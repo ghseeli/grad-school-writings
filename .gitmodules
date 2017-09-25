@@ -1,3 +1,3 @@
 [submodule "ReAdTeX"]
 	path = ReAdTeX
-	url = git@github.com:ghseeli/ReAdTeX.git
+	url = https://github.com/ghseeli/ReAdTeX.git
