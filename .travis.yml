@@ -1,0 +1,35 @@
+sudo: required
+cache:
+  directories:
+  - texlive
+before_install:
+- |
+  if [[ ! -e ./texlive/bin/x86_64-linux/tlmgr ]]; then
+    wget http://mirrors.ctan.org/systems/texlive/Source/install-tl-unx.tar.gz -O - | tar -x --gzip
+    mv $(ls | grep install) install-tl
+    ./install-tl/install-tl -profile texlive.profile
+  fi
+- export PATH=$(pwd)/texlive/bin/x86_64-linux:$PATH
+- sudo apt-get install texlive-full
+- sudo apt-get install latexmk
+- tlmgr update --self
+- tlmgr update --all
+- tlmgr install $(cat .tlmgr-dep)
+script:
+- mkdir _build
+- cd ../Real\ Analysis
+- latexmk -pdf -interaction=nonstopmode -output-directory=../_build real-analysis-notes.tex
+- cd ..
+
+before_deploy:
+- perl .rm-pdf-from-gitignore.pl
+deploy:
+  provider: releases
+  skip_cleanup: true
+  api_key:
+    secure: 
+  file:
+  - _build/real-analysis-notes.pdf
+  on:
+    repo: ghseeli/grad-school-notes
+    branch: master
