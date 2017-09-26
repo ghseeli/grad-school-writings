@@ -18,7 +18,7 @@ before_install:
 script:
 - mkdir _build
 - cd Class\ Notes/Geometric\ Representation\ Theory/
-- latexmk -pdf -interaction=nonstopmode -output-directory=../_build quiver-notes.tex
+- latexmk -pdf -interaction=nonstopmode -output-directory=../../_build quiver-notes.tex
 - cd ../..
 before_deploy:
 - perl .rm-pdf-from-gitignore.pl
