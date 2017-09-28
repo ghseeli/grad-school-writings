@@ -1,0 +1,363 @@
+Recall that, given a torus \(T \subgroup G\), we get a Cartan
+subalgebra that acts on itself by conjugation? This gives rise to a
+Weyl group \(W_T = N_G(T)/T\). 
+\begin{lem}
+  If \(\b,\b' \in \cB\), then there is a canonical isomorphism \[
+    \b/[\b,\b] \isomto \b'/[\b',\b']
+  \]
+  which is independent of choice of conjugation.
+\end{lem}
+\begin{defn}
+  We define \(\ah = \b/[\b,\b]\) to be the \de{abstract Cartan subalgebra}.
+\end{defn}
+\begin{prop}
+  Normally, we take a root system on the pair \((\h,\b)\) but this
+  gives rise to a root system on \(\ah\) and an abstract Weyl group
+  \(\W\). Thus, the \(W\) action on \(\h\) gives rise to a \(\W\)
+  action on \(\ah\). 
+\end{prop}
+\begin{thm}[Universal resolution for general \(\g\) revisited]\label{univ-res}
+  Let \(\g\) be an arbitrary Lie algebra. Then, we have incidence
+  variety \(\tilde{\g} = \{(x,\b) \in \g \times \cB \st x \in \b\}\)
+  such that the following diagram commutes \[
+    \begin{tikzcd}
+      & \tilde{\g} \ar[ld, swap, "\mu"] \ar[rd, "\nu"]& \\
+      \g \ar[rd, swap, "\rho"] & & \ah \ar[ld, "\pi"] \\
+      & \ah / \W
+    \end{tikzcd}
+  \]
+  where \(\nu \from \tilde{\g} \to \ah\) is given by \((x,\b) \mapsto x
+  \mod [\b,\b]\)
+\end{thm}
+\begin{thm}[Chevalley's Restriction Theorem]
+   \[
+    \C[\h]^G \isomto \C[\h]^{W_T} = \C[\ah]^{\W}
+  \]
+  for abstract Weyl group \(\W\). 
+\end{thm}
+\begin{cor}
+  From the above, using the Nullstenllensatz (Proposition 2.2.2 in \cite{cg}), we get \[
+    \g = \operatorname{Specm} \C[\g] \to \operatorname{Specm}
+    \C[\ah]^\W = \ah/\W
+  \]
+  where this composition is \(\rho\) in the Universal
+  Resolution. \todo{Make more sense of how this and the above two
+    theorems fit together. Currently, this is a mess.}
+\end{cor}
+\begin{defn}
+  We say \(\h \in \ah\) is \de{regular} if \(|\W \cdot h| = |\W|\). We
+  define \(\ah^{reg}\) to be the collection of regular elements of
+  \(\ah\). Finally, we define \(\tilde{\g}^{sr} = \mu^{-1}(\g^{sr}) =
+  \nu^{-1}(\ah^{reg})\), where \(\mu,\nu\) are from the Universal
+  Resolution above.
+\end{defn}
+\begin{prop}
+  (\cite{cg} Prop 3.1.36) \(\mu \from \tilde{\g}^{sr} \to \g^{sr}\) is
+  a principal \(\W\)-bundle, that is \(\W\) acts freely on
+  \(\mu^{-1}(x)\) and so \(\tilde{\g}^{sr}\) looks like \(\g^{sr}
+  \times \W\). 
+\end{prop}
+\begin{proof}
+  There exists a unique Cartan subalgebra \(\h = Z_\g(x)\). We then
+  recall that \(\W\) acts freely and transitively on Borel subalgebras
+  containing \(\h\), so \(\W\) acts freely on \(\mu^{-1}(x)\), the set
+  of all Borel subalgebras containing \(x\). \todo{Why? Must all Borel
+  subalgebras containing \(x\) also contain \(\h\)?}
+\end{proof}
+\section{The Nilpotent Cone}
+\begin{defn}
+  Let \(\cN = \{\text{nilpotent elements in }\g\}\). We define the
+  \de{nilpotent cone} to be \[
+    \tilde{\cN} = \mu^{-1}(\cN) = \{(x,\b) \in \cN \times \cB \st x
+    \in \b\}
+  \]
+  where \(\mu \from \tilde{g} \to \g\) is the projection from
+  \ref{univ-res}. 
+\end{defn}
+\begin{prop}
+  The projection \(\pi \from \tilde{\cN} \to \cB\) makes \(\tilde{N}\)
+  into a vector bundle over \(\cB\) with fiber \(\pi^{-1}(\b) = \n\).
+\end{prop}
+\begin{prop}
+  Fix \(B,\b\). We can define a group action of \(B\) on \(G \times \b\)
+  given by \[
+    b \cdot (g,x) = (gb^{-1}, bxb^{-1})
+  \]
+\end{prop}
+\begin{defn}
+  Let \(G \times_B \b\) be the set of orbits of \(G \times \b\) under
+  the \(B\)-action defined above.
+\end{defn}
+\begin{prop}
+  \(G \times_B \b\) is a \(G\)-equivariant vector bundle whose fibres
+  are \(\b\) \[
+    \begin{tikzcd}
+      G \times_B \b \dar & (g,x) \ar[d,mapsto] \\
+      G/B & g.B/B
+    \end{tikzcd}
+  \]
+\end{prop}
+\begin{prop}
+  The following diagrams commute \[
+    \begin{tikzcd}
+      G \times_B \b \rar{\sim} \dar & \tilde{g} \dar \\
+      G/B \rar{\sim} & \cB
+    \end{tikzcd} \ \
+    \begin{tikzcd}
+      G \times_B \n \rar{\sim} \dar & \tilde{\cN} \\
+      G/B \rar{\sim} & \cB
+    \end{tikzcd}
+  \]
+  From this, we can conclude that \(\tilde{N}\) is a smooth
+  variety. \todo{Why?!}
+\end{prop}
+We now go into some necessary background for understanding our
+nilpotent cone.
+\subsection{Symplectic Manifolds}
+\begin{defn}
+  A \de{symplectic manifold} \(M\) is a holomorphic manifold with a
+  non-degenerate closed 2-form \(\omega\) such that, for all \(x \in M\), \[
+    \omega_x \from T_x M \times T_x M \to \C
+  \]
+  is symplectic.
+\end{defn}
+\begin{example}
+  Consider \(\C^{2n}\) with coordinates \(p_1, \ldots, p_n,
+  q_1, \ldots, q_n\) and \(\omega = \sum dp_i \wedge dq_i\). Then,
+  with correct choice of basis for \(T_x \C^{2n}\), we get \[
+    \omega_x = \left(
+      \begin{array}{cc}
+        0 & I \\
+        -I & 0
+      \end{array}
+\right)
+  \]
+\end{example}
+\begin{thm}
+  Locally, all symplectic manifolds look like the example above.
+\end{thm}
+\begin{defn}
+  We define \(\O(M)\) to be the set of all \de{regular functions} on
+  \(M\), that is, all 0-forms.
+\end{defn}
+\begin{defn}
+  Let \(V(M)\) be the set of all vector fields on \(M\). That is,
+  \(\eta \in V(M)\) is given by \(\eta \from M \to TM\) with smooth
+  choice \(x \mapsto \eta_x \in T_x M\).
+\end{defn}
+\begin{defn}
+  We define \(\zeta \from \O(M) \to V(M)\) by \[
+    \omega_x(-,(\zeta_f)_x) = df_x
+  \]
+  \todo{What is this? \(\zeta_f = \zeta(f)\)? Also, where does the
+    \(-\) go?}
+\end{defn}
+\begin{defn}
+  Define \(\{,\}\) on \(\O(M)\) by \[
+    \{f,g\} = \omega(\zeta_f, \zeta_g)
+  \]
+\end{defn}
+\begin{thm}
+  \(\O(M)\) is a Poisson algebra. That is, \(\O(M)\) is an associative
+  algebra, a Lie algebra, and \(\{a,-\} \from \O(M) \to \O(M)\)
+  satisfies a Liebniz rule: \(\{a,b \cdot c\} = \{a,b\} \cdot c + b
+  \cdot \{a,c\}\). 
+\end{thm}
+\begin{example} \label{sl2-moment-map}
+  Take \(M = \C^2\) with coordinates \(p,q\) and \(\omega = dp \wedge
+  dq\). Then, we can represent \(\omega_x = \left(
+    \begin{array}{cc}
+      0&1\\
+      -1&0
+    \end{array}
+  \right)\). Write \(\eta \in V(M)\) as \[
+    \eta = \left(
+      \begin{array}{c}
+        \phi(p,q) \\
+        \psi(p,q)
+      \end{array}
+    \right) \from M \to T_{(p,q)} M = \C^2
+  \]
+  Then, \(\omega(-,\eta) = (\psi, - \phi) \from M \times \C^2 \to \C\)
+  \todo{Why is the domain \(M \times \C^2\)?} and gives \(df =
+  (\frac{\partial f}{\partial p}, \frac{\partial f}{\partial q})\). We
+  then note that \[
+    \zeta_f = \colvec{2}
+        {- \frac{\partial f}{\partial q}}
+       { \frac{\partial f}{\partial p}} \implies
+       \ \ \zeta_{q^2/2} = \colvec{2}{-q}{0},
+       \ \ \zeta_{-p^2/2} = \colvec{2}{0}{-p},
+       \ \ \zeta_{pq} = \colvec{2}{-p}{q}
+     \]
+  Thus, we get
+  \begin{align*}
+    \{\frac{q^2}{2}, -\frac{p^2}{2}\}
+    & = \omega\left(\colvec{2}{-q}{0}, \colvec{2}{0}{-p} \right) = pq \\
+    \{pq, \frac{q^2}{2}\} & = q^2 = 2 \frac{q^2}{2} \\
+    \{pq, -\frac{p^2}{2}\} & = p^2 = -2 \frac{p^2}{2}
+  \end{align*}
+  So, we have a Lie algebra embedding \(\sl_2 \into \O(M)\) given by
+  \begin{align*}
+    e & \mapsto \frac{q^2}{2} \\
+    f & \mapsto -\frac{p^2}{2} \\
+    h & \mapsto pq
+  \end{align*}
+\end{example}
+\todo{Say something about \(\zeta\) mapping \(\O(M) \to V(M)\) and
+  getting a Lie algebra.}
+\begin{defn}
+  For \(\eta \in V(M)\), define \(L_\eta \from \O(M) \to \O(M)\) by \[
+    (L_\eta f)(m) = df_m(y_m)
+  \]
+  \todo{Where did this \(y_m\) come from? What is it?}
+\end{defn}
+\begin{prop}
+  The map \(V(M) \to \Der(\O(M))\) defined by \(\eta \mapsto
+  L_\eta\) is an isomorphism of Lie algebras where we define
+  \([\eta,\eta'] \in V(M)\) and \(L_{[\eta,\eta']} = [L_\eta,
+  L_{\eta'}]\). 
+\end{prop}
+\subsection{The Moment Map}
+\begin{prop}
+  A Lie group \(G\) acts on symplectic manifold \(M\) via a symplectic
+  action \(\phi_m \from G \to M\) given by \(g \mapsto gm\). This
+  induces \(T_e G = \g\) action on \(T_m M\) for all \(m\) given by
+  Lie algebra homomorphism \(\g \to V(M)\). \todo{Write this out more
+    explicitly.}
+\end{prop}
+\begin{defn}
+  A symplectic \(G\)-action is \de{Hamiltonian} if \[
+    \begin{tikzcd}
+      & \ar[dl, dashed, "\exists H"] \g \ar[dr]& \\
+      \O(M) \ar[rr, "\zeta"]& & V(M)
+    \end{tikzcd}
+  \]
+  We denote \(H(x) = H_x\).
+\end{defn}
+\begin{defn}
+  We define \de{the moment map} \(\mu \from M \to \g^*\) by
+  \begin{align*}
+    \mu(m) \from & \g \to \C \\
+    & x \mapsto H_x(m)
+  \end{align*}
+\end{defn}
+\begin{example}
+  Take \(M = \C^2\) and let \(SP_2 = SL_2\) act on \(M\). Then, we get
+  Hamiltonian \(H \from \sl_2 \to \O(M)\) by example
+  \ref{sl2-moment-map}. We also have a canonical isomorphism between
+  \(\sl_2 \isomto \sl_2^*\) given by \(e \mapsto e^*, f \mapsto f^*, h
+  \mapsto h^*\). Thus, we have moment map \(\mu \from M \to \g\)
+  given by \[
+    \mu(p,q) = \frac{1}{2} \left(
+      \begin{array}{cc}
+        pq&-p^2 \\
+        q^2&-pq
+      \end{array}
+  \right) \in \cN \text{ because }\det = 0
+  \]
+  This is precisely equal to \(\frac{q^2}{2}e^* - \frac{p^2}{2}f^* +
+  pqh^*\), so \(\mu \from \C^2 \to \cN\) is a 2-fold cover ramified at
+  the origin. \todo{ramified?!}
+\end{example}
+\begin{prop}
+  If \(M\) is a manifold, then the cotangent bundle \(T^*M\) is
+  symplectic. \todo{What does it mean for a cotangent bundle to be symplectic?}
+\end{prop}
+\begin{prop}
+  The action \(C_T\) on \(M\) induces an action of \(G\) on \(T^* M\),
+  which gives us our Hamiltonian. \todo{What is \(C_T\)? What are
+    these actions?}
+\end{prop}
+\begin{example}
+  Take \(P \subgroup G\). Then, \(G\) acts on \(G/P\) and so \(G\)
+  acts on \(T^*(G/P)\) \todo{how?}. Let \(\p^\perp \subset \g^*\)
+  where \(\p^\perp\) is the annihilator of \(\p\).
+\end{example}
+\begin{prop}
+  (\cite{cg} Prop 1.4.9/10) In the case of the above example, there is a natural
+  \(G\)-equivariant isomorphism  \[
+    \begin{tikzcd}
+      T^*(G/P) \ar[rr,"\sim"] \ar[rd] & & \ar[ld] G \times_\p \p^\perp \\
+      & G/P &
+    \end{tikzcd}
+  \]
+  and the moment map is given by
+  \begin{align*}
+    \mu \from & G \times_\p \to \g^* \\
+    & (g,\alpha) \mapsto g \alpha g^{-1}
+  \end{align*} \todo{This is great, because it is explicit, but where
+    does this come from?}
+\end{prop}
+\subsection{Return to the Nilcone}
+\begin{lem}
+  Recall that we can identify \(\g \isomto \g^*\) via the Killing
+  form. \todo{Recall this.}
+\end{lem}
+\begin{prop}
+  (\cite{cg} Prop 3.22/3) There is a natural \(G\)-equivariant
+  isomorphism \[
+    \tilde{\cN} \isom T^* \cB
+  \]
+  and \(\mu \from R^*\cB \to \cN\) is the moment map from \(G\) acting
+  on \(\cB\) and it is surjective.
+\end{prop}
+\begin{defn}
+  The moment map above is called \de{Springer's resolution}. 
+\end{defn}
+\begin{proof}[Proof of proposition]
+  \todo{Understand why these are actually isomorphisms.}
+  \begin{align*}
+    T*\cB & \isom T^*(G/B) \\
+          & \isom G \times_B \b^\perp \\
+          & \isom G \times_B \n \\
+          & \isom \tilde{\cN}
+  \end{align*}
+\end{proof}
+\begin{prop}
+  (\cite{cg} Prop 3.2.5) \(x \in \g\) is nilpotent if and only if \(P(x) = 0\) for all \(P
+  \in \C[\g]^G_+\) (which is polynomials in \(\C[\g]^G\) with no
+  constant term).
+\end{prop}
+\begin{defn}
+  \(x \in \g^*\) is nilpotent if and only if \(P(x) = 0\) for all \(P
+  \in \C[\g^*]^G_+\).
+\end{defn}
+\begin{proof}[Proof of proposition]
+  Consider the universal resolution \ref{univ-res}, \[
+    \begin{tikzcd}
+      & \ar[dl] \tilde{\g} \ar[dr] & \\
+      \g \ar[dr, "\rho"] & & \ar[dl] \ah  \\
+      & \ah/\W & 
+    \end{tikzcd}
+  \]
+  with \(\rho^{-1}(0) = \cN\). \todo{Does this follow immediately or
+    am I missing something obvious here?}
+\end{proof}
+\begin{cor}
+  (\cite{cg} Cor 3.2.8) \(\cN\) is an irreducible variety of dimension
+  \(2 \dim \n\).
+\end{cor}
+\begin{prop}
+  (\cite{cg} Prop 3.2.10) Regular nilpotent elements for a single open
+  Zariski-dense orbit in \(cN\), denoted \(\O_{prin}\), the principal orbit.
+\end{prop}
+\begin{example}
+  Let \(\g = \sl_n\). Then, the orbit is the orbit of \[
+    \left(
+      \begin{tikzcd}
+        0 \ar[rrdd, dash] & 1 \ar[rd, dash] & \\
+        & & 1 \\
+        & & 0
+      \end{tikzcd}
+    \right)
+\]
+\end{example}
+\begin{prop}
+  Any regular nllpotent element is contained in a unique Borel
+  subalgebra. 
+\end{prop}
+\begin{rmk}
+  Given \(\mu \from \tilde{\cN} \to \cN\), \(\mu\) is a resolution of
+  singularities of \(\cN\), that is it restricts to an isommorphism on
+  an open dense subset.
+\end{rmk}

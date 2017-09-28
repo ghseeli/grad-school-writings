@@ -1,0 +1,319 @@
+\section{The Lagrangian Construction of the Weyl Group}
+\begin{defn}
+  Throughout this talk, let \[
+    m := 2 \dim_\R \n = \dim_\R Z = \frac{1}{2} \dim_\R(\tilde{\cN}
+    \times \tilde{\cN})
+  \]
+\end{defn}
+Now, we must review some material
+\subsubsection{Borel-Moore Homology (\cite{cg} 2.6)}
+\begin{defn}
+  We define the \de{Borel-Moore Homology} to be \[
+    H_*^{BM}(X) = H_*(\hat{X}, \{\infty\})
+  \]
+  where \(\hat{X} = X \union \{\infty\}\) is the 1-point
+  compactification of \(X\). 
+\end{defn}
+\begin{rmk}
+  Note that \(H_*^{BM}(X) = H_*(\ov{X}, \ov{X} \setminus X)\) for \(\ov{X}\) any
+  compacticiation of \(X\).
+\end{rmk}
+\begin{prop}
+ Let \(M\) be a smooth not-necessarily compact oriented manifold and
+ \(X \subset M\) with \(\dim_\R M = N\). Then, \[
+   H_i^{BM}(X) \isom H^{N-i}(M,M\setminus X)
+ \]
+\end{prop}
+\begin{defn}
+  Let us define the \de{intersection pairing} to be a billinear
+  pairing \[
+    \begin{tikzcd}
+    H_i^{BM}(Z) \times H_j^{BM}(\tilde{Z}) \rar{\cap} \dar{\sim} & 
+    H_{i+j-N}^{BM}(Z \intersect \tilde{Z}) \dar{\sim} \\
+    H^{N-i}(M, M \setminus Z) \times H^{N-j}(M,M \setminus \tilde{Z})
+    \rar{\cupprod} & H^{2N-j-i}(M,(M \setminus Z) \union (M \setminus \tilde{Z}))
+    \end{tikzcd}
+  \]
+  where \(\cupprod\) is the standard cup product on cohomology and
+  \(Z,\tilde{Z}\) are closed subspaces of \(M\).
+\end{defn}
+\begin{defn}
+  We define the \de{Kunneth formula} for the Borel-Moore homology via
+  the Kunneth formula for standard homology.
+  \[
+    \begin{tikzcd}
+      H_*^{BM}(M_1) \times H_*^{BM}(M_2) \rar{\boxtimes} \dar{\sim} &
+      H_*^{BM}(M_1 \times M_2) \dar{\sim}
+      \\
+      H_*(\ov{M_1}, \ov{M_1} \setminus M_1) \times
+      H_*(\ov{M_2},\ov{M_2} \setminus M_2) \rar{\boxtimes} & H_*(M_1
+      \times M_2, \ov{M_1 \times M_2} \setminus (\ov{M_1} \times M_2
+      \union M_1 \times \ov{M_2}))
+    \end{tikzcd}
+  \]
+\end{defn}
+\subsection{Set-Theoretic Composition (\cite{cg} 2.7)}
+\begin{defn}
+  Let \(Z_{12} \subset M_1 \times M_2\) and \(Z_{23} \subset M_2
+  \times M_3\). Then, we define \[
+    Z_{12} \circ Z_{23} := \{(m_1,m_3) \in M_1 \times M_3 \st \exists
+    m_2 \in M_2 \text{ such that } (m_1, m_2) \in Z_{12} \text{ and }
+    (m_2, m_3) \in Z_{23}\}
+  \]
+\end{defn}
+Now, we can define convolution products on Borel-Moore homology with
+\(d = \dim_\R M_2\). \textbf{Note that, from this point onward, we are
+  dropping the BM and all homology is Borel-Moore homology.}
+\begin{defn}
+  We define the \de{convolution product} to be a map
+  \begin{align*}
+    * \from H_1(Z_{12}) \times H_j(Z_{23}) & \to H_{i+j-d}(Z_{12} \circ
+                                             Z_{23}) \\
+    (c_{12}, c_{23}) & \mapsto c_{12} * c_{23}
+  \end{align*}
+  where \[
+    c_{12} * c_{23} = (p_{13})_*((c_{12} \boxtimes [M_3]) \intersect
+    ([M_1] \boxtimes c_{23}))
+  \]
+  and \(p_{13} \from M_1 \times M_2 \times M_3 \to M_1 \times M_3\)
+  the standard projection map that is also proper.
+\end{defn}
+\begin{example}
+  Let \(f,g\) be smooth functions \(f \from M_1 \to M_2\) and \(g
+  \from M_2 \to M_3\). Then, \[
+    \operatorname{Graph}(f) \circ \operatorname{Graph}(g) =
+    \operatorname{Graph}(g \circ f)
+  \]
+  Thus, \[
+   [\operatorname{Graph}(f)] * [\operatorname{Graph}(g)] =
+    [\operatorname{Graph}(g \circ f)]
+  \]
+\end{example}
+\subsection{Lagrangian Construction of the Weyl Group}
+\begin{defn}
+  For the Steinberg variety \(Z \subset \tilde{N} \times \tilde{N}\),
+  we define \[
+    H(Z) := H_m(Z, \Q), \text{ the top Borel-Moore homology}
+  \]
+  where \(m = \dim_\R(Z) = \dim_\R(\tilde{N})\), as above.
+\end{defn}
+\begin{rmk}
+  Note that \(H(Z)\) is an algebra with respect to the convolution
+  \(*\) since \(Z \circ Z = Z\). Take \(M_1 = M_2 = M_3 = \tilde{N}\)
+  to get \[
+    * \from H_m(Z) \times H_m(X) \to H_{2m-m}(Z \circ Z)
+  \]
+\end{rmk}
+\begin{prop}
+  \(\dim H(Z) = |\W|\)
+\end{prop}
+\begin{proof}
+  Recall that \(Z = \dunion Z_\O\)
+  (\ref{Z-is-partition-of-locally-closed-subsets}). The number of
+  these subsets is precisely \(|\W|\). This gives the desired result.
+\end{proof}
+\begin{thm}
+  There is a canonical algebra isomorphism \[
+    H(Z) \isom \Q[\W]
+  \]
+\end{thm}
+To prove this theorem, we must give a few definitions and lemmas. Let
+us fix \(\h \subset \b \subset \g\), \(w \in \W\), and regular
+semisimple \(h \in \b\).
+\begin{defn}
+  Consider subset \(S \subset \h\). We define \[
+    \tilde{\g}^S := \nu^{-1}(S) = G \times_B (S+\n)
+  \]
+\end{defn}
+\begin{example}
+  Note that \[
+    \tilde{\g} = \tilde{\g}^\h = G \times_B (h + \n) = G \times_B \b
+  \]
+  and \[
+    \tilde{\g}^0 = G \times_B \n = \tilde{\cN}
+  \]
+\end{example}
+\begin{defn}
+  We define \(\Lambda_w^h \subset \tilde{g}^{w(h)} \times \tilde{g}^h\)
+  to be the graph of the \(\W\)-action on \(\tilde{g}^{sr}\). Thus, \[
+    \Lambda_w^h = \{(x,\b,x,\b') \st x \in \b \intersect \b',
+    \nu(x,\b') = h, (\b,\b') \in Y_w\} \subset \tilde{\g} \times \tilde{\g}
+  \]
+\end{defn}
+\begin{prop}
+  The projection map \(\pi \from \tilde{\g} \to \cB\) given by
+  \((x,\b) \mapsto \b\) induces a map \(\pi^2 \from \tilde{\g} \times
+  \tilde{\g} \to \cB \times cB\) given by \(\pi^2(\Lambda_w^h) = Y_w\)
+\end{prop}
+\begin{proof}
+  Note that \[
+    \Lambda_w^h \into \tilde{\g} \times \tilde{\g} \to[\pi \times \pi]
+    \cB \times \cB
+  \]
+  This image is \(G\)-stable with respect to the diagonal action and,
+  by the set characterization of \(\Lambda_w^h\), \(\pi^2(\Lambda_w^h) = Y_w\).
+\end{proof}
+\begin{lem}
+  The fibrations \(\pi^2 \from \Lambda_w^h \to Y_w\) and \(G\times_{B
+    \intersect w(B)}(h + \n \intersect w(\n)) \to G/(B \intersect
+  w(B))\) are equivalent. \todo{why?}
+\end{lem}
+\begin{proof}
+  Identify \(G/B \times G/w(B)\) with \(\cB \times \cB\) via the
+  assignment \[
+    (g_1 B, g_2 w B) \mapsto (g_1 \b g_1^{-1}, g_2 w(\b) g_2^{-1})
+  \]
+  \todo{Finish this?}
+\end{proof}
+\begin{lem}
+  For \(w,y \in \W\), \[
+    [\Lambda_y^{w(h)}] * [\Lambda_w^h] = [\Lambda_{yw}^h]
+  \]
+\end{lem}
+\begin{proof}
+   Since \(\Lambda_w^h\) is a graph, then, for \(w,y \in \W\), \[
+     \Lambda_y^{w(h)} \circ \Lambda_w^h = \Lambda_{yw}^h
+   \]
+   Thus, we get the desired result.
+\end{proof}
+\begin{defn}\label{w-restrictions}
+  We define \[
+    \ah_w := \operatorname{Graph}(\ah \to[w] \ah) \subset \ah \times \ah
+  \]
+  \[
+    \tilde{\g} \times_{\ah_w} \tilde{\g} := \{(y,x) \in \tilde{\g}
+    \times \tilde{\g} \st \nu(y) = w(\nu(y))\}
+  \]
+  \[
+    \nu_w := \nu \times \nu |_{\tilde{\g} \times_{\ah_w} \tilde{\g}}
+  \]
+  and \[
+    \Lambda_w := (\tilde{\g} \times_{\ah_w} \tilde{\g}) \intersect
+    (\tilde{\g} \times_\g \tilde{\g})
+  \]
+\end{defn}
+\begin{rmk}
+  Note that \(\nu_w^{-1}(0) = \nu^{-1}(0) \times \nu^{-1}(0) =
+  \tilde{\cN} \times \tilde{\cN}\), the graph over special point
+  \(0\). Also note that
+  \begin{align*}
+    \Lambda_w \intersect \nu_w^{-1}(0) & \subset (\tilde{\g} \times_\g
+    \tilde{\g}) \intersect (\tilde{\cN} \times \tilde{\cN}) \\
+    & \subset Z
+  \end{align*}
+\end{rmk}
+\begin{defn}
+  We define \[
+    \ah_w^{reg} := \operatorname{Graph}(\ah^{reg} \to[w] \ah^{reg})
+  \]
+  and thus
+  \begin{align*}
+    \Lambda_w^{reg}
+    & := \Lambda_2 \intersect \nu_w^{-1}(\ah_w^{reg}) \\
+    & = (\tilde{\g} \times_{\ah_w} \tilde{\g}) \intersect
+      (\tilde{g}^{sr} \times_\g \tilde{\g}^{sr}) \\
+    & = \operatorname{Graph}(\tilde{g}^{sr} \to[w] \tilde{g}^{sr})
+  \end{align*}
+\end{defn}
+Now, we seek to specialize \([\Lambda_w^{reg}]\) at \(0 \in \ah\).
+\begin{rmk}
+  Note that \(\ah \setminus \ah_{reg}\) is the root hyperplanes and 
+  \(\codim_\R (\ah \setminus \ah_{reg}) = 2\).
+\end{rmk}
+\begin{defn}
+  Let \(\ell \subset \ah^{reg}\) be a real vector space with dimension
+  less than or equal to \(2\). Then, we define \[
+    \ell^* := \ell \setminus \{0\} = \ell \intersect \ah^{reg}
+  \]
+\end{defn}
+\begin{prop}
+  The following diagrams commute \[
+    \begin{tikzcd}
+      \tilde{\g} \times_{\ah_w} \tilde{\g} \ar[r, hook] \ar[d,
+      "\nu_w"] & \tilde{\g} 
+      \times \tilde{\g} \ar[d, "\nu \times \nu"] \\
+      \operatorname{Graph}(\ah \to[w] \ah) \ar[r, hook] & \ah \times \ah
+    \end{tikzcd} \leadsto
+    \begin{tikzcd}
+      \tilde{\g}^{w(\ell)} \times_{\ell_w} \tilde{\g}^\ell \ar[r, hook]
+      \ar[d, "\nu_w"]
+      & \tilde{\g}^{w(\ell)} \times \tilde{\g}^\ell \ar[d,
+      "\nu \times \nu"]\\
+      \operatorname{Graph}(\ell \to[w] w(\ell)) \ar[r, hook] & \ell
+      \times w(\ell )
+    \end{tikzcd}
+  \] 
+\end{prop}
+\begin{proof}
+  The first diagram follows from the definition of \(\nu_w\). The
+  second diagram follows from the natural projection \(\tilde{\g} \to
+  \ell\) from the definition of \(\nu_w\) in \ref{w-restrictions}.
+\end{proof}
+\subsection{Specialization}
+In our case, specialization will be the process \todo{This entire
+  specialization stuff makes no sense to me.}
+\begin{align*}
+  H_*(\Lambda_w^\ell) & \to H_*(Z) \\
+  [\Lambda_w^{\ell^*}] & \mapsto [\Lambda_w^{0 \cdot h}] \in H_m(Z)
+\end{align*}
+\begin{lem}
+  (\cite{cg} 3.4.11) \([\Lambda_w^{0 \cdot h}]\) does not depend on \(h\).
+\end{lem}
+\begin{proof}
+  The proof follows from the transitivity of specialization. See
+  \cite{cg} 2.6.38. The specialization at \(\ell\) equals the
+  specialization at \(\R h\) for any \(h \in \ell^*\). For \(h,h' \in
+  \ah^{ref}\), draw a polygonal path in \(\ah^{reg}\) from \(h\) to
+  \(h'\) with vertices \(h = h_1, h_2, \ldots, h_m = h'\). Then, the
+  specialization at \(\Span_\R(h_1,h_{i+1})\) equals the
+  specialization at \(\R h_1\) also equals the specialization at \(\R
+   h_{i+1}\).
+\end{proof}
+\begin{lem}
+  Specialization commutes with convolution. (See \cite{cg} 2.7.23)
+\end{lem}
+\begin{lem}
+  \[
+    \lim_{h \to 0}([\Lambda_{yw}^h = [\Lambda_y^{w(h)}] *
+    [\Lambda_w^h]]) = ([\Lambda_{yw}^0 = [\Lambda_y^0] * [\Lambda_w^0]])
+  \]
+\end{lem}
+\begin{prop}
+  \(\{[\Lambda_w^0] \st w \in \W\}\) is a basis of \(H(Z)\).
+\end{prop}
+\begin{proof}
+  \(H(Z)\) has basis \[
+    \{T_w^* = \ov{T_{Y_w}^*(\cB \times \cB)} \st w \in \W\}.
+  \]
+  So, let \[
+    \Lambda_Y = \sum_{w \in \W} n_{yw} T_w^*
+  \]
+  Now, we have \[
+    \begin{tikzcd}
+      \pi^2(\Lambda_y^h) \subset Y_y \ar[d,"\lim\limits_{h \to 0}"] \\
+      \pi^2(\Lambda_y^0) \subset \ov{Y_y}
+    \end{tikzcd}
+  \]
+  thus implying that \([\Lambda_y^0]\) involves only \(T_w^*\) such
+  that \(Y_w \subset \ov{Y_y}\), which leads to the Bruhat
+  order. \todo{This is a mess! Understand it better}
+\end{proof}
+\begin{lem}
+  \(n_{ww} = 1\) for any \(w \in \W\).
+\end{lem}
+\begin{proof}
+  Over an open subset \(U \subset \cB \times \cB\) containing
+  \(Y_w\), \[
+    \begin{tikzcd}
+      \Lambda_w^h = G \times_{B \intersect w(B)} (h + \n \intersect
+    w(\n)) \ar[r, "\lim\limits_{h \to 0}"] \ar[d] & G \times_{B \intersect w(B)}(\n
+    \intersect w(\n)) \ar[d] \\
+    Y_w & Y_w
+    \end{tikzcd}
+  \]
+  Thus, \(n_{ww} = 1\).
+\end{proof}
+\begin{rmk}
+  Kashiwara and Saito showed that the \(n_{yw}\) are not the
+  Kazhdan-Lusztig numbers.
+\end{rmk}

@@ -1,0 +1,352 @@
+\section{Semisimple Lie Algebras and Flag Varieties}
+ In this section, we will review essential facts for our study going
+ forward. Fix \(G\) to be a complex semisimple Lie group with Lie algebra
+ \(\g\).
+ \begin{prop}
+   \(\g\) is a \(G\)-module via the adjoint action. That is, for \(g
+   \in G\), \(x \in \g\) \[
+     g.x = \Ad_ d(\phi_g)_I(x)
+   \]
+   where \(\phi_g\from G \to G\) maps \(h \mapsto ghg^{-1}\) for \(h
+   \in G\).
+ \end{prop}
+ \begin{proof}
+   \todo{Add in a proof here}
+ \end{proof}
+ \begin{defn}
+   A maximal solvable subgroup of \(G\) is called a \de{Borel} subgroup.
+ \end{defn}
+ \begin{defn}
+   A torus of a compact Lie group \(G\) is a compact, connected,
+   abelian Lie subgroup of \(G\).
+ \end{defn}
+ \begin{prop}
+   Given a Borel subgroup \(B \subgroup G\) of a Lie group, \(B\) has
+   a maximal torus \(T \subgroup G\) and a unipotent radical \(U
+   \subgroup G\) such that \(T \cdot U = B\). 
+ \end{prop}
+ \begin{proof}
+   \todo{Add in a proof here}
+ \end{proof}
+ \begin{example}
+   Let \(G = SL_n(\C)\). Then, \[
+     B = \left(
+       \begin{tikzcd}
+         * \arrow[rd, dash] & * \\
+         0 & *
+       \end{tikzcd}
+     \right), \
+     T = \left(
+       \begin{tikzcd}
+         * \arrow[rd, dash] & 0 \\
+         0 & *
+       \end{tikzcd}
+     \right), \
+     U = \left(
+       \begin{tikzcd}
+         1 \arrow[rd, dash] & * \\
+         0 & 1
+       \end{tikzcd}
+     \right)
+   \]
+   In particular, \(B = TU\).
+ \end{example}
+ \begin{defn}
+   When considering the tangent spaces at the identity, we get
+   a Borel subalgebra \(\b = \h \oplus \n\) where \(\h\) is a Cartan
+   subalgebra and \(\n\) is a nilradical. 
+ \end{defn}
+ \begin{rmk}
+   Note that \(\n = [\b,\b]\) and \(\b/[\b,\b] \isom \h\). 
+ \end{rmk}
+ \begin{defn}
+   We define the \de{rank of a Lie algebra} \(\g\) to be \[
+     \rk \g := \dim \h
+   \]
+ \end{defn}
+ \begin{lem}
+   \begin{enumerate}
+   \item    Let \(B \subgroup G\) be Borel. Then, \(B = N_G(B)\) (that is,
+   \(B\) is self-normalizing).
+   \item All Borel subgroups are \(G\)-conjugate
+   \end{enumerate}
+ \end{lem}
+ \begin{proof}
+   \todo{Add a proof here}
+ \end{proof}
+ \begin{defn}
+   For \(x \in \g\), we define \[
+     Z_\g(x) = \{y \in \g \st [x,y] = 0\}, \ Z_G(x) = \{g \in G \st
+     g.x = x\}
+   \]
+ \end{defn}
+ \begin{example}
+   Let \(\g \subset \gl_2(\C)\) be all 2 by 2 upper-triangular
+   matrices. Then,
+ \end{example}
+ \begin{prop}
+   \(\dim(Z_\g(x)) \geq \rk \g\)
+ \end{prop}
+ \begin{proof}
+   Let \(x\) be semisimple. Then, \(x\) is contained in some Cartan
+   subalgebra \(\h\). However, \(\h \subset Z_\g(x)\). Thus, the
+   proposition is true for \(x\) semisimple. However, semisimple
+   elements are Zariski dense, so the result applies for the closure. 
+   \todo{Check this last thing.}
+ \end{proof}
+ \begin{defn}
+   We say \(x \in \g\) is \de{regular} if \(\dim Z_\g(x) = \rk \g\). 
+ \end{defn}
+ \begin{defn}
+   We say \(x \in \g\) is \de{semisimple (resp. nilpotent)} if
+   \(\ad(x)\) is semisimple (resp nilpotent). 
+ \end{defn}
+ \begin{rmk}
+   This result is actually somewhat non-trivial, but is covered by
+   Engel's theorem and related results.
+ \end{rmk}
+ Now, recall that any \(x \in \g\) has a Jordan decomposition \(x = s
+ + n\) where \(s \in \g\) is semisimple and \(n \in \g\) is nilpotent
+ and \(s,n\) commute.
+ \begin{defn}
+   Let \(\g^{sr}\) be the set of semisimple regular elements in
+   \(\g\). 
+ \end{defn}
+ \begin{example}
+   Note that not all regular elements are semisimple. Take \[
+     x = \left(
+       \begin{tikzcd}
+         0 \ar[rrdd, dash]& 1 \ar[rd, dash] & \\
+         & & 1 \\
+         & & 0
+       \end{tikzcd}
+     \right)
+   \]
+   Such an element is regular in \(\sl_n\) because \(Z_\g(x)\) is
+   spanned by the basis \(\{x, x^2, \ldots, x^{n-1}\}\), which is the
+   same size as the basis \(\{e_{ii} - e_{i+1,i+1}\}_{i=1}^{n-1}\)
+   that spans the standard Cartan subalgebra\(\h\) in
+   \(\sl_n\). However, since it is nilpotent, it cannot be semisimple.
+ \end{example}
+ \begin{prop}
+   Fix \(\h \subset \b \subset \g\). Then,
+   \begin{enumerate}
+   \item Any element of \(\h\) is semisimple and any semisimple
+     element is \(G\)-conjugate to an element of \(\h\).
+   \item If \(x \in \g^{sr}\), then \(Z_\g(x)\) is a Cartan
+     subalgebra.
+   \item \(\g^{sr}\) is a \(G\)-stable dense subset of \(\g\) (in the
+     Zariski topology?)
+   \end{enumerate}
+ \end{prop}
+ \begin{proof}[``Proof'']
+   Any element pf \(\h\) is semisimple by definition. Also, in
+   Humphreys chapter 16, he gives an argument that all Cartan subalgebras
+   are \(G\)-conjugate using the conjugacy of Borel subalgebras. \\
+
+   For the second claim, clearly \(\Z_\g(x)\) is a
+   subalgebra. Varadarajan gives an argument for why it is a Cartan
+   subalgebra. \todo{reproduce this here.}
+ \end{proof}
+ \begin{example}
+   A typical example of part (b) in \(\sl_n\) is given by \[
+     x = \left(
+       \begin{tikzcd}
+         \lambda_1 \ar[rd, dash]& 0 \\
+         0 & \lambda_n
+       \end{tikzcd}
+     \right)
+   \]
+   with \(\lambda_i\) distinct. Then, \(Z_\g(x)\) is given by matrices
+   \((a_{ij})\) such that \[
+     0 = [(a_{ij}), x] = \sum_{i,j} [a_{ij} e_{ij}, x] = \sum_{ij}
+     (a_{ij} \lambda_j e_{ij} - \lambda_i a_{ij} e_{ij})
+   \]
+   So, if \(i \neq j\), then \(a_{ij} = 0\) since \(\lambda_i \neq
+   \lambda_j\). That is to say, \(\Z_\g(x)\) is all diagonal matrices
+   in \(\sl_n\)
+ \end{example}
+ \begin{lem}
+   There exists a \(G\)-invariant polynomial \(P\) with coefficients
+   in \(\g\) such that \[
+     x \in \g^{sr} \iff P(x) \neq 0
+   \]
+ \end{lem}
+ \begin{proof}
+   Take \(x \in \g\). Since \(\dim \ker(\ad_x) \geq \rk \g\), the
+   characteristic polynomial of \(\ad_x\) is 
+   given by \[
+     \det(tI - \ad_x) = t^r P_r(x) + t^{r+1} P_{r+1}(x) + \cdots
+   \]
+   where \(P_i\) are \(G\)-invariant polynomials on \(\g\) and \(r =
+   \rk \g\). So, we have that \(x\) is regular if and only if \(t =
+   0\) is a zero of order \(r\) of the characteristic
+   polynomial. However, this is possible if and only if \(P_r(x) \neq
+   0\). Thus, for \(x\) is semisimple and regular, we have found a desired
+   polynomial. Since this polynomial is \(G\)-invariant and all
+   semisimple elements are conjugate to an element in \(\h\),
+   \todo{Figure out why this polynomial applies to all regular
+     semisimple elements.}
+ \end{proof}
+ \subsubsection*{Flag Variety}
+ \begin{defn}
+   Define \(\cB\) to be the set of all Borel subalgebras of \(\g\). 
+ \end{defn}
+ \begin{prop}
+   \(\cB\) is a projective variety.
+ \end{prop}
+ \begin{defn}
+   Let \(\Gr\) be the Grassmanian of \(\dim \b\)-dimensional subspaces
+   of \(\g\).
+ \end{defn}
+ \begin{prop}
+   \(\cB \subset \Gr\) as a closed subvariety of solvable subalgebras.
+ \end{prop}
+ \begin{prop}
+   The stabilizer of \(\b\) under the \(G\)-adjoint action is \(B\),
+   the Borel subgroup of \(G\). 
+ \end{prop}
+ \begin{prop}
+   For \(g \in G\), the map \(g \mapsto g \cdot \b \cdot g^{-1}\)
+   induces a bijection \[
+     G/B \to \cB
+   \]
+   Moreover, this is a \(G\)-equivariant isomorphism of varieties.
+ \end{prop}
+ \begin{example}
+   In type A, \(\cB = \{F = (0 \subset F_1 \subset F_2 \subset \cdots
+   \subset F_n = \C^n)\}\) where \(\dim F_i = i\), the variety of
+   complete flags. 
+ \end{example}
+ \begin{prop}
+   Fix \(B \subgroup G\) with Lie algebra \(\b_0\). Then, we have the
+   following bijections. \[
+     \begin{tikzcd}
+     N_G(T)/T = W_T \rar{3} & B \textbackslash G / B \rar{1} & \{B\text{-orbits on
+     }\cB\}
+     \rar{2} & \{G\text{-diagonal orbits on } \cB \times \cB\}
+   \end{tikzcd}
+ \]
+  where
+  \begin{enumerate}
+  \item[1] is given by \(B \cdot g \cdot B \mapsto B(g \cdot B / B)\),
+  \item[2] is given by \(B.\b \mapsto G.(\b_0,\b)\), and
+  \item[3] is given by \(W \mapsto B \cdot \ov{w} \cdot B\) where
+    \(\ov{w}\) is a representative of \(W\) in \(N_G(T)\). 
+  \end{enumerate}
+\end{prop}
+\todo{Get some handle on the proofs of these propositions!}
+\begin{cor}
+  As a result, \(\cB = \Disjunion_{w \in W} \cB_w\), where \(\cB_w\)
+  is a Bruhat cell. \todo{Understand this better. Why does this follow
+  and why do we care?}
+\end{cor}
+So \(W\) is a fixed point set of the \(\C^*\) action on \(\cB\). \(w
+\in W\) is \(w \cdot B/B\), \(w \in W_T\). \todo{Make sense of this
+  statement.} So, \(\cB_W = B \cdot (wB/B)\) gives us \[
+  G/B = \cB = \Disjunion_{w \in W} \cB_W = \Disjunion BwB/B
+\]
+\begin{cor}
+  Each \(B\)-orbit in \(\cB\) contains exactly one point of the form
+  \(wB/B\), \(w \in W_T\). 
+\end{cor}
+\begin{prop}[Plucker embedding]
+Skipped for now.  
+\end{prop}
+\subsubsection{Extended \(\sl_n\) example}
+Let \(G = SL_n\) and \(\g = \sl_n\). Then, we have the following
+result. 
+\begin{lem}
+  \(\cB\) is naturally identified with the variety of complete flags.
+\end{lem}
+\begin{proof}
+  Let \(F\) be a complete flag. Then, \[
+    \b_F = \{x \in \sl_n \st x(F_i) \subset F_i, \forall i\}
+  \]
+  For example, if \(F\) is the coordinate flag, that is \(F = 0 \subset \C^1
+  \subset C^2 \subset \cdots \subset \C^n\), then \[
+    \b_F = \b = \left(
+      \begin{tikzcd}
+         \ \ar[rd, dash] & * \\
+         \ & \ \ \
+      \end{tikzcd}
+\right)
+\]
+Note that any 2 flags are conjugate by the \(SL_n\) action, so
+\(\b_F\) is Borel for every flag \(F\). Thus, our map is
+surjective. Hence, it is bijective and an isomorphism of algebraic
+varieties \todo{why does this last statement follow?}
+\end{proof}
+\begin{lem}
+Consider \(\C^n/S_n\). It is isomorphic as a variety to
+\(\C[\lambda]_{n-1}\), polynomials in \(\lambda\) of degree less than
+or equal to \(n-1\).  
+\end{lem}
+\begin{proof}
+  Consider the map \(\psi \from \C^n \to \C[\lambda]_{n-1}\) given
+  by \[
+    (x_1, \ldots, x_n) \mapsto \lambda^n - \prod (\lambda - x_i)
+  \]
+  The result of this map does not depend on the order of the
+  \(x_i\)'s, so we can mod out by the action of \(S^n\)  on this map.
+\end{proof}
+Now, given a linear map \(x \from \C^n \to \C^n\), we have an
+unordered \(n\)-tuple of eigenvalues \(\{x_i\}\), but if \(x \in
+\sl_n\), we know that \(\sum x_i = 0\) since \(\tr x = 0\). So,
+take \[
+  \C^{n-1} \isom \{(x_1, \ldots, x_n) \st \sum x_i = 0\}
+\]
+as the \(n-1\)-dimensional hyperplane in \(\C^n\). It is still stable
+under the \(S^n\)-action, giving us a map \(\phi \from \sl_n \to
+\C^{n-1}/S_n\) given by \[
+  x \mapsto (x_1, \ldots, x_n), \text{ the eigenvalues of }x
+\]
+\begin{defn}
+  Given the information above, for \(\g = \sl_n\), we define the
+  \de{incidence variety of \(\g\)}, denoted \(\tilde{\g}\), to be \[
+    \tilde{\g} := \{(x,F) \in \sl_n \times \cB \st x(F_i) \subset F_i\}
+  \]
+\end{defn}
+\begin{prop}
+  The following diagram commutes \[
+    \begin{tikzcd}
+      & \tilde{\g} \ar[ld, swap, "\mu"] \ar[rd, "\nu"]& \\
+      \g \ar[rd, swap, "\phi"] & & \C^{n-1} \subset \C^n \ar[ld, "\psi"] \\
+      & \C^{n-1}/S_n
+    \end{tikzcd}
+  \]
+  where \(\nu \from \tilde{\g} \to \C^{n-1}\) sends \((x,F)\) to the
+  ordered list of its eigenvalues \(\lambda_i\) where \(\lambda_i\) is
+  the eigenvalue of the induced map \(F_i/F_{i-1} \to F_i/F_{i-1}\)
+  and \(\mu \from \tilde{\g} \to \g\) is the standard projection onto
+  the first coordinate \((x,F) \mapsto x\).
+\end{prop}
+\begin{defn}
+  Let \(\cB_x := \{F \in \cB \st x(F_i) \subset F_i, \forall i\}\). 
+\end{defn}
+\begin{prop}
+  For all \(x \in \g^{sr}\), the set \(\cB_x\) consists of \(n-1\)
+  points and has a canonical free \(S_n\)-action.
+\end{prop}
+\begin{proof}
+  Look at the eigenspaces. Note that \(\nu|_{\tilde{\g}^{sr}} =
+  \mu^{-1}(\g^{sr})\) commutes with the \(S_n\)-action. \todo{Actually
+  do the proof.}
+\end{proof}
+\begin{thm}[Universal resolution for general \(\g\)]
+  Let \(\g\) be an arbitrary Lie algebra. Then, we have incidence
+  variety \(\tilde{\g} = \{(x,\b) \in \g \times \cB \st x \in \b\}\)
+  such that the following diagram commutes \[
+    \begin{tikzcd}
+      & \tilde{\g} \ar[ld, swap, "\mu"] \ar[rd, "\nu"]& \\
+      \g \ar[rd, swap, "\rho"] & & \h \ar[ld, "\pi"] \\
+      & \h / W
+    \end{tikzcd}
+  \]
+  where \(\nu \from \tilde{\g} \to \h\) is given by \((x,\b) \mapsto x
+  \mod [\b,\b]\) (recall \(\h = \b/[\b,\b]\)) and \(\rho \from \g \to
+  \h/W\) induces embedding \[
+    \C[\h]^W \overset{\sim}{\to} \C[\g]^G \into \C[\g]
+  \]
+  for Weyl group \(W\). 
+\end{thm}

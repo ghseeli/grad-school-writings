@@ -1,0 +1,269 @@
+\begin{cor}
+  (\cite{cg} Cor 3.2.25) \(\cN = \Dunion \O\) is an \de{algebraic
+    stratification} of \(\cN\), each \(\O\)is a smooth locally closed
+  subvariety of \(\cN\).
+\end{cor}
+\section{The Steinberg Variety}
+\begin{defn}
+  We define the \de{Steinberg variety} to be \[
+    Z := \tilde{\cN} \times_\cN \tilde{\cN} = \{(x,\b,x',\b') \in
+    \tilde{\cN} \times \tilde{\cN} \st x = x'\}
+  \]
+  which is isomorphic to \[
+    \{(x,\b,\b') \in \cN \times \cB \times \cB \st x \in \b \intersect
+    \b'\}
+  \]
+\end{defn}
+\begin{prop}
+  From the standard resolution, we get the diagram \[
+    \begin{tikzcd}
+      & \ar[dl, "\mu_Z"] Z \ar[dr, "\pi^2"] & \\
+      \cN & & \cB \times \cB
+    \end{tikzcd}
+  \]
+  and so we have \(\tilde{\cN} \times \tilde{\cN} \isom T^* \cB \times
+  T^* \cB \overset{\text{sign}}{\isom} T^*(\cB \times \cB)\), that is,
+  isomorphic up to a sign to account for the symplectic form \(\omega
+  = p_1^*
+  \omega_1 - p_2^* \omega_2\) where \(\omega_1\) and \(\omega_2\)
+  account for the standard symplectic forms on \(T^* \cB\).
+\end{prop}
+Thus, we can think of the following \[
+  \begin{tikzcd}
+    & (T^*(\cB \times \cB), \omega) & \\
+    (T^* \cB, \omega_1) \ar[ru, "p_1^*"]& & \ar[lu, "p_2^*"] (T^* \cB, \omega_2)
+  \end{tikzcd} \ \
+  \begin{tikzcd}
+    & \ar[dl, "p_1"] \cB \times \cB \ar[dr, "p_2"] & \\
+    \cB & & \cB
+  \end{tikzcd}
+\]
+or, alternatively, \(T^*(\cB \times \cB) \to \cB \times \cB\) has
+fibres \(\n_1 \times \n_2\) over \((\b_1, \b_2)\), so \(T^*(\cB \times
+\cB) \isom \tilde{\cN} \times \tilde{\cN}\) where the map is given
+by \[
+  (\n, \b_1, \n, \b_2) \mapsto (\n,\b_1, -\n, \b_2)
+\]
+\begin{prop}
+  (\cite{cg} Prop 3.3.4) \(Z\) is the union of conormal bundles to
+  \(G\)-orbits in \(\cB \times \cB\).
+\end{prop}
+\begin{defn}
+  For \(S \subset M\), \(T^*_S M = \ker(T^*M|_S \to T^* S)\). For all \(x
+  \in S\), \(T_x^* S = \{(x,\zeta) \in T_x^*M \st \zeta(\alpha) = 0,
+  \forall \alpha \in T_x S\}\).
+\end{defn}
+To prove this proposition, recall that \(\W \overset{1-1}{\leftrightarrow} \{G\text{-diagonal orbits in }\cB
+\times \cB\}\) given by \(w \mapsto Y_w\). 
+\begin{proof}[Proof of Proposition]
+  For \(\Omega\) a \(G\)-orbit in \(\cB \times \cB\) through
+  \((\b_1,\b_2)\), \(T_{Y_w}^*(\cB \times \cB) \subset Z\).  Recall
+  \(\tilde{\cN} \isom T^* \cB 
+\isom G \times_\cB \n = G \times_B \b^\perp\) where \(\n =
+[\b,\b]\). Then, for a \(\zeta \in T^*_{Y_w}(\cB \times \cB)\),
+\(\zeta = (x_1, \b_1, x_2, \b_2) \in \g^* \times \cB \times \g^*
+\times \cB\) with \(x_1 \in \b_1^\perp, x_2 \in b_2^\perp\). Then, for
+any \(\alpha \in T_{(\b_1,\b_2) \Omega}\), \(\alpha = (u.\b_1,
+u.\b_2)\) for \(u \in \g\) and thus \(\langle x_1, u \rangle + \langle
+x_2, u\rangle = 0\) for all \(u \in \g\). Thus, we get \(x_1 =
+-x_2\). So, \(\zeta = (x_1, \b_1, -x_1, \b_2) \in Z\). 
+\end{proof}
+\begin{cor}
+  (\cite{cg} Cor 3.3.5) \[
+    Z = \Dunion_{w \in \W} T_{Y_w}^*(\cB \times \cB)
+  \]
+  Moreover, the irreducible components of \(Z\) are \(T_{Y_w}(\cB
+  \times \cB)\).
+\end{cor}
+\begin{thm}
+  Fix a Borel \(\b \subset \g\) with \(\n = [\b,\b]\) and \(B\)such
+  that Lie(\(B\)) \(= \b\) and \(\b^\perp = \n \subset \g\). Then, for
+  any \(G\)-orbit \(\O \subset \g\) and \(x \in \O \intersect \b\), we get
+  \(\O \intersect (x+\n)\) is a lagrangian subvariety of \(\O\).
+\end{thm}
+\begin{defn}
+  For a symplectic manifold \(M\), \(Z \subset M\) is \de{lagrangian
+    subvariety} of \(M\) if, for all \(x \in Z\), \(T_x Z \subset T_x
+  M\) is a lagrangian subspace of \(T_x M\).
+\end{defn}
+\begin{defn}
+  A \de{lagrangian subspace} \(W\) of symplectic space \(V\) is a
+  subspace with \(\dim 
+  W = \frac{1}{2} \dim V\) and on which the symplectic form is \(0\).
+\end{defn}
+\begin{proof}[Proof Idea of Theorem]
+  Focus on \(x\) nilpotent.
+\end{proof}
+\begin{lem}
+  (\cite{cg} 3.3.8) \(\dim(\O \intersect \n) \leq \frac{1}{2} \dim
+  \O\), that is, \(\O \intersect \n\) is isotropic.
+\end{lem}
+\begin{proof}
+  Let \(n = \dim \n = \dim \cB\) so \(\dim T^* \cB = \dim Z =
+  2n\) by the identification of \(Z\) with a disjoint union of
+  conormal spaces and defintion of a conormal bundle. Furthermore,
+  let \(Z_\O = \mu_Z^{-1}(\O)\) for \(\O \subset 
+  \cN\), that is \(\Z_\O = \{(x,\b,\b') \in Z \st x \in \O\}\). Then,
+  for any \(x \in \O\),
+  we have fibration \[
+    \begin{tikzcd}
+      \cB_x \times \cB_x \rar & Z_\O \subset Z \dar \\
+      \cB_x = \mu^{-1}(x) \ar[u,dash] & \O
+    \end{tikzcd}
+  \]
+  and so, by a subadditivity property of fibrations, \[
+    \dim \O + 2 \dim \cB_x \leq \dim Z_\O.
+  \] Furthermore, because \(Z_\O \subset Z\), \[
+    \dim Z_\O \leq \dim Z = 2n
+  \] Given \(x \in \O\) and
+  \(x \in \n \subset \b\), we define \[
+    S := \{g \in G \st g \b g^{-1} \in \cB_x\}
+  \]
+  It turns out that \(S\) is \(B\)-stable and so we get isomorphism
+  \begin{align*}
+    B/S & \isomto \cB_x \\
+    Bg & \mapsto g\b g^{-1}
+  \end{align*}
+  and thus  \[
+    \dim \O + 2 \dim \cB_x \leq 2n \implies \dim S - \dim B + \frac{1}{2} \dim \O \leq n.
+  \] Note that \(\O
+  \intersect \n = \{gxg^{-1} \st g \in S\}\). This leads us to the
+  fact that \[
+    S/Z_G(x) \isomto \O \intersect \n
+  \]
+  and so \(\dim S - \dim Z_G(x) = \dim(\O \intersect \n)\), and from
+  there
+  \begin{align*}
+    & \dim S + \frac{1}{2} \dim \O \leq n + \dim B = \dim G \\
+    \implies &\dim(\O \intersect \n) + \frac{1}{2} \dim \O \leq \dim G
+    - \dim Z_G(x) = \dim \O \text{ by orbit-stabilizer.}
+  \end{align*}
+  Thus, rearranging our inequality, we are done.
+\end{proof}
+\begin{proof}[Proof of Theorem]
+  Given the lemma above, it suffices to show that \(\O \intersect \n\)
+  is coisotropic, that is \(\dim(\O \intersect \n) \geq \frac{1}{2}
+  \dim \O\). Consider \[
+    W \subset V \to W^{\perp \omega} \subset W
+  \]
+  We can view \(\O\) as a symplectic manifold with Hamiltonian
+  \(B\)-action. This gets us a function \(\mu_B \from \O \to \b^*\)
+  and thus gives us the identification \(\O \intersect \n =
+  \mu_B^{-1}(0)\), which is coisotropic (\cite{cg} Thm 1.5.7). 
+\end{proof}
+\begin{example}
+  Take \(G = SL_n\). Then, let \[
+    \O = \{x \st x \text{ nilpotent}, \rk x = 1\} \subset \sl_n
+  \]
+  Note that, in this case \(x+\n = x\) since \(x\) is nilpotent. If we take \(V = \C^n\), then \(x\) is of the form \(v \otimes w^* \from V \to V\) 
+  given by \(u \mapsto w^*(u)v\). The nilpotence of \(x = v \otimes
+  w^*\) tells us 
+  that \(w^*(v) = \tr(x) = 0\). Thus, we get a surjection
+  from the set \[
+    \{v \otimes w^* \st w^*(v) = 0\} \onto \O \text{ the orbit of
+      trace free rank 1 linear maps.}
+  \]
+  and thus \(\dim \O = (2n-1)-1 = 2n-2\). In coordinates, this gives
+  us \[
+    \O = \{x = (a_{ij}) \st x \neq 0, a_{ij} = \alpha_i \beta_j, \sum
+    \alpha_i \beta_j = 0\}
+  \]
+  So, let \(\n\) be the set of upper triangular nilpotent
+  matrices. Then, \[
+    \O \intersect \n = \{x = (a_{ij}) \st x \neq 0, a_{ij} = 0 \text{
+      for } i > j, a_{ij} = \alpha_i
+    \beta_j, \sum 
+    \alpha_i \beta_j = 0\}
+  \]
+  Thus, irreducible components of \(\O \intersect \n\) are \[
+    \left\{ \left(
+        \begin{array}{cccccc}
+          0&&&a_{1,k+1}&\ldots&a_{1,n}\\
+           &0&&\vdots & & \vdots \\
+           &&0&a_{k,k+1}& \ldots & a_{k,n}\\
+           &&&0&& \\
+           &&&&\ddots& \\
+          &&&&&0
+        \end{array}
+\right) \st \text{ rows are all proportional } \right\}
+\]
+Therefore, since all the rows are proportional, there are only \(n-1\)
+choices for entries, so it has dimension \(n-1\) and is thus a
+Lagrangian subspace. So, we have found \(\O \intersect (x + \n) = \O
+\intersect \n\) as a lagrangian subvariety.
+\end{example}
+\begin{example}
+  Consider \(\O_x\) for \(x \in \g^{sr}\). So, \(\O \isom G/T\). Take
+  \(\b\) such that \(x \in \b\), \(\n = [\b,\b]\) and \(B\) such that
+  Lie(\(B\)) \(= \b\). Then, \(x \in \b \intersect \g^{sr}\) so \(x+\n
+  = Bx \subset \O\) is a single \(B\)-orbit and, according to our theorem,
+  \(x+\n \intersect \O\) is a Lagrangian subvariety of \(\O\). To see this, we
+  note that \[
+    \dim(\O \intersect (x+\n)) = \dim(x + \N) = \dim \n = \frac{1}{2}
+    \dim G/T = \frac{1}{2} \dim \O
+  \]
+  Now, taking \(\tilde{\O} = \mu^{-1}(\O)\), we get that \(\mu \from
+  \tilde{\O} \to \O\) is an unramified cover with \(\#W\) leaves. Note
+  \(\pi_1(\O) = 0\). Thus, we get \[
+    Z_\O = \mu_Z^{-1}(\O) \isom \tilde{\O} \times_\O \tilde{\O}
+  \]
+  Using a resolution, we get \[
+    m := 2 \dim \n = 2 \dim \cB = \dim \cN
+  \]
+  \todo{What was the last part of this example supposed to show?}
+\end{example}
+\begin{cor}
+  The irreducible components of \(Z_\O\) have the same dimension \[
+    \dim Z_\O = \dim Z = m
+  \]
+\end{cor}
+\begin{proof}
+  \todo{Understand this proof better.} Recall \(\pi \from \tilde{\cN} \isom G \times_B \n \to \cB \isom
+  G/B\) which restricts to the isomorphism \(\tilde{\O} \isom G
+  \times_B (\O \intersect \n)\). This is a fibration and the dimension
+  of the fibres is \(\frac{1}{2} \dim \O\). Irreducible components of
+  \(\tilde{\O}\) have dimension \(\dim(G/B) + \frac{1}{2} \dim
+  \O\). This gives us that irreducible components of \(Z_\O\) have
+  dimension \[
+    2 \dim \tilde{\O} - \dim \O = 2(\dim G/B + \frac{1}{2} \dim \O) -
+    \dim \O = 2 \dim G/B = m
+  \]
+\end{proof}
+\begin{rmk}
+  Later, we will use this to show \(H_m(Z;\Q) \isom \Q[\W]\).
+\end{rmk}
+\begin{cor}\label{Z-is-partition-of-locally-closed-subsets}
+  \(Z = \Dunion_{\O} Z_\O\) is a partition of \(Z\) into locally
+  closed subsets of dimension \(\dim Z\).
+\end{cor}
+\begin{cor}[Robin Schensted Correspondance]
+  The number of nilpotent orbits of \(\g\) is finite.
+\end{cor}
+\begin{proof}
+  \todo{Understand this proof better.} Let us examine the irreducible components of \(Z_\O\). Let \(x \in
+  \O\). Then, \(\O = G/G_x\) by orbit stabilizer. Furthermore, \(G_x\)
+  acts on \(\cB_x\), giving us a \(G\)-equivariant isomorphism
+  \(\tilde{O} \isom G \times_{G_x} \cB_x\). \[
+    \begin{tikzcd}
+      \tilde{\O} \ar[dd, swap, "\mu"] & G \times_{G_x} \cB_x \ar[dd] \\
+      \ \ar[r,"\sim"] & \ \\
+      \O & G/G_x
+    \end{tikzcd}
+  \]
+  So, we get \(Z_\O = \tilde{\O} \times_\O \tilde{\O} \isom G
+  \times_{G_x} (\cB_x \times \cB_x)\), which allows us to see that the
+  irreducible components of \(Z_\O\) are \(G \times_{G_x}(\cB_1 \times
+  \cB_2)\) where \(\cB_1, \cB_2\) are irreducible components of
+  \(\cB_x\). Thus, \[
+    \dim \O + \dim \cB_1 + \dim \cB_2 = 2 \dim \cB
+  \]
+  and if we take \(\cB_1 = \cB_2\), we get \[
+    \dim \cB_x = \dim \cB - \frac{1}{2} \dim \O
+  \]
+  which is the dimension of irreducible points of \(\cB_x\). Thus,
+  there is a one-to-one correspondance \[
+    \{\text{Irreducible components of }Z_\O\} \onetoonecorrespondance
+    \{G_x\text{-orbits on pairs }(\cB_x^\alpha, \cB_x^\beta)\}
+  \]
+  where \(C_x = G_x/(G_x^\circ)\) and \(C_x\) acts on \(\{\cB_x^\alpha\}\).
+\end{proof}
