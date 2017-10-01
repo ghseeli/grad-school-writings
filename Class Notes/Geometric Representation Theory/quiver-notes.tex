@@ -33,6 +33,10 @@
 \newcommand{\Gr}{\operatorname{Gr}} % Grassmanian
 \newcommand\mapsfrom{\mathrel{\reflectbox{\ensuremath{\mapsto}}}}
 
+\newcommand{\roots}{R} % Root System. This symbol may change later
+\newcommand{\bbQ}{\mathbb{Q}} % For rationals since \Q is for quiver now
+\newcommand{\A}{\tilde{\mathcal{A}}} 
+
 \title[Geometric Representation Theory]{Geometric Representation
   Theory: Lecture notes from a class taught by Weiqiang Wang}
 \author{George H. Seelinger}
@@ -1485,11 +1489,11 @@ quivers of type \(ADE\).
   We will end up showing that \(\Rep^{i \leftarrow}(\Q)\) and
   \(\Rep^{i \rightarrow}(\Q)\) contain all indecomposables of \(\Q\)
   except for \(S(i)\). In a sense, this encodes the same fact that a
-  reflection \(s_i\) on a positive set of roots \(R_+\) takes the set
-  \(R_+ \setminus \{\alpha_i\}\) to \(R_+ \setminus
+  reflection \(s_i\) on a positive set of roots \(\roots_+\) takes the set
+  \(\roots_+ \setminus \{\alpha_i\}\) to \(\roots_+ \setminus
   \{\alpha_i\}\). This becomes explicitly manifest in
   \ref{indec-are-positive}. \todo{I understand this, but get a much better
-    handle on it. }
+    handle on it. And what is this reference?}
 \end{rmk}
 \begin{proof}[Proof of Above Propositions]
   \todo{Understand this proof...}
@@ -1850,7 +1854,7 @@ to prove the second part of Gabriel's theorem.
   \(V' = S(i_{k+1})\) and so, we can work backwards to get \(V =
   \sourcetosinkfunc_{i_1} \cdots \sourcetosinkfunc_{i_k}(S(i_{k+1}))\)
   and thus, by \ref{relate-refl-to-refl-func}, \[
-    \grdim V = s_{i_1} \cdots s_{i_k}(\alpha_{i_{k+1}}) \in R_+
+    \grdim V = s_{i_1} \cdots s_{i_k}(\alpha_{i_{k+1}}) \in \roots_+
   \]
   where the root is positive the lemma above. So, we have \[
     \Ext^1(V,V) = \cdots = \Ext^1(S(i),S(i)) = 0
@@ -2048,7 +2052,7 @@ total order on \(I = \{i_1, \ldots, i_r\}\).
 \subsection{Longest Element and Ordering of Positive Roots}
 \begin{defn}
   Let \(w_\circ \in W\) be the largest element \(w_\circ - s_{i_N}
-  \cdots s_{i_1}\) reduced, where \(N = \ell(w_\circ) = |R_+|\). 
+  \cdots s_{i_1}\) reduced, where \(N = \ell(w_\circ) = |\roots_+|\). 
 \end{defn}
 \begin{rmk}
     \(w_\circ^2 = 1\) since \(w_\circ\) takes all positive roots to
@@ -2062,8 +2066,8 @@ total order on \(I = \{i_1, \ldots, i_r\}\).
   \(\gamma_N := s_{i_1} \cdots s_{i_{N-1}}(\alpha_{i_N})\).
 \end{defn}
 \begin{prop}
-  \(R_+ = \{\gamma_1, \ldots, \gamma_N\}\). This is a special case of
-  \(R_+(W)\). \todo{Why? Any intuition at least?}
+  \(\roots_+ = \{\gamma_1, \ldots, \gamma_N\}\). This is a special case of
+  \(\roots_+(W)\). \todo{Why? Any intuition at least?}
 \end{prop}
 \begin{prop}
   A Dynkin graph is bipartite, that is, there is an indexing \(I = I_0
@@ -2105,7 +2109,7 @@ w_\circ =
 
   Given type \(D_n\), we compute \todo{Do this!}
 \end{example}
-\begin{prop}
+\begin{prop}\label{dynkin-quivers-have-adapted-reduced-expressions}
   Given an orientation \(\Omega\) of Dynkin \(|\Q|\), there exists a
   reduced expression \(w_\circ = s_{i_N} \cdots s_{i_1}\) such that
   \(\{i_1, \ldots, i_N\}\) is adapted to \(\Omega\). 
@@ -2420,7 +2424,7 @@ Note that part (a) above implies the following theorem
   \]
 \end{defn}
 \todo{Finish this lecture. The last page is hard to follow.}
-\subsection*{(9/21/2017) Lecture 9}
+\subsection*{(9/19/2017) Lecture 9}
 \subsection{Generic Hall Algebras}
 Let \(\Q\) be a quiver. Then, we can make sense of the category
 \(\Rep(\Q,\F_q)\).
@@ -2460,7 +2464,7 @@ algebras.
   We define the \de{Hall algebra} \(H(\Q,\F_q)\) to be the
   \(\Z\)-algebra with basis given by \([M]\), the isomorphism classes
   in \(\Rep(\Q)\) such that \[
-    [M_1] \cdot [M_2] = \sum_{[L]} F_{M_1,M_2}^L [L]
+    [M_1] * [M_2] = \sum_{[L]} F_{M_1,M_2}^L [L]
   \]
 \end{defn}
 \begin{prop}
@@ -2473,13 +2477,13 @@ algebras.
 \end{prop}
 \begin{proof}
   To see associativity, note that \[
-    ([M_1] \cdot [M_2]) \cdot [M_3] = F_{M_1, M_2, M_3}^L = [M_1]
-    \cdot ([M_2] \cdot [M_3])
+    ([M_1] * [M_2]) * [M_3] = F_{M_1, M_2, M_3}^L = [M_1]
+    * ([M_2] * [M_3])
   \]
 \end{proof}
 \begin{rmk}
   There is also a twisted product, given by \[
-    U \circ V = q^{\frac{\langle \vec{u}, \vec{v} \rangle}{2} U \cdot V}
+    U \cdot V = q^{\frac{\langle \vec{u}, \vec{v} \rangle}{2} U * V}
   \]
    for \(U \in H_{\vec{u}}(\Q)\) and \(V \in H_{\vec{v}}(\Q)\) where
    \(\langle , \rangle\) is the Euler form. This product is also
@@ -2499,20 +2503,20 @@ algebras.
   (.5ex);\) and let \(S\) be the 1-dimensional representation. Then,
   all representations are of the form \(nS := S^{\oplus n}\), \(n \geq
   0\). We then know that \[
-    [(n-1)S][S] = \alpha [nS]
+    [(n-1)S]*[S] = \alpha [nS]
   \]
   for some \(\alpha\). To figure out what \(\alpha\) is, we must count
   the number of submodules of \(nS\), which one can quickly check is
   equivalent to \(|\mathbb{P}^{n-1}(\F_q)| =
   \frac{q^n-1}{q-1}\). Thus, \[
-    [(n-1)S][S] = \frac{q^n-1}{q-1} [nS]
+    [(n-1)S]*[S] = \frac{q^n-1}{q-1} [nS]
   \]
   In fact, we can show the following proposition.
 \end{example}
 \begin{prop}
   For \(\Q = \tikz\draw[black,fill=black] (0,0) circle
   (.5ex);\) and \(S\) as in the above example, \[
-    [nS] [mS] = \quantumBinom{m+n}{m} [(n+m)S]
+    [nS]*[mS] = \quantumBinom{m+n}{m} [(n+m)S]
   \]
   for natural numbers \(m,n\).
 \end{prop}
@@ -2573,9 +2577,9 @@ algebras.
 \begin{prop}
   \(H(\tikz\draw[black,fill=black] (0,0) circle
   (.5ex);) \isom \Z[t][x,x^{(2)},x^{(3)},\ldots]\) and over
-  \(\Q(t)\), \[
+  \(\bbQ(t)\), \[
     H(\tikz\draw[black,fill=black] (0,0) circle
-  (.5ex);) \otimes \Q(t) \isom \Q(t)[x]
+  (.5ex);) \otimes \bbQ(t) \isom \bbQ(t)[x]
   \]
 \end{prop}
 \todo{Understand where this is coming from.}
@@ -2590,11 +2594,11 @@ algebras.
   Simply take \(S = S(i)\).
 \end{example}
 \begin{rmk}
-  In general, \([M_1] \cdot [M_2] \neq [M_1 \oplus M_2]\).
+  In general, \([M_1] * [M_2] \neq [M_1 \oplus M_2]\).
 \end{rmk}
-\begin{prop}
+\begin{prop}\label{mult-commutes-with-oplus}
   Assume \(\Hom_\Q(M_2, M_1) = 0 = \Ext_\Q^1(M_1,M_2)\). Then, \[
-    [M_1] \cdot [M_2] = [M_1 \oplus M_2]
+    [M_1] * [M_2] = [M_1 \oplus M_2]
   \]
 \end{prop}
 \begin{proof}
@@ -2603,7 +2607,7 @@ algebras.
   \]
   Then, since \(\Ext^1(M_1,M_2) = 0\), \(L = M_1 \oplus
   M_2\). Thus, \[
-    [M_1] [M_2] = \alpha [M_1 \oplus M_2]
+    [M_1]*[M_2] = \alpha [M_1 \oplus M_2]
   \]
   for some \(\alpha\). Let \(N \subset M_1 \oplus M_2\) be isomorphic
   to \(M_2\) but \(N \neq \{(0,m_2) \st m_2 \in M_2\}\), that is, let
@@ -2621,25 +2625,25 @@ algebras.
 \end{proof}
 From now on, assume \(\Q\) is Dynkin. Recall that we then have
 \begin{align*}
-  \{\text{Indecomposables}\} & \onetoonecorrespondance R_+ \text{
+  \{\text{Indecomposables}\} & \onetoonecorrespondance \roots_+ \text{
                                (Positive roots)} \\
   I_\alpha & \mapsfrom \alpha \\
-  \text{Isomorphism classes in } \Rep(\Q) & \correspondsto \N^{R_+} :=
-                                            \{\vec{n} \from R_+ \to
+  \text{Isomorphism classes in } \Rep(\Q) & \correspondsto \N^{\roots_+} :=
+                                            \{\vec{n} \from \roots_+ \to
                                             \N\} \\
-  M_n = \bigoplus_{\alpha \in R_+} n_\alpha I_\alpha
-  & \mapsfrom \vec{n} = (n_\alpha)_{\alpha \in R_+}
+  M_n = \bigoplus_{\alpha \in \roots_+} n_\alpha I_\alpha
+  & \mapsfrom \vec{n} = (n_\alpha)_{\alpha \in \roots_+}
 \end{align*}
 \begin{prop}
   Let \(\Q\) be Dynkin. Then, for all \(\vec{n}, \vec{m}, \vec{k} \in
-  \N^{R_+}\), there is a polynomial \(\phi_{\vec{n},\vec{k}}^{\vec{m}}
+  \N^{\roots_+}\), there is a polynomial \(\phi_{\vec{n},\vec{k}}^{\vec{m}}
   \in \Z[t]\) such that \[
     \phi_{\vec{n},\vec{k}}^{\vec{m}}(q) = F_{M_{\vec{n}}, M_{\vec{k}}}^{M_{\vec{m}}}
   \]
 \end{prop}
 This gives rise to the ``generic'' Hall algebra \(H_t(\Q) =
 H(\Q)_{\Z[t]}\) with multiplication \[
-  [M_{\vec{n}}] \cdot [M_{\vec{k}}] = \sum_{\vec{m}}
+  [M_{\vec{n}}] * [M_{\vec{k}}] = \sum_{\vec{m}}
   \phi_{\vec{n},\vec{k}}^{\vec{m}}(t) M_{\vec{m}}
 \]
 We can also make use of specialization to get \[
@@ -2648,12 +2652,102 @@ We can also make use of specialization to get \[
 and also \[
   H(\Q)_\C = H(\Q)_{\Z[t]} \otimes_{\Z[t]} \C
 \]
-\begin{thm}
-  Let \(\tilde{A} = \Z[t][[n]_t^{-1}, \forall n \geq 1]\). Then, the
-  (Ringel-)Hall algebra \(H(\Q)_{\tilde{A}}\) is generated by \(\theta_i =
+\begin{thm}\label{hall-alg-gen-by-thetas}
+  Let \(\A = \Z[t][[n]_t^{-1}, \forall n \geq 1]\). Then, the
+  (Ringel-)Hall algebra \(H(\Q)_{\A}\) is generated by \(\theta_i =
   [S(i)]\) for \(i \in I\). 
 \end{thm}
 This theorem will be expanded upon in the next lecture.
+\subsection*{(9/21/2017) Lecture 10}
+Recall that, by \ref{dynkin-quivers-have-adapted-reduced-expressions},
+if \(\Q\) is Dynkin, there exists a reduced \(w_\circ = 
+s_{i_n} \cdots s_{i_1}\) such that \(\{i_1, \ldots, i_N\}\) is adapted
+to \(\Q\). Thus, we have positive roots \(\roots_+ = \{\gamma_1,
+\ldots, \gamma_N\}\) where \[
+  \gamma_1 = \alpha_1, \ \ \gamma_2 = s_{i_1}(\alpha_2), \ldots,
+  \gamma_N = s_{i_1} \cdots s_{i_{N-1}}(\alpha_N) 
+\] and Gabriel's Theorem \ref{gabriels-thm} says that if \(\Q\) is
+Dynkin, there is a one-to-one correspondance with the indecomposable
+representations of \(\Q\) given by \(\gamma_i \mapsto I_i\). Also,
+recall that, in this setting, \todo{How exactly does this follow?}
+\begin{align*}
+  \Hom_\Q(I_a, I_b) & = \delta_{a,b} \text{ for } a \geq b \\
+  \Ext_\Q^1(I_b, I_a) & = 0
+\end{align*}
+\begin{prop}
+  For \(\Q\) Dynkin, if \(V \isom \bigoplus_{k=1}^N n_k I_k\), then \[
+    [V] = [I_1]^{(n_1)} * \cdots * [I_N]^{(n_N)} \text{ in } H_t(\Q)
+  \]
+\end{prop}
+\begin{proof}
+  It suffices to check in \(H(\Q,\F_q)\) \todo{why does it suffice to
+    check only this?}. By, \ref{mult-commutes-with-oplus} and above, we have \[
+    \left[ \bigoplus_{k=1}^D n_k I_k \right] = [n_1 I_1] * [n_2 I_2] *
+    \cdots * [n_D I_D]
+  \]
+\end{proof}
+\begin{proof}[Proof of \ref{hall-alg-gen-by-thetas}]
+  We define a partial order on \(\N^I\) by \[
+    \vec{v} \leq \vec{w} \iff v_i \leq w_i
+  \]
+  This order allows us to induce a partial order on the isomorphism
+  classes in \(\Rep(\Q)\) by \[
+    V \leq W \iff \grdim V \leq \grdim W \text{ or } \grdim V = \grdim
+    W \text{ and } \O_V \subset \ov{\O}_W
+  \]
+  Let \(H' := \A \langle \O_i \st i \in I \rangle\). Then, we proceed
+  by induction on \(\leq\) to show \([V] \in H'\). Assume for all \(V'
+  < V\), \([V'] \in H'\). We have two cases:
+  \begin{enumerate}[label=(\roman*)]
+  \item \(V\) is decomposable, that is \(V = V' \oplus V''\). By the
+    proposition above, \([V] = [V'] 
+    * [V'']\), both of which are in \(H'\) by the inductive
+    hypothesis since \(\grdim V' < \grdim V\) and \(\grdim V'' <
+    \grdim V\). Thus, \(V \in H'\).
+  \item \(V\) is indecomposable. Then, find an \(i\) such that \(V_i
+    \neq 0\) and, for all edges \(i \to j\), \(V_j = 0\). Let \(v_i =
+    \dim V_i\). Then, we have short exact sequence \[
+      0 \to v_i S(i) \to V \to V/(v_i S(i)) \to 0
+    \]
+    So, \([V/(v_i S(i))]*[V'] = [V] + \sum_k c_k [V_k'']\), where
+    \(V_k''\) are other representations with \(\grdim V_k'' = \grdim
+    V\). However, since \(V\) is a unique indecomposable with \(\grdim
+    V\) by the one-to-one correspondance, the
+    \(V_k''\) must be decomposable and thus \(\sum c_k [V_k''] \in
+    H'\) and \([V/(v_i S(i))]*[V'] \in H'\) give us that \([V] \in H'\).
+  \end{enumerate}
+\end{proof}
+\begin{cor}
+  Over \(\C\), \(\{\theta_i \st i \in I\}\) generates \(H_1(\Q)_\C\).
+\end{cor}
+We now move on to a discussion of the relations among the
+\(\theta_i\)'s.
+\begin{prop}
+  Let \(\Q\) be a Dynkin quiver. If \(i\) and \(j\) are not connected,
+  then in the Hall algebra \[
+    \theta_i * \theta_j = [S(i) \oplus S(j)] = \theta_j * \theta_i
+  \]
+\end{prop}
+\begin{example}
+  Let us do some computations with the quiver \[
+    \Q =
+    \begin{tikzcd}
+      1 \rar & 2
+    \end{tikzcd}
+  \]
+  with \(\bbk = \F_q\). Then, we have representations
+  \begin{align*}
+    S(1) & = \bbk \to 0 \\
+    S(2) & = 0 \to \bbk \\
+    S_{12} & := \bbk \to[\sim] \bbk \\
+    \tilde{S}_{12} & := \bbk \to[0] \bbk
+  \end{align*}
+  Then,
+  \begin{align*}
+    \theta_1 * \theta_2 & = [S_{12}] + [\tilde{S}_12] \\
+    \theta_2 * \theta_1 & = [\tilde{S}_{12}]
+  \end{align*}
+\end{example}
 \begin{bibdiv}
   \begin{biblist}
     \bib{cg}{book}{
