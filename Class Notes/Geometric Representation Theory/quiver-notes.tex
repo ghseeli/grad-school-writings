@@ -36,6 +36,7 @@
 \newcommand{\roots}{R} % Root System. This symbol may change later
 \newcommand{\bbQ}{\mathbb{Q}} % For rationals since \Q is for quiver now
 \newcommand{\A}{\tilde{\mathcal{A}}} 
+\newcommand{\U}{U}
 
 \title[Geometric Representation Theory]{Geometric Representation
   Theory: Lecture notes from a class taught by Weiqiang Wang}
@@ -2481,7 +2482,7 @@ algebras.
     * ([M_2] * [M_3])
   \]
 \end{proof}
-\begin{rmk}
+\begin{rmk}\label{def-of-twisted-prod}
   There is also a twisted product, given by \[
     U \cdot V = q^{\frac{\langle \vec{u}, \vec{v} \rangle}{2} U * V}
   \]
@@ -2747,7 +2748,179 @@ We now move on to a discussion of the relations among the
     \theta_1 * \theta_2 & = [S_{12}] + [\tilde{S}_12] \\
     \theta_2 * \theta_1 & = [\tilde{S}_{12}]
   \end{align*}
-\end{example}
+  since \(\theta_2\) is a submodule of \(S_{12}\) and
+  \(\tilde{S}_{12}\) with multiplicity \(1\) and \(\theta_1\) is a
+  submodule of \(\tilde{S}_{12}\) with multiplicity \(1\).
+  \[ \theta_2 \into S_{12} =
+    \begin{tikzcd}
+        \bbk \rar{\sim} & \bbk \\
+       \bbk \uar \rar & 0 \uar
+     \end{tikzcd} \ \ 
+     \theta_2 \into \tilde{S}_{12} = 
+    \begin{tikzcd}
+      \bbk \rar{0} & \bbk \\
+      \bbk \uar \rar & 0 \uar
+    \end{tikzcd} \ \
+     \theta_1 \into \tilde{S}_{12} =
+    \begin{tikzcd}
+      \bbk \rar{0} & \bbk \\
+      0 \rar \uar & \bbk \uar
+    \end{tikzcd}
+  \]
+  Note that there is no way to embed \(\theta_1 \into S_{12}\) and
+  have the diagram commute.
+  Now, we wish to compute \(\theta_1^2 * \theta_2, \theta_1 * \theta_2
+  * \theta_1\), and \(\theta_2 * \theta_1^2\). To get the right
+  quotients, we must first write down representations of \(\Q\) of
+  \(\grdim = (2,1)\): \[
+    S_{112} = \begin{tikzcd}
+      \bbk^2 \ar[r, twoheadrightarrow] & \bbk
+    \end{tikzcd} \ \ \tilde{S}_{112} =
+    \begin{tikzcd}
+      \bbk^2 \ar[r, "0"] & \bbk
+    \end{tikzcd}
+  \]
+  Then, we have
+  \begin{align*}
+    \theta_1^2 * \theta_2
+    & = (q+1)[2S(1)]*[S(2)] = (q+1)([S_{112}]+[\tilde{S}_{112}]) \\
+    \theta_2 * \theta_1^2
+    & = (q+1)[S(2)]*[2S(1)] = (q+1)[\tilde{S}_{112}] \\
+    \theta_1 * \theta_2 * \theta_1
+    & = \theta_1 * [\tilde{S}_{12}] = [S_{112}] + (q+1)[\tilde{S}_{112}]
+  \end{align*}
+  To see the first equality, we compute \[
+    \theta_1 \into 2S(1) =
+    \begin{tikzcd}
+      \bbk^2 \rar & 0 \\
+      \bbk \uar \rar & 0 \uar
+    \end{tikzcd} \ \
+  \]
+  and see that there are \(q+1\) possible maps \(\bbk \to \bbk^2\)
+  that make the diagram commute, since the map could be encoded by a
+  rank \(1\) \(2 \times 1\) matrix with entries in \(\F_q\), up to
+  non-zero scalar multiplication by \(\F_q\), thus \(\frac{q^2-1}{q-1}
+  = q+1\). Then, we see \[
+      S(2) \into S_{112} = 
+    \begin{tikzcd}
+      \bbk^2 \ar[r, twoheadrightarrow] & \bbk \\
+      0 \rar \uar & \bbk \uar
+    \end{tikzcd} \ \ S(2) \into \tilde{S}_{112} =
+    \begin{tikzcd}
+      \bbk^2 \ar[r, "0"] & \bbk \\
+      0 \rar \uar & \bbk \uar
+    \end{tikzcd} \ \ 2S(1) \into \tilde{S}_{112} =
+    \begin{tikzcd}
+      \bbk^2 \ar[r, "0"] & \bbk \\
+      \bbk^2 \uar \rar & 0 \uar
+    \end{tikzcd}
+  \]
+  each only have 1 embedding and \[
+      \tilde{S}_{12} \into S_{112} =
+      \begin{tikzcd}
+        \bbk^2 \ar[r, twoheadrightarrow] & \bbk \\
+        \bbk \ar[r, "0"] \uar & \bbk \uar
+      \end{tikzcd}
+      \ \ \tilde{S}_{12} \into \tilde{S}_{112} =
+      \begin{tikzcd}
+        \bbk^2 \ar[r, "0"] & \bbk \\
+        \bbk \ar[r, "\sim"] \uar & \bbk \uar
+      \end{tikzcd}
+    \]
+    have \(1\) and \(\frac{q^2-1}{q-1} = q+1\) embeddings, respectively.
+  \end{example}
+  From this example, we can get the following proposition
+  \begin{prop}\label{normal-prod-reln}
+    Let \(i \to j\) in a quiver \(\Q\). Then, in \(H(\Q)_{\Z[t]}\)\[
+      \theta_i^2 * \theta_j - (t+1) \theta_i * \theta_j * \theta_i + t
+      \theta_2 * \theta_i^2 = 0
+    \]
+  \end{prop}
+  \begin{proof}
+    The proof is the same as the computations in the exercise
+    above. An exercise for the reader is to find a similar
+    relationship between \(\theta_2^2 * \theta_1, \theta_2 * \theta_1
+    * \theta_2\), and \(\theta_1*\theta_2^2\).
+  \end{proof}
+  \begin{prop}
+    Recall the twisted product for the Hall algebra given in
+    \ref{def-of-twisted-prod}. Given \(\Q = 1 \to
+    2\), then in \(H(\Q,\F_q)\), we get
+    \begin{align*}
+      \theta_1 \cdot \theta_2 & = q^{-\frac{1}{2}} \theta_1 * \theta_2
+      \\
+      \theta_2 \cdot \theta_1 & = \theta_2 * \theta_1 \\
+      \theta_1^2 \cdot \theta_2 & = q^{-\frac{1}{2}}\theta_1^{*2} * \theta_2 \\
+      \theta_2 \cdot \theta_1^2 & = q^{\frac{1}{2}} \theta_2 *
+                                  \theta_1^{*2} \\
+      \theta_1 \cdot \theta_2 \cdot \theta_1 & = \theta_1 * \theta_2 *
+                                               \theta_1 
+    \end{align*}
+  \end{prop}
+  \begin{proof}
+    These computations follow from the computations that \[
+      \langle S(i), S(i) \rangle = 1, \ \langle S(1), S(2) \rangle =
+      -1, \ \langle S(2), S(1) \rangle = 0
+    \]
+    where \(\langle V,W \rangle = \sum_i v_i w_i - \sum_h v_{s(h)}
+    w_{t(h)}\) is the Euler form.
+  \end{proof}
+  \begin{rmk}
+    From now on, we may choose to omit the \(\cdot\) in the Hall
+    algebra, and simply write \[
+      [V] [W] := [V] \cdot [W]
+    \]
+  \end{rmk}
+  \begin{cor}
+    For \(\Q = 1 \to 2\) and \(v = t^{\frac{1}{2}}\), in
+    \(H(\Q)_{\Z[t]}\), we get
+    \begin{enumerate}
+    \item \(\theta_1^2 \theta_2 - (v+v^{-1})\theta_1 \theta_2 \theta_1
+      + \theta_2 \theta_1^2 = 0\)
+    \item \(\theta_2^2 \theta_1 - (v+v^{-1}) \theta_2 \theta_1
+      \theta_2 + \theta_1 \theta_2^2 = 0\)
+    \end{enumerate}
+  \end{cor}
+  \begin{proof}
+    For part (a),
+    \begin{align*}
+      \theta_1^2 \theta_2 - (v+v^{-1})\theta_1 \theta_2 \theta_1
+      + \theta_2 \theta_1^2
+      & = t^{-\frac{1}{2}} \theta_1^{*2} *
+        \theta_2 - (t^{\frac{1}{2}} + t^{-\frac{1}{2}}) \theta_1 *
+        \theta_2 * \theta_1 + t^{\frac{1}{2}} \theta_2 * \theta_1^{*2}
+      \\
+      & = t^{-\frac{1}{2}} (\theta_1^{*2} *
+        \theta_2 - (t + 1) \theta_1 *
+        \theta_2 * \theta_1 + t \theta_2 * \theta_1^{*2}) \\
+      & = t^{-\frac{1}{2}} * (0) & \text{ by \ref{normal-prod-reln}}
+      \\
+      & = 0
+    \end{align*}
+  \end{proof}
+  \begin{thm}[Ringel's Theorem]
+    Let \(\Q\) be a Dynkin quiver. Let \[
+      \tilde{H}(\Q, v^2) = H_t(\Q) \otimes_{\Z[t]} \Q(v) \ \ (t
+      \mapsto v^2)
+    \]
+    be equipped with the twisted product. Then, there exists an
+    algebra isomorphism \[
+      \U_v \n^+ \to \tilde{H}(\Q, v^2), \ \ E_i \mapsto \theta_i
+    \]
+    where \[
+      \U_v \n^+ = \Q(v) \langle E_i \ (i \in I) \st \substack{E_i E_j = E_j E_i
+      \text{ for } i \not\to j, \\ E_i^2 E_j - [2]_v E_i E_j E_i + E_j
+      E_i^2 = 0 \text{ for } i \to j} \rangle
+    \]
+  \end{thm}
+  \begin{cor}
+    There is an algebra isomorphism \[
+      U \n^+ \isomto H_t(\Q) \otimes_{\Z[t]} \C
+    \]
+    sending \(e_i \to \theta_i\).
+  \end{cor}
+  \todo{Get a handle on the quantum groups vs enveloping algebras
+    here. When is \(E_i\) appropriate and when is \(e_i\) appropriate?}
 \begin{bibdiv}
   \begin{biblist}
     \bib{cg}{book}{
