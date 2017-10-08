@@ -1,0 +1,476 @@
+\section{Applincations of the Jacobson-Morozov Theorem}
+\begin{defn}
+  Let \((e,f,h)\) be a triple of elements in some semisimple Lie
+  algebra \(\g\) over a field of characteristic \(0\). We say
+  \((e,f,h)\) is a \de{\(\sl_2\)-triple} if \[
+    [h,e] =  2e, \ [h,f] = -2f, \ [e,f] = h.
+  \]
+\end{defn}
+We recall from a first course in semisimple Lie algebras the following
+proposition. 
+\begin{prop}
+  A Lie algebra \(\g\) decomposes into a direct sum of
+  finite-dimensional subspaces, each of which is isomorphic to
+  \(V_j\), the \(j+1\)-dimensional simple \(\sl_2\)-module with
+  highest weight \(j\). \todo{Elaborate}
+\end{prop}
+To each of these simple \(\sl_2\)-modules, we can associate an
+\(\sl_2\)-triple in \(\g\). However, the Jacobson-Morozov Theorem can
+provide us with a partial converse to this fact.
+\begin{thm}[Jacboson-Morozov Theorem]
+  \cite{cg}*{3.7.1} Let \(\g\) be a complex semisimple Lie
+  algebra. For any nilpotent 
+  element \(e \in \g\), there 
+  exists \(h,f \in \g\) such that \(\{e,f,h\}\) is an
+  \(\sl_2\)-triple. \\
+
+  Thus, there exists a Lie algebra homomorphism \(\gamma \from \sl_2
+  \to \g\) such that \[
+    \left(
+      \begin{array}{cc}
+        0&1\\
+        0&0
+      \end{array}
+\right) \mapsto e, \ \left(
+  \begin{array}{cc}
+    0&0\\
+    1&0
+  \end{array}
+\right) \mapsto f, \ \left(
+  \begin{array}{cc}
+    1&0\\
+    0&-1
+  \end{array}
+\right) \mapsto h
+\]
+  Moreover, \(h\) is a semisimple element and \(f\) is a nilpotent
+  element of \(\g\).
+\end{thm}
+\begin{rmk}
+  This triple \((e,f,h)\) associated with \(e\) is not necessarily
+  unique. The following proposition, due to Kostant, tells us to what
+  extent the associated triple is unique.
+\end{rmk}
+\begin{prop}
+  \cite{cg}*{3.7.3} Let \(Z_G(e)\) denote the centralizer in \(G\) of
+  \(e\). Then, the 
+  above homomorphism \(\gamma \from \sl_2(\C) \to \g\) is determined
+  uniquely up to conjugation by an element in the unipotent radical of
+  the group \(Z_G(e)\).
+\end{prop}
+\begin{proof}[Proof of Jacobson-Morozov Theorem when \(\g = \sl_n(\C)\)]
+  \cite{cg}*{p 184} By the Jordan canonical form, any nilpotent
+  element is conjugate to 
+  a direct sum of Jordan blocks. Thus, we need only show the theorem
+  is true when \(e\) is a single \(m\) by \(m\) Jordan block. Since
+  \(e\) is nilpotent, all of its eigenvalues are \(0\), so \[
+    e = \left(
+      \begin{tikzcd}
+        0 \ar[rrdd, dash]&1 \ar[rd, dash]& \\
+        & & 1 \\
+        & & 0
+      \end{tikzcd}
+\right)
+\]
+Then, we take
+\begin{align*}
+  h = \left(
+    \begin{array}{cccc}
+      m-1&0&\cdots&0 \\
+      0&m-3&\cdots&0 \\
+      \vdots &&\ddots& \\
+      0&\cdots& &-m+1
+    \end{array}
+\right) \\  f = \left(
+  \begin{array}{cccccc}
+    0&0&&&& \\
+    m-1&0&0&&&\\
+    0&2(m-2)&0&&&\\
+     &&\ddots&&&\\
+     &&&-2(m-2)&0&0 \\
+    &&&&-(m-1)&0
+  \end{array}
+\right)
+\end{align*}
+From this, it is straightforward to check that the set \((e,f,h)\)
+actually forms an \(\sl_2\)-triple.
+\end{proof}
+\begin{lem}
+ \cite{cg}*{3.2.16} \(e \in \g\) is nilpotent if and only if \[
+    (e,x) = \tr(\ad_e \cdot \ad_x) = 0 \text{ for all } x \in Z_\g(e)
+  \]
+\end{lem}
+\begin{proof}
+  \((\implies)\). Assume \(e\) is nilpotent and \(x \in Z_\g(e)\). Since \(ad_e\) and
+  \(\ad_x\) commute \todo{why?}, for large enough \(k\), \[
+    (\ad_e \cdot \ad_x)^k = \ad^k_e \cdot \ad^k_x = 0
+  \]
+  by the nilpotency of \(x\). Thus, \(\ad_e \cdot \ad_x\) is also
+  nilpotent and thus has trace \(0\). \\
+
+  \((\impliedby)\). Now assume \((e,x) = 0\) for all \(x \in
+  Z_\g(e)\). We note that \(\ad_e\) is 
+  skew-symmetric with respect to the Killing form and so
+  \(\im(\ad_e) = \ker (\ad_e)^\perp\), where \(\perp\) stands for
+  the annihilator with respect to \((,)\). Thus, we have
+  \begin{lem}
+    \(e \in
+  \im(\ad_e)\) is equivalent to \((e,Z_\g(e)) = 0\) is equivalent to
+  there exists an 
+  element \(h \in \g\) such that \([h,e]=e\).
+  \end{lem}
+  However, we can also show there exists a \emph{semisimple} element
+  \(s \in \g\) such that \([s,e] = e\). To do this, take \(h\) as
+  above and write its Jordan decomposition \(h = s + n\) where \(s\)
+  semisimple and \(n\) nilpotent. Since \(e\) is an eigenvector for
+  \(\ad_h\), then \(e\) is an eigenvector for \(\ad_s\) and
+  \(\ad_n\). However, \(\ad_n\) is nilpotent and thus only has
+  eigenvalues \(0\), so \(\ad_n e = 0\). Therefore, \(\ad_s e = \ad_h
+  e = e\) and so we have found semisimple \(s \in \g\) such that
+  \([s,e] = e\). \\
+
+  So, take \(h \in \g\) to be semisimple such that \([h,e] =
+  e\). Then, we can decompose \(\g\) into \(\ad_h\)-eigenspaces: \[
+    \g = \bigoplus_{\alpha \in \C} \g_\alpha, \ \g_\alpha := \{x \in
+    \g \st \ad_h(x) = \alpha \cdot x\}
+  \]
+  where \(h \in \g_0\) and \(e \in \g_1\). We also have relation
+  \(\ad_h \circ \ad_e = \ad_e \circ (1+\ad_h)\) which tells us
+  \(\ad_e\) takes \(\g_\alpha\) to \(\g_{\alpha+1}\). Thus,
+  \(\ad^k_e\) takes \(\g_\alpha\) to \(\g_{\alpha+k}\) and since there
+  are only finitely many non-zero spaces \(\g_\alpha\), we get \(\ad^k
+  e = 0\) for sufficiently large \(k\). Thus, \(e\) is nilpotent.
+\end{proof}
+\begin{lem}
+  If \(e \in \g\) is nilpotent, then there exists a semisimple \(h \in
+  \g\) such that \([h,e] = e\).
+\end{lem}
+\begin{proof}
+  If \(e \in \g\) is nilpotent, then by the lemma above, \((e,
+  Z_\g(e)) = 0\). Thus, following the ``only if'' part of the proof
+  above, we can find such an \(h\).
+\end{proof}
+\begin{proof}[Proof of Full Theorem]
+  \cite{cg}*{pp191--2} Fix a nilpotent \(e \in \g\). Note that if
+  \(\dim \g = 3\), then we 
+  are done since \(\g = \sl_2\).
+  \begin{enumerate}[label=(\arabic*)]
+  \item Decomposing a non-nilpotent \(x \in Z_\g(e)\) (assuming such
+    an \(x\) exists) into its Jordan
+    decomposition \(x = s+n\) and using \([x,e] = 0 \implies
+    [s,e]=0\) (see \cite{humph}*{p } \todo{Fill in page number}), we argue by induction on \(\dim
+    \g\) to reduce to the case where 
+    the subalgebra \(Z_\g(e)\) consists of nilpotent elements
+    only. Since \([s,e] = 0\), we have \(s \in Z_\g(e)\), so
+    \(Z_\g(e)\) contains a non-zero semisimple element. Furthermore,
+    the centralizer of such an element is a \emph{proper} reductive
+    Lie subalgebra of \(\mathfrak{t} \subset \g\). Since \(e\) commutes
+    with the semisimple component of \(\mathfrak{t}\), we have \(e \in
+    \mathfrak{t}\). Thus, this semisimple component of
+    \(\mathfrak{t}\) is a Lie algebra of dimension less than \(\dim
+    \g\) containing \(e\), so we are done by the inductive
+    hypothesis. So, we must deal with the case of \(Z_\g(e)\)
+    consisting only of nilpotent elements.
+  \item Show there is a semisimple \(h \in \g\) such that \([h,e]=2e\). By the
+    lemma above, for any nilpotent element \(e \in \g\), we have
+    a semisimple \(h \in \g\) such that \([h,e] = e \implies [2h,e] = 2e\).
+  \item Fix an \(h \in \g\) such that \([h,e]=2e\) as above and introduce
+    weight space decomposition \[
+      \g = \bigoplus_{\alpha \in \C} \g_\alpha, \ \g_\alpha := \{x \in
+      \g \st \ad_h(x) = \alpha \cdot x\}.
+    \]
+    where \(h \in \g_0, e \in \g_2\) and \(\ad_h \circ \ad_e = \ad_e
+    \circ (2+ \ad_h) \implies \ad_e\) takes \(\g_\alpha\) to
+    \(\g_{\alpha+2}\). Thus, if we find \(f \in \g_{-2}\) such that
+    \(\ad_e(f) = h\), we are done. Since \(\ad_e\) shifts the
+    gradation by \(2\), this amounts to showing that \(h \in
+    \im(\ad_e)\). However, from the
+    lemma in the proof above, we see this holds if and only if
+    \((h,Z_\g(e)) = 0\). To prove this, we use the Jacobi identity and
+    the fact that \([h,e]=2e\) to get that, for \(x \in Z_\g(e)\),
+    \begin{align*}
+      [e,[h,x]] & = -[h,[x,e]]-[x,[e,h]] \\
+                & = -[h,0] + [x,2e] \\
+                & = 0
+    \end{align*}
+    and so \([h,Z_\g(e)] \subset Z_\g(e)\). So, we have that \(\C
+    \cdot h + Z_\g(e)\) is a Lie subalgebra of \(\g\). Now, by the
+    first part of the proof, we can assume \(x\) is nilpotent and
+    using Engel's theorem, this tells us that \(Z_\g(e)\) is
+    nilpotent and thus \(\C \cdot h + Z_\g(e)\) is a solvable Lie
+    algebra. Thus, by Lie's theorem, for all \(x \in \C \cdot h +
+    Z_\g(e)\), we can put \(\ad_x\) in the upper triangular form so
+    that, for \(x \in Z_\g(e)\), \(\ad_x\) is strictly upper
+    triangular. Therefore, for any \(x \in Z_\g(e)\), \(\ad_h \cdot
+    \ad_x\) is strictly upper triangular and so \(\tr(\ad_h \cdot
+    \ad_x) = 0 \implies (h,Z_\g(e)) = 0 \implies h \in \im(\ad_e)\)
+    gives us the existence of an \(f \in \g_{-2}\) such that
+    \(\ad_e(f) = h\). 
+  \end{enumerate}
+\end{proof}
+\begin{rmk}
+  In \cite{cm}, parts (1) and (2) of the proof are morally
+  equivalent. However, for part (3) in \cite{cm}*{pp 38--39}, they proceed by
+  contradiction, but follow a somewhat similar proof. In \cite{cg}*{p
+    190}, they claim that the standard proof is quite elementary but
+  involves several tricky lemmas. However, this proof made no use of
+  anything terribly sophisticated in geometry, so I do not quite
+  understand this statement.
+\end{rmk}
+\begin{cor}
+  Given a nilpotent \(e \in \g\), there exists a rational homomorphism
+  \(\gamma \from SL_2(\C) \to G\) such that its differential \(d\gamma
+  \from \sl_2(\C) \to \g\) sends \(\left(
+    \begin{array}{cc}
+      0&1\\
+      0&0
+    \end{array}
+\right)\) to \(e\).
+\end{cor}
+\begin{proof}
+  \(SL_2(\C)\) is simply connected. Thus, any Lie algebra homomorphism
+  can be extended to a (unique) Lie group homomorphism \footnote{This
+    theorem is highly non-trivial, but proved in \cite{hall}*{section 3.6}}.
+\end{proof}
+Recall that any simple finite dimensional \(\sl_2(\C)\)-module \(V\)
+looks like \[
+  \begin{tikzcd}
+    \text{highest weight} & \cdot \ar[r, bend left, "f"] & \ar[l, bend
+    left, "e"] \cdot \ar[r, bend left, "f"] & \ar[l, bend
+    left, "e"] \cdots  \ar[r, bend left, "f"] & \ar[l, bend
+    left, "e"] \cdot & \text{lowest weight}
+  \end{tikzcd}
+\]
+where the dots correspond to \(h\)-eigenspaces, each of dimension
+\(1\), and \(V = \ker f \oplus \im e\) where \(\ker f\) is the
+rightmost vertex. This decomposition holds for any, not necessarily
+simple, \(\sl_2\)-module.
+\begin{cor}
+  Let the \(\sl_2\)-triple \((e,f,h)\) act on a finite dimensional
+  vector space \(V\). Assume that \(v \in V\) is such that \(f \cdot v
+  = 0\) and \(h \cdot v = -m \cdot v\). Then, \(m\) is a non-negative
+  integer and we have \(e^{m+1} \cdot v = 0\).
+\end{cor}
+\begin{proof}
+  This follows since every \(\sl_2(\C)\)-module is symmetric about the
+  \(0\)-eigenspace. 
+\end{proof}
+\begin{cor}
+  Any nilpotent element of a semisimple Lie algebra \(\g\) is acting
+  as a nilpotent operator on any finite dimensional \(\g\)-module.
+\end{cor}
+\begin{proof}
+  By the Jacobson-Morosov Theorem, any nilpotent element \(e\) is part of an
+  \(\sl_2\)-triple and thus, by the corollary above, for each \(v \in
+  V\), there is an \(m
+  \in \N\) such that \(e^{m+1} \cdot v
+  = 0\). Thus, since \(V\) is finite-dimensional, \(e\) is a nilpotent
+  operator on \(V\).
+\end{proof}
+\begin{cor}
+  Fix a nilpotent \(e \in \g\) and corresponding \(\sl_2\)-triple
+  \((e,f,h)\). Then,
+  \begin{enumerate}
+  \item All the eigenvalues of the operator \(\ad_h \from Z_\g(e) \to
+    Z_\g(e)\) are non-negative integers.
+  \item If all the eigenvalues of the operator \(\ad_h \from \g \to
+    \g\) are even, then \(\dim Z_\g(e) = \dim Z_\g(h)\).
+  \end{enumerate}
+\end{cor}
+\begin{proof}
+  From the \(\sl_2\)-triple, we have an embedding \(\sl_2(\C) \into
+  \g\). The adjoint action on \(\g\) of the image of the embedding
+  makes \(\g\) an \(\sl_2(\C)\)-module. Then, by the decomposition of
+  \(\sl_2(\C)\)-modules, we see that all the eigenvalues of \(\ad_h
+  \from \g \to \g\) are integers and the weight space decomposition
+  into \(\ad_h\)-eigenspaces yields a \(\Z\)-grading on the Lie
+  algebra \(\g\): \[
+    \g = \bigoplus_{i \in \Z} \g_i, \ [\g_i, \g_j] \subset \g_{i+j},
+    \forall i, j \in \Z
+  \]
+  Furthermore, by the Jacobi identity, \(Z_\g(e)\) is
+  \(\ad_h\)-stable (\([e,[h,x]] =
+  -[h,[x,e]]-[x,[e,h]] = -[h,0]-[x,2e] = 0\)), so we have \[
+    Z_\g(e) = \bigoplus_{i \in \Z} Z_{\g_i}(e), \ Z_{\g_i}(e) =
+    Z_\g(e) \intersect \g_i
+  \]
+  Finally, since \(\ker(e) = Z_\g(e)\), so \todo{Figure
+    out how this implies the result.}
+\end{proof}
+\begin{thm}
+  (\cite{cg} cor 3.2.13 and thm 3.7.13). Let \(e_1, \ldots, e_n\) be a
+  set of root vectors in \(\n\) for \(\g = \h \oplus \n \oplus
+  \n^-\), one for each simple root determined by \(\b\). Then, \(x =
+  \sum e_i\) is a regular nilpotent element in \(\g\).
+\end{thm}
+\begin{rmk}
+  This theorem can be proved using the fact that \(\n^{reg}\) is a
+  single \(B\)-orbit consisting of regular nilpotent elements in
+  \(\g\) since \(n \in \n^{reg}\). However, we will use the corollary
+  above to prove it instead.
+\end{rmk}
+\begin{proof}[Proof of Theorem]
+  Let \(\alpha_1, \ldots, \alpha_n\) be the set of simple roots
+  determined by \(\b\) and let \(\n_{\alpha_1}, \ldots,
+  \n_{\alpha_n}\) for the corresponding root spaces in \(\n\) (so
+  that, in  particular, \(e_i \in \n_{\alpha_i}\)). Let
+  \(\n_{-\alpha_1}, \ldots, \n_{-\alpha_n}\) denote the corresponding negative root
+  spaces and \(e_{-1}, \ldots, e_{-n}\) the corresponding negative
+  root vectors.
+
+  From the general structure theory of semisimple Lie algebras, there
+  is, for each \(1 \leq i \leq n\), a unique multiple \(h_i\) of
+  \([e_i, e_{-i}]\) such that \(\alpha_i(h_i) = 2\). Furthermore, the
+  \(h_i\)'s form a basis of \(\h\). Now, fix \(h \in \h\) so that
+  \(\alpha_i(h) = 2\) for all \(i\) and define complex numbers
+  \(\mu_1, \ldots, \mu_n\) by the equation \(h = \sum \mu_i h_i\). Let
+  \(y := \sum \mu_i e_{-i}\). Then, for any simple roots \(\alpha,
+  \beta\) where \(\alpha \neq \beta\), \(\alpha - \beta\) is not a
+  root. Thus, \([e_i, e_{-j}] = 0\) whenever \(i \neq j\) because
+  \todo{why?}. Now, we calculate \todo{Where did this come from?}
+  \begin{align*}
+    [h,x] & = \sum_i \alpha_i(h) e_i = 2x \\
+    [h,y] & = \sum_i \mu_i(-\alpha_i)(h)e_{-i} = -2y \\
+    [x,y] & = \sum_{i,j} \mu_j [e_i, e_{-j}] = \sum_i \mu_i [e_i,
+            e_{-i}] = \sum_i \mu_i e_i = h
+  \end{align*}
+  Thus, \((x,y,h)\) is an \(\sl_2\)-triple and all the eigenvalues of
+  \(h\) on \(\g\) are even since \(\alpha_i(h) = 2\). By the corollary
+  above, we obtain \(\dim Z_\g(x) = \dim Z_\g(h) = \dim \h\) and
+  therefore \(x\) is regular.
+\end{proof}
+\subsection{Consequences using Transversal Slices}
+\begin{defn}
+  (\cite{cg} 3.2.19) A locally closed (in the ordinary Hausdorff topology) complex
+  analytic subset \(S \subset X\) containing the point \(y\) will be
+  called a \de{transverse slice} to \(Y\) at \(y\) if there is an open
+  neighborhood of \(y\) (in the ordinary Hausdorff topology), \(U
+  \subset X\), and an analytic isomorphism \(f \from (Y \intersect U)
+  \times S \isomto U\) such that \(f\) restricts to the tautological
+  maps of the factors \[
+    f \from \{y\} \times S \isomto S \text{ and } (Y \intersect U)
+    \times \{y\} \isomto Y \intersect U.
+  \]
+\end{defn}
+\begin{lem}
+  (\cite{cg} 3.2.20) Let \(G\) be an algebraic group, \(V\) a smooth
+  algebraic \(G\)-variety, \(X\) a \(G\)-stable algebraic
+  subvariety in \(V\), and \(S_V\) a locally-closed complex-analytic
+  submanifold which is transverse to \(\O\) at \(y \in \O\). Then the
+  intersection with \(X\) of a small enough open neighborhood of \(y\)
+  in \(S_V\) is a transverse slice to \(\O\) in \(X\). 
+\end{lem}
+\begin{proof}
+  See \cite{cg}.
+\end{proof}
+\begin{prop}
+  Fix a nilpotent \(e \in \g\) and corresponding \(\sl_2\)-triple
+  \((e,f,h)\). Let \(\O\) be the \(G\)-conjugacy class of \(e\). Then,
+  the affice space \(e + Z_\g(f)\) is transverse to the orbit \(\O\)
+  in \(\g\). Moreover, we have \(\O \intersect (e + Z_\g(f)) = e\).
+\end{prop}
+\begin{rmk}
+  The affine space \(e + Z_\g(f)\), or its intersection with \(\cN\),
+  is often referred to as the \de{standard slice} to the orbit \(\O\)
+  at the point \(e\). This is due to the fact that there exists a
+  small enough neighborhood \(U\) containing \(e\) such that \(\cN
+  \intersect (e + Z_\g(f)) \intersect U\) is a transverse slice to
+  \(\O\) in \(\cN\).
+\end{rmk}
+\begin{proof}[Proof of Proposition]
+  
+\end{proof}
+\subsection{Correspondance between nilpotent orbits and
+  \(G\)-conjugacy classes of \(\sl_2\)-triples}
+This exposition is borrowed from chapter 3 of \cite{cm} and modified
+given what we already have proven.
+\begin{prop}
+  For semisimple Lie algebra \(\g\), there is a bijection \[
+    \Hom(\sl_2,\g) \setminus \{0\} \correspondsto \{\text{standard
+      triples in }\g\}
+  \]
+\end{prop}
+\begin{proof}
+  Given a nonzero homomorphism \(\phi \from \sl_2 \to \g\), we get
+  standard triple \(\{\phi(e), \phi(f), \phi(h)\}\). Conversely, an
+  \(\sl_2\)-triple gives an injection of \(\sl_2 \into \g\).
+\end{proof}
+\begin{prop}
+  There is a map defined by
+  \begin{align*}
+    \Omega \from \{G_{ad}\text{-conjugacy classes of standard triples
+    in }\g\} & \to \{\text{nonzero nilpotent orbits in }\g\}\\
+    \{e,f,h\} & \mapsto \O_e
+  \end{align*}
+\end{prop}
+\begin{proof}
+  This map is induced by the fact that \(\Hom(\sl_2,\g) \setminus
+  \{0\}\) and standard triples in \(\g\) are invariant under the
+  action of \(G_{ad}\).
+\end{proof}
+\begin{prop}
+  The map \(\Omega\) is surjective.
+\end{prop}
+\begin{proof}
+  By the Jacobson-Morozov theorem, every nilpotent \(e \in \g\)
+  belongs to some \(\sl_2\)-triple. Thus, there is a conjugacy class
+  of triples \(\{e,f,h\}\) mapping to \(\O_e\).
+\end{proof}
+\begin{prop}[Kostant's Theorem]
+  Let \(\g\) be a complex semisimple Lie algebra. Any two standard
+  triples \((e,f,h)\) amd \((e,f',h')\) with the same nilpositive
+  element are conjugate by an element of \(G_{ad}\), the adjoint
+  group. Thus, the map \[
+    \Omega \from \{G_{ad}\text{-conjugacy classes of standard triples
+      in }\g\} \to \{\text{nonzero nilpotent orbits in }\g\}
+  \]
+  is injective.
+\end{prop}
+\begin{thm}
+  The map \(\Omega\) is a one-to-one correspondance between the set
+  of \(\{G_{ad}\)-conjugacy classes of standard triples in \(\g\)
+  and the set of nonzero nilpotent orbits in \(\g\).
+\end{thm}
+\begin{ex}
+  Consider \(\g = \sl_n(\C)\). Then, \(G_{ad} = PSL_n\) and we can
+  pick orbit representatives \[
+    e_{[d_1, \ldots, d_k]} = \left(
+      \begin{array}{cccc}
+        J_{d_1}(0)&&& \\
+                  &J_{d_2}(0)&& \\
+                  &&\ddots& \\
+        &&&J_{d_k}(0)
+      \end{array}
+\right)
+\]
+  where \([d_1, \ldots, d_k]\) is a partition of \(n\). As discussed
+  in the \(\sl_n\) proof of the Jacobson-Morozov theorem, if we
+  let \[
+    \rho_r(h) = \left(
+      \begin{array}{ccccc}
+        r&&&&\\
+         &r-2&&&\\
+         &&\ddots&&\\
+         &&&-r+2&\\
+        &&&&-r
+      \end{array}
+\right) \ \ \rho_r(f) = \left(
+  \begin{array}{ccccc}
+    0&0&&&\\
+    \mu_1&0&&&\\
+     &\ddots&\ddots&& \\
+     &&&0&0\\
+    &&&\mu_r&0
+  \end{array}
+\right)
+\]
+  where \(\mu_i = i(r+1-i)\) for \(1 \leq i \leq r\), we can associate
+  \(\sl_2\)-triple to \(e_{[d_1, \ldots, d_k]}\) given by \[
+    h_{[d_1, \ldots, d_k]} = \rho_{d_1}(h) \oplus \cdots \oplus
+    \rho_{d_k}(h), \ f_{[d_1, \ldots, d_k]} = \rho_{d_1}(f) \oplus
+    \cdots \oplus \rho_{d_k}(f)
+  \]
+  Conversely, given an \(\sl_2\)-triple in \(\sl_n\), \(\{e,f,h\}\),
+  the corresponding orbit is simply \(\O_e\).
+\end{ex}
+
