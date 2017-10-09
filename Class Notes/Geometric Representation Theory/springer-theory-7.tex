@@ -1,4 +1,8 @@
-\section{Applincations of the Jacobson-Morozov Theorem}
+\documentclass[springer-theory-notes.tex]{subfiles}
+
+\begin{document}
+\section{Applications of the Jacobson-Morozov Theorem}
+\subsection{Statement and Immediate Applications}
 \begin{defn}
   Let \((e,f,h)\) be a triple of elements in some semisimple Lie
   algebra \(\g\) over a field of characteristic \(0\). We say
@@ -51,7 +55,7 @@ provide us with a partial converse to this fact.
   unique. The following proposition, due to Kostant, tells us to what
   extent the associated triple is unique.
 \end{rmk}
-\begin{prop}
+\begin{prop}[Kostant's Theorem]
   \cite{cg}*{3.7.3} Let \(Z_G(e)\) denote the centralizer in \(G\) of
   \(e\). Then, the 
   above homomorphism \(\gamma \from \sl_2(\C) \to \g\) is determined
@@ -230,7 +234,8 @@ actually forms an \(\sl_2\)-triple.
 \begin{proof}
   \(SL_2(\C)\) is simply connected. Thus, any Lie algebra homomorphism
   can be extended to a (unique) Lie group homomorphism \footnote{This
-    theorem is highly non-trivial, but proved in \cite{hall}*{section 3.6}}.
+    theorem is a highly non-trivial differential geometry proof, but
+    proved in \cite{hall}*{section 3.6}}. 
 \end{proof}
 Recall that any simple finite dimensional \(\sl_2(\C)\)-module \(V\)
 looks like \[
@@ -294,8 +299,15 @@ simple, \(\sl_2\)-module.
     Z_\g(e) = \bigoplus_{i \in \Z} Z_{\g_i}(e), \ Z_{\g_i}(e) =
     Z_\g(e) \intersect \g_i
   \]
-  Finally, since \(\ker(e) = Z_\g(e)\), so \todo{Figure
-    out how this implies the result.}
+  Finally, since \(\ker(e) = Z_\g(e)\), then \(Z_\g(e) \intersect
+  \im(f) = \{0\}\), so \(Z_\g\) contains only highest weight
+  vectors. From the general theory, we know that if \(v_0\) is a
+  highest weight vector, then \(h.v_0 = [\dim(\Span\{v_0, f.v_0,
+  f^2.v_0, \ldots\})-1]v_0\), but such an eigenvalue must be a
+  nonnegative integer. If all the eigenvalues are even, then repeated application
+  of \(f\)
+  to each element of \(Z_\g(e)\) will land it in \(\g_0 =
+  Z_\g(h)\) since \(f \from \g_m \to \g_{m-2}\) for all \(m \in \Z\).
 \end{proof}
 \begin{thm}
   (\cite{cg} cor 3.2.13 and thm 3.7.13). Let \(e_1, \ldots, e_n\) be a
@@ -324,15 +336,15 @@ simple, \(\sl_2\)-module.
   \(h_i\)'s form a basis of \(\h\). Now, fix \(h \in \h\) so that
   \(\alpha_i(h) = 2\) for all \(i\) and define complex numbers
   \(\mu_1, \ldots, \mu_n\) by the equation \(h = \sum \mu_i h_i\). Let
-  \(y := \sum \mu_i e_{-i}\). Then, for any simple roots \(\alpha,
+  \(y := \sum \mu_i e_{-i}\). Now, for any simple roots \(\alpha,
   \beta\) where \(\alpha \neq \beta\), \(\alpha - \beta\) is not a
   root. Thus, \([e_i, e_{-j}] = 0\) whenever \(i \neq j\) because
   \todo{why?}. Now, we calculate \todo{Where did this come from?}
   \begin{align*}
-    [h,x] & = \sum_i \alpha_i(h) e_i = 2x \\
+    [h,x] & = [h,\sum e_i] = \sum [h,e_i] = \sum_i \alpha_i(h) e_i = 2x \\
     [h,y] & = \sum_i \mu_i(-\alpha_i)(h)e_{-i} = -2y \\
     [x,y] & = \sum_{i,j} \mu_j [e_i, e_{-j}] = \sum_i \mu_i [e_i,
-            e_{-i}] = \sum_i \mu_i e_i = h
+            e_{-i}] = \sum_i \mu_i h_i = h
   \end{align*}
   Thus, \((x,y,h)\) is an \(\sl_2\)-triple and all the eigenvalues of
   \(h\) on \(\g\) are even since \(\alpha_i(h) = 2\). By the corollary
@@ -340,6 +352,8 @@ simple, \(\sl_2\)-module.
   therefore \(x\) is regular.
 \end{proof}
 \subsection{Consequences using Transversal Slices}
+\todo{This whole section is completely  confusing and I do not
+  understand anything except Kostant's theorem.}
 \begin{defn}
   (\cite{cg} 3.2.19) A locally closed (in the ordinary Hausdorff topology) complex
   analytic subset \(S \subset X\) containing the point \(y\) will be
@@ -364,7 +378,7 @@ simple, \(\sl_2\)-module.
   See \cite{cg}.
 \end{proof}
 \begin{prop}
-  Fix a nilpotent \(e \in \g\) and corresponding \(\sl_2\)-triple
+  (\cite{cg} 3.7.15)Fix a nilpotent \(e \in \g\) and corresponding \(\sl_2\)-triple
   \((e,f,h)\). Let \(\O\) be the \(G\)-conjugacy class of \(e\). Then,
   the affice space \(e + Z_\g(f)\) is transverse to the orbit \(\O\)
   in \(\g\). Moreover, we have \(\O \intersect (e + Z_\g(f)) = e\).
@@ -377,8 +391,44 @@ simple, \(\sl_2\)-module.
   \intersect (e + Z_\g(f)) \intersect U\) is a transverse slice to
   \(\O\) in \(\cN\).
 \end{rmk}
-\begin{proof}[Proof of Proposition]
-  
+\begin{cor}
+  (\cite{cg} 3.7.19) The fiber \(\mu^{-1}(e) \subset \tilde{\cN}\) is a homotopy retract
+  of the variety \(\tilde{S} = \mu^{-1}(e + Z_\g(f)) \subset \tilde{N}\).
+\end{cor}
+\begin{lem}\label{transversal-lem}
+  (\cite{cg} 3.7.21) Let \(U \subset Z_G(e)\) be a unipotent normal subgroup
+  corresponding to the Lie algebra \(\u = \bigoplus_{i > 0} Z_{\g_i}(e)\).
+  \begin{enumerate}
+  \item We have \(\u = \ker(e) \intersect \im(e)\).
+  \item The affine space \(h + \u\) is stable under the adjoint
+    \(U\)-action; moreover, \(h+\u = U \cdot h\) is a single \(U\)-orbit.
+  \end{enumerate}
+\end{lem}
+\begin{proof}[Proof of Kostant's Theorem]
+  Let \((e,f,h)\) and \((e,f',h')\) be two \(\sl_2\)-triples. If
+  \(h=h'\), then \[
+    [f',e] = h' = h = [f,e] \implies [f'-f,e] = 0 \text{ and } f'-f
+    \in Z_\g(e)
+  \]
+  However, \(f,f' \in \g_{-2}\) in the grading \(\g = \bigoplus_{i \in
+ \Z} \g_i\) into \(\ad_h\)-eigenspaces. Thus, \(f'-f \in
+  Z_{\g_{-2}}(e) = 0\) and so \(f' = f\). \\
+
+  Now, for any two \(\sl_2\)-triples \((e,f,h)\) and \((e,f',h')\), we
+  get \[
+    [h',e] = [h,e] = 2e \implies [h'-h,e] = 0 \implies h'-h \in
+    Z_\g(e) = \ker(e)
+  \]
+  Furthermore, we have \[
+    h'-h = [e,f'-f] \in \im(e) \implies h'-h \in \ker(e) \intersect \im(e)
+  \]
+  So, by Lemma \ref{transversal-lem}(a), we get \(h' \in h + \u\)
+  and thus, by Lemma \ref{transversal-lem}(b), there is a \(u \in
+  U\) such that \(h' = uhu^{-1}\). Therefore, \[
+    e = u^{-1}eu, \ h = u^{-1}h'u, \ f'' := u^{-1}f' u
+  \]
+  and so \((e,h,f'')\) is an \(\sl_2\)-triple for \(e\). So, by above,
+  \(f'' = f\) and we are done.
 \end{proof}
 \subsection{Correspondance between nilpotent orbits and
   \(G\)-conjugacy classes of \(\sl_2\)-triples}
@@ -416,7 +466,7 @@ given what we already have proven.
   belongs to some \(\sl_2\)-triple. Thus, there is a conjugacy class
   of triples \(\{e,f,h\}\) mapping to \(\O_e\).
 \end{proof}
-\begin{prop}[Kostant's Theorem]
+\begin{prop}[Kostant's Theorem, rephrased]
   Let \(\g\) be a complex semisimple Lie algebra. Any two standard
   triples \((e,f,h)\) amd \((e,f',h')\) with the same nilpositive
   element are conjugate by an element of \(G_{ad}\), the adjoint
@@ -426,9 +476,12 @@ given what we already have proven.
   \]
   is injective.
 \end{prop}
+\begin{rmk}
+  
+\end{rmk}
 \begin{thm}
   The map \(\Omega\) is a one-to-one correspondance between the set
-  of \(\{G_{ad}\)-conjugacy classes of standard triples in \(\g\)
+  of \(G_{ad}\)-conjugacy classes of standard triples in \(\g\)
   and the set of nonzero nilpotent orbits in \(\g\).
 \end{thm}
 \begin{example}
@@ -474,3 +527,7 @@ given what we already have proven.
   the corresponding orbit is simply \(\O_e\).
 \end{example}
 
+\end{document}
+%%% Local Variables:
+%%% TeX-master: "springer-theory-notes.tex"
+%%% End:
