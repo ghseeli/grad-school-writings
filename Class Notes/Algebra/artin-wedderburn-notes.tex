@@ -1,0 +1,569 @@
+\documentclass[11pt,leqno,oneside]{amsbook}
+\usepackage{tikz}
+\usetikzlibrary{cd}
+\usepackage{bbm}
+\usepackage{todonotes}
+
+\usepackage{../notes}
+\usepackage{../../ReAdTeX/readtex-core}
+\usepackage{../../ReAdTeX/readtex-abstract-algebra}
+
+\numberwithin{thm}{section}
+
+\title[Artin-Wedderburn Theory]{Artin-Wedderburn Theory \\ Notes
+  inspired by a class taught by Brian Parshall in Fall 2017}
+\author{George H. Seelinger}
+\date{Fall 2017}
+\begin{document}
+\maketitle
+\section{Krull-Schmidt}
+We start with an underated lemma.
+\begin{thm}[Fitting's Lemma]
+  Let \(0 \neq M\) be a left \(R\)-module with a composition series
+  and \(f \from M \to M\) a module homomorphism. Since \(M\) has a
+  composition series, there exists an
+  \(n\) such that \[
+    \im f \supset \im f^2 \supset \cdots \supset \im f^n = \im f^{n+1}
+    = \cdots
+  \]
+  and \[
+    \ker f \subset \ker f^2 \subset \cdots \subset \ker f^n = \ker
+    f^{n+1} = \cdots 
+  \]
+  Define \(f^\infty(M) := \im f^n\) and \(f^{-\infty}(M) := \ker
+  f^n\). Then, \[
+    M \isom f^\infty(M) \oplus f^{-\infty}(M)
+  \]
+\end{thm}
+\begin{proof}
+  Let \(x \in f^\infty(M) \intersect f^{-\infty}(M)\). Then, \(x =
+  f^n(y) = f^{2n}(z)\) and \(f^n(x) = 0\). Then, \(0 = f^n(x) =
+  f^{2n}(y)\). Thus, \(y \in \ker f^{2n} = \ker f^n\), so \(x = f^n(y)
+  = 0\). \\
+
+  Now, let \(x \in M\). Then, \(x = [x-f^n(y)]+f^n(y)\) where \(f^n(y)
+  \in f^\infty(M)\) and \(y\) such that \(f^{2n}(y) =
+  f^n(x)\). Then, \[
+    f^n(x-f^n(y)) = f^n(x) - f^{2n}(y) = f^n(x) - f^n(x) = 0
+  \]
+  Thus, \(x - f^n(y) \in f^{-\infty}(M)\) and \(f^n(y) \in
+  f^\infty(M)\). 
+\end{proof}
+Now, we seek to prove the Krull-Schmidt theorem.
+\begin{thm}[Krull-Schmidt Theorem]
+  Let \(0 \neq M\) be an \(R\)-module which is both Artinian and
+  Noetherian. Suppose
+  \begin{align*}
+    M & = M_1 \oplus \cdots \oplus M_h \\
+    & = N_1 \oplus \cdots \oplus N_k
+  \end{align*}
+  where \(M_i, N_j\) are indecomposable. Then, \(h=k\) and, up to
+  rearranging terms, \(M_i \isom N_i\) for \(i = 1, \ldots, h\). 
+\end{thm}
+To prove this theorem, we need the following lemmas.
+\begin{lem}
+  Let \(M,N\) be \(R\)-modules with \(N\) decomposable and
+  homomorphisms \(\nu \from M \to N\) and \(\mu \from N \to M\). If
+  \(\mu \nu \from M \to M\) is an automorphism, then \(\mu\) and
+  \(\nu\) are isomorphisms.
+\end{lem}
+\begin{proof}
+  Let \(\tau = \mu \nu\) be an automorphism. Now, replace \(\mu\) with
+  \(\tau^{-1} \mu\). Then, we have split short exact sequence \[
+    \begin{tikzcd}
+      0 \rar & M \ar[r,swap,"\nu"] & N \rar \ar[l,bend right = 30, swap,"\mu"] & N/M \rar & 0
+    \end{tikzcd}
+  \]
+  and so \(N \isom M \oplus N/M\). However, \(N\) is indecomposable,
+  so \(N = M\).
+\end{proof}
+\begin{lem}
+  Let \(0 \neq M\) be indecomposable, Artinian, and Noetherian. Let \(\tau_1, \ldots, \tau_r \in \End_R M\) satisfy \(\tau_1 +
+  \cdots + \tau_r \in \Aut_R (M)\). Then, at least one \(\tau_i\) is
+  an automorphism of \(M\)
+\end{lem}
+\begin{proof}
+  Since \(\tau = \tau_1 + (\tau_2 + \cdots + \tau_r)\), it suffices to
+  prove for the sum of 2 endomorphisms. Let \(\psi = \tau_1 + \tau_2\)
+  be an automorphism. Then, \(\phi_1 = \psi^{-1} \tau_1\) and \(\phi_2
+  = \psi^{-1} \tau_2\). We then have \(\phi_1 + \phi_2 = 1_M\) and so,
+  since \(\phi_1 = 1_M - \phi_2\), we get \(\phi_1 \phi_2 = \phi_2
+  \phi_1\). Now, we can apply the binomial theorem to get \[
+    0 \neq 1_M^m = (\phi_1 + \phi_2)^m = \sum_{k=1}^m \binom{m}{k} \phi_1^k \phi_2^{m-k}
+  \]
+  So, at least one of the \(\phi_i\)'s cannot be nilpotent. Without
+  loss of generality, assume \(\phi_1\) is not nilpotent. Since
+  \(\phi_1\) is not nilpotent and \(M\) has a composition series, we
+  can apply Fitting's Lemma to get \[
+    M \isom \phi_1^\infty(M) \oplus \phi_1^{-\infty}(M)
+  \]
+  However, \(M\) is indecomposable and \(\phi_1^\infty(M) \neq 0\), so
+  \(M = \phi_1^\infty(M)\) and \(\ker \phi_1 \subset
+  \phi_1^{-\infty}(M) = 0\), so \(\phi_1\) is an
+  automorphism. Therefore, \(\tau_1\) is an automorphism.
+\end{proof}
+We are now ready to prove the Krull-Schmidt theorem.
+\begin{proof}[Proof of Krull-Schmidt]
+  Let \(0 \neq M\) be an Artinian and Noetherian \(R\)-module. Suppose
+  \begin{align*}
+    M & = M_1 \oplus \cdots \oplus M_h \\
+    & = N_1 \oplus \cdots \oplus N_k
+  \end{align*}
+  where the \(M_i,N_j\) are indecomposable. We will proceed by
+  induction on \(h\). If \(h=1\), then \(M\) is already indecomposable
+  and we are done. Now, for the inductive step, let \(\mu \from M \to
+  M_i\) be the projection onto the \(i\)th summand and, similarly, let
+  \(\nu_j \from M \to N_j\) be a projection. Then, we have \(\mu_i
+  \mu_j = \delta_{ij} \mu_i\) and \(\nu_i \nu_j = \delta_{ij}
+  \nu_j\). Now, we have the following identity \[
+    \mu_1 = \mu_1 \circ 1_M = \mu_1(\nu_1 + \cdots + \nu_k)
+  \]
+  Now, let \(\ov{\nu}_j = \nu_j |_{M_i} \from M_i \to M\). If we
+  restrict the above identity to \(M_1\), we get \[
+    1_{M_1} = \mu_1 \ov{\nu}_1 + \cdots + \mu_1 \ov{\nu}_k \in \Aut M_1
+  \]
+  Thus, we can use the lemma above to assume that \(\mu_1 \ov{nu}_1
+  \in \Aut M_1\). Furthermore, by the other lemma, since \(\mu_1 \ov{\nu}_1\) is
+  an automorphism, we get that \(\ov{nu}_1\) is an isomorphism, as is
+  \(\mu_1 \from N_1 \to M_1\). Now,
+  consider \[
+    N_1 + M_2 + \cdots + M_n \submodule M
+  \]
+  We wish to show this sum is actually direct. Assume there is \(n_1
+  \in N_1\) and \(m_2 \in M_2, \ldots, m_h \in M_h\) such that \[
+    n_1 + m_2 + \cdots + m_h = 0.
+  \]
+  We can just apply \(\mu_1\) to this sum above to get \[
+    0 = \mu_1(n_1 + m_2 + \cdots + m_h) = \mu_1(n_1)
+  \]
+  However, \(\mu_1\) is an isomorphism between \(N_1\) and \(M_1\), so
+  \(\mu_1(n_1) = 0 \implies n_1 = 0\). So, furthermore, it must be
+  that \(m_2 = \cdots = m_h = 0\) by the direct sum construction,
+  so \[
+    M' := N_1 + M_2 + \cdots + M_h = N_1 \oplus M_2 \oplus \cdots
+    \oplus M_h \submodule M
+  \]
+  Thus, we wish to finally show that \(M' = M\). Let \[
+    \rho \from M_1 \oplus \cdots \oplus M_h \to M'
+  \]
+  be given by \(\rho = \ov{\nu}_1 + \mu_2 + \cdots + \mu_h\). Note
+  that \(\rho\) is an isomorphism since \(\ov{\nu}_1\) is an
+  isomorphism from \(M_1 \to M\). Since
+  \(M\) is Artinian, there is some \(a \gg 0\) such that \[
+    \rho^{a+1}(M) = \rho^a(M)
+  \]
+  Hence, given \(m \in M\), there is some \(m' \in M\) such that
+  \begin{align*}
+    \rho^{a+1}(m') = \rho^a(m)
+    & \implies \rho^a(m-\rho(m')) = 0 \\
+    & \implies m-\rho(m') \in \ker \rho^a = \{0\}
+  \end{align*}
+  Thus, \(M' = M\) and \(\rho\) is an automorphism of
+  \(M\). Furthermore, \(\rho(M_i) = M_i\) for \(i = 2,\ldots,h\),
+  \(\rho(M_1) = N_1\), and \[
+    N_1 \oplus M_2 \oplus \cdots \oplus M_h = \rho(M) = M = M_1 \oplus
+    \cdots \oplus M_h
+  \]
+  Hence,
+  \begin{align*}
+    M_2 \oplus \cdots \oplus M_h
+    & \isom M/M_1 \\
+    & \isom \rho(M)/\rho(M_1) \\
+    & \isom \rho(M)/N_1 \\
+    & \isom (N_1 \oplus \cdots \oplus N_k) / N_1 \\
+    & \isom N_2 \oplus \cdots \oplus N_k
+  \end{align*}
+  Thus, by induction, \(h-1 = k-1 \implies h = k\) and \(M_i \isom
+  N_i\) for \(i=2,\ldots,h\), and we already know \(M_1 \isom N_1\) by
+  above.
+\end{proof}
+\begin{cor}
+  Let \(N\) be a direct summand of \(M\) as in the Krull-Schmidt
+  theorem. Then, there exist a subset of \(\{M_i\}\) indecomposable submodules 
+  \(M_{i_1}, \cdots , M_{i_t}\) such that \[
+    N \isom M_{i_1} \oplus \cdots \oplus M_{i_t}
+  \]
+\end{cor}
+\section{Nakayama's Lemma: A Hard to Remember Lemma}
+While one statement of Nakayam's Lemma may be hard to remember, there
+are actually many special cases of this lemma and so it has a
+reputation of being hard to remember. To understand and prove
+Nakayama's Lemma, we must first lay the groundwork of Jacobson
+radicals.
+\begin{defn}
+  The \de{Jacobson radical} (often just called the radical) \(R\) of a
+  ring \(A\) is \[
+    R = \{x \in A \st xM = 0, \forall \text{ simple }A\text{-modules }M\}
+  \]
+\end{defn}
+\begin{defn}
+  A ring \(A\) is called \de{semisimple} when its radical \(R = 0\). 
+\end{defn}
+\begin{thm}\label{radical-is-2-sided-ideal}
+  The radical \(R\) of \(A\) is a two-sided ideal of \(A\) and \(A/R\)
+  is semisimple.
+\end{thm}
+\begin{proof}
+  If \(M\) is a simple \(A\)-module, then \(M\) is also an
+  \(A/R\)-module. Conversely, any \(A/R\)-modules are naturally
+  \(A\)-modules. Thus, if there were an \(x + R \in A/R\) such that
+  \((x+R)M = xM = 
+  0\) for all simple \(A/R\)-modules \(M\), then \(x\) would also
+  annihilate all simple \(A\)-modules and thus \(x \in R\), so \(x+R =
+  0 + R\) and thus the radical of \(A/R\) is trivial.
+\end{proof}
+\begin{thm}\label{radical-is-intersection-of-maxl-ideals}
+  Let \(R\) be the radical of a ring \(A\). Then, \[
+    R = \Intersect_{M \text{ simple }} \Ann_A (M) = \Intersect_{\substack{I
+      \ideal A \\ \text{Maximal left ideal}}} I
+  \]
+  That is, \(R\) is the intersection of all maximal left ideals of \(A\).
+\end{thm}
+\begin{proof}
+  Let \(x \in R\) and let \(I\) be a maximal left ideal. We want to
+  show that \(x \in I\). Since \(I\) is maximal, \(A/I\) is a simple
+  left \(A\)-module. thus, \(x \in \Ann(A/I)\). Thus,
+  \begin{align*}
+    0 = x(1+I) & \implies x \in I \\
+               & \implies x \in \Intersect I \\
+               & \implies R \subset \Intersect I
+  \end{align*}
+  Conversely, let \(x \in \Intersect I\). Let \(M\) be a simple module
+  \(0 \neq m \in M\). We show \(xm = 0\). We have
+  \begin{align*}
+    A & \overset{\theta}{\onto} M \\
+    a & \mapsto am
+  \end{align*}
+  Then, \(M \isom A/I\) where \(I = \Ann_A(m)\). Thus, \(xm = 0\).
+\end{proof}
+\begin{thm}\label{one-minus-radical-is-unit}
+  Given a ring \(A\), \[
+    \rad A = \{x \in A \st 1-axb \in A^\times, \forall a,b \in A\}
+  \]
+  where \(A^\times\) is the group of units of \(A\).
+\end{thm}
+\begin{proof}
+  Let \(x \in \rad A\) with \(a,b \in A\). Then, \(\rad A \ideal A\)
+  by \ref{radical-is-2-sided-ideal}, so \(axb \in \rad A\). Now, write
+  \(y := axb\). We wish to show \(1-y\) is a unit. \\
+
+  If \(A(1-y) \neq A\), let \(I\) be a maximal left ideal containing
+  \(A(1-y)\). Then, by \ref{radical-is-intersection-of-maxl-ideals},
+  \(\rad A \subset I\), so \(y \in \rad A \subset I\) and \(1-y \in
+  A\). This would give that \(1 = y + (1-y) \in I \implies I = A\),
+  which is a contradiction of the maximality of \(I\). So, \(A(1-y) =
+  A\) for all \(y \in \rad A\). \\
+
+  Now, since \(A(1-y) = A\), there is a \(t\) such that \(t(1-y) =
+  1\). So, we wish to show \((1-y)t = 1\). Rearranging our expression
+  \(t(1-y) = 1\), we get
+  \begin{align*}
+    1-t = -ty \in \rad A
+    & \implies A(1-(1-t)) = A
+    & \text{ by above since }A(1-y) = A, \forall y \in \rad A \\
+    & \implies At = A \\
+    & \implies \exists u \in A \text{ such that } ut=1 \\
+    & \implies u = ut(1-y) = 1-y
+    & \text{since }t(1-y)=1 \text{ and }ut=1 \\
+    & \implies 1-y \in A^\times
+  \end{align*}
+  Thus, we have shown one containment. \\
+
+  Now, let \(x \in A\) be such that \(1-axb \in A^\times\) for all
+  \(a,b \in A\). We want to prove \(x \in \rad A\). We show \(xM = 0\)
+  if \(M\) is a simple \(A\)-module. Let \(0 \neq m \in M\). Assume
+  \(xm \neq 0\). Then, \(M = Axm\) since \(M\) is simple so \((xm) =
+  M\). Thus, \(m = axm\) for some \(a \in A\) and so \((1-ax)m =
+  0\). However, \(1-ax \in A^\times\), so \(m = 0\), which is a
+  contradiction. Thus, \(xM = 0\) and so \(x \in \rad A\).
+\end{proof}
+\begin{thm}[Nakayama's Lemma]
+  \cite{jacobson}*{p 415} Let \(A\) be a ring and let \(M\) be a finitely-generated
+  \(A\)-module. If \((\rad A)M = M\), then \(M = 0\).
+\end{thm}
+\begin{proof}
+  Let \(m_1, m_2, \ldots, m_k\) be a minimum generating set of
+  \(M\). Given \(m \in M\), there exists \(a_1, \ldots, a_k \in A\)
+  such that \[
+    m = a_1 m_1 + \cdots + a_k m_k
+  \]
+  Take \(m = m_1\). Then, \[
+    (1-a_1)m_1 = a_2 m_2 + \cdots + a_k m_k
+  \]
+  If \((\rad A) M = M\), we can assume each \(a_i \in \rad A\), we can
+  assume each \(a_i \in \rad A\) since \(\rad A\) is a 2-sided ideal
+  by theorem \ref{radical-is-2-sided-ideal}. Thus, by
+  \ref{one-minus-radical-is-unit}, \(1-a_1\) is a unit, so \[
+    m_1 = (1-a_1)^{-1} a_2 m_2 + \cdots + (1-a_2)^{-1} a_k m_k \in
+    \langle m_2, \ldots, m_k \rangle
+  \]
+  However, this contradicts the minimality of the the generating set.
+\end{proof}
+\begin{cor}
+  Let \(M\) be a finitely generated left \(A\)-module and let \(N
+  \submodule M\) be a submodule such that \[
+    N+(\rad A)M = M
+  \]
+  Then, \(N = M\)
+\end{cor}
+\begin{proof}
+  Given the above, \(\rad A(M/N) = M/N\) simply by quotienting both
+  sides of the equality by \(N\). Thus, by Nakayama's lemma, \(M/N =
+  0\) and so \(M=N\).
+\end{proof}
+\begin{cor}
+  Let \(J\) be a maximal ideal in a ring \(A\)
+\end{cor}
+\section{Completely Reducible Modules}
+Understanding all the modules of a ring, in general, is an incredibly
+difficult problem. However, usually the first step in such a program
+is understanding the simple (or irreducible) modules. Understanding
+these modules would then give a complete understanding of completely
+reducible modules.
+\begin{defn}
+  Let \(A\) be a ring. A left \(A\)-module \(M\) is called
+  \de{completely reducible} if, given any submodule \(N \subset M\),
+  there exists a submodule \(N'\) such that \[
+    M = N \oplus N'
+  \]
+\end{defn}
+However, there are equivalent notions of completely reducible.
+\begin{thm}
+  Assume \(M\) is a left \(A\)-module. Then, the following are
+  equivalent.
+  \begin{enumerate}
+  \item \(M\) is completely reducible.
+  \item \(M\) is a direct sum of irreducible submodules, that is \[
+      M \isom \bigoplus_{i \in I} L_i
+    \]
+    where \(I\) is some indexing set and \(L_i\) is simple.
+  \item \(M\) is a sum of irreducible submodules, that is \[
+      M \isom \sum_{i \in I} L_i
+    \]
+    where \(I\) is some indexing set and \(L_i\) is simple.
+  \end{enumerate}
+\end{thm}
+To prove this result, we use the following lemma.
+\begin{lem}
+  If an \(A\)-module \(M\) is completely reducible, so is any
+  submodule \(N \submodule M\).
+\end{lem}
+\begin{proof}[Proof of Lemma]
+  Consider submodule \(N\) of completely reducible a \(A\)-module
+  \(M\). Then, by definition, there exists an \(N'\) such that \[
+    M \isom N \oplus N'.
+  \]
+  Now, let \(S \submodule N\). Then, we also have \(S \submodule M\)
+  and so there is a submodule \(T\) such that \[
+    M \isom S \oplus T.
+  \]
+  Thus, we have
+  \begin{align*}
+    N & = (S \oplus T) \intersect N \\
+      & = S \oplus (T \intersect N)
+  \end{align*}
+  since \(S \submodule N\). Since \(T \intersect N \submodule N\),
+  then \(N\) is completely irreducible.
+\end{proof}
+\begin{lem}
+  Let \(M\) be a completely reducible \(A\)-module. Then, every
+  nontrivial submodule \(N\) of \(M\) contains an irreducible submodule.
+\end{lem}
+\begin{proof}[Proof of Lemma]
+    Let \(N \submodule M\) and \(0 \neq n \in N\). Consider the
+    collection \[
+      S = \{N' \submodule N \st n \not \in N'\}
+    \]
+    We note that \(S\) is nonempty since \((0) \in S\). Thus, since
+    \(S\) is nonempty, it must contain a maximal element, say
+    \(N_0\). By the lemma above, we know that \(N\) is completely
+    reducible and so \(N = N_0 \oplus N_1\) for some submodule \(N_1
+    \submodule N\). \(N_1\) must be irreducible because, if not, then
+    there would be a proper submodule \(N_2 \submodule N_1\) and \(N_1
+    = N_2 \oplus N_3\) for some submodule \(N_3 \submodule
+    N_1\). However, this would give us \[
+      N = N_0 \oplus N_2 \oplus N_3 \implies \text{ either } n \not
+      \in N_0 + N_2 \text{ or } n \not \in N_0 + N_3
+    \]
+    since \((N_0 + N_2) \intersect (N_0 + N_3) = N_0\). Such a result
+    contradicts the maximality of \(N_0\) in \(S\), and so it must be
+    that \(N_1\) is irreducible.
+\end{proof}
+\begin{proof}[Proof of Theorem]
+  We first assume that \(M \neq (0)\), otherwise the theorem is
+  immediately true.
+  \begin{enumerate}
+  \item[(\((a) \implies (b)\)).] Let \(\{M_i \st i \in I\}\) be the
+    collection of all irreducible submodules of \(M\) and let \[
+      T = \left\{J \subset I \ \st \ \sum_{j \in J} M_j \text{
+          is direct} \right\}
+    \]
+    \(T\) is nonempty since it contains at least singleton sets are in
+    \(T\) and any union
+    of an ascending chain of elements in \(T\) is in \(T\). Thus, we
+    can apply Zorn's lemma to get a maximal element of \(T\), say
+    \(J_0\). Now, let \[
+      M' := \bigoplus_{j \in J_0} M_j
+    \]
+    be properly contained in \(M\). Then, by complete reducibility of
+    \(M\), we get \[
+      M = M' \oplus M''
+    \]
+    for \((0) \neq M'' \submodule M\). However, 
+    since \(M''\) must be completely reducible, by the lemma above,
+    \(M''\) must contain an an irreducible submodule, say
+    \(M_{i_0}\). Then, \[
+      \left(\bigoplus_{j \in J_0} M_j \right) + M_{i_0} \text{ is direct}
+    \]
+    and thus we have violated the maximality of \(J_0\).
+  \item[(\((b) \implies (c)\)).] This result is immediate by the
+    definition of direct sum.
+  \item[(\((c) \implies (a)\)).] Let \(N \submodule M\) and let \(N'\)
+    be a maximal submodule with respect to the property that \(N
+    \intersect N' = (0)\). Assume \(M \neq N \oplus N'\). Then, there
+    is an \(m \in M, m \not \in N \oplus N'\). However, since \(M\) is
+    a sum of irreducible submodules, \(m = m_1 + \cdots + m_k\) where
+    each \(m_i\) belonds to an irreducible summand. Thus, at least one
+    \(m_i \not \in N \oplus N'\) since \(m \not \in N \oplus N'\) and
+    thus \(M_i \not \subset N \oplus N'\). However, \(M_i\) is
+    irreducible and so \(M_i \intersect (N \oplus N') = (0)\). Thus,
+    \(N' \propsubgroup N' + M_i\) and \((N'+M_i) \intersect N = (0)\),
+    thus violating the maximality of \(N'\). Thus, \(M = N \oplus N'\).
+  \end{enumerate}
+\end{proof}
+\section{Nilpotent and non-Nilpotent Ideals in Artinian Rings}
+To get to the Artin-Wedderburn Theorem, we must have an understanding
+of idempotents in Artinian rings, which are intimately (non)-related to
+nilpotent ideals. We wish to culminate in a theorem that says any
+non-nilpotent left ideal in a left-artinian ring must contain an
+idempotent. First, we present a theorem similar to Schur's Lemma.
+\begin{thm}
+  Let \(M\) be a (left) Noetherian \(A\)-module for ring \(A\). If \(f
+  \in \End_A(M)\) is surjective, then \(f\) is an isomorphism
+\end{thm}
+\begin{proof}
+  
+\end{proof}
+\begin{thm}
+  Let \(A\) be a left Noetherian ring. If \(a,b \in A\) be such that \(ab =
+  1\), then \(ba = 1\) and \(a,b \in A^\times\).
+\end{thm}
+\begin{defn}
+  An \de{idempotent} of a ring \(A\) is an element \(0 \neq e \in A\)
+  such that \(e^2 = e\).
+\end{defn}
+One advantage of idempotents is that they allow us to ``project'' the
+ring onto ``orthogonal'' compotents, that is, given a ring \(A\) with
+idempotent \(e\), then, as a module over itself \[
+  A \isom Ae \oplus A(1-e)
+\]
+\begin{defn}
+  We call a left or right ideal, \(I\), \de{nilpotent} if there is an \(m
+  \in \N\) such that \(I^m = \{0\}\).
+\end{defn}
+\begin{thm}
+  Let \(N\) be a nilpotent left ideal of a ring \(A\). Let \(x \in A\)
+  be non-nilpotent such that \(x^2-x \in N\). Then, the left ideal
+  \(Ax\) has an idempotent \(y\).
+\end{thm}
+\begin{thm}
+  Let \(L\) be a non-nilpotent left ideal in a left-artinian ring
+  \(A\). Then, \(L\) contains an idempotent \(e\).
+\end{thm}
+\begin{thm}
+  Let \(A\) be a left artinian ring. Then \(\rad A\) is the largest
+  nilpotent left ideal.
+\end{thm}
+\section{The Radical of an Artinian Ring}
+\begin{thm}
+  Let \(A\) be a left artinian ring. Then, the sum of all left nilpotent
+  ideals of \(A\) is a nilpotent ideal, say \(N\). It contains every
+  nilpotent right ideal of \(A\). Also, the quotient ring \(A/N\) has
+  no nontrivial nilpotent ideal.
+\end{thm}
+\begin{thm}
+  Let \(A\) be a left artinian ring. If is \(N\) the sum of all
+  left nilpotent ideals, then \(N = \rad A\).
+\end{thm}
+\begin{thm}
+  Let \(A\) be a left artinian ring. Then, \({}_A A\) is completely
+  reducible if and only if \(A\) is semisimple.
+\end{thm}
+\begin{thm}
+  Let \(A\) be a (left) artinian ring. Then, \(A\) is semisimple if
+  and only if every \(A\)-module is completely reducible.
+\end{thm}
+\begin{thm}
+  Let \(A\) be artinian and semisimple. Then, every irreducible
+  \(A\)-module \(L\) is isomorphic to a non-zero minimum left ideal of
+  \(A\). Thus, \(A\) has only a finite number of irreducible modules.
+\end{thm}
+\begin{thm}
+  Let \(A\) be artinian and semisimple. Let \(Ae\) be a left ideal for
+  idempotent \(e\). Then, \(Ae\) is irreducible if and only if \(eAe\)
+  is a division ring.
+\end{thm}
+\section{The Structure of Semisimple (Left) Artinian Rings}
+\begin{defn}
+  A left artinian ring \(A\) is called \de{simple} if its only ideals
+  are \(0\) and \(A\).
+\end{defn}
+We now seek to prove the Artin-Wedderburn theorem, that will tell us
+that a semisimple left artinian ring is isomorphic to a direct sum of
+matrix rings over division rings.
+\begin{lem}
+  Let \(L,L'\) be minimal left ideals. Then, \(L \isom L'\) as left
+  \(A\)-modules if and only if there is an \(a' \in L'\) such that
+  \(L' = La'\).
+\end{lem}
+\begin{lem}
+  Let \(L,L'\) be minimal left ideals in \(A\). Then, \[
+    L \isom L' \iff LL' = L'
+  \]
+\end{lem}
+\begin{thm}[Wedderburn]
+  Let \(A\) be a semisimple artinian ring. Let \(L\) be a minimal left
+  ideal. The sum of all minimal left ideals \(\{L' \ideal A
+  \st L' \isom L\}\), say \(B_L\), is a simple subring and a
+  \(2\)-sided ideal in \(A\). Also, \[
+    A = \bigoplus_{i=1}^r B_{L_i}
+  \]
+  where \(L_1, \ldots, L_r\) are representatives of distinct
+  isomorphism classes of left ideals.
+\end{thm}
+\begin{thm}[Wedderburn]
+  Let \(A\) be a simple artinian ring. Then, there exists a unique
+  division ring and a unique positive integer \(n\) such that \[
+    A \isom M_n(D)
+  \]
+  Conversely, if \(D\) is a division ring, then \(M_n(D)\) is a simple
+  artinian ring. 
+\end{thm}
+Thus, combining our results, we arrive at the landmark theorem.
+\begin{thm}[Artin-Wedderburn Theorem]
+  Let \(A\) be a semisimple left artinian ring. Then, up to reordering,
+  there is a unique decomposition \[
+    A \isom M_{n_1}(D_1) \times M_{n_2}(D_2) \times \cdots \times M_{n_r}(D_r)
+  \]
+  where each \(D_i\) is a division ring and each \(n_i\) is a positive
+  integer.
+\end{thm}
+\begin{bibdiv}
+  \begin{biblist}
+    \bib{cr}{book}{
+      author={Curtis, Curtis W.}
+      author={Reiner, Irving}
+      title={Representation Theory of Finite Groups and Associative
+        Algebras}
+      year={1962}
+    }
+    \bib{jacobson}{book}{
+      author={Jacobson, Nathan}
+      title={Basic Algebra II}
+      year={1989}
+      note={2nd edition}
+    }
+  \end{biblist}
+\end{bibdiv}
+
+\end{document}
