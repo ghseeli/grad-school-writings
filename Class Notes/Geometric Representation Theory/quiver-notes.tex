@@ -2871,7 +2871,7 @@ We now move on to a discussion of the relations among the
       [V] [W] := [V] \cdot [W]
     \]
   \end{rmk}
-  \begin{cor}
+  \begin{cor}\label{serre-relns}
     For \(\Q = 1 \to 2\) and \(v = t^{\frac{1}{2}}\), in
     \(H(\Q)_{\Z[t]}\), we get
     \begin{enumerate}
@@ -2905,7 +2905,7 @@ We now move on to a discussion of the relations among the
     \]
     be equipped with the twisted product. Then, there exists an
     algebra isomorphism \[
-      \U_v \n^+ \to \tilde{H}(\Q, v^2), \ \ E_i \mapsto \theta_i
+      \psi \from \U_v \n^+ \to \tilde{H}(\Q, v^2), \ \ E_i \mapsto \theta_i
     \]
     where \[
       \U_v \n^+ = \Q(v) \langle E_i \ (i \in I) \st \substack{E_i E_j = E_j E_i
@@ -2920,7 +2920,24 @@ We now move on to a discussion of the relations among the
     sending \(e_i \to \theta_i\).
   \end{cor}
   \todo{Get a handle on the quantum groups vs enveloping algebras
-    here. When is \(E_i\) appropriate and when is \(e_i\) appropriate?}
+    here. When is \(E_i\) appropriate and when is \(e_i\)
+    appropriate?}
+  \begin{proof}[Proof of Theorem]
+    We must check the following
+    \begin{itemize}
+    \item \(\psi\) is a homomorphism. This follows from
+      \ref{serre-relns}.
+    \item \(\psi\) is onto.
+    \item \(\psi\) respects the grading \((\U_v \n^+)_{\vec{d}} \to
+      \tilde{H}_{\vec{d}} (\Q,v^2)_{\vec{d} \in \N^\pm}\)
+    \end{itemize}
+    We also check \[
+      \dim \tilde{H}_{\vec{d}} (\Q, v^2) = \left| \left\{
+          (n_\alpha)_{\alpha \in \roots^+} \st \sum n_\alpha \alpha =
+          \vec{d} \right\} \right| = \dim \U \n^+
+    \]
+    by the PBW theorem.
+  \end{proof}
 \begin{bibdiv}
   \begin{biblist}
     \bib{cg}{book}{
