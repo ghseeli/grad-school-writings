@@ -277,7 +277,7 @@ radicals.
   0\). However, \(1-ax \in A^\times\), so \(m = 0\), which is a
   contradiction. Thus, \(xM = 0\) and so \(x \in \rad A\).
 \end{proof}
-\begin{thm}[Nakayama's Lemma]
+\begin{thm}[Nakayama's Lemma]\label{nakayamas-lemma}
   \cite{jacobson}*{p 415} Let \(A\) be a ring and let \(M\) be a finitely-generated
   \(A\)-module. If \((\rad A)M = M\), then \(M = 0\).
 \end{thm}
@@ -436,6 +436,11 @@ To prove this result, we use the following lemma.
     thus violating the maximality of \(N'\). Thus, \(M = N \oplus N'\).
   \end{enumerate}
 \end{proof}
+\begin{prop}
+  Let \(M\) be a completely reducible module for a ring \(A\). Then,
+  \(M\) satisfies the ascending chain condition if and only if \(M\)
+  satisfies the descending chain condition.
+\end{prop}
 \section{Nilpotent and non-Nilpotent Ideals in Artinian Rings}
 To get to the Artin-Wedderburn Theorem, we must have an understanding
 of idempotents in Artinian rings, which are intimately (non)-related to
@@ -555,7 +560,7 @@ map \(q \from A \to A/N\), \(q(x) = q(y)\).
   element. However, the following theorem gives us a (useful!)
   converse to that fact.
 \end{rmk}
-\begin{thm}
+\begin{thm}\label{artinian-non-nilp-ideal-has-idem}
   Let \(L\) be a non-nilpotent left ideal in a left-artinian ring
   \(A\). Then, \(L\) contains an idempotent \(e\).
 \end{thm}
@@ -589,10 +594,13 @@ map \(q \from A \to A/N\), \(q(x) = q(y)\).
   ideal. Thus, we now have \(x,N\) as in the theorem above and so
   there is an idempotent \(e \in Ax \subset L_1 \subset L\).
 \end{proof}
-\begin{thm}
+\begin{thm}\label{for-artinian-rad-is-largest-nilp-ideal}
   Let \(A\) be a left artinian ring. Then \(\rad A\) is the largest
   nilpotent left ideal.
 \end{thm}
+\begin{proof}
+  
+\end{proof}
 \begin{prop}
   If \(f \from A \to B\) is a surjective homomorphism of rings,
   then \[
@@ -606,9 +614,103 @@ map \(q \from A \to A/N\), \(q(x) = q(y)\).
   nilpotent right ideal of \(A\). Also, the quotient ring \(A/N\) has
   no nontrivial nilpotent ideal.
 \end{thm}
+To show this, we use the following lemma
+\begin{lem}
+  Any finite sum of nilpotent ideals is nilpotent.
+\end{lem}
+\begin{proof}[Proof of Lemma]
+  If we assume the result is true for a sum of \(r-1\) nilpotent
+  ideals, then it is true for \(r\) nilpotent ideals. Consider
+  nilpotent ideals \(N_1, \ldots, N_r\). Then, \[
+    N_1 + \cdots + N_r = \underbrace{(N_1 + \cdots +
+      N_{r-1})}_{\text{Nilpotent ideal by assumption}} + N_r \text{ is
+    nilpotent.}
+  \]
+  Thus, it suffices to show the result is true for the sum of two
+  nilpotent ideals. \\
+
+  Let \(N_1, N_2\) be nilpotent left ideals. Then, there exist
+  positive integers \(q,r\) such that \[
+    N_1^q = N_2^r = 0.
+  \]
+  And element in \((N_1 + N_2)^{q+r}\) is a finite sum of products \[
+    y_1 y_2 \cdots y_{q+r}, \ y_i \in N_1 \union N_2, s \in \N
+  \]
+  We can assume at least \(q\) of the \(y_i\) belong to \(N_1\) or at
+  least \(r\) of the \(y_i\) belong to \(N_2\). Without loss of
+  generality, we assume the
+  former. Then, the product above may be written \[
+    (x_1 x_2 \cdots x_{i_1})(x_{i_1 + 1} \cdots x_{i_2}) \cdots
+    (x_{i_{s-1}+1} \cdots x_{i_s}) \cdots, 
+  \]
+  where \(x_{i_1}, x_{i_2}, \ldots,
+  x_{i_s} \in N_1\) and \(s \geq q\). Since \(N_1\) is a left ideal,
+  each ``segment'' belongs to \(N_1\). Thus, \[
+    y_1 y_2 \cdots y_{q+r} \in N_1^q = 0  \implies y_1 y_2 \cdots
+    y_{q+r} = 0
+  \]
+  However, \(y_1 y_2 \cdots y_{q+r}\) was an arbitrary element of
+  \((N_1 + N_2)^{q+r}\), so \((N_1 + N_2)^{q+r} = 0\) and thus the sum
+  of 2 nilpotent (left) ideals is nilpotent.
+\end{proof}
+\begin{proof}[Proof of Theorem]
+  Let \(\{N_i\}\) be a set of nilpotent left ideals. Then, the
+  elements of \(N\) are finite sums, i.e. \[
+    n \in N \implies n = x_1 + \cdots + x_r, x_i \in \text{ some }N_i
+  \]
+  Since the sum of left ideals is a left ideal, \(N\) is a left
+  ideal. \\
+
+  Assume \(N\) is not nilpotent, then since \(A\) is left-artinian,
+  \(N\) contains an idempotent, \(e\)
+  (see \ref{artinian-non-nilp-ideal-has-idem}). Thus, there is a finite sum
+  of nilpotent ideals such that \[
+    e \in N_1 + \cdots + N_r
+  \]
+  However, \(N_1 + \cdots + N_r\) is nilpotent by the lemma above, and
+  so there is a \(k\) such that \[
+    e = e^k \in (N_1 + \cdots + N_r)^k = 0
+  \]
+  which is a contradiction. \\
+
+  If \(N_i\) is a nilpotent left ideal, then \(N_i A\) is a nilpotent
+  (two-sided) ideal since, for large enough \(t \in \N\), \[
+    (N_i A)^t = N_i(A N_i) \cdots (A N_i) A \subset N_i (N_i)^{t-1}A = 0
+  \]
+  Thus, \(N\) is an ideal. \todo{How does this follow exactly?} If
+  \(I\) is a nilpotent right ideal, \(AI\) is a nilpotent left ideal
+  by the same argument. Thus, \(I \subset AI \subset N\). \\
+
+  Since \(N\) is a two-sided ideal, then every left ideal of \(R/N\)
+  is of the form \(I/N\) for some left ideal \(I\) of \(R\), by the
+  correspondance theorem. Thus, \[
+    (I/N)^k = 0 \iff I^k \subset N \iff I
+    \text{ is nilpotent} \iff I \subset N
+  \]
+  since \(N\) is the sum of all nilpotent left ideals. Thus, \(R/N\)
+  contains no nilpotent left ideal except \(0\), and by the discussion
+  above, also contains no nontrivial nilpotent right or two-sided ideals.
+\end{proof}
 \begin{thm}
   Let \(A\) be a left artinian ring. If is \(N\) the sum of all
   left nilpotent ideals, then \(N = \rad A\).
+  \begin{proof}
+    We already have that \(N \subset \rad A\) by
+    (\ref{for-artinian-rad-is-largest-nilp-ideal} \todo{Is this not
+      the same result as the theorem we are proving? Did we show
+      something weaker, earlier?}) since \(N\) is
+    nilpotent by the above theorem. However, consider the sequence of
+    ideals \[
+      \rad A \supset (\rad A)^2 \supset \cdots \supset (\rad A)^n
+      \supset \cdots
+    \]
+    Since \(A\) is artinian, there is some \(k\) such that \[
+      (\rad A)^k = (\rad A)^{k+1} = \cdots
+    \]
+    and thus \((\rad A)(\rad A)^n = (\rad A)^n\). Thus, by Nakayama's
+    lemma (\ref{nakayamas-lemma}), \((\rad A)^n = 0\). Thus, \(\rad
+    A\) is nilpotent.
+  \end{proof}
 \end{thm}
 \begin{thm}
   Let \(A\) be a left artinian ring. Then, \({}_A A\) is completely
