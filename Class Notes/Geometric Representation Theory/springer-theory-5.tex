@@ -1,2 +1,30 @@
-\section{Geometric Analysis of \(H(Z)\)}
+\documentclass[springer-theory-notes.tex]{subfiles}
 
+\begin{document}
+\section{Geometric Analysis of \(H(Z)\)}
+Previously, for the Springer variety \(Z\), we have shown that \(H(Z) \isom \Q(\W)\) and \(\C
+\otimes_\Q H(Z) = \C[\W]\) is a semisimple Lie algebra. By the
+Artin-Wedderburn theorem, we have \[
+  \C \otimes_\Q H(Z) = \bigoplus_\alpha \End_\C(E_\alpha)
+\]
+where \(\{E_\alpha\}\) is a complete set of \(\g\) irreducible
+representations. Our goal for this section is to understand this
+decomposition. \\
+
+Recall that, for the Springer resolution \[
+  \begin{tikzcd}
+    \tilde{\cN} \ar[d, "\mu"] \\
+    \cN
+  \end{tikzcd} \hspace{1in} Z = \tilde{\cN} \times_\cN \tilde{\cN}
+\]
+and, for \(Y \subset \cN\), \[
+  Z_y = \mu^{-1}(Y) \times_Y \my^{-1}(Y) \subset \tilde{\cN} \times \tilde{\cN}
+\]
+Now, \(Z_Y \circ Z = Z_Y = Z \circ Z_Y\).
+\begin{prop}
+  \(H(Z_Y)\) has a \(H(Z)\)-bimodule structure.
+\end{prop}
+\end{document}
+%%% Local Variables:
+%%% TeX-master: "springer-theory-notes.tex"
+%%% End:

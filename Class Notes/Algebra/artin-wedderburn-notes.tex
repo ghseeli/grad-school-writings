@@ -716,6 +716,41 @@ To show this, we use the following lemma
   Let \(A\) be a left artinian ring. Then, \({}_A A\) is completely
   reducible if and only if \(A\) is semisimple.
 \end{thm}
+\begin{proof}
+  \((\impliedby).\) Let \(A\) be semisimple. Then, \(\rad A =
+  0\). Now, Let \(I_1\) be minimal among nontrivial non-nilpotent left
+  ideals of \(A\). Then, \(I_1\) has an idempotent, say \(e_1\). Thus,
+  \(e_1 \in I_1 \implies Ae_1 \subset I_1\), but \(I_1\) is minimal
+  among non-nilpotent ideals, so \(I_1 = Ae_1\). Now, notice that \[
+    A = Ae_1 \oplus A(1-e_1) \implies {}_A A = I_1 \oplus I_1', \
+  \]
+   where \(I_1' = A(1-e_1)\) is a non-nilpotent left ideal if \(I_1'
+   \neq 0\). Then, we can repeat this process with \(I_1'\) \todo{Why
+     is \(I_1'\) minimal?} to get \[
+     {}_A A = I_1 \oplus I_2 \oplus I_2', \ I_2 = Ae_2
+   \]
+   \todo{There is more work to do here.} Continuing, we get \[
+     {}_A A = I_1 \oplus I_2 \oplus \cdots \oplus I_r
+   \]
+   where \(I_i = Ae_i, e_i\) idempotent. Each \(I_i\) is irreducible
+   as a left \(A\)-module since \(A\) is semisimple. \\
+
+   \((\implies)\). Let \({}_A A\) be completely reducible. Consider
+   that \(N = \rad A\) is a left ideal of \(A\) and thus also a
+   submodule of \({}_A A\) and thus \[
+     {}_A A = N \oplus N'
+   \]
+   for some left ideal \(N'\) of \(A\). Then, \[
+     1 = x + x'
+   \]
+   for some \(x \in N, x' \in N'\), which then yields \[
+     x \cdot 1 = x(x+x') = x^2 + xx' \implies x - x^2 = x x' \in N
+     \intersect N' = 0
+   \]
+   Thus, \(x-x^2 = 0 \implies x = x^2 = \cdots = 0\) since \(N\) is
+   nilpotent. Thus, \(x' = 1\) and \(N' = A \implies \rad A = N = 0\)
+   and thus \(A\) is semisimple.
+\end{proof}
 \begin{thm}
   Let \(A\) be a (left) artinian ring. Then, \(A\) is semisimple if
   and only if every \(A\)-module is completely reducible.
