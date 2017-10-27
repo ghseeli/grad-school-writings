@@ -333,7 +333,7 @@ reducible modules.
   \]
 \end{defn}
 However, there are equivalent notions of completely reducible.
-\begin{thm}
+\begin{thm}\label{cr-module-equivs}
   Assume \(M\) is a left \(A\)-module. Then, the following are
   equivalent.
   \begin{enumerate}
@@ -608,6 +608,15 @@ map \(q \from A \to A/N\), \(q(x) = q(y)\).
   \]
 \end{prop}
 \section{The Radical of an Artinian Ring}
+In this section, we seek to understand the radical or an artinian ring \(A\)
+and show that when it is trivial, we gain a huge amount of
+insight into \(A\)-modules. Namely, for semisimple \(A\), every \(A\)-module is
+completely reducible and every irreducible \(A\)-module is
+isomorphic to a non-zero minimum left ideal of \(A\). Perhaps most
+surprisingly of all, this tells us that a semisimple \(A\) has only a
+finite number of irreducible modules, which is not a typical
+phenemenon! We start by finding a deeper insight into the relationship
+between \(\rad A\) and the nilpotent ideals of \(A\).
 \begin{thm}
   Let \(A\) be a left artinian ring. Then, the sum of all left nilpotent
   ideals of \(A\) is a nilpotent ideal, say \(N\). It contains every
@@ -755,16 +764,112 @@ To show this, we use the following lemma
   Let \(A\) be a (left) artinian ring. Then, \(A\) is semisimple if
   and only if every \(A\)-module is completely reducible.
 \end{thm}
+\begin{proof}
+  To prove \((\impliedby)\), we simply note that \(_{A} A\) is an
+  \(A\)-module, and so the previous theorem tells us that \(A\) is
+  semisimple. \\
+
+  For \((\implies)\), assume \(A\) is semisimple and \(M\) is an
+  \(A\)-module. Then, it suffices to show \(M\) is a (not-necessarily
+  direct) sum of irreducible \(A\)-modules by
+  \ref{cr-module-equivs}. By the theorem above, we know \[
+    {}_A A \isom L_1 \oplus \cdots \oplus L_n
+  \]
+  Now, given \(0 \neq m \in M\), consider \(\phi \from A \to M\) given
+  by \(a \mapsto a.m\). Then, \(\phi|_{L_i} \from L_i \to M\) is
+  either injective or the \(0\) map. Thus, we get \[
+    A.M = M \implies (L_1 \oplus \cdots \oplus L_n).M = M \implies
+    \phi(L_1) + \cdots + \phi(L_n) = M
+  \]
+  but since each \(\phi(L_i)\) is irreducible or \(0\), it must be
+  that \(M\) is completely reducible.
+\end{proof}
 \begin{thm}
   Let \(A\) be artinian and semisimple. Then, every irreducible
   \(A\)-module \(L\) is isomorphic to a non-zero minimum left ideal of
   \(A\). Thus, \(A\) has only a finite number of irreducible modules.
 \end{thm}
+\begin{proof}
+  Similar to above, we know \[
+    {}_A A \isom L_1 \oplus \cdots \oplus L_n
+  \]
+  and, for irreducible \(A\)-module \(M\) and \(0 \neq m \in M\), we have a map \(\phi \from
+  A \to M\) given by \(a \mapsto a.m\). Then, \[
+    M = \phi(L_1) + \cdots + \phi(L_n)
+  \]
+  and one of the summands must be nonzero, say \(\phi(L_i)\). However,
+  since \(M\) is irreducible, this means that \(M = \phi(L_i)\) and
+  thus \(\phi|_{L_i}\) is an isomorphism. Since \(A\) has only a
+  finite number of ideals up to isomorphism by the Krull-Schmidt
+  theorem, this means that \(A\) has 
+  only a finite number of irreducible modules. 
+  % Then,
+  % \(L_i\) contains an idempotent \(e_i\) by
+  % \ref{artinian-non-nilp-ideal-has-idem} and since \(L_i\) is
+  % irreducible, \(L_i = Ae_i\). 
+\end{proof}
 \begin{thm}
   Let \(A\) be artinian and semisimple. Let \(Ae\) be a left ideal for
   idempotent \(e\). Then, \(Ae\) is irreducible if and only if \(eAe\)
   is a division ring.
 \end{thm}
+\begin{proof}
+  Let us assume \(Ae\) is irreducible and let \(L\) be any nonzero
+  left ideal of \(eAe\). Then, \[
+    AL \subset A \cdot eAe \subset Ae
+  \]
+  and so \(AL\) is a left ideal of \(A\) contained in \(Ae\), but
+  \(Ae\) is irreducible, so \(AL = Ae\). Furthermore, since \(e\) acts
+  as the identity on \(eAe\), then \(eL = L\) and \[
+    eAe = eAL = eA(eL) = eAe \cdot L \subset L \implies eAe = L
+  \]
+  and so \(eAe\) has only \((0)\) and itself as left ideals. Thus,
+  \(eAe\) is a division ring. \\
+
+  Let us assume \(eAe\) is a division ring. Since \(A\) is semisimple,
+  if \(Ae\) is not irreducible, then \[
+    Ae = L_1 \oplus L_2
+  \]
+  where \(L_1, L_2\) are proper submodules. Then, this gives us the
+  decomposition \(e = e_1 + e_2\) for idempotents \(e_1 \in L_1, e_2 \in
+  L_2\). Note that
+  \begin{align*}
+    e & = e^2 \\
+      &= (e_1 + e_2)(e_1 + e_2) \\
+    & = e_1^2 + e_2 e_1 + e_1 e_2 + e_2^2 \\
+    \implies 0 & = e_1^2 - e_1 + e_2 e_1 + e_1 e_2 + e_2^2 -e_2
+  \end{align*}
+  However, \(e_1 e_2 + e_2^2 - e_2 \in L_2\) and \(-e_2 e_1 - e_1^2 + e_1 \in L_1\) tells us that
+  \(e_1 e_2 + e_2^2-e_2= - e_2 e_1 - e_1^2 + e_1= 0\) since \(L_1 \intersect L_2 =
+  0\). Furthermore, \(e_1, e_2 \in eAe\) since \(e_1, e_2 \in Ae
+  \implies e_1 e = e_1\) and \(e_2 e = e_2\), as well as
+  \begin{align*}
+    e e_2 & = (e_1 + e_2)e_2 \\
+              & = e_1 e_2 + e_2^2 \\
+              & = e_2
+  \end{align*}
+  and similarly \(e e_1 = e_1\). Thus, \(e_1 = e e_1 e \in eAe\) and
+  \(e_2 = e e_2 e \in eAe\). Finally,
+  \begin{align*}
+    e_2^2 + e_1 e_2 & = e_2 \\
+                    & = e_2(e_1+e_2) \\
+                    & = e_2 e_1 +  e_2^2 \\
+    \implies e_1 e_2 & = e_2 e_1
+  \end{align*}
+  But \(e_1 e_2 \in L_2\) and \(e_2 e_1 \in L_1\) and thus \(e_1 e_2 =
+  0\), which tells us that \(eAe\) has zero divisors. Thus, \(eAe\) is
+  not a division ring.
+
+  % consider the
+  % projection map \(\pi_1\) given by \[
+  %   \begin{tikzcd}
+  %     L_1 \oplus L_2 \ar[r,"\pi_1"] \ar[rd, twoheadrightarrow]& L_1 \oplus L_2 \\
+  %     & L_1 \ar[u, hookrightarrow]
+  %   \end{tikzcd}
+  % \]
+  % and similarly for \(\pi_2\). Then, \(0 \neq \pi_1, \pi_2
+  % \in \End_A(Ae)\) but \(\pi_1 \pi_2 = 0\). 
+\end{proof}
 \section{The Structure of Semisimple (Left) Artinian Rings}
 \begin{defn}
   A left artinian ring \(A\) is called \de{simple} if its only
