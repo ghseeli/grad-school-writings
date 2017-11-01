@@ -876,20 +876,62 @@ To show this, we use the following lemma
   two-sided ideals
   are \(0\) and \(A\).
 \end{defn}
+\begin{defn}
+  A set of idempotents \(\{e_1, \ldots, e_n\}\) of a ring \(A\) is a
+  \de{complete set of orthogonal idempotents} if
+  \begin{itemize}
+  \item Each \(e_i\) is an idempotent,
+  \item \(e_1 + \cdots + e_n = 1\)
+  \item and \(e_i e_j = 0\) if \(i \neq j\).
+  \end{itemize}
+\end{defn}
+Note that, for an artinian ring \(A\), we have \[
+  {}_A A = L_1 \oplus \cdots \oplus L_n
+\]
+for \(L_i\) irreducible \(A\)-modules, also seen as minimal left
+ideals. Thus, \[
+  1 = e_1 + \cdots + e_n, \ \ e_i \in L_i
+\]
+with \(e_j e_i \in L_i\). Thus, \(e_j^2 = e_j\) and \(e_i e_j = 0\) if
+\(i \neq j\), so \(\{e_1, \ldots, e_n\}\) is a complete set of
+orthogonal idempotents for \(A\). \\
+
 We now seek to prove the Artin-Wedderburn theorem, that will tell us
 that a semisimple left artinian ring is isomorphic to a direct sum of
 matrix rings over division rings.
-\begin{lem}
+\begin{lem}\label{wedderburn-lem-1}
   Let \(L,L'\) be minimal left ideals. Then, \(L \isom L'\) as left
   \(A\)-modules if and only if there is an \(a' \in L'\) such that
   \(L' = La'\).
 \end{lem}
-\begin{lem}
-  Let \(L,L'\) be minimal left ideals in \(A\). Then, \[
-    L \isom L' \iff LL' = L'
+\begin{proof}
+  For (\(\implies\)), let \(\phi \from L \isomto L'\). Then, for \(x
+  \in L = (e)\), \[
+    \phi(x) = \phi(xe) = x \phi(e) = xa' \ \text{ where } a' = \phi(e)
   \]
-\end{lem}
-\begin{thm}[Wedderburn]
+  Then, \(L' = La'\) as required. \\
+
+  For (\(\impliedby\)), assume there is an \(a' \in L'\) such that
+  \(L' = La'\). Define \(\phi \from L \to L'\) by \(\phi(x) =
+  xa'\). Thus, \(\phi\) is surjective. Since \(L\) is irreducible,
+  \(\ker \phi = \{0\}\) and so \(\phi\) is injective. Thus, \(\phi\)
+  is an isomorphism.
+\end{proof}
+% \begin{lem}\label{wedderburn-lem-2}
+%   Let \(L,L'\) be minimal left ideals in \(A\). Then, \[
+%     L \isom L' \iff LL' = L'
+%   \]
+% \end{lem}
+% \begin{proof}
+%   For (\(\implies\)), we note by the lemma above that there exists an
+%   \(a' \in L'\) such that \(La' = L'\). Thus, \(LL' \supset L'\) and moreover,
+%   \(LL' \subset L'\) by standard ring theory. \\
+
+%   For (\(\impliedby\)), assume \(LL' = L'\). Then, there is an \(a'
+%   \in L'\) such that \(La' \neq 0\). However, \(L'\) is irreducible,
+%   so \(La' = L'\) and so we are done by the above lemma.
+% \end{proof}
+\begin{thm}[Weddurburn]
   Let \(A\) be a semisimple artinian ring. Let \(L\) be a minimal left
   ideal. The sum of all minimal left ideals \(\{L' \ideal A
   \st L' \isom L\}\), say \(B_L\), is a simple subring and a
@@ -899,6 +941,60 @@ matrix rings over division rings.
   where \(L_1, \ldots, L_r\) are representatives of distinct
   isomorphism classes of left ideals.
 \end{thm}
+\begin{proof}
+  Let \[
+    A = L_1 \oplus \cdots \oplus L_r
+  \]
+  where the \(L_i\) are minimal left ideals of \(A\). There is an
+  equivalence relation on \(\{L_1, \ldots, L_r\}\) given by \[
+    L_i \sim L_j \iff L_i \isom L_j
+  \]
+  Thus, if \(L_1, \ldots, L_s\) is an equivalence class, then for
+  \(i,j \leq s\), \(L_i L_j = L_j\). Thus, let us define \[
+    B_{L_1} := L_{1} \oplus \cdots \oplus L_{s} \subset A 
+  \]
+  Such a subset is closed under multiplication and is a 2-sided ideal
+  since \(A\). Let us do this 
+  analogously for every equivalence class to get \(B_1, B_2, \ldots,
+  B_t\). Then, \[
+    i \neq j \implies B_i B_j = 0
+  \]
+  and also, \[
+    B_1 \oplus B_2 \oplus \cdots \oplus B_t = A
+  \]
+  For a given \(B_i\), we have \[
+    B_i = L_{i,1} \oplus L_{i,2} \oplus \cdots \oplus L_{i,s_i}
+  \]
+  where \(L_{i,j} = L_\ell\) for some \(\ell\). We note \[
+    1_i := e_{i,1} + \cdots + e_{i,s_i}
+  \]
+  is the multiplicative identity in \(B_i\). Thus, \(B_i\) is a
+  subring of \(A\). Also, \(B_i\) is a left ideal, so it is
+  artinian.\\
+  
+  \todo{It is not clear to me where we show \(B_i\) is a 2-sided
+    ideal.}
+  
+  It still remains to show that \(B_i\) is simple subring and a
+  2-sided ideal. Without loss of generality, consider
+  \begin{align*}
+    B_1 & = L_1 \oplus \cdots \oplus L_r \\
+    1_B & = e_1 + \cdots + e_r
+  \end{align*}
+  and let \(0 \neq D \ideal B_1\), that is, let \(D\) be a nontrivial
+  2-sided ideal of \(B_i\). Then, \(D\) is a left-ideal and thus
+  contains a minimal left ideal \(L\) of \(A\). Thus, \[
+    L \subset D \subset B_1 \implies L \isom L_1
+  \]
+  and so we conclude that \(L \isom L_1\) since \(L \subset
+  B_1\). However, we also know that \[ 
+    Lx \subset D, \ \ x \in A
+  \]
+  since \(D\) is a right ideal, too. Thus, by \ref{wedderburn-lem-1},
+  \(\{Lx \st x \in A\}\) gives all minimal left ideals of \(A\) isomorphic to
+  \(L\). Therefore, it must be that \(D = B_1\), so \(B_1\) contains
+  no non-trivial two-sided ideals and is thus a simple subring.
+\end{proof}
 \begin{thm}[Wedderburn]
   Let \(A\) be a simple artinian ring. Then, there exists a unique
   division ring and a unique positive integer \(n\) such that \[
