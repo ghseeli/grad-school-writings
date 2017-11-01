@@ -1,0 +1,134 @@
+\documentclass[11pt,leqno,oneside]{amsbook}
+\usepackage{tikz}
+\usetikzlibrary{cd}
+\usepackage{bbm}
+\usepackage{todonotes}
+
+\usepackage{../notes}
+\usepackage{../../ReAdTeX/readtex-core}
+\usepackage{../../ReAdTeX/readtex-abstract-algebra}
+
+\numberwithin{thm}{section}
+
+\title[Representation Theory of Finite Groups]{Representation Theory
+  of Finite Groups \\ Notes
+  inspired by a class taught by Brian Parshall in Fall 2017}
+\author{George H. Seelinger}
+\date{Fall 2017}
+\begin{document}
+\maketitle
+\section{Group Algebras}
+\begin{defn}
+  The \de{group ring} or \de{group algebra} of a group \(G\) over a ring \(R\), denoted
+  \(R[G]\) is a free \(R\)-module over the set \[
+    \{e_g \st g \in G\}
+  \]
+  with addition being formal sums. Additionally, \(R[G]\) has the
+  structure of a 
+  ring where multiplication is given by \(e_g
+  \cdot e_h = e_{gh}\) for \(g,h \in G\). Thus, \(1_{R[G]} = e_{1_G}\)
+\end{defn}
+Typically, we will take \(R\) to be a field, usually
+\(\C\). Furthermore, we will often replace \(e_g\) by \(g\) when it is
+understood that we are working in the group algebra. That is, for
+\(\lambda \in R\), we may
+rewrite \[
+  \lambda e_g \to \lambda g 
+\]
+\section{Representations}
+A representation of a finite group is a way to induce an action of a
+finite group on a vector space. Sometimes, such a perspective allows
+mathematicians to see structure or symmetries in groups that may not
+have been readily apparent from a purely group theoretic point of
+view, much like modules can provide insight into the structure of
+rings. In fact, a reprsentation of a finite group is fundamentally the
+same as a module of a finite group algebra, but the representation
+theoretic perspective allows us to leverage tools from linear algebra
+to gain additional insights.
+\begin{defn}
+  A \de{representation of a finite group \(G\) in vector space \(V\)} is a
+  homomorphism \(\rho \from G \to GL(V)\).
+\end{defn}
+\begin{defn}
+  We say two representations \(\rho, \rho' \from G \to GL(V)\) are
+  \de{similar} or \de{isomorphic} if 
+  there is a linear transformation \(\tau \from V \to V'\) such
+  that \[
+    \tau \circ \rho(g) = \rho'(g) \circ \tau
+  \]
+  for all \(g \in G\).
+\end{defn}
+\begin{defn}
+  We say that a subspace \(W \subset V\) is \de{\(G\)-stable} if
+  \(\rho(g)W \subset W\) for all \(g \in G\).
+\end{defn}
+\begin{prop}
+  Let \(\rho \from G \to GL(V)\) be a linear representation of \(G\)
+  in \(V\) and let \(W\) be a subspace of \(V\) such that \(\rho(g)W =
+  W\) for all \(g \in G\). Then, there exists a complement \(W'\) of
+  \(W\) in \(V\) such that \(\rho(g)W' = W'\) for all \(g \in G\)
+\end{prop}
+\begin{defn}
+  Given representations \(\rho_1 \from G \to GL(V_1)\) and \(\rho_2 \from
+  G \to GL(V_2)\), we define \(\rho := \rho_1 \oplus \rho_2 \from G \to GL(V_1
+  \oplus V_2)\) by the map \[
+    g \mapsto \left(
+      \begin{array}{cc}
+        \rho_1(g)&0\\
+        0&\rho_2(g)
+      \end{array}
+    \right)
+  \]
+  That is, \(\rho(g)|_{V_i} = \rho_i(g)\).
+\end{defn}
+\section{Character Theory}
+Throughout this section, let \(G\) be a finite group and \(F = \C\).
+\begin{prop}
+  If \(V\) is a \(G\)-module, then every \(g \in G\), viewed as a
+  linear operator \(g_V \from V \to V\), is semisimple, and thus \(V\)
+  has a basis of eigenvectors for \(g_V\).
+\end{prop}
+\begin{proof}
+  Since \(G\) is a finite group, \(g\) is of finite order, so \(g_V^n
+  = Id_V\). Thus, \(g_V^n = (D+N)^n\) for diagonalizable \(D\) and
+  nilpotent \(N\) (by Jordan Canonical Form since \(\C\) is
+  algebraically closed) such that \(DN = ND\). Thus, \[
+    Id_V = g_V^n = (D+N)^n = D^n + nND^{n-1} + \binom{n}{2} N^2 D^{n-2} +
+    \cdots + nN^{n-1}D + N^n 
+  \]
+  which thus tells us that \(N = 0\) and \(D^n = Id_V\) since \(Id_V\)
+  has no nilpotent part.
+\end{proof}
+\begin{defn}
+  The \de{character} of group representation \(\rho \from G \to V\), denoted \(\chi_\rho = \chi^\rho\), is the function
+  \(\chi_\rho \from G \to F\) defined by \(\chi_\rho(g) =
+  \tr(\rho(g))\).
+\end{defn}
+\begin{prop}
+  For \(F = \C\) and fixed group representation \(\rho\),
+  \begin{enumerate}
+  \item \(\chi(1) = \dim V\),
+  \item \(\chi(g^{-1}) = \ov{\chi(g)}\) for all \(g \in G\),
+  \item \(\chi(tst^{-1}) = \chi(s)\) for all \(s,t \in G\).
+  \end{enumerate}
+\end{prop}
+\begin{proof}
+  All these properties follow from standard properties of trace.
+\end{proof}
+\begin{defn}
+  A function \(f \from G \to \C\) is called a \de{class function}
+  because it is constant on conjugacy classes. Note that
+  \(\operatorname{Class}(G)\) is the \(\C\)-algebra of all class
+  functions on \(G\) and \(\dim \operatorname{Class}(G) =\) the number
+  of conjugacy classes in \(G\).
+\end{defn}
+\begin{prop}
+  Let \(\rho_i \from G \to GL(V_i)\), \(i = 1,2\) be representations
+  of \(G\) with characters \(\chi_{\rho_i}\).
+  \begin{enumerate}
+  \item \(\chi_{\rho_1 \oplus \rho_2} = \chi_{\rho_1} + \chi_{\rho_2}\)
+  \item \(\chi_{\rho_1 \otimes \rho_2} = \chi_{\rho_1} \cdot \chi_{\rho_2}\)
+  \end{enumerate}
+\end{prop}
+
+\end{document}
