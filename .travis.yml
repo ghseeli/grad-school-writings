@@ -19,6 +19,7 @@ script:
 - mkdir _build
 - cd Class\ Notes/Algebra/
 - latexmk -pdf -interaction=nonstopmode -output-directory=../../_build artin-wedderburn-notes.tex
+- latexmk -pdf -interaction=nonstopmode -output-directory=../../_build representation-theory-of-finite-groups.tex
 - cd ../Geometric\ Representation\ Theory/
 - latexmk -pdf -interaction=nonstopmode -output-directory=../../_build quiver-notes.tex
 - latexmk -pdf -interaction=nonstopmode -output-directory=../../_build springer-theory-notes.tex
@@ -32,6 +33,7 @@ deploy:
     secure: HXgpRlzngKyMJir0Xyqq/WAg4DykW9DMz39MbJE449v0PvY6ruybFTD4SqTl8mAobHHDogRZKTFHDMGdNHAr0pIz/g6lhP+W3/U24QHrMX2g1uwfDTmevmGHfnCXlqroCW9AiYn0RJcPnfzeW0tKMliNVnRYfsXNyNFFjhQj34Nes1L2wJs2Us/eOwNcsrAZhXUn751EXtt/Uka3sLar9wOqgC906buxYMLYuUG5v0eHHR8ZNaSr6K2vKszcP1XaBbzqzbZRUhowFE2Y4rkY4XpDGkgYCqBfhFYowJA10mdq6qNQPTyM7LlDguAN+R1c9iqFmzwMWKVH8/LNSN/Mm152No7jV2eAKLpb7dy8Xe12r2BEnP0bgHkVJHfob3sNLAIQDpzRb3qwsYSt87DnCNabId6nnQcRhoVACzzXJSfU8S95Bz5MS3kJ+RwNpwQFnbzkwkgKNyofSd6ZgXJqO8SntgJQaHMobESUTsf75nA10LqfWvAOPK4HF0ECIhyvvAD84tvY3vjU89Bi+ky40Q9VjewseRicSyfMvhwKGym4I6q9noAxAaDqHxnnezT1c5PLFEQVmiu1YhkIxdugbfDyC1nU38QReucFnxlR+Zr0M/9wjd46NPZQbWFXopqdldsxxr93xhSW2EnLNQbVLAYBE69X6lTrwyAFoKvnXIU=
   file:
   - _build/artin-wedderburn-notes.pdf
+  - _build/representation-theory-of-finite-groups.pdf
   - _build/quiver-notes.pdf
   - _build/springer-theory-notes.pdf
   on:
