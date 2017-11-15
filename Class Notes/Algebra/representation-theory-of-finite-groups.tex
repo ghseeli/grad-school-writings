@@ -8,6 +8,8 @@
 \usepackage{../../ReAdTeX/readtex-core}
 \usepackage{../../ReAdTeX/readtex-abstract-algebra}
 
+\newcommand{\bbk}{\mathbbm{k}}
+
 \numberwithin{thm}{section}
 
 \title[Representation Theory of Finite Groups]{Representation Theory
@@ -17,6 +19,71 @@
 \date{Fall 2017}
 \begin{document}
 \maketitle
+\section{Introduction}
+From one perspective, the representation theory of finite groups is merely a
+special case of the representation theory of associative algebras by
+considering the fact that a sufficiently nice finite group ring \(\bbk[G]\)
+is semisimple, and thus the results from Artin-Wedderburn
+theory apply. However, the extra structure of the group provides a
+rich connection between \(\bbk[G]\)-modules and linear algebra.
+
+
+A representation of a finite group is a way to induce an action of a
+finite group on a vector space. Sometimes, such a perspective allows
+mathematicians to see structure or symmetries in groups that may not
+have been readily apparent from a purely group theoretic point of
+view, much like modules can provide insight into the structure of
+rings. In fact, a reprsentation of a finite group is fundamentally the
+same as a module of a finite group algebra, but the representation
+theoretic perspective allows us to leverage tools from linear algebra
+to gain additional insights.
+
+\section{Group Actions}
+The following exposition is a summary of \cite{princeton-companion}. The reader is probably familiar with the notion of a group action.
+\begin{defn}
+  A \de{group action} on a set \(X\) is a homomorphism \(\phi \from G \to \Aut(X)\)
+  such that \(\phi(e) = Id_X\).
+\end{defn}
+If the reader is unfamiliar with group actions, most introductory
+texts on group theory will provide more than adequate treatment.
+\begin{defn}
+  A group action is called \de{faithful} if \(\phi\) is injective. A
+  group action is called \de{transitive} if \(\phi(G)\) induces only
+  one orbit on \(X\).
+\end{defn}
+When an action is not transitive, we have multiple orbits and we can
+consider the group action on each orbit separately. Thus, in a sense,
+we can ``decompose'' this group action (on the level of sets). Thus,
+let us focus on transitive actions as our basic building blocks of
+group actions.
+\begin{thm}
+  Let \(\phi\) be a transitive group action of \(G\) on a set \(X\). Then,
+  consider \(H = \Stab_G(x)\). Then, \(G/H \isom X\) as sets with a
+  (left) \(G\)-action.
+\end{thm}
+\begin{proof}
+  Given \(H = \Stab_G(x)\), consider the correspondance \[
+    gH \correspondsto g.x = \phi(g)x
+  \]
+  Then, the action of \(G\) preserves this correspondance, namely \[
+    g'.gH = (g'g)H \correspondsto (g'g).x = \phi(g'g)x = \phi(g')\phi(g)x
+    = g'.\phi(g)x = g'.(g.x)
+  \]
+\end{proof}
+Thus, we have reducted the classification of transitive \(G\)-actions
+on \(X\) to the study of conjugacy classes of subgroups of
+\(G\). Thus, the structure of a group that controls a group action on
+a set \(X\) is the subgroup structure of \(G\). However, understanding
+the subgroup structure of a group is, in general, incredibly
+difficult. For instance, recall Cayley's theorem.
+\begin{thm}[Cayley's Theorem]
+  Any finite group \(G\) with \(|G| = n < \infty\) can be embedded
+  into \(\Sym_n\) via the action of \(G\) on itself. 
+\end{thm}
+Thus, to understand the subgroups of \(S_n\), one must understand all
+finite groups \(G\) with order less than \(n\). Thus, while group
+actions are incredibly useful and general, they lack structure that
+can be otherwise useful.
 \section{Group Algebras}
 \begin{defn}
   The \de{group ring} or \de{group algebra} of a group \(G\) over a ring \(R\), denoted
@@ -35,20 +102,66 @@ understood that we are working in the group algebra. That is, for
 rewrite \[
   \lambda e_g \to \lambda g 
 \]
+Since group algebras are \(R\)-algebras, we can ask many mathematical
+questions about their modules.
+\begin{thm}[Maschke's Theorem]\label{maschke}
+  Let \(G\) be a finite group and \(\bbk\) be a field such that
+  \(\Char \bbk \notdivides |G|\). Then, \(\bbk[G]\) is completely
+  reducible as a module over itself. 
+\end{thm}
+\begin{proof}
+  Let \(V\) be a proper \(\bbk[G]\)-submodule of \(\bbk[G]\). Consider the
+  \(\bbk\)-linear map
+  map \(\pi \from \bbk[G] \to B\) and let \(\phi \from \bbk[G] \to V\)
+  be given by \[
+    \phi(x) = \frac{1}{|G|} \sum_{s \in G} s.\pi(s^{-1}.x)
+  \]
+  Thus, \(\phi\) is also a projection since, for \(v \in V\), \[
+    \phi(v) = \frac{1}{|G|} \sum_{s \in G} s.\pi(s^{-1}.v) =
+    \frac{1}{|G|} \sum_{s \in G} s.s^{-1}.v = v
+  \]
+  and it is \(\bbk\)-linear since it is simply the (appropriately scaled) sum of \(\bbk\)
+  linear maps. In fact,
+  \begin{align*}
+    \phi(t.x) & = \frac{1}{|G|} \sum_{s \in G} s.\pi(s^{-1}.t.x) \\
+              & = \frac{1}{|G|} \sum_{s' \in G} (ts') \cdot \pi(s'^{-1}.x)
+              & (s'^{-1} = s^{-1}t \implies s = ts') \\
+              & = t.\phi(x)
+  \end{align*}
+  so, \(\phi\) is \(\bbk[G]\)-linear. Thus, \(\bbk[G] \isom V \oplus
+  \ker \phi\), but \(V\) was an arbitrary proper submodule. Thus,
+  \(\bbk[G]\) is completely reducible.
+\end{proof}
+\begin{rmk}
+  The converse of Maschke's theorem is also true. 
+\end{rmk}
+Thus, since \(\bbk[G]\) is finite-dimensional and thus also artinian,
+\(\bbk[G]\) is a semisimple ring when \(\Char \bbk \notdivides |G|\)
+and, using artin-wedderburn theory, 
+has decomposition as an module 
+over itself \[ 
+  \bbk[G] \isom \bigoplus_{i=1}^k M_{n_i}(D_i)
+\]
+for \(n_i \in \N\) and \(D_i\) a division ring, and these direct
+summands represent all the irreducible \(\bbk[G]\)-modules. However,
+we still wish to understand what these division rings and \(n_i\)'s
+actually are (see \cite{aw}). Thus, we will shift our perspective to looking at
+\emph{group representations} instead of group algebra modules.
 \section{Representations}
-A representation of a finite group is a way to induce an action of a
-finite group on a vector space. Sometimes, such a perspective allows
-mathematicians to see structure or symmetries in groups that may not
-have been readily apparent from a purely group theoretic point of
-view, much like modules can provide insight into the structure of
-rings. In fact, a reprsentation of a finite group is fundamentally the
-same as a module of a finite group algebra, but the representation
-theoretic perspective allows us to leverage tools from linear algebra
-to gain additional insights.
+In this section, we seek to establish some of the basic ideas of
+representations of finite groups. Much of this exposition is borrowed
+from \cite{etingof} where the results are presented more generally for
+\(R\)-algebras. Also, many of these results can be rephrased using the
+language in \cite{aw}.
 \begin{defn}
-  A \de{representation of a finite group \(G\) in vector space \(V\)} is a
+  A \de{representation of a finite group \(G\) in a (complex) vector space \(V\)} is a
   homomorphism \(\rho \from G \to GL(V)\).
 \end{defn}
+\begin{rmk}
+  Throughout this monograph, we will often simply say
+  ``representation'' to mean a representation of a finite group. When
+  we refer to a vector space \(V\), we will mean a vector space over \(\C\).
+\end{rmk}
 \begin{defn}
   We say two representations \(\rho, \rho' \from G \to GL(V)\) are
   \de{similar} or \de{isomorphic} if 
@@ -66,8 +179,31 @@ to gain additional insights.
   Let \(\rho \from G \to GL(V)\) be a linear representation of \(G\)
   in \(V\) and let \(W\) be a subspace of \(V\) such that \(\rho(g)W =
   W\) for all \(g \in G\). Then, there exists a complement \(W'\) of
-  \(W\) in \(V\) such that \(\rho(g)W' = W'\) for all \(g \in G\)
+  \(W\) in \(V\) such that \(\rho(g)W' \subset W'\) for all \(g \in G\)
 \end{prop}
+\begin{proof}
+  Let \(W'\) be a vector space complement of \(W\) in \(V\) (not
+  necessarily \(G\)-stable) and let \(p \from V \to W\) be the
+  standard projection. Then, consider the map \[
+    p^0 := \frac{1}{|G|} \sum_{t \in G} \rho(t) \circ p \circ \rho(t)^{-1}
+  \]
+  Such a map is a projection of \(V\) onto a subspace of \(W\). In
+  fact, \(p^0|_W = Id_W\) since, for \(w \in W\), \[
+    p \circ \rho(t)^{-1} w = \rho(t)^{-1} w \implies \rho(t) \circ p
+    \circ \rho(t)^{-1} w = w \implies p^0 w = w
+  \]
+  Thus, we seek to show \(W^0 := \ker p^0\) is stable under the \(G\)
+  action via \(\rho\). Indeed, it is easy to check \(\rho(s) p^0
+  \rho(s)^{-1} = p^0\) and thus \(p^0 \circ \rho(s)x = \rho(s) \circ
+  p^0 x = 0\), that is, \(\rho(s) x \in W^0\). Thus, \(V = W \oplus
+  W^0\) is a decomposition into \(G\)-stable subspaces. 
+\end{proof}
+\begin{rmk}
+  Note the similarity between this proof and the proof of Maschke's
+  theorem above (\ref{maschke}). Indeed, these proofs are more or less
+  equivalent and the proposition above is the same as Maschke's
+  theorem for \(\bbk = \C\).
+\end{rmk}
 \begin{defn}
   Given representations \(\rho_1 \from G \to GL(V_1)\) and \(\rho_2 \from
   G \to GL(V_2)\), we define \(\rho := \rho_1 \oplus \rho_2 \from G \to GL(V_1
@@ -81,6 +217,126 @@ to gain additional insights.
   \]
   That is, \(\rho(g)|_{V_i} = \rho_i(g)\).
 \end{defn}
+\begin{defn}
+  We say that a representation \(\rho \from G \to GL(V)\) is
+  \de{irreducible} or \de{simple} if \(V \neq 0\) and there is no
+  subspace \(W
+  \subset V\) such that \(W\) is stable under the action of \(G\) via
+  \(\rho\). By the proposition above, this is equivalent to saying
+  that \(\rho\) does not break into a direct sum of representations.
+\end{defn}
+\begin{prop}
+  Every representation is a direct sum of irreducible representations.
+\end{prop}
+\begin{proof}
+  The proof follows from induction on \(\dim V\) and application of
+  the proposition above.
+\end{proof}
+\begin{defn}
+  Let \(\rho_1 \from G \to GL(V_1)\) and \(\rho_2 \from G \to
+  GL(V_2)\) be representations. Then, we define \(\rho := \rho_1
+  \otimes \rho_2 \from G \to GL(V_1 \otimes V_2)\) by, for \(s \in G\), \[
+    \rho(s)(v_1 \otimes v_2) = \rho_1(s)v_1 \otimes \rho_2(s) v_2
+  \]
+\end{defn}
+\begin{rmk}
+  The tensor product of two irreducible representations is not
+  typically irreducible. 
+\end{rmk}
+\begin{thm}
+  Let \(\rho \from G \to GL(V)\) be a representation. Then, given
+  \(\rho \otimes \rho \to GL(V \otimes V)\) decomposes as \[
+    V \otimes V \isom \frac{V \otimes V}{(x \otimes y - y \otimes x)} \oplus
+    \frac{V \otimes V}{(x \otimes y + y \otimes x)} =
+    \operatorname{Sym}^2(V) \oplus \operatorname{Alt}^2(V)
+  \]
+\end{thm}
+\begin{proof}
+  Consider the automorphism of \(V \otimes V\) given by \(\tau(e_i
+  \otimes e_j) = e_j \otimes e_i\) for basis \(\{e_1, \ldots, e_n\}\)
+  of \(V\). Then, \(\tau(v \otimes w) = w \otimes v\) for any \(v,w
+  \in V\) and \(\tau^2 = Id_{V \otimes V}\). Thus, as vector spaces, \[
+    V \otimes V \isom  \ker (\tau-Id) \oplus \im (\tau-Id) 
+  \]
+  However, \(\ker(\tau-Id) = \langle x \otimes y \st x \otimes y - y
+  \otimes x = 0 \rangle \isom (V \otimes V)/(x \otimes y - y \otimes
+  x)\). Now, consider that \[
+    (\tau-Id)(x \otimes y) + \tau(\tau-Id)(x \otimes y) = (\tau-Id)(x
+    \otimes y) + (Id - \tau)(x \otimes y) = 0
+  \]
+  and so, for any \(v \in \im(\tau-Id)\), we get \(v + \tau(v) =
+  0\). Thus, \(\im(\tau-Id) \subset (V \otimes V)/(x \otimes y + y
+  \otimes x)\). However, by dimension counting, we note that
+  \begin{align*}
+        \dim \ker(\tau-Id) = \dim \operatorname{Sym}^2(V) &= \frac{n(n+1)}{2} \implies \\ \dim
+    \im(\tau-Id) = n - \frac{n(n+1)}{2} &= \frac{n(n-1)}{2} = \dim \operatorname{Alt}^2(V)
+  \end{align*}
+  Thus, \(\im(\tau-Id) = \operatorname{Alt}^2(V)\).
+
+  However, we must also check that these spaces are stable under
+  \(G\). However, for \(\rho' = \rho \otimes \rho\),
+  \begin{align*}
+    \rho'(g) \circ \tau \circ \rho'(g^{-1}) (v \otimes w)
+    & = \rho'(g)
+      \circ \tau (\rho^{-1}(g)v \otimes \rho^{-1}(g)w) \\
+    & = \rho'(g)(\rho^{-1}(g)w \otimes \rho^{-1}(g)v) \\
+    & = w \otimes v \\
+    & = \tau(v \otimes w)
+  \end{align*}
+  and so the image and kernel of \(\tau-Id\) is stable under the
+  action of \(G\).
+\end{proof}
+We now also seek to prove some other useful tools in representation
+theory.
+\begin{thm}[Schur's Lemma]
+  Let \(V_1, V_2\) be representations of \(G\) and let \(\phi \from
+  V_1 \to V_2\) be a nontrivial homomorphism of representations. Then,
+  \begin{enumerate}
+  \item If \(V_1\) is irreducible, then \(\phi\) is injective.
+  \item If \(V_2\) is irreducible, then \(\phi\) is surjective.
+  \end{enumerate}
+\end{thm}
+\begin{proof}
+  Exercise for the reader.
+\end{proof}
+\begin{cor}[Schur's Lemma for algebraically closed fields]
+  Let \(V\) be a finite dimensional irreducible representation of a
+  group \(G\) over an algebraically closed field \(\bbk\), and \(\phi
+  \from V \to V\) a commuting homomorphism (ie \(\rho(g) \circ \phi = \phi
+  \circ \rho(g)\)). Then, \(\phi = \lambda Id_V\) for some \(\lambda
+  \in \bbk\).
+\end{cor}
+\begin{rmk}
+  \begin{enumerate}
+  \item We sometimes call \(\phi\) a ``scalar operator'' or say that
+    \(\phi\) ``acts as a scalar'' in this situation. In \cite{serre},
+    Serre calls such an operator a ``homothey.''
+  \item This proposition is false over \(\R\). Just consider \(G = \Z_2
+    \times \Z_2\) with representation \(\rho \from G \to
+    GL(\R^4)\). \todo{Check this!}
+  \end{enumerate}
+\end{rmk}
+\begin{proof}
+  Let \(\lambda\) be an eigenvalue of \(\phi\), which exists since
+  \(\bbk\) is algebraically closed. Then, since \(\phi\) commutes with
+  \(\rho(g)\), so does \(\phi - \lambda Id \from V \to V\). However, \(\phi -
+  \lambda Id\) is not an isomorphism since \(\det(\phi - \lambda Id) =
+  0\). Thus, \(\phi - \lambda Id = 0 \implies \phi = \lambda Id\).
+\end{proof}
+\begin{cor}
+  Let \(G\) be an abelian group. Then, every irreducible finite
+  dimensional representation of \(G\) is \(1\)-dimensional.
+\end{cor}
+\begin{proof}
+  Let \(V\) be an irreducible finite dimensional representation of
+  \(G\). Then, for \(g,h \in G\), \(v \in V\) \[
+    \rho(g) \rho(h) v = \rho(gh)v = \rho(hg)v = \rho(h)\rho(g) v
+  \]
+  Thus, \(\rho(g)\) commutes with all \(\rho(h)\) and so, by the
+  corollary above, \(\rho(g) = \lambda Id\) for some \(\lambda \in
+  \C\). Thus, every vector subspace of \(V\) is a subrepresentation,
+  but \(V\) is irreducible. Thus, \(\dim V = 1\).
+\end{proof}
 \section{Character Theory}
 Throughout this section, let \(G\) be a finite group and \(F = \C\).
 \begin{prop}
@@ -130,5 +386,46 @@ Throughout this section, let \(G\) be a finite group and \(F = \C\).
   \item \(\chi_{\rho_1 \otimes \rho_2} = \chi_{\rho_1} \cdot \chi_{\rho_2}\)
   \end{enumerate}
 \end{prop}
+\begin{bibdiv}
+  \begin{biblist}
+    \bib{cr}{book}{
+      author={Curtis, Charles W.}
+      author={Reiner, Irving}
+      title={Representation Theory of Finite Groups and Associative
+        Algebras}
+      year={1962}
+    }
+    \bib{etingof}{article}{
+      author={Etingof, Pavel}
+      author={Golberg, Oleg}
+      author={Hensel, Sebastian}
+      author={Liu, Tiankai}
+      author={Schwendner, Alex}
+      author={Vaintrob, Dmitry}
+      author={Yudovina}
+      title={Introduction to Representation Theory}
+      year={2011}
+    }
+    \bib{princeton-companion}{article}{
+      author={Gronjnowski, Ian}
+      title={Representation Theory}
+      journal={The Princeton Companion to Mathematics}
+      pages={419--431}
+    }
+    \bib{aw}{article}{
+      author={Seelinger, George H.}
+      title={Artin-Wedderburn Theory}
+      year={2017}
+      note={See \url{https://github.com/ghseeli/grad-school-writings/releases/latest}}
+    }
+    \bib{serre}{book}{
+      author={Serre, Jean-Pierre}
+      title={Linear Representations of Finite Groups}
+      year={1997}
+      note={Translated from the French by Leonard L. Scott}
+    }
+
+  \end{biblist}
+\end{bibdiv}
 
 \end{document}
