@@ -299,7 +299,7 @@ theory.
 \begin{proof}
   Exercise for the reader.
 \end{proof}
-\begin{cor}[Schur's Lemma for algebraically closed fields]
+\begin{cor}[Schur's Lemma for algebraically closed fields]\label{schur-alg-closed}
   Let \(V\) be a finite dimensional irreducible representation of a
   group \(G\) over an algebraically closed field \(\bbk\), and \(\phi
   \from V \to V\) a commuting homomorphism (ie \(\rho(g) \circ \phi = \phi
@@ -337,8 +337,21 @@ theory.
   \C\). Thus, every vector subspace of \(V\) is a subrepresentation,
   but \(V\) is irreducible. Thus, \(\dim V = 1\).
 \end{proof}
+\begin{defn}
+  For an irreducible representation \(\rho \from G \to GL(V)\) of
+  \(G\), then for all \(g \in Z(G)\), \(\rho(g)\) commutes with all
+  \(\rho(h), h \in H\). Thus, \(\rho(g) = \lambda_g Id_V\) by \ref{schur-alg-closed} and
+  we call the map \(\chi_V \from Z(G) \to \C\) the \de{central
+    character} of \(V\).
+\end{defn}
+\begin{prop}
+  \(\chi_V \from Z(G) \to \C\) is a homomorphism.
+\end{prop}
 \section{Character Theory}
-Throughout this section, let \(G\) be a finite group and \(F = \C\).
+Throughout this section, let \(G\) be a finite group and \(F =
+\C\). We wish to extend the notion of the central character above to a
+general character \(\chi_V \from G \to \C\) that will still carry
+useful information about the group representation \(V\).
 \begin{prop}
   If \(V\) is a \(G\)-module, then every \(g \in G\), viewed as a
   linear operator \(g_V \from V \to V\), is semisimple, and thus \(V\)
@@ -357,11 +370,11 @@ Throughout this section, let \(G\) be a finite group and \(F = \C\).
 \end{proof}
 \begin{defn}
   The \de{character} of group representation \(\rho \from G \to V\), denoted \(\chi_\rho = \chi^\rho\), is the function
-  \(\chi_\rho \from G \to F\) defined by \(\chi_\rho(g) =
+  \(\chi_\rho \from G \to \bbk\) defined by \(\chi_\rho(g) =
   \tr(\rho(g))\).
 \end{defn}
 \begin{prop}
-  For \(F = \C\) and fixed group representation \(\rho\),
+  For \(\bbk = \C\) and fixed group representation \(\rho\),
   \begin{enumerate}
   \item \(\chi(1) = \dim V\),
   \item \(\chi(g^{-1}) = \ov{\chi(g)}\) for all \(g \in G\),
@@ -386,6 +399,10 @@ Throughout this section, let \(G\) be a finite group and \(F = \C\).
   \item \(\chi_{\rho_1 \otimes \rho_2} = \chi_{\rho_1} \cdot \chi_{\rho_2}\)
   \end{enumerate}
 \end{prop}
+\begin{proof}
+  This follows from the definition of direct sum and tensor product of
+  representations and the definition of the character.
+\end{proof}
 \begin{bibdiv}
   \begin{biblist}
     \bib{cr}{book}{
