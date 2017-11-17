@@ -403,6 +403,116 @@ useful information about the group representation \(V\).
   This follows from the definition of direct sum and tensor product of
   representations and the definition of the character.
 \end{proof}
+Based on the identity (a) above, we see that the characters of
+irreducible representations will be of primary interest.
+\section{Orthogonality Relations of Irreducible Characters}
+Inspired by the proof of Maschke's theorem, we present the following
+proposition.
+\begin{prop}
+  Let \(h \from V_1 \to V_2\) be a linear transformation and let 
+  \(\rho^1 \from G \to GL(V_1), \rho^2 \from G \to GL(V_2)\) be
+  irreducible representations of finite group \(G\). Consider \[
+    h^0 := \frac{1}{|G|} \sum_{t \in G} \rho^2(t^{-1}) h \rho^1(t)
+  \]
+  \(h^0\) is a homomorphism of representations. Furthermore
+  \begin{enumerate}
+  \item If \(\rho^1 \not \isom \rho^2\), then \(h^0 = 0\).
+  \item If \(\rho^1 \isom \rho^2\) (and thus \(V_1 \isom V_2\)), then \(h^0 = \frac{1}{\dim V_1}
+    \tr(h) Id_{V_1}\).
+  \end{enumerate}
+\end{prop}
+\begin{proof}
+  \todo{Fill this in}
+\end{proof}
+\begin{cor}
+  Consider that \(\rho(t) \in GL(V)\) and thus we can represent
+  \(\rho(t)\) as a \(n \times n\) matrix, say \(\rho^1(t) =
+  [r_{i_1,j_1}(t)]\) and \(\rho^2(t) = [r_{i_2,j_2}(t)]\). Then,
+  \begin{enumerate}
+  \item If
+  \(\rho^1 \isom \rho^2\), \[
+    \frac{1}{|G|} \sum_{t \in G} r_{i_2,j_2}(t^{-1}) r_{j_1,i_1}(t) =
+    \frac{1}{n} \delta_{j_1,j_2} \delta_{i_1,i_2}
+  \]
+\item If \(\rho^1 \not \isom \rho^2\), \[
+  \frac{1}{|G|} \sum_{t \in G} r_{i_2,j_2}(t^{-1}) r_{j_1,i_1}(t) = 0
+  \]
+  \end{enumerate}
+\end{cor}
+This provides us motivation for definiting a positive definite
+Hermitian inner product on the set of class functions on \(G\).
+\begin{defn}
+  For class functions \(\phi, \psi \from G \to \C\), we define inner
+  product \[ 
+    \langle \phi, \psi \rangle = \frac{1}{|G|} \sum_{g \in G}
+    \phi(g^{-1}) \psi(g)
+  \]
+  and also \[
+    (\phi,\psi) = \frac{1}{|G|} \sum_{g \in G} \phi(g) \ov{\psi(g)}
+  \]
+\end{defn}
+\begin{prop}
+  Let \(\langle \cdot, \cdot \rangle\) and \((\cdot, \cdot)\) be as
+  above.
+  \begin{enumerate}
+  \item \(\langle \cdot, \cdot \rangle\) is a bilinear form.
+  \item \(\langle \phi, \psi \rangle = \langle \psi, \phi \rangle\),
+    that is \(\langle \cdot, \cdot \rangle\) is symmetric.
+  \item \((\phi, \psi) = \langle \phi, \ov{\psi \circ i} \rangle\)
+    where \(i \from G \to G\) takes \(i(g) = g^{-1}\).
+  \item \((\cdot, \cdot)\) is a positive definite Hermitian inner form.
+  \end{enumerate}
+\end{prop}
+\begin{prop}
+  If \(\rho\) is a representation of \(G\) in \(V\) and if \(\psi(t) =
+  \tr \rho(t)\), then \[
+    \langle \phi, \psi \rangle = (\phi, \psi)
+  \]
+\end{prop}
+Thus, it is with the form \((\cdot, \cdot)\) that we can arise at the
+following
+\begin{thm}
+  For any representations \(V,W\), \[
+    (\chi_V, \chi_W) = \dim \Hom_G(W,V) 
+  \]
+  and, if \(V,W\) are irreducible, \[
+    (\chi_V, \chi_W) =
+    \begin{cases}
+      1 & V \isom W \\
+      0 & V \not \isom W
+    \end{cases}
+  \]
+\end{thm}
+\begin{proof}
+  We first compute for arbitrary representations \(V,W\),
+  \begin{align*}
+    (\chi_V, \chi_W) & = \frac{1}{|G|} \sum_{g \in G} \chi_V(g)
+                       \ov{\chi_W(g)} \\
+                     & = \frac{1}{|G|} \sum_{g \in G} \chi_V(g) \chi_{W^*}(g) \\
+                     & = \frac{1}{|G|} \sum_{g \in G} \chi_{V \otimes
+                       W^*}(g) \\
+                     & = \frac{1}{|G|} \sum_{g \in G} \chi_{\Hom_\C(W,V)}(g)\\
+                     & = \tr_{\Hom_\C(W,V)}\left(\frac{1}{|G|}\sum_{g \in G} g\right)
+  \end{align*}
+  However, \(P := \frac{1}{|G|} \sum_{g \in G} g\) is a homomorphism of
+  \(G\) representations and the image of \(P\) is
+  stable under any action of \(G\). Thus, for arbitrary representation
+  \(U\), \(\tr_U(P)\) simply counts
+  the number of times the trivial representation occurs as a
+  subrepresentation of \(U\). However, considering \(\Hom_\C(W,V)\) as
+  a \(G\)-representation, the \(G\)-invariant subrepresentation is
+  exactly \(\Hom_G(W,V)\). Thus, \[
+   (\chi_V, \chi_W) = \tr_{\Hom_\C(W,V)}\left(\frac{1}{|G|}\sum_{g \in G} g\right) = \dim \Hom_G(W,V)
+  \]
+  Furthermore, if \(V,W\) are irreducible, Schur's lemma tells us
+  that \[
+    \dim \Hom_G(W,V) =
+    \begin{cases}
+      1 & V \isom W \\
+      0 & \text{ else }
+    \end{cases}
+  \]
+\end{proof}
 \begin{bibdiv}
   \begin{biblist}
     \bib{cr}{book}{
