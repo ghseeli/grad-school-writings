@@ -28,7 +28,6 @@ is semisimple, and thus the results from Artin-Wedderburn
 theory apply. However, the extra structure of the group provides a
 rich connection between \(\bbk[G]\)-modules and linear algebra.
 
-
 A representation of a finite group is a way to induce an action of a
 finite group on a vector space. Sometimes, such a perspective allows
 mathematicians to see structure or symmetries in groups that may not
@@ -39,6 +38,12 @@ same as a module of a finite group algebra, but the representation
 theoretic perspective allows us to leverage tools from linear algebra
 to gain additional insights.
 
+While the classic texts in representation theory continue to be cited
+and used often, and contain many details ommitted here, I am eternally
+grateful for \cite{etingof} and \cite{smith} for being approachable,
+providing simplifying insights, and using more modern language to
+rephrase classical results. Much of the writings here are shamelessly
+borrowed and synthesized from these sources.
 \section{Group Actions}
 The following exposition is a summary of \cite{princeton-companion}. The reader is probably familiar with the notion of a group action.
 \begin{defn}
@@ -615,7 +620,7 @@ Hermitian inner product on the set of class functions on \(G\).
 \end{prop}
 Thus, it is with the form \((\cdot, \cdot)\) that we can arise at the
 following
-\begin{thm}
+\begin{thm}\label{orthonormal}
   For any representations \(V,W\), \[
     (\chi_V, \chi_W) = \dim \Hom_G(W,V) 
   \]
@@ -784,7 +789,68 @@ have the following theorem
     \theta((1)) \theta((12)) = 1 - 1 + 2 \theta((12)) \implies
     \theta((12)) = 0
   \]
+  Finally, returning to the regular representation of \(\Sym_3\), we
+  know that \(\chi_{reg}(1) = 6\) and \(\chi_{reg} = a \chi_1 + b
+  \chi_2 + c \theta\). However, we also know that \(\chi_{reg}(g) =
+  0\) for all non-identity \(g \in \Sym_3\) and so, in particular,
+  \(\chi_{reg}((123)) = 0\). Thus, the unique
+  decomposition of \(\chi_{reg}\) is \[
+    \chi_{reg} = \chi_1 + \chi_2 + 2 \theta
+  \]
+  From this, we will see that \[
+    \rho_{reg} = \rho_{trivial} \oplus \rho_{alt} \oplus \rho_{std}
+    \oplus \rho_{std} \isom M_1(\C) \oplus M_1(\C) \oplus M_2(\C)
+  \]
 \end{example}
+\section{Results of Character Theory}
+Perhaps the most important reason to study character theory is the
+following theorem.
+\begin{cor}
+  The multiplicity of an irreducible representation \(W\) in a
+  representation \(V\) is \(\chi_W, \chi_V\). 
+\end{cor}
+\begin{proof}
+  Let \(V \isom W_1^{m_1} \oplus \cdots \oplus W_k^{m_k}\) be a
+  decomposition of \(V\) into irreducibles. Then, we have \[
+    \chi_V = \chi_{W_1^{m_1} \oplus \cdots \oplus W_k^{m_k}} = m_1
+    \chi_{W_1} + \cdots + m_k \chi_{W_k}.
+  \]
+  Moreover, since the irreducible characters form an \emph{orthonormal
+  basis} of class functions, we can apply \((\cdot, \chi_{W_i})\) to
+  our equality to get \[
+    (\chi_V, \chi_{W_i}) = m_i
+  \]
+\end{proof}
+\begin{cor}
+  Two finite dimensional complex representations of a finite group
+  \(G\), say \(V,W\), are isomorphic if and only if they have the same
+  character. In other words \[
+    V \isom W \iff \chi_V = \chi_W
+  \]
+\end{cor}
+\begin{proof}
+  The forward direction follows by definition of character. The
+  backwards direction follows from the fact that the irreducible characters form a
+  basis of \(\Class(G)\). Namely, \(\chi_V = \chi_W\) implies that
+  \(\chi_V\) and \(\chi_W\) have the same unique decomposition into
+  irreducible characters, and thus from the corollary above, \(V,W\) have the
+  same multiplicity of each irreducible representation.
+\end{proof}
+\begin{cor}
+  A representation \(V\) is irreducible if and only if \((\chi_V,
+  \chi_V) = 1\). 
+\end{cor}
+\begin{proof}
+  The forward direction was proved earlier in \ref{orthonormal}. For the
+  backwards direction, if \(\chi_V = m_1 \chi_{V_1} + \cdots + m_k
+  \chi_{V_k}\) for irreducibles \(V_1, \ldots, V_k\), then using the
+  fact that the \(\chi_{V_i}\)'s form an orthonormal basis, we get \[
+    1 = (\chi_V, \chi_V) = m_1^2 + \cdots + m_k^2
+  \]
+  Thus, since each \(m_i^2 \geq 0\) and are in \(\Z\), it must be that
+  exactly one \(m_i = 1\) and all others are \(0\). Thus, \(V\) must
+  be irreducible by the corollary above.
+\end{proof}
 \begin{bibdiv}
   \begin{biblist}
     \bib{cr}{book}{
