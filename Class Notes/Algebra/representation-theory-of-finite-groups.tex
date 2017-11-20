@@ -86,7 +86,7 @@ difficult. For instance, recall Cayley's theorem.
   Any finite group \(G\) with \(|G| = n < \infty\) can be embedded
   into \(\Sym_n\) via the action of \(G\) on itself. 
 \end{thm}
-Thus, to understand the subgroups of \(S_n\), one must understand all
+Thus, to understand the subgroups of \(\Sym_n\), one must understand all
 finite groups \(G\) with order less than \(n\). Thus, while group
 actions are incredibly useful and general, they lack structure that
 can be otherwise useful.
@@ -168,6 +168,21 @@ language in \cite{aw}.
   ``representation'' to mean a representation of a finite group. When
   we refer to a vector space \(V\), we will mean a vector space over \(\C\).
 \end{rmk}
+\begin{thm}
+  There is a natural bijection between \(\C[G]\)-modules and complex
+  representations of \(G\).
+\end{thm}
+\begin{proof}
+  Given a representation of \(G\) given by \(\rho \from G \to GL(V)\),
+  we get a \(\C[G]\) action on \(v \in V\) via \[
+    e_g.v = \rho(g)v
+  \]
+  and extend via linearity. Conversely, given \(M\) a
+  \(\C[G]\)-module, we can consider \(M\) as 
+  a vector space over \(\C e_1\) and then view the action of each
+  \(e_g\) as an invertible linear transformation on this vector space.
+\end{proof}
+
 \begin{defn}
   We say two representations \(\rho, \rho' \from G \to GL(V)\) are
   \de{similar} or \de{isomorphic} if 
@@ -317,9 +332,7 @@ theory.
   \item We sometimes call \(\phi\) a ``scalar operator'' or say that
     \(\phi\) ``acts as a scalar'' in this situation. In \cite{serre},
     Serre calls such an operator a ``homothey.''
-  \item This proposition is false over \(\R\). Just consider \(G = \Z_2
-    \times \Z_2\) with representation \(\rho \from G \to
-    GL(\R^4)\). \todo{Check this!}
+  \item This proposition is false over \(\R\).
   \end{enumerate}
 \end{rmk}
 \begin{proof}
@@ -792,7 +805,8 @@ have the following theorem
   Finally, returning to the regular representation of \(\Sym_3\), we
   know that \(\chi_{reg}(1) = 6\) and \(\chi_{reg} = a \chi_1 + b
   \chi_2 + c \theta\). However, we also know that \(\chi_{reg}(g) =
-  0\) for all non-identity \(g \in \Sym_3\) and so, in particular,
+  0\) for all non-identity \(g \in \Sym_3\) since no such elements fix
+  any basis elements. In particular,
   \(\chi_{reg}((123)) = 0\). Thus, the unique
   decomposition of \(\chi_{reg}\) is \[
     \chi_{reg} = \chi_1 + \chi_2 + 2 \theta
@@ -851,6 +865,75 @@ following theorem.
   exactly one \(m_i = 1\) and all others are \(0\). Thus, \(V\) must
   be irreducible by the corollary above.
 \end{proof}
+\section{The Regular Representation Revisited}
+\begin{cor}
+  The multiplicity of any irreducible representation \(V\) in the regular
+  representation equals its dimension.
+\end{cor}
+\begin{proof}
+  Recall that the dimension of the regular representation is \(|G|\). Consider \[
+    (\chi_V, \chi_{reg}) = \frac{1}{|G|}\chi_V(1) \chi_{reg}(1) =
+    \chi_V(1) = \dim V
+  \]
+\end{proof}
+\begin{cor}
+  Let \(\{V_1, \ldots, V_k\}\) be the set of all irreducible
+  representations of finite group \(G\). Then, \[
+    |G| = \sum_{i=1}^k (\dim V_i)^2
+  \]
+\end{cor}
+\begin{proof}
+  From above, we have \(\chi_{reg} = \sum_{i=1}^k \dim V_i \cdot
+  \chi_{V_i}\), and so we simply take \((\chi_{reg}, \chi_{reg})\) to
+  get \[
+    (\chi_{reg}, \chi_{reg}) = \sum_{1\leq i \leq k, 1 \leq j \leq k}
+    \dim V_i \dim V_j (\chi_{V_i}, \chi_{V_j}) = \sum_{i=1}^k (\dim
+    V_i)^2
+  \]
+  using the orthogonality of the irreducible characters. However,
+  since \[
+    \chi_{reg}(g) =
+    \begin{cases}
+      |G| & g = 1 \\
+      0 & \text{otherwise}
+    \end{cases}
+  \]
+  we also have \((\chi_{reg}, \chi_{reg}) = \frac{|G|^2}{|G|} = |G|\)
+  by definition of the inner product \((\cdot, \cdot)\).
+\end{proof}
+\begin{rmk}
+  This result should not come as a surprise to a reader familiar with
+  Artin-Wedderburn theory. However, the question of what the
+  analogous decomposition of the regular representation looks like
+  still remains. 
+\end{rmk}
+\begin{lem}
+  If \(\rho_1\) and \(\rho_2\) are irreducible representations of
+  \(G_1\) and \(G_2\) respectively, then
+  \(\rho_1 \otimes \rho_2\) is an irreducible representation of \(G_1
+  \times G_2\)
+\end{lem}
+\begin{proof}
+  We have, from above, that for characters \(\chi_1\) of \(\rho_1\)
+  and \(\chi_2\) of \(\rho_2\), that \[
+    (\chi_1, \chi_1) = 1 = (\chi_2,\chi_2)
+  \]
+  However, \(\chi := \chi_{\rho_1 \otimes \rho_2}\) has
+  \begin{align*}
+    (\chi,\chi) & = 
+    \frac{1}{|G_1||G_2|} \sum_{g \in G_1, g' \in G_2} \chi_1(g)
+                  \chi_2(g') \ov{\chi_1(g) \chi_2(g')} \\
+    & = \frac{1}{|G_1|} \left(
+      \sum_{g \in G_1} \chi_1(g) \ov{\chi_1(g)} \right)
+      \frac{1}{|G_2|} \left( 
+      \sum_{g' \in G_2} \chi_2(g') \ov{\chi_2(g')} \right) \\
+    & = (\chi_1, \chi_1) \cdot (\chi_2, \chi_2) \\
+    & = 1
+  \end{align*}
+  Thus, it must be that \(\rho_1 \otimes \rho_2\) is irreducible.
+  \end{proof}
+\section{Induced Representations}
+
 \begin{bibdiv}
   \begin{biblist}
     \bib{cr}{book}{
