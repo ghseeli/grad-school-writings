@@ -10,6 +10,8 @@
 
 \newcommand{\bbk}{\mathbbm{k}}
 \newcommand{\Class}{\operatorname{Class}}
+\newcommand{\Res}{\operatorname{Res}}
+\newcommand{\Ind}{\operatorname{Ind}}
 
 \numberwithin{thm}{section}
 
@@ -42,8 +44,10 @@ While the classic texts in representation theory continue to be cited
 and used often, and contain many details ommitted here, I am eternally
 grateful for \cite{etingof} and \cite{smith} for being approachable,
 providing simplifying insights, and using more modern language to
-rephrase classical results. Much of the writings here are shamelessly
-borrowed and synthesized from these sources.
+rephrase classical results. I am also grateful for \cite{ct}, out of
+which I first learned the representation theory of finite groups, even
+if I did not understand a lot of it at the time. Much of the writings
+here are shamelessly  borrowed and synthesized from these sources.
 \section{Group Actions}
 The following exposition is a summary of \cite{princeton-companion}. The reader is probably familiar with the notion of a group action.
 \begin{defn}
@@ -907,7 +911,7 @@ following theorem.
   analogous decomposition of the regular representation looks like
   still remains. 
 \end{rmk}
-\begin{lem}
+\begin{lem}\label{tensor-of-irred-is-irred}
   If \(\rho_1\) and \(\rho_2\) are irreducible representations of
   \(G_1\) and \(G_2\) respectively, then
   \(\rho_1 \otimes \rho_2\) is an irreducible representation of \(G_1
@@ -1054,10 +1058,177 @@ better, namely
   \]
 \end{thm}
 \begin{proof}
-  
+  For \(g \in Z(G)\), we note that \(\rho(g)\) commutes with
+  \(\rho(h)\) for all \(h \in G\), so \(\rho(g) = \lambda_g Id_V\) for
+  some \(\lambda \in \C\). Consider the map from \(Z(G)\) to \(\C\)
+  given by \(g \mapsto \lambda_g\). Such a map is, in fact, a
+  homomorphism from \(Z(G)\) to \(\C^\times\). Now, for some \(m \geq
+  0\), consider \[
+    \rho^{\otimes m} \from G^{\times m} \to GL(V^{\otimes m})
+  \]
+  By \ref{tensor-of-irred-is-irred}, this is an irreducible representation of \(G^{\times
+    m}\). So, given \((g_1, \ldots, g_m) \in Z(G) \times Z(G)
+  \times \cdots \times Z(G) \subgroup Z(G^{\times m})\), it must be
+  that \(\rho(g_1, \ldots, g_m) = \lambda Id_{V^{\otimes m}}\). Now,
+  consider \(H = \{(g_1, \ldots, g_m) \in (Z(G))^{\times m} \st g_1
+  \ldots g_m = 1_G\} \subgroup G\). Then, for \((h_1, \ldots, h_m) \in
+  H\),
+  \begin{align*}
+    (h_1, \ldots, h_m).(v_1 \otimes \cdots \otimes v_m)
+    & = \rho(h_1)v_1 \otimes \cdots \otimes \rho(h_m)v_m \\
+    & = \lambda_{h_1} v_1 \otimes \cdots \otimes \lambda_{h_m} v_m \\
+    & = (\lambda_{h_1} \cdots \lambda_{h_m})v_1 \otimes \cdots \otimes
+      v_m \\
+    & = (h_1 \cdots h_m)v_1 \otimes \cdots \otimes v_m \\
+    & = v_1 \otimes \cdots \otimes v_m
+  \end{align*}
+  so \(H\) acts trivially on \(V^{\otimes m}\). Thus, consider that
+  \(\rho^{\otimes m}\) induces an irreducible representation on \(H\)
+  \(G^{\times m}/H\). By the theorem above, \((\dim V)^n \divides
+  |G^{\times m}/H| = \frac{|G|^m}{|Z(G)|^{m-1}}\), where \(|H| =
+  |Z(G)|^{m-1}\) since \(g_1 \cdots g_m = 1\) constrains a degree of
+  freedom. Thus, \(\left(\frac{|G|}{|Z(G)| \dim V}\right)^m \in
+  |Z(G)|^{-1} \Z\) for all \(m\) and thus \(\frac{|G|}{|Z(G)| \dim
+    V}\) is an integer.
 \end{proof}
+Another famous result is Burnside's theorem, which can be proved using
+representation theory. \todo{State and prove Burnside's theorem.}
 \section{Induced Representations}
-
+Given a representation of a group \(G\), there is a natural way to
+restrict the representation to a subgroup \(H \subgroup G\).
+\begin{defn}
+  Let \(\rho \from G \to GL(V)\) be a representation of \(G\) and \(H \subgroup G\). Then,
+  we define the \de{restricted representation} \(\Res_H^G V\) to be \[
+    \rho_{\Res_H^G V} = \rho|_H
+  \]
+\end{defn}
+However, we may ask if we can go the other way. That is, given a
+representation \(V\) of a subgroup \(H \subgroup G\), can we construct
+a representation of \(G\)? We present the following
+\begin{defn}
+  Let \(\rho \from H \to GL(V)\) be a representation of \(H \subgroup
+  G\). Then, we define the \de{induced representation} \(\Ind_H^G V\)
+  to be
+  \begin{align*}
+    \Ind_H^G V & = \{f \from G \to V \st f(hx) = \rho(h)f(x), \forall x
+    \in G, h \in H\} \\
+    (g.f)(x) & = f(xg), \forall g \in G
+  \end{align*}
+  Less abstractly, this says that, \(\Ind_H^G V = \bigoplus_{g \in G/H}
+  g.V\) where each \(g.V \isom V\) and the action is given by,
+  where \(gg_i = g_{\sigma(i)}h_i\) for \(\{g_i\}\) a full set of
+  coset representatives, \[
+    \rho_{\Ind_H^G V}(g) \cdot \left( \sum_{i = 1}^k g_i v_i \right)
+    = \sum_{i=1}^k g_{\sigma(i)} \rho(h_i) v_i
+  \]
+\end{defn}
+\begin{prop}
+  Given a representation \(\rho \from H \to GL(V)\) and \(H \subgroup
+  G\), we have that \[
+    \Ind_H^G V \isom \C[G] \otimes_{\C[H]} V
+  \]
+  as \(\C[G]\)-modules with \(G\)-action \[
+    g'.(e_g \otimes v) = e_{g'g} \otimes v = e_{g''} \otimes \rho(h) v
+  \]
+  where \(g'g = g''h\) for \(g'' \in G, h \in H\).
+\end{prop}
+\begin{proof}
+  This follows from the fact that \(\C[G] \isom \bigoplus_{g \in G/H}
+  g.\C[H]\), so \[
+    \C[G] \otimes_{\C[H]} V \isom \left( \bigoplus_{g \in G/H} g.\C[H]
+    \right) \otimes_{\C[H]} V \isom \bigoplus g.(\C[H] \otimes_{\C[H]}
+    V) \isom \bigoplus_{g \in G/H} g.V
+  \]
+\end{proof}
+\begin{rmk}
+  Under this isomorphism, we get \(\Ind_H^G V = \bigoplus_{g \in G/H}
+  g.V\) where \(V \isom g.V\) via \(v \mapsto e_g \otimes v\)
+\end{rmk}
+\todo{Check that all these actions are actually correct}
+\begin{example}
+  \begin{enumerate}
+  \item Let \(H = \{1\} \subgroup G\) and let \(W\) be the trivial
+    representation. Then, since \(W = \C\) \[
+      \Ind_H^G W \isom \C[G] \otimes_{\C} W \isom \C[G] \otimes_{\C}
+      \C \isom \C[G]
+    \]
+    is the regular representation.
+  \item Let \(H \subgroup G\) and \(W\) be the trivial
+    representation. Then, \[
+      \Ind_H^G W \isom \C[G] \otimes_{\C[H]} \C \isom \C[G/H]
+    \]
+    since \(g \otimes \lambda = g'h \otimes \lambda = g' \otimes
+    h.\lambda = g' \otimes \lambda\) for \(g' \in G, h \in H\).
+  \end{enumerate}
+\end{example}
+\begin{prop}
+  Let \(V, V_1, V_2\) be representations of \(H \subgroup G\). Then, 
+  \begin{enumerate}
+  \item \(\Ind_H^G(V_1 \oplus V_2) \isom \Ind_H^G V_1 \oplus \Ind_H^G
+    V_2\).
+  \item \(\dim \Ind_H^G V = |G/H| \dim V\).
+  \item For \(H \subgroup K \subgroup G\), \(\Ind_K^G \Ind_H^K V \isom
+    \Ind_H^G V\).
+  \end{enumerate}
+\end{prop}
+\begin{proof}
+  (b) has already been shown in the example above. For (a), \[
+    \Ind_H^G(V_1 \oplus V_2) \isom \C[G] \otimes_{\C[H]}(V_1 \oplus
+    V_2)  = (\C[G] \otimes_{\C[H]} V_1) \oplus (\C[H] \otimes_{\C[H]}
+    V_2) \isom \Ind_H^G V_1 \oplus \Ind_H^G V_2
+  \]
+  and for (c), \[
+    \Ind_K^G \Ind_H^K V \isom \C[G] \otimes_{\C[K]} (\C[K] \otimes_{\C[H]} V) \isom C[G]
+    \otimes_{\C[H]} V \isom \Ind_H^G V
+  \]
+\end{proof}
+\begin{defn}
+  Let \(\phi \in \Class(H)\) for \(H \subgroup G\). Then, we define
+  the \de{induced class function} on \(G\) by \[
+    \Ind_H^G(\phi)(g) := \sum_{s \in G/H} \tilde{\phi}(s^{-1}gs) = \frac{1}{|H|}\sum_{t \in
+    G} \tilde{\phi}(t^{-1}gt)
+  \]
+  where \[
+    \tilde{\phi}(g) =
+    \begin{cases}
+      \phi(g) & g \in H \\
+      0 & \text{else}
+    \end{cases}
+  \]
+\end{defn}
+\begin{prop}
+  Given \(\phi \in \Class(H)\) for \(H \subgroup G\), we get
+  \(\Ind_H^G(\phi) \in \Class(G)\).
+\end{prop}
+\begin{proof}
+  Let \(g,k \in G\), then \[
+    \Ind_H^G(\phi)(k^{-1}gk) = \frac{1}{|H|} \sum_{t \in G}
+    \tilde{\phi}(t^{-1}k^{-1}gkt) = \frac{1}{|H|} \sum_{t' \in G}
+    \phi(t'^{-1}gt') = \Ind_H^G(\phi)(g)
+  \]
+\end{proof}
+\begin{thm}[The Mackey formula]
+  The character of the induced representation \(\Ind_H^G V\) is \(\Ind_H^G(\chi_V)\).
+\end{thm}
+\begin{proof}
+  We seek to directly compute the trace of the action of \(s \in
+  G\) on \(\Ind_H^G V \isom \bigoplus_{g \in G/H} g.V\). Consider that
+  \(sgH = gH \iff g^{-1}sg = t \in H\). We only 
+  consider such cosets since all others will not contribute to the
+  trace.  On \(g.V\), we
+  get \[
+    s. (e_g \otimes v) = e_{sg}
+    \otimes v = e_{gt} \otimes v = e_g \otimes \rho(t)w
+  \]
+  so the action of \(s\) on \(g.V\) corresponds to the action of \(t =
+  g^{-1}sg\) on \(V\). Thus, the block corresponding to \(g.V\)
+  contributes \(\chi_V(g^{-1}sg)\) to the trace of \(\rho_{\Ind_H^G
+    V}(s)\). Thus, summing over all such \(g\), we get \[
+    \chi_{\Ind_H^G \rho}(s) = \sum_{g \in G/H, g^{-1}sg \in H}
+      \chi_V(g^{-1}sg) = \sum_{g \in G/H} \tilde{\chi_V}(g^{-1}sg) = \Ind_H^G(\chi_V)(s)
+  \]
+\end{proof}
+\section{Frobenius Reciprocity}
 \begin{bibdiv}
   \begin{biblist}
     \bib{cr}{book}{
@@ -1102,6 +1273,12 @@ better, namely
       title={Groups and their Representations}
       year={2010}
       note={\url{http://www.math.lsa.umich.edu/~kesmith/rep.pdf}}
+    }
+    \bib{ct}{article}{
+      author={Teleman, Constantin}
+      title={Representation Theory}
+      year={2005}
+      note={\url{https://math.berkeley.edu/~teleman/math/RepThry.pdf}}
     }
   \end{biblist}
 \end{bibdiv}
