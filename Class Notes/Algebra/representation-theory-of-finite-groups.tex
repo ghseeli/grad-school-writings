@@ -489,6 +489,10 @@ they are needed.
 % \begin{prop}
 %   \(\chi_V \from Z(G) \to \C\) is a homomorphism.
 % \end{prop}
+\begin{rmk}
+  The construction of the \(\Hom\) representation more generally comes
+  from the \emph{Hopf algebra} structure on \(\C[G]\). 
+\end{rmk}
 \section{Character Theory}
 Throughout this section, let \(G\) be a finite group and \(F =
 \C\). We wish to extend the notion of the central character above to a
@@ -1229,6 +1233,185 @@ a representation of \(G\)? We present the following
   \]
 \end{proof}
 \section{Frobenius Reciprocity}
+We seek to find relationships between \(\Ind\) and \(\Res\) since
+\(\Res\) is much easier to compute than \(\Ind\). By far the most
+important one is Frobenius reciprocity.
+\begin{thm}[Frobenius Reciprocity]
+  Let \(H \subgroup G\), a finite group. Then, for \(\phi \in
+  \Class(G)\) and \(\psi \in \Class(H)\), we have \[
+    (\Ind_H^G \psi, \phi) = (\psi, \Res_H^G \phi)
+  \]
+  which is to say, \(\Ind_H^G\) and \(\Res_H^G\) are Hermetian adjoint.
+\end{thm}
+\begin{lem}
+  Given \(M\) an \(R\)-module and \(N\) an \(S\)-module and ring
+  homomorphism \(f \from R \to S\) for \(R,S\) (unital) rings, then \[
+    \Hom_{R}(M,N) \isom \Hom_{S}(S \otimes_{R} M, N)
+  \]
+  where \(N\) is considered as an \(R\) module via \(r.n = f(r)n\)
+  (that is, the restriction of scalars).
+\end{lem}
+\begin{proof}[Proof of Lemma]
+  Given \(u \in \Hom_R(M,N)\), let \(F \from \Hom_R(M,N) \to \Hom_S(S
+  \otimes_R M,N)\) be defined by sending \(u\) to the composition
+  \begin{align*}
+    S \otimes_R M \to[id_S \otimes u] S \otimes_R N & \to N \\
+    s \otimes n &\mapsto sn
+  \end{align*}
+  Then, \(F(u)\) is an \(S\)-module homomorphism and so \(F\) is
+  well-defined and a homomorphism of abelian groups. We now construct
+  and inverse to \(F\). Let \(G \from \Hom_S(S \otimes_R M, N) \to
+  \Hom_R(M,N)\) be defined by sending \(v \in \Hom_S(S \otimes_R M,
+  N)\) to the composition
+  \begin{align*}
+    M & \to R \otimes_R M \to[f \otimes id_M] S \otimes_R M \to[v] N
+    \\
+    m & \mapsto 1 \otimes m
+  \end{align*}
+  One can check that \(F,G\) are inverse to each other.
+\end{proof}
+\begin{rmk}
+  One can also check that this isomorphism depends only on the ring homomorphism
+  \(f\). Thus, such an isomorphism is functorial and so the extensions
+  of scalars, \(S \otimes -\), is left adjoint to the restriction of
+  scalars functor.
+\end{rmk}
+\begin{proof}[Proof of Frobenius Reciprocity]
+  Frobenius reciprocity ends up being a special case of the
+  lemma. That is,
+  \begin{align*}
+    (\Ind_H^G \chi_V, \chi_W)
+    & = \dim \Hom_G(\C[G] \otimes_{\C[H]} V,
+      W) & \text{by }\ref{orthonormal}\\
+    & = \dim \Hom_H(V,W) & \text{by lemma} \\
+    & = (\chi_V, \Res_H^G \chi_W)
+  \end{align*}
+\end{proof}
+Frobenius reciprocity is useful for computing various representations
+of groups from representations of their subgroups.
+\begin{example}
+  Consider \(\Z/2\Z \isom \langle (12) \rangle \subgroup
+  \Sym_3\). Then, \(\Z/2\Z\) has two irreducible 1-dimensional
+  characters, let us say \(\chi_1\) and \(\chi_{-1}\). Then,
+  \((\Ind_{\Z/2\Z}^{\Sym_3} \chi_1, \chi_V) = (\chi_1,
+  \Res_{\Z/2\Z}^{\Sym_3} \chi_V)\) for any irreducible representation
+  \(V\) of \(\Sym_3\). Thus,
+  \begin{align*}
+    (\Ind_{\Z/2\Z}^{\Sym_3} \chi_1, \chi_{trivial}) & = (\chi_1,
+    \Res_{\Z/2\Z}^{\Sym_3} \chi_{trivial}) = (\chi_1, \chi_1) = 1 \\
+    (\Ind_{\Z/2\Z}^{\Sym_3} \chi_1, \chi_{alt}) & = (\chi_1,
+    \Res_{\Z/2\Z}^{\Sym_3} \chi_{alt}) = (\chi_1, \chi_{-1}) = 0 \\
+    (\Ind_{\Z/2\Z}^{\Sym_3} \chi_1, \chi_{std}) & = (\chi_1,
+  \Res_{\Z/2\Z}^{\Sym_3} \chi_{std})  = (\chi_1, \chi_1 + \chi_{-1}) =
+    1 \\
+    (\Ind_{\Z/2\Z}^{\Sym_3} \chi_{-1}, \chi_{trivial}) & = (\chi_{-1},
+    \Res_{\Z/2\Z}^{\Sym_3} \chi_{trivial}) = (\chi_{-1}, \chi_1) = 0 \\
+    (\Ind_{\Z/2\Z}^{\Sym_3} \chi_{-1}, \chi_{alt}) & = (\chi_{-1},
+    \Res_{\Z/2\Z}^{\Sym_3} \chi_{alt}) = (\chi_{-1}, \chi_{-1}) = 1 \\
+    (\Ind_{\Z/2\Z}^{\Sym_3} \chi_{-1}, \chi_{std}) & = (\chi_{-1},
+  \Res_{\Z/2\Z}^{\Sym_3} \chi_{std}) = (\chi_{-1}, \chi_1 + \chi_{-1}) =
+    1
+  \end{align*}
+  Thus, \(\Ind_{\Z/2\Z}^{\Sym_3} \chi_1 = \chi_{trivial} +
+  \chi_{std}\) and \(\Ind_{\Z/2\Z}^{\Sym_3} \chi_{-1} = \chi_{alt} + \chi_{std}\).
+\end{example}
+\section{Artin's Theorem}
+Artin's theorem allows us to gain more insight into how induced
+characters or representations may be related to the irreducible
+representations of a finite group.
+\begin{defn}
+  Let \(G\) be a finite group. A \de{virtual representation} of \(G\)
+  is an integer linear combination of irreducible representations of
+  \(G\). 
+\end{defn}
+\begin{prop}
+  Let \(V\) be an virtual representation with character \(\chi_V\). If
+  \((\chi_V,\chi_V)=1\) and \(\chi_V(1) > 0\), then \(\chi_V\) is a
+  character of an irreducible representation of \(G\).
+\end{prop}
+\begin{proof}
+  Let \(V = \sum n_i V_i\) for irreducible representations \(V_i\) and
+  \(n_i \in \Z\). Then, using the fact that the irreducible characters
+  form an orthonomal basis, we get \(1 = (\chi_V,\chi_V) = \sum
+  n_i^2\). Thus, \(n_i = \pm 1\) for one \(i\) and \(0\)
+  otherwise. However, \(\chi_V(1) > 0\) by assumption, so \(n_i = 1\).
+\end{proof}
+\begin{thm}[Artin's theorem]
+  Let \(X\) be a conjugation-invariant family of subgroups of a finite
+  group \(G\). Then, the following are equivalent.
+  \begin{enumerate}
+  \item Any element of \(G\) belongs to a subgroup \(H \in X\), that
+    is, \(G = \Union_{H \in X} H\).
+  \item The character of any irreducible representation of \(G\)
+    belongs to the \(\Q\)-span of characters of induced
+    representations \(\Ind_H^G V\) where \(H \in X\) and \(V\) is an
+    irreducible representation of \(H\). 
+  \end{enumerate}
+\end{thm}
+\begin{rmk}
+  Part (b) is equivalent to the statement that \(\coker \Ind\) is a
+  finite group where \(\Ind\) is defined by
+  \begin{align*}
+    \Ind \from \bigoplus_{H \in X} R(H) & \to R(G) \\
+    (\theta_H)_{H \in X} & \mapsto \sum_{H \in X} \Ind_H^G \theta_H
+  \end{align*}
+  For \(R(H)\) the ring of virtual characters of \(H\) and \(R(G)\)
+  similarly defined. In fact, this map can be represented by a
+  matrix \[
+    \Ind = \left[ (W_i, \Ind_H^G V_{H,j}) \right]
+  \]
+  where \(W_i\) ranges over all irreducible representations of \(G\)
+  and \(V_{H,j}\) ranges over all irreducible representations of \(H\)
+  for al \(H \in X\). Thus, the cokernel is a finite group if and only
+  if the rows of this matrix are linearly independent.
+\end{rmk}
+\begin{proof}
+  For \((b) \implies (a)\), let \(S = \Union_{H \in X} H\). Then, take
+  \(g \in G \setminus S\). Since \(S\) is conjugation invariant, no
+  conjugate of \(g\) is in \(S\). So, by the Mackey formula,
+  \(\chi_{\Ind_H^G V}(g) = 0\) for all \(H \in X\) and \(V\). Thus,
+  by assumption, for any irreducible representation \(W\) of \(G\) is
+  a \(\Q\)-span of characters of induced representations, so
+  \(\chi_W(g) = 0\). However, irreducible characters also span the
+  class functions, so this would mean that any class function would
+  vanish of \(g\), a contradiction. \\
+
+  For \((a) \implies (b)\), let \(U\) be a virtual representation of
+  \(G\) such that \((\chi_U, \chi_{\Ind_H^G V}) = 0\) for all \(H\)
+  and \(V\). Then, by Frobenius reciprocity, we get \((\chi_{\Res_H^G
+    U}, \chi_V) = 0\). Thus, \(\chi_U\) vanishes on \(H\) for any \(H
+  \in X\) and so \(\chi_U \identically 0\). \todo{Expand on this}
+\end{proof}
+\begin{cor}
+  Any irreducible character of a finite group is a rational linear
+  combination of induced characters from its cyclic subgroups.
+\end{cor}
+\begin{example}
+  Let \(G = A_4\). Then, \(|A_4| = 12\). Let \(H = \langle 1,
+  (123),(321) \rangle\), \(K = \langle 1, (12)(34) \rangle\). Then,
+  given characters of \(A_4\), \(\chi_1, \chi_{\zeta},
+  \chi_{\zeta^2}\), and \(\theta\), characters of \(H\), \(\chi_1,
+  \chi_{\zeta}, \chi_{\zeta^2}\), and characters of \(K\), \(\chi_1,
+  \chi_{-1}\), one can use Frobenius reciprocity 
+  to check
+  \begin{align*}
+    \Ind_H^G \chi_1 & = \chi_1 + \theta \\
+    \Ind_H^G \chi_{\zeta} & = \chi_{\zeta} + \theta \\
+    \Ind_H^G \chi_{\zeta^2} & = \chi_{\zeta^2} + \theta \\
+    \Ind_K^G \chi_1 & = \chi_1 + \chi_{\zeta} + \chi_{\zeta^2} + \theta \\
+    \Ind_K^G \chi_{-1} & = 2 \theta
+  \end{align*}
+  and so
+  \begin{align*}
+    \chi_1 & = \Ind_H^G \chi_1 - \frac{1}{2} \Ind_K^G \chi_{-1} \\
+    \chi_\zeta & = \Ind_H^G \chi_\zeta - \frac{1}{2} \Ind_K^G
+                 \chi_{-1} \\
+    \chi_{\zeta^2} & = \Ind_H^G \chi_{\zeta^2} - \frac{1}{2} \Ind_K^G
+                     \chi_{-1} \\
+    \theta & = \frac{1}{2} \Ind_K^G \chi_{-1}
+  \end{align*}
+  Thus, \(A_4 = \Union_{g \in A_4} gHg^{-1} \union \Union_{g \in A_4} gKg^{-1}\).
+\end{example}
 \begin{bibdiv}
   \begin{biblist}
     \bib{cr}{book}{
