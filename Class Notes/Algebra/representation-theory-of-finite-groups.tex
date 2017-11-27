@@ -12,6 +12,7 @@
 \newcommand{\Class}{\operatorname{Class}}
 \newcommand{\Res}{\operatorname{Res}}
 \newcommand{\Ind}{\operatorname{Ind}}
+\newcommand{\bs}{\textbackslash}
 
 \numberwithin{thm}{section}
 
@@ -1315,6 +1316,58 @@ of groups from representations of their subgroups.
   Thus, \(\Ind_{\Z/2\Z}^{\Sym_3} \chi_1 = \chi_{trivial} +
   \chi_{std}\) and \(\Ind_{\Z/2\Z}^{\Sym_3} \chi_{-1} = \chi_{alt} + \chi_{std}\).
 \end{example}
+\section{Mackey Theory}
+To gain more insight into induced representations, we wish to
+understand \(\Res_K^G \Ind_H^G V\) for \(H,K \subgroup G\) and \(V\) a
+representation of \(G\). To describe our results, we will need the
+language of double cosets.
+\begin{defn}
+  Let \(H,K \subgroup G\), a group. The set of \de{double cosets}
+  \(K\bs G /H\) is the set of \(K \times H\)-orbits on
+  \(G\) where \((k,h).g = kgh\). Often, elements of such a set are
+  denoted \(KgH\) for \(g \in G\), a representative.
+\end{defn}
+\begin{rmk}
+  If \(K=H \normsubgroup G\), then \(K \bs G / H = G/H\). Also note
+  that there are other definitions of double cosets.
+\end{rmk}
+\begin{defn}
+  Following \cite{serre}, for \(H,K \subgroup G\) and \(s \in S\), a set
+  of double-coset representatives, let \[
+    H_s := sHs^{-1} \intersect K \subgroup K
+  \]
+  and let \[
+    \rho_s(x) := \rho(s^{-1}xs), \ x \in H_s
+  \]
+  be a representation of \(H_s\).
+\end{defn}
+\begin{rmk}
+  Note that \(H_s\) is the stabilizer of \(sH\) under the action of
+  \(K\) on \(G/H\). Furthermore, if one embeds \(H_s \into H\) via \(x
+  \mapsto s^{-1}xs\), then \(\im H_s\) is the stabiliser of \(Ks\)
+  under the action of \(H\) on \(H \bs G\).
+\end{rmk}
+\begin{prop}
+  Given \(S\), a set of double coset representatives for \(K \bs G /
+  H\), then \[
+    \Res_K^G \Ind_H^G V \isom \bigoplus_{s \in S} \Ind_{H_s}^K V_s
+  \]
+\end{prop}
+\begin{proof}
+  
+\end{proof}
+\begin{thm}[Mackey's Irreducibility Criterion]
+  \(\Ind_H^G V\) is irreducible if and only if
+  \begin{enumerate}
+  \item \(V\) is irreducible and
+  \item \(V_s\) and \(\Res_{H_s}^H V\) are irreducible for all \(s \in
+    S\), a set of double coset representatives of \(K \bs G / H\).
+  \end{enumerate}
+\end{thm}
+\begin{cor}
+  If \(H \normsubgroup G\), then \(\Ind_H^G V\) is irreducible if and
+  only if \(V\) is irreducible and \(V \not \isom V_s\) for all \(s \in G/H\)
+\end{cor}
 \section{Artin's Theorem}
 Artin's theorem allows us to gain more insight into how induced
 characters or representations may be related to the irreducible
