@@ -187,7 +187,6 @@ language in \cite{aw}.
   a vector space over \(\C e_1\) and then view the action of each
   \(e_g\) as an invertible linear transformation on this vector space.
 \end{proof}
-
 \begin{defn}
   We say two representations \(\rho, \rho' \from G \to GL(V)\) are
   \de{similar} or \de{isomorphic} if 
@@ -388,7 +387,19 @@ theory.
     so \(v\) and \(\tau v\) have distinct eigenvalues and thus they
     are linearly independent. Thus, \(\Span\{v,\tau v\}\) defines an
     irreducible, \(2\)-dimensional representation. This is called the
-    \de{standard representation}.
+    \de{standard representation}. Explicitly, it is given by \[
+      \tau \mapsto \left(
+        \begin{array}{cc}
+          0&1\\
+          1&0
+        \end{array}
+\right), \ \sigma \mapsto \left(
+  \begin{array}{cc}
+    \zeta_3&0\\
+    0&\zeta_3^2
+  \end{array}
+\right)
+    \]
   \item Let \(\lambda = 1\) and \(\tau v = -v\). Then, \(\Span\{v\}\)
     is an irreducible \(1\)-dimensional representation, but it is
     distinct from the trivial representation. It is called the
@@ -399,6 +410,43 @@ theory.
   Thus, we have found \(3\) irreducible representations of
   \(\Sym_3\).
 \end{example}
+\begin{defn}
+  We say a representation \(\rho \from G \to GL(V)\) is \de{faithful}
+  if \(\ker \rho = \{1\}\).
+\end{defn}
+\begin{prop}\label{quotient-rep}
+  Given a representation \(\rho \from G \to GL(V)\) and a normal
+  subgroup \(H \normsubgroup G\) such that \(\rho\) acts trivially on
+  \(H\), (that is, \(\rho(H) = \{Id_V\}\)), \(\rho\) can descend to a
+  representation of \(G/H\), say \(\ov{\rho}\), via \[
+    \ov{\rho}(gH) = \rho(g)
+  \]
+\end{prop}
+\begin{proof}
+  We must check that such an action is well defined. Let \(g,g' \in
+  gH\). Then, \(g = hg'\) so \[
+    \ov{\rho}(gH) = \rho(g) = \rho(hg') = \rho(h)\rho(g') = \rho(g') = \ov{\rho}(g'H)
+  \]
+\end{proof}
+\begin{prop}
+  Given representation \(\rho \from G \to GL(V)\), we have that
+  \(\ov{\rho} \from G/\ker \rho \to GL(V)\) is faithful.
+\end{prop}
+\begin{prop}\label{lifted-rep}
+  Let \(\rho \from G/H \to GL(V)\) be a representation of \(G/H\) for \(H
+  \normsubgroup G\). Then, we can lift \(\rho\) to a representation of
+  \(G\), say \(\tilde{\rho}\), via \[
+    \tilde{\rho}(g) = \rho(gH)
+  \]
+  Furthermore, if \(\rho\) is a faitful representation of \(G/H\), then
+  \(\ker \tilde{\rho} = H\).
+\end{prop}
+\begin{proof}
+  This construction is immediately well defined. If \(\rho\) is
+  faithful, then we note that \[
+    \tilde{\rho}(g) = Id \iff \rho(gH) = Id \iff gH = H
+  \]
+\end{proof}
 \section{The Regular Representation}
 One of the most important representations is the regular
 representation. Later, we will see that every irreducible
@@ -758,7 +806,7 @@ have the following theorem
   the number of irreducible representations of \(G\). Thus, these two
   quantities are equal.
 \end{proof}
-\begin{thm}
+\begin{thm}\label{2nd-ortho-reln}
   Let \(g \in G\) and \(C(g)\) be the number of elements in the
   conjugacy class of \(g\). Then,
   \begin{enumerate}
@@ -767,6 +815,9 @@ have the following theorem
     conjugate to \(h\).
   \end{enumerate}
 \end{thm}
+\begin{rmk}\label{sum-of-squares-is-ord-G}
+  In particular, \(\sum_{i=1}^d \ov{\chi_i}(1)\chi_i(1) = |G|\).
+\end{rmk}
 \begin{proof}
   Using \(f_g \in \Class(G)\) as above, write \[
     f_g = \sum_{i=1}^k \lambda_i \chi_i, \lambda_i \in \C
@@ -778,7 +829,7 @@ have the following theorem
   \]
   Thus, by definition of \(f_g(h)\), the identities in the theorem are proved.
 \end{proof}
-\begin{example}
+\begin{example}\label{char-table-for-S3}
   Let \(G = \Sym_3\). We know that \(\Sym_3\) has \(3\) conjugacy
   classes given by cycle type. Thus, \(\Sym_3\) has \(3\) distinct
   irreducible characters, denoted \(\chi_1, \chi_2\), and \(\theta\)
@@ -826,11 +877,110 @@ have the following theorem
   \]
 \end{example}
 \section{Results of Character Theory}
+Now, we wish to use character theory to tell us more about
+representations of a group. 
+\begin{prop}
+  Let \(H \normsubgroup G\) and let \(\rho \from G/H \to GL(V)\) be a
+  representation. Then, \(\rho\) is irreducible if and only if its
+  lifted representation to \(G\), \(\tilde{\rho}\), is
+  irreducible. (See \ref{lifted-rep} for a reminder of how a lifted
+  representation is constructed.)
+\end{prop}
+\begin{proof}
+  We first note that \[
+    \tr(\tilde{\rho}(g)) = \tr(\rho(gN))
+  \]
+  by definition of \(\tilde{\rho}\). Thus, if \(\chi\) is the
+  character of \(\tilde{\rho}\) and \(\chi'\) is the character of
+  \(\rho\), then \(\chi(g) = \chi'(gH)\). Now, we compute
+  \begin{align*}
+    (\chi', \chi') & = \frac{1}{|G/H|} \sum_{gH \in G/H} \chi'(gH)
+                     \ov{\chi'}(gH) \\
+                   & = \frac{|H|}{|G|} \sum_{gH \in G/H} \chi(g) \ov{\chi(g)} \\
+    & = \frac{1}{|G|} \sum_{gH \in G/H} \sum_{h \in H} \chi(gh)
+      \ov{\chi(gh)} \\
+                   & = \frac{1}{|G|} \sum_{g \in G} \chi(g) \ov{\chi(g)} \\
+    & = (\chi, \chi)
+  \end{align*}
+\end{proof}
+\begin{example}
+  Let \(G = A_4\). Then, \(|A_4| = 12\) and \(A_4\) has \(4\)
+  conjugacy classes given by \[
+    C_1 = \{(1)\}, C_2 = \{(123), \ldots\}, C_3 = \{(132), \ldots\},
+    C_4 = \{(12)(34), \ldots\}
+  \]
+  and thus must have \(4\) irreducible characters, say \(\chi_1,
+  \chi_2, \chi_3, \chi_4\), and let \(\chi_1\) be the trivial
+  representation.
+  
+  Now, consider that \(C_4\) is also a normal subgroup of \(A_4\)
+  isomorphic to \(\Z/2\Z \times \Z/2\Z\), so
+  we can find irreducible representations of \(A_4/C_4 \isom \Z/3\Z\), we could
+  lift them to irreducible representations of \(A_4\) by the
+  proposition above. Since \(\Z/3\Z\) is
+  abelian, it immediately gives character table \[
+    \begin{array}{c|ccc}
+      & (1) & (123) & (132) \\
+      \hline
+      \chi_1 & 1 & 1 & 1 \\
+      \chi_{\zeta_3} & 1 & \zeta_3 & \zeta_3^2 \\
+      \chi_{\zeta_3^2} & 1 & \zeta_3^2 & \zeta_3
+    \end{array}
+  \]
+  Of course, the trivial representation with character \(\chi_1\) lifts to a trivial
+  representation of \(A_4\). However, the lifted representation \(\tilde{\rho_{\zeta_3}}\) and \(\tilde{\rho_{\zeta_3^2}}\) will
+  be irreducible by the proposition above and thus give us irreducible
+  characters of \(A_4\). It is immediate that, up to reordering,
+  \(\chi_2 = \tilde{\rho_{\zeta_3}}\) and \(\chi_3 =
+  \tilde{\rho_{\zeta_3^2}}\), so we now fill in the rows of our
+  character table to get \[
+    \begin{array}{c|cccc}
+      &C_1&C_2&C_3&C_4 \\
+      \hline
+      \chi_1 & 1 & 1 & 1 & 1\\
+      \chi_2 & 1 & \zeta_3 & \zeta_3^2 & 1\\
+      \chi_3 & 1 & \zeta_3^2 & \zeta_3 & 1\\
+      \chi_4 & a & b & c & d 
+    \end{array}
+  \]
+  However, we know that \[
+    1^2 + 1^2 + 1^2 +a^2 = 12 \implies a = \pm 3
+  \]
+    by \ref{sum-of-squares-is-ord-G} and \(a = \chi_4(1) = \dim V\) for \(V\) the corresponding vector
+  space of \(\rho_4\). Thus \(a > 0 \implies a = 3\). Furthermore,
+ \[
+    1^2 + 1^2 + 1^2 + ad = 0 \implies ad = -3 \implies d = -1
+  \]
+  by \ref{2nd-ortho-reln}.
+  Now, we can use our orthogonality relations to determine
+  \(\chi_4\). Using the orthongality of rows (\ref{orthonormal}), we get \[
+    \begin{cases}
+      (\chi_4,\chi_1) = 3 + 4b+4c-3\cdot1 = 0\\
+      (\chi_4,\chi_2) = 3+4b\zeta_3^2+4c\zeta_3-3\cdot1 = 0\\
+      (\chi_4,\chi_3) = 3+4b\zeta_3+4c\zeta_3^2-3\cdot1 = 0\\
+    \end{cases}
+    \implies
+    \begin{cases}
+      b = 0 \\
+      c = 0\\
+    \end{cases}
+  \]
+  Thus, our completed character table is given by \[
+    \begin{array}{c|cccc}
+      &C_1&C_2&C_3&C_4 \\
+      \hline
+      \chi_1 & 1 & 1 & 1 & 1\\
+      \chi_2 & 1 & \zeta_3 & \zeta_3^2 & 1\\
+      \chi_3 & 1 & \zeta_3^2 & \zeta_3 & 1\\
+      \chi_4 & 3 & 0 & 0 & -1
+    \end{array}
+  \]
+\end{example}
 Perhaps the most important reason to study character theory is the
 following theorem.
 \begin{cor}
   The multiplicity of an irreducible representation \(W\) in a
-  representation \(V\) is \(\chi_W, \chi_V\). 
+  representation \(V\) is \((\chi_W, \chi_V)\). 
 \end{cor}
 \begin{proof}
   Let \(V \isom W_1^{m_1} \oplus \cdots \oplus W_k^{m_k}\) be a
@@ -1201,6 +1351,40 @@ a representation of \(G\)? We present the following
     \end{cases}
   \]
 \end{defn}
+\begin{example}
+  Let \(G = \Sym_3\) and consider \(H = \Z/3\Z \isom \{(1),(123),(132)\} \normsubgroup
+  \Sym_3\). Then, since \(\Z/3\Z\) is abelian, it has character
+  table \[
+    \begin{array}{c|ccc}
+      & (1) & (123) & (132) \\
+      \hline
+      \chi_1 & 1 & 1 & 1 \\
+      \chi_{\zeta} & 1 & \zeta & \zeta^2 \\
+      \chi_{\zeta^2} & 1 & \zeta^2 & \zeta
+    \end{array}
+  \]
+  where \(\zeta = \zeta_3\), a third root of unity, since \(g^3 = 1\)
+  for all \(g \in \Z/3\Z\). We also have, from earlier, the
+  irreducible characters of \(\Sym_3\) as \(\chi_1,\chi_2,\theta\)
+  (see \ref{char-table-for-S3}). 
+  Then, using the fact that \(H\) is normal and \(G/H = \{H, (12)H\}\),
+  we see that
+  \begin{align*}
+    \Ind_H^G(\chi)(h) & = \chi(h) + \chi((12)h(12)) & \forall h \in H
+    \\
+    & = \chi(h) + \ov{\chi(h)} & \text{ since }(12)(123)(12) = (132)\\
+    \Ind_H^G(\chi)((12)) & = \tilde{\chi}((12)) +
+                             \tilde{\chi}((12)(12)(12)) \\
+    & = 0
+  \end{align*}
+  And thus
+  \begin{align*}
+    \Ind_H^G(\chi_1) & = \chi_1 + \chi_2 \\
+    \Ind_H^G(\chi_\zeta) & = \theta \\
+    \Ind_H^G(\chi_{\zeta^2}) & = \theta
+  \end{align*}
+  since \(\zeta + \zeta^2 = -1\).
+\end{example}
 \begin{prop}
   Given \(\phi \in \Class(H)\) for \(H \subgroup G\), we get
   \(\Ind_H^G(\phi) \in \Class(G)\).
@@ -1233,6 +1417,10 @@ a representation of \(G\)? We present the following
       \chi_V(g^{-1}sg) = \sum_{g \in G/H} \tilde{\chi_V}(g^{-1}sg) = \Ind_H^G(\chi_V)(s)
   \]
 \end{proof}
+\begin{example}
+  Thus, from our example above, this actually tells us the
+  decomposition of the induced representations of \(\Sym_3\) from \(\Z/3\Z\).
+\end{example}
 \section{Frobenius Reciprocity}
 We seek to find relationships between \(\Ind\) and \(\Res\) since
 \(\Res\) is much easier to compute than \(\Ind\). By far the most
