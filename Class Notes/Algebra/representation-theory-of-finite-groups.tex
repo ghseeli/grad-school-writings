@@ -1277,7 +1277,7 @@ a representation of \(G\)? We present the following
     = \sum_{i=1}^k g_{\sigma(i)} \rho(h_i) v_i
   \]
 \end{defn}
-\begin{prop}
+\begin{prop}\label{ind-is-tensor}
   Given a representation \(\rho \from H \to GL(V)\) and \(H \subgroup
   G\), we have that \[
     \Ind_H^G V \isom \C[G] \otimes_{\C[H]} V
@@ -1524,10 +1524,15 @@ language of double cosets.
   of double-coset representatives, let \[
     H_s := sHs^{-1} \intersect K \subgroup K
   \]
-  and let \[
-    \rho_s(x) := \rho(s^{-1}xs), \ x \in H_s
+  and, given representation \(\rho \from H \to GL(V)\), let \(\rho_s
+  \from H_s \to GL(V_s)\) given by \[ 
+    \rho_s(x) := \rho(s^{-1}xs)
   \]
-  be a representation of \(H_s\).
+  be a representation of \(H_s\). In other words, \(V_s \isom s
+  \otimes V\) with action of \(H_s\) given by \[
+    (shs^{-1})(s \otimes v) = s \otimes hv
+  \]
+
 \end{defn}
 \begin{rmk}
   Note that \(H_s\) is the stabilizer of \(sH\) under the action of
@@ -1542,7 +1547,25 @@ language of double cosets.
   \]
 \end{prop}
 \begin{proof}
-  
+  Let us consider \(\C[G]\) as a \((\C[K], \C[H])\)-bimodule. Then, \[
+    \C[G] \isom \bigoplus_{s \in S} \C[KsH]
+  \]
+  Note, too, this viewpoint gives the isomorphism as \((\C[K],\C[H])\)-bimodules
+  \begin{align*}
+    \C[KsH] & \isom \C[K] \otimes_{\C[H_s]} (s \otimes \C[H]) \\
+    ksh & \mapsto k \otimes s \otimes h
+  \end{align*}
+  Thus, using this decomposition, we get the following isomorphisms of \(\C[K]\)-modules
+  \begin{align*}
+    \Res_K^G \Ind_H^G V & \isom \Res_K^G \left( \C[G] \otimes_{\C[H]}
+                          V \right) \\
+                        & \isom \bigoplus_{s \in S} \C[KsH] \otimes_{\C[H]} V \\
+    & \isom \bigoplus_{s \in S} \C[K] \otimes_{\C[H_s]} (s
+      \otimes \C[H] ) \otimes_{\C[H]} V \\
+    & \isom \bigoplus_{s \in S} \C[K] \otimes_{\C[H_s]}
+      V_s \\
+    & \isom \bigoplus_{s \in S} \Ind_{H_s}^K V_s 
+  \end{align*}  
 \end{proof}
 \begin{thm}[Mackey's Irreducibility Criterion]
   \(\Ind_H^G V\) is irreducible if and only if
@@ -1556,6 +1579,73 @@ language of double cosets.
   If \(H \normsubgroup G\), then \(\Ind_H^G V\) is irreducible if and
   only if \(V\) is irreducible and \(V \not \isom V_s\) for all \(s \in G/H\)
 \end{cor}
+\section{Representations of Nilpotent Groups}
+\begin{thm}
+  Given an irreducible representation of a nilpotent group \(G\), it is induced
+  from a one-dimensional representation of some subgroup \(H \subgroup G\).
+\end{thm}
+\begin{rmk}
+  This is a specific case of Brauer's theorem (see
+  \ref{brauers-thm}). We will probe this theorem using the program
+  given in \cite{ct}.
+\end{rmk}
+\begin{lem}
+  Given finite group \(G\) with \(N \normsubgroup G\) and irreducible
+  representation \(V\), then \(V = \Ind_H^G W\) for some \(N \subgroup H
+  \subgroup G\) and \(\Res_N^H W \isom U^{\oplus r}\) for \(U\) an irreducible
+  representation of \(N\), \(r \in \N\).
+\end{lem}
+\begin{proof}
+  Let \(\Res_N^G V = \bigoplus_i V_i\) for \(V_i\) irreducible \(N\)
+  representations. If there is a single summand, then \(H=G\) and we
+  are done. Otherwise, given \(\rho \from N \to GL(V)\), note that
+  \(\rho_s(n) := \rho(s^{-1}ns)\) for \(n \in N\), \(s \in G\) will
+  permute the summands of \(\Res_N^G V\) since conjugation defines an
+  automorphism of the normal subgroup \(N\), and so must permute the
+  irreducible characters of \(N\). Thus, this conjugation action gives
+  us an isomorphism of \(N\)-representations. Furthermore, this
+  permutation action by \(G\) must be transitive since we assumed that \(V\)
+  has no \(G\)-invariant subspaces and so each non-zero \(V_i\) has
+  the same dimension. \\
+
+  Now choose a non-zero block \(V_k\) and let \(H =
+  \Stab_G(V_k)\). Then, it must be that \(\dim V = \frac{|G|}{|H|}
+  \dim V_k = \dim \Ind_H^G V_k\) by the orbit-stabilizer theorem. Furthermore, we get \[
+    \dim \Hom_G(\Ind_H^G V_k, V) = \dim \Hom_H(V_k, \Res_H^G V) \geq 1
+  \]
+  Thus, since \(V\) is irreducible as a \(G\)-representation and
+  \(\dim V = \dim \Ind_H^G V_k\), it must be that \[
+    (\Ind_H^G V_k, V) = \dim \Hom_G(\Ind_H^G V_k, V) = 1
+  \]
+  and so \(V = \Ind_H^G V_k\).
+\end{proof}
+\begin{cor}
+  If \(N \normsubgroup G\) is abelian, then either its action on \(V\)
+  is a scalar or \(V = \Ind_H^G W\) for some proper subgroup \(H
+  \propsubgroup G\).
+\end{cor}
+We will also use the following (standard) group theory fact.
+\begin{lem}
+  If \(G\) is nilpotent, then it contains a characteristic, abelian, non-central
+  subgroup.
+\end{lem}
+\begin{proof}[Proof of Theorem]
+Let \(\rho \from G \to GL(V)\) be an irreducible representation of a
+nilpotent group \(G\). Then, \(G/\ker \rho\) is nilpotent. If \(G/\ker
+\rho\) is abelian, then \(\ov{\rho} \from G/\ker \rho \to GL(V)\) is
+one-dimensional and so \(\rho \from G \to GL(V)\) must be as
+well. Otherwise, take \(A \normsubgroup G/\ker \rho\) to be a
+characteristic, abelian, and non-central subgroup given by the lemma
+above. Then, for non-central element \(a \in A\), \(\ov{\rho}(a)\)
+cannot be a scalar.
+
+Thus, from the corollary above, there is a proper subgroup \(H
+\propsubgroup G\) with a representation \(\rho' \from H/\ker \rho \to
+GL(W)\) such that \(\ov{\rho} = \Ind_{H/\ker \rho}^{G/\ker \rho} \rho'
+= \Ind_H^G \tilde{\rho'}\) where \(\tilde{\rho'} \from H \to GL(W)\)
+is a lift of \(\rho'\). Since \(H\) is also nilpotent, we can repeat
+this argument until we find a \(1\)-dimensional representation \(\rho'\).
+\end{proof}
 \section{Artin's Theorem}
 Artin's theorem allows us to gain more insight into how induced
 characters or representations may be related to the irreducible
@@ -1653,8 +1743,47 @@ representations of a finite group.
   \end{align*}
   Thus, \(A_4 = \Union_{g \in A_4} gHg^{-1} \union \Union_{g \in A_4} gKg^{-1}\).
 \end{example}
+\section{Brauer's Theorem}
+While Artin's theorem gives us a way to write characters as a rational
+linear combination of characters induced from cyclic subgroups, the
+use of the rational numbers leaves something to be desired. We would
+rather have integral linear combinations. In fact, if we are willing
+to look a little more broadly than cyclic groups, we can arrive at
+such a decomposition.
+\begin{defn}
+  Let \(p\) be a prime. A group \(G\) is called \de{\(p\)-elementary}
+  if \[
+    G \isom Z \times P
+  \]
+  where \(Z\) is a cyclic group of order prime to \(p\), (that is
+  \(\gcd(p,|Z|)=1\)), and \(P\) is a \(p\)-group (i.e. \(|P| =
+  p^r\)). \(G\) is \de{elementary} if it is \(p\)-elementary for some
+  prime \(p\).
+\end{defn}
+\begin{thm}[Brauer's Theorem]\label{brauers-thm}
+  Every complex character is a \(\Z\)-linear combination of linear
+  characters of elementary subgroups \(P\) induced to \(G\), that
+  is \[
+    \chi = \sum_P c_P \Ind_P^G \xi_p, \ c_P \in \Z
+  \]
+  where \(\xi_P\) is a linear character of \(P\).
+\end{thm}
+However, the proof of Brauer's theorem is not so straight-forward. It
+requires use of the following theorem.
+\begin{thm}
+  Let \(G\) be a finite group and let \(V_p\) be the subgroup of
+  \(R(G)\) generated by characters induced from those of
+  \(p\)-elementary subgroups of \(G\). Then, \([R(G):V_p] < \infty\) 
+  and \(\gcd([R(G):V_p],p) = 1\).
+\end{thm}
+
 \begin{bibdiv}
   \begin{biblist}
+    \bib{benson}{book}{
+      author={Benson, D.J.}
+      title={Representations and Cohomology I}
+      year={1995}
+    }
     \bib{cr}{book}{
       author={Curtis, Charles W.}
       author={Reiner, Irving}
