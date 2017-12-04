@@ -1247,7 +1247,35 @@ better, namely
     V}\) is an integer.
 \end{proof}
 Another famous result is Burnside's theorem, which can be proved using
-representation theory. \todo{State and prove Burnside's theorem.}
+representation theory.
+\begin{thm}
+  Any group \(G\) of order \(p^a q^b\) for primes \(p,q\) and \(a,b
+  \geq 0\) is solvable.
+\end{thm}
+To prove Burnside's theorem, we will use the following results.
+\begin{thm}
+  Let \(V\) be an irreducible representation of finite group \(G\) and
+  let \(C\) be a conjugacy class of \(G\) such that \(\gcd(|C|,\dim V)
+  = 1\). Then, for any \(g \in C\), either \(\chi_V(g) = 0\) or \(g\)
+  acts as a scalar on \(V\).
+\end{thm}
+\begin{lem}
+  If \(\lambda_1, \lambda_2, \ldots, \lambda_n\) are roots of unity
+  such that \(\frac{1}{n}(\lambda_1 + \lambda_2 + \cdots +
+  \lambda_n)\) is an algebraic integer, then either \(\lambda_1 =
+  \lambda_2 = \cdots = \lambda_n\) or \(\lambda_1 + \cdots + \lambda_n
+  = 0\).
+\end{lem}
+\begin{thm}
+  Let \(G\) be a finite group and \(C\) be a conjugacy class in \(G\)
+  with \(|C| = p^k\) for \(p\) prime and \(k \in \Z_+\). Then, \(G\)
+  is not simple.
+\end{thm}
+\begin{lem}
+  There exists a non-trivial irreducible representation of \(G\), say
+  \(V\), with \(p \notdivides \dim V\) such that \(\chi_V(g) \neq 0\).
+\end{lem}
+\todo{State and prove Burnside's theorem.}
 \section{Induced Representations}
 Given a representation of a group \(G\), there is a natural way to
 restrict the representation to a subgroup \(H \subgroup G\).

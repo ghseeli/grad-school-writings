@@ -1012,6 +1012,42 @@ Thus, combining our results, we arrive at the landmark theorem.
   where each \(D_i\) is a division ring and each \(n_i\) is a positive
   integer.
 \end{thm}
+\section{The Double Centralizer Property}
+In order to finish our proofs, however, we will appeal to some other
+facts that make use of the following language.
+\begin{defn}
+  Let \(A\) be a ring and \(M\) be a left \(A\)-module. Furthermore,
+  let \(A_L \subset \End_A(M)\) be the endomorphisms given by applying
+  elements of \(A\) to \(M\). If \(A_L = \End_A(M)\), we sa that the
+  pair \((A,M)\) has the \de{double centralizer property}. 
+\end{defn}
+\begin{rmk}
+  More generall, this notion can be extended to any ring \(R\) with
+  subring \(S\). We say \((R,S)\) has the double centralizer property
+  if \(C_R(C_R(S)) = S\).
+\end{rmk}
+Thus, Wedderburn's theorem above can be reprhased as follows
+\begin{thm}[Wedderburn]
+  Let \(A\) be a simple Artinian ring. Then, for some
+  minimal left ideal \(M \ideal A\), \((A,M)\) has the double
+  centralizer property.
+\end{thm}
+\begin{lem}
+  Let \(A\) be a ring. Them \((A,{}_A A)\) has the double centralizer
+  property. 
+\end{lem}
+\begin{lem}
+  Let \(V = M^{\bigoplus k}\) for a left \(A\)-module \(M\), \(k \in
+  \N\). If \((A,V)\) has the double centralizer property, then
+  \((A,M)\) also has the double centralizer property.
+\end{lem}
+\begin{lem}
+  Let \(M = Ae\) for \(e \in A\) an idempotent. Then, \[
+    \End_A(M) \isom eAe
+  \]
+  via isomorphism \(f \from \End_A(M) \to eAe\) and \(md = m \cdot f(d)\) for all \(m \in M, d
+  \in \End_A(M)\). 
+\end{lem}
 \begin{bibdiv}
   \begin{biblist}
     \bib{cr}{book}{
