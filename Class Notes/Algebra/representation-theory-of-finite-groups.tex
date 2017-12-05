@@ -1599,14 +1599,67 @@ language of double cosets.
   \(\Ind_H^G V\) is irreducible if and only if
   \begin{enumerate}
   \item \(V\) is irreducible and
-  \item \(V_s\) and \(\Res_{H_s}^H V\) are irreducible for all \(s \in
+  \item \(V_s\) and \(\Res_{H_s}^H V\) share no irreducibles for all \(s \in
     S\), a set of double coset representatives of \(K \bs G / H\).
   \end{enumerate}
 \end{thm}
+\begin{proof}
+  We wish to show that \((\Ind_H^G V, \Ind_H^G V) = 1\).  We compute
+  \begin{align*}
+    (\Ind_H^G V, \Ind_H^G V)
+    & = (V, \Res_H^G \Ind_H^G V)
+    & \text{ by Frobenius Reciprocity}\\
+    & = (V, \bigoplus_{s \in H \bs G / H} \Ind_{H_s}^H(\rho_s))
+    & \text{ by proposition above}\\
+    & = \sum_{s \in H \bs G / H} (\Res_{H_s}^H(\rho), \rho_s)
+    & \text{ by Frobenius reciprocity}
+  \end{align*}
+  Note that the last equality also makes use of the fact \[
+    \Hom(A,\bigoplus_{i \in I} B_i) =
+    \bigoplus_{i \in I} \Hom(A,B_i) \text{ for finite index set } I
+  \]
+  Now, when \(s = 1\), \((\Res_H^H \rho,\rho_1) = (\rho, \rho) \geq
+  1\). Thus, for our sum to be exactly \(1\), it must be that \[
+    (\rho, \rho) = 1 \text{ and } (\Res_{H_s}^H \rho, \rho_s) = 0 \text{ for } s \neq 1
+  \]
+  This will happen precisely when \(\rho\) is irreducible and
+  \(\Res_{H_s}^H \rho\) and \(\rho_s\) share no irreducibles.
+\end{proof}
 \begin{cor}
   If \(H \normsubgroup G\), then \(\Ind_H^G V\) is irreducible if and
   only if \(V\) is irreducible and \(V \not \isom V_s\) for all \(s \in G/H\)
 \end{cor}
+\begin{proof}
+  If \(H \normsubgroup G\), then \(H_s = H\) and \(\Res_{H_s}^H \rho =
+  \rho\), so it must be that \(\rho\) is irreducible and not
+  isomorphic to any \(\rho_s\), otherwise \(\rho_s\) and
+  \(\Res_{H_s}^H \rho = \rho\) will share an irreducible.
+\end{proof}
+\begin{example}
+  Consider \(\langle r,s \st r^4 = s^2 = 1, sr = r^{-1}s \rangle \isom
+  D_8 \isom \Z_4 \rtimes \Z_2\). Then, we know \(\langle r \rangle
+  \isom \Z_4
+  \normsubgroup D_8\) with character table \[
+    \begin{array}{c|cccc}
+      &1&r&r^2&r^3 \\
+      \hline
+      \chi_1 & 1 & 1 & 1 & 1 \\
+      \chi_2 & 1 & i & -1 & -i\\
+      \chi_3 & 1 & -1 & 1 & -1 \\
+      \chi_4 & 1 & -i & -1 & i
+    \end{array}
+  \]
+  If \(\rho^i\) is the irreducible representation of \(\Z_4\)
+  corresponding to \(\chi_i\), then we notice that \(\rho^2_s(r) =
+  \rho^2(srs) = \rho^2(r^{-1}) = \rho^2(r)\), so \(\Ind_{\Z_4}^{D_8}
+  \rho^2\) will \emph{not} be irreducible. On the other hand, one can
+  check \(\rho^1_s(r) = \rho^1(srs) = \rho^1(r^{-1}) = \rho^3(r)\), so
+  \(\rho^1_s\) and \(\rho^1\) are orthogonal, thus sharing no
+  irreducibles. Thus, it must be that \(\Ind_{\Z_4}^{D_8} \rho^1\) is
+  irreducible. In fact, one can check \(\Ind_{\Z_4}^{D_8} \rho^1 =
+  \Ind_{\Z_4}^{D_8} \rho^3\) will give the only irreducible
+  \(2\)-dimensional representation of \(D_8\).
+\end{example}
 \section{Representations of Nilpotent Groups}
 \begin{thm}
   Given an irreducible representation of a nilpotent group \(G\), it is induced
