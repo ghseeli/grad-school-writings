@@ -2,6 +2,7 @@
 \usepackage{tikz}
 \usetikzlibrary{cd}
 \usepackage{bbm}
+\usepackage{ytableau}
 \usepackage{todonotes}
 
 \usepackage{../notes}
@@ -13,6 +14,8 @@
 \newcommand{\Res}{\operatorname{Res}}
 \newcommand{\Ind}{\operatorname{Ind}}
 \newcommand{\bs}{\textbackslash}
+\newcommand{\partitionof}{\vdash}
+\newcommand{\T}{\mathsf{T}}
 
 \numberwithin{thm}{section}
 
@@ -716,8 +719,12 @@ following
                      & = \tr_{\Hom_\C(W,V)}\left(\frac{1}{|G|}\sum_{g \in G} g\right)
   \end{align*}
   However, \(P := \frac{1}{|G|} \sum_{g \in G} g\) is a homomorphism of
-  \(G\) representations and the image of \(P\) is
-  stable under any action of \(G\). Thus, for arbitrary representation
+  \(G\) representations (that is, \(P.v\) is a representation
+  of \(G\)) and the image of \(P\) is
+  stable under any action of \(G\) since \(g.Pv = Pv\). However, the only
+  such irreducible representation is the trivial representation or the
+  zero representation. Thus, for
+  arbitrary representation 
   \(U\), \(\tr_U(P)\) simply counts
   the number of times the trivial representation occurs as a
   subrepresentation of \(U\). However, considering \(\Hom_\C(W,V)\) as
@@ -1098,6 +1105,18 @@ following theorem.
   each class function of \(G_1 \times G_2\) which is orthogonal to
   characters of the form \(\chi_1 \cdot \chi_2\) is zero.
 \end{rmk}
+\begin{prop}
+  One can realize \(\C[G]\) as a \(G \times G\)-module via the
+  action \[
+    (h,k).g = hgk^{-1}
+  \]
+  extended linearly. 
+\end{prop}
+\begin{proof}
+  Indeed, \[
+    (h',k').(h,k).g = (h',k').hgk^{-1} = h'hgk^{-1}k'^{-1} = (h'h,k'k).g
+  \]
+\end{proof}
 \begin{thm}
   The regular representation decomposes as a direct sum of \(G \times
   G\) representations. More specifically, \[
@@ -1650,14 +1669,15 @@ language of double cosets.
     \end{array}
   \]
   If \(\rho^i\) is the irreducible representation of \(\Z_4\)
-  corresponding to \(\chi_i\), then we notice that \(\rho^2_s(r) =
-  \rho^2(srs) = \rho^2(r^{-1}) = \rho^2(r)\), so \(\Ind_{\Z_4}^{D_8}
-  \rho^2\) will \emph{not} be irreducible. On the other hand, one can
-  check \(\rho^1_s(r) = \rho^1(srs) = \rho^1(r^{-1}) = \rho^3(r)\), so
-  \(\rho^1_s\) and \(\rho^1\) are orthogonal, thus sharing no
-  irreducibles. Thus, it must be that \(\Ind_{\Z_4}^{D_8} \rho^1\) is
-  irreducible. In fact, one can check \(\Ind_{\Z_4}^{D_8} \rho^1 =
-  \Ind_{\Z_4}^{D_8} \rho^3\) will give the only irreducible
+  corresponding to \(\chi_i\), then we notice that \(\tr \rho^3_s(r) =
+  \tr \rho^3(srs) = \tr \rho^3(r^{-1}) = -1 = \tr \rho^3(r)\), so
+  \(\Ind_{\Z_4}^{D_8} 
+  \rho^3\) will \emph{not} be irreducible. On the other hand, one can
+  check \(\rho^2_s(r) = \rho^2(srs) = \rho^2(r^{-1}) = -i = \rho^4(r)\), so
+  \(\rho^2_s\) and \(\rho^2\) are orthogonal, thus sharing no
+  irreducibles. Thus, it must be that \(\Ind_{\Z_4}^{D_8} \rho^2\) is
+  irreducible. In fact, one can check \(\Ind_{\Z_4}^{D_8} \rho^2 =
+  \Ind_{\Z_4}^{D_8} \rho^4\) will give the only irreducible
   \(2\)-dimensional representation of \(D_8\).
 \end{example}
 \section{Representations of Nilpotent Groups}
@@ -1857,6 +1877,118 @@ requires use of the following theorem.
   \(p\)-elementary subgroups of \(G\). Then, \([R(G):V_p] < \infty\) 
   and \(\gcd([R(G):V_p],p) = 1\).
 \end{thm}
+\todo{Actually prove Brauer's theorem.}
+\section{Example: Representations of the Symmetric Group}
+Elements of the symmetric group \(\Sym_n\) can be represented in
+\(1\)-line notation as products of disjoint cycles, and to each
+element, we can assign a \de{cycle type} in the form of a partition of
+\(n\).
+\begin{example}
+  Consider \((12345)(876)(9,10) \in \Sym_{10}\). This cycle has cycle
+  type \((5,3,2) \partitionof 10\). 
+\end{example}
+Partitions are useful combinatorial tools with many applications
+beyond what is described here. We can also define a partial order on
+tableau.
+\begin{defn}
+  Given partitions \(\lambda = (\lambda_1, \lambda_2,
+  \ldots) \partitionof n\) and \(\mu = (\mu_1, \mu_2, \ldots)\), we
+  say that \(\lambda \leq \mu\) if \[
+    \begin{cases}
+      \lambda_1 \leq \mu_1 \\
+      \lambda_1 + \lambda_2 \leq \mu_1 + \mu_2 \\
+      \vdots\\
+      \lambda_1 + \cdots + \lambda_k \leq \mu_1 + \cdots + \mu_k \\
+      \vdots
+    \end{cases}
+  \]
+\end{defn}
+\begin{example}
+  Using the notation that \((2^2,1^2) = (2,2,1,1)\), the following
+  partial order is induced on the partitions of \(6\). 
+\[  \begin{tikzcd}[row sep=tiny, column sep=tiny]
+    & (6) \ar[d] & \\
+    & (5,1) \ar[d] & \\
+    & (4,2) \ar[ld] \ar[rd] & \\
+    (3,3) \ar[rd] & & (4,1^2) \ar[ld] \\
+    & (3,2,1) \ar[ld] \ar[rd] & \\
+    (3,1^3) \ar[rd]& & (2^3) \ar[ld] \\
+    & (2^2, 1^2) \ar[d] & \\
+    & (2,1^4) \ar[d] & \\
+    & (1^6) &
+  \end{tikzcd}
+\]
+\end{example}
+
+
+It is also useful to realize partitions of \(n\) as Young
+diagrams. Once again, we shall define the correspondance via an
+example.
+\begin{example}
+  We can represent a partition \((\lambda_1, \lambda_2, \ldots)\) as a
+  \de{Young diagram} with \(\lambda_i\) boxes on the \(i\)th row. So,
+  consider \((5,3,2) \partitionof 10\). The corresponding diagram
+  would be \[
+    \ydiagram{5,3,2}
+  \]
+  Furthermore, we can fill in the boxes of the diagram to get a \de{Young
+    tableau}. For example \[ 
+    \begin{ytableau}
+      1 & 2 & 3 & 4 & 5 \\
+      6 & 7 & 8 \\
+      9 & 10
+    \end{ytableau}
+  \]
+  Furthermore, \(\Sym_n\) can act on a Young tableau by permuting the
+  numbers. So, \((12345)(876)(9,10) \in \Sym_10\) would act on the
+  above diagram to yield \[
+    \begin{ytableau}
+      2 & 3 & 4 & 5 & 1\\
+      8 & 6 & 7 \\
+      10 & 9
+    \end{ytableau}
+  \]
+\end{example}
+Now, using this combinatorial device, we can define the following.
+\begin{defn}
+  Let \(\T\) be a tableau of shape \(\lambda \partitionof n\) for \(n
+  \in \N\). Then, we define the \de{row stabalizer subgroup}
+  \(R(\T) \subgroup \Sym_n\) to be the subgroup of
+  permutations such that
+  every permutation in \(R(\T)\) preserves the elements in
+  the rows of \(\T\). One analogously defines \(C(\T)\) to be the
+  \de{column stabalizer subgroup}.
+\end{defn}
+\begin{example}
+  In the example above, \((12345)(876)(9,10)\) is in the row
+  stabalizer of the tableau. In fact, in that setup \(R(\T) \isom \Sym_5 \times
+  \Sym_3 \times \Sym_2\). 
+\end{example}
+Now, given \(\Sym_n\), we automatically know of \(2\) irreducible,
+\(1\)-dimensional, complex representations, namely the trivial
+representation 
+and the sign/alternating representation. Furthermore, we know that
+conjugacy classes of \(\Sym_n\) are encoded by cycle type, which are
+encoded by partitions of \(n\). So, since character tables are square,
+there must be as many irreducible representations of \(\Sym_n\) as
+there are partitions of \(n\). Thus, we have \[
+  \{\text{Partitions of }n\} \onetoonecorrespondance
+  \{\text{Irreducible representations of }\Sym_n\}
+\]
+Our task, then, is to figure out what these irreducible
+representations are. A systematic treatment will not be given here,
+but some of the tools in the previous chapters will be used to get an
+idea of some results about the representation theory of symmetric
+groups. For more, see \cite{james}, \cite{fulton}.
+\begin{defn}
+  We define the \de{row symmetrizer} of a tableau \(\T\) of shape
+  \(\lambda\) to be \[
+    P(\T) := \sum_{\alpha \in R(\T)} \alpha
+  \]
+  and the \de{column symmetrizer} to be \[
+    Q(\T) := \sum_{\alpha \in C(\T)} \sgn(\alpha) \alpha
+  \]
+\end{defn}
 
 \begin{bibdiv}
   \begin{biblist}
@@ -1884,11 +2016,21 @@ requires use of the following theorem.
       year={2011}
       note={\url{http://math.mit.edu/~etingof/replect.pdf}}
     }
+    \bib{fulton}{book}{
+      author={Fulton, Wiliam}
+      title={Young Tableaux}
+      year={1997}
+    }
     \bib{princeton-companion}{article}{
       author={Gronjnowski, Ian}
       title={Representation Theory}
       journal={The Princeton Companion to Mathematics}
       pages={419--431}
+    }
+    \bib{james}{book}{
+      author={James, G. D.}
+      title={The Representation Theory of the Symmetric Groups}
+      year={1978}
     }
     \bib{aw}{article}{
       author={Seelinger, George H.}
