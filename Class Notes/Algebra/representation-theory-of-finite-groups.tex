@@ -15,13 +15,19 @@
 \newcommand{\Ind}{\operatorname{Ind}}
 \newcommand{\bs}{\textbackslash}
 \newcommand{\partitionof}{\vdash}
-\newcommand{\T}{\mathsf{T}}
+\newcommand{\T}{\mathsf{T}} % Tableau
+\renewcommand{\S}{\mathsf{S}}
+\newcommand{\sh}{\operatorname{shape}}
 
+\newcommand{\dominatedby}{\trianglelefteq}
+\newcommand{\dominates}{\trianglerighteq}
+\newcommand{\lexicoleq}{\leq}
+\newcommand{\lexicogeq}{\geq}
 \numberwithin{thm}{section}
 
 \title[Representation Theory of Finite Groups]{Representation Theory
   of Finite Groups \\ Notes
-  inspired by a class taught by Brian Parshall in Fall 2017}
+  (loosely) inspired by a class taught by Brian Parshall in Fall 2017}
 \author{George H. Seelinger}
 \date{Fall 2017}
 \begin{document}
@@ -1889,12 +1895,199 @@ element, we can assign a \de{cycle type} in the form of a partition of
   type \((5,3,2) \partitionof 10\). 
 \end{example}
 Partitions are useful combinatorial tools with many applications
-beyond what is described here. We can also define a partial order on
+beyond what is described here.
+It is also useful to realize partitions of \(n\) as Young
+diagrams. Once again, we shall define the correspondance via an
+example.
+\begin{example}
+  We can represent a partition \((\lambda_1, \lambda_2, \ldots)\) as a
+  \de{Ferrers diagram} with \(\lambda_i\) boxes on the \(i\)th row. So,
+  consider \((5,3,2) \partitionof 10\). The corresponding diagram
+  would be \[
+    \ydiagram{5,3,2}
+  \]
+  Furthermore, we can fill in the boxes of the diagram to get a \de{Young
+    tableau}. For example \[ 
+    \begin{ytableau}
+      1 & 2 & 3 & 4 & 5 \\
+      6 & 7 & 8 \\
+      9 & 10
+    \end{ytableau}
+  \]
+  Finally, \(\Sym_n\) can act on a Young tableau by permuting the
+  numbers. So, \((12345)(876)(9,10) \in \Sym_{10}\) would act on the
+  above diagram to yield \[
+    \begin{ytableau}
+      2 & 3 & 4 & 5 & 1\\
+      8 & 6 & 7 \\
+      10 & 9
+    \end{ytableau}
+  \]
+\end{example}
+Now, using this combinatorial device, we can define the following.
+\begin{defn}
+  Let \(\T\) be a tableau of shape \(\lambda \partitionof n\) for \(n
+  \in \N\). Then, we define the \de{row stabalizer subgroup}
+  \(R(\T) \subgroup \Sym_n\) to be the subgroup of
+  permutations such that
+  every permutation in \(R(\T)\) preserves the elements in
+  the rows of \(\T\). One analogously defines \(C(\T)\) to be the
+  \de{column stabalizer subgroup}. Finally, one defines
+  \(\Sym_\lambda := R(\T')\) where \(\T' = \{(1, 2, \ldots,
+  \lambda_1), (\lambda_1+1, \ldots, \lambda_1 + \lambda_2), \ldots,
+  (n-\lambda_\ell+1, \ldots, n)\}\).
+\end{defn}
+\begin{example}
+  In the example above, \((12345)(876)(9,10)\) is in the row
+  stabalizer of the tableau. In fact, in that setup \(R(\T) =
+  \Sym_{\{1,2,3,4,5\}} \times \Sym_{\{6,7,8\}} \times \Sym_{\{9,10\}}\isom \Sym_5 \times
+  \Sym_3 \times \Sym_2\). 
+\end{example}
+Now, given \(\Sym_n\), we automatically know of \(2\) irreducible,
+\(1\)-dimensional, complex representations, namely the trivial
+representation 
+and the sign/alternating representation. Furthermore, we know that
+conjugacy classes of \(\Sym_n\) are encoded by cycle type, which are
+encoded by partitions of \(n\). So, since character tables are square,
+there must be as many irreducible representations of \(\Sym_n\) as
+there are partitions of \(n\). Thus, we have \[
+  \{\text{Partitions of }n\} \onetoonecorrespondance
+  \{\text{Irreducible representations of }\Sym_n\}
+\]
+Our task, then, is to figure out what these irreducible
+representations are. A systematic treatment will not be given here,
+but some of the tools in the previous chapters will be used to get an
+idea of some results about the representation theory of symmetric
+groups. For more, see \cite{james}, \cite{fulton}. We will follow the
+program of \cite{sagan}, strategically omitting details and adapting
+the content to the language in these notes.
+\begin{defn}
+  We say two \(\lambda\)-tableaux \(\T_1\) and \(\T_2\) are \de{row
+    equivalent} if the corresponding rows of the two tableaux contain
+  the same elements, that is, \(R(\T_1) = R(\T_2)\). We then define a
+  \de{tabloid of shape \(\lambda\)} or a \de{\(\lambda\)-tabloid}
+  \(\{\T\}\) to be \[
+    \{\T\} = \{\T' \st \T' \sim \T, \sh \T = \lambda\}
+  \]
+\end{defn}
+\begin{example}
+  If \[
+    \T =
+    \begin{ytableau}
+      1 & 2 \\
+      3
+    \end{ytableau}
+  \]
+  then, \[
+    \{\T\} = \left\{
+      \begin{ytableau}
+        1 & 2 \\
+        3
+      \end{ytableau},
+      \begin{ytableau}
+        2 & 1 \\
+        3
+      \end{ytableau}
+\right\} = \ytableausetup{tabloids}
+\begin{ytableau}
+  1&2\\
+  3
+\end{ytableau}
+  \]
+\end{example}
+\begin{prop}
+  If \(\lambda = (\lambda_1, \ldots, \lambda_\ell) \partitionof n\), then the number of \(\lambda\)-tableaux in any
+  given \(\lambda\)-tabloid is \[
+    \lambda_1 ! \lambda_2 ! \cdots \lambda_\ell ! =: \lambda!
+  \]
+  and thus the number of \(\lambda\)-tabloids is \(n!/\lambda!\).
+\end{prop}
+\begin{proof}
+  This follows immediately since, if \(\T_1 \sim \T_2\), then \(g.\T_1
+  = \T_2\) for some \(g \in R(\T_1) = R(\T_2)\), that is, \(\T_1 \sim
+  \T_2\) if and only if \(\T_1\) and \(T_2\) are in the same
+  \(R(\T_1)\)-orbit and \(|R(\T_1)| = \lambda!\). 
+\end{proof}
+\begin{prop}
+  Given \(\T\) of shape \(\lambda\), \(R(\T) \subgroup S_n\) and
+  trivial representation \(1\) of 
+  \(R(\T)\), we get that \[ 
+    \Ind_{R(\T)}^{S_n} \isom \C[S_n/R(\T)] = \C[\pi_1 R(\T), \ldots,
+    \pi_k R(\T)]
+  \]
+  and we can index each \(\pi_i\) by a \(\lambda\)-tabloid, say
+  \(\{\T_i\}\).
+\end{prop}
+\begin{defn}
+  Let \(\lambda \partitionof n\). We define \[
+    M^\lambda := \C[\{\T_1\}, \ldots, \{\T_k\}]
+  \]
+  where \(\{\T_1\}, \ldots, \{\T_k\}\) is a complete list of
+  \(\lambda\)-tabloids as the \de{permutation module corresponding to
+  \(\lambda\)}.
+\end{defn}
+\begin{example}
+  Let \(\lambda = (n) = \ytableausetup{boxsize=1em,
+    notabloids}\ydiagram{2} \cdots \ydiagram{1}\). Then, there is only
+  a single \(\lambda\)-tabloid consisting of all
+  \(\lambda\)-tableaux. Thus, \[
+    M^{(n)} = \C\left[\ytableausetup{tabloids}
+    \ \begin{ytableau}
+      1&2&\cdots&n
+    \end{ytableau}
+    \ \right] \isom \C
+  \]
+  with a trivial action. Thus, \(M^{(n)}\) is the trivial representation.
+\end{example}
+\begin{example}
+  Let \(\lambda = (1^n)\). Then, each \(\lambda\)-tabloids consists of
+  a single \(\lambda\)-tableau and thus they are in bijection with
+  \(\Sym_n\). Thus, \[
+    M^{(1^n)} = \C[\{\T_1\}, \ldots, \{T_{n!}\}] \isom \C \Sym_n
+  \]
+  is the regular representation of \(\Sym_n\).
+\end{example}
+\begin{example}
+  Let \(\lambda = (n-1, 1) = \ytableausetup{boxsize=0.5em, notabloids}
+  \ydiagram{2,1} \cdots \ydiagram{1,0}
+  \). Then, each \(\lambda\)-tabloid is uniquely determined by the
+  number in the second row, so there are \(n\)
+  \(\lambda\)-tabloids. Thus, we get \[
+    M^{(n-1,1)} = \C[\{\T_1\}, \ldots, \{\T_n\}]
+  \]
+  with action \(\sigma.\T_j = \T_{\sigma(j)}\) for \(\sigma \in
+  \Sym_n\). Thus, we have the ``standard'' or ``defining''
+  representation of \(\Sym_n\), that is, the action of \(\Sym_n\) on
+  \(\{1,\ldots,n\}\).
+\end{example}
+\begin{prop}
+  If \(\lambda \partitionof n\), then \(M^\lambda\) is cyclicly
+  generated by any given \(\lambda\)-tabloid. Furthermore, \(\dim
+  M^\lambda = n!/\lambda!\), that is, the number of \(\lambda\)-tabloids.
+\end{prop}
+\begin{proof}
+  This is a relatively straightforward application of the
+  transitivity of the \(\Sym_n\)-action on the set of
+  \(\lambda\)-tabloids, which 
+  initially came from cosets of \(\Sym_n/R(\T)\) for some \(\T\) of
+  shape \(\lambda\). The dimension computation is immediate from the
+  construction as well. 
+\end{proof}
+\begin{thm}
+  Let \(\lambda \partitionof n\) and let \(S_\lambda\) correspond to
+  tabloid \(\{\T^\lambda\}\). Then, \(\C \Sym_n \Sym_\lambda \isom \C
+  \Sym_n \{\T^\lambda\}\) as \(\Sym_n\)-modules.
+\end{thm}
+\begin{proof}
+  Define a map by sending \(\pi_i S_\lambda \mapsto \{\pi_i
+  \T^\lambda\}\) and extend linearly.
+\end{proof}
+We can also define a partial order on
 tableau.
 \begin{defn}
   Given partitions \(\lambda = (\lambda_1, \lambda_2,
   \ldots) \partitionof n\) and \(\mu = (\mu_1, \mu_2, \ldots)\), we
-  say that \(\lambda \leq \mu\) if \[
+  say that \(\lambda \dominatedby \mu\) if \[
     \begin{cases}
       \lambda_1 \leq \mu_1 \\
       \lambda_1 + \lambda_2 \leq \mu_1 + \mu_2 \\
@@ -1920,67 +2113,28 @@ tableau.
   \end{tikzcd}
 \]
 \end{example}
-
-
-It is also useful to realize partitions of \(n\) as Young
-diagrams. Once again, we shall define the correspondance via an
-example.
-\begin{example}
-  We can represent a partition \((\lambda_1, \lambda_2, \ldots)\) as a
-  \de{Young diagram} with \(\lambda_i\) boxes on the \(i\)th row. So,
-  consider \((5,3,2) \partitionof 10\). The corresponding diagram
-  would be \[
-    \ydiagram{5,3,2}
-  \]
-  Furthermore, we can fill in the boxes of the diagram to get a \de{Young
-    tableau}. For example \[ 
-    \begin{ytableau}
-      1 & 2 & 3 & 4 & 5 \\
-      6 & 7 & 8 \\
-      9 & 10
-    \end{ytableau}
-  \]
-  Furthermore, \(\Sym_n\) can act on a Young tableau by permuting the
-  numbers. So, \((12345)(876)(9,10) \in \Sym_{10}\) would act on the
-  above diagram to yield \[
-    \begin{ytableau}
-      2 & 3 & 4 & 5 & 1\\
-      8 & 6 & 7 \\
-      10 & 9
-    \end{ytableau}
-  \]
-\end{example}
-Now, using this combinatorial device, we can define the following.
+\begin{lem}[Dominance Lemma]
+  \cite{sagan}*{Lem 2.2.4}. Let \(\T\) and \(\S\) be tableaux of shape
+  \(\lambda\) and \(\mu\), 
+  respectively. If, for each index \(i\), the elements of row \(i\) of
+  \(\S\) are all in different columns in \(\T\), then \(\lambda
+  \dominates \mu\).
+\end{lem}
 \begin{defn}
-  Let \(\T\) be a tableau of shape \(\lambda \partitionof n\) for \(n
-  \in \N\). Then, we define the \de{row stabalizer subgroup}
-  \(R(\T) \subgroup \Sym_n\) to be the subgroup of
-  permutations such that
-  every permutation in \(R(\T)\) preserves the elements in
-  the rows of \(\T\). One analogously defines \(C(\T)\) to be the
-  \de{column stabalizer subgroup}.
+  Let \(\lambda = (\lambda_1, \ldots, \lambda_k)\) abd \(\mu=(\mu_1,
+  \ldots, \mu_m)\) be partitions of \(n\). Then, \(\lambda \lexicoleq
+  \nu\) if, for some index \(i\), \[
+    \lambda_j = \mu_j \text{ for }j<i\text{ and }\lambda_i < \mu_i
+  \]
+  This order is called the \de{lexicographic order}.
 \end{defn}
-\begin{example}
-  In the example above, \((12345)(876)(9,10)\) is in the row
-  stabalizer of the tableau. In fact, in that setup \(R(\T) \isom \Sym_5 \times
-  \Sym_3 \times \Sym_2\). 
-\end{example}
-Now, given \(\Sym_n\), we automatically know of \(2\) irreducible,
-\(1\)-dimensional, complex representations, namely the trivial
-representation 
-and the sign/alternating representation. Furthermore, we know that
-conjugacy classes of \(\Sym_n\) are encoded by cycle type, which are
-encoded by partitions of \(n\). So, since character tables are square,
-there must be as many irreducible representations of \(\Sym_n\) as
-there are partitions of \(n\). Thus, we have \[
-  \{\text{Partitions of }n\} \onetoonecorrespondance
-  \{\text{Irreducible representations of }\Sym_n\}
-\]
-Our task, then, is to figure out what these irreducible
-representations are. A systematic treatment will not be given here,
-but some of the tools in the previous chapters will be used to get an
-idea of some results about the representation theory of symmetric
-groups. For more, see \cite{james}, \cite{fulton}.
+\begin{prop}
+  \begin{enumerate}
+  \item The lexicographic order is a total order.
+  \item If \(\lambda,\mu \partitionof n\) with \(\lambda \dominates
+    \mu\), then \(\lambda \lexicogeq \mu\).
+  \end{enumerate}
+\end{prop}
 \begin{defn}
   We define the \de{row symmetrizer} of a tableau \(\T\) of shape
   \(\lambda\) to be \[
@@ -2033,6 +2187,13 @@ groups. For more, see \cite{james}, \cite{fulton}.
       title={The Representation Theory of the Symmetric Groups}
       year={1978}
     }
+    \bib{sagan}{book}{
+      author={Sagan, Bruce E.}
+      title={The Symmetric Group: Representations, Combinatorical
+        Algorithms, and Symmetric Functions}
+      year={1991}
+      note={2nd Edition, 2001}
+    }
     \bib{aw}{article}{
       author={Seelinger, George H.}
       title={Artin-Wedderburn Theory}
@@ -2059,5 +2220,4 @@ groups. For more, see \cite{james}, \cite{fulton}.
     }
   \end{biblist}
 \end{bibdiv}
-
 \end{document}
