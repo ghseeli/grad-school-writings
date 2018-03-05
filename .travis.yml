@@ -24,6 +24,9 @@ script:
 - latexmk -pdf -interaction=nonstopmode -output-directory=../../_build quiver-notes.tex
 - latexmk -pdf -interaction=nonstopmode -output-directory=../../_build springer-theory-notes.tex
 - cd ../..
+- cd Monographs/
+- latexmk -pdf -interaction=nonstopmode -output-directory=../_build RootSystems.tex
+- cd ..
 before_deploy:
 - perl .rm-pdf-from-gitignore.pl
 deploy:
