@@ -45,8 +45,8 @@ script:
     done
     printf "\n" >> "$OUTPUT_FILENAME"
   }
-- write_section_links "Class Notes/Algebra" "class-notes.md" "Algebra" ""
-- write_section_links "Class Notes/Geometric Representation Theory" "class-notes.md" "Geometric Representation Theory" ""
+- write_section_links "class-notes/Algebra" "class-notes.md" "Algebra" ""
+- write_section_links "class-notes/geometric-representation-theory" "class-notes.md" "Geometric Representation Theory" ""
 - write_section_links "Monographs" "monographs.md" "Monographs" ""
 - cd ..
 deploy:
