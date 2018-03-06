@@ -1696,7 +1696,7 @@ language of double cosets.
 \end{thm}
 \begin{rmk}
   This is a specific case of Brauer's theorem (see
-  \ref{brauers-thm}). We will probe this theorem using the program
+  \ref{brauers-thm}). We will prove this theorem using the program
   given in \cite{ct}.
 \end{rmk}
 \begin{lem}
@@ -1756,137 +1756,6 @@ GL(W)\) such that \(\ov{\rho} = \Ind_{H/\ker \rho}^{G/\ker \rho} \rho'
 is a lift of \(\rho'\). Since \(H\) is also nilpotent, we can repeat
 this argument until we find a \(1\)-dimensional representation \(\rho'\).
 \end{proof}
-\section{Artin's Theorem}
-Artin's theorem allows us to gain more insight into how induced
-characters or representations may be related to the irreducible
-representations of a finite group.
-\begin{defn}
-  Let \(G\) be a finite group. A \de{virtual representation} of \(G\)
-  is an integer linear combination of irreducible representations of
-  \(G\). 
-\end{defn}
-\begin{prop}
-  Let \(V\) be an virtual representation with character \(\chi_V\). If
-  \((\chi_V,\chi_V)=1\) and \(\chi_V(1) > 0\), then \(\chi_V\) is a
-  character of an irreducible representation of \(G\).
-\end{prop}
-\begin{proof}
-  Let \(V = \sum n_i V_i\) for irreducible representations \(V_i\) and
-  \(n_i \in \Z\). Then, using the fact that the irreducible characters
-  form an orthonomal basis, we get \(1 = (\chi_V,\chi_V) = \sum
-  n_i^2\). Thus, \(n_i = \pm 1\) for one \(i\) and \(0\)
-  otherwise. However, \(\chi_V(1) > 0\) by assumption, so \(n_i = 1\).
-\end{proof}
-\begin{thm}[Artin's theorem]
-  Let \(X\) be a conjugation-invariant family of subgroups of a finite
-  group \(G\). Then, the following are equivalent.
-  \begin{enumerate}
-  \item Any element of \(G\) belongs to a subgroup \(H \in X\), that
-    is, \(G = \Union_{H \in X} H\).
-  \item The character of any irreducible representation of \(G\)
-    belongs to the \(\Q\)-span of characters of induced
-    representations \(\Ind_H^G V\) where \(H \in X\) and \(V\) is an
-    irreducible representation of \(H\). 
-  \end{enumerate}
-\end{thm}
-\begin{rmk}
-  Part (b) is equivalent to the statement that \(\coker \Ind\) is a
-  finite group where \(\Ind\) is defined by
-  \begin{align*}
-    \Ind \from \bigoplus_{H \in X} R(H) & \to R(G) \\
-    (\theta_H)_{H \in X} & \mapsto \sum_{H \in X} \Ind_H^G \theta_H
-  \end{align*}
-  For \(R(H)\) the ring of virtual characters of \(H\) and \(R(G)\)
-  similarly defined. In fact, this map can be represented by a
-  matrix \[
-    \Ind = \left[ (W_i, \Ind_H^G V_{H,j}) \right]
-  \]
-  where \(W_i\) ranges over all irreducible representations of \(G\)
-  and \(V_{H,j}\) ranges over all irreducible representations of \(H\)
-  for al \(H \in X\). Thus, the cokernel is a finite group if and only
-  if the rows of this matrix are linearly independent.
-\end{rmk}
-\begin{proof}
-  For \((b) \implies (a)\), let \(S = \Union_{H \in X} H\). Then, take
-  \(g \in G \setminus S\). Since \(S\) is conjugation invariant, no
-  conjugate of \(g\) is in \(S\). So, by the Mackey formula,
-  \(\chi_{\Ind_H^G V}(g) = 0\) for all \(H \in X\) and \(V\). Thus,
-  by assumption, for any irreducible representation \(W\) of \(G\) is
-  a \(\Q\)-span of characters of induced representations, so
-  \(\chi_W(g) = 0\). However, irreducible characters also span the
-  class functions, so this would mean that any class function would
-  vanish of \(g\), a contradiction. \\
-
-  For \((a) \implies (b)\), let \(U\) be a virtual representation of
-  \(G\) such that \((\chi_U, \chi_{\Ind_H^G V}) = 0\) for all \(H\)
-  and \(V\). Then, by Frobenius reciprocity, we get \((\chi_{\Res_H^G
-    U}, \chi_V) = 0\). Thus, \(\chi_U\) vanishes on \(H\) for any \(H
-  \in X\) and so \(\chi_U \identically 0\). \todo{Expand on this}
-\end{proof}
-\begin{cor}
-  Any irreducible character of a finite group is a rational linear
-  combination of induced characters from its cyclic subgroups.
-\end{cor}
-\begin{example}
-  Let \(G = A_4\). Then, \(|A_4| = 12\). Let \(H = \langle 1,
-  (123),(321) \rangle\), \(K = \langle 1, (12)(34) \rangle\). Then,
-  given characters of \(A_4\), \(\chi_1, \chi_{\zeta},
-  \chi_{\zeta^2}\), and \(\theta\), characters of \(H\), \(\chi_1,
-  \chi_{\zeta}, \chi_{\zeta^2}\), and characters of \(K\), \(\chi_1,
-  \chi_{-1}\), one can use Frobenius reciprocity 
-  to check
-  \begin{align*}
-    \Ind_H^G \chi_1 & = \chi_1 + \theta \\
-    \Ind_H^G \chi_{\zeta} & = \chi_{\zeta} + \theta \\
-    \Ind_H^G \chi_{\zeta^2} & = \chi_{\zeta^2} + \theta \\
-    \Ind_K^G \chi_1 & = \chi_1 + \chi_{\zeta} + \chi_{\zeta^2} + \theta \\
-    \Ind_K^G \chi_{-1} & = 2 \theta
-  \end{align*}
-  and so
-  \begin{align*}
-    \chi_1 & = \Ind_H^G \chi_1 - \frac{1}{2} \Ind_K^G \chi_{-1} \\
-    \chi_\zeta & = \Ind_H^G \chi_\zeta - \frac{1}{2} \Ind_K^G
-                 \chi_{-1} \\
-    \chi_{\zeta^2} & = \Ind_H^G \chi_{\zeta^2} - \frac{1}{2} \Ind_K^G
-                     \chi_{-1} \\
-    \theta & = \frac{1}{2} \Ind_K^G \chi_{-1}
-  \end{align*}
-  Thus, \(A_4 = \Union_{g \in A_4} gHg^{-1} \union \Union_{g \in A_4} gKg^{-1}\).
-\end{example}
-\section{Brauer's Theorem}
-While Artin's theorem gives us a way to write characters as a rational
-linear combination of characters induced from cyclic subgroups, the
-use of the rational numbers leaves something to be desired. We would
-rather have integral linear combinations. In fact, if we are willing
-to look a little more broadly than cyclic groups, we can arrive at
-such a decomposition.
-\begin{defn}
-  Let \(p\) be a prime. A group \(G\) is called \de{\(p\)-elementary}
-  if \[
-    G \isom Z \times P
-  \]
-  where \(Z\) is a cyclic group of order prime to \(p\), (that is
-  \(\gcd(p,|Z|)=1\)), and \(P\) is a \(p\)-group (i.e. \(|P| =
-  p^r\)). \(G\) is \de{elementary} if it is \(p\)-elementary for some
-  prime \(p\).
-\end{defn}
-\begin{thm}[Brauer's Theorem]\label{brauers-thm}
-  Every complex character is a \(\Z\)-linear combination of linear
-  characters of elementary subgroups \(P\) induced to \(G\), that
-  is \[
-    \chi = \sum_P c_P \Ind_P^G \xi_p, \ c_P \in \Z
-  \]
-  where \(\xi_P\) is a linear character of \(P\).
-\end{thm}
-However, the proof of Brauer's theorem is not so straight-forward. It
-requires use of the following theorem.
-\begin{thm}
-  Let \(G\) be a finite group and let \(V_p\) be the subgroup of
-  \(R(G)\) generated by characters induced from those of
-  \(p\)-elementary subgroups of \(G\). Then, \([R(G):V_p] < \infty\) 
-  and \(\gcd([R(G):V_p],p) = 1\).
-\end{thm}
-\todo{Actually prove Brauer's theorem.}
 \section{Example: Representations of the Symmetric Group}
 Elements of the symmetric group \(\Sym_n\) can be represented in
 \(1\)-line notation as products of disjoint cycles, and to each
@@ -2185,14 +2054,189 @@ results without proofs about the irreducible \(\Sym_n\) modules.
     removable corner of \(\lambda\) revmoved and \(\lambda^+\) is the
     set of all 
     Ferrers diagrams with an addable corner of \(\lambda\) added. 
-  \item The permutation modules decompose as \[
-      M^\mu = \bigoplus_{\lambda \covers \mu} m_{\lambda, \mu} S^{\lambda}
+  \item (Young's Rule) Over an algebraically closed field, the
+    permutation modules decompose as \[ 
+      M^\mu = \bigoplus_{\lambda} K_{\lambda, \mu} S^{\lambda}
     \]
-    where \(m_{\lambda, \mu}\) is the number of ``semistandard Young
-    tableaux'' of shape \(\lambda\) and content \(\mu\). 
+    where \(K_{\lambda, \mu}\) is the number of ``semistandard Young
+    tableaux'' of shape \(\lambda\) and content \(\mu\), referred to
+    as the \emph{Kostka number}. 
   \end{enumerate}
 \end{prop}
+\begin{example}
+  Let \(\lambda = (n)\). Then, \(e_{\ydiagram{2} \cdots
+    \ydiagram{1}} = \ytableausetup{boxsize=normal, tabloids}
+  \begin{ytableau}
+    1&2&\none[\cdots]&n
+  \end{ytableau}
+\) and so the trivial representation is a subrepresentation of
+\(S^{(n)}\). Therefore, \(S^(n)\) is the trivial representation, which
+was the only possibility anyways since \(M^{(n)}\) was also trivial.
+\end{example}
+\begin{example}
+  Let \(\lambda = (1^n)\). Then, for any \(\T\) of shape \(\lambda\),
+  \(e_\T\) is the signed sum of all 
+  \(n!\) permutations viewed as tabloids and \(e_{\sigma \T} = \sigma
+  e_\T = (\sgn \sigma) e_\T \). Thus, every polytabloid is a scalar
+  multiple of \(e_\T\) and thus \(S^{(1^n)} = \C\{e_\T\}\) with action
+  given by \(\sigma e_\T = (\sgn \sigma) e_\T\), thus giving the sign representation.
+\end{example}
+\begin{example}
+  For \(\lambda = (n-1,1)\), then we have polytabloids of the form \[
+    \{\T\} = \begin{ytableau}
+      i& \cdots & j\\
+      k
+    \end{ytableau} \implies Q(\T) = 1-(i,k) \implies e_\T = \begin{ytableau}
+      i& \cdots & j\\
+      k
+    \end{ytableau} - \begin{ytableau}
+      k& \cdots & j\\
+      i
+    \end{ytableau}
+  \]
+  The span of all these \(e_\T\) is given by \[
+    S^{(n-1,1)} = \{c_1 \textbf{1} + c_2 \textbf{2} + \cdots + c_n \textbf{n} \st c_1 + c_2 +
+    \cdots + c_n = 0\} \text{ where } \textbf{k} := \begin{ytableau}
+      i& \cdots & j\\
+      k
+    \end{ytableau}
+  \]
+  Thus, \(\dim S^{(n-1,1)} = n-1\) and we can pick a basis \(\{\textbf{2}-\textbf{1},
+  \textbf{3}-\textbf{1}, \ldots, \textbf{n}-\textbf{1}\}\}\) with character
+  \(\chi_{S^{(n-1,1)}}(\sigma)\) to be one less than the number of
+  fixed points of \(\sigma \in \Sym_n\).
+\end{example}
+\section{Artin's Theorem}
+Artin's theorem allows us to gain more insight into how induced
+characters or representations may be related to the irreducible
+representations of a finite group.
+\begin{defn}
+  Let \(G\) be a finite group. A \de{virtual representation} of \(G\)
+  is an integer linear combination of irreducible representations of
+  \(G\). 
+\end{defn}
+\begin{prop}
+  Let \(V\) be an virtual representation with character \(\chi_V\). If
+  \((\chi_V,\chi_V)=1\) and \(\chi_V(1) > 0\), then \(\chi_V\) is a
+  character of an irreducible representation of \(G\).
+\end{prop}
+\begin{proof}
+  Let \(V = \sum n_i V_i\) for irreducible representations \(V_i\) and
+  \(n_i \in \Z\). Then, using the fact that the irreducible characters
+  form an orthonomal basis, we get \(1 = (\chi_V,\chi_V) = \sum
+  n_i^2\). Thus, \(n_i = \pm 1\) for one \(i\) and \(0\)
+  otherwise. However, \(\chi_V(1) > 0\) by assumption, so \(n_i = 1\).
+\end{proof}
+\begin{thm}[Artin's theorem]
+  Let \(X\) be a conjugation-invariant family of subgroups of a finite
+  group \(G\). Then, the following are equivalent.
+  \begin{enumerate}
+  \item Any element of \(G\) belongs to a subgroup \(H \in X\), that
+    is, \(G = \Union_{H \in X} H\).
+  \item The character of any irreducible representation of \(G\)
+    belongs to the \(\Q\)-span of characters of induced
+    representations \(\Ind_H^G V\) where \(H \in X\) and \(V\) is an
+    irreducible representation of \(H\). 
+  \end{enumerate}
+\end{thm}
+\begin{rmk}
+  Part (b) is equivalent to the statement that \(\coker \Ind\) is a
+  finite group where \(\Ind\) is defined by
+  \begin{align*}
+    \Ind \from \bigoplus_{H \in X} R(H) & \to R(G) \\
+    (\theta_H)_{H \in X} & \mapsto \sum_{H \in X} \Ind_H^G \theta_H
+  \end{align*}
+  For \(R(H)\) the ring of virtual characters of \(H\) and \(R(G)\)
+  similarly defined. In fact, this map can be represented by a
+  matrix \[
+    \Ind = \left[ (W_i, \Ind_H^G V_{H,j}) \right]
+  \]
+  where \(W_i\) ranges over all irreducible representations of \(G\)
+  and \(V_{H,j}\) ranges over all irreducible representations of \(H\)
+  for al \(H \in X\). Thus, the cokernel is a finite group if and only
+  if the rows of this matrix are linearly independent.
+\end{rmk}
+\begin{proof}
+  For \((b) \implies (a)\), let \(S = \Union_{H \in X} H\). Then, take
+  \(g \in G \setminus S\). Since \(S\) is conjugation invariant, no
+  conjugate of \(g\) is in \(S\). So, by the Mackey formula,
+  \(\chi_{\Ind_H^G V}(g) = 0\) for all \(H \in X\) and \(V\). Thus,
+  by assumption, for any irreducible representation \(W\) of \(G\) is
+  a \(\Q\)-span of characters of induced representations, so
+  \(\chi_W(g) = 0\). However, irreducible characters also span the
+  class functions, so this would mean that any class function would
+  vanish of \(g\), a contradiction. \\
 
+  For \((a) \implies (b)\), let \(U\) be a virtual representation of
+  \(G\) such that \((\chi_U, \chi_{\Ind_H^G V}) = 0\) for all \(H\)
+  and \(V\). Then, by Frobenius reciprocity, we get \((\chi_{\Res_H^G
+    U}, \chi_V) = 0\). Thus, \(\chi_U\) vanishes on \(H\) for any \(H
+  \in X\) and so \(\chi_U \identically 0\). \todo{Expand on this}
+\end{proof}
+\begin{cor}
+  Any irreducible character of a finite group is a rational linear
+  combination of induced characters from its cyclic subgroups.
+\end{cor}
+\begin{example}
+  Let \(G = A_4\). Then, \(|A_4| = 12\). Let \(H = \langle 1,
+  (123),(321) \rangle\), \(K = \langle 1, (12)(34) \rangle\). Then,
+  given characters of \(A_4\), \(\chi_1, \chi_{\zeta},
+  \chi_{\zeta^2}\), and \(\theta\), characters of \(H\), \(\chi_1,
+  \chi_{\zeta}, \chi_{\zeta^2}\), and characters of \(K\), \(\chi_1,
+  \chi_{-1}\), one can use Frobenius reciprocity 
+  to check
+  \begin{align*}
+    \Ind_H^G \chi_1 & = \chi_1 + \theta \\
+    \Ind_H^G \chi_{\zeta} & = \chi_{\zeta} + \theta \\
+    \Ind_H^G \chi_{\zeta^2} & = \chi_{\zeta^2} + \theta \\
+    \Ind_K^G \chi_1 & = \chi_1 + \chi_{\zeta} + \chi_{\zeta^2} + \theta \\
+    \Ind_K^G \chi_{-1} & = 2 \theta
+  \end{align*}
+  and so
+  \begin{align*}
+    \chi_1 & = \Ind_H^G \chi_1 - \frac{1}{2} \Ind_K^G \chi_{-1} \\
+    \chi_\zeta & = \Ind_H^G \chi_\zeta - \frac{1}{2} \Ind_K^G
+                 \chi_{-1} \\
+    \chi_{\zeta^2} & = \Ind_H^G \chi_{\zeta^2} - \frac{1}{2} \Ind_K^G
+                     \chi_{-1} \\
+    \theta & = \frac{1}{2} \Ind_K^G \chi_{-1}
+  \end{align*}
+  Thus, \(A_4 = \Union_{g \in A_4} gHg^{-1} \union \Union_{g \in A_4} gKg^{-1}\).
+\end{example}
+\section{Brauer's Theorem}
+While Artin's theorem gives us a way to write characters as a rational
+linear combination of characters induced from cyclic subgroups, the
+use of the rational numbers leaves something to be desired. We would
+rather have integral linear combinations. In fact, if we are willing
+to look a little more broadly than cyclic groups, we can arrive at
+such a decomposition.
+\begin{defn}
+  Let \(p\) be a prime. A group \(G\) is called \de{\(p\)-elementary}
+  if \[
+    G \isom Z \times P
+  \]
+  where \(Z\) is a cyclic group of order prime to \(p\), (that is
+  \(\gcd(p,|Z|)=1\)), and \(P\) is a \(p\)-group (i.e. \(|P| =
+  p^r\)). \(G\) is \de{elementary} if it is \(p\)-elementary for some
+  prime \(p\).
+\end{defn}
+\begin{thm}[Brauer's Theorem]\label{brauers-thm}
+  Every complex character is a \(\Z\)-linear combination of linear
+  characters of elementary subgroups \(P\) induced to \(G\), that
+  is \[
+    \chi = \sum_P c_P \Ind_P^G \xi_p, \ c_P \in \Z
+  \]
+  where \(\xi_P\) is a linear character of \(P\).
+\end{thm}
+However, the proof of Brauer's theorem is not so straight-forward. It
+requires use of the following theorem.
+\begin{thm}
+  Let \(G\) be a finite group and let \(V_p\) be the subgroup of
+  \(R(G)\) generated by characters induced from those of
+  \(p\)-elementary subgroups of \(G\). Then, \([R(G):V_p] < \infty\) 
+  and \(\gcd([R(G):V_p],p) = 1\).
+\end{thm}
+\todo{Actually prove Brauer's theorem.}
 \begin{bibdiv}
   \begin{biblist}
     \bib{benson}{book}{
