@@ -1527,7 +1527,8 @@ is finite.
   \item If \(S\) has a highest weight, then \(S\) must be finite.
   \item If \(S\) has highest weight \(\lambda\), then if \(\mu \in
     \weightlattice^+\) and \(\mu \prec \lambda\), then \(\mu \in S\).
-  \item If \(S\) has highest weight \(\lambda\), then if \(\mu \in
+  \item (Optional) If \(S\) has highest weight \(\lambda\), then if
+    \(\mu \in 
     S\), then \[
       (\mu+\halfsum, \mu+\halfsum) \leq (\lambda + \halfsum, \lambda +
       \halfsum)
@@ -1539,7 +1540,72 @@ is finite.
   Part (a) is immediate from the definition of \(S\) being
   saturated. For part (b), we note that the number of dominant weights
   less than the highest weight, say \(\lambda \in S\), must be
-  finite by \ref{finite-num-of-misbehaved-weights}. 
+  finite by \ref{finite-num-of-misbehaved-weights}. Thus, since our
+  root system is also finite, each dominant weight will only have a
+  finite number of other weights to make \(S\) saturated. \\
+
+  For (c), we take an arbitrary \(\mu' = \mu+\sum_{\alpha \in
+    \simpleroots} k_\alpha \alpha \in S\) with \(k_\alpha \in
+  \Z^+\). One reduces one of the \(k_\alpha\) while still remaining in
+  \(S\) until only \(\mu \in S\). \\
+
+  For (d), we can reduce to \(\mu\) being dominant using part (c). If
+  \(\mu = \lambda - \pi\) for \(\pi\) a sum of positive roots, we have
+  \begin{align*}
+    (\lambda+\halfsum, \lambda+\halfsum) - (\mu+\halfsum,
+    \mu+\halfsum)
+    & = (\lambda + \halfsum, \lambda+\halfsum) -
+      (\lambda+\halfsum-\pi, \lambda+\halfsum-\pi) \\
+    & = (\lambda+\halfsum, \pi)+(\pi, \mu+\halfsum) \\
+    & \geq (\lambda+\halfsum, \pi) \\
+    & \geq 0
+  \end{align*}
+  where the inequalities follow because \(\mu+\halfsum\) and
+  \(\lambda+\halfsum\) are dominant. Because \(\lambda+\halfsum\) is
+  strongly dominant, equality holds only if \(\pi = 0\).
+\end{proof}
+The proposition above gives us a good picture of what a saturated set
+of weights \(S\) looks like if it has a highest weight. Namely, \(S\)
+consists of all dominant weights lower than or equal to highest weight
+\(\lambda\) and the conjugates of all these weights under \(\W\)
+\begin{cor}
+  \cite{humph}*{p 71} Given \(\lambda \in \weightlattice^+\), there exists precisely one
+  set of saturated weights \(S\) such that \(\lambda\) is a highest
+  weight of \(S\).
+\end{cor}
+\begin{proof}
+  Given the exposition above, for \(\lambda \in \weightlattice^+\), we
+  see that at most one saturated set of weights can exist with
+  \(\lambda\) the highest weight. Conversely, given \(\lambda \in
+  \weightlattice^+\), let us construct a saturated set of weights where
+  \(\lambda\) is a highest weight.
+  \begin{enumerate}
+  \item Take \(S\) to be the set of all dominant weights below
+    \(\lambda\) and their \(\W\)-conjugates.
+  \item Observe that \(S\) is stable under the \(\W\). Then, \(w \mu
+    \prec \mu\) for all dominant weights \(\mu\) and all \(w \in
+    \W\) by \ref{weight-is-conj-to-unique-dominant-weight}. Thus, \[
+      S = \{\mu \in \weightlattice \st w \mu \prec \lambda \text{ for
+        all } w \in \W\}
+    \]
+    Take \(\alpha \in \roots\). For \(\mu' = \mu - k \alpha\) for
+    \(k\) between \(0\) and 
+    \(\langle \mu, \alpha \rangle\), we wish to show \(\mu' \in S\).
+  \item Since \(\mu'\) is on the \(\alpha\)-chain of \(\mu\),
+    \(w(\mu')\) is on the \(w(\alpha)\)-chain from \(w(\mu)\) to
+    \(w(\mu-\langle \mu,\alpha \rangle \alpha) = w(\mu)-\langle
+    \mu,\alpha \rangle w(\alpha)\). Thus, we have \[
+      w \mu \prec w \mu' \prec w \mu - \langle \mu,\alpha \rangle w
+      (\alpha) \text{ or } w \mu - \langle \mu,\alpha \rangle w
+      (\alpha) \prec w \mu' \prec w\mu
+    \]
+  \item Note, howver, \(w\mu\) and \(w \mu - \langle \mu,\alpha \rangle w
+      (\alpha)\) are both in the \(\W\)-orbit of \(\mu\), so by the
+      description of \(S\) above, they are both lower than
+      \(\lambda\). Therefore, \(w \mu' \prec \lambda\) for all \(w \in
+      \W\), thus giving us \(\mu' \in S\) by our description of \(S\).
+  \end{enumerate}
+
 \end{proof}
 \begin{bibdiv}
   \begin{biblist}
