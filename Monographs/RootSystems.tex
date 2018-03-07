@@ -189,7 +189,7 @@ relative to $\simpleroots$ as those with $k_\alpha \geq 0, \forall \alpha
 \in \simpleroots$ and a similar notion for negative roots. Note that this
 partitions $\roots = \roots^+ \union \roots^-$. We also note that we can
 define a partial order on the roots in $\roots$ with a fixed $\simpleroots$.
-\begin{defn}
+\begin{defn}\label{partial-order-on-roots}
   \cite{humph}*{p 47} We say $\mu \prec \lambda$ if and only if $\lambda - \mu$ is a sum
   of positive roots (equivalently, of simple roots) or $\lambda =
   \mu$. 
@@ -207,7 +207,7 @@ We note also the following relationship between simple roots.
 \end{proof}
 In essence,
 this lemma gives us that the angle between two simple roots is obtuse.
-\begin{defn}
+\begin{defn}\label{half-sum-defn}
   Let us define the \de{half sum of positive roots} as \[
     \halfsum := \frac{1}{2}
   \sum_{\beta \succ 0} \beta.
@@ -1271,7 +1271,7 @@ consider the connected components of this complement.
   \(P_\alpha\) is the hyperplane orthogonal to 
   \(\alpha\). 
 \end{defn}
-\begin{prop}
+\begin{prop}\label{weyl-chamber-props}
   Given a root system \(\roots\) of Euclidean space \(E\)
   \begin{enumerate}
   \item Each regular \(\gamma \in E\) belongs to precisely one Weyl
@@ -1301,6 +1301,12 @@ consider the connected components of this complement.
   of this action comes from the correspondance with a choice of base
   along with theorem \ref{weyl-gp-and-simple-system}.
 \end{proof}
+\begin{defn}
+  Given a choice of \(\simpleroots\), we call the Weyl chamber
+  corresponding to this choice consisting of all \(v \in E\) such that
+  \((v,\alpha) > 0\) for all \(\alpha \in \simpleroots\) the
+  \de{fundamental Weyl chamber relative to \(\simpleroots\)}.
+\end{defn}
 At first glance, it is not apparent what value the Weyl chamber
 perspective gives over the choice of base persepctive, but there are
 some useful techniques that use closure arguments, such as
@@ -1312,7 +1318,8 @@ some useful techniques that use closure arguments, such as
 \begin{proof}
   Consider the closure \(\ov{C}\) of \(C\). By construction, every
   vector \(v \in E\) must lie in the closure of some chamber and, by
-  \ref{}, \(\W\) acts transitively on the chambers. Thus, each orbit
+  \ref{weyl-chamber-props}(c), \(\W\) acts transitively on the
+  chambers. Thus, each orbit 
   of \(\W\) on \(V\) intersects \(\ov{C}\). \\
 
   Now, let \(v_1, v_2 \in \ov{C}\) with \(w(v_1) = v_2\) for some \(w
@@ -1337,6 +1344,13 @@ some useful techniques that use closure arguments, such as
   \]
   and so \(v_1 = v_2\) by the inductive hypothesis.
 \end{proof}
+An immediate consequence of the second part of this proof is the
+following
+\begin{lem}\label{lem-10-3-B}
+  \cite{humph}*{Lemma 10.3B p 52} If \(v_1,v_2 \in \ov{C}\) such that
+  \(w(v_1) = v_2\) for some \(w \in \W\), then \(w\) is a product of
+  simple reflections which fix \(v_1\). In particular, \(v_1 = v_2\).
+\end{lem}
 \section{Weights}
 Let $\weightlattice$ be a collection of vectors $\lambda \in E$ such that
 $\langle \lambda, \alpha \rangle \in \Z$ for all $\alpha \in
@@ -1385,10 +1399,13 @@ Cartan matrix. Thus,
 \end{prop}
 \begin{proof}
   Write \(\alpha_i = \sum_j m_{i,j} \lambda_j\) for \(m_{i,j} \in
-  \Z\). Then, we see \[
+  \Z\). Then, we see
+  \begin{equation}
+    \label{eq:weight-decomp}
     \langle \alpha_i, \alpha_k \rangle = \sum_{j} m_{i,j} \langle
     \lambda_j, \alpha_k \rangle = m_{i,k} = \langle \alpha_i, \lambda_k \rangle
-  \]
+  \end{equation}
+
   Thus, the Cartan matrix is a change of basis matrix to write the
   \(\alpha_i\)'s in terms of the \(\lambda_i\)'s. To go the other
   direction, we simply invert \(M\), which is a matrix with entries in
@@ -1396,18 +1413,133 @@ Cartan matrix. Thus,
   thus \(\det M \cdot \lambda_i \in \rootlattice\).
 \end{proof}
 \todo{Compute the index for each type.}
+Recall the
+partial order on roots \ref{partial-order-on-roots}. We can extend
+this to a partial order on weights as follows.
+\begin{defn}
+  Given \(\lambda,\mu \in \weightlattice\), we say \(\lambda \prec
+  \mu\) if and only if \(\lambda-\mu\) is a sum of positive roots.
+\end{defn}
 In some ways, dominant weights serve as a good notion for a base of
 the weights, by virtue of the following proposition.
-\begin{prop}
+\begin{prop}\label{weight-is-conj-to-unique-dominant-weight}
   \cite{humph}*{p 68} Each weight is conjugate under \(\W\) to one and
-  only one dominant weight. If \(\lambda\) is dominant, then \(\sigma
-  \lambda \prec \lambda\) for all \(\sigma \in \W\), and if
-  \(\lambda\) is strongly dominant, then \(\sigma \lambda = \lambda\)
-  only when \(\sigma = 1\).
+  only one dominant weight. If \(\lambda\) is dominant, then \(w
+  \lambda \prec \lambda\) for all \(w \in \W\), and if
+  \(\lambda\) is strongly dominant, then \(w \lambda = \lambda\)
+  only when \(w = 1\).
 \end{prop}
 \begin{proof}
   This result follows from
-  \ref{weyl-chamber-closure-contains-one-point-in-orbit} and \ref{}
+  \ref{weyl-chamber-closure-contains-one-point-in-orbit} and
+  \ref{lem-10-3-B} since all the fundamental weights lie in the
+  closure of the fundamental Weyl chamber.
+\end{proof}
+However, dominant weights are not not necessarily maximal with respect
+to the partial order in general.
+\begin{example}
+  Consider the weight lattice for \(A_2\) with
+  \(\simpleroots=\{\alpha,\beta\}\), the standard choice. Then,
+  \(\lambda = 3\alpha+\beta\) has \[
+    \langle \lambda, \beta \rangle = -3+2 = -1
+  \]
+  so \(\lambda\) is not a dominant weight. However, \(\lambda-\alpha\)
+  has \[
+    \langle \lambda-\alpha, \beta \rangle = -2+2=0, \ \ \langle
+    \lambda-\alpha, \alpha \rangle = 4-1 = 3
+  \]
+  and thus is a dominant weight. Therefore, \(\lambda-\alpha \prec
+  \lambda\) since \(\lambda - (\lambda-\alpha) = \alpha \in
+  \simpleroots\), but \(\lambda\) is not dominant.
+\end{example}
+However, given a fixed dominant weight, the space of all such examples
+is finite.
+\begin{lem}\label{finite-num-of-misbehaved-weights}
+  \cite{humph}*{p 70} Let \(\lambda\) be a dominant weight. Then, the
+  number of dominant 
+  weights \(\mu\) such that \(\mu \prec \lambda\) is finite.
+\end{lem}
+\begin{proof}
+  Observe that, since \(\lambda-\mu\) is a sum of positive roots, \[
+    0 \leq (\lambda+\mu, \lambda-\mu) = (\lambda,\lambda)-(\mu,\mu)
+  \]
+  so \(\mu \in \{x \in E \st (x,x) \leq (\lambda,\lambda)\}\), which
+  is compact. Furthermore, the dominant weights is a discrete set, so
+  there can only be a finite number of such \(\mu\).
+\end{proof}
+\begin{prop}
+  \cite{humph}*{p 70} Recall \(\displaystyle \halfsum = \frac{1}{2} \sum_{\alpha \in \roots, \alpha \succ
+    0} \alpha\) (\ref{half-sum-defn}). As discussed before, \(\halfsum
+  \in \weightlattice\). Furthermore,
+  \begin{enumerate}
+  \item \(\halfsum\) is a (strongly) dominant weight.
+  \item For \(\mu \in \weightlattice^+\) and \(\nu = w^{-1}(\mu)\) for
+    \(w \in \W\) we have \[
+      (\nu+\halfsum,\nu+\halfsum) \leq (\mu+\halfsum, \mu+\halfsum)
+    \] with equality only if
+    \(\nu=\mu\). 
+  \end{enumerate}
+\end{prop}
+\begin{proof}
+  For (a), observe \[
+    \sigma_i \halfsum = \halfsum-\alpha_i \implies (\halfsum-\alpha_i,
+    \alpha_i) = (\sigma_i^2 \halfsum, \sigma_i \alpha_i) = (\halfsum,
+    -\alpha_i) \implies 2(\halfsum, \alpha_i) = (\alpha_i,\alpha_i) = 2
+  \]
+  Thus, \(\langle \halfsum, \alpha_i \rangle = 1\), so \[
+    \halfsum \overset{\ref{eq:weight-decomp}}{=} \sum_i \langle \halfsum, \alpha_i \rangle \lambda_i =
+    \sum_i \lambda_i
+  \]
+  For (b), observe
+  \begin{align*}
+    (\nu+\halfsum,\nu+\halfsum)
+    & = (w(\nu+\halfsum), w(\nu+\halfsum)) \\
+    & = (\mu+w\halfsum, \mu+w\halfsum) \\
+    & = (\mu + \halfsum, \mu + \halfsum) - 2(\mu, \halfsum-w\halfsum)
+    \\
+    & \leq (\mu+\halfsum, \mu+\halfsum)
+      & \text{ since }\mu \in \weightlattice^+ \text{ and } \halfsum -
+        w\halfsum \text{ is a sum of positive roots}
+  \end{align*}
+  with equality only if \((\mu, \halfsum-w\halfsum) = 0\) by
+  \ref{weight-is-conj-to-unique-dominant-weight}. \todo{Why is the last
+    equality true?} However, this gives us \[
+    (\mu,\halfsum) = (\mu, w\halfsum) = (\nu, \halfsum) \implies
+    (\mu-\nu,\halfsum) = 0
+  \]
+  but \(\mu-\nu\) is a sum of positive roots and \(\halfsum\) is
+  strongly dominant, so it must be that \(\mu=\nu\).
+\end{proof}
+\begin{defn}
+  We call a subset \(S \subset \weightlattice\) \de{saturated} if, for
+  all \(\lambda \in S\), \(\alpha \in \roots\), and \(i\) between
+  \(0\) and \(\langle \lambda, \alpha \rangle\), the weight
+  \(\lambda-i \alpha \in S\). We say a saturated set of weights has a
+  \de{highest weight} \(\lambda\) if \(\lambda \in S\) and \(\mu \prec
+  \lambda\) for all \(\mu \in S\).
+\end{defn}
+\begin{prop}
+  Given a saturated set of weights \(S\), we have the following
+  \begin{enumerate}
+  \item \(S\) is stable under \(\W\), that is, \(\sigma_\alpha \lambda
+    = \lambda - \langle \lambda, \alpha \rangle \alpha
+    \in S\) for all \(\lambda \in S, \alpha \in \roots\).
+  \item If \(S\) has a highest weight, then \(S\) must be finite.
+  \item If \(S\) has highest weight \(\lambda\), then if \(\mu \in
+    \weightlattice^+\) and \(\mu \prec \lambda\), then \(\mu \in S\).
+  \item If \(S\) has highest weight \(\lambda\), then if \(\mu \in
+    S\), then \[
+      (\mu+\halfsum, \mu+\halfsum) \leq (\lambda + \halfsum, \lambda +
+      \halfsum)
+    \]
+    with equality only if \(\mu = \lambda\).
+  \end{enumerate}
+\end{prop}
+\begin{proof}
+  Part (a) is immediate from the definition of \(S\) being
+  saturated. For part (b), we note that the number of dominant weights
+  less than the highest weight, say \(\lambda \in S\), must be
+  finite by \ref{finite-num-of-misbehaved-weights}. 
 \end{proof}
 \begin{bibdiv}
   \begin{biblist}
