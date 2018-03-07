@@ -70,7 +70,7 @@ as desired and if $(\beta,\alpha) = 0$, then $\sigma_\alpha(\beta) =
   \begin{figure}[h]
     \centering
     \includegraphics[width=0.25\textwidth]{images/Root_system_A2_with_labels.png}
-    \caption{Root system $A_2$}
+    \caption{Root system $A_2$ from \cite{wiki}}
   \end{figure}
 \end{example}
 These hyperplane reflections form a ``nice''
@@ -371,8 +371,12 @@ It turns out that all these root systems are irreducible, but they are
 not the only ones. There are other so-called ``exceptional'' types,
 such as
 \begin{defn}
-  The following configuration of roots is called \(G_2\). \\
-  \includegraphics[scale=0.3]{images/Root_system_G2_with_labels}
+  The following configuration of roots in figure \ref{fig:G_2} is called \(G_2\). \\
+  \begin{figure}
+  \includegraphics[scale=0.3]{images/Root_system_G2_with_labels}    
+    \caption{\(G_2\) Root System from \cite{wiki}}
+    \label{fig:G_2}
+  \end{figure}
 \end{defn}
 \begin{rmk}
   Note that the short roots in \(G_2\) form the system \(A_2\), and
@@ -381,15 +385,21 @@ such as
 Using Dynkin diagrams, we will arrive at \emph{all}
 the irreducible root systems. While it might take a little work to
 derive directly at this stage, the root systems
-have the following Weyl groups, which we will derive later. \\
-\begin{tabular}{|c|c|}
+have the following Weyl groups, presented in Table
+\ref{tab:wely-groups}, which we will derive later. \\
+\begin{table}
+  \centering
+  \begin{tabular}{|c|c|}
   \hline \(A_n\) & \(S_{n+1}\) \\
   \hline \(B_n\) & \((\Z/2)^n \rtimes S_n\) \\
   \hline \(C_n\) & \((\Z/2)^n \rtimes S_n\)\\
   \hline \(D_n\) & \((\Z/2)^{n-1} \rtimes S_n\) \\
   \hline \(G_2\) & \(D_{12}\), the Dihedral group of order \(12\). \\
   \hline
-\end{tabular} \\
+  \end{tabular}
+  \caption{Weyl Groups for Standard Irreducible Root Systems}
+  \label{tab:wely-groups}
+\end{table}
 % We also note, for \(n=2\), the positive systems of \(A_2, B_2, C_2\) are given by the
 % roots with positive height. So, for \(A_2\), these are \(\alpha,
 % \alpha+\beta,\beta\). 
@@ -455,10 +465,10 @@ This length function has many results.
   \end{enumerate}
 \end{prop}
 \subsection{Chevalley-Bruhat Ordering (Optional)}
-Now, we can also define a partial order on $W$ called the
+Now, we can also define a partial order on $\W$ called the
 ``Chevalley-Bruhat Ordering'' following the approach in
 \cite{cat-o}*{p 5}. Let \[
-  T := \Union_{w \in W} wSw^{-1}
+  T := \Union_{w \in \W} wSw^{-1}
 \]
 where $S$ is the set of all simple reflections ($s_\alpha$) in
 $W$. Then, $T$ is the set of all reflections. Now, if $w,w' \in W$,
@@ -466,11 +476,12 @@ then we can say $w' \to w$ if $w = tw'$ for some $t \in T$ and $\ell(w') <
 \ell(w)$. We extend this relation to a partial ordering of $W$, saying
 $w' < w$ if
 there is some sequence of relations $w'=w_0 \to w_1 \to \cdots \to
-w_n=w$ for some $w_i \in W$. This partial order satisfies some
+w_n=w$ for some $w_i \in \W$. This partial order satisfies some
 useful properties.
 \begin{prop}
-  \cite{cat-o}*{p 5} Let $w,w' \in W$.
+  \cite{cat-o}*{p 5} Let $w,w' \in \W$.
   \begin{enumerate}
+  \item \(w' < w \implies \ell(w') < \ell(w)\)
   \item \(w' \leq w\) if and only if \(w'\) occurs as a subexpression
     in one (hence any) reduced expression \(s_1 \cdots s_n\), \(s_i \in
     S\), for \(w\).
@@ -482,6 +493,10 @@ useful properties.
     \W\) satisfying \(w_1 < w < w_2\) is \(0\) or \(2\).
   \end{enumerate}
 \end{prop}
+\begin{rmk}
+  When \(\W = S_n\), then the Chevalley-Bruhat order is the weak order
+  on permutations.
+\end{rmk}
 \section{Cartan Matrices}
 If we fix an ordering of our simple roots, we can encode the
 relationships between our simple roots using a matrix.
