@@ -1,4 +1,6 @@
-# Grad School Writings
+# Grad School Writings [![Build Status](https://travis-ci.org/ghseeli/grad-school-writings.svg?branch=master)](https://travis-ci.org/ghseeli/grad-school-writings)
+
+[PDFs](https://ghseeli.github.io/grad-school-writings)
 
 This is a GitHub repository for me to keep documents I am working on in a public version control system. In this repository, I will keep
 
