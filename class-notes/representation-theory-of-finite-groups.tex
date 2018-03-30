@@ -52,6 +52,32 @@ same as a module of a finite group algebra, but the representation
 theoretic perspective allows us to leverage tools from linear algebra
 to gain additional insights.
 
+One of the most oft-cited examples of representation theory in action
+is Burnside's \(pq\)-theorem
+(see \ref{some-applications-of-representation-theory}), but representations
+are also often studied in their own right. In general, representation
+theories seem to follow a general program along the following lines.
+\begin{enumerate}
+\item To what degree do representations decompose into direct sums of
+  subrepresentations? The best answer is when all representations are
+  completely reducible, that is, a representation breaks up into a
+  direct sum of 
+  the irreducible subrepresentations. This happens for finite group
+  representations over \(\C\).
+\item Can we determine the irreducible and indecomposable
+  representations of a given object? For finite group representations
+  over \(\C\), the irreducible representations are completely
+  determined by the group's ``character table.''
+\item Given a tensor product of representations, which irreducible
+  and/or indecomposable representations does the product contain?
+\end{enumerate}
+These are the questions this monograph will try to answer for
+representations of finite groups over \(\C\). Over fields where the
+characteristic of the field divides the order of the group, different
+techniques are often used in an area of math known as ``modular
+representation theory,'' and such a situation will not be discussed
+much here.
+
 While the classic texts in representation theory continue to be cited
 and used often, and contain many details ommitted here, I am eternally
 grateful for \cite{etingof} and \cite{smith} for being approachable,
@@ -1137,7 +1163,7 @@ following theorem.
   different language. 
 \end{rmk}
 \section{Some Applications of Representation Theory: Frobenius
-  Divisibility and Burnside}
+  Divisibility and Burnside}\label{some-applications-of-representation-theory}
 We now seek to discuss some useful applications of representation
 theory that would be much more difficult to prove using only group
 theory. First, we will have to introduce the terminology of algebraic
