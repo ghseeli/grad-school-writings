@@ -47,6 +47,7 @@ script:
   }
 - write_section_links "class-notes" "class-notes.md" "Class Notes" ""
 - write_section_links "Monographs" "monographs.md" "Monographs" ""
+- write_section_links "presentations" "presentations.md" "Presentations" ""
 - cd ..
 deploy:
   provider: pages
