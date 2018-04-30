@@ -4,7 +4,7 @@ for DIR in $(ls -d */ | grep ''); do
     cd "$DIR"
     for FI in $(ls | grep --regexp="\.tex$"); do
         echo "$FI"
-        latexmk -pdf -interaction=nonstopmode -silent "$FI" > output.txt 2>&1
+        tectonic "$FI" --print > output.txt 2>&1
         EXITCODE="$?"
         if [ $EXITCODE > 0 ]; then
             cat output.txt
