@@ -1,4 +1,4 @@
-csudo: required
+sudo: required
 install:
 - export PATH="$HOME/miniconda/bin:$PATH"
 - if ! command -v conda > /dev/null; then
