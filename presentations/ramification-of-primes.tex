@@ -15,6 +15,7 @@
 \renewcommand{\O}{\mathcal{O}}
 \newcommand{\disc}{\operatorname{disc}}
 \newcommand{\Tr}{\operatorname{Tr}}
+\newcommand{\transpose}{t}
 
 \title[Ramification of Primes]{Ramification of Primes: A Presentation
   for Math 8600: Commutative Algebra}
@@ -23,7 +24,8 @@
 \begin{document}
 \maketitle
 \section{Introduction}
-Let \(K|\Q\) be a finite field extension. Then, we may consider the
+Let \(K|\Q\) be a finite field extension with \([K:\Q] = n\). Then, we
+may consider the 
 integral closure of \(\Z\) in \(K\), say \(\O_K\). Thus, we have the
 following setup.
 \[\begin{tikzcd}
@@ -39,23 +41,29 @@ following facts.
   \item \(\O_K\) is a Dedekind domain.
   \item Given a prime \(p \in \Z\), the ideal \((p) = p\O_K \ideal
     \O_K\) has a unique decomposition \[
-      (p) = \prod_{i=1}^n P_i^{e_i}
+      (p) = \prod_{i=1}^g P_i^{e_i}
     \]
-    for prime ideals \(P_i \ideal \O_K\) and \(e_i \in \N_0\).
+    for prime ideals \(P_i \ideal \O_K\) and \(e_i \in \N\).
   \item \(\O_K\) is a finitely-generated, free \(\Z\)-module, say \[
       \O_K \isom \Z \alpha_1 \oplus \cdots \oplus \Z \alpha_n \text{
         as a }\Z\text{-module.}
     \]
-    Thus, \(\O_K/p\O_K\) is a finitely-generated \(\Z/p\Z\)-modules,
+    Thus, \(\O_K/p\O_K\) is a finitely-generated \(\Z/p\Z\)-module,
     that is \[
       \O_K/p\O_K \isom (\Z/p\Z) \ov{\alpha_1} \oplus \cdots \oplus (\Z/p\Z)\ov{\alpha_n}
     \]
+    Furthermore, by the Chinese Remainder Theorem, \[
+      \O_K/p\O_k \isom \O_K/P_1^{e_1} \times \cdots \times \O_K/P_g^{e_g}
+    \]
+    so each \(\O_K/P_i^{e_i}\) is an \(\F_p\)-vector space, and in
+    fact, an \(\F_p\)-algebra since \(p
+    \in P_i^{e_i}\).
   \end{enumerate}
 \end{prop}
 This leads us to the following definition:
 \begin{defn}
   We say a prime \(p \in \Z\) is \de{ramified} in \(\O_K\) if \[
-    p\O_k = \prod_{i=1}^n P_i^{e_i}
+    p\O_K = \prod_{i=1}^g P_i^{e_i}
   \]
   has some \(e_i > 1\) for prime ideals \(P_i \ideal \O_K\). If every
   \(e_i = 1\), then \(p\) is
@@ -64,33 +72,88 @@ This leads us to the following definition:
 \begin{example}
   Consider \(2 \in \Z[i]\). Then, since \[
     -i(1+i)(1+i) = -i(1+2i-1) = -i2i = 2,
-  \] we have that \((2) \subset (1+i)^2\). However, \((2)
-  \neq (1+i)\), so it must be that \((2) = (1+i)^2\). Therefore, \(2\)
+  \] we have that \((2) \subset (1+i)^2\). Furthermore, since 
+  \((1+i)\) is prime in \(\Z[i]\) using norm arguments, and \((2)\)
+  has norm \(4\), it must be that \((2) = (1+i)^2\). Therefore, \(2\)
   ramifies in \(\Z[i]\).
 \end{example}
 We wish to come up with some method to determine when a prime will
 ramify in \(\O_K\). One such characterization uses the notion of the ``discriminant.''
 \begin{defn}
-  Let \(B|A\) be an integral ring extension where \(A\) is a PID. Then, we may view \(B\)
-  as a free \(A\)-module with integral basis \(\{x_1, \ldots,
-  x_n\}\). We define
+  Let \(V\) be an \(m\)-dimensional vector space over \(K\). Then,
+  given a symmetric bilinear form \(b \from V \times V \to K\) and
+  \(\{\omega_1, \ldots, \omega_m\}\) a basis of \(V\), we define \[
+    \disc(b;\omega_1, \ldots, \omega_m) :=
+    \det(b(\omega_i,\omega_j))_{1 \leq i,j \leq m}
+  \]
+\end{defn}
+\begin{prop}
+  Given another \(K\)-basis of \(V\) as above, say \(\{\omega_1',
+  \ldots, \omega_m'\}\) such that \[
+    M \colvec{3}{\omega_1}{\vdots}{\omega_m} = \colvec{3}{\omega_1'}{\vdots}{\omega_m'}
+  \]
+  we get that \[
+    \disc(b;\omega_1', \ldots, \omega_m') = (\det M)^2
+    \disc(b;\omega_1, \ldots, \omega_m)
+  \]
+\end{prop}
+\begin{proof}
+  Consider that if \[
+    B = (b(\omega_i,\omega_j))_{1 \leq i,j \leq m}, \ \ B' =
+    (b(\omega_i', \omega_j'))_{1 \leq i,j \leq m}
+  \]
+  then, \[
+    B'_{i,j} = b(\omega_i', \omega_j') = b\left(\sum_{k=1}^n m_{k,i}
+      \omega_k, 
+    \sum_{\ell=1}^n m_{\ell,j} \omega_\ell\right) = \sum_{k=1}^n
+    \sum_{\ell=1}^n m_{i,k} b(\omega_k, \omega_\ell) m_{j,\ell} =
+    (MBM^\transpose)_{i,j} 
+  \]
+  and so \(B' = MBM^\transpose\).
+  Then the result is obtained by taking
+  the determinant of both sides.
+\end{proof}
+\begin{defn}
+  Let \(K\) be a field and let \(A\) be a finite-dimensional
+  \(K\)-algebra with basis \(\{x_1, 
+  \ldots, x_n\}\). Then,
   \begin{enumerate}
-  \item The \de{trace} \(\Tr_{B|A}(z) := \tr m_z\) where, if \[
-      zx_i = \sum_{j=1}^n a_{i,j} x_j
+  \item The \de{trace} \(\Tr_{A|K}(z) := \tr m_z\) where, if \[
+      zx_i = \sum_{j=1}^n a_{i,j} x_j, \ \ a_{i,j} \in K
     \]
-    then \(m_z = (a_{i,j})_{1 \leq i,j \leq n}\).
-  \item The \de{trace form} \(T \from B \times B \to A\) is given
+    then \(m_z = (a_{i,j})_{1 \leq i,j \leq n}\). Note that this is
+    independent of choice of basis since a different choice will give
+    a matrix \(m_z'\) that is conjugate to \(m_z\), which will not
+    change the trace.
+  \item The \de{trace form} \(T \from A \times A \to K\) is given
     by \[
-      T(x,y) = \Tr_{B|A}(xy)
+      T(x,y) = \Tr_{A|K}(xy)
     \]
-  \item The \de{discriminant} of an integral basis \(\{x_1, \ldots,
-    x_n\}\) is \[
-      \disc_A(x_1, \ldots, x_n) = \det \left( T(x_i, x_j) \right)
-    \] 
+    Since we are in a commutative ring, the form is symmetric. Since
+    matrix trace is bilinear, then so is the trace form.
+  \item The \de{discriminant} of \(A\) is 
+  \[
+      \disc(A) := \disc(T;x_1, \ldots, x_n)
+    \]
   \end{enumerate}
 \end{defn}
+\begin{rmk}
+  Consier the case that \(K|\Q\) is a finite separable field extension with
+  \(\O_K \subset K\) the integral closure of \(\Z\) in \(K\).
+  \begin{enumerate}
+  \item Then, the discriminant is independent of choice of
+  integral basis since, given another integral basis \(\{x_1', \ldots,
+  x_n'\}\), we have \[
+    \disc(T;x_1', \ldots, x_n') = (\det M)^2 \disc(T;x_1, \ldots, x_n)
+  \]
+  However, \(M\) is an invertible matrix with entries in \(\Z\), so it
+  must be that \(\det M = \pm 1 \implies (\det M)^2 = 1\). 
+  \item Note \(\disc(K)\) is always an integer because
+    \(\Tr_{K|\Q}(\O_K) \subset \Z\).
+  \end{enumerate}
+\end{rmk}
 \begin{example}
-  Let \(A = \Z\) and \(B = \Z[i]\). Then, if we take integral basis
+  Consider the field extension \(\Q(i)|\Q\). Then, if we take integral basis
   \(\{1,i\}\), we get \[
     m_1 = \left(
       \begin{array}{cc}
@@ -108,7 +171,7 @@ Thus, \[
   \Tr(1) = 2, \Tr(i) = 0, \Tr(-1) = -2
 \]
 and so \[
-  \disc_\Z(\{1,i\}) = \det \left(
+  \disc(\{1,i\}) = \det \left(
     \begin{array}{cc}
       \Tr(1)&\Tr(i)\\
       \Tr(i)&\Tr(-1)
@@ -125,7 +188,7 @@ This paper seeks to prove the following useful characterization for when a
 prime \(p\) ramifies in \(\O_K\).
 \begin{thm}\label{main-thm}
   A prime \(p \in \Z\) ramifies in \(\O_K\) if and only if \(p
-  \divides \disc_\Z(\O_K)\). 
+  \divides \disc(K)\). 
 \end{thm}
 From this result, we also have the useful corollary
 \begin{cor}
@@ -134,8 +197,8 @@ From this result, we also have the useful corollary
 Thus, from our running example, \(2\) is the only prime that ramifies
 in \(\Z[i]\). In the next section, we will follow a synthesis of the
 programs by \cite{ash}*{4.2} and \cite{conrad} to prove this theorem.
-\section{Structure and trace of the quotient \(\O_K/p\O_k\)}
-Using our same setup, let \((p) = p\O_k = \prod_i P_i^{e_i}\) for
+\section{Structure and trace of the quotient \(\O_K/p\O_K\)}
+Using our same setup, let \((p) = p\O_K = \prod_i P_i^{e_i}\) for
 prime ideals \(P_i \ideal \O_K\) and \(e_i \in \N\). 
 \begin{lem}\label{p-ramifies-iff-nilp}
   \(p\) ramifies if and only if the ring \(\O_K/(p)\) has nonzero
@@ -143,23 +206,25 @@ prime ideals \(P_i \ideal \O_K\) and \(e_i \in \N\).
 \end{lem}
 \begin{proof}
   \begin{itemize}
-    \item \((\implies)\). Let \(p\) ramify in \(\O_K\). Then, \(B/pB
-      \isom B/P_1^{e_1}\times \cdots \times B/P_n^{e_n}\) by the
+    \item \((\implies)\). Let \(p\) ramify in \(\O_K\). Then, \(\O_K/p\O_K
+      \isom \O_K/P_1^{e_1}\times \cdots \times \O_K/P_n^{e_n}\) by the
       Chinese Remainder Theorem, where at
       least one \(e_i > 1\), let us say \(e_1\). Then, the quotient
-      ring \(\O_K/P_1^{e_1}\) has a nilpotent element since, for \(x \in
+      ring \(\O_K/P_1^{e_1}\) has a nonzero nilpotent element since,
+      for \(x \in 
       P_1 \setminus P_1^{e_1}\), we get \((x+P_1^{e_1})^{e_1} =
-      x^{e_1} P_1^{e_1} = P_1^{e_1}\).
+      x^{e_1} + P_1^{e_1} = P_1^{e_1}\).
     \item \((\impliedby)\). If \(p\) does not ramify in \(\O_K\), then
       \(\O_K/p\O_K \isom \O_K/P_1 \times \cdots \times \O_K/P_n\), each of which
-      is a (finite) field since each \(P_i\) is maximal in
-      \(\O_K\) and \(\O_K\) is a finitely-generated \(\Z\)-module. Thus,
-      \(\O_K/p\O_K\) cannot have any nilpotent elements. 
+      is a field since each \(P_i\) is maximal in
+      \(\O_K\). Furthermore, each of these fields is finite by
+      Proposition \ref{intro-prop}(c). Thus,
+      \(\O_K/p\O_K\) cannot have any nonzero nilpotent elements. 
     \end{itemize}
   \end{proof}
 We also have, as a corollary to the proof, that
 \begin{cor}\label{unramified-gives-prod-of-finite-fields}
-  If \(p\) is unramified in \(\O_K\), then \(\O_K\) is a product of
+  If \(p\) is unramified in \(\O_K\), then \(\O_K/p\O_K\) is a product of
   finite fields. 
 \end{cor}
 This is a useful fact since
@@ -171,97 +236,112 @@ This is a useful fact since
   (m_x)^k\), it must be that \((m_x)^n = 0\), so \(m_x\) is a
   nilpotent matrix, which has trace \(0\) since its mimimal
   polynomial \(\mu_{m_x}(t) \divides t^n\). Therefore, \[
-    \Tr_{B|A}(x) = \tr m_{x} = 0
+    \Tr_{K|\Q}(x) = \tr m_{x} = 0
   \]
 \end{proof}
 And so, we get
 \begin{lem}\label{nilp-elt-gives-disc-zero-mod-p}
-  For prime \(p\), let \((p) \subset
-  P_i^{e_i}\) such that \(e_i > 1\). Then,
-  \(\disc_{\Z/p\Z}(\O_K/P_i^{e_i}) = \ov{0}\).
+  For prime \(p \in \Z\), let \(p\O_K = \prod_{i=1}^g
+  P_i^{e_i}\). For any \(e_i > 1\),
+  \(\disc_{\F_p}(\O_K/P_i^{e_i}) = \ov{0}\).
 \end{lem}
 \begin{proof}
-  By the above, we know \(\O_K/P_i^{e_i}\) has a nilpotent element,
+  From \ref{intro-prop}(c), we have that \(\O_K/P_i^{e_i}\) is an
+  \(\F_p\)-algebra. By the above, since at least one \(e_i>1\), \(p\)
+  ramifies and so we know \(\O_K/P_i^{e_i}\) has a nonzero nilpotent
+  element, 
   say \(x\). Then, extend \(\{x\}\) to a basis of \(\O_K/P_i^{e_i}\)
-  over \(\Z/p\Z\), say \(\{x,x_2, \ldots,
+  over \(\F_p\), say \(\{x,x_2, \ldots,
   x_k\}\). Each \(xx_i\) is nilpotent, so, for all \(i\), \[
-    \Tr_{\O_K/(p)|\Z/p\Z}(xx_i) = \ov{0}
+    \Tr_{\O_K/P_i^{e_i}|\F_p}(xx_i) = \ov{0}
   \]
   and so, since the trace form matrix will have a row of all zeros, it
-  must have determinant equal to \(\ov{0}\) and so the discriminant is \(0\).
+  must have determinant equal to \(\ov{0}\) and so the discriminant is
+  \(0\). 
 \end{proof}
 \begin{lem}\label{trace-form-nondeg-on-field-ext}
-  Let \(p\) be an unramified prime in \(\O_K\) such that \((p) = \prod_i
-  P_i\). Then, the trace form on \(\O_K/P_i\) is nondegenerate.
+  Let \(p\) is in \(\O_K\) be unramified, that is, \(p \O_K =
+  \prod_{i=1}^g P_i\). Then, the trace 
+  form of \(\O_K/P_i\) over 
+  \(\F_p\) is nondegenerate. Thus, given the field extension
+  \(\O_K/P_i|\F_p\), the discriminant \[
+    \disc(\O_K/P_i) \neq \ov{0} \in \F_p
+  \]
 \end{lem}
 \begin{proof}
   By the arguments above, we already know that \(\O_K/P_i\) is a
   finite field, and since \(\F_p\) is perfect, we have that
-  \(\O_K/P_i|\F_p\) is a separable field extension. Therefore, by a
-  lemma in class \todo{cite this}, it must be that the trace form is
-  nondegenerate. 
+  \(\O_K/P_i|\F_p\) is a separable field extension. Therefore, by
+  Lemma 2.2.3 in class, it must be that the trace form is
+  nondegenerate. Therefore, fixing an \(\F_p\)-basis of \(\O_K/P_i\),
+  \(\{\omega_1, \ldots, \omega_k\}\)
+  the matrix \[
+    (T(\omega_i,\omega_j))_{1 \leq i,j \leq n} \text{ is invertible }  \iff
+    \det(T(\omega_i,\omega_j))_{1 \leq i,j \leq n} \neq \ov{0}
+  \]
+  Therefore, \(\disc(\O_K/P) \neq \ov{0}\).
 \end{proof}
 \section{Discriminant Behaves  Well with Reduction \(\mod p\) and Products}
 \begin{lem}\label{disc-plays-nice-with-mod-p}
   For an appropriate choice of bases, \[
-    \disc_\Z(\O_K) \mod p = \disc_{\Z/p\Z}(\O_K/pO_k)
+    \disc(K) \mod p = \disc(\O_K/p\O_K)
   \]
 \end{lem}
 \begin{proof}
   Let \(\{\alpha_1, \ldots, \alpha_n\}\) be an integral basis for
-  \(\O_K|\Z\). Then, for \(x \in \O_K\), we have \[
+  \(\O_K|\Z\). Then, for \(x \in \O_K\), we have \(a_{i,j} \in \Z\)
+  such that \[
     x \alpha_i = \sum_j a_{i,j} \alpha_j \implies x \alpha_i +
-    \O/p\O_K = \sum_j \ov{a_{i,j}} \alpha_j + \O/p\O_k
+    p\O_K = \sum_j \ov{a_{i,j}} \alpha_j + p\O_K
   \]
-  where \(\ov{a_{i,j}} = a_{i,j}\). Thus, \(m_x\) with the entries
-  reduced mod \(p\) is equal to \(m_{x+\O_K/p\O_K}\). Thus, \[
-    \Tr_{\O_K/p\O_K | \Z/p\Z}(x+\O_K/p\O_K) = \tr(m_{x+\O_K/p\O_K}) =
-    \tr(m_x) \mod p = \Tr_{\O_K|\Z}(x) \mod p
+  where \(\ov{a_{i,j}} = a_{i,j} \mod p\). Thus, \(m_x\) with the entries
+  reduced mod \(p\) is equal to \(m_{x+p\O_K}\). Thus, \[
+    \Tr_{\O_K/p\O_K | \F_p}(x+p\O_K) = \tr(m_{x+p\O_K}) =
+    \tr(m_x) \mod p = \Tr_{K|\Q}(x) \mod p
   \]
   giving us that \[
-    (\Tr_{\O_K|\Z}(\alpha_i \alpha_j))_{1 \leq i,j \leq n} \mod p =
+    (\Tr_{K|\Q}(\alpha_i \alpha_j))_{1 \leq i,j \leq n} \mod p =
     \Tr_{\O_K/(p)|\Z/p\Z}(\ov{\alpha}_i \ov{\alpha_j})
   \]
   and so, taking determinants of both sides gives the desired result.
 \end{proof}
 \begin{lem}\label{disc-plays-nice-with-prod}
-  Let \(A\) be a commutative ring with \(B_1, B_2\) ring
-  extensions of \(A\) that are finitely-generated, free
-  \(A\)-modules. Then, up to appropriate choice of basis, \[
-    \disc_A(B_1 \times B_2) = \disc_A(B_1) \disc_A(B_2)
+  Let \(F\) be a field with \(B_1, B_2\) finitely-generated
+  \(F\)-algebras. Then, up to appropriate choice of basis, \[
+    \disc(B_1 \times B_2) = \disc(B_1) \disc(B_2)
   \]
 \end{lem}
 \begin{proof}
   Let \[
-    B_1 = \bigoplus_{i=1}^m A e_i, \ \ B_2 = \bigoplus_{j=1}^n A f_i
+    B_1 = \bigoplus_{i=1}^m F e_i, \ \ B_2 = \bigoplus_{j=1}^n F f_j
   \]
-  Then, take the standard choice of \(A\)-basis of \(B_1 \times B_2\),
+  Then, take the standard choice of \(F\)-basis of \(B_1 \times B_2\),
   \(\{e_1, \ldots, e_m, f_1, \ldots, f_m\}\). Since \(e_i f_j = 0\) in
   \(B_1 \times B_2\), we get that \[
-    \disc_A(B_1 \times B_2) = \det \left(
+    \disc(B_1 \times B_2) = \det \left(
       \begin{array}{cc}
-        \Tr_{B_1 \times B_2 | A}(e_i e_k)& 0 \\
-        0 & \Tr_{B_1 \times B_2 | A}(f_j f_\ell)
+        \Tr_{B_1 \times B_2 | F}(e_i e_k)& 0 \\
+        0 & \Tr_{B_1 \times B_2 | F}(f_j f_\ell)
       \end{array}
     \right)
   \]
   Also, for \(x \in B_1\), since \(xy = 0\) for all \(y \in B_2\), we
   have \[
-    \Tr_{B_1 \times B_2|A}(x) = \Tr_{B_1|A}(x)
+    \Tr_{B_1 \times B_2|F}(x) = \Tr_{B_1|F}(x)
   \]
   and similarly for \(y \in B_2\) \[
-    \Tr_{B_1 \times B_2|A}(y) = \Tr_{B_2|A}(y)
+    \Tr_{B_1 \times B_2|F}(y) = \Tr_{B_2|F}(y)
   \]
   Thus, \[
 \left(
       \begin{array}{cc}
-        \Tr_{B_1 \times B_2 | A}(e_i e_k)& 0 \\
-        0 & \Tr_{B_1 \times B_2 | A}(f_j f_\ell)
+        \Tr_{B_1 \times B_2 | F}(e_i e_k)& 0 \\
+        0 & \Tr_{B_1 \times B_2 | F}(f_j f_\ell)
       \end{array}
     \right) = \left(
       \begin{array}{cc}
-        \Tr_{B_1 | A}(e_i e_k)& 0 \\
-        0 & \Tr_{B_2 | A}(f_j f_\ell)
+        \Tr_{B_1 | F}(e_i e_k)& 0 \\
+        0 & \Tr_{B_2 | F}(f_j f_\ell)
       \end{array}
     \right)
   \]
@@ -272,40 +352,40 @@ We now prove our theorem.
 \begin{proof}[Proof of \ref{main-thm}]
   We first observe that
   \begin{align*}
-    p \divides \disc_\Z(\O_K)
-    & \iff \disc_\Z(\O_K) \equiv 0 \mod p\\
-    & \iff \disc_{\Z/p\Z}(\O_K/(p)) = \ov{0} & \text{by Lemma \ref{disc-plays-nice-with-mod-p}}\\
-    & \iff \prod \disc_{\Z/p\Z}(\O_K/P_i^{e_i}) = \ov{0}
+    p \divides \disc(K)
+    & \iff \disc(K) \equiv 0 \mod p\\
+    & \iff \disc(\O_K/(p)) = \ov{0} & \text{by Lemma \ref{disc-plays-nice-with-mod-p}}\\
+    & \iff \prod \disc(\O_K/P_i^{e_i}) = \ov{0}
       & \text{by Lemma \ref{disc-plays-nice-with-prod}}
   \end{align*}
   Thus, if any \(e_i > 1\), we get that \(\O_K/P_i^{e_i}\) has a
-  nilpotent element by \ref{p-ramifies-iff-nilp}, and so \(\disc_{\Z/p\Z}(\O_K/P_i^{e_i})
+  nonzero nilpotent element by \ref{p-ramifies-iff-nilp}, and so \(\disc(\O_K/P_i^{e_i})
   = \ov{0}\) by \ref{nilp-elt-gives-disc-zero-mod-p}, thus giving \(p
   \divides \disc_\Z(\O_K)\) by the 
   equivalences above. \\
 
   If all \(e = 1\), then each \(\O_K/P_i\) is a finite field, so
-  \(\disc_{\Z/p\Z}(\O_K/P_i) \neq 0\) because, \[
-    \hspace{-0.5in} T \text{ on } \O_K/P_i \text{ nondegenerate by \ref{trace-form-nondeg-on-field-ext}} \iff (T(x_i
-    x_j))_{1 \leq i,j \leq n} \text{ is invertible } \iff
-    \disc_{\Z/p\Z}(\O_K/P_i) \neq \ov{0}
-  \]
-  Therefore, it must be that \(p \notdivides \disc_\Z(\O_K)\).
+  \(\disc(\O_K/P_i) \neq \ov{0}\) by
+  \ref{trace-form-nondeg-on-field-ext}.
+  Therefore, it must be that \(p \notdivides \disc(K)\).
 \end{proof}
 \section{Factorization in Quadratic Number Fields}
 In this section, we follow \cite{ash} to determine some results about
 factorization of primes in quadratic number fields. First, recall the theorem
 \begin{thm}[Ram-Rel Identity]
-  Given an integral domain \(A\) with field of fractions \(K\), finite
-  field extension \(L|K\), and \(B\) the integral closure of \(A\) in
-  \(L\), then, given a prime ideal \(P \ideal A\), then, if \[
+  Let \(A\) be an integral domain with field of fractions \(K\),
+  \(L|K\) a finite
+  separable field extension of degree \(n\), and \(B\) the
+  integral closure of \(A\) in 
+  \(L\). Given a prime ideal \(P \ideal A\), if \[
     PB = \prod_{i=1}^g P_i^{e_i} \ \ f_i = [B/P_i:A/P]
   \]
-  we have that \[
+  then \[
     \sum_{i=1}^g e_i f_i = [B/PB:A/P] = n
   \]
 \end{thm}
-Thus, given \(\Q(\sqrt{m})|\Q\) has degree \(2\), if must be that, for
+Thus, for \(m \in \Z \setminus \{0,1\}\), a squarefree integer,
+\(\Q(\sqrt{m})|\Q\) has degree \(2\). Thus, for 
 a prime \(p \in \Z\), there are only three possible situations.
 \begin{enumerate}
 \item \(g=2,e_1=e_2=f_1=f_2=1\), that is, \[
@@ -319,71 +399,149 @@ a prime \(p \in \Z\), there are only three possible situations.
   \]
   so \(p\) ramifies.
 \end{enumerate}
-Furthermore, we recall the following result about the discriminant of
+Furthermore, we will use the following result about the discriminant of
 \(\Q(\sqrt{m})\).
 \begin{prop}
   The discriminant of \(\Q(\sqrt{m})\) is \(m\) if \(m \equiv 1 \mod 4\)
   and it is \(4m\) if \(m \equiv 2,3 \mod 4\). In particular, the
   discriminant is always \(0\) or \(1 \mod 4\).
 \end{prop}
-
+\begin{proof}
+  If \(m \not \congruent 1 \mod 4\), \(\{1,\sqrt{m}\}\) is an integral
+  basis of \(\Q(\sqrt{m})\). Then, \[
+    \Tr(a+b\sqrt{m}) = \tr\left(
+      \begin{array}{cc}
+        a&b\\
+        bm&a
+      \end{array}
+    \right) = 2a \implies \disc(\Q(\sqrt{m})) = \det \left(
+      \begin{array}{cc}
+        2&0\\
+        0&2m
+      \end{array}
+    \right) = 4m
+  \]
+  If \(m \congruent 1 \mod 4\), then \(\{1, \frac{1+\sqrt{m}}{2}\}\)
+  forms an integral basis 
+  and \[
+    \left( \frac{1+\sqrt{m}}{2} \right)^2 = \frac{m-1}{4} +
+    \frac{1+\sqrt{m}}{2}
+  \]
+  So, \(\Tr(1) = 2\) and
+  \begin{align*}
+     \Tr\left(\frac{1+\sqrt{m}}{2}\right) & = \tr \left(
+      \begin{array}{cc}
+        0&1\\
+        \frac{m-1}{4}&1
+      \end{array}
+\right) = 1, \\ \Tr\left(\frac{m-1}{4} +
+    \frac{1+\sqrt{m}}{2}\right) & = \tr \left(
+      \begin{array}{cc}
+        \frac{m-1}{4}&1\\
+        \frac{m-1}{4}&\frac{m+3}{4}
+      \end{array}
+\right) = \frac{m+1}{2}
+  \end{align*}
+  Thus \[
+    \disc(\Q(\sqrt{m})) = \det \left(
+      \begin{array}{cc}
+        2&1\\
+        1&\frac{1+m}{2}
+      \end{array}
+\right) = m
+  \]
+\end{proof}
 We then have the following result.
 \begin{thm}
-  \cite{mack-crane} Let prime \(p \neq 2\) and \(D = \disc_\Q(\Q(\sqrt{m}))\). Then,
+  Let prime \(p \neq 2\). Then,
   \begin{enumerate}
   \item \((p)\) ramifies as \((p,\sqrt{m})^2\) in \(\Q(\sqrt{m})\) if
-    and only if \(D \equiv 
+    and only if \(m \equiv 
     0 \mod p\).
   \item \((p)\) splits as \((p) = (p,a+\sqrt{m})(p,a-\sqrt{m})\) in
-    \(\Q(\sqrt{m})\) if and only if \(D \equiv 
+    \(\Q(\sqrt{m})\) if and only if \(m \equiv 
     a^2 \mod p\) for some \(a \not \equiv 0 \mod p\).
-  \item \((p)\) is inert in \(\Q(\sqrt{m})\) if and only if \(D \not
+  \item \((p)\) is inert in \(\Q(\sqrt{m})\) if and only if \(m \not
     \equiv a^2 \mod p\) for all \(a\).
   \end{enumerate}
-  If \(p = 2\), then
+  If \(p = 2\) and \(m\) is odd, then
   \begin{enumerate}
-  \item \((2)\) ramifies in \(\Q(\sqrt{m})\) if and only if \(D \equiv
-    0,4 \mod 8\).
-  \item \((2)\) splits in \(\Q(\sqrt{m})\) if and only if \(D \equiv 1
+  \item \((2)\) ramifies in \(\Q(\sqrt{m})\)
+    if and only if \(m \equiv 
+    3 \mod 4\).
+  \item \((2)\) splits as \(\left( 2,\frac{1+\sqrt{m}}{2}
+    \right)\left( 2,\frac{1-\sqrt{m}}{2} \right)\) in \(\Q(\sqrt{m})\)
+    if and only if \(m \equiv 1 
     \mod 8\).
-  \item \((2)\) is inert in \(\Q(\sqrt{m})\) if and only if \(D \equiv
+  \item \((2)\) is inert in \(\Q(\sqrt{m})\) if and only if \(m \equiv
     5 \mod 8\).
   \end{enumerate}
 \end{thm}
 \begin{proof}
-  We break down the various situations.
+  We break down the various situations. Throughout, let \(D =
+  \disc(\Q(\sqrt{m}))\). 
   \begin{itemize}
-  \item Assume \(p\) is an odd prime with \(p\) not dividing \(m\).
-    \begin{itemize}
-    \item \(p\) does not divide the discriminant, so \(p\) cannot
+  \item Assume \(p\) is an odd prime with \(p\) not dividing
+    \(m\). \(p\) does not divide the discriminant, so \((p)\) cannot
       ramify.
-    \item If \(m \equiv a^2 \mod p \iff D \equiv (2a)^2 \mod p\), then
-      \(x^2-m\) factors \(\mod 
-      p\) as \((x+a)(x-a)\) and so \((p) =
-      (p,a+\sqrt{m})(p,a-\sqrt{m})\).
+    \begin{itemize}
+    \item If \(m \equiv a^2 \mod p\), \(a \not \congruent 0 \mod p\),
+      then \((p) = 
+      (p,a+\sqrt{m})(p,a-\sqrt{m})\) because \[
+        (p,a+\sqrt{m})(p,a-\sqrt{m}) = (p^2,
+        pa+p\sqrt{m},pa-p\sqrt{m},\underbrace{a^2-m}_{\congruent 0
+          \mod p}) \subset (p)
+      \]
+      and since \[
+        p(a+\sqrt{m}+a-\sqrt{m}) = 2ap \in (p,a+\sqrt{m})(p,a-\sqrt{m})
+      \]
+      but \(a \not\congruent 0 \mod p\), so \(\gcd(2ap, p^2) = p\),
+      and thus \(p \in (p,a+\sqrt{m})(p,a-\sqrt{m})\).
     \item If \(m \not \equiv a^2 \mod p\), then \(x^2-m\) cannot be
       the product of two linear factors, so \(x^2-m\) is irreducible
-      \(\mod p\) and so \((p)\) is inert.
+      \(\mod p\). Assume \((p) = Q_1Q_2\). Each \(Q_i\) must have norm
+      \(p\), thus giving \(\O_K/Q_i \isom \F_p\). However, \(\sqrt{m} \in
+      \O_K \implies m\) has a square root in \(\F_p\), a
+      contradiction. Thus, \((p)\) is inert.
     \end{itemize}
   \item Let \(p\) divide \(m\). Then, \(p\) divides the discriminant
-    and so \((p)\) ramifies. In fact, since \(x^2-m \equiv x^2 = xx
-    \mod p\), we get \((p) = (p,\sqrt{m})^2\).
-  \item Let \(p = 2\) and \(m\) be odd.
-    \begin{itemize}
-    \item If \(m \equiv 3 \mod 4 \iff m \equiv 3 \text{ or } 7 \mod 8
-      \implies D = 4m\), then \(2\) divides the 
-      discriminant \(4m\), so \((2)\) ramifies. We also get \(x^2-m
-      \equiv (x+1)^2 \mod 2\) and so \((2) = (2,1+\sqrt{m})^2\).
-    \item If \(m \equiv 1 \mod 8 \iff D \equiv 1 \mod 8\), then \(m
-      \equiv 1 \mod 4\). We get 
+    and so \((p)\) ramifies. In fact, \[
+      (p,\sqrt{m})^2 = (p^2, p\sqrt{m},m) \subset (p)
+    \]
+    However, since \(m\) is squarefree, \(p^2 \notdivides m\), so
+    \(\gcd(p^2,m) = p\), so \(p \in (p,\sqrt{m})^2\).
+  \item Let \(p=2\) and \(m\) be odd.
+  \begin{itemize}
+    \item If \(m \equiv 3 \mod 4 
+      \implies D=4m\), then \(2\) divides the 
+      discriminant, so \((2)\) ramifies. We claim \((2) =
+      (2,1+\sqrt{m})^2\). First, we check \[
+        (2,1+\sqrt{m})^2 =
+        (4,2(1+\sqrt{m}),\underbrace{1+2\sqrt{m}+m}_{\congruent 0 \mod
+        2}) \subset (2)
+    \]
+    Furthermore, \[
+      1+2\sqrt{m}+m-2(1+\sqrt{m}) = m-1 \congruent 2 \mod 4
+    \]
+    so there is some \(x \in \Z\) such that \[
+      m-1+4x = 2
+    \]
+    thus giving us equality of ideals.
+    \item If \(m \equiv 1 \mod 8\), then \(m
+      \equiv 1 \mod 4\), so we get 
       an integral basis \(\{1, \frac{1+\sqrt{m}}{2}\}\) and the
       discriminant is \(D = m\). Therefore, \(2 \notdivides D\), so
       \((2)\) does not ramify. We then compute, \[
         (2,\frac{1+\sqrt{m}}{2})(2,\frac{1-\sqrt{m}}{2}) =
-        (2,1-\sqrt{m},1+\sqrt{m},
-        \underbrace{\frac{1-m}{4}}_{\text{Even}}) = (2)
+        (4,1-\sqrt{m},1+\sqrt{m},
+        \underbrace{\frac{1-m}{4}}_{\text{Even}}) \subset (2)
       \]
-    \item If \(m \equiv 5 \mod 8 \iff D \equiv 5 \mod 8\), then \(m
+      However, we also have \[
+        1-\sqrt{m} + 1+\sqrt{m} = 2 \in
+        (2,\frac{1+\sqrt{m}}{2})(2,\frac{1-\sqrt{m}}{2}) 
+      \]
+      giving us the desired ideal equality.
+    \item If \(m \equiv 5 \mod 8\), then \(m
       \equiv 1 \mod 4\), so \(D 
       = m\), meaning \(2\) does not ramify. Consider \[
         f(x) = x^2-x+\frac{1-m}{4} \in (\O_K/P)[x]
@@ -413,8 +571,8 @@ We then have the following result.
       note={\url{http://www.math.uconn.edu/~kconrad/blurbs/gradnumthy/disc.pdf}}
     }
     \bib{mack-crane}{article}{
-      author={Mack-Crane. Sander}
-      title={Prime Splitting in Quadratic Extensions I: One PRime,
+      author={Mack-Crane, Sander}
+      title={Prime Splitting in Quadratic Extensions I: One Prime,
         Many Fields}
       year={2016}
       note={\url{https://algebrateahousejmath.wordpress.com/2016/11/23/prime-splitting-in-quadratic-extensions-i-one-prime-many-fields/}}
