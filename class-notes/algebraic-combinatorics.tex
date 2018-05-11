@@ -964,6 +964,51 @@ Finally, we wish to introduce one more family of symmetric functions.
   every power sum polynomial is symmetric, \(\sym_n \isom \Q[p_1,
   \ldots, p_n]\).
 \end{proof}
+Finally, we note how \(p_n\)'s are explicitly related to the \(h_n\)'s
+and \(e_n\)'s.
+\begin{prop}
+  Given \(\lambda \partitionof n\), let \(m_i\) be the
+    multiplicity of \(i\) in \(\lambda\) and set \(z_\lambda = \prod_i
+    i^{m_i} m_i!\). Then,
+    \[
+      h_n = \sum_{\lambda \partitionof n} \frac{p_\lambda}{z_\lambda}
+    \]
+    and \[
+      e_n = \sum_{\lambda \partitionof n} (-1)^{n-\ell(\lambda)}
+      \frac{p_\lambda}{z_\lambda} 
+    \]
+\end{prop}
+\begin{proof}
+  We show this by writing each \(h_r\) as a linear combination of
+  \(p_\lambda\)'s. Observe, 
+  \begin{align*}
+        \sum_{k=0}^\infty h_k(\vec{x}) t^k
+        & = \prod_{i=1}^\infty \frac{1}{1-x_i t} \\
+        & = \prod \exp\left({-\log(1-x_i t)}\right)\\
+        & = \prod \exp\left({\sum_{k=1}^\infty \frac{(x_i
+          t)^k}{k}}\right) \\ 
+        & = \exp\left({\sum_{k=1}^\infty \sum_{i=1}^\infty \frac{(x_i
+          t)^k}{k}}\right) \\
+        & = \exp\left( \sum_{k=1}^\infty \frac{p_k(x)t^k}{k} \right)
+        \\
+        & = \prod_{k=1}^\infty \exp\left( \frac{p_k(x)t^k}{k} \right)
+        \\
+        & = \prod_{k=1}^\infty \sum_{m_k = 0}^\infty
+          \frac{(p_k(x)t^k)^{m_k}}{m_k! \cdot k^{m_k}} \\
+        & = \sum_{\lambda} \frac{1}{z(\lambda)}p_\lambda t^{|\lambda|}
+      \end{align*}
+      Thus, we see that \(h_n = \sum_{\lambda \partitionof n}
+      \frac{p_\lambda}{z_\lambda}\). The relation for \(e_n\) is a
+      similar manipulation of the generating functon \(E(t)\).
+    \end{proof}
+    \begin{rmk}
+      Note that \(z(\lambda)\) is equal to the cardinality of the
+      centralizer of an element of \(\Sym_n\) with cycle type
+      \(\lambda\). Indeed, an \(i\)-cycle \((1,2,\ldots,i)\) is fixed
+      by \(i\) elements and a product of \(m_i\) disjoint \(i\)-cycles
+      can be permuted in \(m_i!\) ways. \todo{So then, why does this
+        number show up here?}
+    \end{rmk}
 \subsection{Schur functions}
 \begin{defn}
   The \de{Vandermonde determinant} is \[
@@ -1079,7 +1124,7 @@ construction, that the Schur functions form a basis for \(\Lambda\).
   is a symmetric function.
 \end{prop}
 To prove this fact, we will need the following definition.
-\begin{defn}
+\begin{defn}\label{def-kostka-number}
   Let the \de{Kostka number}, \(K_{\lambda \alpha}\) be the number of
   semistandard Young tableaux of shape \(\lambda\) with weight
   \(\alpha\). In other words, \(|\SSYT(\lambda,\alpha)| = K_{\lambda \alpha}\).
@@ -1344,44 +1389,197 @@ theorem.
     \end{cases}
   \]
 \end{prop}
+\begin{rmk}
+  This is a symmetric form, although this is not obvious from the
+  definition. 
+\end{rmk}
+A natural question about this inner product is how might it behave
+with respect to other bases we have encountered. One significant basis
+with this form is the Schur basis.
+\begin{thm}\label{schurs-are-orthonormal}
+  Schur functions are an orthonormal basis with respect to \(\langle
+  \cdot, \cdot \rangle\). In other words, \[
+    \langle s_\lambda, s_\mu \rangle = \delta_{\lambda,\mu}
+  \]
+\end{thm}
+There are multiple ways to show this, each of which reveals a
+different perspective.
 \begin{lem}
-  Given \(\lambda \partitionof n\), let \(m_i\) be the
-    multiplicity of \(i\) in \(\lambda\) and set \(z_\lambda = \prod_i
-    i^{m_i} m_i!\). Then,
-    \[
-      h_n = \sum_{\lambda \partitionof n} \frac{p_\lambda}{z_\lambda}
-    \]
+  Given a shape \(\lambda\), \[
+    h_\lambda = \sum_\mu K_{\mu,\lambda} s_\mu
+  \]
+  where \(K_\lambda,\alpha = |\SSYT(\lambda,\alpha)|\) is the Kostka
+  number (see \ref{def-kostka-number}).
 \end{lem}
 \begin{proof}
-  We show this by writing each \(h_r\) as a linear combination of
-  \(p_\lambda\)'s. Observe, 
+  From the
+  Pieri rule, we see that \[
+    h_{r_1}s_{\emptyset} = s_{(r_1)}
+  \]
+  Then, \[
+    h_{r_2}h_{r_1}s_{\emptyset} = h_{r_2}s_{(r_1)} =
+    \sum_{\nu = (r_1)+\text{horizontal }r_2\text{-strip}} s_\nu
+  \]
+  \begin{example}
+  For instance, if \(r_1 = 5, r_2 = 3\), we get \[
+    \ytableausetup{boxsize=0.5em}
+    h_{r_2} s_{(r_1)} =
+    s_{\ydiagram{3,5}*[*(lightgray)]{0,5}}+s_{\ydiagram{2,6}*[*(lightgray)]{0,5}}+s_{\ydiagram{1,7}*[*(lightgray)]{0,5}}+s_{\ydiagram{8}*[*(lightgray)]{5}}
+    \ytableausetup{boxsize=normal}
+  \]
+  which, if you fill the gray boxes with \(1\) and the white boxes
+  with \(2\), you get an SSYT of weight \((5,3)\). Thus, the sum is
+  precisely \[ 
+    h_{(5,3)} = \sum_{\mu,(5,3)} K_{\mu,(5,3)} s_\mu
+  \]  
+  \end{example}
+  In general, we see that the process of multiplying many
+  \(h_{r_i}\)'s to \(s_\emptyset\) will be equivalent to building
+  different SSYTs of \emph{partition} weight \((r_1, \ldots,
+  r_k)\). In fact, since the weight is partition weight, this will
+  exactly get us the desired equality. \todo{I know this is not the
+    best proof; the example really illustrates the point, though.}
+\end{proof}
+\begin{rmk}
+  Note, if we encode the Kostka numbers is a matrix, called the
+  \de{Kostka matrix}, then we have change of bases given by \[
+    (K_{\lambda,\mu})_{\mu,\lambda} (s_\mu)_{\mu} = (h_\lambda)_{\lambda}
+  \]
+  and thus also the other change of basis given by taking the inverse
+  of the Kostka matrix.
+\end{rmk}
+\begin{proof}[A proof of \ref{schurs-are-orthonormal}]
+  Based on our lemma above and Littlewood's combinatorial description
+  of Schur functions, we observe that \[
+    s_\lambda = \sum_{\mu} K_{\mu,\lambda}^{-1} h_\lambda \text{ and }
+    s_\lambda = \sum_{\mu} K_{\lambda,\mu} m_\mu
+  \]
+  where \(K_{\mu,\lambda}^{-1}\) is the \(\mu,\lambda\)-entry of
+  inverse Kostka matrix
+  \((K_{\alpha,\beta})_{\alpha,\beta}^{-1}\). Therefore,
   \begin{align*}
-        \sum_{k=0}^\infty h_k(\vec{x}) t^k
-        & = \prod_{i=1}^\infty \frac{1}{1-x_i t} \\
-        & = \prod \exp\left({-\log(1-x_i t)}\right)\\
-        & = \prod \exp\left({\sum_{k=1}^\infty \frac{(x_i
-          t)^k}{k}}\right) \\ 
-        & = \exp\left({\sum_{k=1}^\infty \sum_{i=1}^\infty \frac{(x_i
-          t)^k}{k}}\right) \\
-        & = \exp\left( \sum_{k=1}^\infty \frac{p_k(x)t^k}{k} \right)
-        \\
-        & = \prod_{k=1}^\infty \exp\left( \frac{p_k(x)t^k}{k} \right)
-        \\
-        & = \prod_{k=1}^\infty \sum_{m_k = 0}^\infty
-          \frac{(p_k(x)t^k)^{m_k}}{m_k! \cdot k^{m_k}} \\
-        & = \sum_{\lambda} \frac{1}{z(\lambda)}p_\lambda t^{|\lambda|}
-      \end{align*}
-      Thus, we see that \(h_n = \sum_{\lambda \partitionof n}
-      \frac{p_\lambda}{z_\lambda}\).
-    \end{proof}
-    \begin{rmk}
-      Note that \(z(\lambda)\) is equal to the cardinality of the
-      centralizer of an element of \(\Sym_n\) with cycle type
-      \(\lambda\). Indeed, an \(i\)-cycle \((1,2,\ldots,i)\) is fixed
-      by \(i\) elements and a product of \(m_i\) disjoint \(i\)-cycles
-      can be permuted in \(m_i!\) ways. \todo{So then, why does this
-        number show up here?}
-    \end{rmk}
+    \langle s_\lambda, s_\mu \rangle
+    & = \langle \sum_{\alpha} K_{\lambda,\alpha} m_\alpha,
+      \sum_{\beta} K_{\beta, \mu}^{-1} h_\beta \rangle\\
+    & = \sum_{\alpha} K_{\lambda,\alpha} \sum_{\beta}
+      K_{\beta,\mu}^{-1} \langle m_\alpha, h_\beta \rangle \\
+    & = \sum_{\alpha} K_{\lambda, \alpha} K_{\alpha, \mu}^{-1}
+    & \text{ since }\langle m_\alpha, h_\beta \rangle =
+      \delta_{\alpha,\beta} \\
+    & = (Id)_{\lambda,\mu} \\
+    & = \delta_{\lambda,\mu}
+  \end{align*}
+\end{proof}
+\begin{cor}
+  The Schur functions can be characterized as the unique orthonormal
+  basis for \(\sym\) that is unitriangularly related to the basis
+  \(\{m_\lambda\}_{\lambda}\). 
+\end{cor}
+In fact, one could take the corollary to be the definition of the
+Schur functions.
+\begin{example}
+  Imagine one knows only the above corollary. Then, we have by the
+  unitriangularity that\[
+    \begin{cases}
+      s_{111} = m_{111} \\
+      s_{21} = m_{21} + u_{21,111} m_{111}\\
+      s_3 = m_3 + u_{3,21} m_{21} + u_{3,111}m_{111}
+    \end{cases}
+  \]
+  Then, since \[
+    s_{111} = m_{111} = h_{111}-2h_{21}+h_3
+  \]
+  we get
+  \[
+    \langle s_{111},s_{21} \rangle = 0 \implies 0 = \langle
+    h_{111}-2h_{21}+h_3, 
+    m_{21} + u_{21,111} m_{111} \rangle = u_{21,111}-2
+  \]
+  and so \[
+    s_{21} = m_21 + 2m_{111}
+  \]
+  One could then continue this process to get the unknown coefficients
+  in \(s_3\), but this would be quite tedious.
+\end{example}
+Another proof technique to see the orthonormality of Schur functions
+is using ``Cauchy kernels.'' This process requires us to know more
+about how the power sum basis behaves with respect to the Hall inner
+product.
+\begin{defn}
+  The \de{Cauchy kernel} in \(x = (x_1, x_2, \ldots)\) and \(y = (y_1,
+  y_2, \ldots)\) is defined by \[
+    \Omega(x,y) = \prod_{i,j \geq 1} \frac{1}{1-x_i y_i}
+  \]
+\end{defn}
+\begin{prop}
+  We have the following facts about the Cauchy kernel.
+  \begin{enumerate}
+  \item \(\Omega(x,y) = \sum_{\lambda} h_\lambda(x)m_\lambda(y)\)
+  \item \(\Omega(x,y) = \sum_{\lambda} s_\lambda(x)s_\lambda(y)\)
+  \end{enumerate}
+\end{prop}
+\begin{proof}
+  To see part (a), observe \[
+      \prod_{i,j \geq 1} \frac{1}{1-x_j y_j} = \prod_j \left( \sum_{n}
+      h_n(\vec{x}) y_j^n \right)
+  \]
+  and so, expanding out our product and collecting terms, we see \[
+\hspace{-1.5in} \prod_j \left( \sum_{n} h_n(\vec{x}) y_j^n \right) = 1 +
+\underbrace{h_1(\vec{x})(y_1+y_2+\cdots)}_{\partitionof 1} + \underbrace{h_2(\vec{x})\cdot(y_1^2+y_2^2+\cdots) +
+h_1(\vec{x}) h_1(\vec{x}) \cdot (y_1 y_2 + y_1 y_3 + \cdots + y_2 y_3
++ \cdots)}_{\partitionof 2} + \cdots
+\]
+Therefore, we have our desired result. \\
+
+To see part (b), we make use of the RSK correspondence. Note that \[
+  \prod_{i,j \geq 1} \frac{1}{1-x_i y_j} = \prod_{i,j \geq 1}
+  \sum_{k=0}^\infty (x_iy_j)^k
+\]
+when expanded out into an infinite series has monomials (each with
+coefficient \(1\)) indexed by
+matrices with nonnegative integer entries. On the righthand side, if
+we expand \[
+  \sum_{\lambda} s_\lambda(x) s_\lambda(y) = \sum_{\lambda} \left(
+    \sum_{\T \in \SSYT(\lambda)} x^{\wt(\T)}\right) \left( \sum_{\S \in
+      \SSYT(\lambda)} y^{\wt(\S)} \right) = \sum_{\lambda} \sum_{\T,\S
+  \in \SSYT(\lambda)} x^{\wt(\T)}y^{\wt(\S)}
+\]
+the monomials are indexed by pairs of SSYTs of the same shape, each
+with coefficient \(1\). Thus, by the RSK correspondence, these two
+infinite sums are equal.
+\end{proof}
+\begin{thm}
+  Two bases \(\{b_\lambda\}\) and \(\hat{b}_\lambda\) for \(\sym\) are
+  dual if and only if \(\sum_{\lambda} b_\lambda(x) b_\lambda(y) =
+  \Omega(x,y)\). 
+\end{thm}
+\begin{proof}
+  Write \(b_\lambda(x) = \sum_{\mu} a_{\lambda, \mu} m_\mu\)
+    and \(\hat{b}_{\gamma}(x) = \sum_\nu c_{\gamma,\nu}
+    h_\nu\). Then, \[
+      \langle b_\lambda,\hat{b}_\gamma \rangle = \sum_{\mu} \sum_{\nu}
+      a_{\lambda,\mu} c_{\gamma, \nu} \langle m_\mu, h_\nu \rangle =
+      \sum_{\mu} a_{\lambda,\mu} c_{\gamma, \mu}
+    \]
+    Thus, the two bases are orthonormal if and only if \[
+      \sum_{\mu} a_{\lambda,\mu} c_{\gamma, \mu} = \delta_{\lambda,
+        \gamma} \iff AC^T = I \iff C^TA = I \iff A^TC = I \iff
+      \sum_{\mu} a_{\mu,\lambda} c_{\mu, \gamma} = \delta_{\lambda,\gamma}
+    \]
+    where \(A = (a_{\lambda,\mu})\) and \(C = (c_{\gamma,\nu})\).
+    However, this happens if and only if \[
+      \sum_{\lambda,\gamma} \left(\sum_{\mu} a_{\mu,\lambda} c_{\mu,
+         \gamma}\right) 
+      h_{\lambda}(x) m_{\gamma}(y) = \sum_{\lambda,\gamma}
+      \delta_{\lambda,\gamma} h_\lambda(x) m_{\gamma}(y) =
+      \sum_{\lambda}
+      h_{\lambda}(x) m_{\lambda}(y) = \Omega(x,y)
+    \]
+\end{proof}
+\begin{proof}[Alternative proof of \ref{schurs-are-orthonormal}]
+  Since \(\Omega(x,y) = \sum_{\lambda} s_\lambda(x) s_{\lambda}(y)\),
+  then the Schur basis is self-dual by the theorem above.
+\end{proof}
 \section{LLT Polynomials}
 \subsection{Some Notions on Semistandard Young Tableaux}
 Note that we can consider a semistandard Young tableau \(\T\) of shape
