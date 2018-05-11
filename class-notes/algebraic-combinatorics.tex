@@ -951,6 +951,19 @@ Finally, we wish to introduce one more family of symmetric functions.
   The set \(\{p_\lambda\}_{\text{all partitions }\lambda}\) is a basis
   for \(\sym\) over a field of characteristic \(0\).
 \end{thm}
+\begin{proof}
+  By Newton's identities, \[
+    p_n = \sum_{j=1}^n e_j p_{n-j}
+  \]
+  if we rewrite this recurrence, we get \[
+    e_n = \frac{1}{n}\sum_{j=1}^n (-1)^{j-1} e_{n-j} p_j
+  \]
+  Thus, each \(e_n\) can be written as a rational linear combination
+  of the power sums, giving that \(\sym_n \subset \Q[p_1, \ldots,
+  p_n]\). Therefore, the \(p_\lambda\)'s form a basis and because
+  every power sum polynomial is symmetric, \(\sym_n \isom \Q[p_1,
+  \ldots, p_n]\).
+\end{proof}
 \subsection{Schur functions}
 \begin{defn}
   The \de{Vandermonde determinant} is \[
@@ -1321,6 +1334,7 @@ theorem.
   \(r\)-strip. Therefore, the inverse is straightforward to compute
   directly.
 \end{proof}
+\subsection{Inner Product Struction of \(\sym\)}
 \begin{prop}
   \(\sym\) is an inner-product space with Hall-inner product \[
     \langle m_\lambda, h_\mu \rangle = \delta_{\lambda,\mu} =
@@ -1330,7 +1344,44 @@ theorem.
     \end{cases}
   \]
 \end{prop}
-
+\begin{lem}
+  Given \(\lambda \partitionof n\), let \(m_i\) be the
+    multiplicity of \(i\) in \(\lambda\) and set \(z_\lambda = \prod_i
+    i^{m_i} m_i!\). Then,
+    \[
+      h_n = \sum_{\lambda \partitionof n} \frac{p_\lambda}{z_\lambda}
+    \]
+\end{lem}
+\begin{proof}
+  We show this by writing each \(h_r\) as a linear combination of
+  \(p_\lambda\)'s. Observe, 
+  \begin{align*}
+        \sum_{k=0}^\infty h_k(\vec{x}) t^k
+        & = \prod_{i=1}^\infty \frac{1}{1-x_i t} \\
+        & = \prod \exp\left({-\log(1-x_i t)}\right)\\
+        & = \prod \exp\left({\sum_{k=1}^\infty \frac{(x_i
+          t)^k}{k}}\right) \\ 
+        & = \exp\left({\sum_{k=1}^\infty \sum_{i=1}^\infty \frac{(x_i
+          t)^k}{k}}\right) \\
+        & = \exp\left( \sum_{k=1}^\infty \frac{p_k(x)t^k}{k} \right)
+        \\
+        & = \prod_{k=1}^\infty \exp\left( \frac{p_k(x)t^k}{k} \right)
+        \\
+        & = \prod_{k=1}^\infty \sum_{m_k = 0}^\infty
+          \frac{(p_k(x)t^k)^{m_k}}{m_k! \cdot k^{m_k}} \\
+        & = \sum_{\lambda} \frac{1}{z(\lambda)}p_\lambda t^{|\lambda|}
+      \end{align*}
+      Thus, we see that \(h_n = \sum_{\lambda \partitionof n}
+      \frac{p_\lambda}{z_\lambda}\).
+    \end{proof}
+    \begin{rmk}
+      Note that \(z(\lambda)\) is equal to the cardinality of the
+      centralizer of an element of \(\Sym_n\) with cycle type
+      \(\lambda\). Indeed, an \(i\)-cycle \((1,2,\ldots,i)\) is fixed
+      by \(i\) elements and a product of \(m_i\) disjoint \(i\)-cycles
+      can be permuted in \(m_i!\) ways. \todo{So then, why does this
+        number show up here?}
+    \end{rmk}
 \section{LLT Polynomials}
 \subsection{Some Notions on Semistandard Young Tableaux}
 Note that we can consider a semistandard Young tableau \(\T\) of shape
