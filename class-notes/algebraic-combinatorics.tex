@@ -964,6 +964,23 @@ Finally, we wish to introduce one more family of symmetric functions.
   every power sum polynomial is symmetric, \(\sym_n \isom \Q[p_1,
   \ldots, p_n]\).
 \end{proof}
+\begin{rmk}
+  An alternative proof is just to let \(C=(c_{\lambda,\mu})\) be a
+  matrix expressing \(p_\lambda\) in terms of the monomial basis. One
+  argues that \[
+    p_{\lambda} = c_{\lambda \lambda}m_{\lambda} + \sum_{\mu
+      \strictlydominates \lambda} c_{\lambda \mu} m_{\mu}
+  \]
+  with \(c_{\lambda \lambda} \neq 0\). Then, if \(x_1^{\mu_1} \cdots
+  x_m^{\mu_m}\) appears in \[
+    p_\lambda = (x_1^{\lambda_1} + x_2^{\lambda_2} +
+    \cdots)(x_1^{\lambda_2}+x_2^{\lambda_2}+ \cdots )+\cdots
+  \]
+  then each \(\mu_i\) must be a sum of \(\lambda_j\)'s, thus making
+  \(\mu\) larger in dominance order than \(\lambda\). This proof is
+  probably simpler than the one above but has the disadvantage of not
+  introducing Newton's identities.
+\end{rmk}
 Finally, we note how \(p_n\)'s are explicitly related to the \(h_n\)'s
 and \(e_n\)'s.
 \begin{prop}
@@ -1276,6 +1293,100 @@ where \(s_{\mu/\nu}\) and \(\lambda\)-Yamanouchi are defined below.
     \wt(T_{\geq 1})+\lambda & = (7,4,1)
   \end{align*}
 \end{example}
+\begin{proof}[Proof of \ref{lr-generalization}; \cite{stembridge}]
+  We observe that
+  \begin{align*}
+    \Vdet_{\lambda+\rho} s_{\mu/\nu}
+    & = \sum_{\substack{\T \in \SSYT(\lambda) \\ \T\
+    \lambda\text{-Yamanouchi}}} \Vdet_{\lambda+\wt(\T)+\rowshift}\\
+    & = \sum_{w \in \Sym_n} (-1)^{\ell(w)} x^{w(\lambda+\rowshift)}
+      \sum_{\T \in \SSYT(\mu/\nu)} x^{\wt(\T)}\\
+    & = \sum_{w \in \Sym_n} \sum_{\T \in \SSYT(\mu/\nu)}
+      (-1)^{\ell(w)} x^{w(\lambda+\rowshift+\wt(\T))}\\
+    & = \sum_{\T \in \SSYT(\mu/\nu)} \Vdet_{\lambda+\rowshift+\wt(\T)}
+  \end{align*}
+  However, we want to show the result is true summing only over \(\T\)
+  that are \(\lambda\)-Yamanouchi. To do this, we will show that all
+  the non \(\lambda\)-Yamanouchi tableaux cancel each other out by
+  finding an appropriate sign-recersing involution on them.
+
+  To that effect, say \(\T\) is a ``Bad Guy'' if \(\T\) is not
+  \(\lambda\)-Yamanouchi. For such a \(\T\), there exists a \(j,k \in
+  [n]\) such that \[
+    \lambda_k+\wt_k(\T_{\geq j}) < \lambda_{k+1} + \wt_{k+1}(\T_{\geq j})
+  \]
+  Pick the largest such \(j\) and then pick the pair \((j,k)\) with
+  the smallest such \(k\). Then, \(\lambda + \wt(\T_{>j})\) is a
+  partition. Since, by column strictness, \(\wt_k(\T_{\geq
+    j})-\wt_{k+1}(\T_{\geq j})\) can 
+  change by at most one when \(j\) is incremented or decremented,
+  there must be a \(k+1\) in column \(j\) of 
+  \(\T\), but no \(k\).
+  \begin{example}
+    For an easy example, take \(\lambda = \emptyset\) and \[
+      \T = \ytableaushort{3444,2223344,\none\none1122333,\none\none\none\none\none\none222,\none\none\none\none\none\none111}*[*(lightgray)]{0,6+1,6+3,6+3,6+3}
+    \]
+    The shaded part of the tableau is Yamanouchi, but it fails to be
+    Yamanouchi at \(T_{\geq 6}\). Furthermore, the minimal such \(k\)
+    so that our inequality fails is \(1\), that is \[
+      3 = 0+3 = \lambda_1+\wt_1(\T_{\geq 6}) < \lambda_2+\wt_2(\T_{\geq
+        6}) = 0+4 = 4
+    \]
+    and \(\lambda+\wt(\T_{>6}) = (3,3,3,1)\) is a partition. Indeed
+    also, in column \(6\), there is a \(k+1=2\) entry, but not a
+    \(k=1\) entry.
+  \end{example}
+  Thus, we have \[
+    \lambda_k+\wt_k(\T_{\geq j})+1 = \lambda_{k+1}+\wt_{k+1}(\T_{\geq
+      j}) 
+  \]
+  which, since \(\rowshift_k=\rowshift_{k+1}+1\), also gives \[
+   s_k(\lambda+\wt(\T_{\geq j}) + \rowshift) =
+    \lambda+\wt(\T_{\geq j})+\rowshift
+  \]
+  where \(s_k \in \Sym_n\) swaps \(k\) and \(k+1\). Now, we apply the
+  Bender-Knuth involution \(\phi_k\) to \(\T_{<j}\) 
+  and leave the remainder of \(\T\) fixed. Let us call the resulting
+  tableau \(\T^*\).
+  \begin{example}
+    \[
+      \T = \ytableaushort{3444,2223344,\none\none1122333,\none\none\none\none\none\none222,\none\none\none\none\none\none111}*[*(blue)]{0,6+1,6+3,6+3,6+3}*[*(red)]{4,5,2+3}
+    \]
+    We apply the Bender-Knuth involultion \(\phi_1\) to the red part only to
+    get \[
+      \T^* = \ytableaushort{3444,1123344,\none\none1122333,\none\none\none\none\none\none222,\none\none\none\none\none\none111}*[*(blue)]{0,6+1,6+3,6+3,6+3}*[*(red)]{4,5,2+3}
+    \]
+    Note that the blue part has an equal number of \(1\)'s and \(2\)'s.
+  \end{example}
+  \(\T^*\) is still an SSYT since the Bender-Knuth involution only
+  swaps some \(k\)s and \(k+1\)s in \(\T_{<j}\) in a semistandard way
+  and column \(j\) has a \(k+1\), but contains no \(k\)s. Thus, by
+  construction, we have the following two properties \[
+    \begin{cases}
+      (\T^*)_{\geq j} = \T_{\geq j} & \text{ since left unchanged by
+        involution}\\
+      \wt(\T^*_{< j}) = s_k(\wt(\T_{< j})) & \text{ by construction of
+      Bender-Knuth.}
+    \end{cases}
+  \]
+  So, \(\T^*\) is a Bad Guy and, in fact, the map \(\T \mapsto \T^*\)
+  is an involution on Bad Guys. Finally,
+  \begin{align*}
+    \lambda+\wt(\T^*) + \rowshift
+    & = \lambda + \wt(\T^*_{\geq j}) + \wt(\T^*_{<j}) + \rowshift\\
+    & = \lambda + \wt(\T_{\geq j}) + s_k(\wt(\T_{<j})) + \rowshift\\
+    & = s_k(\lambda+\wt(\T_{\geq j})+\rowshift) + s_k(\wt(\T_{<j}))\\
+    & = s_k(\lambda+\wt(\T)+\rowshift)
+  \end{align*}
+  and \[
+    \Vdet_{\lambda+\wt(\T^*)+\rowshift} =
+    \Vdet_{s_k(\lambda+\wt(\T))+\rowshift} = 
+    -\Vdet_{\lambda+\wt(\T)+\rowshift} 
+  \]
+  since \(s_k\) acts by swapping the \(k\) and \(k+1\)st rows of
+  \(\Vdet\), which changest the determinant by a sign. Thus, we can
+  cancel the contributions of the Bad Guys from our desired sums.
+\end{proof}
 \begin{cor}[Corollaries to Theorem \ref{lr-generalization}] In the
   following special cases, we get the following corollaries.
   \begin{enumerate}
@@ -1379,6 +1490,39 @@ theorem.
   \(r\)-strip. Therefore, the inverse is straightforward to compute
   directly.
 \end{proof}
+Finally, another important relationship between \(s_\lambda\)'s and
+\(h_n\)'s is given below without proof.
+\begin{thm}[Jacobi-Trudi Identities]
+  Let \(\lambda = (\lambda_1, \ldots, \lambda_\ell)\) be a
+  partition of \(n\). Then, \[ 
+    s_\lambda = \det(h_{\lambda_i-i+j})_{1 \leq i,j \leq \ell} = \det\left(
+      \begin{array}{cccc}
+        h_{\lambda_1} & h_{\lambda_1+1} & \cdots &
+                                                   h_{\lambda_1+\ell-1}\\
+        h_{\lambda_2-1} & h_{\lambda_2} & \cdots & \vdots \\
+        \vdots & & \ddots & \\
+        h_{\lambda_\ell-(\ell-1)} & \cdots & & h_{\lambda_\ell}
+      \end{array}
+    \right)  = \sum_{\sigma \in \Sym_n} (-1)^{\ell(\sigma)}
+    h_{\sigma(\lambda+\rowshift)} 
+  \]
+  where \(h_n = 0\) for all \(n < 0\). Similarly, \[
+    s_{\lambda'} = \det(e_{\lambda_i-i+j})_{1 \leq i,j \leq \ell}
+  \]
+\end{thm}
+\begin{example}
+  If \(\lambda = (4,3,3,1,1)\), then \[
+    s_{43311} = \det \left(
+      \begin{array}{ccccc}
+        h_4&h_5&h_6&h_7&h_8\\
+        h_2&h_3&h_4&h_5&h_6\\
+        h_1&h_2&h_3&h_4&h_5\\
+        0&0&h_0&h_1&h_2\\
+        0&0&0&h_0&h_1
+      \end{array}
+\right)
+  \]
+\end{example}
 \subsection{Inner Product Struction of \(\sym\)}
 \begin{prop}
   \(\sym\) is an inner-product space with Hall-inner product \[
