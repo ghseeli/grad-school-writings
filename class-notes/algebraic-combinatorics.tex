@@ -11,6 +11,7 @@
 \usepackage{mathtools}
 \usepackage{pgf}
 \usepackage{tikz}
+\usetikzlibrary{shapes.geometric}
 \usepackage{tikz-cd}
 \usepackage{graphicx}
 \numberwithin{thm}{section}
@@ -985,7 +986,7 @@ Finally, we wish to introduce one more family of symmetric functions.
 \end{rmk}
 Finally, we note how \(p_n\)'s are explicitly related to the \(h_n\)'s
 and \(e_n\)'s.
-\begin{prop}
+\begin{prop}\label{hn-in-terms-of-pn}
   Given \(\lambda \partitionof n\), let \(m_i\) be the
     multiplicity of \(i\) in \(\lambda\) and set \(z_\lambda = \prod_i
     i^{m_i} m_i!\). Then,
@@ -2704,7 +2705,7 @@ interested in symmetric functions over \(\Q(t)\).
 \begin{cor}
   \(\{R_\lambda\}_{\lambda}\) is a basis of symmetric polynomials.
 \end{cor}
-\begin{rmk}
+\begin{rmk}\label{s-in-terms-of-P}
   If we let \[
     P_\lambda(x_1, \ldots, x_n; t) = \frac{1}{V_\lambda(t)}
     R_\lambda(x_1, \ldots, x_n;t)
@@ -2721,8 +2722,352 @@ interested in symmetric functions over \(\Q(t)\).
     c_{\lambda,\mu}(t) = K_{\lambda,\mu}(t) = \sum_{\T \in
       \SSYT(\lambda,\mu)} t^{\charge(\T)}
   \]
+  where \(\charge(\T)\) is appropriately defined. Some of this
+  material will be elaborated in the next section.
 \end{rmk}
 \subsection{\(t\)-Generalization of Hall Inner Product}
+Following the remark concluding the previous section, we define the
+following.
+\begin{defn}
+  Let \(\lambda\) be a partition. Then, we define the
+  \de{Hall-Littlewood polynomials} to be \[
+    P_\lambda(x;t) = \frac{1}{V_\lambda(t)} \sum_{w \in \Sym_n} w
+    \left( x^\lambda \prod_{i < j} \frac{x_i-tx_j}{x_i-x_j}\right)
+  \]
+\end{defn}
+\begin{prop}
+  \begin{enumerate}
+  \item \(P_\lambda(x;0) = s_\lambda\)
+  \item \(P_\lambda(x;1) = m_\lambda\)
+  \item \(\{P_\lambda(x;t)\}\) is a basis for \(\sym[t]\), that is,
+    \(\sym\) over \(\Q(t)\). 
+  \end{enumerate}
+\end{prop}
+\begin{defn}
+  Let \(\langle \cdot, \cdot \rangle_t \from \sym[t] \times \sym[t]
+  \to \Q(t)\) be given by \[
+    \langle P_\lambda, P_\mu \rangle_t = \delta_{\lambda,\mu}
+    z_\lambda \prod_{i} (1-t^{\lambda_i})
+  \]
+  where \(z_\lambda = \prod_i i^{m_i} m_i!\). (See
+  \ref{hn-in-terms-of-pn}). 
+\end{defn}
+\begin{prop}
+  The set \(\{P_\lambda(x;t)\}\) is characterize by
+  \begin{enumerate}
+  \item Orthogonality with respect to \(\langle \cdot, \cdot
+    \rangle_t\).
+  \item Unitriangularity with respect to Schur basis. That is, \[
+      P_\lambda(x;t) = s_\lambda + \sum_{\lambda \strictlydominates
+        \mu} c_{\lambda,\mu}(t) s_\mu
+    \]
+    \todo{Somehow, this seems off; when characterizing Schur functions
+    in a similar way, we used that they were ortho\textbf{normal}; in
+    other words, is orthogonality sufficient?}
+  \end{enumerate}
+\end{prop}
+\begin{cor}
+  If we set \(t=1\), this gives us that \[
+    m_\lambda = s_\lambda + \text{ lower order terms}
+  \]
+  where the lower order terms come from the combinatorics of special
+  rim hook tabloids.
+\end{cor}
+\begin{defn}
+  Let \(\{Q_\mu'(x;t)\}\) in \(\sym[t]\) be the dual basis to
+  \(\{P_\lambda(x;t)\}\) with respect to \(\langle \cdot,\cdot
+  \rangle\). 
+\end{defn}
+\begin{prop}
+  Since \(s_\lambda = \sum_\mu K_{\lambda \mu}(t) P_\mu\) by
+  \ref{s-in-terms-of-P}, we get \[
+    Q_\mu' = \sum_{\lambda} K_{\lambda,\mu}(t) s_\lambda
+  \]
+\end{prop}
+\begin{thm}
+  \[
+    K_{\lambda,\mu}(t) = \sum_{\T \in \SSYT(\lambda,\mu)} t^{\charge(\T)}
+  \]
+\end{thm}
+Of course, to understand this theorem, we must define the charge of a
+semistandard Young tableau.
+\begin{defn}
+  The \de{reading word} of a tableau \(\T\) is the word created from
+  reading the entries of \(\T\) from left to right, top to bottom.
+\end{defn}
+\begin{example}
+  Let \[
+    \T = \ytableaushort{5,4,368,1279}
+  \]
+  Then, the reading word is \(543681279\).
+\end{example}
+\begin{defn}
+  Recall that the charge of a permutation \(\sigma\) is given by
+  writing \(\sigma\) counterclockwise on a circle and labeling the
+  letters \(1,2,3,\ldots\) with an ``index'' clockwise starting at
+  \(0\) and increasing 
+  if you cross \(\star\). Finally, the charge is the sum of the
+  indices. Then, for \(\T\) a \emph{standard} Young tableau,
+  we define \(\charge(\T)\) to be the 
+  charge of the reading word of \(\T\). Alternatively, one can assign
+  indices \(I=(I_1,I_2, \ldots, I_\ell)\) by setting \[
+    I_1 = 0, I_x =
+    \begin{cases}
+      I_{x-1} + 1 & \text{ if }x\text{ is east of }x-1\\
+      I_{x-1} & \text{ else}
+    \end{cases}
+  \]
+\end{defn}
+\begin{example}
+  Let \(\T\) be as above so it has reading word \(\sigma =
+  543681279\). Then, we compute 
+\[  
+  \begin{tikzpicture}
+    \draw[black] circle(0.8cm);
+    \node[draw=none,minimum size=2cm,regular polygon,regular polygon
+    sides=10] (a) {};
+
+    \draw[fill] (a.side 1) circle (1pt) node{\(\star\)};
+    \draw[fill] (a.side 2) circle (0pt) node{\(5\)};
+    \draw[fill] (a.side 3) circle (0pt) node{\(4\)};
+    \draw[fill] (a.side 4) circle (0pt) node{\(3\)};
+    \draw[fill] (a.side 5) circle (0pt) node{\(6\)};
+    \draw[fill] (a.side 6) circle (0pt) node{\(8\)};
+    \draw[fill] (a.side 7) circle (0pt) node{\(1\)};
+    \draw[fill] (a.side 8) circle (0pt) node{\(2\)};
+    \draw[fill] (a.side 9) circle (0pt) node{\(7\)};
+    \draw[fill] (a.side 10) circle (0pt) node{\(9\)};
+
+    \node[draw=none,minimum size=1.25cm,regular polygon,regular polygon
+    sides=10] (b) {};
+    \draw[fill] (b.side 2) circle (0pt) node{\(1\)};
+    \draw[fill] (b.side 3) circle (0pt) node{\(1\)};
+    \draw[fill] (b.side 4) circle (0pt) node{\(1\)};
+    \draw[fill] (b.side 5) circle (0pt) node{\(2\)};
+    \draw[fill] (b.side 6) circle (0pt) node{\(3\)};
+    \draw[fill] (b.side 7) circle (0pt) node{\(0\)};
+    \draw[fill] (b.side 8) circle (0pt) node{\(1\)};
+    \draw[fill] (b.side 9) circle (0pt) node{\(3\)};
+    \draw[fill] (b.side 10) circle (0pt) node{\(4\)};
+  \end{tikzpicture}
+\]
+giving \(\charge(\T) = 16\).
+\end{example}
+\begin{defn}
+  We define the charge of a semistandard Young tableau as
+  follows. Given a word (tableau) of partition weight,
+  \begin{enumerate}
+  \item Extract the ``standard'' (permutation) subwords.
+  \item Compute charge on each of these subwords.
+  \item Sum up each of the separate charges to get the charge.
+  \end{enumerate}
+\end{defn}
+\begin{example}
+  Let \[
+    \T = \ytableaushort{5,3444,22333,1111224}
+  \]
+  Then, we draw the reading word on a charge circle and find the
+  standard subwords, labelled in different colors and done
+  successively for clarity. \[
+    \begin{tikzpicture}
+    \draw[black] circle(1.8cm);
+    \node[draw=none,minimum size=4cm,regular polygon,regular polygon
+    sides=18] (a) {};
+
+    \draw[fill] (a.side 1) circle (0pt) node{\(\star\)};
+    \draw[fill] (a.side 2) circle (0pt) node[red]{\(5\)};
+    \draw[fill] (a.side 3) circle (0pt) node[red]{\(3\)};
+    \draw[fill] (a.side 4) circle (0pt) node{\(4\)};
+    \draw[fill] (a.side 5) circle (0pt) node{\(4\)};
+    \draw[fill] (a.side 6) circle (0pt) node{\(4\)};
+    \draw[fill] (a.side 7) circle (0pt) node{\(2\)};
+    \draw[fill] (a.side 8) circle (0pt) node[red]{\(2\)};
+    \draw[fill] (a.side 9) circle (0pt) node{\(3\)};
+    \draw[fill] (a.side 10) circle (0pt) node{\(3\)};
+    \draw[fill] (a.side 11) circle (0pt) node{\(3\)};
+    \draw[fill] (a.side 12) circle (0pt) node{\(1\)};
+    \draw[fill] (a.side 13) circle (0pt) node{\(1\)};
+    \draw[fill] (a.side 14) circle (0pt) node{\(1\)};
+    \draw[fill] (a.side 15) circle (0pt) node[red]{\(1\)};
+    \draw[fill] (a.side 16) circle (0pt) node{\(2\)};
+    \draw[fill] (a.side 17) circle (0pt) node{\(2\)};
+    \draw[fill] (a.side 18) circle (0pt) node[red]{\(4\)};
+  \end{tikzpicture}
+  \rightarrow
+  \begin{tikzpicture}
+    \draw[black] circle(1.8cm);
+    \node[draw=none,minimum size=4cm,regular polygon,regular polygon
+    sides=18] (a) {};
+
+    \draw[fill] (a.side 1) circle (0pt) node{\(\star\)};
+    \draw[fill] (a.side 2) circle (0pt) node[red]{\(5\)};
+    \draw[fill] (a.side 3) circle (0pt) node[red]{\(3\)};
+    \draw[fill] (a.side 4) circle (0pt) node{\(4\)};
+    \draw[fill] (a.side 5) circle (0pt) node{\(4\)};
+    \draw[fill] (a.side 6) circle (0pt) node[blue]{\(4\)};
+    \draw[fill] (a.side 7) circle (0pt) node[blue]{\(2\)};
+    \draw[fill] (a.side 8) circle (0pt) node[red]{\(2\)};
+    \draw[fill] (a.side 9) circle (0pt) node{\(3\)};
+    \draw[fill] (a.side 10) circle (0pt) node{\(3\)};
+    \draw[fill] (a.side 11) circle (0pt) node[blue]{\(3\)};
+    \draw[fill] (a.side 12) circle (0pt) node{\(1\)};
+    \draw[fill] (a.side 13) circle (0pt) node{\(1\)};
+    \draw[fill] (a.side 14) circle (0pt) node[blue]{\(1\)};
+    \draw[fill] (a.side 15) circle (0pt) node[red]{\(1\)};
+    \draw[fill] (a.side 16) circle (0pt) node{\(2\)};
+    \draw[fill] (a.side 17) circle (0pt) node{\(2\)};
+    \draw[fill] (a.side 18) circle (0pt) node[red]{\(4\)};
+  \end{tikzpicture}
+  \rightarrow
+  \begin{tikzpicture}
+    \draw[black] circle(1.8cm);
+    \node[draw=none,minimum size=4cm,regular polygon,regular polygon
+    sides=18] (a) {};
+
+    \draw[fill] (a.side 1) circle (0pt) node{\(\star\)};
+    \draw[fill] (a.side 2) circle (0pt) node[red]{\(5\)};
+    \draw[fill] (a.side 3) circle (0pt) node[red]{\(3\)};
+    \draw[fill] (a.side 4) circle (0pt) node{\(4\)};
+    \draw[fill] (a.side 5) circle (0pt) node[green]{\(4\)};
+    \draw[fill] (a.side 6) circle (0pt) node[blue]{\(4\)};
+    \draw[fill] (a.side 7) circle (0pt) node[blue]{\(2\)};
+    \draw[fill] (a.side 8) circle (0pt) node[red]{\(2\)};
+    \draw[fill] (a.side 9) circle (0pt) node{\(3\)};
+    \draw[fill] (a.side 10) circle (0pt) node[green]{\(3\)};
+    \draw[fill] (a.side 11) circle (0pt) node[blue]{\(3\)};
+    \draw[fill] (a.side 12) circle (0pt) node{\(1\)};
+    \draw[fill] (a.side 13) circle (0pt) node[green]{\(1\)};
+    \draw[fill] (a.side 14) circle (0pt) node[blue]{\(1\)};
+    \draw[fill] (a.side 15) circle (0pt) node[red]{\(1\)};
+    \draw[fill] (a.side 16) circle (0pt) node{\(2\)};
+    \draw[fill] (a.side 17) circle (0pt) node[green]{\(2\)};
+    \draw[fill] (a.side 18) circle (0pt) node[red]{\(4\)};
+  \end{tikzpicture}
+\]
+And thus giving us \[
+  \begin{tikzpicture}
+    \draw[black] circle(1.8cm);
+    \node[draw=none,minimum size=4cm,regular polygon,regular polygon
+    sides=18] (a) {};
+
+    \draw[fill] (a.side 1) circle (0pt) node{\(\star\)};
+    \draw[fill] (a.side 2) circle (0pt) node[red]{\(5\)};
+    \draw[fill] (a.side 3) circle (0pt) node[red]{\(3\)};
+    \draw[fill] (a.side 4) circle (0pt) node[violet]{\(4\)};
+    \draw[fill] (a.side 5) circle (0pt) node[green]{\(4\)};
+    \draw[fill] (a.side 6) circle (0pt) node[blue]{\(4\)};
+    \draw[fill] (a.side 7) circle (0pt) node[blue]{\(2\)};
+    \draw[fill] (a.side 8) circle (0pt) node[red]{\(2\)};
+    \draw[fill] (a.side 9) circle (0pt) node[violet]{\(3\)};
+    \draw[fill] (a.side 10) circle (0pt) node[green]{\(3\)};
+    \draw[fill] (a.side 11) circle (0pt) node[blue]{\(3\)};
+    \draw[fill] (a.side 12) circle (0pt) node[violet]{\(1\)};
+    \draw[fill] (a.side 13) circle (0pt) node[green]{\(1\)};
+    \draw[fill] (a.side 14) circle (0pt) node[blue]{\(1\)};
+    \draw[fill] (a.side 15) circle (0pt) node[red]{\(1\)};
+    \draw[fill] (a.side 16) circle (0pt) node[violet]{\(2\)};
+    \draw[fill] (a.side 17) circle (0pt) node[green]{\(2\)};
+    \draw[fill] (a.side 18) circle (0pt) node[red]{\(4\)};
+  \end{tikzpicture}
+  \begin{tikzpicture}
+    \draw[fill] (0,0) circle (0pt);
+    \draw[fill] (0,2) circle (0pt) node{\(\mapsto\)};
+  \end{tikzpicture}
+  \begin{tikzpicture}
+    \draw[red] (0,1.5) circle(0.65cm);
+    \node[draw=none, minimum size=2cm, regular polygon, regular
+    polygon sides=6] (a) at (0,1.5) {};
+    \draw[fill] (a.side 1) circle (0pt) node[red]{\(\star\)};
+    \draw[fill] (a.side 2) circle (0pt) node[red]{\(5\)};
+    \draw[fill] (a.side 3) circle (0pt) node[red]{\(3\)};
+    \draw[fill] (a.side 4) circle (0pt) node[red]{\(2\)};
+    \draw[fill] (a.side 5) circle (0pt) node[red]{\(1\)};
+    \draw[fill] (a.side 6) circle (0pt) node[red]{\(4\)};
+
+    \node[draw=none, minimum size=1cm, regular polygon, regular
+    polygon sides=6] (ain) at (0,1.5) {};
+    \draw[fill] (ain.side 2) circle (0pt) node{\(1\)};
+    \draw[fill] (ain.side 3) circle (0pt) node{\(0\)};
+    \draw[fill] (ain.side 4) circle (0pt) node{\(0\)};
+    \draw[fill] (ain.side 5) circle (0pt) node{\(0\)};
+    \draw[fill] (ain.side 6) circle (0pt) node{\(1\)};
+
+    
+    \draw[blue] (2.5,1.5) circle(0.65cm);
+    \node[draw=none, minimum size=1.75cm, regular polygon, regular
+    polygon sides=5] (b) at (2.5,1.5) {};
+    \draw[fill] (b.corner 1) circle (0pt) node[blue]{\(\star\)};
+    \draw[fill] (b.corner 2) circle (0pt) node[blue]{\(4\)};
+    \draw[fill] (b.corner 3) circle (0pt) node[blue]{\(2\)};
+    \draw[fill] (b.corner 4) circle (0pt) node[blue]{\(3\)};
+    \draw[fill] (b.corner 5) circle (0pt) node[blue]{\(1\)};
+
+    \node[draw=none, minimum size=0.9cm, regular polygon, regular
+    polygon sides=5] (bin) at (2.5,1.5) {};
+    \draw[fill] (bin.corner 2) circle (0pt) node{\(1\)};
+    \draw[fill] (bin.corner 3) circle (0pt) node{\(0\)};
+    \draw[fill] (bin.corner 4) circle (0pt) node{\(1\)};
+    \draw[fill] (bin.corner 5) circle (0pt) node{\(0\)};
+
+    
+    \draw[green] (0,-1.5) circle(0.65cm);
+    \node[draw=none, minimum size=1.75cm, regular polygon, regular
+    polygon sides=5] (c) at (0,-1.5) {};
+    \draw[fill] (c.corner 1) circle (0pt) node[green]{\(\star\)};
+    \draw[fill] (c.corner 2) circle (0pt) node[green]{\(4\)};
+    \draw[fill] (c.corner 3) circle (0pt) node[green]{\(3\)};
+    \draw[fill] (c.corner 4) circle (0pt) node[green]{\(1\)};
+    \draw[fill] (c.corner 5) circle (0pt) node[green]{\(2\)};
+
+    \node[draw=none, minimum size=0.9cm, regular polygon, regular
+    polygon sides=5] (cin) at (0,-1.5) {};
+    \draw[fill] (cin.corner 2) circle (0pt) node{\(1\)};
+    \draw[fill] (cin.corner 3) circle (0pt) node{\(1\)};
+    \draw[fill] (cin.corner 4) circle (0pt) node{\(0\)};
+    \draw[fill] (cin.corner 5) circle (0pt) node{\(1\)};
+
+    
+    \draw[violet] (2.5,-1.5) circle(0.65cm);
+    \node[draw=none, minimum size=1.75cm, regular polygon, regular
+    polygon sides=5] (d) at (2.5,-1.5) {};
+    \draw[fill] (d.corner 1) circle (0pt) node[violet]{\(\star\)};
+    \draw[fill] (d.corner 2) circle (0pt) node[violet]{\(4\)};
+    \draw[fill] (d.corner 3) circle (0pt) node[violet]{\(3\)};
+    \draw[fill] (d.corner 4) circle (0pt) node[violet]{\(1\)};
+    \draw[fill] (d.corner 5) circle (0pt) node[violet]{\(2\)};
+
+    \node[draw=none, minimum size=0.9cm, regular polygon, regular
+    polygon sides=5] (din) at (2.5,-1.5) {};
+    \draw[fill] (din.corner 2) circle (0pt) node{\(1\)};
+    \draw[fill] (din.corner 3) circle (0pt) node{\(1\)};
+    \draw[fill] (din.corner 4) circle (0pt) node{\(0\)};
+    \draw[fill] (din.corner 5) circle (0pt) node{\(1\)};
+  \end{tikzpicture}
+\]
+Thus, the charge would be \(2+2+3+3=10\). 
+\end{example}
+\begin{example}
+  Our theorem says that
+  \begin{align*}
+        s_{21} & = \sum_{\text{partition }\mu}\left(\sum_{\T \in \SSYT((2,1), \mu)}
+                 t^{\charge(\T)}\right) P_\mu(x;t)\\
+    & = \left( \sum_{\T \in
+        \SSYT((2,1),(2,1))} t^{\charge(\T)}\right) P_{21}(x;t) +
+    \left( \sum_{\T \in \SSYT((2,1),(1,1,1))} t^{\charge(\T)} \right) P_{111}(x;t)
+  \end{align*}
+  Thus, we can now use our theorem to compute \[
+    s_{21} = t^0 P_{21}(x;t) + (t^2+t)P_{111}(x;t)
+  \]
+  since \[
+    \begin{cases}
+      \ytableaushort{2,11} \text{ has charge }0\\
+      \\
+      \ytableaushort{3,12} \text{ has charge }1\\
+      \\
+      \ytableaushort{2,13} \text{ has charge }2
+    \end{cases}
+  \]
+\end{example}
 \begin{bibdiv}
   \begin{biblist}
     \bib{fulton}{book}{
