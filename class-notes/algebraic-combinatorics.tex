@@ -20,6 +20,8 @@
 \newcommand{\TP}{\mathsf{P}}
 \newcommand{\TQ}{\mathsf{Q}}
 \newcommand{\inv}{\operatorname{inv}}
+\newcommand{\charge}{\operatorname{charge}}
+\newcommand{\cocharge}{\operatorname{cocharge}}
 \newcommand{\des}{\operatorname{des}}
 \newcommand{\row}{\operatorname{row}}
 \newcommand{\col}{\operatorname{col}}
@@ -2461,6 +2463,266 @@ Thus, \(\inv(\tilde{T}) = 9\).
     = \sum_{\tilde{\T}} t^{\inv(\T)} x^{\wt(\tilde{\T})}
   \]
 \end{proof}
+\section{Hall-Littlewood Polynomials}
+Throughout our discussions on symmetric functions, most of our examples
+have been stated and worked out for symmetric functions over
+reasonably simple fields,
+such as \(\Q\), or some other relatively structured ring, such as a
+PID like \(\Z\). However, there is no reason we cannot consider
+\(\sym\) over other rings. In this section, we will primarily be
+interested in symmetric functions over \(\Q(t)\).
+\subsection{Symmetric polynomials over \(\Q(t)\)}
+\begin{example}
+  Consider \(\sym_2\) over \(\Q(t)\). The polynomial \[
+    t x_1^2 + t x_2^2 + \frac{1-3t}{1+t^2} x_1 x_2
+  \]
+  would be in \(\sym_2\).
+\end{example}
+\begin{defn}
+  Let \(\lambda\) be a partition. We define \(m_i(\lambda)\) to be the
+  number of parts in \(\lambda\) of size \(i\). Equivalently, this is
+  the number of rows with \(i\) boxes if \(\lambda\) is represented as
+  a Ferrers diagram.
+\end{defn}
+\begin{example}
+  Let \(\lambda = (4,4,4,3,3,2,2,2,1,1,1,1)\). Then, \[
+    m_1(\lambda) = 4, \ m_2(\lambda) = 3, \ m_3(\lambda) = 2, \
+    m_4(\lambda) = 3
+  \]
+\end{example}
+\begin{defn}
+  Let \(\lambda\) be a partition and let \(n = \ell(\lambda)\). Then,
+  we define \(\Sym_n^\lambda\) to be a subgroup of \(\Sym_n\) such
+  that \[
+    \sigma \in \Sym_n^\lambda \iff \sigma(\lambda) = \lambda
+  \]
+  where \(\sigma(\lambda_i) = \lambda_{\sigma(i)}\).
+\end{defn}
+\begin{example}
+  Let \(\sigma = (1,3,2,5,4,8,7,6,12,11,10,9)\) in one line
+  notation. Then,
+  \begin{align*}
+    \Sym_n^\lambda & \isom \Sym_{m_N} \times \cdots \times \Sym_{m_1} \\
+    \sigma & \mapsto (1,3,2) \times (2,1) \times (3,2,1) \times (4,3,2,1)
+  \end{align*}
+  all in one line notation.
+\end{example}
+\begin{rmk}\label{inv-plays-nice-with-prod}
+  Recall for \(\sigma \in \Sym_n\), \((i,j)\) is an inversion pair if
+  \(i < j\) but \(\sigma(i) > \sigma(j)\). Thus, if \(\sigma \in
+  \Sym_n^\lambda\), say \(\sigma = w_1 \times w_2 \times \cdots \times
+  w_N\), then \[
+    \inv(\sigma) = \sum_{i=1}^N \inv(w_i)
+  \]
+  since blocks do not contribute inversions outside of the block.
+\end{rmk}
+\begin{defn}
+  For \(n \in \N\), let \[
+    V_n(t) \defeq \prod_{i=1}^n \frac{1-t^i}{1-t} = \prod_{i=1}^n (1+t+\cdots+t^{i-1})
+  \]
+  and, for a partition \(\lambda\), let \[
+    V_\lambda(t) = \prod_{i \geq 0} V_{m_i(\lambda)}(t)
+  \]
+\end{defn}
+\begin{rmk}
+  One should exercise caution since, for \(a \in \N\), \[
+    V_{(a)}(t) = 1 \text{ but }V_a(t) = \prod_{i=1}^a (1+t+\cdots+t^{i-1})
+  \]
+\end{rmk}
+\begin{example}
+  Continuing with \(\lambda = (4,4,4,3,3,2,2,2,1,1,1,1)\), we have \[
+    V_\lambda(t) = V_3^2(t) V_2(t) V_4(t)
+  \]
+\end{example}
+\begin{prop}
+  Given \(n \in \N\), \[
+    V_n(t) = \sum_{\sigma \in \Sym_n} t^{\inv(\sigma)}
+  \]
+\end{prop}
+\begin{proof}
+  The proof is a straightforward application of the quantum factorial.
+\end{proof}
+\begin{cor}
+  By the above proposition, \[
+    V_\lambda(t) = \sum_{\sigma \in \Sym_n^\lambda} t^{\inv(\sigma)}
+  \]
+\end{cor}
+\begin{proof}
+  We check
+  \begin{align*}
+    V_\lambda(t)
+    & = \prod_{i \geq 0} V_{m_i(\lambda)}(t) \\
+    & = \prod_{i \geq 0} \sum_{w_i \in \Sym_{m_i}} t^{\inv(w_i)}
+    & \text{ by Proposition} \\
+    & = \sum_{(w_1, \cdots, w_N) \in \Sym_{m_1} \times \cdots \times
+      \Sym_{m_N}} 
+      t^{\inv(w_1)+\inv(w_2)+\cdots + \inv(w_N)} \\
+    & = \sum_{\sigma \in \Sym_n^\lambda} t^{\inv(\sigma)}
+      & \text{ by Remark \ref{inv-plays-nice-with-prod}}
+  \end{align*}
+\end{proof}
+\begin{defn}
+  Let \(\lambda\) be a partition. We define \[
+    R_\lambda(x_1,\ldots,x_n;t) \defeq \sum_{w \in \Sym_n} w\left(
+      x^\lambda \prod_{i < j} \frac{x_i-tx_j}{x_i-x_j} \right) \in
+    \Q(t)[x_1, \ldots, x_n]
+  \]
+\end{defn}
+\begin{rmk}
+  There are many things to notice about this \(R_\lambda\) polynomial,
+  and things to be suspicious of, too.
+  \begin{enumerate}
+  \item The product should be reminiscent of the Vandermonde
+    determinant. Recall \[
+      \Vdet = \det(x_i^j) = \prod_{i < j} (x_i - x_j) = \sum_{w \in
+        \Sym_n} \sgn(w) w(x^\rowshift)
+    \]
+    and, more generally, for \(\alpha = (\alpha_1, \ldots,
+    \alpha_\ell)\) with distinct parts, \[
+      \Vdet_{\alpha} = \det(x_i^{\alpha_j}) = \sum_{w \in \Sym_n}
+      \sgn(w)w(x^{\alpha}) 
+    \]
+    Thus, this \(R_\lambda\)  polynomial is of a similar form.
+  \item In the definition of \(R_\lambda\), we are dividing the
+    expression by \(x_i-x_j\)'s, but these elements are not in our
+    ring. Thus, we must argue that the numerator is somehow divisible
+    by this term. However, recall that a Schur function \(s_\lambda\) is \[
+      s_\lambda = \frac{\Vdet_{\lambda+\rowshift}}{\Vdet} =
+      \frac{\Vdet_{\lambda+\rowshift}}{\prod_{i<j} x_i - x_j} \in \sym
+    \]
+    and so it is not unreasonable for this idea to work out.
+  \item In fact, when \(t=0\), \[
+      R(x_1, \ldots, x_n;0) = \sum_{w \in \Sym_n} w\left( x^\lambda
+        \prod_{i < j} \frac{x_i}{x_i-x_j} \right)
+    \]
+    and, since \(\prod_{1 \leq i < j \leq n} x_i = x^\rowshift\) and
+    \(w\left( \prod_{i < j} x_i - x_j \right) = \sgn(w)\Vdet\), we get
+    \begin{align*}
+      R_\lambda(x_1, \ldots, x_n;0)
+      & = \sum_{w \in \Sym_n} \frac{\sgn(w)}{\Vdet}
+        w(x^{\lambda+\rowshift}) \\
+      & = \frac{1}{\Vdet} \sum_{w \in \Sym_n} \sgn(w)
+        w(x^{\lambda+\rowshift}) \\
+      & = \frac{\Vdet_{\lambda+\rowshift}}{\Vdet_{\rowshift}} \\
+      & = s_\lambda
+    \end{align*}
+  \item When \(t=1\), we get \[
+      R(x_1, \ldots, x_n;1) = \sum_{w \in \Sym_n} w \left( x^\lambda
+        \prod_{i < j} \frac{x_i-x_j}{x_i-x_j} \right) = \sum_{w \in
+        \Sym_n} w(x^\lambda)
+    \]
+    However, since \(w(x^\lambda) = x^{w(\lambda)}\), then we have \[
+      R(x_1, \ldots, x_n;1)  = |\Stab_{\Sym_n}(\lambda)|
+      \sum_{\substack{\alpha \in \N^n \\ \alpha \sim \lambda}}  x^\alpha =
+    |\Stab_{\Sym_n}(\lambda)| m_{\lambda}(x_1, \ldots, x_n)
+    \]
+  \end{enumerate}
+\end{rmk}
+\begin{example}
+  We compute the small examples of \(R_{11}(x_1,x_2)\) and
+  \(R_{2}(x_1, x_2)\). Thus, we are working over \(\Sym_2 = \{id,
+  (12)\}\) (in cycle notation). First,
+  \begin{align*}
+    R_{11}(x_1, x_2) 
+    & = x_1 x_2 \left( \frac{x_1-tx_2}{x_1-x_2} \right) + x_1 x_2
+      \left( \frac{x_2-tx_1}{x_2-x_1} \right)\\
+    & = \frac{x_1 x_2}{x_1-x_2} (x_1-tx_2-x_2+tx_1)\\
+    & = \frac{x_1 x_2}{x_1 - x_2}(x_1-x_2+t(x_1-x_2))\\
+    & = x_1 x_2 (1+t) 
+  \end{align*}
+  which is \((1+t)s_{11}\) in terms of Schur functions. Also, note
+  that \[
+    V_{(11)}(t) = V_2(t) = \frac{1-t^2}{1-t} = 1+t
+  \]
+  Second,
+  \begin{align*}
+    R_2(x_1, x_2)
+    & = x_1^2 \frac{x_1-tx_2}{x_1-x_2} + x_2^2
+      \frac{x_2-tx_1}{x_2-x_1} \\
+    & = \frac{1}{x_1-x_2}(x_1^3-tx_1^2 x_2 - x_2^3 + tx_1x_2^2)\\
+    & = \frac{1}{x_1-x_2}(x_1^3-x_2^3-tx_1x_2(x_1-x_2))\\
+    & = x_1^2+x_1x_2+x_2^2-tx_1x_2
+  \end{align*}
+  which is \(s_2-ts_{11}\) in terms of Schur functions. Thus, we see
+  that \(R_\lambda\)'s are not necessarily Schur positive. Also, of
+  note, \[
+    V_{(2)} = V_1(t) = 1
+  \]
+  Thus, in both our examples, \(R_\lambda\) has been divisible by
+  \(V_\lambda(t)\). 
+\end{example}
+\begin{prop}
+  \(R_\lambda(x_1, \ldots, x_n;t)\) is a symmetric polynomial.
+\end{prop}
+\begin{proof}
+  Observe that \[
+    \prod_{i < j}(x_i-tx_j) =
+    \begin{array}{cccc}
+      &&&\\
+      &&&\\
+      (x_1-tx_2)&(x_1-tx_3)&(x_1-tx_4)&\cdots\\
+                &(x_2-tx_3)&(x_2-tx_4)&\cdots\\
+                &          &(x_3-tx_4)&\cdots
+    \end{array}
+  \]
+  and so, expanding this product into a sum, each monomial will be of
+  the form \[ 
+    \prod_{i < j} x_i^{r_{ij}} (-tx_j)^{s_{ij}}, \ \ r_{ij},s_{ij} \in \N
+  \]
+  However, there are some restrictions we must place on \(r_{ij}\) and
+  \(s_{ij}\). In fact, from each term in initial product above, we are
+  picking either an \(x_i\) or a \(-tx_j\); we cannot pick both. So,
+  the combinatorics of picking monomials amounts to circling either
+  the \((i,j)\) or \((j,i)\) entry of the following matrix, but not
+  both. \[
+    \left(
+      \begin{array}{ccccc}
+        0&x_1&x_1&x_1&\cdots\\
+        -tx_2&0&x_2&x_2&\cdots\\
+        -tx_3&-tx_3&0&x_3&\cdots\\
+        \vdots&&&\ddots&\\
+        -tx_n&-tx_n&-tx_n&\cdots&0
+      \end{array}
+\right)
+  \]
+  Thus, if we take \(U = (u_{i,j})\) to be a \((0,1)\)-matrix with
+  \(u_{i,i} = 0\) and \(u_{i,j}+u_{j,i} = 1\), we get \[
+    \prod_{i < j} (x_i-tx_j) = \sum_{U} \prod_{i < j} x_i^{u_{ij}}(-t
+    x_j)^{u_{ji}} 
+  \]
+  where the sum is over all such \((0,1)\)-matrices \(U\). Thus, the
+  symmetry follows. \todo{Elaborate}
+\end{proof}
+\begin{prop}
+  \[
+    R_\lambda(x_1, \ldots, x_n;t) = V_{\lambda}(t) \left( s_\lambda +
+      \sum_{\lambda \strictlydominates \mu} c_{\lambda,\mu}(t) s_\mu
+    \right) 
+  \]
+  for some \(c_{\lambda,\mu}(t) \in \Q(t)\).
+\end{prop}
+\begin{cor}
+  \(\{R_\lambda\}_{\lambda}\) is a basis of symmetric polynomials.
+\end{cor}
+\begin{rmk}
+  If we let \[
+    P_\lambda(x_1, \ldots, x_n; t) = \frac{1}{V_\lambda(t)}
+    R_\lambda(x_1, \ldots, x_n;t)
+  \]
+  then \[
+    s_\lambda(x_1, \ldots, x_n) = \sum_{\mu} c_{\lambda,\mu}(t)
+    P_\mu(x_1, \ldots, x_n;t) 
+  \]
+  with \(c_{\lambda,\mu}(t) \in \N[t]\), that is, each
+  \(c_{\lambda,\mu}(t)\) is a polynomial in \(t\) with no negative
+  coefficients! This is incredibly remarkable since there are no
+  \(t\)'s on the left hand side, so they must all cancel
+  somehow. Furthermore, it is known that \[
+    c_{\lambda,\mu}(t) = K_{\lambda,\mu}(t) = \sum_{\T \in
+      \SSYT(\lambda,\mu)} t^{\charge(\T)}
+  \]
+\end{rmk}
+\subsection{\(t\)-Generalization of Hall Inner Product}
 \begin{bibdiv}
   \begin{biblist}
     \bib{fulton}{book}{
