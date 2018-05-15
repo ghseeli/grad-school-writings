@@ -719,8 +719,10 @@ Then, \(R[x_1, \ldots, x_n]\) is a graded ring with \[
   \]
   where \(\alpha_1\) is the number of \(1\)'s in \(\mu\), \(\alpha_2\)
   is the number of \(2\)'s in \(\mu\), etc. This shows that \(f \in
-  R[e_1, \ldots, e_n]\). \todo{This only shows \(\sym_n \subset R[e_1,
-    \ldots, e_n]\). There should be more to show?}
+  R[e_1, \ldots, e_n]\). Thus, \(\sym_n^d \subset R[e_1, \ldots,
+  e_n]\). However, since \(e_1, \ldots, e_n\) are all symmetric, it
+  must be that \(R[e_1, \ldots, e_n] \subset \sym_n\). Thus, we get
+  the desired isomorphism.
 \end{proof}
 \begin{defn}
   For \(r \in \N\), the \de{complete symmetric polynomial} is \[
@@ -1073,7 +1075,7 @@ and \(e_n\)'s.
   We let \(\rowshift \defeq (n-1,n-2,\ldots,1,0)\). Then,
   \(\Vdet_\rowshift = \Vdet\), the Vandermonde determinant.
 \end{rmk}
-\begin{prop}
+\begin{prop}\label{vandermonde-props}
   Let \(\alpha = (\alpha_1, \ldots, \alpha_n) \in \N^n\). Then, for Jacobi's generalized Vandermonde
   \begin{enumerate}
   \item \(\alpha_i = \alpha_j \implies \Vdet_\alpha = 0\)
@@ -1087,7 +1089,7 @@ and \(e_n\)'s.
 \begin{proof}
   \begin{enumerate}
   \item If \(\alpha_i = \alpha_j\), then our matrix has two equal
-    rows, so its determinant is \(0\).
+    columns, so its determinant is \(0\).
   \item This is immediate since \(s_i \Vdet_\alpha\) swaps the \(i\)th
     and \(i+1\)st rows.
   \item If \(x_i = x_j\), then \(\Vdet_\alpha = 0\) since our matrix
@@ -1124,7 +1126,8 @@ Thus, now our following definition makes sense
   Postponed.
 \end{proof}
 One can instead take the statement of the theorem to be the definition
-of the \(s_\lambda\), if so inclined. We wish to show, using this
+of the \(s_\lambda\), if so inclined, and prove that it implies the
+bialternate formula; in fact, we will do this. See \ref{lr-generalization-corollaries}. We wish to show, using this
 construction, that the Schur functions form a basis for \(\Lambda\).
 \begin{example}
   Consider \(s_{21}(x_1,x_2,x_3)\). The possible semistandard Young
@@ -1311,10 +1314,11 @@ where \(s_{\mu/\nu}\) and \(\lambda\)-Yamanouchi are defined below.
   However, we want to show the result is true summing only over \(\T\)
   that are \(\lambda\)-Yamanouchi. To do this, we will show that all
   the non \(\lambda\)-Yamanouchi tableaux cancel each other out by
-  finding an appropriate sign-recersing involution on them.
+  finding an appropriate sign-reversing involution on them.
 
   To that effect, say \(\T\) is a ``Bad Guy'' if \(\T\) is not
-  \(\lambda\)-Yamanouchi. For such a \(\T\), there exists a \(j,k \in
+  \(\lambda\)-Yamanouchi and \(\Vdet_{\lambda+\rowshift+\wt(\T)} \neq
+  0\) \ref{bad-guy-restrictions}. For such a \(\T\), there exists a \(j,k \in 
   [n]\) such that \[
     \lambda_k+\wt_k(\T_{\geq j}) < \lambda_{k+1} + \wt_{k+1}(\T_{\geq j})
   \]
@@ -1389,8 +1393,23 @@ where \(s_{\mu/\nu}\) and \(\lambda\)-Yamanouchi are defined below.
   since \(s_k\) acts by swapping the \(k\) and \(k+1\)st rows of
   \(\Vdet\), which changest the determinant by a sign. Thus, we can
   cancel the contributions of the Bad Guys from our desired sums.
+  \begin{rmk}\label{bad-guy-restrictions}
+    Note, there is still some work to do. A concern is that not all
+    ``Bad Guys'' will actually have a \(\T_{<j}\) on which the BK
+    involution can act. Consider, for \(\lambda = \emptyset\), \[
+      \T = \ytableaushort{233,\none222,\none222}
+    \]
+    which fails to be Yamanouchi at column \(1\). However, such a Bad
+    Guy will have \[
+      \wt(\T)+\rowshift = (3,4,2)+(2,1,0) = (5,5,2)
+    \]
+    and so \(\Vdet_{(5,5,2)} = 0\) by
+    \ref{vandermonde-props}(a). \todo{argue why this happens with all
+      such Bad Guys that are fixed by the BK involution.}
+  \end{rmk}
 \end{proof}
-\begin{cor}[Corollaries to Theorem \ref{lr-generalization}] In the
+\begin{cor}[Corollaries to Theorem
+  \ref{lr-generalization}]\label{lr-generalization-corollaries} In the 
   following special cases, we get the following corollaries.
   \begin{enumerate}
   \item If \(\nu = \emptyset, \lambda = \emptyset\), then
@@ -1401,7 +1420,7 @@ where \(s_{\mu/\nu}\) and \(\lambda\)-Yamanouchi are defined below.
       \implies \Vdet_{\rowshift} s_\mu
       & = \Vdet_{\mu+\rowshift}
       & \substack{\text{Since there is a unique} \\ \text{Yamanouchi
-      tableau of shape }\mu \\ \text{by }\ref{super-semistandard}} \\
+      SSYT of shape }\mu \\ \text{by }\ref{super-semistandard}} \\
       \implies s_\mu & = \Vdet_{\mu+\rowshift}/\Vdet_{\rowshift}
     \end{align*}
   \item If \(\nu = \emptyset\), then
@@ -1663,6 +1682,9 @@ product.
   \begin{enumerate}
   \item \(\Omega(x,y) = \sum_{\lambda} h_\lambda(x)m_\lambda(y)\)
   \item \(\Omega(x,y) = \sum_{\lambda} s_\lambda(x)s_\lambda(y)\)
+    \todo{Add that \(\Omega(x,y) =
+      \sum_{\lambda}p_{\lambda}(x)p_{\lambda}(y)\). Only problem is
+      that I do not know how to prove this yet...}
   \end{enumerate}
 \end{prop}
 \begin{proof}
@@ -2074,9 +2096,13 @@ book.
       \lambda_1^{(2)} = 0-1+1 = 0
     \end{cases}
   \]
-  Thus, we get the \(3\)-quotient \(\lambda^* = ((1,1),(2),(0))\),
+  Thus, we get the \(3\)-quotient \(\lambda^* = ((1,1),(2),(0))\)   \todo{This does not quite agree with Sage, which gets
+    \(((2),(0),(1,1))\). Perhaps I did something wrong or Sage
+    uses a different definition.}
+,
   ie \[
-    \ydiagram{2,2,4,4} \mapsto \left( \ydiagram{1,1},\ydiagram{2}, \emptyset \right)
+    \ydiagram{2,2,4,4} \mapsto \left( \ydiagram{1,1},\ydiagram{2},
+      \emptyset \right)
   \]
 \end{example}
 \begin{prop}
@@ -2208,7 +2234,8 @@ We define a quotient map which takes a ribbon tableau \(\T\) to a tuple
   where \(0 
   \leq p < n\). Then, send \(R\) to a square of content \(r\)
   in the \(p+1\)st SSYT. \todo{Why does this work?! Probably follows
-    from the ``quotienting'' aspect.}
+    from the ``quotienting'' aspect. The \(p\)-quotient section
+    probably resolves this.}
 \end{defn}
 \begin{example}
   We send \[
@@ -2248,8 +2275,8 @@ content \(1\).
   \begin{enumerate}
   \item \(\sigma(c) > \sigma(d)\) and \(c\) and \(d\) have the same
     content, or
-  \item \(\sigma(c) < \sigma(d)\) and the content of \(c\) is one less
-    than the content of \(d\).
+  \item \(\sigma(c) < \sigma(d)\) and the content of \(c\) is one more
+    than the content of \(d\) (that is, \(c\) is one diagonal below \(d\)).
   \end{enumerate}
   Alternatively, for \(x \in \T^i\), define the \de{adjusted content}\todo{Note that this is a
       modification the definition in \cite{haglund-et-al}:
@@ -2753,7 +2780,7 @@ following.
   \ref{hn-in-terms-of-pn}). 
 \end{defn}
 \begin{prop}
-  The set \(\{P_\lambda(x;t)\}\) is characterize by
+  The set \(\{P_\lambda(x;t)\}\) is characterized by
   \begin{enumerate}
   \item Orthogonality with respect to \(\langle \cdot, \cdot
     \rangle_t\).
@@ -3068,6 +3095,11 @@ Thus, the charge would be \(2+2+3+3=10\).
     \end{cases}
   \]
 \end{example}
+\begin{rmk}
+  It should be noted that all Hall-Littlewood polynomials are actually
+  special cases of LLT polynomials. \todo{However, I do not know how
+    to prove this.}
+\end{rmk}
 \begin{bibdiv}
   \begin{biblist}
     \bib{fulton}{book}{
