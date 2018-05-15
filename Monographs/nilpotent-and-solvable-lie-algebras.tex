@@ -1,0 +1,878 @@
+\documentclass[11pt,leqno,oneside]{amsart}
+\usepackage[alphabetic,abbrev]{amsrefs} % use AMS ref scheme
+\usepackage{../ReAdTeX/readtex-core}
+\usepackage{./monographs}
+\usepackage{../ReAdTeX/readtex-abstract-algebra}
+\usepackage{../ReAdTeX/readtex-lie-algebras}
+\usepackage{tikz-cd}
+
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{todonotes}
+
+\numberwithin{thm}{section}
+
+\title[Nilpotent, Solvable, and Semisimple Lie Algebras]{Nilpotent,
+  Solvable, and Semisimple Lie
+Algebras}
+\author{George H. Seelinger}
+\date{May 2018}
+\begin{document}
+\maketitle
+\section{Introduction}
+Just as in groups, Lie algebras can have additional structure which
+make them ``nice.'' Due to the resemblence these structures have to
+their group theoretic counter-parts, we talk about solvable,
+nilpotent, and simple Lie algebras. The goal of this monograph is to
+primarily understand the most important theorems surrounding these
+structures, namely Engel's theorem, Lie's theorem, and Cartan's
+theorem. \textbf{This monograph will borrow content freely from \cite{humph}
+and makes no claim to originality of theorems, their
+statements, or their proofs.} The reader should think
+of this monograph as companion notes to \cite{humph}*{Sections
+  1--5}. Unless otherwise stated, we are always 
+working over 
+algebraically closed ground
+field \(F\) of characteristic \(0\), \(\g\) is an arbitrary Lie
+algebra, and \(\gl(V) 
+= \End(V)\) with the Lie bracket multiplication. 
+\section{Basic Definitions}
+\begin{defn}
+  Consider a Lie algebra \(\g\). We say \(\g\) is \de{linear} if
+  \([\g,\g] = 0\).
+\end{defn}
+While rather boring since the Lie bracket does not provide much
+additional structure, linear Lie algebras are important to keep in
+mind as easy examples. Linear Lie algebras play a similar role in Lie
+theory to abelian groups in group theory.
+\begin{thm}
+  Any \(1\)-dimensional Lie algebra is linear.
+\end{thm}
+\begin{proof}
+  By definition, a Lie algebra \(\g\) must have \([g,g] = 0\) for all
+  \(g \in \g\). Now, let \(\g\) have basis element \(\{x\}\). Then,
+  \([x,x] = 0 \implies [\g,\g] = 0\).
+\end{proof}
+\begin{defn}
+  Consider a Lie algebra \(\g\). We say \(\g\) is \de{simple} if
+  \(\g\) has no proper non-trivial ideals.
+\end{defn}
+Note that simple algebras are, in some sense, opposite to linear Lie
+algebras, since simple non-linear Lie algebras have the following
+property.
+\begin{prop}
+  Let \(\g\) be a simple non-linear Lie algebra. Then, \([\g,\g] =
+  \g\). 
+\end{prop}
+\begin{proof}
+  Since \([\g,\g] \ideal \g\) and \([\g,\g] \neq 0\) because \(\g\) is
+  non-linear, \([\g,\g] = \g\) by the simplicity of \(\g\). 
+\end{proof}
+\begin{example}
+  Consider \(\g = \sl_2(\C)\), the Lie algebra of \(2\) by \(2\)
+  complex traceless matrices. Such a Lie algebra is simple and
+  non-linear. This follows from the fact that the basis \[
+    e = \left(
+      \begin{array}{cc}
+        0&1\\
+        0&0
+      \end{array}
+  \right), \ f = \left(
+  \begin{array}{cc}
+    0&0\\
+    1&0
+  \end{array}
+  \right), \ h = \left(
+  \begin{array}{cc}
+    1&0\\
+    0&-1
+  \end{array}
+  \right)
+  \]
+  has the relations \[
+    [h,e] = 2e, [h,f] = -2f, [e,f] = h 
+  \]
+  So, \([\g,\g] = \g\). Now, suppose \(I\) is some nonempty ideal of
+  \(\sl_2(\C)\). Then, it contains some element \(ae+bf+ch\) for
+  \(a,b,c \in \C\). Then, \[
+    [h,[h,ae+bf+ch]] = [h,a[h,e] + b[h,f]] = [h,2ae - 2bf] = 4ae+4bf \implies c = 0 \text{
+      or } h \in I
+  \]
+  since \(4(ae+bf+ch)-(4ae+4bf) \in I\). However, if \(h \in I\), then
+  \([e,h] = -2e \in I\) and \([f,h] = 2f \in I\) and so \(I =
+  \g\). So, it must be that \(c = 0\). Now, consider since \(ae-bf \in
+  I\) by above, \[
+    [e,ae-bf] = -bh \in I \implies b = 0
+  \]
+  However, if \(ae \in I\), then \([f,ae] = -ah \in I\) and so we are
+  done. It must be that \(I = \sl_2(\C)\). \\
+
+  Once more theory is developed, there are easier and more elegant
+  ways to show \(\sl_2(\C)\) is simple.
+\end{example}
+\begin{defn}
+  Let \(\g\) be a Lie algebra and \(\g^{(0)} = \g, \g^{(1)} =
+  [\g,\g]\), and \(\g^{(i)} = 
+  [\g^{(i-1)}, \g^{(i-1)}]\). We call \(\{\g^{(i)}\}_{i \geq 0}\) the
+  \de{derived series} of \(\g\). 
+\end{defn}
+\begin{defn}
+  Let \(\g\) be a Lie algebra. We say \(\g\) is \de{solvable} if there
+  exists an \(n \in \N\) such that \(\g^{(n)} = 0\). 
+\end{defn}
+Solvable Lie algebras have many of the same properties as solvable
+groups in regards to their behavior with ideals, homomorphisms, and
+short exact sequences. See \cite{humph}*{p 11} for more information.
+\begin{example}
+  The canonical example of a solvable Lie algebra is the Lie algebra
+  of all upper triangular matrices over a field \(F\). Let us denote
+  such a Lie algebra as \(\b_n(F)\). Let \(\g = \b_n(F)\). Then, we
+  first seek to compute \([\g, \g]\). Let \(x,y \in \g\). Then, \(x =
+  d_x + n_x\), where \(d_x\) is the diagonal part of \(x\) and \(n_x\)
+  is the nilpotent part of \(x\). We then check:
+  \begin{align*}
+    [x,y] & = xy - yx \\
+          & = (d_x+n_x)(d_y+n_y) - (d_y+n_y)(d_x+n_x) \\
+    & = d_x d_y + n_x d_y + d_x n_y + n_x n_y - d_y d_x - n_y d_x -
+      d_y n_x - n_y n_x \\
+    & = n_x d_y + d_x n_y + n_x n_y - n_y d_x -
+      d_y n_x - n_y n_x & \text{ since } d_x d_y \text{ commute.}
+  \end{align*}
+  However, this final result must be \emph{strictly}
+  upper-triangular. Such matrices actually form another Lie algebra,
+  denoted \(\n_n(F)\). Thus, \([\g,\g] \subset \n_n(F)\). \\
+
+  Let \(e_{i,j}\) be the matrix with a \(1\) in the \((i,j)\)th entry
+  and \(0\) at all others. Then, \(\b_n(F)\) is spanned by all
+  \(e_{i,j}\) such that \(j-i \geq 0\) and \(\n_n(F)\) is spanned by
+  all \(e_{i,j}\) such that \(j-i \geq 1 = 2^0\). Furthermore, \[
+    [e_{i,j}, e_{k,\ell}] = \delta_{j,k} e_{i,\ell} - \delta_{\ell,i} e_{k,j}
+  \]
+  Let us assume \(j-i \geq 2^{k-1}\) and \(\ell-k \geq 2^{k-1}\) for
+  some \(k \in \N\) and \(\g^{(k)}\) is spanned by such \(e_{i,j}\). Then,
+  \begin{align*}
+    [e_{i,j}, e_{k,\ell}]
+    & = \delta_{j,k} e_{i,\ell} - \delta_{\ell,i} e_{k,j} \\
+    & =
+      \begin{cases}
+        e_{i,\ell} & j=k, \ell \neq i
+        \\
+        e_{k,j} & j \neq k, \ell = i \\
+        (e_{i,i} - e_{j,j}) & j = k, \ell = i \\
+        0 & \text{ else }
+      \end{cases}
+  \end{align*}
+  However, if \(j = k\) and \(\ell = i\), then \(i-j \geq 2^{k-1}\),
+  which is a contradiction since \(j-i \geq 2^{k-1}\). Thus, we
+  actually have \[
+  [e_{i,j}, e_{k,\ell}] =
+      \begin{cases}
+        e_{i,\ell} & j=k, \ell \neq i
+        \\
+        e_{k,j} & j \neq k, \ell = i \\
+        0 & \text{ else }
+      \end{cases}
+  \]
+  Moreover, if \(j = k\), then \(\ell - i \geq 2^{k-1} + k - i =
+  2^{k-1} + j - i \geq 2^{k-1} + 2^{k-1} = 2^k\), and similarly if
+  \(\ell = i\), then \(j-k \geq 2^k\). Thus, \(\g^{(k+1)}\) has a basis
+  consisting of all elements \(e_{i,j}\) with \(j-i \geq 2^k\). \\
+
+  Using this fact, we can see that \(\g^{\log_2 n + 1} = 0\) and thus
+  \(\g\) is solvable.
+  % Thus, if \(z \in \n_n(F)\), then \[
+  %   z = \sum_{j > i} z_{i,j} e_{i,j}
+  % \]
+  % and so, it \(t \in \n_n(F)\), too, we get
+  % \begin{align*}
+  %   [z,t] & = \sum_{j > i} \sum_{k > \ell} z_{i,j}
+  %           t_{k,\ell}[e_{i,j},e_{k,\ell}] \\
+  %   & = \sum_{j > i} \sum_{k > \ell} z_{i,j}
+  %           t_{k,\ell} (\delta_{j,k} e_{i,\ell}-\delta_{\ell,i}
+  %     e_{k,j}) \\
+  %   & = \sum_{j > i} \sum_{k > \ell} 
+  %     \begin{cases}
+  %       z_{i,j} t_{j,\ell} e_{i,\ell} & j=k, \ell \neq i
+  %       \\
+  %       -z_{i,j} t_{k,i} e_{k,j} & j \neq k, \ell = i \\
+  %       z_{i,j} t_{j,i} (e_{i,i} - e_{j,j}) & j = k, \ell = i \\
+  %       0 & \text{ else }
+  %     \end{cases} \\
+  %   & = \sum_{j > i} \sum_{k > \ell} 
+  %     \begin{cases}
+  %       z_{i,j} t_{j,\ell} e_{i,\ell} & j=k, \ell \neq i, \ell > j
+  %       \\
+  %       -z_{i,j} t_{k,i} e_{k,j} & j \neq k, \ell = i, i > k \\
+  %       0 & \text{ else }
+  %     \end{cases} & \text{ since } t_{j,i} = 0
+  % \end{align*}
+  % However, since \(j > i\) and \(k > \ell\), then \([z,t]\) must have
+  % \(0\)'s on the diagonal and the super-diagonal. 
+\end{example}
+\begin{example}
+  A specific and important Lie algebra in this family of Lie algebras is
+  \(\n_3(F)\), which is isomorphic to \de{the Heisenberg algebra},
+  \(H\), with 
+  basis \(\{f,g,z\}\) and relation \([f,g] = z\), as well as the properties
+  that \([H,H] \subset Z(H)\) and \(z \in Z(H)\). The isomorphism
+  between these two algebras is exhibited by \[
+    f \mapsto e_{1,2}, \ g \mapsto e_{2,3}, \ z \mapsto e_{1,3}
+  \]
+\end{example}
+\begin{prop}
+  Let \(\g\) be an arbitrary Lie algebra. Then, \(\g\) has a unique
+  maximal solvable ideal.
+\end{prop}
+\begin{proof}
+  Let \(S \ideal \g\) be a maximal solvable ideal. We know that, if
+  \(I,J \ideal \g\) are both solvable, then \(I+J\) is solvable. So,
+  given another solvable ideal \(I \ideal \g\), it must be that
+  \(S+I\) is solvable, but since \(S\) is maximal, \(S+I = S\). Thus,
+  \(I \subset S\). 
+\end{proof}
+\begin{defn}
+  If \(\g\) is a Lie algebra, we call its unique maximal solvable
+  ideal the \de{radical of \(\g\)} denoted \(\Rad \g\). 
+\end{defn}
+\begin{defn}
+  If \(\g\) is a Lie algebra and \(\Rad \g = 0\), we call \(\g\)
+  \de{semisimple}. 
+\end{defn}
+\begin{rmk}
+  Since simple Lie algebras have no non-trivial ideals, their radical
+  is \(0\) and thus any simple Lie algebra is also semisimple.
+\end{rmk}
+\begin{prop}
+  Let \(\g\) be a Lie algebra. Then \(\g / \Rad \g\) is semisimple.
+\end{prop}
+\begin{proof}
+  Consider the short exact sequence \[
+    0 \to \Rad \g \to \g \to \g / \Rad \g \to 0
+  \]
+  If \(\g \neq \Rad \g\), then it must be that \(\g / \Rad \g\) is not
+  solvable, otherwise \(\g\) would be solvable and thus \(\g = \Rad
+  \g\). Now, consider an solvable ideal of \(\g/\Rad \g\) must have
+  the form \(I/\Rad \g\) for an ideal \(I \ideal \g\). Then we would
+  have short exact sequence of ideals \[
+    0 \to I \intersect \Rad \g \to I \to I/\Rad \g \to 0
+  \]
+  and \(I\) would be solvable, so \(I = \Rad \g\) and \(I/\Rad \g =
+  0\). Thus, \(\g / \Rad \g\) is semisimple.
+\end{proof}
+\begin{defn}\label{levi-decomp}
+  Let \(\g\) be a Lie algebra. Then, the short exact sequence used in
+  the proof above, namely \[
+    0 \to \Rad \g \to \g \to \g/\Rad \g \to 0
+  \]
+  is the \de{Levi decomposition} of \(\g\). That is, \(\g\) is the
+  extension of a semisimple Lie algebra by a solvable algebra. 
+\end{defn}
+\begin{defn}
+  Let \(\g\) be a Lie algebra, \(\g^0 := \g, \g^1 := [\g,\g]\), and \(\g^i := [\g, \g^{i-1}]\). We
+  call \(\{\g^i\}_{i \geq 0}\) the \de{lower central series of \(\g\)}
+  or the \de{descending central series of \(\g\)}.
+\end{defn}
+\begin{defn}
+  Let \(\g\) be a Lie algebra. If there exists an \(n \in \N\) such
+  that \(\g^n = 0\), we say that \(\g\) is \de{nilpotent}.
+\end{defn}
+Just like solvability, nilpotency behaves similarly to the group
+theoretic version with respect to homomorphisms, ideals, and short
+exact sequences. See \cite{humph}*{p 12} for more details.
+\begin{example}
+  Consider \(\g = \sl_2(F)\) where \(\Char F = 2\). Such a Lie algebra
+  is nilpotent since \[
+    [h,e] = 2e = 0, \ [h,f] = -2f = 0, \ \ [e,f] = h
+  \]
+  and so \(\g^2 = \langle h \rangle\) and thus \(\g^3 = 0\).
+\end{example}
+\begin{defn}
+  Let \(g \in \g\), a Lie algebra. Then, if \(\ad_g\) is a nilpotent
+  endomorphism, that is, there is an \(n\) such that \((\ad_g)^n =
+  0\), we say that \(g\) is \de{ad-nilpotent}. 
+\end{defn}
+\begin{prop}
+  Given a Lie algebra \(\g\), if \(\g\) is nilpotent,
+  then all \(g \in \g\) are ad-nilpotent.
+\end{prop}
+\begin{proof}
+  Let \(\g^n = [\g, \g^{n-1}] = 0\). Now, for any \(g \in \g\), we
+  know \([g,\g] \subset [\g,\g]\). So, for any \(h \in \g\),
+  \((\ad_g)^i(h) \subset \g^i\). Therefore, \((\ad_g)^n(h) \in \g^n = 0
+  \implies (\ad g)^n = 0\). 
+\end{proof}
+\section{Engel's Theorem and Consequences}
+We have now laid out the appropriate groundwork to state and prove
+Engel's Theorem, which is a somewhat surprising partial converse to
+the proposition above.
+\begin{thm}[Engel's Theorem]
+  Let \(\g\) be a Lie algebra such that, for all \(g \in \g\), \(g\)
+  is ad-nilpotent. Then, \(\g\) is nilpotent.
+\end{thm}
+To prove Engel's theorem, we will make use of the following lemma, in
+the style of \cite{humph}*{p 12}
+\begin{lem}\label{nilp-implies-ad-nilp}
+  Let \(g \in \gl(V)\) be a nilpotent endomorphism of \(V\), then
+  \(\ad_g\) is nilpotent.
+\end{lem}
+\begin{proof}[Proof of Lemma]
+  Consider that \(\ad_g = \lambda_g + \rho_{-g}\) where \(\lambda_g \from
+  \g \to \g\) is given by \(x \mapsto gx\) and \(\rho_{-g} \from \g
+  \to \g\) is given by \(x \mapsto -xg\). Now, since \(g\) is a
+  nilpotent element of \(\End(V)\), it must be that \(\lambda_g,
+  \rho_{-g}\) are nilpotent elements of \(\End(\End(V))\). Using the
+  binomial theorem, it is straightforward to prove that, in any ring,
+  the sum of 
+  two nilpotent elements is again nilpotent, so \(\ad_g\) must be nilpotent.
+\end{proof}
+We will also use the following result to prove Engel's Theorem
+\begin{thm}\label{nilp-has-nontrivial-simult-0-eigenspace}
+  Let \(\g\) be a subalgebra of \(\gl(V)\), with \(V \neq 0\)
+  finite-dimensional. If all \(g \in \g\) are nilpotent, then there
+  exists \(0 \neq v \in V\) such that \(\g.v = 0\). 
+\end{thm}
+\begin{proof}
+  See \cite{humph}*{p 13}
+\end{proof}
+\begin{proof}[Proof of Engel's Theorem]
+  We proceed by induction on the dimension of \(\g\). If \(\g\) is
+  1-dimensional, we are done, since \(\g\) must be abliean. So, assume
+  the result is true for all Lie algebras with dimension less than
+  \(n\) and let \(\g\) have dimension \(n\). Since \(\g\) consis of
+  ad-nilpotent elements, then \(\ad \g \subset 
+  \gl(\g)\) satisfies the above theorem. Thus, there is a \(0 \neq x \in
+  \g\) such that \(ad_g x \neq 0\) for all \(g \in \g\), that is to
+  say\([\g, x] = 0\). Therefore, \(Z(\g) \neq 0\) since \(x \in
+  Z(\g)\). However, \(\g / Z(\g)\) must also consist of ad-nilpotent
+  elements and have dimension strictly less than \(\g\), since \(Z(\g)
+  \neq 0\). Thus, \(\g / Z(\g)\) is nilpotent, which implies that
+  \(\g\) is nilpotent. 
+\end{proof}
+These result have some interesting corollaries which give us insight
+into the structure of nilpotent Lie algebras. \todo{Add some
+  consequences.}
+\begin{cor}
+  Let \(\g\) be a subalgebra of \(\gl(V)\), with \(V \neq 0\) finite
+  dimensional, and all \(g \in \g\) are nilpotent. Then, there exists
+  a flag \((V_i)\) that is stable under \(\g\), with \(g.V_i \subset
+  V_{i-1}\) for all \(i\). In other words, there is a basis of \(V\)
+  relative to which the matrices of \(\g\) are all strictly upper
+  triangular.
+\end{cor}
+\begin{proof}
+  By Engel's theorem, there is a \(v \in V\) such that \(\g.v =
+  0\). So, proceeding by induction, \(V/ \Span\{v\}\) has such a
+  flag and we are done.
+\end{proof}
+Thus, we see that any nilpotent Lie algebra will ``look like'' the Lie
+algebra of strictly upper triangular matrices with the appropriate
+choice of basis.
+\section{Lie's Theorem and Consequences}
+Engel's theorem provided us with insight into the structure of
+nilpotent Lie algebras. Solvability is a slightly weaker condition,
+but Lie's theorem will still give us some useful information. For this
+section, we must assume that \(F\) is algebraically closed and \(\Char
+F = 0\). In essence, Lie's theorem is a corollary to the following
+theorem which most closely resembles
+\ref{nilp-has-nontrivial-simult-0-eigenspace}, and its proof will
+follow the same rough structure.
+\begin{thm}
+  Let \(\g\) be a solvable sub-algebra of \(\gl(V)\), where \(0 \neq
+  V\) is finite dimensional. Then, \(V\) contains a common eigenvector
+  for all the endomorphisms in \(\g\). 
+\end{thm}
+\begin{proof}
+  See \cite{humph}*{pp 15--16}
+\end{proof}
+\begin{cor}[Lie's Theorem]
+  Let \(\g\) be a solvable subalgebra of \(\gl(V)\), \(V\) finite
+  dimensional. Then, \(\g\) stabilizes some flag in \(\g\), that is to
+  say that the matrices of \(\g\) are upper triangular relative to
+  some suitable basis of \(V\). 
+\end{cor}
+\begin{rmk}
+  Lie's theorem also holds in prime characteristic provided \(\dim V <
+  \Char F\). 
+\end{rmk}
+\begin{proof}
+  Let \(\dim V = 1\). Then, \(\g\) trivially stabilizes the flag \(0
+  \subset V\). Now, assume the theorem is true for all \(V\) with
+  dimension less than \(n\). Then, consider that, by the theorem
+  above, there is a \(v \in V\) such that \(v\) is an eigenvector for
+  all \(g \in \g\), that is, \(g.v = \lambda(g)v\) for some \(\lambda
+  \from \g \to F\). Then, consider that \(\g\) stabalizes
+  some flag \(V/\Span\{v\}\) by the inductive hypothesis, say \(0 = V_0
+  \subset V_1
+  \subset \cdots \subset V_{n-1} = V/\Span\{v\}\). Thus, \(\g\)
+  stabalizes the flag \[
+    0 = V_0 \subset V_1 \subset \cdots \subset V_{n-1} = V/\Span\{v\}
+    \subset V_n = V.
+  \]
+\end{proof}
+Using this result, we can get an interesting fact about the structure
+of solvable Lie algebras.
+\begin{cor}
+  Let \(\g\) be a solvable Lie algebra. Then, there exist a chain of
+  ideals of \(\g\), \[
+    0 = \g_0 \subset \g_1 \subset \cdots \subset \g_n = \g
+  \]
+  such that \(\dim \g_i = i\). 
+\end{cor}
+\begin{proof}
+  Let \(\g\) be a solvable Lie algebra and \(\phi \from \g \to
+  \gl(V)\) be a finite-dimensional representation of \(\g\). Then,
+  \(\phi(\g)\) must be solvable and, by Lie's theorem, stabilize some
+  flag in \(V\). So, if \(\phi\) is the adjoint representation, then
+  \(V = \g\) and the subspaces of the flag are ideals of \(\g\), each with
+  codimension 1 in the next.
+\end{proof}
+\begin{cor}
+  Let \(\g\) be a solvable Lie algebra. Then, \(\ad_\g x\) is
+  nilpotent for any \(x \in [\g,\g]\). 
+\end{cor}
+\begin{proof}
+  \(\g\) has a flag of ideals as in the corollary above. Then, take a
+  basis \((x_1, \ldots, x_n)\) of \(\g\) for which \((x_1, \ldots,
+  x_i)\) spans \(\g_i\). Relative to this basis, the matrices of \(\ad
+  \g\) must be upper triangular since \(\g.x_i \in \Span \{x_1,
+  \ldots, x_i\}\). Thus, \(ad_g\) is upper triangular for all \(g \in
+  \g\). Thus, since the Lie algebra of upper triangular matrices has
+  derived subalgebra the Lie algebra of all \emph{strictly} upper
+  triangular matrices, it must be that \([\ad \g, \ad \g] = \ad_\g [\g,\g]\) contains
+  only upper triangular matrices. Thus, since every strictly upper
+  triangular matrix is nilpotent, every element of \([\g,\g]\) is
+  ad-nilpotent. 
+\end{proof}
+\section{Representation Theory of Solvable and Nilpotent Lie Algebras}
+We can also consider the following:
+\begin{defn}
+  A \de{1-dimensional representation} of a Lie algebra \(\g\) is a
+  linear map \(\rho \from \g \to \End(\C) \isom \C\) such that \(\rho([x,y]) =
+  [\rho(x),\rho(y)]\) for all \(x,y \in \g\).
+\end{defn}
+Then, we have
+\begin{lem}
+  A linear map \(\rho \from \g \to \C\) is a 1-dimensional
+  representation of \(\g\) if and only if \(\rho\) vanishes on \([\g,\g]\).
+\end{lem}
+\begin{proof}
+  This is a straightforward exercise using definitions since
+  \(\End(\C) \isom \C\) is \(1\)-dimensional as a Lie algebra.
+\end{proof}
+\begin{cor}[Alternative Lie's Theorem]
+  Let \(\g\) be a solvable Lie algebra and \(V\) a finite dimensional
+  irreducible \(\g\)-module. Then \(\dim V = 1\).
+\end{cor}
+\begin{proof}
+  Let \(V\) be an irreducible \(\g\)-module. We know by Lie's theorem that \(\g\) stabalizes some flag \(0 = V_0
+  \subset V_1 \subset \cdots \subset V_n = V\). However, \(V\) is
+  irreducible, so the only \(\g\)-submodule of \(V\) is itself and
+  \(0\). Thus, the flag must be \(0 \subset V\) and thus \(V\) is
+  one-dimensional. \\
+
+  Conversely, one could prove Lie's theorem from this corollary since
+  it implies that every \(\g\)-module would contain a
+  \(1\)-dimensional subrepresentation.
+\end{proof}
+This reinforces the picture that all solvable Lie algebra modules can
+be given a basis such that the action of \(\g\) is given by an
+upper-triangular matrix. However, we can say even more about the
+action of a nilpotent \(\g\), namely,
+\begin{thm}
+  Let \(\g\) be a nilpotent Lie algebra and \(V\) be a
+  \(\g\)-module. Let \(y \in \g\) and \(\rho(y) \from V \to V\) be the
+  map \(v \mapsto yv\). Then, the generalized eigenspaces of the map
+  \(\rho(y)\) are submodules of \(V\).
+\end{thm}
+\begin{proof}
+  The proof of this fact is rather ugly but relies on the fact that \[
+    (\rho(y)-(\alpha+\beta)1)^n xv = \sum_{i=0}^n \binom{n}{i} ((\ad_y
+    - \beta 1)^i x)((\rho(y)-\alpha 1)^{n-1}v)
+  \]
+  for \(v \in V, x,y \in \g, \alpha, \beta \in \C\). Then, one takes
+  \(\alpha = \lambda_i\) and \(\beta = 0\). See
+  \cite{carter}*{pp 17--18} for the full proof.
+\end{proof}
+Essentially, this theorem is saying that, if \(\rho(y)\) is put in
+Jordan-Canonical form, then the action \(y \mapsto \) Jordan block of \(\rho(y)\)
+forms a Lie algebra submodule.
+% \begin{cor}
+%   Let \(\g\) be a nilpotent Lie algebra and let \(V\) be a finite
+%   dimensional indecomposable \(\g\)-module. Then, we can choose a
+%   basis for \(V\) such that we obtain a matrix representation \(\rho\)
+%   of \(\g\) of the form \[
+%     \rho(x) = \left(
+%       \begin{tikzcd}
+%         0 \ar[rd, dash] & * \\
+%         0 & 0
+%       \end{tikzcd}
+%     \right), \ \ \ \forall x \in \g
+%   \]
+% \end{cor}
+% \begin{proof}
+%   This is simply a reformulation of Engel's theorem, since there is a
+%   \(v\) such that \(\g.v = 0\) and thus, \(x.v = 0\) and so \(x\) has
+%   \(0\) as an eigenvalue. But then, since each generalized eigenspace
+%   is a submodule
+% \end{proof}
+\section{Cartan's Criterion and Consequences}
+While Lie's theorem gives us some idea of the structure of a solvable
+Lie algebra, we still only have the actual definition of a solvable
+Lie algebra to prove a Lie algebra is, in fact, solvable. Cartan's
+criterion provides us a way to test a Lie algebra \(\g\) for
+solvability.
+\begin{thm}[Cartan's Criterion]
+  Let a Lie algebra \(\g\) be a subalgebra of \(\gl(V)\), \(V\)
+  finite-dimensional. Then, if \(\tr(xy) = 0\) for all \(x \in
+  [\g,\g]\) and \(y \in \g\), \(\g\) is solvable.
+\end{thm}
+To prove this, we will use a somewhat technical lemma from
+\cite{humph}*{p 19}.
+\begin{lem}
+  Let \(A \subset B\) be two subspaces of \(\gl(V)\) with \(\dim V <
+  \infty\). Set \(M = \{x \in \gl(V) \st [x,B] \subset A\}\). If \(x
+  \in M\) satisfies \(\tr(xy) = 0\) for all \(y \in M\), then \(x\) is
+  nilpotent. 
+\end{lem}
+\begin{proof}
+  See \cite{humph}*{p 19}.  
+\end{proof}
+\begin{lem}
+  Given \(x,y,z \in \gl_n(F)\), we get \[
+    \tr([x,y]z) = \tr(x[y,z])
+  \]
+\end{lem}
+\begin{proof}[Proof of Cartan's Criterion]
+  If \(\g^{(1)} = [\g,\g]\) is nilpotent, we know that \(\g\) is
+  solvable since \(\g^{(i+1)} = [\g,\g]^{(i)} \subset [\g,\g]^i\). To
+  do this, we will show that all \(x \in [\g,\g]\) are nilpotent
+  endomorphisms and appeal to \ref{nilp-implies-ad-nilp} followed by
+  Engel's theorem to conclude \([\g,\g]\) is nilpotent. Now, using the
+  first lemma above, take \(A = [\g,\g]\) and \(B = \g\). Then, \(\g \subset
+  M = \{x \in \gl(V) \st [x,\g] \subset \g\}\) trivially. Now, take
+  \([x,y] \in [\g,\g]\) and \(z \in M\). The second lemma above tells
+  us \[
+    \tr([x,y]z) = \tr(x[y,z]) = \tr([y,z]x) = 0
+  \]
+  where the last equality follows from \([y,z] \in M\) and the given
+  hypothesis on trace. Thus, we have satisfied the hypotheses for the first
+  lemma above and get that any generator \([x,y] \in [\g,\g]\) is nilpotent.
+\end{proof}
+\begin{cor}\label{killing-form-degenerate-on-derived-implies-solvable}
+  Let \(\g\) be a Lie algebra. If \(\tr(\ad_x, \ad_y) = 0\) for
+  all \(x \in [\g,\g], y \in \g\), then \(\g\) is solvable.
+\end{cor}
+\begin{proof}
+  We can apply Cartan's criterion to the adjoint representation of
+  \(\g\) to get that \(\ad \g\) is solvable using the given trace
+  condition. Then, since \(\ker \ad = Z(\g)\), by definition of
+  \(Z(\g)\), and \(Z(\g)\) is an abelian Lie algebra, \(\ker \ad\) is
+  also solvable. Thus, we have short exact sequence \[
+    0 \to Z(\g) \to \g \to \ad \g \to 0
+  \]
+  with \(Z(\g), \ad \g\) solvable and so \(\g\) must be solvable.
+\end{proof}
+This corollary will be useful due to the way the Killing form is defined.
+\section{The Killing Form}
+\begin{defn}
+  Given a Lie algebra \(\g\), we define the \de{Killing form of
+    \(\g\)}, denoted \(\kappa \from \g \times \g \to \g\) to be
+  defined by, for \(x,y \in \g\) \[
+    \kappa(x,y) = \tr(\ad_x \ad_y)
+  \]
+\end{defn}
+\begin{prop}
+  \begin{enumerate}
+  \item The Killing form on a Lie algebra \(\g\) is a symmetric bilinear
+  form on \(\g\). 
+  \item The Killing for is associative, that is \[
+    \kappa([x,y],z) = \kappa(x,[y,z])
+  \]
+  \item The radical of the Killing form of \(\g\) is an ideal of
+    \(\g\).
+  \item Given \(x,y \in I \ideal \g\), then \[
+      \kappa_\g(x,y) = \kappa_I(x,y)
+    \]
+    that is, the Killing form of \(\g\) restricted to \(I\) is the
+    same as the Killing form on \(I\).
+  \item If \(I \ideal \g\), then \[
+      I^\perp := \{g \in \g \st \kappa(x,g) = 0, \forall x \in I\}
+      \text{ is an ideal of }\g
+    \]
+  \end{enumerate}
+\end{prop}
+\begin{proof}
+  For (a), observe that, for arbitrary matrices \(A,B \in M_n(F)\) and
+  \(c \in F\), we
+  have \[
+    \tr(A+B) = \sum_{i=1}^n (A+B)_{i,i} = A_{i,i} + B_{i,i} = \tr(A) +
+    \tr(B) \text{ and } \tr(cA) = \sum_{i=1}^n cA_{i,i} =
+    c\sum_{i=1}^n A_{i,i} = c \tr(A)
+  \]
+  and also that
+  \[
+    \tr(AB) = \sum_{i=1}^n (AB)_{i,i} = \sum_{i=1}^n \sum_{j=1}^n A_{i,j} B_{j,i} = \sum_{j=1}^n
+    \sum_{i=1}^n B_{j,i} A_{i,j} = \sum_{j=1}^n (BA)_{j,j} = \tr(BA)
+  \]
+  Thus, it must be that the Killing form is symmetric and bilinear.\\
+
+  For (b), we note  \[
+    \kappa([x,y],z) = \tr(\ad([x,y])\ad(z)) = \tr((xy-yx)z) = \tr(xyz)-\tr(yxz)
+  \]
+  and also \[
+    \kappa(x,[y,z]) = \tr(\ad(x)\ad([y,z])) = \tr(x(yz-zy)) =
+    \tr(xyz)-\tr(xzy).
+  \]
+  Since \(\tr(y(xz)) = \tr((xz)y)\), we are done. \\
+
+  For (c), recall that the radical of \(\kappa\) is given by \[
+    S := \{x \in \g \st \kappa(x,y) = 0, \forall y \in \g\}
+  \]
+  Then, since \(\kappa\) is bilinear, it is clear that, for \(x,z \in
+  S\), \(x+z \in S\). Furthermore, for \(g \in \g\) and \(x \in S\),
+  we get, using the lemma above,
+  \[
+    \kappa([g,x],y) = -\kappa(x,[g,y]) = 0 \implies [g,x] \in S 
+  \]
+  Thus, \(S\) is an ideal. \\
+
+  For (d), pick a basis for \(I\) and extend it to a basis of
+  \(\g\). Then, since \(x,y \in I\), the linear maps are given by \[
+    \ad_x = \left(
+      \begin{array}{cc}
+        A_1 & A_2 \\
+        0 & 0
+      \end{array}
+\right), \ \ \ad_y = \left(
+  \begin{array}{cc}
+    B_1&B_2\\
+    0&0
+  \end{array}
+\right)
+  \]
+  Thus, is matrix form \[
+    \ad_x \ad_y = \left(
+      \begin{array}{cc}
+        A_1 B_1 & A_2 B_2 \\
+        0 & 0
+      \end{array}
+  \right) \implies \tr_\g(\ad_x \ad_y) = \tr A_1 B_1 = \tr_I(\ad_x \ad_y)
+  \]
+  Thus, \(\kappa_\g(x,y) = \kappa_I(x,y)\). \\ 
+
+  For (e), if \(g \in \g\) and \(x \in I^\perp\), we wish to show
+  \([x,g] \in I^\perp\). Given \(y \in I\), we check \[
+    \kappa([x,g],y) = \kappa(x,[g,y]) = 0 \text{ since }[g,y] \in I
+  \]
+  Thus, \([x,g] \in I^\perp \implies I^\perp \ideal \g\).
+\end{proof}
+However, the most useful fact about the Killing form is the following.
+\begin{thm}\label{cartan-semisimplicity-criterion}
+  Let \(\g\) be a Lie algebra. Then, \(\g\) is semisimple if and only
+  if its Killing form is nondegenerate. 
+\end{thm}
+\begin{proof}
+  \((\implies)\) Let \(\Rad \g = 0\). Then, we wish to show the ideal
+  given by the radical of \(\kappa\), say \(S\), is contained in
+  \(\Rad \g\). Now, by Cartan's criterion, \(\ad_\g S\) must be
+  solvable since \(\tr(\ad_x \ad_y) = 0\) for all \(x \in S, y \in
+  \g\) and therefore, since \(\ker \ad\) is solvable, \(S\) is
+  solvable. Therefore, \(S \subset \Rad \g = 0\), so \(S = 0\). \\
+
+  \((\impliedby)\) Let \(S = 0\). We wish to show that every abelian
+  ideal of \(\g\) is contained in \(S\). Let \(x \in I\), an abelian
+  ideal of \(\g\), and \(y \in \g\). Then, \(\ad x \ad y \from \g \to
+  I\) and thus \((\ad 
+  x \ad y)^2 \from \g \to I \to[] [I,I] = 0\). Thus, \(\ad x \ad y\) is
+  a nilpotent linear transformation and so its only eigenvalues are
+  0. So, \[
+    0 = \tr(\ad x \ad y) = \kappa(x,y) \implies I \subset S = 0.
+  \]
+  Therefore, \(\g\) has no nontrivial abelian ideals and nontrivial
+  \(\Rad \g\) 
+  always contains a nontrivial abelian ideal, so \(\g\) must
+  therefore be semisimple.
+\end{proof}
+\begin{rmk}
+  Note that, in \((\implies)\) direction of the proof, we did not use
+  \(S = 0\) to show \(S \subset \Rad \g\), so this is always true.
+\end{rmk}
+\begin{example}
+  Let \(\g = \sl_2\) with standard basis \(\beta = \{e,h,f\}\). Then, we wish
+  to compute the dual basis to \(\beta\) under the Killing
+  form. Consider that \(A = (\kappa(\beta_i
+  \beta_j))_{i,j}\) has \[
+    A = \left(
+      \begin{array}{ccc}
+        0 & 0 & 4 \\
+        0 & 8 & 0 \\
+        4 & 0 & 0
+      \end{array}
+    \right)
+  \]
+  and so its non-zero determinant tells us the form is nonzero and
+  that the dual basis \(\gamma\) is given by \[
+    A^{-1} = \left(
+      \begin{array}{ccc}
+        0 & 0 & \frac{1}{4} \\
+        0 & \frac{1}{8} & 0 \\
+        \frac{1}{4} & 0 & 0
+      \end{array}
+    \right)
+  \]
+  So, \(\kappa(\beta_i, \gamma_j) = e_i^t A (A^{-1} e_j) = \delta_{ij} \implies
+  \gamma = \{\frac{1}{4}f, \frac{1}{8}h, \frac{1}{4}e\}\).
+  % \begin{align*}
+  %   1 = \kappa(e, x)
+  %   & = \tr (\ad_e \ad_x) \\
+  %   & = \tr \left( (-2e_{1,2} + e_{2,3}) \ad_{x} \right) \\
+  %   & = \tr \left(\sum_{k,\ell} \left( -2x_{k,\ell} \delta_{2,k} e_{1,\ell}
+  %     + x_{k,\ell} \delta_{3,k} e_{2,\ell} \right)\right) \\
+  %   & = -2 x_{2,1} + x_{3,2} \\
+  %   0 = \kappa(h, x)
+  %   & = \tr(\ad_h \ad_x) \\
+  %   & = \tr\left( (2 e_{1,1} - 2 e_{3,3}) \ad_x \right) \\
+  %   & = 2 x_{1,1} - 2 x_{3,3} \\
+  %   0 = \kappa(f, x)
+  %   & = \tr(\ad_f \ad_x) \\
+  %   & = \tr((2 e_{3,2} - e_{2,1}) \ad_x) \\
+  %   & = 2 x_{2,3} - x_{1,2}
+  % \end{align*}
+  % Thus, using some simple algebra shows that \(x = \lambda h +
+  % \frac{1}{4} f\) for some \(\lambda\). We similarly compute 
+\end{example}
+\begin{thm}
+  If the Killing form of \(\g\) is identically zero, then \(\g\) is
+  solvable.
+\end{thm}
+\begin{proof}
+  In this case, \(\g = \Rad \kappa\) by definition, and by the remark
+  above, \(\Rad \kappa = S \subset \Rad \g\), so \(\g\) is
+  itself solvable. \todo{Check this proof; seems too easy}
+\end{proof}
+Using the Killing form, we can then arrive at the following
+characterization of semisimple Lie algebras, mirroring the one for
+semisimple Artinian rings.
+\begin{thm}\label{structure-theorem-of-ss-las}
+  A Lie algebra \(\g\) is semisimple if and only if it is isomorphic
+  to a direct sum of non-trivial simple Lie algebras. 
+\end{thm}
+\begin{proof}
+  First, assume \(\g\) is semisimple. If \(\g\) is nontrivial and
+  simple, we are done, so assume \(\g\) is not simple. Then, consider
+  a minimal non-zero ideal \(I \ideal \g\). Now, \(I^\perp\) is also
+  an ideal and, since \(\kappa\) is non-degenerate, \(I \intersect
+  I^\perp = \emptyset\). Thus, \[
+    \g = I \oplus I^\perp
+  \]
+  \todo{This seems too fast. Carter spends much more time to do this.}
+  Thus, we must show that \(I\) is a \emph{simple} Lie algebra. Take
+  \(J \ideal I\). Then, it must be \[
+    [J,\g] \subset [J,I] + [J,I^\perp] \subset [J,I] + [I,I^\perp] \subset J
+  \]
+  Thus, \(J \ideal \g\). However, \(I\) is minimal, so \(J = I\) or
+  \(J=0\), so \(I\) is simple.
+
+  Next, we wish to see that \(I^\perp\) is semisimple by showing all its
+  solvable ideals are trivial. If \(J \ideal I^\perp\) is
+  solvable, then \[
+    [J,\g] \subset [J,I]+[J,I^\perp] \subset [J,I^\perp] \subset J
+  \]
+  and so \(J \ideal \g \implies J = 0\) since \(\g\) is
+  semisimple. Thus, \(I^\perp\) is semisimple. \\
+
+  For the converse, suppose \[
+    \g = \g_1 \oplus \cdots \oplus \g_k
+  \]
+  where each \(\g_i\) is non-trivial and simple. We wish to show that
+  the Killing form 
+  on \(\g\) is non-degenerate. Each \(\g_i\) has non-degenerate
+  Killing form. Take \(x \in \Rad \kappa \subset \g \implies x = x_1 +
+  \cdots + x_k\) with \(x_i \in \g_i\). For \(y_i \in \g_i\), we
+  have \[
+    \langle x_i, y_i \rangle = \langle x,y_i \rangle = 0 \implies x_i
+    = 0
+  \]
+  Thus, \(x = 0\) since the above is true for all \(i\). Therefore,
+  \(\Rad \kappa = 0 \implies \g\) is semisimple.
+\end{proof}
+Thus, in summary, we have shown,
+\begin{thm}
+  Let \(\g\) be a Lie algebra. The following are equivalent.
+  \begin{enumerate}
+  \item \(\g\) is semisimple, that is, \(\Rad \g = 0\).
+  \item \(\g\) does not contain any non-trivial, abelian ideals.
+  \item The Killing form is non-degenerate on \(\g\).
+  \item \(\g\) is isomorphic to the direct sum of finitely many
+    non-trivial simple Lie algebras.
+  \end{enumerate}
+\end{thm}
+\begin{proof}
+  \((a) \implies (b)\) is immediate since any abelian ideal is also a
+  solvable ideal, but the maximal solvable ideal must be trivial. For
+  \((b) \implies (a)\), let \(\g\) have no non-trivial, abelian
+  ideals. Then, \(\g\) does not have any solvable ideals, since the
+  last ideal of a derived series must be abelian. \\
+
+  \((a) \iff (c)\) is \ref{cartan-semisimplicity-criterion}
+
+  \((a) \iff (d)\) is \ref{structure-theorem-of-ss-las}
+\end{proof}
+\section{Further Directions}
+In light of the above discussion, we see that semisimple Lie algebras
+break up into a direct sum of simple Lie algebras. Furthermore, in a
+strengthening of the Levi decomposition presented above
+(\ref{levi-decomp}), one gets that an arbitrary Lie algebra \(\g =
+\mathfrak{l} \oplus \rad \g\) over \(\R\) or \(\C\) where
+\(\mathfrak{l} \isom \g/\rad \g\) 
+is a semisimple subalgebra of \(\g\) called a \de{Levi
+  subalgebra}. Thus, if we could classifly \emph{all} simple Lie
+algebras, we would understand all the possible pieces an arbitrary Lie
+algebra (over \(\R\) or \(\C\)) could decompose into. An incredibly
+important tool for doing this is the representation theory of
+semisimple Lie algebras. In fact, using this representation,
+mathematicisna developed a beautiful and complete
+classification of simple Lie algebras.
+\begin{bibdiv}
+  \begin{biblist}
+    \bib{humph}{book}{
+      author={Humphreys, James E.}
+      title={Introduction to Lie Algebras and Representaton Theory}
+      year={1972}
+      note={Third printing, revised}
+    }
+    \bib{carter}{book}{
+      author={Carter, Roger}
+      title={Lie Algebras of Finite and Affine Type}
+      year={2005}
+    }
+    \bib{cat-o}{book}{
+      author={Humphreys, James E.}
+      title={Representations of Semisimple Lie Algebras in the BGG
+        Category $\mathcal{O}$}
+      year={2008}
+    }
+    \bib{erdmann}{book}{
+      author={Erdmann, Karin}
+      author={Wildon, Mark J.}
+      title={Introduction to Lie Algebras}
+      year={2006}
+    }
+    \bib{tao}{misc}{
+      author={Tao, Terrence}
+      title={Notes on the classification fo complex Lie algebras}
+      year={2013}
+      note={[Online; accessed 29-December-2017] \url{https://terrytao.wordpress.com/2013/04/27/notes-on-the-classification-of-complex-lie-algebras/}}
+%      note={}
+    }
+    % \bib{wiki}{misc}{
+    %   author={Wikipedia}
+    %   title={Root system --- Wikipedia{,} The Free Encyclopedia}
+    %   year={2017}
+    %   url={https://en.wikipedia.org/w/index.php?title=Root_system&oldid=759729605}
+    %   note={[Online; accessed 21-February-2017]}
+    % }
+  \end{biblist}
+\end{bibdiv}
+
+\end{document}
