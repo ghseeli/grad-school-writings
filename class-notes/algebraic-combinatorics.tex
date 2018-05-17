@@ -1317,8 +1317,7 @@ where \(s_{\mu/\nu}\) and \(\lambda\)-Yamanouchi are defined below.
   finding an appropriate sign-reversing involution on them.
 
   To that effect, say \(\T\) is a ``Bad Guy'' if \(\T\) is not
-  \(\lambda\)-Yamanouchi and \(\Vdet_{\lambda+\rowshift+\wt(\T)} \neq
-  0\) \ref{bad-guy-restrictions}. For such a \(\T\), there exists a \(j,k \in 
+  \(\lambda\)-Yamanouchi. For such a \(\T\), there exists a \(j,k \in 
   [n]\) such that \[
     \lambda_k+\wt_k(\T_{\geq j}) < \lambda_{k+1} + \wt_{k+1}(\T_{\geq j})
   \]
@@ -1377,7 +1376,9 @@ where \(s_{\mu/\nu}\) and \(\lambda\)-Yamanouchi are defined below.
     \end{cases}
   \]
   So, \(\T^*\) is a Bad Guy and, in fact, the map \(\T \mapsto \T^*\)
-  is an involution on Bad Guys. Finally,
+  is an involution on Bad Guys (Note, however, it still has fixed
+  points, but we need not worry about those. See
+  \ref{bad-guy-restrictions}). Finally, 
   \begin{align*}
     \lambda+\wt(\T^*) + \rowshift
     & = \lambda + \wt(\T^*_{\geq j}) + \wt(\T^*_{<j}) + \rowshift\\
@@ -1394,18 +1395,33 @@ where \(s_{\mu/\nu}\) and \(\lambda\)-Yamanouchi are defined below.
   \(\Vdet\), which changest the determinant by a sign. Thus, we can
   cancel the contributions of the Bad Guys from our desired sums.
   \begin{rmk}\label{bad-guy-restrictions}
-    Note, there is still some work to do. A concern is that not all
-    ``Bad Guys'' will actually have a \(\T_{<j}\) on which the BK
-    involution can act. Consider, for \(\lambda = \emptyset\), \[
-      \T = \ytableaushort{233,\none222,\none222}
+    Note, there is still some work to do. A concern is that some
+    ``Bad Guys'' will actually have \(\T_{<j}\) fixed by the BK
+    involution. Consider, for \(\lambda = \emptyset\), \[
+      \T = \ytableaushort{233,\none222,\none111}
     \]
     which fails to be Yamanouchi at column \(1\). However, such a Bad
     Guy will have \[
       \wt(\T)+\rowshift = (3,4,2)+(2,1,0) = (5,5,2)
     \]
     and so \(\Vdet_{(5,5,2)} = 0\) by
-    \ref{vandermonde-props}(a). \todo{argue why this happens with all
-      such Bad Guys that are fixed by the BK involution.}
+    \ref{vandermonde-props}(a). In general, if the BK involution fixes
+    \(\T_{<j}\), then \(\T_{<j}\) necessarily has an
+    equal number of cells labelled \(k\) and \(k+1\), that is\[
+      \wt_k(\T_{<j}) = \wt_{k+1}(\T_{<j})
+    \]
+    Furthermore, since
+    \(\T\) is a Bad Guy, our choice of \((j,k)\) is such that \[
+      \lambda_k+\wt_k(\T_{\geq j}) + 1 = \lambda_{k+1} + \wt_{k+1}(\T_{\geq j})
+    \]
+    So, adding these two expressions together, we get \[
+      \lambda_k+\wt_k(\T)+1 = \lambda_{k+1}+\wt_{k+1}(\T)
+    \]
+    and thus, importantly, \[
+      (\lambda+\wt(\T)+\rowshift)_k =
+      (\lambda+\wt(\T)+\rowshift)_{k+1} \implies
+      \Vdet_{\lambda+\wt(\T)+\rowshift} = 0
+    \]
   \end{rmk}
 \end{proof}
 \begin{cor}[Corollaries to Theorem
