@@ -51,6 +51,7 @@
 }
 \makeatother
 
+\newcommand{\maj}{\operatorname{maj}}
 \newcommand{\height}{\operatorname{ht}}
 \newcommand{\size}{\operatorname{size}}
 \newcommand{\sh}{\operatorname{sh}}
@@ -59,6 +60,7 @@
 \newcommand{\wt}{\operatorname{wt}}
 \newcommand{\length}{\operatorname{len}}
 \newcommand{\LLT}{\operatorname{LLT}}
+\setcounter{section}{-1}
 
 \title[Algebraic Combinatorics]{Introduction to Algebraic
   Combinatorics: (Incomplete) Notes from a course taught by Jennifer Morse}
@@ -67,6 +69,75 @@
 \date{May 2018}
 \begin{document}
 \maketitle
+\section{Permutations}
+\begin{thm}[Foata Bijection]
+  There exists a bijection \(\psi \from \Sym_n \to \Sym_n\) such that
+  \(\maj(\sigma) = \inv(\psi(\sigma))\).
+\end{thm}
+\begin{proof}
+  Let \(w = w_1w_2\cdots w_n \in \Sym_n\) in one-line notation. Then,
+  set \(\psi(w_1) = w_1\). Next, if \(\psi(w_1 \cdots w_{i-1}) = v_1
+  \dots v_{i-1}\), then, we define \(\psi(w_1 \cdots w_i)\) by
+  \begin{enumerate}
+  \item Add \(w_i\) on the right.
+  \item Place vertical bars in \(w_1 \cdots w_i\) following the rules
+    \begin{enumerate}[label=(\roman*)]
+    \item If \(w_i > v_{i-1}\), then place a bar to the right of any
+      \(v_k\) with \(w_i > v_k\).
+    \item If \(w_i < v_{i-1}\), then place a bar to the right of any
+      \(v_k\) with \(w_i < v_k\).
+    \end{enumerate}
+  \item Cyclically permute one step to the right in any run between
+    two bars.
+  \end{enumerate}
+  \begin{example}
+    Let \(\sigma = 31426875\) which has \(\maj(\sigma) = 17\). Then,
+    we iterate
+    \begin{align*}
+      3\\
+      |3|1\\
+      |3|1|4\\
+      3|14|2&\rightarrow 3412\\
+      3|4|1|2|6\\
+      3|4|1|2|6|8\\
+      |341268|7&\rightarrow 8341267\\
+      |8|34126|7|5&\rightarrow 86341275 = \psi(\sigma)
+    \end{align*}
+    Indeed, \(\inv(\psi(\sigma)) = 17\)
+  \end{example}
+  To invert the Foata bijection, one does the following
+  \begin{enumerate}
+  \item For \(w = w_1 \cdots w_i\), place a dot between \(w_{i-1}\)
+    and \(w_i\).
+  \item Place vertical bars in \(w_1\ldots w_i\) following the rules
+    \begin{enumerate}[label=(\roman*)]
+    \item If \(w_i > w_1\), place a bar to the left of any \(w_k\)
+      with \(w_k < w_i\) and also before \(w_i\).
+    \item If \(w_i < w_1\), place a bar to the left of any \(w_k\) with
+      \(w_k > w_i\) and also before \(w_i\).
+    \end{enumerate}
+  \item Cyclically permute every run between two bars to the left.
+  \item \(w_i\) will be the \(i\)th entry of the resulting permutation.
+  \end{enumerate}
+  \begin{example}
+    For our example, if we start with \(86341275\), we carry out
+    \begin{align*}
+      |8|63412|7.5&\rightarrow 8341267&5\\
+      |834126.7&\rightarrow 341268&7\\
+      |3|4|1|2|6.8&\rightarrow 34126&8\\
+      |3|4|1|2.6&\rightarrow 3412&6\\
+      |3|41.2&\rightarrow 314&2\\
+      |3|1.4&\rightarrow 31&4\\
+      3.1&\rightarrow 3&1\\
+      .3& &3
+    \end{align*}
+    and thus we recover \(\sigma = 31426875\).
+  \end{example}
+\end{proof}
+\begin{prop}
+  The Foata bijection preserves the inverse descent set of
+  \(\sigma\).
+\end{prop}
 \section{Tableaux}
 \subsection{Robinson-Schensted-Knuth (RSK) Correspondence}
 We will discuss a bijection between matrices with entries in \(\N_0\)
