@@ -9,10 +9,10 @@ This is a GitHub repository for me to keep documents I am working on in a public
 
 There are many advantages to making these things public.
 
-1. Others may benefit from my work, from the perspective of mathematics and from hacing publically available TeX code.
+1. Others may benefit from my work, from the perspective of mathematics and from having publicly available TeX code.
 1. Others might catch mathematical errors I make. (If you see one, please let me know!)
 1. Version control allows me to save everything and see how thoughts evolve over time.
-1. A deployment system can compile my work into PDFs, so that when I make a change, the new PDFs are immediately and publically deployed.
+1. A deployment system can compile my work into PDFs, so that when I make a change, the new PDFs are immediately and publicly deployed.
 1. Mistakes I make will be forever preserved in the public record. Everyone makes mistakes and I think it is a good thing to be open about them.
 1. Allows for easy and efficient collaboration. Note, a successful model of public GitHub collaboration on TeX files can be found in the repository [ghseeli/grad-school-notes](https://ghseeli.github.io/grad-school-notes/), where I worked with collaborators to create a series of class notes for our first year graduate math PhD sequence.
 
