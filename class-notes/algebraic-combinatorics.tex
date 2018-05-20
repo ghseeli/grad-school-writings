@@ -32,8 +32,12 @@
 \newcommand{\SSYT}{\operatorname{SSYT}} % Semistandard Young Tableaux
 \newcommand{\defeq}{\coloneqq}
 \newcommand{\partitionof}{\vdash}
-\newcommand{\dominates}{\unrhd}
-\newcommand{\strictlydominates}{\rhd}
+\newcommand{\dominates}{\mathrel{\unrhd}}
+\newcommand{\strictlydominates}{\mathrel{\rhd}}
+\newcommand{\dominatedby}{\mathrel{\unlhd}}
+\newcommand{\strictlydominatedby}{\mathrel{\lhd}}
+\newcommand{\covers}{\mathrel{\gtrdot}}
+\newcommand{\coveredby}{\mathrel{\lessdot}}
 
 \newcommand{\sym}{\Lambda}
 \renewcommand{\k}{\Bbbk}
@@ -51,7 +55,13 @@
 }
 \makeatother
 
+\newcommand{\quantumBinom}[3][q]{\left[ \begin{array}{c} #2 \\
+                                          #3 \end{array} \right]_#1}
+\newcommand{\qbinom}{\quantumBinom}
+\newcommand{\stat}{\operatorname{stat}}
+\newcommand{\Des}{\operatorname{Des}}
 \newcommand{\maj}{\operatorname{maj}}
+\newcommand{\comaj}{\operatorname{comaj}}
 \newcommand{\height}{\operatorname{ht}}
 \newcommand{\size}{\operatorname{size}}
 \newcommand{\sh}{\operatorname{sh}}
@@ -69,7 +79,107 @@
 \date{May 2018}
 \begin{document}
 \maketitle
-\section{Permutations}
+These are a set of incomplete notes from an introductory class on
+algebraic combinatorics I took with Dr. Jennifer Morse in Spring
+2018. Especially early on in these notes, I have taken the liberty of
+skipping a lot of 
+details, since I was mainly focused on understanding symmetric
+functions when writing. Throughout I have assumed basic knowledge of
+the group 
+theory of the symmetric group, ring theory of polynomial rings, and
+familiarity with set theoretic 
+constructions, such as posets. A reader with a strong grasp on
+introductory enumerative combinatorics would probably have few
+problems skipping ahead to symmetric functions and referring back to
+the earlier sections as necessary.
+
+In these notes, we use French notation for Ferrers diagrams and Young
+tableaux, so the Ferrers diagram of \((5,3,3,1)\) is \[
+  \ydiagram{1,3,3,5}
+\]
+We also frequently use one-line notation for permutations, so the
+permutation \(\sigma = (4,3,5,2,1) \in \Sym_5\) has \[
+  \sigma(1) = 4, \sigma(2) = 3, \sigma(3) = 5, \sigma(4) = 2, \sigma(5)=1
+\]
+\section{Prelimaries}
+This section is an introduction to some notions on permutations and partitions. Most
+of the arguments are given in brief or not at all. A
+familiar reader can skip this section and refer back to it as necessary.
+\subsection{Some Statistics}
+\begin{defn}
+  A \de{statistic} on permutations is a function \(\stat \from \Sym_n
+  \to \N\). 
+\end{defn}
+\begin{defn}
+  Given a permutation \(\sigma = (\sigma_1,
+  \ldots, \sigma_n)\) in one-line notation, we have the following
+  definitions. 
+  \begin{enumerate}
+  \item The \de{length} of \(\sigma\), denoted \(\ell(\sigma)\), is
+    the number of pairs \((i,j)\) such that \(i < j\) and \(\sigma_i >
+    \sigma_j\).
+  \item The \de{sign} of \(\sigma\) is \((-1)^{\ell(\sigma)}\).
+  \item The \de{inversion statistic} on \(\sigma\) is defined by \[
+      \inv(\sigma) = \ell(\sigma)
+    \]
+  \item A \de{descent} of \(\sigma\) is an index \(i \in [n-1]\) such
+    that \(\sigma_i > \sigma_{i+1}\). The set of all descents on
+    \(\sigma\) is denoted \(\Des(\sigma)\).
+  \item The \de{major statistic} or \de{major index} is given by \[
+      \maj(\sigma) = \sum_{i \in \Des(\sigma)} i
+    \]
+  \end{enumerate}
+\end{defn}
+\begin{example}
+  Let \(\sigma = (3,1,4,2,5)\). Then, it has
+  \begin{itemize}
+  \item Inversions \((1,2), (1,4), (3,4)\). Thus, \(\inv(\sigma) = 3 =
+    \ell(\sigma)\).
+  \item Descents \(\{1,3\}\) and thus \(\maj(\sigma) = 1+3 = 4\).
+  \end{itemize}
+\end{example}
+\begin{defn}
+  Any statistic which is equidistributed over \(\Sym_n\) with the
+  inversion statistic, \(\inv\), is called \de{Mahonian}.
+\end{defn}
+\begin{thm}
+  The major index, \(\maj\), is Mahonian.
+\end{thm}
+\begin{example}
+  Given that \[
+    \Sym_3 = \{(123),(213),(132),(231),(312),(321)\} \text{ in
+      one-line notation}
+  \]
+  we have the corresponding lengths \(\{0,1,1,2,2,3\}\) and
+  corresponding descent sets
+  \(\{\{\},\{1\},\{2\},\{1\},\{2\},\{1,2\}\}\), giving major indexes
+  \(\{0,1,2,1,2,3\}\). Thus, on \(\Sym_3\), \(\inv\) and \(\maj\) are
+  equidistributed. 
+\end{example}
+To prove that \(\maj\) is Mahonian in general, we will use the
+characterization of Mahonian given below.
+\begin{thm}
+  A statistic \(\stat\) is Mahonian if and only if it satisfies the
+  identity \[
+    \sum_{\sigma \in \Sym_n} q^{\stat(\sigma)} = \sum_{\sigma \in
+      \Sym_n} q^{\inv(\sigma)}
+  \]
+\end{thm}
+\begin{rmk}
+  Note that \[
+    \sum_{\sigma \in \Sym_n} q^{\inv(\sigma)} = [n]_q! \defeq
+    (1)(1+q)(1+q+q^2)\cdots (1+q+\cdots+q^{n-1})
+  \]
+  which can be proved using an inductive argument by noting \[
+    \sum_{\sigma \in \Sym_n} q^{\inv(\sigma)} = \sum_{\sigma \in
+      \Sym_{n-1}} q^{\inv(\sigma)} + \sum_{\substack{\sigma \in \Sym_n
+      \\ \sigma(n) \neq n}} q^{\inv(\sigma)} = [n-1]_q! +
+  \sum_{j=1}^{n-1} \sum_{\substack{\sigma \in \Sym_n \\ \sigma(n)=j}} q^{\inv(\sigma)}
+  \]
+  but we will not need this in what follows.
+\end{rmk}
+To prove \(\maj\) is Mahonian, we will use the following theorem,
+although other bijections exist, such as the Carlitz bijection.
 \begin{thm}[Foata Bijection]
   There exists a bijection \(\psi \from \Sym_n \to \Sym_n\) such that
   \(\maj(\sigma) = \inv(\psi(\sigma))\).
@@ -138,7 +248,252 @@
   The Foata bijection preserves the inverse descent set of
   \(\sigma\).
 \end{prop}
+\begin{defn}
+  The \de{charge statistic} on a permutation \(\sigma\) is given by
+  \begin{enumerate}
+  \item Write the 
+    permutation in one-line notation counterclockwise around a circle
+    with a \(\star\) between the beginning and the end. \[
+    \begin{tikzpicture}
+    \draw[black] (0,0) circle(0.65cm);
+    \node[draw=none, minimum size=2.5cm, regular polygon, regular
+    polygon sides=6] (d) at (0,0) {};
+    \draw[fill] (d.side 1) circle (0pt) node{\(\star\)};
+    \draw[fill] (d.side 2) circle (0pt) node{\(\sigma_n\)};
+    \draw[fill] (d.side 3) circle (0pt) node{\(\sigma_{n-1}\)};
+    \draw[fill] (d.side 4) circle (0pt) node{\(\dots\)};
+    \draw[fill] (d.side 5) circle (0pt) node{\(\sigma_2\)};
+    \draw[fill] (d.side 6) circle (0pt) node{\(\sigma_1\)};
+      \end{tikzpicture}
+    \]
+  \item To each entry \(\sigma_k\), assign an ``index'' \(I_k\)
+    recursively as follows \[
+      I_k =
+      \begin{cases}
+        I_{k-1}+1 & \text{ if }\star\text{ is passed going from
+        }\sigma_{k-1}\text{ to }\sigma_k\text{ in a clockwise path
+          around the circle.} \\
+        I_{k-1} & \text{ otherwise.}
+      \end{cases}
+    \]
+  \item Define \(\charge(\sigma) = \sum_{k=1}^n I_k\), that is, the
+    sum of the indices.
+  \end{enumerate}
+\end{defn}
+\begin{example}
+  The permutation \((6,7,1,4,2,3,5)\) has \[
+    \begin{tikzpicture}
+    \draw[black] (0,0) circle(0.9cm);
+    \node[draw=none, minimum size=2.5cm, regular polygon, regular
+    polygon sides=8] (d) at (0,0) {};
+    \draw[fill] (d.side 1) circle (0pt) node{\(\star\)};
+    \draw[fill] (d.side 2) circle (0pt) node{\(6\)};
+    \draw[fill] (d.side 3) circle (0pt) node{\(7\)};
+    \draw[fill] (d.side 4) circle (0pt) node{\(1\)};
+    \draw[fill] (d.side 5) circle (0pt) node{\(4\)};
+    \draw[fill] (d.side 6) circle (0pt) node{\(2\)};
+    \draw[fill] (d.side 7) circle (0pt) node{\(3\)};
+    \draw[fill] (d.side 8) circle (0pt) node{\(5\)};
+
+    \node[draw=none, minimum size=1.5cm, regular polygon, regular
+    polygon sides=8] (d) at (0,0) {};
+    \draw[fill] (d.side 2) circle (0pt) node{\(3\)};
+    \draw[fill] (d.side 3) circle (0pt) node{\(4\)};
+    \draw[fill] (d.side 4) circle (0pt) node{\(0\)};
+    \draw[fill] (d.side 5) circle (0pt) node{\(2\)};
+    \draw[fill] (d.side 6) circle (0pt) node{\(1\)};
+    \draw[fill] (d.side 7) circle (0pt) node{\(2\)};
+    \draw[fill] (d.side 8) circle (0pt) node{\(3\)};
+    \end{tikzpicture}
+  \]
+  charge \(3+4+0+2+1+2+3=15\).
+\end{example}
+\begin{defn}
+  We define the \de{cocharge} of a permutation \(\sigma = (\sigma_1,
+  \ldots, \sigma_n)\) to be \[
+    \cocharge(\sigma) \defeq \binom{n}{2}-\charge(\sigma)
+  \]
+  We also define \[
+    \comaj(\sigma) = \sum_{i \in \Des(\sigma)}(n-i)
+  \]
+\end{defn}
+\begin{prop}
+  Given a permutation \(\sigma\), \[
+    \cocharge(\sigma) = \comaj(\sigma^{-1})
+  \]
+\end{prop}
+\subsection{Dominance Order on Partitions}
+\begin{defn}
+  Let \(S\) be the set of partitions of degree \(n\), ie whose parts
+  sum to \(n\). Then, for \(\lambda,\mu \in S\), the \de{dominance
+    order} on \(S\) is given by \[
+    \lambda \dominatedby \mu \iff \sum_{i=1}^\ell \lambda_i \leq
+    \sum_{i=1}^\ell \mu_i \ \ \forall \ell
+  \]
+  where \(\lambda = (\lambda_1, \ldots, \lambda_m)\) and \(\mu =
+  (\mu_1, \ldots, \mu_k)\).
+\end{defn}
+\begin{example}
+  \((1,1,1,1) \dominatedby (2,2) \dominatedby (4)\) and \((2,2,1)
+  \dominates (2,1,1,1)\). Furthermore, \((3,3)\) and \((4,1,1)\) are
+  incomparable since \(3 < 4\) but \(3+3=6>5=4+1\).
+\end{example}
+\begin{defn}
+  An partition \(\mu\) \de{covers} \(\lambda\), denoted \(\mu \covers
+  \lambda\),  when \(\mu
+  \strictlydominates \lambda\) (that is, \(\mu \dominates \lambda, \mu
+  \neq \lambda\)) and there is no partition \(\nu\) such that \(\mu
+  \strictlydominates \nu \strictlydominates \lambda\).
+\end{defn}
+\begin{rmk}
+  Covering relations are sufficient to define a partial order in
+  general. 
+\end{rmk}
+\begin{prop}
+  \(\lambda \dominatedby \mu \iff \lambda' \dominates \mu'\), where
+  \(\lambda'\) is the conjugate partition to \(\mu\).
+\end{prop}
+\begin{defn}
+  The \de{weak order} on \(\Sym_n\) is defined by, for \(\sigma,
+  \gamma \in \Sym_n\), \[
+    \sigma \coveredby_w \gamma \iff \gamma = \sigma s_i \text{ and
+    }\ell(\gamma) = \ell(\sigma)+1
+  \]
+  where \(s_i\) is the transposition switching \(i\) and \(i+1\).
+\end{defn}
+\begin{example}
+  In one-line notation, \[
+    (123) \coveredby (213) = (123)s_1 \coveredby (231) = (213)s_2 = s_1s_2
+  \]
+  Note that \[
+    s_1 = (213) \not\coveredby (312) = s_2s_1
+  \]
+\end{example}
+\begin{defn}
+  The \de{strong (Bruhat) order} on \(\Sym_n\) is defined by, for
+  \(\sigma, \gamma \in \Sym_n\), \[
+    \sigma \coveredby_s \gamma \iff \gamma = \sigma \tau_{ij} \text{ and
+    } \ell(\gamma) = \ell(\sigma)+1
+  \]
+  where \(\tau_{ij}\) is the transposition switching \(i\) and \(j\).
+\end{defn}
+\begin{thm}[Strong Exchange Property]
+  Given \(\sigma \coveredby_s \gamma\) and \(\gamma = s_{i_1} s_{i_2}
+  \cdots s_{i_\ell}\), then \(\sigma = s_{i_1} s_{i_2} \cdots
+  \hat{s}_{i_k} \cdots s_{i_\ell}\) where the hat means \(s_{i_k}\) is
+  deleted from the expression.
+\end{thm}
+\subsection{Young's Poset on Partitions}
+\begin{defn}
+  The \de{Young order} on partitions is given by \[
+    \lambda \leq \mu \iff \lambda \subset \mu
+  \]
+  when viewed as Ferrers diagrams. Equivalently, \[
+    \lambda \coveredby \mu \iff \mu = \lambda + \text{ an addable corner}
+  \]
+\end{defn}
+\begin{defn}
+  Given a rectangle \((m^n)\), the \de{order ideal generated by
+    \((m^n)\)} is \(\{\lambda \subset (m^n)\}\) with induced
+  containment order.   The \de{rank generating function} is given
+  by \[
+    \sum_{\lambda \subset (m^n)} q^{|\lambda|}
+  \]
+  where \(|\lambda| = \sum \lambda_i\).
+\end{defn}
+\begin{example}
+  The induced sub-poset of \((2^3) = (2,2,2)\) is given by \[
+    \ytableausetup{boxsize=0.5em}
+    \begin{tikzcd}[row sep=tiny, column sep=tiny]
+      &&\ydiagram{2,2,2} \ar[d,dash]& \\
+      &&\ydiagram{1,2,2} \ar[ld,dash] \ar[rd,dash]&\\
+      &\ydiagram{1,1,2} \ar[ld,dash] \ar[rd,dash]&&\ydiagram{2,2} \ar[ld,dash]\\
+      \ydiagram{1,1,1}\ar[rd, dash]&&\ydiagram{1,2} \ar[ld,dash]
+      \ar[rd,dash]&\\
+      &\ydiagram{1,1}\ar[rd,dash]&&\ydiagram{2}\ar[ld,dash]\\
+      &&\ydiagram{1}\ar[d,dash]&\\
+      &&\emptyset&
+    \end{tikzcd}
+    \ytableausetup{boxsize=normal}
+  \]
+  and thus the rank generating function is \[
+    1+q+2q^2+2q^3+2q^4+q^5+q^6
+  \]
+\end{example}
+\begin{defn}
+  We define the \de{quantum binomial} or \de{Gaussian polynomial} to
+  be \[
+    \qbinom{m+n}{n} \defeq \frac{[m+n]_q!}{[m]_q![n]_q!}
+  \]
+\end{defn}
+\begin{example}
+  \[
+    \qbinom{2}{1} = \frac{1+q}{1 \cdot 1} = 1+q
+  \]
+\end{example}
+\begin{prop}
+  Given \(m,n \in \N\), we have \[
+    \sum_{\lambda \subset (m^n)} q^{|\lambda|} = \qbinom{m+n}{n}
+  \]
+\end{prop}
+\begin{proof}
+  The proof is given by an inductive argument on \(m+n\). For the
+  inductive step, one breaks up the set \(\{\lambda \subset (m^n)\}\)
+  into the set of all \(\lambda\)'s containing a top left cell and the
+  set of all \(\lambda\)'s that do not, thus giving \[
+    \sum_{\lambda \subset (m^n)} q^{|\lambda|} = \sum_{\lambda \subset
+    ((m-1)^n)} q^n q^{|\lambda|} + \sum_{\lambda \subset
+    (m^{n-1})} q^{|\lambda|}
+  \]
+\end{proof}
 \section{Tableaux}
+\subsection{Tableaux Basics}
+\begin{prop}
+  A saturated chain in Young's Poset is given by \[
+    \emptyset \coveredby \lambda^1 \coveredby \lambda^2 \coveredby
+    \cdots \coveredby \lambda^\ell
+  \]
+  where \(\lambda^i/\lambda^{i-1}\) is one cell.
+\end{prop}
+\begin{defn}
+  A \de{standard Young tableau} of shape \(\lambda\) is given by a
+  saturated chain in Young's poset where each
+  \(\lambda^i/\lambda^{i-1}\) is filled with the number \(i\).
+
+  Alternatively, one can define a standard Young tableau of shape
+  \(\lambda \partitionof n\) to be a filling of \(\lambda\) with
+  \(\{1,2,\ldots,n\}\) such that rows and columns are strictly
+  increasing.
+\end{defn}
+\begin{example}
+  \[
+    \emptyset \coveredby \ydiagram{1} \coveredby \ydiagram{2}
+    \coveredby \ydiagram{1,2} \coveredby \ydiagram{1,3} \coveredby
+    \ydiagram{2,3} \correspondsto \ytableaushort{35,124}
+  \]
+\end{example}
+\begin{defn}
+  Given a partition \(\lambda\), the \de{hook length} of cell \(x =
+  (i,j) \in \lambda\), denoted \(h_\lambda(x)\), is given by the
+  number of cells in row \(i\) 
+  easy of \(x\) plus the number of cells in column \(j\) north of
+  \(x\) plus \(1\). 
+\end{defn}
+\begin{example}
+  \[
+    \lambda = \ydiagram{1,2,4,4,5,5}*[*(lightgray)]{0,1+1,1+1,2+2}*[*(black)]{0,0,0,1+1}
+  \]
+  The black shaded cell above has hook length \(2+2+1 = 5\). The
+  following diagram is filled in with the hook length of each cell. \[
+    \ytableaushort{21,431}
+  \]
+\end{example}
+\begin{prop}
+  Let \(f^\lambda\) be the number of standard Young tableaux of shape
+  \(\lambda \partitionof n\). Then, \[
+    f^\lambda = \frac{n!}{\prod_{x \in \lambda} h_\lambda(x)}
+  \]
+\end{prop}
 \subsection{Robinson-Schensted-Knuth (RSK) Correspondence}
 We will discuss a bijection between matrices with entries in \(\N_0\)
 with finite support and pairs of semistandard Young tableaux \((\TP,
