@@ -1,5 +1,6 @@
 sudo: required
 install:
+- sudo apt-get install liblz4-dev
 - wget http://mirrors.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz -O - | tar -x --gzip
 - mv $(ls | grep install) install-tl
 - ./install-tl/install-tl -profile texlive.profile
