@@ -1409,10 +1409,11 @@ We denote by $\weightlattice^+$ the set of all dominant weights.
 \begin{defn}
   Let $\simpleroots = \{\alpha_1, \ldots, \alpha_n\}$. Then, we know that
   $\{\alpha_1^\vee, \ldots, \alpha_n^\vee\}$ forms a basis of
-  $E$. Then, if we have the dual basis to this basis, $\{\lambda_1,
-  \ldots, \lambda_n\}$, we can check that the $\lambda_i$ are all
+  $E$. Then, if we have the dual basis to this basis, $\{\omega_1,
+  \ldots, \omega_n\}$, we can check that the $\omega_i$ are all
   dominant weights which we will call the \de{fundamental dominant
-    weights (relative to $\simpleroots$)}.
+    weights (relative to $\simpleroots$)}. In otherwords, the
+  fundamental dominant weights are such that \(\langle \omega_i, \alpha_j \rangle = \delta_{i,j}\).
 \end{defn}
 \begin{defn}
   We say that $\weightlattice/\rootlattice$ is the \de{fundamental group} of
@@ -1424,26 +1425,26 @@ where $m$ is the dimension of $\weightlattice$. By definition, $\rootlattice$ is
 submodule of $\weightlattice$ but has the same dimension. Both are 
 free. So, the quotient will be some finite group. More concretely, one
 notes that the Cartan matrix is a change of basis matrix, so to write
-the \(\lambda_i\) in terms of the \(\alpha_i\), we can invert the
+the \(\omega_i\) in terms of the \(\alpha_i\), we can invert the
 Cartan matrix. Thus,
 \begin{prop}
   Given Cartan matrix \(M\) of a root system \(\roots\), the index of
   \(\rootlattice\) in \(\weightlattice\) is given by \(\det C\).
 \end{prop}
 \begin{proof}
-  Write \(\alpha_i = \sum_j m_{i,j} \lambda_j\) for \(m_{i,j} \in
+  Write \(\alpha_i = \sum_j m_{i,j} \omega_j\) for \(m_{i,j} \in
   \Z\). Then, we see
   \begin{equation}
     \label{eq:weight-decomp}
     \langle \alpha_i, \alpha_k \rangle = \sum_{j} m_{i,j} \langle
-    \lambda_j, \alpha_k \rangle = m_{i,k} = \langle \alpha_i, \lambda_k \rangle
+    \omega_j, \alpha_k \rangle = m_{i,k} = \langle \alpha_i, \omega_k \rangle
   \end{equation}
 
   Thus, the Cartan matrix is a change of basis matrix to write the
-  \(\alpha_i\)'s in terms of the \(\lambda_i\)'s. To go the other
+  \(\alpha_i\)'s in terms of the \(\omega_i\)'s. To go the other
   direction, we simply invert \(M\), which is a matrix with entries in
   \(\Z\), so \(M^{-1} = \frac{1}{\det M} \operatorname{adj}(M)\), and
-  thus \(\det M \cdot \lambda_i \in \rootlattice\).
+  thus \(\det M \cdot \omega_i \in \rootlattice\).
 \end{proof}
 \todo{Compute the index for each type.}
 Recall the
@@ -1505,7 +1506,9 @@ is finite.
     0} \alpha\) (\ref{half-sum-defn}). As discussed before, \(\halfsum
   \in \weightlattice\). Furthermore,
   \begin{enumerate}
-  \item \(\halfsum\) is a (strongly) dominant weight.
+  \item \(\halfsum\) is a (strongly) dominant weight and, in fact, \[
+      \halfsum = \sum_{i=1}^n \omega_i
+    \]
   \item For \(\mu \in \weightlattice^+\) and \(\nu = w^{-1}(\mu)\) for
     \(w \in \W\) we have \[
       (\nu+\halfsum,\nu+\halfsum) \leq (\mu+\halfsum, \mu+\halfsum)
@@ -1520,8 +1523,8 @@ is finite.
     -\alpha_i) \implies 2(\halfsum, \alpha_i) = (\alpha_i,\alpha_i) = 2
   \]
   Thus, \(\langle \halfsum, \alpha_i \rangle = 1\), so \[
-    \halfsum \overset{\ref{eq:weight-decomp}}{=} \sum_i \langle \halfsum, \alpha_i \rangle \lambda_i =
-    \sum_i \lambda_i
+    \halfsum \overset{\ref{eq:weight-decomp}}{=} \sum_i \langle \halfsum, \alpha_i \rangle \omega_i =
+    \sum_i \omega_i
   \]
   For (b), observe
   \begin{align*}
