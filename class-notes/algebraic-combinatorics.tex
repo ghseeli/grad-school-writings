@@ -138,6 +138,13 @@ familiar reader can skip this section and refer back to it as necessary.
   \item Descents \(\{1,3\}\) and thus \(\maj(\sigma) = 1+3 = 4\).
   \end{itemize}
 \end{example}
+\begin{rmk}
+  Some readers may be more familiar with the definition of
+  \(\ell(\sigma)\) to be the length of the reduced word of \(\sigma\)
+  in terms of 
+  simple transpositions of \(\Sym_n\). These two notions are
+  equivalent. This can be made explicit using ``Rothe diagrams.''
+\end{rmk}
 \begin{defn}
   Any statistic which is equidistributed over \(\Sym_n\) with the
   inversion statistic, \(\inv\), is called \de{Mahonian}.
@@ -231,16 +238,18 @@ although other bijections exist, such as the Carlitz bijection.
   \end{enumerate}
   \begin{example}
     For our example, if we start with \(86341275\), we carry out
-    \begin{align*}
-      |8|63412|7.5&\rightarrow 8341267&5\\
-      |834126.7&\rightarrow 341268&7\\
-      |3|4|1|2|6.8&\rightarrow 34126&8\\
-      |3|4|1|2.6&\rightarrow 3412&6\\
-      |3|41.2&\rightarrow 314&2\\
-      |3|1.4&\rightarrow 31&4\\
-      3.1&\rightarrow 3&1\\
-      .3& &3
-    \end{align*}
+    \begin{samepage}
+      \begin{align*}
+        |8|63412|7.5&\rightarrow 8341267&5\\
+        |834126.7&\rightarrow 341268&7\\
+        |3|4|1|2|6.8&\rightarrow 34126&8\\
+        |3|4|1|2.6&\rightarrow 3412&6\\
+        |3|41.2&\rightarrow 314&2\\
+        |3|1.4&\rightarrow 31&4\\
+        3.1&\rightarrow 3&1\\
+        .3& &3
+      \end{align*}
+    \end{samepage}
     and thus we recover \(\sigma = 31426875\).
   \end{example}
 \end{proof}
@@ -317,11 +326,56 @@ although other bijections exist, such as the Carlitz bijection.
     \comaj(\sigma) = \sum_{i \in \Des(\sigma)}(n-i)
   \]
 \end{defn}
+\begin{rmk}
+  We can also show cocharge can be computed like charge, but with the
+  ``opposite'' recurrence 
+  relation of charge, which is what we will use to show the
+  proposition below.
+\end{rmk}
 \begin{prop}
   Given a permutation \(\sigma\), \[
     \cocharge(\sigma) = \comaj(\sigma^{-1})
   \]
 \end{prop}
+\begin{proof}[Idea of Proof]
+  Let \(\sigma\) be a permutation with a descent \(k\), that is,
+  \(\sigma_k > \sigma_{k+1}\). This adds \(n-k\) to
+  \(\comaj(\sigma)\). Then, observe \[
+    \sigma = \left(
+      \begin{array}{cccccc}
+        1&\cdots&k&k+1&\cdots&n\\
+        \sigma_1&\cdots&\sigma_k&\sigma_{k+1}&\cdots&\sigma_n
+      \end{array}
+\right) \to[-1] \sigma^{-1} = \left(
+  \begin{array}{cccccc}
+    \cdots&\sigma_{k+1}&\cdots&\sigma_k&\cdots\\
+    \cdots&k+1&\cdots&k&\cdots
+  \end{array}
+  \right)
+  \]
+  That is, \(k+1\) is to the left of \(k\) in \(\sigma^{-1}\). So, our
+  cocharge diagram will look like \[
+    \begin{tikzpicture}
+    \draw[black] (0,0) circle(1.25cm);
+    \node[draw=none, minimum size=3.5cm, regular polygon, regular
+    polygon sides=8] (d) at (0,0) {};
+    \draw[fill] (d.side 1) circle (0pt) node{\(\star\)};
+    \draw[fill] (d.side 2) circle (0pt) node{\(\dots\)};
+    \draw[fill] (d.side 3) circle (0pt) node{\small \(k+1\)};
+    \draw[fill] (d.side 4) circle (0pt) node{\(\dots\)};
+    \draw[fill] (d.side 5) circle (0pt) node{\(k\)};
+    \draw[fill] (d.side 6) circle (0pt) node{\(\dots\)};
+
+    \node[draw=none, minimum size=1.5cm, regular polygon, regular
+    polygon sides=8] (d) at (0,0) {};
+    \draw[fill] (d.side 3) circle (0pt) node{\small \(I_{k} + 1\)};
+    \draw[fill] (d.side 5) circle (0pt) node{\(I_k\)};
+    \end{tikzpicture}
+  \]
+  Therefore, the \(k+1\) occurring before the \(k\) adds \(1\) to
+  the index for every number greater than \(k\), which adds \(n-k\) to
+  the \(\cocharge(\sigma^{-1})\). 
+\end{proof}
 \subsection{Dominance Order on Partitions}
 \begin{defn}
   Let \(S\) be the set of partitions of degree \(n\), ie whose parts
@@ -350,9 +404,15 @@ although other bijections exist, such as the Carlitz bijection.
   general. 
 \end{rmk}
 \begin{prop}
-  \(\lambda \dominatedby \mu \iff \lambda' \dominates \mu'\), where
-  \(\lambda'\) is the conjugate partition to \(\mu\).
+  Given partitions \(\lambda,\mu\) of degree \(n\), \[
+    \lambda \dominatedby \mu \iff \lambda' \dominates \mu'
+  \]
+  where \(\lambda'\) is the conjugate partition to \(\lambda\), and
+  similarly for \(\mu'\).
 \end{prop}
+\begin{proof}
+  See \cite{macdonald}*{1.11}.
+\end{proof}
 \begin{defn}
   The \de{weak order} on \(\Sym_n\) is defined by, for \(\sigma,
   \gamma \in \Sym_n\), \[
@@ -952,7 +1012,7 @@ Then, \(R[x_1, \ldots, x_n]\) is a graded ring with \[
                        = & x_1^2x_2+x_1x_2^2+x_1x_2x_3+\\
                        & x_1^2x_3+x_1x_2x_3+x_1x_3^2+\\
                        & x_1x_2x_3+x_2^2x_3+x_2x_3^2\\
-    = & 3m_{21}(x_1,x_2,x_3) + 3m_{111}(x_1,x_2,x_3)
+    = & m_{21}(x_1,x_2,x_3) + 3m_{111}(x_1,x_2,x_3)
   \end{align*}
 \end{example}
 \begin{prop}
@@ -1045,7 +1105,8 @@ Then, \(R[x_1, \ldots, x_n]\) is a graded ring with \[
         \begin{array}{cccc}
           1&1&0&0\\
           1&0&0&0\\
-          1&0&0&0
+          1&0&0&0\\
+          0&0&0&0
         \end{array}
       \right)
     \]
@@ -1895,11 +1956,13 @@ theorem.
   Given shapes \(\lambda, \mu\), \[
     s_\lambda s_\mu = \sum_{\nu} c_{\lambda, \mu}^\nu s_\nu
   \]
-  where \(c_{\lambda, \mu}^\nu\) counts the number tableaux of skew shape
-  \(\nu/\lambda\) of weight \(\mu\) which are \(\lambda\)-Yamanouchi.
+  where \(c_{\lambda, \mu}^\nu\), called the \de{Littlewood-Richardson
+  coefficients}, counts the number tableaux of skew shape
+  \(\nu/\lambda\) of weight \(\mu\) which are Yamanouchi \todo{Check
+    this removal of \(\lambda\)}.
 \end{thm}
 \begin{rmk}
-  Such tableaux are of the form \[
+  \(c_{\lambda,\mu}^\nu\) is also the number of tableaux of the form \[
     \begin{array}{c}
       \\ \\
       \mu \rightarrow \\
@@ -1915,6 +1978,25 @@ theorem.
   where the bottom right connected component must be super
   semi-standard and the whole skew shape is Yamanouchi of weight \(\nu\).
 \end{rmk}
+\begin{example}
+  Naturally, we expect that, since \(s_{\emptyset} = 1\), we get
+  \(s_{\emptyset} s_\mu = s_\mu\). Indeed, \(c_{\emptyset,\mu}^\nu\)
+  is the number of tableaux of shape \(\nu\) and weight \(\mu\), so \[
+    c_{\emptyset,\mu}^\nu = |\SSYT(\nu,\mu)| = K_{\nu,\mu}
+  \]
+  recovering \(s_\mu\) from the Littlewood-Richardson rule.
+
+  For something less trivial, take \(\lambda = (2,1)\) and
+  \(\mu=(1)\). Then, \[
+     c_{(2,1),(1)}^{(3,1)} = 1, c_{(2,1),(1)}^{(2,2)} = 1,
+     c_{(2,1),(1)}^{(2,1,1)} = 1
+   \]
+   since these are the only skew-shapes such that \(\nu/(2,1)\) can
+   have one box. Therefore, all the other coefficients are \(0\) and
+   we get \[
+     s_{21} s_1 = s_{31}+s_{22}+s_{211}
+   \]
+\end{example}
 \begin{thm}[Pieri Rule]
   \label{pieri-rule} We have \[
     h_r s_\lambda = \sum_{\nu = \lambda + \text{ horizontal
@@ -1967,8 +2049,7 @@ Finally, another important relationship between \(s_\lambda\)'s and
         \vdots & & \ddots & \\
         h_{\lambda_\ell-(\ell-1)} & \cdots & & h_{\lambda_\ell}
       \end{array}
-    \right)  = \sum_{\sigma \in \Sym_n} (-1)^{\ell(\sigma)}
-    h_{\sigma(\lambda+\rowshift)} 
+    \right)
   \]
   where \(h_n = 0\) for all \(n < 0\). Similarly, \[
     s_{\lambda'} = \det(e_{\lambda_i-i+j})_{1 \leq i,j \leq \ell}
@@ -2016,7 +2097,7 @@ different perspective.
   Given a shape \(\lambda\), \[
     h_\lambda = \sum_\mu K_{\mu,\lambda} s_\mu
   \]
-  where \(K_\lambda,\alpha = |\SSYT(\lambda,\alpha)|\) is the Kostka
+  where \(K_{\lambda,\alpha} = |\SSYT(\lambda,\alpha)|\) is the Kostka
   number (see \ref{def-kostka-number}).
 \end{lem}
 \begin{proof}
@@ -2062,7 +2143,7 @@ different perspective.
     s_\lambda = \sum_{\mu} K_{\mu,\lambda}^{-1} h_\lambda \text{ and }
     s_\lambda = \sum_{\mu} K_{\lambda,\mu} m_\mu
   \]
-  where \(K_{\mu,\lambda}^{-1}\) is the \(\mu,\lambda\)-entry of
+  where \(K_{\mu,\lambda}^{-1}\) is the \((\mu,\lambda)\)-entry of
   inverse Kostka matrix
   \((K_{\alpha,\beta})_{\alpha,\beta}^{-1}\). Therefore,
   \begin{align*}
@@ -2104,7 +2185,7 @@ Schur functions.
     m_{21} + u_{21,111} m_{111} \rangle = u_{21,111}-2
   \]
   and so \[
-    s_{21} = m_21 + 2m_{111}
+    s_{21} = m_{21} + 2m_{111}
   \]
   One could then continue this process to get the unknown coefficients
   in \(s_3\), but this would be quite tedious.
@@ -2160,7 +2241,7 @@ with coefficient \(1\). Thus, by the RSK correspondence, these two
 infinite sums are equal.
 \end{proof}
 \begin{thm}
-  Two bases \(\{b_\lambda\}\) and \(\hat{b}_\lambda\) for \(\sym\) are
+  Two bases \(\{b_\lambda\}\) and \(\{\hat{b}_\lambda\}\) for \(\sym\) are
   dual if and only if \(\sum_{\lambda} b_\lambda(x) b_\lambda(y) =
   \Omega(x,y)\). 
 \end{thm}
@@ -2643,6 +2724,11 @@ because we cannot tile \(\ydiagram{2,2}\) with \(3\)-ribbons. To deal with this,
 \begin{prop}
   When \(t=1\), \(G_\lambda^{(n)}\) is a product of Schur functions.
 \end{prop}
+\begin{example}
+  From above\[
+    G_{(3,3)}^{(3)}(x;1) = s_2+s_{11} = s_1 \cdot s_2
+  \]
+\end{example}
 \begin{defn}
   We define the statistic \(\cospin(\T) = (\spin\max(\mu) -
   \spin(\T))/2\) where \(\T\) is a (semistandard) ribbon tableaux of
@@ -3084,7 +3170,7 @@ interested in symmetric functions over \(\Q(t)\).
     However, since \(w(x^\lambda) = x^{w(\lambda)}\), then we have \[
       R(x_1, \ldots, x_n;1)  = |\Stab_{\Sym_n}(\lambda)|
       \sum_{\substack{\alpha \in \N^n \\ \alpha \sim \lambda}}  x^\alpha =
-    |\Stab_{\Sym_n}(\lambda)| m_{\lambda}(x_1, \ldots, x_n)
+    |\Sym_n^\lambda| m_{\lambda}(x_1, \ldots, x_n)
     \]
   \end{enumerate}
 \end{rmk}
@@ -3230,9 +3316,6 @@ following.
       P_\lambda(x;t) = s_\lambda + \sum_{\lambda \strictlydominates
         \mu} c_{\lambda,\mu}(t) s_\mu
     \]
-    \todo{Somehow, this seems off; when characterizing Schur functions
-    in a similar way, we used that they were ortho\textbf{normal}; in
-    other words, is orthogonality sufficient?}
   \end{enumerate}
 \end{prop}
 \begin{cor}
