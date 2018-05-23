@@ -13,6 +13,7 @@
 \newcommand{\rootlattice}{\Lambda_R}
 \newcommand{\weightlattice}{\Lambda_W}
 \newcommand{\halfsum}{\rho}
+\renewcommand{\Sym}{S}
 
 \title[Root Systems]{Root Systems}
 \author{George H. Seelinger}
@@ -521,7 +522,8 @@ necessarily be 2's, since \(\langle \alpha, \alpha \rangle =
   For \(A_2\) with simple system \(\simpleroots = \{\alpha,\beta\}\), we
   compute that \(\langle \alpha,\beta \rangle = \frac{2
     |\alpha||\beta|\cos(\frac{2\pi}{3})}{|\alpha|^2} = -1\). We get
-  the same result for \(\langle \beta,\alpha \rangle\) since \(\cos\)
+  the same result for \(\langle \beta,\alpha \rangle\) since
+  \(\cos(\theta)\) 
   is an even function and \(|\alpha| = |\beta|\). Thus, we get our
   Cartan matrix as \[
     \left(
@@ -1680,8 +1682,111 @@ consists of all dominant weights lower than or equal to highest weight
       \(\lambda\). Therefore, \(w \mu' \prec \lambda\) for all \(w \in
       \W\), thus giving us \(\mu' \in S\) by our description of \(S\).
   \end{enumerate}
-
 \end{proof}
+\section{Appendix: Summary Information}
+Throughout, we denote \(\epsilon_i\) for the \(i\)th standard basis
+vector of \(\R^n\).
+\subsection{Type \(A_n\)}
+\begin{prop}
+The root system \(A_n \subset \R^{n+1}\) has
+\begin{enumerate}
+\item \(\roots = \{\epsilon_i - \epsilon_j \st 1 \leq i \neq j \leq
+  n+1\}\) and \(|\roots| = n(n+1)\).
+\item The canonical choice of simple roots is \[
+    \simpleroots = \{\epsilon_i - \epsilon_{i+1} \st 1 \leq i < n+1\}
+  \]
+  and thus \(\roots^+ = \{\epsilon_i-\epsilon_j \st 1 \leq i < j \leq
+  n+1\}\).
+\item From the relations induced by the Dynkin diagram, one can infer
+  \(\W = \Sym_n\). 
+\item The fundamental weights are given by \(\omega_i =
+  \epsilon_1+\cdots+\epsilon_i\) for \(1 \leq i \leq n\) and \[
+    \halfsum = n \epsilon_1 + (n-1) \epsilon_2 + \cdots + \epsilon_n
+  \]
+\end{enumerate}
+\end{prop}
+\subsection{Type \(B_n\)}
+\begin{prop}
+  The root system \(B_n \subset \R^n\) has
+  \begin{enumerate}
+  \item \(\roots = \{\epsilon_i \pm \epsilon_j \st 1 \leq i \neq j
+    \leq n\} \union \{\pm \epsilon_i \st 1 \leq i \leq n\}\) and so
+    \(|\roots| = 2n(n-1)+2n = 2n^2\).
+  \item The canonical choice of simple roots is \[
+      \simpleroots = \{\epsilon_i - \epsilon_{i+1} \st 1 \leq  i < n\}
+      \union \{\epsilon_n\}
+    \]
+    and thus \(\roots^+ = \{\epsilon_i-\epsilon_j \st 1 \leq i < j
+    \leq n\} \union \{\epsilon_i \st 1 \leq i \leq n\}\).
+  \item Since the Dynkin diagram has no graph automorphisms, it must
+    be that \(\W = \Aut \roots\). Furthermore, automorphisms can
+    permute \(\{\epsilon_1, \ldots, \epsilon_n\}\) and change any of
+    the signs, thus giving \(\W = (\Z/2)^n \rtimes \Sym_n\).
+  \item The fundamental weights are given by \[
+      \omega_i = \epsilon_1 + \cdots + \epsilon_i, (i < n) \ \ \omega_n
+      = \frac{1}{2}(\epsilon_1 + \cdots + \epsilon_n)
+    \]
+    and \[
+      \halfsum = \frac{1}{2}((2n-1)\epsilon_1 + (2n-3)\epsilon_2 +
+      \cdots + \epsilon_n)
+    \]
+  \end{enumerate}
+\end{prop}
+\subsection{Type \(C_n\)}
+\begin{prop}
+  The root system \(C_n \subset \R^n\) has
+  \begin{enumerate}
+  \item \(\roots = \{\epsilon_i \pm \epsilon_j \st 1 \leq i \neq j
+    \leq n\} \union \{\pm 2 \epsilon_i\}\) and so \(|\roots| =
+    2n(n-1)\).
+  \item The canonical choice of simple roots is \[
+      \simpleroots = \{\epsilon_i - \epsilon_{i+1} \st 1 \leq  i < n\}
+      \union \{2 \epsilon_n\}
+    \]
+    and thus \(\roots^+ = \{\epsilon_i-\epsilon_j \st 1 \leq i < j
+    \leq n\} \union \{\epsilon_i \st 1 \leq i \leq n\}\).
+  \item \(C_n\) presents a somewhat dual situation to \(B_n\) and thus
+    also has Weyl group \(\W = (\Z/2)^n \rtimes \Sym_n\).
+  \item The fundamental weights are given by \[
+      \omega_i = \epsilon_1 + \cdots + \epsilon_i, (i \leq n)
+    \]
+    and \[
+      \halfsum = n \epsilon_1 + (n-1) \epsilon_2 + \cdots + \epsilon_n
+    \]
+  \end{enumerate}
+\end{prop}
+\subsection{Type \(D_n\)}
+\begin{prop}
+  The root system \(D_n \subset \R^n\) has
+  \begin{enumerate}
+  \item \(\roots = \{\epsilon_i - \epsilon_j \st 1 \leq i \neq j
+    \leq n\} \union \{\pm(\epsilon_i + \epsilon_j) \st 1 \leq i < j
+    \leq n\}\) and so \(|\roots| = n(n-1)+2\frac{n(n-1)}{2} =
+    2n(n-1)\).
+  \item The canonical choice of simple roots is \[
+      \simpleroots = \{\epsilon_i - \epsilon_{i+1} \st 1 \leq i < n\}
+      \union \{\epsilon_{n-1}+\epsilon_{n+1}\}
+    \]
+    and thus \(\roots^+ = \{\epsilon_i \pm \epsilon_j \st 1 \leq i < j
+    \leq n\}\).
+  \item \(D_n\) has Weyl group \(\W = (\Z/2)^{n-1} \rtimes \Sym_n\).
+  \item The fundamental weights are given by \[
+      \begin{cases}
+        \omega_i = \epsilon_1 + \cdots + \epsilon_i & i < n-1\\
+        \omega_{n-1} = \frac{1}{2}(\epsilon_1 + \cdots +
+        \epsilon_{n-1} - \epsilon_n) \\
+        \omega_n = \frac{1}{2}(\epsilon_1 + \cdots +
+        \epsilon_{n-1}+\epsilon_n) 
+      \end{cases}
+    \]
+    and thus \[
+      \halfsum = (n-1) \epsilon_1 + (n-2) \epsilon_2 + \cdots +
+      \epsilon_{n-1} 
+    \]
+  \end{enumerate}
+
+\end{prop}
+
 \begin{bibdiv}
   \begin{biblist}
     \bib{humph}{book}{
