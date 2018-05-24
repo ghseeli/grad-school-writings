@@ -1183,17 +1183,21 @@ with relations given by the Dynkin diagram of \(\roots\).
 This immediately tells us the information we need to understand the
 Weyl groups of irreducible root systems.
 \begin{example}
-  Let \(\roots = A_n\) with simple system \(\simpleroots = \{\alpha_1,
-  \ldots, \alpha_n\}\). Then, for \(\beta \neq \pm \alpha\), we have
-  \(\langle \alpha,\beta \rangle \langle \beta, \alpha \rangle = 1\),
-  so we have \(\sigma_{\alpha_i}^2 = 0\), \(\sigma_{\alpha_i}
-  \sigma_{\alpha_j} = \sigma_{\alpha_j} \sigma_{\alpha_i}\) for
-  \(|j-i| \neq 1\), and
-  \(\sigma_{\alpha_i}\sigma_{\alpha_{i+1}}\sigma_{\alpha_i} =
-  \sigma_{\alpha_{i+1}} \sigma_{\alpha_i} \sigma_{\alpha_{i+1}}\) for
-  \(1 \leq i \leq n-1\). To
-  those familiar with \(S_{n+1}\), this is the presentation in terms
-  of adjacent transpositions. Thus, \(\W \isom S_{n+1}\).
+  Let \(\roots = A_n\) with simple system \(\simpleroots = \{e_1-e_2,
+  \ldots, e_{n-1}-e_n\}\). Then, the Weyl group generators act on the
+  set \(\{e_1, \ldots, e_n\}\) by \[
+    \sigma_{e_i-e_{i+1}}(e_k) = e_k -
+    2\frac{(e_k,e_i-e_{i+1})}{(e_i-e_{i+1}, e_i-e_{i+1})}(e_i -
+    e_{i+1}) = e_k - (\delta_{k,i}-\delta_{k,i+1})(e_i-e_{i+1})
+  \]
+  and so \(\sigma_{e_i-e_{i+1}}\) sends \[
+    e_i \mapsto e_{i+1}, e_{i+1} \mapsto e_i, e_k \mapsto e_k \text{
+      for }k \neq i,i+1
+  \]
+  Thus, \(f \from \W \onto \Sym_n\) via \(\sigma_{e_i-e_{i+1}} \mapsto
+  (i,i+1)\), but if some \(\sigma \in \W\) has \(\sigma(e_k) = e_k\)
+  for all \(k\), then \(\sigma(\simpleroots) = \simpleroots\) and thus
+  \(\sigma = id\), so \(\ker f = \{id\}\) and thus \(\W \isom \Sym_n\).
 \end{example}
 \begin{example}
   Let \(\roots = B_n\) with simple system \(\simpleroots =
