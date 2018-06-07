@@ -561,13 +561,13 @@ with finite support and pairs of semistandard Young tableaux \((\TP,
 \begin{defn}
   Let \(\T = (\T_{i,j})\) be a tableau and \(x\) be a positive
   integer. We define 
-  \de{row insertion}, denoted \(T \leftarrow x\) to be the algorith,
-  that takes \(\T\) and adds a cell labelled \(x\) as follows.
+  \de{row insertion}, denoted \(T \leftarrow x\) to be the algorithm,
+  that takes \(\T\) and adds a cell labeled \(x\) as follows.
   \begin{enumerate}[label=(\arabic*)]
   \item Go to row \(1\). Pick \(r_1\) such that \(\T_{1,r_1-1} \leq x\)
     (if \(\T_{1,1} > x, r_1=1\)).
   \item If \(\T_{1,r_1}\) does not exist, add
-    cell labelled \(x\) to the end of the row.
+    cell labeled \(x\) to the end of the row.
   \item Otherwise, replace \(\T_{1,r_1}\) with \(x\) to get
     \(\T'\). Then, do \(\T' \leftarrow \T_{1,r_1}\) on row \(2\).
   \item Repeat this process until either the bumped entry can be put
@@ -639,7 +639,7 @@ with finite support and pairs of semistandard Young tableaux \((\TP,
   We want to show that the insertion path (starting at row \(1\))
   always moves in a weakly westward direction.
 
-  Let us say an entry \(b\), originally in \(\T_{n,m}\), is bumbed into
+  Let us say an entry \(b\), originally in \(\T_{n,m}\), is bumped into
   \(\T_{n+1,m'}\). If \(m' > m\), then \(m'\) is the largest integer
   such that \(\T_{n+1,m'-1} \leq b\) by the construction of the
   algorithm. So, we have the following picture \[
@@ -729,12 +729,12 @@ with finite support and pairs of semistandard Young tableaux \((\TP,
   where the last pair is \((\TP(w), \TQ(w))\).
 \end{example}
 The fact that this is a correspondence between words and pairs of
-tableaux comes from the reversiblity of the row-bump combined with
+tableaux comes from the reversibility of the row-bump combined with
 knowing the inserted cell. In the example above, \(\TQ\) is a standard
 tableaux. We will prove a more general correspondence, which will get
 us what we need about \(\TQ\).
 \begin{defn}
-  Given a (possibly infininte) matrix \(A\) with entries in \(\N_0\)
+  Given a (possibly infinite) matrix \(A\) with entries in \(\N_0\)
   with finite support and nonzero entries , we define \[
     w_A \defeq \left(
       \begin{array}{ccc}
@@ -840,7 +840,7 @@ us what we need about \(\TQ\).
   \item \(\TP_{r,s}\) is the last spot in the insertion path of
     \(\TP^{m-1} \leftarrow j_m\).
   \item We need \(\TP_{r-1,t}\), the rightmost element of row \(r-1\)
-    that is smaller than \(\TP_{r,s}\). Then, do reverse bumping uptil
+    that is smaller than \(\TP_{r,s}\). Then, do reverse bumping until
     you get \(j_m\).
   \item Repeat this process until \(w_A\) is recovered.
   \end{enumerate}
@@ -881,7 +881,7 @@ x_n\) be indeterminates.
   with multiplication \(x^\alpha x^\beta = x^{\alpha+\beta}\).
 \end{defn}
 \begin{defn}
-  We say \(f \in R[x_1, \ldots, x_n]\) has \de{homogenous degre \(d\)}
+  We say \(f \in R[x_1, \ldots, x_n]\) has \de{homogeneous degree \(d\)}
   if \[
     f = \sum_{|\alpha|=d} c_\alpha x^\alpha
   \]
@@ -984,7 +984,7 @@ Then, \(R[x_1, \ldots, x_n]\) is a graded ring with \[
 \end{proof}
 \begin{cor}
   An immediate corollary to this result is that any basis for
-  \(\sym_n^d\) can be indexted by \(\lambda \partitionof d\).
+  \(\sym_n^d\) can be indexed by \(\lambda \partitionof d\).
 \end{cor}
 \begin{defn}
   For \(\alpha\) a partition, we establish the convention \[
@@ -1022,7 +1022,7 @@ Then, \(R[x_1, \ldots, x_n]\) is a graded ring with \[
 \begin{proof}
   By definition, the elementary symmetric polynomials \(e_r\) are
   symmetric polynomials with degree \(r\) monomials with no variable
-  occuring more than once in each monomial. Thus, it must be that
+  occurring more than once in each monomial. Thus, it must be that
   \(e_r = m_{1^r}\). Furthermore, by the corollary to the monomial
   symmetric polynomials forming a basis, it must be that \(\{e_r\}_{r
     \in \N}\) cannot form a basis because each \(e_r \in \sym_n^r\)
@@ -1098,7 +1098,7 @@ Then, \(R[x_1, \ldots, x_n]\) is a graded ring with \[
   \]
   To do this, first consider one term. Let \(A^*\) be the
   \((0,1)\)-matrix with row sum \(\nu'\) where all the one's are left
-  justfied.
+  justified.
   \begin{example}
     If \(\nu' = (2,1,1,0)\), then \[
       A^* = \left(
@@ -1186,7 +1186,7 @@ Then, \(R[x_1, \ldots, x_n]\) is a graded ring with \[
     \]
   \end{example}
 \end{proof}
-\begin{cor}[Fundmanetal Theorem of Symmetric Polynomials]
+\begin{cor}[Fundamental Theorem of Symmetric Polynomials]
   \(\sym_n\) with coefficients in \(R\) is a polynomial ring in the
   \(n\) elementary symmetric polynomials, that is, \(\sym_n \isom
   R[e_1, \ldots, e_n]\) as commutative rings.
@@ -1508,7 +1508,7 @@ and \(e_n\)'s.
       \end{align*}
       Thus, we see that \(h_n = \sum_{\lambda \partitionof n}
       \frac{p_\lambda}{z_\lambda}\). The relation for \(e_n\) is a
-      similar manipulation of the generating functon \(E(t)\).
+      similar manipulation of the generating function \(E(t)\).
     \end{proof}
     \begin{rmk}
       Note that \(z(\lambda)\) is equal to the cardinality of the
@@ -1845,7 +1845,7 @@ where \(s_{\mu/\nu}\) and \(\lambda\)-Yamanouchi are defined below.
     \[
       \T = \ytableaushort{3444,2223344,\none\none1122333,\none\none\none\none\none\none222,\none\none\none\none\none\none111}*[*(blue)]{0,6+1,6+3,6+3,6+3}*[*(red)]{4,5,2+3}
     \]
-    We apply the Bender-Knuth involultion \(\phi_1\) to the red part only to
+    We apply the Bender-Knuth involution \(\phi_1\) to the red part only to
     get \[
       \T^* = \ytableaushort{3444,1123344,\none\none1122333,\none\none\none\none\none\none222,\none\none\none\none\none\none111}*[*(blue)]{0,6+1,6+3,6+3,6+3}*[*(red)]{4,5,2+3}
     \]
@@ -1879,7 +1879,7 @@ where \(s_{\mu/\nu}\) and \(\lambda\)-Yamanouchi are defined below.
     -\Vdet_{\lambda+\wt(\T)+\rowshift} 
   \]
   since \(s_k\) acts by swapping the \(k\) and \(k+1\)st rows of
-  \(\Vdet\), which changest the determinant by a sign. Thus, we can
+  \(\Vdet\), which changes the determinant by a sign. Thus, we can
   cancel the contributions of the Bad Guys from our desired sums.
   \begin{rmk}\label{bad-guy-restrictions}
     Note, there is still some work to do. A concern is that some
@@ -1894,7 +1894,7 @@ where \(s_{\mu/\nu}\) and \(\lambda\)-Yamanouchi are defined below.
     and so \(\Vdet_{(5,5,2)} = 0\) by
     \ref{vandermonde-props}(a). In general, if the BK involution fixes
     \(\T_{<j}\), then \(\T_{<j}\) necessarily has an
-    equal number of cells labelled \(k\) and \(k+1\), that is\[
+    equal number of cells labeled \(k\) and \(k+1\), that is\[
       \wt_k(\T_{<j}) = \wt_{k+1}(\T_{<j})
     \]
     Furthermore, since
@@ -1943,7 +1943,7 @@ where \(s_{\mu/\nu}\) and \(\lambda\)-Yamanouchi are defined below.
   The corollaries above have significance outside of combinatorics.
   \begin{enumerate}
   \item In representation theory, the product rule for Schur functions
-    gives the decomoosition of tensor products of Specht modules for
+    gives the decomposition of tensor products of Specht modules for
     \(\Sym_n\) into irreducibles.
   \item In Schubert calculus, this is useful for understanding the
     intersection of Grassmanian subvarieties. \todo{Make this more
@@ -2004,7 +2004,7 @@ theorem.
   \]
 \end{thm}
 \begin{rmk}
-  If one already has the Littlewoord-Richardson rule, the Pieri rule
+  If one already has the Littlewood-Richardson rule, the Pieri rule
   is actually a specialization since \(s_{(r)} = h_r\) and it turns
   out that \(c_{(r),\mu}^\nu\) is always \(0\) or \(1\).
 \end{rmk}
@@ -2068,7 +2068,7 @@ Finally, another important relationship between \(s_\lambda\)'s and
 \right)
   \]
 \end{example}
-\subsection{Inner Product Struction of \(\sym\)}
+\subsection{Inner Product Structure of \(\sym\)}
 \begin{prop}
   \(\sym\) is an inner-product space with Hall-inner product \[
     \langle m_\lambda, h_\mu \rangle = \delta_{\lambda,\mu} =
@@ -2140,7 +2140,7 @@ different perspective.
 \begin{proof}[A proof of \ref{schurs-are-orthonormal}]
   Based on our lemma above and Littlewood's combinatorial description
   of Schur functions, we observe that \[
-    s_\lambda = \sum_{\mu} K_{\mu,\lambda}^{-1} h_\lambda \text{ and }
+    s_\lambda = \sum_{\mu} K_{\mu,\lambda}^{-1} h_\mu \text{ and }
     s_\lambda = \sum_{\mu} K_{\lambda,\mu} m_\mu
   \]
   where \(K_{\mu,\lambda}^{-1}\) is the \((\mu,\lambda)\)-entry of
@@ -2312,7 +2312,7 @@ and it \(\T\) is a standard Young tableau of shape \(\lambda\) on
 \end{prop}
 \begin{proof}
   Consider that if \(\lambda\) is a horizontal strip, there is a
-  unique labelling of the cells of \(\lambda\) to form a standard
+  unique labeling of the cells of \(\lambda\) to form a standard
   tableau (with no descents). Similarly, if \(\lambda\) is a vertical
   strip, there is a unique standard tableau on \(\lambda\) with
   descents at every position. To get a weakly increasing sequence, one
@@ -2467,7 +2467,7 @@ To get a special rim hook tabloid, one follows the following algorithm
 \end{thm}
 \begin{defn}
   The \de{type} of a rim hook tabloid is \(\alpha = (\alpha_1,
-  \ldots, \alpha_\ell)\) if the ribbon labelled \(i\) has \(\alpha_i\)
+  \ldots, \alpha_\ell)\) if the ribbon labeled \(i\) has \(\alpha_i\)
   cells. 
 \end{defn}
 \begin{defn}
@@ -2477,7 +2477,7 @@ To get a special rim hook tabloid, one follows the following algorithm
   \]
   such that \(\lambda^i/\lambda^{i-1}\) is a rim hook with
   \(\alpha_i\)-cells and the cells of \(\lambda^i/\lambda^{i-1}\) are
-  labelled with the letter \(i\)
+  labeled with the letter \(i\)
 \end{defn}
 \begin{example} A rim hook tabloid with type \(\alpha = (3,4,5)\) is 
   \[
@@ -2512,9 +2512,9 @@ To get a special rim hook tabloid, one follows the following algorithm
   Fix \(n > 0\). A \de{semistandard ribbon tableau} of weight
   \(\alpha\) is created from an \(n\)-ribbon tableau on
   \(\length(\alpha)\) letters such 
-  that the contents of the ribbon heads labelled \(\{1,2,\ldots,
+  that the contents of the ribbon heads labeled \(\{1,2,\ldots,
   \alpha_1\}\) are increasing, the contents of the ribbon heads
-  labelled \(\{\alpha_1+1, \alpha_1+2, \ldots, \alpha_2\}\) are
+  labeled \(\{\alpha_1+1, \alpha_1+2, \ldots, \alpha_2\}\) are
   increasing, etc., by replacing the labels \(\{1,2,\ldots,
   \alpha_1\}\) by \(1\), \(\{\alpha_1+1, \alpha_1+2, \ldots,
   \alpha_2\}\) by \(2\), etc.
@@ -2572,7 +2572,7 @@ book.
 \begin{defn}
   Given a partition \(\lambda = (\lambda_1, \ldots, \lambda_\ell)\),
   let \(m_k(\lambda)\) be the number of parts of \(\lambda\) of size
-  \(k\). In other workds \(m_k(\lambda) = |\{\lambda_i \in \lambda \st \lambda_i =
+  \(k\). In other words \(m_k(\lambda) = |\{\lambda_i \in \lambda \st \lambda_i =
   k\}|\).
 \end{defn}
 \begin{defn}
@@ -2635,7 +2635,7 @@ book.
 \end{prop}
 \begin{proof}
   By above, removing a border strip of length \(p\) corresponds to
-  subtracting \(p\) from some part pf \(\zeta = \lambda+\rho\) and
+  subtracting \(p\) from some part of \(\zeta = \lambda+\rho\) and
   then rearranging the sequence in descending order. Simply
   subtracting \(p\) from parts of \(\zeta\) until it is no longer
   possible is certainly independent of choice, and will result in a
@@ -2689,7 +2689,9 @@ Notice, however, our definition is not clear for something like \[
 \]
 because we cannot tile \(\ydiagram{2,2}\) with \(3\)-ribbons. To deal with this, we will have to define the following:
 \begin{defn}
-  An \(n\)-core is a partition with no removable \(n\)-rim-hook.
+  An \(n\)-core is a partition with no removable
+  \(n\)-rim-hook. Equivalently, an \(n\)-core is a shape where none of
+  its cells have a hook length of \(n\).
 \end{defn}
 \begin{example}
   The diagram on the left is not a \(3\)-core, the one on the right is.
@@ -2699,7 +2701,7 @@ because we cannot tile \(\ydiagram{2,2}\) with \(3\)-ribbons. To deal with this,
 \end{example}
 \begin{prop}
   For any partition \(\gamma\), successively removing all removable
-  \(n\)-rim hooks in any order yields a unique \(n\)-core
+  \(n\)-rim hooks in any order yields a unique \(n\)-core.
 \end{prop}
 \begin{defn}
   Fix \(n > 0\). For any shape \(\lambda\), let \(\tilde{\lambda}\) be
@@ -2892,7 +2894,7 @@ Thus, \(\inv(\tilde{T}) = 9\).
     \]
     In the left configuration, each ribbon has height \(1\) and in the
     right configuration, each ribbon has height \(2\). Importantly, in
-    the continguous region, the two ribbons must have the same
+    the contiguous region, the two ribbons must have the same
     height since the swap trades a vertical move for a horizontal move
     on both ribbons. \[
       \ydiagram{2,2,6,6,4+2,4+2}*[*(green)]{1,1,1,5,4+1,4+1}*[*(blue)]{1+1,1+1,1+5,5+1,5+1,5+1}
@@ -2921,7 +2923,7 @@ Thus, \(\inv(\tilde{T}) = 9\).
   that \(\tilde{\T}\) and \(\tilde{\T}'\) differ by a switch. We
   wish to show that \(\cospin(\T)-\cospin(\T') =
   \inv(\tilde{\T})-\inv(\tilde{\T'})\). Since \(\T,\T'\) are identical
-  except for the ribbons labelled \(a\) and \(a+1\), the problem
+  except for the ribbons labeled \(a\) and \(a+1\), the problem
   reduces to the case where \(\tilde{\mu}\) has only two non-empty SSYTs and
   \(|\mu| = 2n\); in other words, \(\T,\T'\) are \(n\)-ribbon tableaux
   tiled by only \(2\) ribbons each with a distinct content. We now
@@ -2989,7 +2991,7 @@ Thus, \(\inv(\tilde{T}) = 9\).
   By the definition of an inversion pair, equal entries \(\tilde{\T}(x) =
   \tilde{\T}(y) = a\) contribute nothing to \(\inv(\tilde{\T})\). In
   the standardization \(\tilde{\S}\), equal entries are replaced with
-  entries labelled in increasing order of adjusted content
+  entries labeled in increasing order of adjusted content
   \(\tilde{c}\), contributing nothing to \(\inv(\tilde{\S})\). On the
   other hand, unequal entries of \(\tilde{\T}\) give rise to entries
   ordered in the same way in \(\tilde{\S}\), so \(\inv(\tilde{\T}) =
@@ -3419,7 +3421,7 @@ giving \(\charge(\T) = 16\).
     \T = \ytableaushort{5,3444,22333,1111224}
   \]
   Then, we draw the reading word on a charge circle and find the
-  standard subwords, labelled in different colors and done
+  standard subwords, labeled in different colors and done
   successively for clarity. \[
     \begin{tikzpicture}
     \draw[black] circle(1.8cm);
