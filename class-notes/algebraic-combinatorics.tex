@@ -1568,7 +1568,7 @@ and \(e_n\)'s.
   \item \(\alpha_i = \alpha_j \implies \Vdet_\alpha = 0\)
   \item If \(\alpha\) has distinct parts, then \(\Vdet_\alpha\) is
     ``alternating,'' that is \(\sigma \Vdet_\alpha =
-    (-1)^{\ell(\sigma)} \Vdet_\alpha\) for any permutation \(\sigma\)
+    (-1)^{\ell(\sigma)} \Vdet_{\alpha}\) for any permutation \(\sigma\)
     of \([n]\).
   \item \(\Vdet_\rowshift\) divides \(\Vdet_\alpha\).
   \end{enumerate}
@@ -2465,6 +2465,46 @@ To get a special rim hook tabloid, one follows the following algorithm
   where the sum is over all partitions \(\mu\) such that
   \(\mu/\lambda\) is a rim-hook of size \(r\). 
 \end{thm}
+\begin{proof}
+  Let us work in \(\sym_n\). First, consider that \[
+    \Vdet_{\lambda+\rowshift} p_r = \sum_{i=1}^n \Vdet_{\lambda+r
+      \epsilon_i+\rowshift}
+  \]
+  Then, arrange \(\lambda+ r \epsilon_i + \rowshift\) in descending
+  order. If two terms are equal, then \(\Vdet_{\lambda+r \epsilon_i +
+    \rowshift} = 0\), otherwise there will be some \(p \leq q\) such
+  that
+  \begin{samepage}
+    \begin{align*}
+      \lambda_{p-1} + \rowshift_{p-1} > \lambda_q &+\rowshift_{q}+r >
+                                                    \lambda_p + \rowshift_p\\
+      \iff&\\
+      \lambda_{p-1} + n - p + 1 > \lambda_q + n &-q +r > \lambda_p + n - p
+    \end{align*}
+  \end{samepage}
+  and so \(\Vdet_{\lambda+r \epsilon_i+\rowshift} = (-1)^{q-p}
+  \Vdet_{\xi}\) where \[
+    \hspace{-1in}   \xi = (\lambda_1+n-1, \cdots, \lambda_{p-1}+n-p+1,
+    \underbrace{\lambda_q+n-q+r,\lambda_p+n-p, \ldots,
+    \lambda_{q-1}+n-q+1}_{q-p\text{ rows}},\lambda_{q+1}+n-q-1,\ldots, \lambda_n)
+  \]
+  Thus, \(\mu := \xi-\rowshift\) is a partition of the form \[
+  \mu = (\lambda_1, \ldots, \lambda_{p-1},\lambda_p + p - q +r,
+    \lambda_p + 1, \ldots, \lambda_{q-1}+1, \lambda_{q+1}, \ldots,
+    \lambda_n) 
+  \]
+  Such a partition is exactly such that \(\mu/\lambda\) has a rim-hook
+  of size \(r\). In the example below, \(r = 5, p=2, q=4\) \[
+    \lambda = \ydiagram{3,4,5,6,7}
+  \]\[
+    \lambda+5 \epsilon_4+\rowshift = \ydiagram{3,10,7,9,11}*[*(gray)]{0,1,2,3,4}*[*(green)]{0,5+5}
+    \mapsto \xi = \ydiagram{3,7,9,10,11}*[*(gray)]{0,1,2,3,4}*[*(green)]{0,0,0,5+5}
+  \]\[
+    \mu = \ydiagram{3,6,7,7,7}*[*(blue)]{0,4+2,5+2,6+1}
+  \]
+  To complete the proof, divide both sides by \(\Vdet_\rowshift\) and
+  let \(n \to \infty\).
+\end{proof}
 \begin{defn}
   The \de{type} of a rim hook tabloid is \(\alpha = (\alpha_1,
   \ldots, \alpha_\ell)\) if the ribbon labeled \(i\) has \(\alpha_i\)
