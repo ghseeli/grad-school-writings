@@ -111,7 +111,7 @@ functions, and we will explore one of these variants in this section.
 \end{example}
 Naturally, such computations are not much different than computing
 Hall-Littlewood polynomials.
-\begin{prop}
+\begin{prop}\label{qr-gen-fn}
   The generating function for the \(q_r\) is given by \[
     \sum_{r=0}^\infty q_r(x;t) u^r = \prod_i \frac{1-x_i t u}{1 - x_i
       u} = \frac{H(u)}{H(tu)}
@@ -477,7 +477,7 @@ so that, when \(t=0\), the usual Cauchy kernel is recovered.
     \\
     & = \prod_i \frac{\exp(\log(1-tx_i y))}{\exp(\log(1- x_i y))} \\
     & = \prod_i \frac{1-t x_i y}{1 - x_i y} \\
-    & = \sum_{r=0}^\infty q_r(x;t) y^r
+    & = \sum_{r=0}^\infty q_r(x;t) y^r & \text{ by \ref{qr-gen-fn}}
   \end{align*}
   Thus, we have proven the lemma.
 \end{proof}
