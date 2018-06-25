@@ -1,0 +1,516 @@
+\documentclass[11pt,leqno,oneside]{amsart}
+\usepackage[alphabetic,abbrev]{amsrefs} % use AMS ref scheme
+\usepackage{../ReAdTeX/readtex-core}
+\usepackage{./monographs}
+\usepackage{../ReAdTeX/readtex-abstract-algebra}
+\usepackage{../ReAdTeX/readtex-lie-algebras}
+\usepackage{tikz-cd}
+
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{todonotes}
+
+\numberwithin{thm}{section}
+
+\newcommand{\T}{\mathsf{T}}
+\newcommand{\SymP}{\operatorname{Sym}}
+\newcommand{\ExtP}{\wedge}
+\newcommand{\Vdet}{\Delta}
+\newcommand{\partitionof}{\vdash}
+\newcommand{\rowshift}{\rho}
+\newcommand{\sym}{\Lambda}
+
+\newcommand{\ch}{\operatorname{ch}}
+\newcommand{\sign}{\operatorname{sign}}
+\newcommand{\Ind}{\operatorname{Ind}}
+\newcommand{\Res}{\operatorname{Res}}
+
+\newcommand{\wt}{\operatorname{wt}}
+
+\newcommand{\sh}{\operatorname{sh}}
+\newcommand{\height}{\operatorname{ht}}
+\newcommand{\dominates}{\mathrel{\unrhd}}
+\newcommand{\strictlydominates}{\mathrel{\rhd}}
+\newcommand{\diag}{\operatorname{diag}}
+\newcommand{\exp}{\operatorname{exp}}
+
+\title[Schur \(Q\)-functions]{Schur \(Q\)-functions}
+\author{George H. Seelinger}
+\date{June 2018}
+\begin{document}
+\maketitle
+\section{Introduction}
+These notes are a companion for \cite{macdonald}*{III, Sections 2,4,8}. All results and proofs are from \cite{macdonald}, \textbf{usually
+verbatim or very close} with some extra detail added for my own sake.
+
+Recall the Hall-Littlewood functions given by \[
+  P_\lambda(x_1, \ldots, x_n;t) = \frac{1}{V_\lambda(t)} \sum_{w \in
+    \Sym_n} w\left( x_1^{\lambda_1} \cdots x_n^{\lambda_n} \prod_{i <
+      j} \frac{x_i-tx_j}{x_i-x_j} \right)
+\]
+or alternatively \[
+  P_\lambda(x_1, \ldots, x_n;t) = \sum_{w \in \Sym_n / \Sym_n^\lambda}
+  w \left( x_1^{\lambda_1} \cdots x_n^{\lambda_n} \prod_{\lambda_i >
+      \lambda_j} \frac{x_i - t x_j}{x_i - x_j} \right)
+\]
+One typically learns some remarkable specializations, namely \[
+  P_\lambda(x;0) = s_\lambda(x) \text{ and } P(x;1) = m_\lambda(x)
+\]
+However, there exist other ``variants'' of the Hall-Littlewood
+functions, and we will explore one of these variants in this section.
+\begin{defn}
+  For \(r \geq 1\), we define \[
+    q_r(x;t) = (1-t)P_{(r)}(x;t)
+  \]
+  and set \(q_0(x;t) = 1\). 
+\end{defn}
+\begin{rmk}
+  Notice that when \(t=0\), we have \[
+    q_r(x;0) = P_{(r)}(x;0) = s_{(r)}(x) = h_{r}(x)
+  \]
+\end{rmk}
+\begin{prop}
+  In \(n\) variables, \[
+    q_r(x_1,\ldots,x_n;t) = (1-t) \sum_{i=1}^n x_i^r \prod_{j \neq i}
+    \frac{x_i-tx_j}{x_i-x_j}
+  \]
+\end{prop}
+\begin{proof}
+  We observe that \(\Sym_n^{(r)}\) is all permutations that fix
+  \(1\), giving us \(\Sym_n / \Sym_n^{(r)} \isom \{(1,j)
+  \Sym_n^{(r) \st 1 \leq j \leq n}\}\). Let us say \(\tau_{1,j} =
+  (1,j)\).  From the definition, \[
+    q_r(x_1, \ldots, x_n;t) = (1-t) \sum_{w \in \Sym_n / \Sym_n^{(r)}}
+    w \left( x_1^r \prod_{\lambda_i > \lambda_j} 
+      \frac{x_i-tx_j}{x_i-x_j} \right) = (1-t) \sum_{w \in
+      \Sym_n/\Sym_n^{(r)}}w \left( x_1^r \prod_{j \neq 1}
+      \frac{x_1-tx_j}{x_1-x_j}
+    \right) 
+  \]
+  Next, we break up the sum based on
+  where the permutation sends \(1\). \[
+    q_r(x_1, \ldots, x_n;t) = (1-t) \sum_{i=1}^n x_i^r \tau_{1,i}
+  \left( \prod_{j \neq 1} \frac{x_1-tx_j}{x_1-x_j} 
+    \right)
+  \]
+  which then yields the result.
+\end{proof}
+\begin{example}
+  We compute using \(2\) variables \[
+    \begin{cases}
+      q_1(x_1,x_2) = (1-t) \left(x_1\left( \frac{x_1-tx_2}{x_1-x_2}
+        \right)+x_2\left( \frac{x_2-tx_1}{x_2-x_1} \right)\right) =
+      (1-t) \frac{x_1^2-tx_1x_2-x_2^2+tx_1x_2}{x_1-x_2} \\ =
+      (1-t)(x_1+x_2) = (1-t)m_1 \\
+      q_2(x_1,x_2) =
+      (1-t)\frac{x_1^3-tx_1^2x_2-x_2^3+tx_1x_2^2}{x_1-x_2} =
+      \frac{1-t}{x_1-x_2}(x_1^3-x_2^3 + t(x_1 x_2^2 - x_1^2+x_2)) = \\
+      = (1-t)(x_1^2+x_1 x_2 + x_2^2 - t(x_1 x_2)) = (1-t)(m_2+(1-t)m_{11})
+    \end{cases}
+  \]
+\end{example}
+Naturally, such computations are not much different than computing
+Hall-Littlewood polynomials.
+\begin{prop}
+  The generating function for the \(q_r\) is given by \[
+    \sum_{r=0}^\infty q_r(x;t) u^r = \prod_i \frac{1-x_i t u}{1 - x_i
+      u} = \frac{H(u)}{H(tu)}
+  \]
+\end{prop}
+\begin{proof}
+  When using a finite number of variables,
+  \begin{align*}
+    \sum_{r=1}^\infty q_r(x;t) u^r
+    & = \sum_{r=1}^\infty (1-t) \sum_{i=1}^n x_i^r u^r \prod_{j \neq i}
+      \frac{x_i-tx_j}{x_i-x_j}  \\
+    & = (1-t)  \sum_{i=1}^n \left(\sum_{r=1}^\infty x_i^r u^r\right)
+      \prod_{j \neq i} \frac{x_i-tx_j}{x_i-x_j} \\
+    & = (1-t) \sum_{i=1}^n \frac{x_i u}{1-x_i u} \prod_{j \neq i}
+      \frac{x_i-tx_j}{x_i-x_j} \\
+  \end{align*}
+  Then, using the Heaviside cover-up method of partial sum
+  decomposition, we have \[ 
+    \prod_{i=1}^n \frac{z- t x_i}{z - x_i} = 1 + \frac{\prod_{i=1}^n (z
+    - t x_i)-\prod_{i=1}^n (z - x_i)}{\prod_{i=1}^n z-x_i} = 1 + \sum_{i=1}^n \frac{A_i}{z-x_i}
+  \]
+  where
+  \begin{align*}
+    A_i & = \operatorname{Res}_{z=x_i}\left(  \frac{ \prod_{j=1}^n (z- t
+        x_j) - \prod_{j=1}^n (z-x_j)}{\prod_{j=1}^n z - x_j} \right)
+    \\
+    & = \frac{\prod_{j=1}^n (x_i-t
+      x_j) - \prod_{j=1}^n (x_i - x_j)}{\prod_{j \neq i} x_i-x_j} \\
+    & = (x_i-tx_i) \prod_{j \neq i}\frac{x_i-t
+    x_j}{ x_i - x_j}
+  \end{align*}
+  or, in other words, \[
+    \prod_{i=1}^n \frac{z- t x_i}{z - x_i} = 1+\sum_{i=1}^n
+    (1-t)\frac{x_i}{z-x_i} \prod_{j \neq i}\frac{x_i-t
+    x_j}{ x_i - x_j}
+  \]
+  Now, taking \(z = u^{-1}\), we get \[
+    \prod_{i=1}^n \frac{1-t u x_i}{1 - u x_i} = 1+\sum_{i=1}^n
+    (1-t)\frac{u x_i}{1- u x_i} \prod_{j \neq i}\frac{x_i-t
+    x_j}{ x_i - x_j}
+  \]
+  And thus, \[
+    \sum_{r=0}^\infty q_r u^r = 1 + (1-t) \sum_{i=1}^n \frac{x_i u}{1-x_i u} \prod_{j \neq i}
+      \frac{x_i-tx_j}{x_i-x_j} = \prod_{i=1}^n \frac{1-x_i t u}{1-x_i u}
+  \]
+\end{proof}
+\begin{defn}\label{def-Q}
+  Given a partition \(\lambda\), we define \[
+    Q_\lambda(x;t) := b_\lambda(t) P_\lambda(x;t)
+  \]
+  where \[
+    b_\lambda(t) := \prod_{i \geq 1} \phi_{m_i(\lambda)}(t)
+  \]
+  with \(m_i(\lambda)\) being the number of times \(i\) occurs as a
+  part of \(\lambda\) and \[
+    \phi_r(t) = (1-t)(1-t^2) \cdots (1-t^r)
+  \]
+  These \(Q_\lambda\)'s are also called Hall-Littlewood functions.
+\end{defn}
+\begin{prop}
+  Since \(b_{(r)}(t) = (1-t)\)
+  \[
+    Q_{(r)}(x;t) = (1-t)P_{(r)}(x;t) = q_r(x;t)
+  \]
+\end{prop}
+One can also prove that \[
+  Q_\lambda = \prod_{i < j} \frac{1-R_{ij}}{1-t R_{ij}} q_\lambda
+\]
+which also gives that the transition matrix from
+\(\{Q_\lambda\}_{\lambda}\)  to \(\{q_\mu\}_\mu\) is lower
+unitriangular. Furthermore, since Hall-Littlewood functions form a
+\(\Q(t)\)-basis of \(\sym[t]\), the set \(\{q_\lambda\}_\lambda\)
+forms a \(\Q(t)\)-basis of \(\sym[t]\).
+\section{When \(t=-1\)}
+Above, we have mainly focused on the very basics of this ``\(Q\)''
+class of Hall-Littlewood functions. However, in
+1911, Schur published a paper on projective representations that
+realized the so-called ``Schur \(Q\)-functions'' as irreducible spin
+characters of \(\Sym_n\). In this section, we will define \[
+  q_r = q_r(x;t=-1), P_\lambda = P_\lambda(x;-1), Q_\lambda =
+  Q_\lambda(x;-1) 
+\]
+We call such \(Q_\lambda\)'s \de{Schur \(Q\)-function}. We will now
+lay some groundwork for \(q_r(x;-1)\). 
+\begin{example}
+  Now we have \[
+    q_1(x;-1) = 2 m_1 \ \ \ \ q_2(x;-1) = 2 m_2 + 4 m_{11}
+  \]
+\end{example}
+
+\begin{cor}
+  Given \(Q(t) = \sum_{r \geq 0} q_r t^r\), then, \[
+    Q(t) = \prod_{i} \frac{1+t x_i}{1-t x_i} = E(t)H(t)
+  \]
+  and thus, since \(H(t)E(-t) = 1\), we get \[
+    Q(t)Q(-t) = E(t)H(t)E(-t)H(-t) = 1
+  \]
+\end{cor}
+\begin{proof}
+  The first part comes from specializing \(t = -1\) in the formula
+  \(Q(u)\) in the section above (and then replacing \(u\) with \(t\)
+  since \(t\) is now available as a variable). The second part follows
+  from the exposition. 
+\end{proof}
+\begin{prop}
+  For \(n = 2m\), we have the formula \[
+    q_{2m} = \sum_{r=1}^{m-1} (-1)^{r-1} q_r q_{2m-r} + \frac{1}{2}(-1)^{m-1}q_m^2
+  \]
+  and thus \(q_{2m} \in \Q[q_1, q_2, \ldots, q_{2m-1}]\).
+\end{prop}
+\begin{proof}
+  Since \(Q(t)Q(-t)=1\), we have \[
+    \sum_{r+s = n} (-1)^r q_r q_s = 0
+  \]
+  and so, setting \(n=2m\), we get \[
+    0 = \sum_{r=0}^{2m} (-1)^r q_r q_{2m-r} = (-1)^m q_m^2 + 2 \sum_{r=0}^{m-1} (-1)^r
+    q_r q_{2m-r}  \implies 0 = q_{2m} + \frac{1}{2}(-1)^m q_m^2 + \sum_{r=1}^{m-1} (-1)^r q_r q_{2m-r} 
+  \]
+  and so the result is obtained by isolating \(q_{2m}\).
+\end{proof}
+\begin{cor}
+  \(q_{2m} \in \Q[q_1, q_3, q_5, \ldots, q_{2m-1}]\).
+\end{cor}
+\begin{proof}
+  This follows by induction on \(m\) using the proposition above. 
+\end{proof}
+\begin{cor}\label{non-strict-sum-of-strict}
+  Given a partition \(\lambda \partitionof n\), then either
+  \(\lambda\) is strict or \(q_\lambda = q_{\lambda_1} \ldots
+  q_{\lambda_\ell}\) is a \(\Z\)-linear combination of the \(q_\mu\)
+  such that \(q_\mu\) is strict and \(\mu \dominates \lambda\).
+\end{cor}
+\begin{defn}
+  We define \[
+    \Gamma := \Z[q_1, q_2, q_3, \ldots] \subset \sym
+  \]
+  and \(\Gamma^n := \Gamma \intersect \sym^n\). We also denote \[
+    \Gamma_\Q := \Gamma \otimes \Q = \Q[q_1, q_2, q_3, \ldots]
+  \]
+\end{defn}
+\begin{lem}
+  \[
+    \frac{Q'(t)}{Q(t)} = \frac{E'(t)H(t)+E(t)H'(t)}{E(t)H(t)} =
+    \frac{E'(t)}{E(t)} + \frac{H'(t)}{H(t)} = P(t) + P(-t)
+  \]
+  and thus \[
+    \frac{Q'(t)}{Q(t)} = 2 \sum_{r \geq 0} p_{2r+1} t^{2r}
+  \]
+\end{lem}
+\begin{prop}
+  \[
+    rq_r = 2(p_1 q_{r-1} + p_3 q_{r-3} + \cdots)
+  \]
+\end{prop}
+\begin{proof}
+  Rearranging the results of our lemma above, we get \[
+    Q'(t) = Q(t)\left(2 \sum_{r \geq 0} p_{2r+1} t^{2r}  \right)
+  \]
+  and so, looking at the \(t^{r-1}\) coefficient on both sides, we get \[
+    r q_r = \sum_{2s+u = r-1} p_{2s+1} q_u = \sum_{s=0}^{r-1} p_{2s+1}
+    q_{r-1-2s}
+  \]
+  where we take \(q_u = 0\) if \(u < 0\).
+\end{proof}
+\begin{cor}\label{gamma-spanned-by-odd}
+  Thus, \[
+    \Gamma_\Q = \Q[p_r \st r \text{ is odd}] = \Q[q_r \st r \text{ is odd}]
+  \]
+  and the \(q_r\) for \(r\) odd are algebraically independent over \(\Q\)
+\end{cor}
+\begin{proof}
+  The formula above allows us to express odd power \(p_r\)'s in terms
+  of \(q\)'s and vice versa. Since the odd \(p_r\)'s are algebraically
+  independent over \(\Q\), we get the result.
+\end{proof}
+\begin{lem}
+  The number of odd partitions on \(n\) is equal to the number of
+  strict partitions on \(n\).
+\end{lem}
+\begin{proof}
+  Consider the generation function \[
+    \sum_{\lambda \text{ is odd}} t^{|\lambda|}
+  \]
+  which would have a \(t^n\) term for every odd partition of
+  \(n\). Since every odd partition is some combination of odd terms,
+  we can rewrite this sum as \[
+    \hspace{-1.25in}\left( 1 + t^{\wt(1)} + t^{\wt(1,1)} + \cdots
+    \right)\left( 1 + 
+      t^{\wt(3)} + t^{\wt(3,3)} + \cdots \right) \cdots = \left(
+      1+t+t^2+\cdots \right)\left( 1+t^3+t^6+\cdots \right) \cdots =
+    \prod_{r=1}^\infty \frac{1}{1-t^{2r-1}}
+  \]
+  However, using some clever algebra, we rewrite our fraction to have
+  every \(1-t^{2r}\) term in the numerator and all \(1-t^r\) terms in
+  the denominator (so after cancellation, only \(1-t^{2r-1}\) terms
+  remain in the denominator) \[
+    \prod_{r \geq 1} \frac{1}{1-t^{2r-1}} = \prod_{r \geq 1}
+    \frac{1-t^{2r}}{1-t^r} = \prod_{r \geq 1} (1+t^r)
+  \]
+  Finally, we observe by multiplying out the terms that \[
+    \prod_{r \geq 1} (1+t^r) = \sum_{\lambda \text{ distinct parts}}
+    t^{|\lambda|} 
+  \]
+\end{proof}
+\begin{prop}
+  \begin{enumerate}
+  \item The \(q_\lambda\) for \(\lambda\) odd form a \(\Q\)-basis of
+    \(\Gamma_\Q\).
+  \item The \(q_\lambda\) for \(\lambda\) strict form a \(\Z\)-basis
+    of \(\Gamma\).
+  \end{enumerate}
+\end{prop}
+\begin{proof}
+  The first part follows immediately from the previous proposition. By
+  \ref{non-strict-sum-of-strict}, we have that the \(q_\lambda\) for
+  \(\lambda\) strict span \(\Gamma^n\) (and thus also
+  \(\Gamma^n_\Q\)). Furthermore, since, by the lemma above, the number
+  of strict partitions is equal to the number of odd partitions, they
+  must form a \(\Q\) basis of \(\Gamma^n_\Q\). Therefore, they are
+  linearly independent over \(\Q\) and thus also \(\Z\), giving the
+  second part.
+\end{proof}
+\begin{prop}
+  Given a partition \(\lambda\), we have \[
+    Q_\lambda(x;-1) =
+    \begin{cases}
+      2^{\ell(\lambda)} P_\lambda & \text{ if }\lambda\text{ is
+        strict}\\
+      0 & \text{otherwise}
+    \end{cases}
+  \]
+\end{prop}
+\begin{proof}
+  Recall from \ref{def-Q} that \[
+    Q_\lambda(x;t) = b_\lambda(t)P_\lambda(x;t)
+  \]
+  where \(b_\lambda(t) = \prod_{i \geq 1} \phi_{m_i(\lambda)}(t)\) and
+  \(\phi_r(t) = (1-t)(1-t^2)\cdots(1-t^r)\). Then, if \(r = 1\),
+  \(\phi_r(-1) = 2\), but for \(r > 1\), \(\phi_r(-1)=0\). Thus, if
+  \(\lambda\) does not have distinct parts, there is an \(i\) such
+  that \(\phi_{m_i(\lambda)}(-1) = 0 \implies b_\lambda(-1) =
+  0\). When \(\lambda\) has distinct parts, then \(b_\lambda(-1) =
+  2^{\ell(\lambda)}\). Thus, we get our result.
+\end{proof}
+\section{Orthogonality}
+When working with the Hall inner product on \(\sym\), one typically
+encounters the Cauchy kernel \[
+  \Omega = \prod_{i,j \geq 1} (1-x_i y_i)^{-1}
+\]
+A generalization of this formula can be given by \[
+  \Omega(t) = \prod_{i,j \geq 1} \frac{1-t x_i y_j}{1-x_i y_j}
+\]
+so that, when \(t=0\), the usual Cauchy kernel is recovered.
+\begin{thm}
+  We have
+  \begin{enumerate}
+  \item \(\Omega(t) = \sum_\lambda z_\lambda(t)^{-1} p_\lambda(x)
+    p_\lambda(y)\) where \(z_\lambda(t) = z_\lambda \prod_{i \geq 1}
+    (1-t^{\lambda_i})^{-1}\)
+  \item \(\Omega(t) = \sum_{\lambda} q_\lambda(x;t) m_\lambda(y) =
+    \sum_{\lambda} m_\lambda(x) q_\lambda(y;t)\)
+  \item \(\Omega(t) = \sum_{\lambda} P_\lambda(x;t) Q_\lambda(y;t)\)
+  \end{enumerate}
+\end{thm}
+\begin{proof}
+  This is the subject of \cite{macdonald}*{pp 222-224}. In brief,
+  \begin{enumerate}
+  \item The first identity follows from generating function-ology. The
+    key observation is that \[
+      \log \prod_{i,j} \frac{1-t x_i y_j}{1 - x_i y_j} =
+      \sum_{m=1}^\infty \frac{1-t^m}{m} p_m(x) p_m(y)
+    \]
+    and then exponentiating both sides.
+  \item Since \[
+      Q(y_j) = \sum_{r=0}^\infty q_r(x;t) y_j^r = \prod_i \frac{1-t x_i y_j}{1 - x_i y_j}
+    \]
+    we get \[
+      \prod_{i,j}  \frac{1-t x_i y_j}{1 - x_i y_j} = \prod_j Q(y_j) =
+      \prod_j \sum_{r_j = 0}^\infty q_{r_j}(x;t) y_j^{r_j} =
+      \sum_\lambda q_\lambda(x;t) m_\lambda(y)
+    \]
+    and similarly for \(x\)'s and \(y\)'s interchanged.
+  \item If we take the linear transformations \[
+      (A_{\lambda,\mu})(Q_\lambda)_\lambda = (q_\mu)_\mu \ \
+      (B_{\lambda,\mu})(Q_\lambda)_\lambda = (m_\mu)_\mu \ \
+      (C_{\lambda,\mu})(m_\lambda)_\lambda = (q_\mu)_\mu
+    \]
+    We have that \(A\) is lower unitriangular by \ref{} and \(B\) is
+    upper triangular because it is a product of upper triangular
+    matrices (\(m \to s \to P \to Q\)). Thus, \(D = B^t A\) is lower
+    triangular. However, \(D = B^t C B\) and since \(C\) is symmetric,
+    \(D\) must also be symmetric. Thus, \(D\) must be a diagonal
+    matrix with diagonal entries equal to those of \(B\) since \(A\)
+    is unitriangular. Thus, \(D = \diag(b_\lambda(t)^{-1})\). This
+    gives us
+    \begin{align*}
+      \sum_\lambda q_\lambda(x;t) m_\lambda(y)
+      & = \sum_{\lambda,\mu,\nu} A_{\lambda,\mu} B_{\lambda,\nu}
+        Q_\mu(x;t) Q_\nu(y;t) \\
+      & = \sum_\mu b_\mu(t)^{-1} Q_\mu(x;t) Q_\mu(x;t) \\
+      & = \sum_\mu P_\mu(x;t) Q_\mu(y;t)
+    \end{align*}
+  \end{enumerate}
+\end{proof}
+\begin{defn}
+  Given a partition \(\lambda\), we define \[
+    S_\lambda(x;t) := \det(q_{\lambda_i-i+j}(x;t))
+  \]
+\end{defn}
+\begin{prop}
+  We can also express \[
+    S_\lambda(x;t) = \prod_{i < j} (1-R_{ij}) q_\lambda = \prod_{i <
+      j} (1-tR_{ij})Q_\lambda
+  \]
+\end{prop}
+\begin{proof}
+  The first equality follows using an identical argument for
+  \(s_\lambda = \prod_{i<j}(1-R_{ij}) h_\lambda\) from the
+  Jacobi-Trudi identity. For the second equality, we have \[
+    \prod_{i < j} (1-tR_{ij})Q_\lambda = \prod_{i <
+      j}(1-tR_{ij})\left( \prod_{i<j} \frac{1-R_{ij}}{1-tR_{ij}}
+      q_\lambda \right) = \prod_{i < j} (1-R_{ij}) q_\lambda
+  \]
+\end{proof}
+\begin{lem}
+  For \(r \geq 1\), we have \[
+    q_r(x;t) = h_r[(1-t)p_{1}]
+  \]
+  where \(h_r[(1-t)p_{1}]\) is a plethystic substitution.
+\end{lem}
+\begin{proof}
+  We write
+  \begin{align*}
+    h_r(x) & = \sum_{\lambda} z_\lambda^{-1} p_\lambda(x) \\
+    \implies
+    h_r[(1-t)p_1] & = \sum_{\lambda} z_\lambda^{-1} p_\lambda[(1-t)p_1]
+    = \sum_{\lambda \partitionof r} z_\lambda^{-1}
+    \prod_{i=1}^{\ell(\lambda)} (1-t^{\lambda_i}) p_{\lambda_i} 
+    = \sum_{\lambda \partitionof r} z_\lambda^{-1} p_\lambda \prod_{i=1}^{\ell(\lambda)}(1-t^{\lambda_i})
+  \end{align*}
+  since \(p_1(x_1^{\lambda_i}, x_2^{\lambda_i}, \ldots) =
+  p_{\lambda_i}(x)\).
+  Now, using some generating function-ology\footnote{The reader may
+    find it helpful to review the proof that \(\sum_{r=0}^\infty h_r
+    y^r = \sum_\lambda \frac{p_\lambda}{z_\lambda}
+    y^{|\lambda|}\). See \cite{alg-comb}*{2.2} or \cite{macdonald}*{p 25}}, we get
+  \begin{align*}
+    \sum_{r=0}^\infty h_r[(1-t)p_1] y^r
+    & = \sum_\lambda
+      \frac{\prod_{j=1}^{\ell(\lambda)} (1-t^{\lambda_j})}{z_\lambda} p_\lambda
+      y^{|\lambda|} \\
+    & = \prod_{k=1}^\infty\sum_{m_k=0}^\infty \frac{((1-t^k) p_k
+      y^k)^{m_k}}{m_k! k^{m_k}}\\
+    & = \prod_{k=1}^\infty \exp\left( \frac{(1-t^k)p_k y^k}{k}
+      \right)\\
+    & = \exp \left( \sum_{k=1}^\infty \sum_{i=1}^\infty
+      \frac{(1-t^k)(x_i y)^k}{k} \right)\\
+    & = \prod_i \exp\left( \sum_{k=1}^\infty \frac{(1-t^k)(x_i
+      y)^k}{k} \right)\\
+    & = \prod_i \exp\left( \sum_{k=1}^\infty \frac{(x_i y)^k}{k} -
+      \sum_{k=1}^\infty \frac{(t x_i y)^k}{k} \right) \\
+    & = \prod_i \exp\left( -\log(1-x_i y) + \log(1 - t x_i y) \right)
+    \\
+    & = \prod_i \frac{\exp(\log(1-tx_i y))}{\exp(\log(1- x_i y))} \\
+    & = \prod_i \frac{1-t x_i y}{1 - x_i y} \\
+    & = \sum_{r=0}^\infty q_r(x;t) y^r
+  \end{align*}
+  Thus, we have proven the lemma.
+\end{proof}
+\begin{cor}
+  Let variables \(\xi_i\) be such that \(h_r(\xi) =
+  h_r[(1-t)p_1]\). Then, \[
+    q_r(x;t) = h_r(\xi) \text{ and } S_\lambda(x;t) = s_\lambda(\xi)
+  \]
+\end{cor}
+\begin{proof}
+  It is a general fact that one can always introduce variables
+  \(\xi_i\) such that \(f(\xi) = f[g]\). Thus, the first part is
+  immediate from the above lemma. Then, from above, we have \[
+    S_\lambda(x;t) = \det(q_{\lambda_i-i+j}(x;t)) =
+    \det(h_{\lambda_i-i+j}(\xi)) = s_\lambda(\xi)
+  \]
+  by the Jacobi-Trudi identity.
+\end{proof}
+\begin{bibdiv}
+  \begin{biblist}
+    \bib{macdonald}{book}{
+      author={Macdonald, I.G.}
+      title={Symmetric Functions and Hall Polynomials}
+      year={1979}
+      note={2nd Edition, 1995}
+    }
+    \bib{alg-comb}{misc}{
+      author={Seelinger, George H.}
+      title={Algebraic Combinatorics}
+      year={2018}
+      note={[Online] \url{https://ghseeli.github.io/grad-school-writings/class-notes/algebraic-combinatorics.pdf}}
+    }
+  \end{biblist}
+\end{bibdiv}
+
+\end{document}
