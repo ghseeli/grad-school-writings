@@ -181,9 +181,11 @@ One can also prove that \[
 \]
 which also gives that the transition matrix from
 \(\{Q_\lambda\}_{\lambda}\)  to \(\{q_\mu\}_\mu\) is lower
-unitriangular. Furthermore, since Hall-Littlewood functions form a
-\(\Q(t)\)-basis of \(\sym[t]\), the set \(\{q_\lambda\}_\lambda\)
-forms a \(\Q(t)\)-basis of \(\sym[t]\).
+unitriangular. Thus, since Hall-Littlewood functions form a
+\(\Q(t)\)-basis of \(\sym[t]\), we get
+\begin{prop}
+ The set \(\{q_\lambda\}_\lambda\) forms a \(\Q(t)\)-basis of \(\sym[t]\).
+\end{prop}
 \section{When \(t=-1\)}
 Above, we have mainly focused on the very basics of this ``\(Q\)''
 class of Hall-Littlewood functions. However, in
@@ -363,8 +365,11 @@ encounters the Cauchy kernel \[
 A generalization of this formula can be given by \[
   \Omega(t) = \prod_{i,j \geq 1} \frac{1-t x_i y_j}{1-x_i y_j}
 \]
-so that, when \(t=0\), the usual Cauchy kernel is recovered.
-\begin{thm}
+so that, when \(t=0\), the usual Cauchy kernel is recovered. We will
+then use the \(t\)-generalized Cauchy kernel to show various
+orthogonality relations with a \(t\)-generalization of the Hall inner
+product. 
+\begin{thm}\label{cauchy-sums}
   We have
   \begin{enumerate}
   \item \(\Omega(t) = \sum_\lambda z_\lambda(t)^{-1} p_\lambda(x)
@@ -480,6 +485,12 @@ so that, when \(t=0\), the usual Cauchy kernel is recovered.
   \end{align*}
   Thus, we have proven the lemma.
 \end{proof}
+\begin{rmk}\label{plethystic-inverses}
+  The plethystic substitution \(f \mapsto f[(1-t)p_1]\) has explicit
+  inverse given by \(g \mapsto g[\frac{p_1}{1-t}]\), which can be seen
+  by direct computation of \(p_\lambda[\frac{p_1}{1-t}] =
+  p_\lambda \prod_{i=1}^{\ell(\lambda)} (1-t^{\lambda_i})^{-1 }\).
+\end{rmk}
 \begin{cor}
   Let variables \(\xi_i\) be such that \(h_r(\xi) =
   h_r[(1-t)p_1]\). Then, \[
@@ -494,6 +505,112 @@ so that, when \(t=0\), the usual Cauchy kernel is recovered.
     \det(h_{\lambda_i-i+j}(\xi)) = s_\lambda(\xi)
   \]
   by the Jacobi-Trudi identity.
+\end{proof}
+\begin{prop}
+  We have \[
+    \prod_{i,j} \frac{1-t x_i y_j}{1- x_i y_j} = \sum_{\lambda}
+    S_\lambda(x;t) s_\lambda(y) = \sum_\lambda s_\lambda(x) S_\lambda(y;t)
+  \]
+\end{prop}
+\begin{proof}
+  Since the Cauchy kernel has equality \[
+    \Omega = \prod_{i,j} \frac{1}{1-x_i y_j} = \sum_{\lambda} s_\lambda(x) s_\lambda(y)
+  \]
+  we compute in the spirit of the proof of the corollary above, \[
+    \prod_{i,j} \frac{1-t x_i y_j}{1- x_i y_j} = \prod_{i,j}
+    \frac{1}{1-\xi_i y_j} = \sum_{\lambda} s_\lambda(\xi) s_\lambda(y)
+    = \sum_{\lambda} S_\lambda(x;t) s_\lambda(y)
+  \]
+  and similarly for the other equality.
+\end{proof}
+\begin{defn}
+  We define a bilinear product on \(\sym[t]\) \[
+    \langle q_\lambda(x;t), m_\mu(x) \rangle_t := \delta_{\lambda \mu}
+  \]
+\end{defn}
+\begin{rmk}
+  This is a \(t\)-generaliation of the Hall-inner product, but is not
+  the same one used in \cite{alg-comb}*{Section 4.2}.
+\end{rmk}
+\begin{lem}\label{t-cauchy-kernel-equiv-to-dual-basis}
+  Given \(\{u_\lambda\}, \{v_\lambda\}\) as \(\Q(t)\)-bases of \(\sym[t]\), the following are equivalent.
+  \begin{enumerate}
+  \item \(\langle u_\lambda, v_\mu \rangle_t = \delta_{\lambda \mu}\)
+    for all \(\lambda,\mu\)
+  \item \(\sum_\lambda u_\lambda(x) v_\lambda(y) = \prod_{i,j}
+    \frac{1-t x_i y_j}{1-x_i y_j}\)
+  \end{enumerate}
+\end{lem}
+\begin{proof}
+  If we let \[
+    u_\lambda = \sum_{\nu} a_{\lambda \nu} q_\nu \ \ \ v_\mu =
+    \sum_{\sigma} b_{\mu \sigma} m_\sigma
+  \]
+  then 
+  \begin{align*}
+    \sum_\lambda u_\lambda(x) v_\lambda(y)
+    & = \prod_{i,j} \frac{1-t x_i y_j}{1-x_i y_j} \\
+    \iff \sum_\lambda u_\lambda(x) v_\lambda(y)
+    & = \sum_\mu q_\mu(x;t) m_\mu(y)\\
+    \iff \sum_\lambda a_{\lambda \nu} b_{\lambda \sigma}
+    & = \delta_{\nu \sigma} \\
+    \iff \langle u_\lambda, v_\mu \rangle_t
+    & = \sum_\rho a_{\lambda \rho} b_{\mu \rho}
+     = \delta_{\lambda \mu} \\
+  \end{align*}
+\end{proof}
+\begin{prop}
+  \cite{macdonald}*{p 225} Given the definition of \(\langle \cdot, \cdot \rangle_t\) above, we have
+  \begin{enumerate}
+  \item \(\langle P_\lambda(x;t), Q_\mu(x;t)\rangle_t =
+    \delta_{\lambda,\mu}\)
+  \item \(\langle S_\lambda(x;t), s_\mu(x) \rangle_t = \delta_{\lambda,
+      \mu}\)
+  \item \(\langle p_\lambda(x), p_\mu(x) \rangle_t =
+    \delta_{\lambda,\mu} z_\lambda \prod_i (1-t^{\lambda_i})^{-1}\)
+  \item \(\langle \cdot, \cdot \rangle_t\) is symmetric.
+  \end{enumerate}
+\end{prop}
+\begin{proof}
+  The first three identites follow by applying lemma
+  \ref{t-cauchy-kernel-equiv-to-dual-basis} to \ref{cauchy-sums}. The
+  symmetry follows from the self-duality of the power-sum basis. 
+\end{proof}
+\begin{prop}
+  The \(t\)-generalized Hall inner product is given by \[
+    \langle f,g \rangle_t = \langle f,g[(1-t)^{-1} p_1] \rangle
+  \]
+  where the inner product on the right is the standard Hall-inner product.
+\end{prop}
+\begin{proof}
+  Let \(\phi,\psi \in \sym\) over \(\Q\). Then, we may write \[
+    \phi = \sum_\lambda a_\lambda m_\lambda \ \ \ \psi = \sum_\mu b_\mu h_\mu
+  \]
+  for \(a_\lambda, b_\mu \in \Q\). Then, \[
+    \langle \phi,\psi \rangle = \sum_\lambda \sum_\mu a_\lambda b_\mu
+    \langle m_\lambda, b_\mu \rangle = \sum_\lambda a_\lambda
+    b_\lambda = \langle \phi, \sum_\mu b_\mu q_\mu \rangle_t = \langle \phi,
+    \psi[(1-t) p_1] \rangle_t
+  \]
+  and thus the result follows by remark \ref{plethystic-inverses}.
+\end{proof}
+\begin{rmk}
+  The \(t\)-generalization of the Hall inner product in
+  \cite{alg-comb} is given by \(\langle p_\lambda,p_\mu \rangle_t =
+  \langle p_\lambda,p_\mu[(1-t)p_1] \rangle\). 
+\end{rmk}
+\begin{cor}
+  The plethystic substitution of \((1-t)p_1\) is self-adjoint with the
+  the standard Hall inner product, \(\langle \cdot,\cdot \rangle\). In other words, for
+  \(f,g \in \sym\), \[
+    \langle f, g[(1-t)p_1] \rangle = \langle f[(1-t)p_1],g \rangle
+  \]
+\end{cor}
+\begin{proof}
+  We observe \[
+    \langle f,g[(1-t)p_1] \rangle = \langle f,g \rangle_t = \langle
+    g,f \rangle_t = \langle g,f[(1-t)p_1] \rangle = \langle f[(1-t)p_1],g \rangle
+  \]
 \end{proof}
 \begin{bibdiv}
   \begin{biblist}
