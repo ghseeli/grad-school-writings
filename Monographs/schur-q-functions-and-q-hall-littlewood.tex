@@ -360,10 +360,10 @@ lay some groundwork for \(q_r(x;-1)\).
 \section{Orthogonality}
 When working with the Hall inner product on \(\sym\), one typically
 encounters the Cauchy kernel \[
-  \Omega = \prod_{i,j \geq 1} (1-x_i y_i)^{-1}
+  \Omega(x,y) = \prod_{i,j \geq 1} (1-x_i y_i)^{-1}
 \]
 A generalization of this formula can be given by \[
-  \Omega(t) = \prod_{i,j \geq 1} \frac{1-t x_i y_j}{1-x_i y_j}
+  \Omega(x,y;t) = \prod_{i,j \geq 1} \frac{1-t x_i y_j}{1-x_i y_j}
 \]
 so that, when \(t=0\), the usual Cauchy kernel is recovered. We will
 then use the \(t\)-generalized Cauchy kernel to show various
@@ -372,12 +372,12 @@ product.
 \begin{thm}\label{cauchy-sums}
   We have
   \begin{enumerate}
-  \item \(\Omega(t) = \sum_\lambda z_\lambda(t)^{-1} p_\lambda(x)
+  \item \(\Omega(x,y;t) = \sum_\lambda z_\lambda(t)^{-1} p_\lambda(x)
     p_\lambda(y)\) where \(z_\lambda(t) = z_\lambda \prod_{i \geq 1}
     (1-t^{\lambda_i})^{-1}\)
-  \item \(\Omega(t) = \sum_{\lambda} q_\lambda(x;t) m_\lambda(y) =
+  \item \(\Omega(x,y;t) = \sum_{\lambda} q_\lambda(x;t) m_\lambda(y) =
     \sum_{\lambda} m_\lambda(x) q_\lambda(y;t)\)
-  \item \(\Omega(t) = \sum_{\lambda} P_\lambda(x;t) Q_\lambda(y;t)\)
+  \item \(\Omega(x,y;t) = \sum_{\lambda} P_\lambda(x;t) Q_\lambda(y;t)\)
   \end{enumerate}
 \end{thm}
 \begin{proof}
@@ -489,7 +489,21 @@ product.
   The plethystic substitution \(f \mapsto f[(1-t)p_1]\) has explicit
   inverse given by \(g \mapsto g[\frac{p_1}{1-t}]\), which can be seen
   by direct computation of \(p_\lambda[\frac{p_1}{1-t}] =
-  p_\lambda \prod_{i=1}^{\ell(\lambda)} (1-t^{\lambda_i})^{-1 }\).
+  p_\lambda \prod_{i=1}^{\ell(\lambda)} (1-t^{\lambda_i})^{-1 }\). \\
+
+  As some trivia, the plethystic substitutions have a representation
+  theoretic meaning. If \(f(x;t) = \sum_r t^r \ch(\chi_{A_r})\) for \(A =
+  \bigoplus_r A_r\) a graded \(\Sym_n\)-module and \(V = \C^n\) the
+  defining representation, then \[
+    f[(1-t)p_1] = \sum_k (-1)^k t^k \left( \sum_r t^r \ch(\chi_{A
+        \otimes \ExtP^k V}) \right) 
+  \]
+  and \[
+    f[\frac{p_1}{1-t}] = \sum_k t^k \left( \sum_r t^r \ch(\chi_{A
+        \otimes \SymP^k V}) \right)
+  \]
+  which follows from proving the result for \(f = h_n\) and doing some
+  extra representation theoretic work.
 \end{rmk}
 \begin{cor}
   Let variables \(\xi_i\) be such that \(h_r(\xi) =
@@ -514,7 +528,7 @@ product.
 \end{prop}
 \begin{proof}
   Since the Cauchy kernel has equality \[
-    \Omega = \prod_{i,j} \frac{1}{1-x_i y_j} = \sum_{\lambda} s_\lambda(x) s_\lambda(y)
+    \Omega(x,y) = \prod_{i,j} \frac{1}{1-x_i y_j} = \sum_{\lambda} s_\lambda(x) s_\lambda(y)
   \]
   we compute in the spirit of the proof of the corollary above, \[
     \prod_{i,j} \frac{1-t x_i y_j}{1- x_i y_j} = \prod_{i,j}
@@ -611,6 +625,64 @@ product.
     \langle f,g[(1-t)p_1] \rangle = \langle f,g \rangle_t = \langle
     g,f \rangle_t = \langle g,f[(1-t)p_1] \rangle = \langle f[(1-t)p_1],g \rangle
   \]
+\end{proof}
+\section{Bernstein and Jing Operators}
+First, recall from \cite{macdonald}*{pp 75--76} that, given a
+symmetric function \(f \in \sym\), there exists \(f^\perp
+\in \End(\sym)\) given as an adjoint to \(f\) under the Hall inner
+product, that is \[
+ \langle  f^\perp u, v \rangle = \langle u,fv \rangle
+\]
+In particular, we may express \[
+  p_n^\perp = n \frac{\partial}{\partial p_n}
+\]
+Then, from \cite{macdonald}*{p 96}, we may define the following.
+\begin{defn}
+  The \de{Bernstein operators} on \(\sym\) are given by \[
+    B_n := \sum_{i \geq 0} (-1)^i h_{n+i} e_i^\perp
+  \]
+  which are also encoded in the
+  generating function \[
+    \hspace{-1in} B(t) = \sum_{n \in \Z} B_n t^n =
+    H(t)E^\perp(-t^{-1}) = \exp\left( \sum_{k \geq 1}
+      \frac{t^k}{k} p_k \right) \exp \left( - \sum_{k \geq 1}
+      \frac{t^{-k}}{k}
+      p_k^\perp \right) = \exp\left( \sum_{k \geq 1}
+      \frac{t^k}{k} p_k \right) \exp \left( - \sum_{k \geq 1} t^{-k}
+      \frac{\partial}{\partial p_k} \right)
+  \]
+\end{defn}
+However, we can also rephrase the description using plethysm and the
+Cauchy kernel. Recall the Cauchy kernel \[
+  \Omega(x,y) = \prod_{i,j \leq 1} (1-x_i y_i)^{-1}
+\]
+and let us set \[
+  \Omega(x) := \prod_{i \leq 1} (1-x_i)^{-1}
+\]
+We may then we have
+\begin{prop}
+  Given \(f \in \sym\), we have \(B(t) f(x) = f[p_1-\frac{1}{t}]
+  \Omega(tx)\) and thus \(B_m f\) is the coefficient of the \(m\)th
+  term. 
+\end{prop}
+\todo{Prove this.}
+\begin{thm}
+  Given a Schur function \(s_\lambda\) with \(\lambda = (\lambda_1,
+  \ldots, \lambda_\ell)\), if \(m \geq \lambda_1\), then \[
+    B_m s_\lambda = s_{m,\lambda} = s_{m,\lambda_1, \ldots,
+      \lambda_\ell}
+  \] 
+\end{thm}
+\begin{proof}
+  \cite{macdonald} gives a proof using his definition on page
+  96. Using the proposition above, we observe first that \[
+    \Omega(tx) = \prod_i \frac{1}{1-tx_i} = \sum_i \frac{1}{1-t x_i}
+    \prod_{j \neq i} \frac{1}{1-\frac{x_j}{x_i}}
+  \]
+  via partial fraction expansion (similar to the proof of
+  \ref{qr-gen-fn}). Next, we observe that the coefficient of \(t^m\)
+  in \(f(t^{-1}) (1-tz)^{-1}\) is the coefficient of \(t^0\) in
+  \(t^{-m} f(t^{-1})(1-tz)^{-1}\)
 \end{proof}
 \begin{bibdiv}
   \begin{biblist}
