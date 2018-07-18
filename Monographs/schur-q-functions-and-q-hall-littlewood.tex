@@ -681,9 +681,26 @@ We may then we have
   \]
   via partial fraction expansion (similar to the proof of
   \ref{qr-gen-fn}). Next, we observe that the coefficient of \(t^m\)
-  in \(f(t^{-1}) (1-tz)^{-1}\) is the coefficient of \(t^0\) in
-  \(t^{-m} f(t^{-1})(1-tz)^{-1}\)
+  in \(f(t^{-1}) (1-tx)^{-1}\) is the coefficient of \(t^0\) in
+  \(t^{-m} f(t^{-1})(1-tx)^{-1}\), giving us \(x^m
+  f(t^{-1})\). Thus, \[
+    B s_\lambda = s_\lambda[p_1-t^{-1}] \Omega(tx) = s_\lambda [p_1-t^{-1}] \sum_i
+    \frac{1}{1-tx_i} \prod_{j \neq i} \frac{1}{1-\frac{x_j}{x_i}}
+  \] \todo{How
+    did this happen?}
+  Thus, we get that \[
+    B_m s_\lambda = \sum_i x_i^m \frac{s_\lambda [p_1-x_i]}{\prod_{j
+        \neq i}(1-\frac{x_j}{x_i})} 
+  \]
+  However, \(s_\lambda[p_1-x_i]\) is simply evaluating \(s_\lambda\)
+  in all the other variables, removing \(x_i\). 
 \end{proof}
+\begin{defn}
+  The \de{Jing operators} \(S^k(t)\) are defined by \[
+    S^k(t)f(x) := f[p_1+(k-1)t^{-1}] \Omega(tx)
+  \]
+  where \(S^k_n(t)f(x)\) is the coefficient of \(t^n\) in \(S^k(t)f(x)\).
+\end{defn}
 \begin{bibdiv}
   \begin{biblist}
     \bib{macdonald}{book}{
