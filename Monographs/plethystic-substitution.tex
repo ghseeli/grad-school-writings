@@ -1,0 +1,205 @@
+\documentclass[11pt,leqno,oneside]{amsart}
+\usepackage[alphabetic,abbrev]{amsrefs} % use AMS ref scheme
+\usepackage{../ReAdTeX/readtex-core}
+\usepackage{./monographs}
+\usepackage{../ReAdTeX/readtex-abstract-algebra}
+\usepackage{../ReAdTeX/readtex-lie-algebras}
+\usepackage{tikz-cd}
+
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{todonotes}
+
+\numberwithin{thm}{section}
+
+\newcommand{\T}{\mathsf{T}}
+\newcommand{\SymP}{\operatorname{Sym}}
+\newcommand{\ExtP}{\wedge}
+\newcommand{\Vdet}{\Delta}
+\newcommand{\partitionof}{\vdash}
+\newcommand{\rowshift}{\rho}
+\newcommand{\sym}{\Lambda}
+
+\newcommand{\ch}{\operatorname{ch}}
+\newcommand{\sign}{\operatorname{sign}}
+\newcommand{\Ind}{\operatorname{Ind}}
+\newcommand{\Res}{\operatorname{Res}}
+
+\newcommand{\wt}{\operatorname{wt}}
+
+\newcommand{\sh}{\operatorname{sh}}
+\newcommand{\height}{\operatorname{ht}}
+\newcommand{\dominates}{\mathrel{\unrhd}}
+\newcommand{\strictlydominates}{\mathrel{\rhd}}
+\newcommand{\diag}{\operatorname{diag}}
+
+\title[Plethystic Substitution]{Plethystic Substitution}
+\author{George H. Seelinger}
+\date{July 2018}
+\begin{document}
+\maketitle
+\section{Introduction}
+In \cite{macdonald}*{p 135}, a new type of product on symmetric
+functions is introduced called ``plethysm,'' which allows one to take
+\(f \in \sym^m\) and \(g \in \sym^n\) to get a product \(f[g] \in
+\sym^{mn}\) (denoted \(f \circ g\) in \cite{macdonald}). This notion
+has become increasingly prevalent in algebraic combinatorics research,
+and this monograph seeks to give an outline of some of the essentials.
+\section{Definition and properties}
+Departing from \cite{macdonald}, we define the following.
+\begin{defn}
+  Given a Laurent series \(A\) in indeterminates \(a_1, a_2, a_3,
+  \ldots\), we define \(p_n[A]\) to be the series where each \(a_i\)
+  is changed to \(a_i^n\). In other words, each indeterminate is
+  raised to the \(n\)th power. In particular, given a symmetric function
+  \(g \in \sym\), \(p_n[g] = g(x_1^n, x_2^n, \cdots)\).
+\end{defn}
+\begin{example}\label{first-examples}
+  \begin{enumerate}
+  \item If \(A = a_1+a_2+a_3+\cdots\), then \(p_n[A] =
+    a_1^n+a_2^n+a_3^n+\cdots\).
+  \item In particular, \(p_n[p_m] = (x_1^n)^m+(x_2^n)^m+\cdots =
+    p_{nm} = p_m[p_n]\). Thus, \(p_n[1] = 1\).
+  \end{enumerate}
+\end{example}
+\begin{prop}
+  \cite{macdonald}*{p 135} For \(n \geq 1\), the mapping \(g \mapsto
+  p_n[g]\) is an endomorphism of the ring \(\sym\).
+\end{prop}
+Next, since any \(f \in \sym\) can be written as a (rational) linear
+combination of \(p_\lambda\)'s and each \(p_\lambda\) is a product of
+\(p_n\)'s, we extend the definition of plethysm to say
+\begin{defn}
+  Given a Laurent series \(A\),
+  \begin{enumerate}
+  \item we say \(p_\lambda[A] = p_{\lambda_1}[A] p_{\lambda_2}[A]
+    \cdots p_{\lambda_\ell}[A]\) and 
+  \item\((f+g)[A] = f[A]+g[A]\) for any \(f,g \in \sym\), and
+  \end{enumerate}
+\end{defn}
+Thus, we can compute \(f[A]\) for any symmetric function \(f \in
+\sym\) by writing it as a linear combination of \(p_\lambda\)'s and
+evaluating the plethysm on each term.
+\begin{example}
+  \begin{enumerate}
+  \item Given \(A = 1+t+t^2+t^3+\cdots = \frac{1}{1-t}\), we get
+  \(f[\frac{1}{1-t}] = f(1,t,t^2,t^3,\ldots)\) since \[
+    p_n\left[\frac{1}{1-t}\right] = 1+t^n+t^{2n}+\cdots =
+    p_n(1,t,t^2,\ldots) 
+  \]
+  \item Recall \(p_1(x) = x_1 + x_2 + \cdots\). Then, \(f[p_1+a]\) adds a
+    variable \(a\) to our set of variables. Similarly, \(f[p_1-x_i]\)
+    removes \(x_i\) from the set of variables.
+  \end{enumerate}
+\end{example}
+\begin{prop}
+  Given \(c \in \Q\), we get, by definition, that \(f[cA] = cf[A]\)
+  for all \(f \in \sym\) and Laurent series \(A\). However, given an
+  indeterminate \(t\), we get \(p_n[tA] = t^n p_n[A]\). In other
+  words, plethysm and variable evaluation do \emph{not} commute.
+\end{prop}
+\begin{proof}
+  This follows since plethysm affects indeterminates but not
+  constants. 
+\end{proof}
+\begin{prop}
+  \cite{macdonald}*{p 135} Plethysm is associative. That is, \[
+   (f[g])[h] = f[g[h]]
+  \]
+\end{prop}
+\begin{proof}
+  Because the \(p_n\) generate \(\sym\) over \(\Q\), we need only
+  verify the associativity for \(p_n\)'s, which we already did in
+  \ref{first-examples}. 
+\end{proof}
+\begin{lem}
+  Given Laurent series \(A\) and \(B\), we get \[
+    p_k[A+B] = p_k[A]+p_k[B]
+  \]
+\end{lem}
+\begin{proof}
+  By definition, \(p_k[A+B]\) raises all the indeterminates from \(A\)
+  and \(B\) to the \(k\)th power, which is the same effect as
+  \(p_k[A]\) and \(p_k[B]\).
+\end{proof}
+Now, recall the Cauchy kernel \[
+  \Omega(x,y) = \prod_{i,j} \frac{1}{1-x_i y_j}
+\]
+We seek to generalize this notion as follows. Let us define \[
+  \Omega := \exp\left( \sum_{k=1}^\infty \frac{p_k}{k} \right) 
+\]
+which gives us that
+\begin{prop}
+  \begin{enumerate}
+  \item \[
+  \Omega[x] = \exp\left( \sum_{k=1}^\infty \frac{x^k}{k} \right) =
+  \exp\left( \log(x-1) \right) = \exp\left( \log((1-x)^{-1}) \right) = \frac{1}{1-x}
+\]
+  \item \(\Omega[A+B] = \Omega[A]\Omega[B]\) and \(\Omega[-A] =
+    \frac{1}{\Omega[A]}\) for any Laurent series \(A\) and \(B\)
+  \item \[
+  \Omega[X] = \prod_{i \geq 1} \frac{1}{1-x_i} \text{ and } \Omega[XY]
+  = \Omega(x,y)
+\]
+for formal power series \(X = \sum x_i\) and \(Y = \sum y_j\). 
+  \end{enumerate}
+\end{prop}
+\begin{proof}
+  By definition, \(p_k[x] = x^k\) and so the first part follows. For
+  part (b), using the lemma above, we have \[
+    \exp\left( p_k[A+B] \right) = \exp\left(
+      p_k[A]+p_k[B] \right) = \exp\left(p_k[A]
+    \right)\exp \left(p_k[B] \right) 
+  \]
+  and so \(\Omega[A+B] = \Omega[A]\Omega[B]\). Similarly, \[
+    \exp\left( p_k[-A] \right) = \exp\left( -p_k[A] \right) =
+    \frac{1}{\exp\left( p_k[A] \right)} 
+  \]
+  Finally, part (c) follows from repeated iteration of part (a).
+\end{proof}
+% \begin{lem}
+%   For any dual bases \(\{u_\lambda\}\) and \(\{v_\lambda\}\) under the
+%   Hall inner product \(\langle \cdot,\cdot \rangle\), \[
+%     \langle u[AZ],v \rangle = \langle u,v[AZ] \rangle
+%   \]
+%   for any Laurent series \(A\) and \(Z = z_1+z_2+z_3+\cdots\). 
+% \end{lem}
+% \begin{proof}
+%   A classical fact in algebraic combinatorics is that \(u,v\) are dual
+%   bases with respect to the Hall inner product if and only if \[
+%     \Omega[XY] = \sum_{\lambda} u_\lambda[X] v_\lambda[Y]
+%   \]
+  
+% \end{proof}
+\section{Examples with Schur Functions}
+
+\begin{bibdiv}
+  \begin{biblist}
+    \bib{haiman}{article}{
+      author={Haiman, Mark}
+      title={Combinatorics, Symmetric Functions, and Hilbert Schemes}
+      year={2003}
+      note={\url{https://math.berkeley.edu/~mhaiman/ftp/cdm/cdm.pdf}}
+    }
+    \bib{macdonald}{book}{
+      author={Macdonald, I.G.}
+      title={Symmetric Functions and Hall Polynomials}
+      year={1979}
+      note={2nd Edition, 1995}
+    }
+    \bib{ucd}{misc}{
+      author={Schilling, Anne}
+      title={Plethystic notation}
+      year={2014}
+      note={UCD MAT 280: Macdonald Polynomials and Crystal Bases; \url{https://math.libretexts.org/LibreTexts/University_of_California\%2C_Davis/UCD_MAT_280\%3A_Macdonald_Polynomials_and_Crystal_Bases/Plethystic_notation.}}
+    }
+    \bib{alg-comb}{misc}{
+      author={Seelinger, George H.}
+      title={Algebraic Combinatorics}
+      year={2018}
+      note={[Online] \url{https://ghseeli.github.io/grad-school-writings/class-notes/algebraic-combinatorics.pdf}}
+    }
+  \end{biblist}
+\end{bibdiv}
+
+\end{document}
