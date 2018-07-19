@@ -32,6 +32,7 @@
 \newcommand{\dominates}{\mathrel{\unrhd}}
 \newcommand{\strictlydominates}{\mathrel{\rhd}}
 \newcommand{\diag}{\operatorname{diag}}
+\newcommand{\SSYT}{\operatorname{SSYT}}
 
 \title[Plethystic Substitution]{Plethystic Substitution}
 \author{George H. Seelinger}
@@ -171,7 +172,79 @@ for formal power series \(X = \sum x_i\) and \(Y = \sum y_j\).
 %   \]
   
 % \end{proof}
-%\section{Examples with Schur Functions}
+\section{Examples with Schur Functions}
+Some examples
+\begin{prop}
+  \cite{stanley}*{Cor 7.21.3} We have \[
+    s_\lambda\left[\frac{1}{1-t}\right] =
+    s_\lambda(1,t,t^2,t^3,\ldots) = \frac{t^{n(\lambda)}}{\prod_{x \in
+      \lambda} (1-t^{h(x)})}
+\]
+for \(h(x)\) the hook-length of cell \(x \in \lambda\) and
+\(n(\lambda) = \sum_i (i-1)\lambda_i\).
+\end{prop}
+\begin{proof}
+  As discussed above, \(f\left[ \frac{1}{1-t} \right] =
+  f(1,t,t^2,t^3,\ldots)\) for any symmetric function \(f\). Now, 
+  we observe that \[
+    s_\lambda(1,t,t^2,t^3, \ldots, t^{n-1}) =
+    \frac{t^{n(\lambda)+n(n-1)(n-2)/6 }\prod_{i <
+          j}(1-t^{\lambda_i-\lambda_j-i+j})}{t^{n(n-1)(n-2)/6}\prod_{i<j}(1-t^{-i+j})}
+    \]
+    However, one can show using the combinatorics of tableaux (see
+    \cite{manivel}*{Exercise 1.4.9} and proof of \cite{manivel}*{Proposition 1.4.10}) that \[
+      \prod_{x \in \lambda}(1-t^{h(x)})
+      \prod_{i<j}(1-t^{\lambda_i-\lambda_j-i+j}) = \prod_{i=1}^n \prod_{k=1}^{\lambda_i+n-i}(1-t^k)
+    \]
+    and so, pluggin this in, we get \[
+      s_\lambda(1,t,t^2,\ldots,t^{n-1}) =  t^{n(\lambda)}
+      \frac{\prod_{i=1}^n \prod_{k=1}^{\lambda_i+n-i}(1-t^k)}{\prod_{x
+        \in \lambda} (1-t^{h(x)}) \prod_{i=1}^n
+      \prod_{k=1}^{n-i}(1-t^k) } = t^{n(\lambda)} \frac{\prod_{i=1}^n
+      \prod_{k=n-i+1}^{\lambda_i+n-i}(1-t^k)}{\prod_{x \in \lambda}(1-t^{h(x)})}
+  \]
+  However, since \(\lambda_i = 0\) for \(i > \ell(\lambda)\), we can
+  remove one dependence on \(n\) to get: \[
+      s_\lambda(1,t,t^2,\ldots,t^{n-1}) = t^{n(\lambda)} \frac{\prod_{i=1}^\ell
+      \prod_{k=n-i+1}^{\lambda_i+n-i}(1-t^k)}{\prod_{x \in \lambda}(1-t^{h(x)})}
+  \]
+  At this point, \cite{stanley} claims that \(\lim_{n \to \infty}
+  (1-t^{n}) = 1\), so we are done. \todo{Of course, I do not
+    understand why this should be ture; certainly, it would not work
+    for my calculus students.} % Perhaps since we are using an
+                               % expansion where t < 1 anyways, this
+                               % follows. 
+\end{proof}
+\begin{prop}
+  Let \(\lambda\) be a partition. Then, \[
+    s_\lambda[X+a] = \sum_k a^k \sum_{\lambda = \nu+\text{horizontal }k\text{-strip}} s_\nu(x)
+  \]
+  for \(X = x_1+x_2+x_3+\cdots\).
+\end{prop}
+\begin{proof}
+  Using Littlewood's combinatorial description of Schur functions, we
+  get \[
+    s_\lambda(x_1,\ldots,x_n) = \sum_{T \in \SSYT(\lambda)}
+    x^{\wt(\T)}
+  \]
+  However, since semistandard tableaux must have strictly increasing
+  columns, all the boxes labelled \(n\) must form a (possibly empty)
+  horizontal strip. Thus, if we break up the sum based on how many
+  boxes labelled \(n\) there are, we get
+  \begin{align*}
+    s_\lambda(x_1, \ldots, x_n)
+    & = \sum_{k \geq 0} x_n^k \sum_{\lambda
+      = \nu + \text{ horizontal }k\text{-strip}} \sum_{\T \in
+      \SSYT(\nu)} x^{\wt(\T)} \\
+    & \text{where } \SSYT(\nu) \text{ are labelled with letters
+                                } \{1,\ldots,n-1\}. 
+ \\
+    & = \sum_{k \geq 0} x_n^k \sum_{\lambda
+      = \nu + \text{ horizontal }k\text{-strip}} s_\nu(x_1,\ldots,x_{n-1})
+  \end{align*}
+  Thus, we see how to write a Schur function in terms of Schur
+  functions with one fewer variable.
+\end{proof}
 %\section{Representation Theoretic Interpretation}
 \begin{bibdiv}
   \begin{biblist}
@@ -198,6 +271,11 @@ for formal power series \(X = \sum x_i\) and \(Y = \sum y_j\).
       title={Algebraic Combinatorics}
       year={2018}
       note={[Online] \url{https://ghseeli.github.io/grad-school-writings/class-notes/algebraic-combinatorics.pdf}}
+    }
+    \bib{stanley}{book}{
+      author={Stanley, R.P.}
+      title={Endumerative Combinatorics, Vol 2}
+      year={1999}
     }
   \end{biblist}
 \end{bibdiv}
