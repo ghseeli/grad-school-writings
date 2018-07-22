@@ -699,10 +699,28 @@ We may then we have
   The \de{Jing operators} \(S^k(t)\) are defined by \[
     S^k(t)f(x) := f[p_1+(k-1)t^{-1}] \Omega(tx)
   \]
-  where \(S^k_n(t)f(x)\) is the coefficient of \(t^n\) in \(S^k(t)f(x)\).
+  where \(S^k_n(t)f(x)\) is the coefficient of \(t^n\) in
+  \(S^k(t)f(x)\).
 \end{defn}
+Of course, when \(k=0\), we recover the Bernstein operators. However,
+their general action on Schur functions is slightly more
+complicated. Namely, we have
+\begin{lem}
+  \cite{haiman}*{Lem 3.4.6} If \(n \geq \mu_1\) and \(\lambda
+  \dominates \mu\), then \[ 
+    S^k_n s_\lambda \in \Z[t]\{s_\gamma \st \gamma \dominates (m,\mu)\}
+  \]
+  Furthermore, \(s_{(m,\mu)}\) occurs with coefficient \(1\) in
+  \(S^k_n s_\mu\).
+\end{lem}
 \begin{bibdiv}
   \begin{biblist}
+    \bib{haiman}{article}{
+      author={Haiman, Mark}
+      title={Combinatorics, Symmetric Functions, and Hilbert Schemes}
+      year={2003}
+      note={\url{https://math.berkeley.edu/~mhaiman/ftp/cdm/cdm.pdf}}
+    }
     \bib{macdonald}{book}{
       author={Macdonald, I.G.}
       title={Symmetric Functions and Hall Polynomials}
