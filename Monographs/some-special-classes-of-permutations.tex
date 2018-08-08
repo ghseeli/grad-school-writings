@@ -1,0 +1,320 @@
+\documentclass[11pt,leqno,oneside]{amsart}
+\usepackage[alphabetic,abbrev]{amsrefs} % use AMS ref scheme
+\usepackage{../ReAdTeX/readtex-core}
+\usepackage{../ReAdTeX/readtex-abstract-algebra}
+\usepackage{./monographs}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{todonotes}
+\usepackage{ytableau}
+\usepackage{xcolor}
+\usepackage{mathtools}
+\usepackage{pgf}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric}
+\usepackage{tikz-cd}
+\usepackage{graphicx}
+\numberwithin{thm}{section}
+
+\newcommand{\T}{\mathsf{T}} % use for tableaux
+\renewcommand{\S}{\mathsf{S}}
+\newcommand{\TP}{\mathsf{P}}
+\newcommand{\TQ}{\mathsf{Q}}
+\newcommand{\inv}{\operatorname{inv}}
+\newcommand{\charge}{\operatorname{charge}}
+\newcommand{\cocharge}{\operatorname{cocharge}}
+\newcommand{\des}{\operatorname{des}}
+\newcommand{\row}{\operatorname{row}}
+\newcommand{\col}{\operatorname{col}}
+
+\newcommand{\Vdet}{\Delta}
+\newcommand{\rowshift}{\rho}
+\newcommand{\SSYT}{\operatorname{SSYT}} % Semistandard Young Tableaux
+\newcommand{\defeq}{\coloneqq}
+\newcommand{\partitionof}{\vdash}
+\newcommand{\dominates}{\mathrel{\unrhd}}
+\newcommand{\strictlydominates}{\mathrel{\rhd}}
+\newcommand{\dominatedby}{\mathrel{\unlhd}}
+\newcommand{\strictlydominatedby}{\mathrel{\lhd}}
+\newcommand{\covers}{\mathrel{\gtrdot}}
+\newcommand{\coveredby}{\mathrel{\lessdot}}
+
+\newcommand{\sym}{\Lambda}
+\renewcommand{\k}{\Bbbk}
+
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+   \node[shape=circle,draw,inner sep=1pt] (char) {#1};}}
+\newcommand{\mymk}[1]{\tikz \node[draw,circle, inner sep=0pt, minimum size=7mm]{#1};}
+
+\makeatletter
+\newcommand\mathcircled[1]{%
+  \mathpalette\@mathcircled{#1}%
+}
+\newcommand\@mathcircled[2]{%
+  \tikz[baseline=(math.base)] \node[draw,circle,inner sep=1pt] (math) {$\m@th#1#2$};%
+}
+\makeatother
+
+\newcommand{\quantumBinom}[3][q]{\left[ \begin{array}{c} #2 \\
+                                          #3 \end{array} \right]_#1}
+\newcommand{\qbinom}{\quantumBinom}
+\newcommand{\stat}{\operatorname{stat}}
+\newcommand{\Des}{\operatorname{Des}}
+\newcommand{\maj}{\operatorname{maj}}
+\newcommand{\comaj}{\operatorname{comaj}}
+\newcommand{\height}{\operatorname{ht}}
+\newcommand{\size}{\operatorname{size}}
+\newcommand{\sh}{\operatorname{sh}}
+\newcommand{\spin}{\operatorname{spin}}
+\newcommand{\cospin}{\operatorname{cospin}}
+\newcommand{\wt}{\operatorname{wt}}
+\newcommand{\length}{\operatorname{len}}
+\newcommand{\LLT}{\operatorname{LLT}}
+
+\title[Special Classes of Permutations]{Some Special Classes of Permutations}
+\author{George H. Seelinger}
+\date{August 2018}
+\begin{document}
+\maketitle
+\section{Introduction}
+Permutations are a fundamental object of study in combinatorics and
+are also studied in abstract algebra to define concrete examples of
+groups. In this monograph, we seek to explore some special classes of
+permutations that are interesting to combinatorialists. In particular,
+we will discuss
+\begin{enumerate}
+\item \(132\)-avoiding permutations,
+\item dominant partitions,
+\item Grassmannian partitions,
+\item and vexillary permutations.
+\end{enumerate}
+\todo{Introduce some basic concepts like the Rothe diagram.}
+This monograph is currently very incomplete and simply a rough outline
+of details I would like to fully flush out at a later time. Currently,
+almost all results are stated as in \cite{manivel}.
+\section{\(132\)-avoiding permutations}
+We first start with the general definition that
+\begin{defn}
+  \(\sigma \in \Sym_n\) avoids pattern \(\tau \in \Sym_r\) (for \(r
+  \leq n\)) if there is no subword \(\sigma_{i_1}, \sigma_{i_2},
+  \ldots, \sigma_{i_r}\) which ``reduces'' to \(\tau\).
+\end{defn}
+\begin{example}
+  The permutation \(\sigma = 24513\) (in one line notation) does
+  not avoid \(231\) since \(251 \mapsto 231\).
+\end{example}
+Thus, we immediately get the definition of a \(132\)-avoiding
+permutation.
+\begin{example}
+  In \(\Sym_3\), every permutation except \(132\) is
+  \(132\)-avoiding. In \(\Sym_4\), \(1234\) and \(4123\) are
+  \(132\)-avoiding. 
+\end{example}
+Now, if we recall that the Catalan numbers \(C_n\) are given by
+either \[
+  C_n = \frac{1}{n+1} \binom{2n}{n} \text{ or }
+  \begin{cases}
+    C_0 = 1 \\
+    C_{n+1} = \sum_{i=0}^n C_i C_{n-i}
+  \end{cases}
+\]
+then we have
+\begin{thm}
+  The number of \(132\)-avoiding permutations in \(\Sym_n\) is given
+  by \(C_{n-1}\).
+\end{thm}
+\begin{proof}
+  This is a classic combinatorics homework exercise and so will be
+  left to the reader. Perhaps some hints will be given by the
+  propositions that follow.
+\end{proof}
+\begin{lem}
+  For  a \(132\)-avoiding
+  permutation \(\sigma\), there is no triple of integers \(i < j < k\)
+  such that \(\sigma_i < \sigma_k < \sigma_j\).
+\end{lem}
+\begin{prop}
+  There is a bijection mapping \(132\)-avoiding permutations in
+  \(\Sym_n\) to Dyck paths of length \(2n\).
+\end{prop}
+\begin{proof}
+  Given a Dyck path \(\pi\) with \((1,1)\) the top left square,
+  we will construct a Rothe diagram for \(\sigma\) which is
+  \(132\)-avoiding.
+  \begin{enumerate}
+  \item Place an \(X\) in each ``removable corner'' below the path
+    \(\pi\) and put in the appropriate \(\cdot\)'s.
+  \item Moving top to bottom, place \(X\) in westernmost empty
+    sequence below \(\pi\) (and fill as appropriate). Note that since
+    \(\pi\) never falls below the diagonal, there will be \(n\) rows
+    and columns below \(\pi\).
+  \end{enumerate}
+  Note first that
+  \[
+    \pi = UUUU \cdots UR \cdots RRRR \mapsto \begin{array}{|c|c|c|c|} \hline
+                             \times&\cdot&\cdot&\cdot\\ 
+            \hline \cdot&\times&\cdot&\cdot\\ \hline
+            \cdot&\cdot&\times&\cdot\\ \hline
+            \cdot&\cdot&\cdot&\times\\ \hline \end{array} \mapsto
+          \sigma = id
+   \]
+   which is \(132\)-avoiding. Otherwise, if \(\pi\) is not of this
+   form, then the cell \((1,1)\) is above \(\pi\). Next, if \(i < j <
+   k\) and \(\sigma_i < \sigma_j < \sigma_k\), we have a configuration
+   with disconnected cells, which cannot be a Dyck path since no pair
+   of cells can be disconnected. \[
+     \begin{array}{|c|c|c|c|c|c|} \hline &&&&\times&\cdot\\ \hline &&&&\cdot&\times\\ \hline \times&\cdot&\cdot&\cdot&\cdot&\cdot\\ \hline \cdot&&\times&\cdot&\cdot&\cdot\\ \hline \cdot&\times&\cdot&\cdot&\cdot&\cdot\\ \hline \cdot&\cdot&\cdot&\times&\cdot&\cdot\\ \hline \end{array}
+   \]
+ \end{proof}
+ \begin{prop}
+   There is a bijection between \(132\)-avoiding permutations and
+   \(321\)-avoiding permutations.
+ \end{prop}
+ \section{Dominant Permutations}
+ \begin{defn}
+   A permutations \(\sigma \in \Sym_n\) is a \de{dominant permutation}
+   if it has partition Lehmer code, that is \[
+     c(\sigma) = (\ell_1, \ell_2, \ldots, \ell_{n-1}) \text{ with }
+     \ell_1 \geq \ell_2 \geq \cdots \geq \ell_{n-1}
+   \]
+ \end{defn}
+ \begin{example}
+   An example of a dominant permutation is \(\sigma = 6324571 \in \Sym_7\)
+   since \[
+     c(\sigma) = (5,2,1,1,1,1)
+   \]
+   Interestingly, the Rothe diagram of \(\sigma\) given below exhibits
+   the Ferrers diagram of the partition \(5,2,1,1,1,1\). \[
+     \begin{array}{|c|c|c|c|c|c|c|} \hline &&&&&\times&\cdot\\ \hline &&\times&\cdot&\cdot&\cdot&\cdot\\ \hline &\times&\cdot&\cdot&\cdot&\cdot&\cdot\\ \hline &\cdot&\cdot&\times&\cdot&\cdot&\cdot\\ \hline &\cdot&\cdot&\cdot&\times&\cdot&\cdot\\ \hline &\cdot&\cdot&\cdot&\cdot&\cdot&\times\\ \hline \times&\cdot&\cdot&\cdot&\cdot&\cdot&\cdot\\ \hline \end{array}
+   \]
+ \end{example}
+ \begin{prop}
+   A permutation is dominant if and only if the cells above its Rothe
+   diagram are the Ferrers diagram of a partition (in English
+   convention). 
+ \end{prop}
+\begin{proof}
+  A common fact about Rothe diagrams is that the number of empty boxes
+  in column \(i\) is the \(i\)th entry of the Lehmer code. Thus, since
+  the transpose of the Rothe diagram is the Rothe diagram of
+  \(\sigma^{-1}\) and such a transposition conjugates the embedded Ferrers
+  diagram, we get that such a Rothe diagram gives a dominant
+  permutation.
+
+  \todo{Prove the converse.}
+\end{proof}
+\section{Grassmannian Permutations}
+\begin{defn}
+  A permutation \(\sigma \in \Sym_n\) is called \de{Grassmannian} if
+  \(\sigma\) has at most one descent. In other words, there is at most
+  one integer \(r\) such that \[
+    \sigma_1 < \sigma_2 < \cdots < \sigma_r \text{ and } \sigma_{r+1}
+    < \sigma_{r+2} < \cdots < \sigma_n
+  \]
+\end{defn}
+\begin{example}
+  The permutation \(\sigma = 245813679\) (in one line notation) has a
+  descent at \(8\). Furthermore, it has code \[
+    c(\sigma) = (1,2,2,5,0,0,0,0)
+  \]
+\end{example}
+\begin{lem}
+  A Grassmannian permutation \(\sigma\) with Lehmer code \(c(\sigma) =
+  (\ell_1, \ldots, \ell_{n-1})\) has \[
+    \ell_1 \leq \ell_2 \leq \cdots \leq \ell_r \leq n-r \text { and }
+    \ell_{r+1} = \cdots = \ell_{n-1} = 0
+  \]
+\end{lem}
+\begin{proof}
+  If either of these conditions fails, there must be more than one
+  descent since a Grassmannian permutation must have entries (in one
+  line notation) increasing up to \(\sigma_r\) and then increasing
+  again from \(\sigma_{r+1}\) to \(\sigma_n\).
+\end{proof}
+\begin{prop}
+  Grassmannian permutations are in bijection with partitions inside
+  an \(r \times n-r\) rectangle.
+\end{prop}
+\begin{defn}
+  A permutation is called \de{bigrassmannian} if it is Grassmannian
+  and its inverse is Grassmannian.
+\end{defn}
+\section{Vexillary Permutations}
+\begin{defn}
+  A permutations \(\sigma \in \Sym_n\) is called \de{vexillary} if it
+  is \(2143\)-avoiding. In other words, \(\sigma\) is vexillary if and
+  only if there does not exist a sequence \(i < j < k < l\) such that
+  \(\sigma_j < \sigma_i < \sigma_l < \sigma_k\).
+\end{defn}
+\begin{lem}
+  A permutation \(\sigma\) is vexillary if and only if, up to a
+  permutation of its rows and columns, its Rothe diagram has a diagram
+  of a partition above it.
+\end{lem}
+\todo{Prove this}
+% \begin{proof}
+%   The Rothe diagram of a permutation can be transformed so that a 
+%   partition diagram lies above it if and only if the empty boxes in
+%   the rows (or columns) can be ordered by inclusion. Such an ordering
+%   is not possible if and only if there are points \((i,\sigma_j)\) and
+%   \((k,\sigma_l)\) of the diagram with any of 
+%   \begin{enumerate}
+%   \item \(i < k\) such that \((i,\sigma_l)\) and \((k,\sigma_j)\) are
+%     not in the same connected component.
+%   \item \(\sigma_j < \sigma_l\) such that \((k,\sigma_j)\) and
+%     \((i,\sigma_l)\) are not in the same connected component.
+%   \end{enumerate}
+% \end{proof}
+\begin{cor}
+  Dominant permutations and bigrassmannian permutations are vexillary.
+\end{cor}
+\begin{prop}
+  A permutation is vexillary if and only if \(\lambda(\sigma) =
+  \lambda(\sigma^{-1})'\), that is, the shape of \(\sigma\) is equal
+  to the conjugate of the shape of \(\sigma^{-1}\).
+\end{prop}
+\begin{defn}
+  The \de{flag} of a vexillary permutation \(\sigma\) is defined as
+  follows.
+  \begin{enumerate}
+  \item If \(c(\sigma)_i \neq 0\), let \(e_i\) be the greatest integer
+    \(j \geq i\) such that \(c(\sigma)_j \geq c(\sigma)_i\).
+  \item The flag \(\phi(\sigma)\) is the sequence of integers \(e_i\)
+    ordered to be increasing. 
+  \end{enumerate}
+\end{defn}
+\begin{example}
+  Let \(\sigma = 126354\). Then, we have Rothe diagram \[
+\begin{array}{|c|c|c|c|c|c|} \hline \times&\cdot&\cdot&\cdot&\cdot&\cdot\\ \hline \cdot&\times&\cdot&\cdot&\cdot&\cdot\\ \hline \cdot&\cdot&&&&\times\\ \hline \cdot&\cdot&\times&\cdot&\cdot&\cdot\\ \hline \cdot&\cdot&\cdot&&\times&\cdot\\ \hline \cdot&\cdot&\cdot&\times&\cdot&\cdot\\ \hline \end{array}
+\]
+We have \(c(\sigma) = (0,0,3,0,1)\). Thus, \(e_3 = 3\) and \(e_5 = 5\)
+and so \(\phi(\sigma) = (3,5)\).
+\end{example}
+\begin{prop}
+  A vexillary permutation is completely determined by its shape and
+  its flag.
+\end{prop}
+\begin{bibdiv}
+  \begin{biblist}
+    \bib{fulton}{book}{
+      author={Fulton, William}
+      title={Young Tableaux}
+      year={1997}
+    }
+    \bib{macdonald}{book}{
+      author={Macdonald, I.G.}
+      title={Symmetric Functions and Hall Polynomials}
+      year={1979}
+      note={2nd Edition, 1995}
+    }
+    \bib{manivel}{book}{
+      author={Manivel, Laurent}
+      title={Symmetric Functions, Schubert Polynomials, and Degeneracy
+        Loci}
+      year={1998}
+      note={Translated by John R. Swallow; 2001}
+    }
+  \end{biblist}
+\end{bibdiv}
+
+\end{document}
