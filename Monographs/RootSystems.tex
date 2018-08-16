@@ -319,7 +319,7 @@ explicit manner.
   side of a hyperplane in Euclidean space and forming pairwise obstuse
   angles must be linearly independent.
 \end{rmk}
-\section{Standard Examples}
+\section{Standard Examples}\label{standard-examples}
 Above, we saw the root system \(A_2\). Classically, some standard
  root systems are of types \(A_n, B_n, C_n\), and
 \(D_n\), all of rank \(n\). Whe \(n=2\), each of these has simple system \(\simpleroots =
@@ -1689,7 +1689,7 @@ consists of all dominant weights lower than or equal to highest weight
 \end{proof}
 \section{Appendix: Summary Information}
 Throughout, we denote \(\epsilon_i\) for the \(i\)th standard basis
-vector of \(\R^n\).
+vector of \(\R^n\). Refer to Section \ref{standard-examples} for definitions of these root systems.
 \subsection{Type \(A_n\)}
 \begin{prop}
 The root system \(A_n \subset \R^{n+1}\) has
@@ -1713,14 +1713,16 @@ The root system \(A_n \subset \R^{n+1}\) has
 \begin{prop}
   The root system \(B_n \subset \R^n\) has
   \begin{enumerate}
-  \item \(\roots = \{\epsilon_i \pm \epsilon_j \st 1 \leq i \neq j
+  \item \(\roots = \{\pm(\epsilon_i + \epsilon_j) \st 1 \leq i < j
+    \leq n\} \union \{\pm (\epsilon_i - \epsilon_j) \st 1 \leq i < j
     \leq n\} \union \{\pm \epsilon_i \st 1 \leq i \leq n\}\) and so
     \(|\roots| = 2n(n-1)+2n = 2n^2\).
   \item The canonical choice of simple roots is \[
       \simpleroots = \{\epsilon_i - \epsilon_{i+1} \st 1 \leq  i < n\}
       \union \{\epsilon_n\}
     \]
-    and thus \(\roots^+ = \{\epsilon_i-\epsilon_j \st 1 \leq i < j
+    and thus \(\roots^+ = \{\epsilon_i+\epsilon_j \st 1 \leq i < j
+    \leq n\} \union \{\epsilon_i-\epsilon_j \st 1 \leq i < j
     \leq n\} \union \{\epsilon_i \st 1 \leq i \leq n\}\).
   \item Since the Dynkin diagram has no graph automorphisms, it must
     be that \(\W = \Aut \roots\). Furthermore, automorphisms can
@@ -1740,15 +1742,17 @@ The root system \(A_n \subset \R^{n+1}\) has
 \begin{prop}
   The root system \(C_n \subset \R^n\) has
   \begin{enumerate}
-  \item \(\roots = \{\epsilon_i \pm \epsilon_j \st 1 \leq i \neq j
+  \item \(\roots = \{\pm(\epsilon_i+\epsilon_j) \st 1 \leq i < j \leq
+    n\} \union \{\pm(\epsilon_i - \epsilon_j) \st 1 \leq i < j
     \leq n\} \union \{\pm 2 \epsilon_i\}\) and so \(|\roots| =
-    2n(n-1)\).
+    2n(n-1)\) just as in \(B_n\).
   \item The canonical choice of simple roots is \[
-      \simpleroots = \{\epsilon_i - \epsilon_{i+1} \st 1 \leq  i < n\}
+      \simpleroots = \{\epsilon_i - \epsilon_{i+1} \st 1 \leq i < n\}
       \union \{2 \epsilon_n\}
     \]
-    and thus \(\roots^+ = \{\epsilon_i-\epsilon_j \st 1 \leq i < j
-    \leq n\} \union \{\epsilon_i \st 1 \leq i \leq n\}\).
+    and thus \(\roots^+ = \{\epsilon_i+\epsilon_j \st 1 \leq i < j
+    \leq n\} \union \{\epsilon_i-\epsilon_j \st 1 \leq i < j
+    \leq n\} \union \{2 \epsilon_i \st 1 \leq i \leq n\}\).
   \item \(C_n\) presents a somewhat dual situation to \(B_n\) and thus
     also has Weyl group \(\W = (\Z/2)^n \rtimes \Sym_n\).
   \item The fundamental weights are given by \[
