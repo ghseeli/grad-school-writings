@@ -1,0 +1,278 @@
+\documentclass[11pt,leqno,oneside]{amsbook}
+\usepackage{tikz}
+\usetikzlibrary{cd}
+\usepackage{bbm}
+\usepackage{ytableau}
+\usepackage{todonotes}
+
+\usepackage{./notes}
+\usepackage{../ReAdTeX/readtex-core}
+\usepackage{../ReAdTeX/readtex-abstract-algebra}
+
+\newcommand{\bbk}{\mathbbm{k}}
+\newcommand{\Class}{\operatorname{Class}}
+\newcommand{\Res}{\operatorname{Res}}
+\newcommand{\Ind}{\operatorname{Ind}}
+\newcommand{\bs}{\textbackslash}
+\newcommand{\partitionof}{\vdash}
+\newcommand{\T}{\mathsf{T}} % Tableau
+\renewcommand{\S}{\mathsf{S}}
+\renewcommand{\F}{F}
+\newcommand{\cF}{\mathcal{F}}
+\newcommand{\m}{\mathfrak{m}}
+\newcommand{\Dom}{\operatorname{Dom}}
+
+\numberwithin{thm}{section}
+
+\title[Theory of Sheaves]{Theory of Sheaves \\ Notes
+  inspired by a class taught by Andrei Rapinchuk in Fall 2018}
+\author{George H. Seelinger}
+\date{Fall 2018}
+\begin{document}
+\maketitle
+\section{Presheaves and Sheaves}
+\begin{defn}
+  Let \(X\) be topological space. A \de{presheaf of sets} \(\F\) on
+  \(X\) is given by the following data.
+  \begin{enumerate}
+  \item For each open set \(U \subset X\), \(\F(U)\) is a set.
+  \item If \(V \subset U\), there exists a map \(\rho^U_V \from \F(U)
+    \to \F(V)\) such that
+    \begin{enumerate}
+    \item \(\rho_U^U = id_{\F(U)}\)
+    \item If \(W \subset V \subset U\), then \(\rho_W^U = \rho_W^V
+      \circ \rho_V^U\). In other words, \[
+        \begin{tikzcd}
+          \F(U) \ar[rd, "\rho_V^U"] \ar[rr, "\rho_W^U"] & & \F(W)\\
+          & \F(V) \ar[ur, "\rho_W^V"]&
+        \end{tikzcd}
+      \]
+    \end{enumerate}
+  \end{enumerate}
+\end{defn}
+\begin{rmk}
+  \begin{enumerate}
+  \item Sometimes \(\F(\emptyset) = \{e\}\), the singleton set, is
+    included in the 
+    definition, but it is also a formal consequence of the above
+    statements.
+  \item A presheaf of sets can also be defined as a contravariant
+    functor from \(\catname{Top}(X) \to \catname{Set}\) where
+    \(\catname{Top}(X)\) is the category with objects being the open
+    sets of \(X\) and the morphisms being \[
+      \Hom(V,U) =
+      \begin{cases}
+        \{\iota \from V \into U\} & V \subset U\\
+        \emptyset & V \not\subset U
+      \end{cases}
+    \]
+  \end{enumerate}
+\end{rmk}
+Informally, we can think of presheaves as a collection of
+functions. Historically, sheaves were thought in the context of some
+``\'{e}tale space'', \(\cF\), mapping to \(X\) and then considering
+the set of sections over \(U \subset X\). \[ 
+  \begin{tikzcd}
+    \cF \ar[r] & X\\
+    & \ar[ul, "\sigma \in \F(U)"] U
+  \end{tikzcd}
+\]
+This leads to the terminology of a ``sheaf of sections.'' Thus, we
+often call elements of \(\F(u)\) ``sections of \(\F\) over \(U \subset
+X\).'' Similarly, one can think of \(\rho_V^U\) as a restriction map.
+\begin{example}
+  Throughout, let \(X\) be a topological space.
+  \begin{enumerate}
+  \item Fix another topological space \(Y\). Then, for \(U \subset
+    X\), let \[
+      F(U) = \{\phi \from U \to Y \st \phi \text{ is continuous} \}
+      \text{ and } F(\emptyset) = \{e\} 
+    \]
+    Then, for \(V \subset U\), we define \(\rho_V^U \from F(U) \to
+    F(V)\) via \[
+      (\phi \from U \to Y) \mapsto (\phi |_V \from V \to Y)
+    \]
+    In fact, if we take \(Y=\R\) or \(\C\), then we would get a
+    presheaf of groups or even rings.
+  \item If we take a set \(S\) and set \[
+      F(U) = \{\text{Constant functions }\phi \from U \to S\}
+    \]
+    we get the \de{constant presheaf}. We can modify this slightly by
+    instead letting \(F(U)\) be all locally constant functions from
+    \(U\).
+  \item Given \(Y\) as another topological space, recall that, given a
+    map \(\pi \from Y \to X\), a section \(\sigma \from X \to Y\) is a
+    continuous map such that \(\sigma \circ \pi = id_X\). Then, we can
+    define the \de{presheaf of sections} by defining, for
+    \(U \subset X\), \[
+      F(U) = \{\phi \from U \to Y \text{ continuous} \st \pi \circ
+      \phi = id_U\}
+    \]
+  \item Given any presheaf \(F\) on \(X\), we can restrict it to an
+    open subset \(W \subset X\) by taking only the \(F(U)\) where \(U
+    \subset W\).
+  \item Fix a point \(p \in X\) and a set \(S\). Then, we can define
+    the \de{skyscraper presheaf} by saying, for open \(U \subset
+    X\), \[
+      F(U) =
+      \begin{cases}
+        S & \text{if }p \in U\\
+        \{e\} & \text{if }p \not\in U
+      \end{cases}
+    \]
+    Then, if \(p \in V \subset U\), \(\rho^U_V = id_S\) and if \(p
+    \not \in V\), then there is a unique map \(\rho^U_V \from F(U) \to
+    \{e\}\).
+  \end{enumerate}
+\end{example}
+Let \(K\) be an algebriacally closed field (eg \(K=\C\)).
+\begin{defn}
+  Given an ideal \(I \ideal K[x_1, \ldots, x_n]\), define the
+  \de{vanishing set} \[
+    V(I) := \{(a_1, \ldots, a_n) \in K^n \st f(a_1, \ldots, a_n) = 0
+    \forall f \in I\}
+  \]
+  We call a set \(S \subset K^n\) for which there exists an ideal \(I
+  \ideal K[x_1, \ldots, x_n]\) such that \(S = V(I)\) an \de{algebraic
+  set}.
+\end{defn}
+Then, there is a topology called the \de{Zariski topology} on \(K^n\)
+for which sets of the form 
+\(V(I)\) form the family of all closed sets.
+\begin{defn}
+  If \(X = V(I)\) is an algebraic set, a function \(f \from X \to K\)
+  is \de{regular} if there exists a polynomial \(p(x_1, \ldots, x_n)
+  \in K[x_1, \ldots, x_n]\) such that \(f(x) = p(x)\) for all \(x \in
+  X\). (In other words, there is a polynomial \(p\) such that \(p|_X =
+  f\).)
+\end{defn}
+All such functions form a ring, called the \de{coordinate ring},
+denoted \(K[X]\). There is a natural map
+\begin{align*}
+  K[x_1, \ldots, x_n] & \onto K[X] \\
+  p & \mapsto p|_X
+\end{align*}
+which gives us
+\begin{prop}
+  The coordinate ring \(K[X] \isom K[x_1, \ldots, x_n]/I(X)\) where
+  \(I(X) = \{p \st p|_X = 0\}\).
+\end{prop}
+Recall, however, that \(X = V(I)\) for some \(I \ideal K[x_1, \ldots,
+x_n]\). One can check that \(I \subset I(X) = I(V(I))\), but this
+containement is not necessarily an equality due to the following example.
+\begin{example}
+  Let \(I = (x_1^2)\). Then, \(X = V(I) = \{(a_1, \ldots, a_n) \in K^n \st
+  a_1 = 0\}\). From this, we see that any \(p \in x_1 K[x_1, \ldots,
+  x_n]\) has the property that \(p|_X = 0\). Thus, \(I(X) = (x_1)\).
+\end{example}
+One may then ask how \(I(X)\) is related to \(X\). The answer is given
+by the following famous theorem.
+\begin{thm}[Hilbert's Nullstellensatz]
+  Let \(K\) be an algebraically closed field. Then, for \(J \ideal
+  K[x_1, \ldots, x_n]\), we have that \[
+    I(V(J)) = r(J)
+  \]
+  where \(r(J) = \{s \in K[x_1, \ldots, x_n] \st s^m
+  \in J \text{ for some }m \in \N\}\) is the ``radical'' of \(J\).
+\end{thm}
+There are other equivalent formulations of Hilbert's Nullstellensatz,
+such as \todo{Check that this is actually equivalent.}
+\begin{prop}
+ Given proper ideal \(I \propsubset K[x_1, \ldots, x_n]\), we have
+ that \(V(I) \neq 
+ \emptyset\). 
+\end{prop}
+Furthermore, \(K[X]\) allows us to recover \(X\) in a functorial way,
+since we have
+\begin{cor}
+  For \(K\) an algebraically closed field, we have that
+  \begin{enumerate}
+  \item all maximal ideals \(\m \ideal K[x_1, \ldots, x_n]\) are of
+    the form \(\m = (x_1-a_1, \ldots, x_n - a_n)\) and
+  \item \(V(\m) = \{(a_1, \ldots, a_n)\}\).
+  \end{enumerate}
+\end{cor}
+Thus, we can recover all the points of \(X\) by applying \(V(\cdot)\)
+to the maximal ideals of \(X\).
+\begin{defn}
+  A topological space \(X\) is called \de{irreducible} if \(X \neq X_1
+  \union X_2\) for \(X_1,X_2\) proper closed sets of \(X\).
+\end{defn}
+\begin{rmk}
+  Note that this notion is relatively uninteresting for \(T_2\)
+  topological spaces since any non-trivial \(T_2\) space is
+  reducible. As such, this notion is rarely used outside algebraic
+  geometry. 
+\end{rmk}
+\begin{prop}
+  A space \(X \subset K^n\) is irreducible if and only if \(I(X)\) is
+  a prime 
+  ideal if and only if \(K[X]\) is an integral domain.
+\end{prop}
+Using Hilbert's Basis Theorem, we also get 
+\begin{prop}
+  Every algebraic set is a finite union of irreducible algebraic sets.
+\end{prop}
+\begin{prop}
+  If \(f \in K[x_1, \ldots, x_n]\) is irreducible, then \(X = V((f))\)
+  is irreducible.
+\end{prop}
+\begin{proof}
+  By Hilbert's Nullstellensatz, we have that \[
+    I(V((f))) = r((f))
+  \]
+  and so, \(g \in r((f)) \implies f \divides g^m\) and because \(f\)
+  is irreducible, this gives that \(f \divides g \implies g \in
+  (f)\). Thus, it must be that \((f)\) is a prime ideal and so
+  \(V((f))\) is irreducible.
+\end{proof}
+\begin{defn}
+  If \(X \subset K^n\) is irreducible, then \(K[X]\) is an integral
+  domains and so we define \(K(X)\) to be the fraction field of
+  \(K[X]\), also referred to as the \de{field of rational functions}.
+\end{defn}
+While it is nice that we have this definition, we have a fundamental
+problem because \(f \in K(X)\) does not have a \emph{canonical}
+presentation as \(f = \frac{g}{h}\), and so we can run into problems
+if one choice of \(h\) is zero at a point \(x\). Thus, we must do a
+little work to 
+address this problem.
+\begin{defn}
+  Given \(f \in K(X)\) and \(x \in X\), we say \(f\) is \de{defined at
+  \(x\)} if there is \(g_x, h_x \in K[X]\) such that \(f =
+  \frac{g_x}{h_x}\) and \(h_x \neq 0\). Furthermore, we define \[
+    \Dom(f) := \{x \in X \text{ where }f\text{ is defined}\}
+  \]
+\end{defn}
+However, it is not clear that \(f\) is well-defined on the
+domain. Indeed, we check
+\begin{proof}
+  Let \(f = \frac{g_1}{h_1} = \frac{g_2}{h_2}\) such that \(h_1(x),
+  h_2(x) \neq 0\). Then, this gives\[
+    g_1 h_2 = g_2 h_1 \implies g_1(x) h_2(x) = g_2(x) h_1(x) \implies
+    \frac{g_1(x)}{h_1(x)} = \frac{g_2(x)}{h_2(x)}
+  \]
+\end{proof}
+\begin{prop}
+  The domain of a rational function \(f\) is a non-empty Zariski open set.
+\end{prop}
+This follows immediately by considering that a Zariski closed set is
+of the form \(V(I)\) and so an open set is of the form \(K^n \setminus
+V(I) = \Union_{p \in I} D(p)\) where
+\begin{defn}
+  \[
+    D(p) := \{x \in K^n \st p(x) \neq 0\}
+  \]
+  is called the \de{principal (distinguished) open set defined by \(p\)}.
+\end{defn}
+\begin{prop}
+  \begin{enumerate}
+  \item \(D(p_1) \union D(p_2) = D(p_1 p_2)\)
+  \item The \(D(p)\)'s form a base for the Zariski topology.
+  \end{enumerate}
+\end{prop}
+\begin{bibdiv}
+  \begin{biblist}
+  \end{biblist}
+\end{bibdiv}
+\end{document}
