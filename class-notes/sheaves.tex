@@ -18,9 +18,11 @@
 \newcommand{\T}{\mathsf{T}} % Tableau
 \renewcommand{\S}{\mathsf{S}}
 \renewcommand{\F}{F}
+\newcommand{\G}{G}
 \newcommand{\cF}{\mathcal{F}}
 \newcommand{\m}{\mathfrak{m}}
 \newcommand{\Dom}{\operatorname{Dom}}
+\renewcommand{\O}{\mathcal{O}}
 
 \numberwithin{thm}{section}
 
@@ -31,6 +33,7 @@
 \begin{document}
 \maketitle
 \section{Presheaves and Sheaves}
+\subsection{Presheaves}
 \begin{defn}
   Let \(X\) be topological space. A \de{presheaf of sets} \(\F\) on
   \(X\) is given by the following data.
@@ -271,6 +274,141 @@ V(I) = \Union_{p \in I} D(p)\) where
   \item The \(D(p)\)'s form a base for the Zariski topology.
   \end{enumerate}
 \end{prop}
+\begin{defn}
+  Given that the map \(K[x_1, \ldots, x_n] \to K[X]\) sends \(p
+  \mapsto q\), we define \[
+    D_X(q) := \{x \in X \st q(x) \neq 0\} = X \intersect D(p)
+  \]
+\end{defn}
+Thus, we have that \[
+  \Dom(f) = \Union_{f=\frac{g}{h}} D_X(h)
+\]
+\begin{defn}
+  Given a space \(X \subset K^n\), we define the \de{structure
+    presheaf}, by, for every open set \(U \subset X\), \[
+    \O_X(U) = \{f \in K(X) \st f \text{ is defined at every point of }U\}
+  \]
+  and, for \(V \subset U\), \[
+    \rho^U_V \from \O_X(U) \into \O_X(V) \text{ is the identity embedding}
+  \]
+\end{defn}
+\begin{prop}
+  \(\O_X(U)\) is a \(K\)-subalgebra of \(K(X)\).
+\end{prop}
+One may ask, what is \(\O_X(X)\). To answer this, we first define a
+general notion.
+\begin{defn}
+  Given a presheaf \(\F\) on \(X\), \(\F(X)\) is called the \de{global
+  sections}, and sometimes is denoted \(\Gamma(\F)\).
+\end{defn}
+Thus, the global sections \(\O_X(X)\) are the rational functions
+defined everywhere on \(X\). From this, we can immediately conclude
+that \(K[X] \subset \O_X(X)\), but in fact, we have
+\begin{prop}
+  \[
+    \O_X(X) = K[X]
+  \]
+\end{prop}
+\begin{proof}
+  Given \(f \in \O_X(X)\), there is a presentation of \(f\) forever
+  \(x \in X\) as \(f = \frac{g_x}{h_x}\) such that \(h_x(x) \neq
+  0\). Now, let \[
+    J = (h_x \st x \in X) \ideal K[X]
+  \]
+  Then, \(J\) has no zeros in \(X\) and so, by Hilbert's
+  Nullstellensatz, \(J = K[X]\). Thus, there exists \(\phi_i \in
+  K[X]\) such that \[
+    \phi_1 h_{x_1} + \cdots + \phi_r h_{x_r} = 1
+  \]
+  Thus, \[
+    f = f \cdot 1 = f(\phi_1 h_{x_1} + \cdots + \phi_r h_{x_r}) =
+    \phi_1 g_{x_1} + \cdots + \phi_r g_{x_r}
+  \]
+  which is a polynomial.
+\end{proof}
+Thus, with this idea, we can generalize our definition of a regular
+function.
+\begin{defn}
+  The regular functions on an open set \(U \subset X\) are given by
+  \(\O_X(U)\). 
+\end{defn}
+\begin{rmk}
+  A generalization of this idea is the notion of the prime spectrum of
+  an arbitrary commutative ring \(A\), which allows us to put a
+  Zariski topology and a presheaf on this space.  This will be
+  expanded on later.
+\end{rmk}
+\begin{defn}
+  Given a fixed arbitrary topological space \(X\), and 2 presheaves
+  \(\F\) and \(\G\) on \(X\), then a morphism between them, denoted
+  \(\phi \from F \to G\) consists of appropriate morphisms \(\phi_U\)
+  for all open \(U \subset X\) and \(V \subset U\) such that the
+  following diagram 
+  commutes \[
+    \begin{tikzcd}
+      \F(U) \ar[d,"\rho^U_V(\F)"] \ar[r,"\phi_V"] & \G(U)
+      \ar[d,"\rho^U_V(\G)"] \\
+      \F(V) \ar[r, "\phi_V"] & \G(V)
+    \end{tikzcd}
+  \]
+\end{defn}
+\begin{rmk}
+  If we think of a presheaf as a contravariant functor, then a
+  morphism of presheaves is a natural transformation.
+\end{rmk}
+Now, suppose \(F,G\) are presheaves of some category with kernels,
+such as abelian groups. Then, our morphism diagrams can be extended \[
+    \begin{tikzcd}
+      \ker \phi_U \ar[r] & \F(U) \ar[d,"\rho^U_V(\F)"] \ar[r,"\phi_V"]
+      & \G(U) 
+      \ar[d,"\rho^U_V(\G)"] \\
+      \ker \phi_V \ar[r] & \F(V) \ar[r, "\phi_V"] & \G(V)
+    \end{tikzcd}
+  \]
+Then, we have
+\begin{prop}
+  \(\rho^U_V(F)(\ker \phi_U) \subset \ker \phi_V\)
+\end{prop}
+which allows us to define \(K(U) = \ker \phi_U \subset \F(U)\), giving
+us that \(\{K(U), \rho^U_V(\F)\}\) is a presheaf, and similarly for
+\(I(U) = \im \phi_U \subset \G(U)\).
+\begin{prop}
+  \begin{enumerate}
+  \item \(\catname{Presheaves}(X)\) forms a category.
+  \item We can send a presheaf \(\F \to \F(X)\), the global sections
+    of \(\F\) over \(X\), giving us a function. For example, if \(\F\)
+    is presheaf of abelian groups, then we have a functor \[
+      \catname{Presheaves}(X) \to \catname{AbGps}
+    \]
+    called the \de{functor of global sections}.
+  \end{enumerate}
+\end{prop}
+Eventually, this will allow us to define the notion of a short exact
+sequence for (pre)sheaves. However, the functor of global sections
+turns out to be left exact but not right exact, so we will be able to
+look at right derived functors to measure the failure of this
+exactness.
+\subsection{Sheaves}
+We often want to glue together local information. For instance, if we
+had 2 functions \(f_1 \from U_1 \to \R\) and \(f_2 \from U_2 \to \R\),
+and wanted to build a function on \(U = U_1 \union U_2\), we would
+need that \[
+  f_1|_{U_1 \intersect U_2} = f_2|_{U_1 \intersect U_2}
+\]
+\begin{defn}
+  Let \(X\) be a topological space. For all open sets \(U \subset X\),
+  take an open cover (not necessarily finite)  \(U = \Union_{\alpha
+    \in I} U_\alpha\). A presheaf \(\F\) on \(X\) is a sheaf if
+  \begin{enumerate}
+  \item For \(x,t \in \F(U)\) and \(\rho^U_{U_\alpha}(s) =
+    \rho^U_{U_\alpha}(t)\), then \(s=t\) and
+  \item Given \(s_\alpha \in \F(U_\alpha)\) such that
+    \(\rho^{U_\alpha}_{U_\alpha \intersect U_\beta}(s_\alpha) =
+    \rho^{U_\beta}_{U_\alpha \intersect U_\beta}(s_\beta) \), there
+    exists an \(s \in \F(U)\) such that \(\rho^U_{U_\alpha}(s) =
+    s_\alpha \) for all \(\alpha \in I\).
+  \end{enumerate}
+\end{defn}
 \begin{bibdiv}
   \begin{biblist}
   \end{biblist}
