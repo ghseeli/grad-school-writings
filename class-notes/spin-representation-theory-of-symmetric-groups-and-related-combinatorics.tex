@@ -1,0 +1,121 @@
+\documentclass[11pt,leqno,oneside]{amsbook}
+\usepackage{tikz}
+\usetikzlibrary{cd}
+\usepackage{bbm}
+\usepackage{ytableau}
+\usepackage{todonotes}
+
+\usepackage{./notes}
+\usepackage{../ReAdTeX/readtex-core}
+\usepackage{../ReAdTeX/readtex-abstract-algebra}
+
+\newcommand{\bbk}{\mathbbm{k}}
+\newcommand{\Class}{\operatorname{Class}}
+\newcommand{\Res}{\operatorname{Res}}
+\newcommand{\Ind}{\operatorname{Ind}}
+\newcommand{\bs}{\textbackslash}
+\newcommand{\partitionof}{\vdash}
+\newcommand{\T}{\mathsf{T}} % Tableau
+\renewcommand{\S}{\mathsf{S}}
+\newcommand{\sh}{\operatorname{shape}}
+
+\newcommand{\dominatedby}{\trianglelefteq}
+\newcommand{\dominates}{\trianglerighteq}
+\newcommand{\lexicoleq}{\leq}
+\newcommand{\lexicogeq}{\geq}
+\newcommand{\covers}{\gtrdot}
+\newcommand{\coveredby}{\lessdot}
+
+\renewcommand{\H}{\mathcal{H}}
+\numberwithin{thm}{section}
+
+\title[Spin Representation Theory of Symmetric Groups]{Spin
+  Representation Theory of Symmetric Groups and Related Combinatorics \\ Notes
+  from a reading course in Fall 2018}
+\author{George H. Seelinger}
+\date{Fall 2018}
+\begin{document}
+\maketitle
+\section{Introduction (presented by Jinkui Wan)}
+When discussing the representation theory of the symmetric group, one
+considers \emph{linear representations} which are group
+homomoprhisms \[
+  \Sym_n \to GL(V)
+\]
+In 1911, Schur started considering projective representations \[
+  \Sym_n \to PGL(V) = GL(V)/\C^*
+\]
+leading to the projective representation theory of \(\Sym_n\). It
+turns out that this corresponds to the linear representation theory of
+an extension of \(\Sym_n\), denoted \(\tilde{S}_n\) and referred to as
+the \de{double cover of the symmetric group}, fitting into the
+short exact sequence \[
+  1 \to \Z/2\Z \to \tilde{S}_n \to \Sym_n \to 1
+\]
+where, if \(\Z/2\Z = \{1,z\}\), then \(z\) is central in
+\(\tilde{S}_n\), which gives us that \(z = 1\) or \(z=-1\).
+
+When \(z=1\), we have the representation theory of \(\Sym_n\). When,
+\(z=-1\), we have the representation theory of the \emph{spin
+  symmetric group algebra}
+\[
+\C\Sym_n^- = \C\Sym_n/\langle z+1 \rangle = \left\langle t_1, \ldots, t_n
+\st
+\begin{array}{l}
+  t_i^2=1\\
+  t_i t_{i+1} t_i = t_{i+1} t_i t_{i+1}\\
+  t_i t_j = -t_j t_i \text{ when }|i-j|>1
+\end{array}
+\right\rangle
+\]
+which is equipped with a \(\Z/2\Z\)-grading. So, when we discuss
+spin representations of \(\Sym_n\), we are discussing linear
+representations of \(\C\Sym_n^-\). Our program to establish these
+ideas is as follows. \\
+
+Part I
+\begin{enumerate}[label=(\arabic*)]
+\item Basics of associative superalgebras
+\item Connection to Hecke-Clifford (or Sengeev) algebra, \(\H_n\)
+\item Split conjugacy classes in a finite supergroup
+\item Characteristic map
+\item Schur-\(Q\) functions
+\item Schur-Sergeev duality
+\item Seminormal form of irreducible representations
+\end{enumerate}
+Part II
+\begin{enumerate}[label=(\arabic*)]
+\item Centers of \(\C\Sym_n^-\) (analog of Farahat-Higman theory for
+  \(\C\Sym_n\))
+\item Coinvariant theory for \(\C\Sym_n^-\)
+\item Spin Kostka polynomials
+\item Quantum deformation (in particular, Olshanki-Sergeev duality)
+\end{enumerate}
+\begin{bibdiv}
+  \begin{biblist}
+    \bib{macdonald}{book}{
+      author={Macdonald, I.G.}
+      title={Symmetric Functions and Hall Polynomials}
+      year={1979}
+      note={2nd Edition, 1995}
+    }
+    \bib{sagan}{article}{
+      author={Sagan, Bruce E.}
+      title={Shifted Tableaux, Schur \(Q\)-functions, and a conjecture
+      of R. Stanley}
+      year={1987}
+      journal={J. Combin. Theory Ser. A}
+      pages={62--103}
+    }
+    \bib{wan-wang}{article}{
+      author={Wan, Jinkui}
+      author={Wang, Weiqiang}
+      title={Lectures on Spin Representation Theory of Symmetric
+        Groups}
+      year={2012}
+      journal={Bull. Inst. Math. Acad. Sin.}
+      pages={91--164}
+    }
+  \end{biblist}
+\end{bibdiv}
+\end{document}
