@@ -402,13 +402,83 @@ need that \[
   \begin{enumerate}
   \item For \(x,t \in \F(U)\) and \(\rho^U_{U_\alpha}(s) =
     \rho^U_{U_\alpha}(t)\), then \(s=t\) and
-  \item Given \(s_\alpha \in \F(U_\alpha)\) such that
+  \item Given \(s_\alpha \in \F(U_\alpha)\) for \(\alpha \in I\) such that
     \(\rho^{U_\alpha}_{U_\alpha \intersect U_\beta}(s_\alpha) =
     \rho^{U_\beta}_{U_\alpha \intersect U_\beta}(s_\beta) \), there
     exists an \(s \in \F(U)\) such that \(\rho^U_{U_\alpha}(s) =
     s_\alpha \) for all \(\alpha \in I\).
   \end{enumerate}
 \end{defn}
+\begin{rmk}
+  A presheaf satisfying only condition (a) is called a \de{separated
+    presheaf} of a \de{monopresheaf}.
+\end{rmk}
+Let us see how some of our presheaves meet this definition (and others
+do not).
+\begin{example}
+  \begin{enumerate}[label=(\arabic*)]
+  \item Fix another topologyical space \(Y\) and define \(\F(U) =
+    \{\text{all continuous maps }f \from U \to Y\}\) and the
+    restriction maps to be the usual restriction of functions. Then,
+    if \(U = \Union_{\alpha \in I} U_\alpha\),
+    \begin{enumerate}
+    \item For \(f,g \from U \to Y\), we have \[
+        \rho^U_{U_\alpha}(f) = \rho^U_{U_\alpha}(g) \iff f(x) = g(x)\ 
+        \forall x \in U_\alpha \iff f(x) = g(x)\ \forall x \in U
+      \]
+    \item Given \(f_\alpha \in \F(U_\alpha)\), we get \[
+        \rho^{U_\alpha}_{U_\alpha \intersect U_\beta}(f_\alpha) =
+        \rho^{U_\beta}_{U_\alpha \intersect U_\beta}(f_\beta) \implies
+        f_\alpha(x) = f_\beta(x) \ \forall x \in U_\alpha \intersect U_\beta
+      \]
+      Then, given \(x \in U\), we have that there is at least one
+      \(\alpha \in I\) such that \(x \in U_\alpha\) and, by above, we
+      can define \(f(x) = f_\alpha(x)\). This is continuous since, for
+      open set \(V \subset Y\), we get \(f^{-1}(V) = \Union
+      f_\alpha^{-1}(V)\), which is open. 
+    \end{enumerate}
+  \item Consider the presheaf of bounded functions on \(X=\R\), that
+    is \(\F(U) = \{\text{bounded function }f \from U \to \R\}\). We
+    may cover \(X = \R\) by overlapping intervals (eg \(U_n =
+    (n-\frac{1}{2}, n+\frac{4}{3})\)). Then, on each \(U_n\), take
+    \(f_n \in \F(U_n)\) to be \(f_n(x) = x\) for \(x \in U_n\). Each
+    of these \(f_n\)'s is bounded on the domain, but if you glue them
+    all together, you do not get a bounded function on \(\R\).
+  \item More generally, consider the constant presheaf on \(X\) to set
+    \(S\) with at least \(2\) elements where \(F(U) = S\) when \(U
+    \neq \emptyset\) and 
+    \(\F(\emptyset) = \{e\}\), the \(1\) element set. Then, take
+    non-empty open sets \(U_1, U_2\) such that \(U_1 \intersect U_2 =
+    \emptyset\). If we take \(2\) distinct elements of \(S\), say
+    \(s_1,s_2\) and let \(U = U_1 \union U_2\), we find that we cannot
+    satisfy the second sheaf condition as follows. If there
+    is an \(s \in \F(U) = S\) such that the condition holds, it would
+    get mapped to \(s_1\) under the restriction map to \(U_1\) and to
+    \(s_2\) under the restriction map to \(U_2\). However, this cannot
+    happen because the restriction maps in these instances are just
+    the identity maps.
+  \item The outlook for the locally constant presheaf is better, since
+    we no longer run into these gluing problems.
+  \item Consider the skyscaper presheaf. We verify
+    \begin{enumerate}
+    \item Let \(s,t \in \F(U)\). If \(p \not \in U\), then \(s=t\)
+      since \(\F(U) = \{e\}\). If \(p \in U\), there exists an
+      \(\alpha \in I\) with \(p \in U_\alpha\) and \(\rho^U_{U_\alpha}
+      = id_S\). Thus, \[
+        \rho^U_{U_\alpha}(s) = \rho^U_{U_\alpha}(t) \implies s=t
+      \]
+    \item Let \(s_\alpha \in \F(U_\alpha)\) such that
+      \(\rho^{U_\alpha}_{U_\alpha \intersect U_\beta(s_\alpha) =
+        \rho^{U_\beta}_{U_\alpha \intersect U_\beta}}(s_\beta)\). If
+      \(p \not \in U\), then \(\F(U) = \{e\}\). If \(p \in U\), then
+      \(p \in U_\alpha\) so \(s_\alpha = s \in F(U_\alpha)\). The rest
+      follows from the definition of the restriction maps.
+    \end{enumerate}
+  \item Now, let us consider the structure presheaf \(\O_X\). We will
+    show it is a sheaf. 
+  \end{enumerate}
+\end{example}
+
 \begin{bibdiv}
   \begin{biblist}
   \end{biblist}
