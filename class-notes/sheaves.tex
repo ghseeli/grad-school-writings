@@ -474,11 +474,52 @@ do not).
       \(p \in U_\alpha\) so \(s_\alpha = s \in F(U_\alpha)\). The rest
       follows from the definition of the restriction maps.
     \end{enumerate}
-  \item Now, let us consider the structure presheaf \(\O_X\). We will
-    show it is a sheaf. 
+  \item Now, let us consider the structure presheaf \(\O_X\) for \(X
+    \subset K^n\) and \(X\) irreducible. We will
+    show it is a sheaf. Let open set \(U \subset X\) have open cover
+    \(U = \Union_{\alpha \in I} U_\alpha\)
+    \begin{enumerate}
+    \item Take \(f,g \in \O_X(U)\). Then, we have that
+      \(\rho^U_{U_\alpha}(f) = f \in K(X)\) and thus, if
+      \(\rho^U_{U_\alpha}(f) = \rho^U_{U_\alpha}(g)\), we immediately
+      get that \(f=g\) in \(K(X)\).
+    \item Given \(f_\alpha \in \F(U_\alpha)\), we similarly get
+      that \[
+        \rho^{U_\alpha}_{U_\alpha \intersect U_\beta}(f_\alpha) =
+        \rho^{U_\beta}_{U_\alpha \intersect U_\beta}(f_\beta) \implies
+        f_\alpha = \rho^{U_\alpha}_{U_\alpha \intersect U_\beta}(f_\alpha) =
+        \rho^{U_\beta}_{U_\alpha \intersect U_\beta}(f_\beta) = g_\beta
+      \]
+      and so, we may take \(f = f_\alpha\). 
+    \end{enumerate}
   \end{enumerate}
 \end{example}
+\begin{prop}
+  \(\O_X(D_X(p)) = S^{-1}K[X]\), the localization of \(K[X]\) with \(S
+  = \{1,p,p^2, \ldots\}\).
+\end{prop}
+\begin{proof}
+  The containment \(\O_X(D_X(p)) \supset S^{-1}K[X]\) is immediate
+  since every element of \(S^{-1}K[X]\) is a rational function defined
+  where \(p \neq 0\). Let \(f \in \O_X(D_X(p))\). For all \(x \in
+  D_X(p)\), we have a presentation of \(f\) as \(f = \frac{g_x}{h_x}\)
+  where \(h_x(x) \neq 0\). Now, let \[
+    I = (h_x \st x \in D_X(p)) \ideal K[X]
+  \]
+  and consider that \(V(I) \intersect D_X(p) = \emptyset\). In fact,
+  \(V(I) \subset X \setminus D_X(p) = V_X(p)\), that is, \(p\)
+  vanishes at all points where \(I\) vanishes.
 
+  By Hilbert's Nullstellensatz, some power of \(p\), say \(p^m\), is
+  in \(I\). Thus,
+  \begin{align*}
+    & p^m = a_1 h_{x_1} + \cdots + a_r h_{x_r} & \text{ by Hilbert's
+                                                 Basis Theorem} \\
+    \implies & fp^m = a_1 g_{x_1} + \cdots + a_r g_{x_r} \in K[X] \\
+    \implies & f = \frac{a_1 g_{x_1} + \cdots + a_r g_{x_r}}{p^m} \in S^{-1}K[X]
+  \end{align*}
+
+\end{proof}
 \begin{bibdiv}
   \begin{biblist}
   \end{biblist}
