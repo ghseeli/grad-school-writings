@@ -18,6 +18,7 @@
 \newcommand{\T}{\mathsf{T}} % Tableau
 \renewcommand{\S}{\mathsf{S}}
 \newcommand{\sh}{\operatorname{shape}}
+\newcommand{\grdim}{\boldsymbol{\dim}}
 
 \newcommand{\dominatedby}{\trianglelefteq}
 \newcommand{\dominates}{\trianglerighteq}
@@ -27,6 +28,8 @@
 \newcommand{\coveredby}{\lessdot}
 
 \renewcommand{\H}{\mathcal{H}}
+\renewcommand{\Q}{\mathcal{Q}}
+\newcommand{\Cl}{\mathcal{C\ell}}
 \numberwithin{thm}{section}
 
 \title[Spin Representation Theory of Symmetric Groups]{Spin
@@ -91,6 +94,153 @@ Part II
 \item Spin Kostka polynomials
 \item Quantum deformation (in particular, Olshanki-Sergeev duality)
 \end{enumerate}
+\section{Generalities for Associative Superalgebras}
+\subsection{Definitions and Examples}
+\begin{defn}
+  \begin{enumerate}
+  \item   A \de{vector superspace} (over \(\C\)) is a
+    \(\Z/2\Z\)-graded vector space 
+    \(V = V_{\ov{0}} \oplus V_{\ov{1}}\), where elements of
+    \(V_{\ov{0}}\) are called \de{even} and elements of \(V_{\ov{1}}\)
+    are called \de{odd}. For \(v \in V_i\), \(i \in \Z/2\Z\), we say
+    \(|v| = i\).
+  \item If \(V\) is a vector superspace with \(\dim V_{\ov{0}} = m\)
+    and \(\dim V_{\ov{1}} = n\), we say the \de{graded dimension} of
+    \(V\) is \((m,n)\), denoted \(\grdim V = (m,n)\).
+  \item A \de{superalgebra} is a \(\C\)-algebra \(A\) with a
+    \(\Z/2\Z\)-grading \(A = A_{\ov{0}} \oplus A_{\ov{1}}\) such that
+    \(A_i A_j \subset A_{i+j}\) for all \(i,j \in \Z/2\Z\).
+  \item A \de{superalgebra ideal} is a homogeneous ideal, that is, an
+    ideal of either \(A_{\ov{0}}\) or \(A_{\ov{1}}\).
+  \item A superalgebra that has no non-trivial ideals is called
+    \de{simple}.
+  \item A \de{superalgebra homomorphism} \(\theta \from A \to B\) is
+    an even algebra homomorphism, that is, an algebra homomorphism
+    sending \(A_i \to B_i\) for all \(i \in \Z/2\Z\).
+  \item Given superalgebras \(A\) and \(B\), the tensor product \(A
+    \otimes B\) is a superalgebra with multiplication \[
+      (a \otimes b)(a' \otimes b') = (-1)^{|a||b|} aa' \otimes bb'
+    \]
+    for homogeneous elements and extended by linearity.
+  \end{enumerate}
+\end{defn}
+\begin{example}
+  \begin{enumerate}
+  \item Let \(V = V(m|n)\), the vector superspace with \(\grdim V =
+    (m,n)\). Then, \(\End_\C(V)\) is a superalgebra and is isomorphic
+    to the matrix superalgebra \[
+      M(m|n) := \left\{ \left(
+          \begin{array}{cc}
+            a&b\\
+            c&d
+          \end{array}
+\right) \st
+\begin{array}{c}
+  a \text{ is an }m \times m \text{ matrix}\\
+  b \text{ is an }m \times n \text{ matrix}\\
+  c \text{ is an }n \times m \text{ matrix}\\
+  d \text{ is an }n \times n \text{ matrix}
+\end{array}
+\right\}
+\]
+or, in other words, \(M(m|n)\) consists of all \(m|n\)-block matrices
+and has \(\grdim M(m|n) = (m^2+n^2, 2mn)\). Furthermore, \(M(m|n)\) is
+a simple superalgebra.
+\item Let \(V = V(n|n)\) and \(p \in \End_\C(V)\) be an odd involution
+  (that is, it sends \(V_i \to V_{i+1}\) for \(i \in \Z/2\Z\)). Then,
+  we define \[
+    \Q(V) := \{f \in \End_\C(V) \st fp = (-1)^{|f|}pf\} =
+    \Q(V)_{\ov{0}} \oplus \Q(V)_{\ov{1}}
+  \]
+  \(\Q(V)\) is also a superalgebra. Moreover, if we pick a basis
+  \(\{v_1, \ldots, v_n\}\) of \(V_{\ov{0}}\) and let \(v_i' = p(v_i)\)
+  for \(1 \leq i \leq n\), we have that, with respect to the basis
+  \(\{v_1, \ldots, v_n, v_1', \ldots, v_n'\}\), \(\Q(V)\) is
+  isomorphic to \[
+    \Q(n) := \left\{ \left(
+        \begin{array}{cc}
+          a&b\\
+          -b&a
+        \end{array}
+      \right) \in M(n|n) \right\}
+  \]
+  and it is simple.
+  \item The Clifford algebra \(\Cl_n\) is the superalgebra generated
+    by the odd elements \(c_1, \ldots, c_n\) subject to the
+    relations \[
+      \begin{cases}
+        c_i^2 = 1\\
+        c_i c_j = - c_j c_i & \forall 1 \leq i \neq j \leq n
+      \end{cases}
+    \]
+  \end{enumerate}
+\end{example}
+\begin{lem}
+  There exist isomorphisms of superalgebras
+  \begin{enumerate}
+  \item \(M(m|n) \otimes M(k|l) \isom M(mk+nl|mk+nl)\)
+  \item \(M(m|n) \otimes \Q(k) \isom Q((m+n)k)\)
+  \item \(\Q(m) \otimes \Q(n) \isom M(mn|mn)\)
+  \end{enumerate}
+\end{lem}
+\begin{proof}
+  For part (a), we note that \[
+    \End_\C(V(m|n)) \otimes \End_\C(V(k|l)) \isom \End_\C(V(mk+ml | mk+nl))
+  \]
+  under the isomorphism sending \(f \otimes g\) to the endomorphism of
+  \(V(mk+ml | mk+nl)\) mapping \(v \otimes w\) to \((-1)^{|g||v|}f(v)
+  \otimes g(w)\).
+
+  For part (b), we have \[
+    \End(V(m|n)) \otimes \Q(V(k|k),p) \isom Q(V(m|n) \otimes V(k|k), id
+    \otimes p)
+  \]
+
+  For (c), one explicitly checks that \(\Q(1) \otimes \Q(1) \isom
+  M(1|1)\) and then inductively applies (a) and (b) above.
+\end{proof}
+\begin{cor}
+   Since \(\Cl_{m+n} \isom \Cl_m \otimes \Cl_n\) under the isomorphism
+    sending generators \(c_1, \ldots, c_n\) to \(c_1 \otimes 1,
+    \ldots, c_n \otimes 1\) and \(c_{n+1}, \ldots, c_{n+m}\) to \(1
+    \otimes c_1, \ldots, 1 \otimes c_m\), we have the corollaries
+  \begin{enumerate}
+  \item \(\Cl_1 \isom \Q(1)\) under the isomorphism \(c_1 \mapsto
+    p(v_1)\)
+  \item \(\Cl_2 \isom M(1|1)\) since \(\Cl_2 \isom \Cl_1 \otimes \Cl_1
+    \isom \Q(1) \otimes \Q(1) 
+    \isom M(1|1)\)
+  \item \(\Cl_{2k} \isom M(2^{k-1}|2^{k-1})\)
+  \item \(\Cl_{2k-1} \isom \Q(2^{k-1})\)
+  \item and thus, \(\Cl_n\) is simple by parts (c) and (d).
+  \end{enumerate}
+\end{cor}
+\subsection{Classification of Simple Superalgebras}
+\begin{thm}
+  There are two types of finite dimensional simple associative
+  superalgebras over \(\C\):
+  \begin{enumerate}
+  \item \(M(m|n)\)
+  \item \(\Q(n)\)
+  \end{enumerate}
+\end{thm}
+\subsection{Wedderburn Theorem and Schur's Lemma}
+\begin{defn}
+  \begin{enumerate}
+  \item   A \de{(super)module} over a superalgebra \(A\) is a vector space \(M
+  = M_{\ov{0}} \oplus M_{\ov{1}}\) with a left action of \(A\) on
+  \(M\) such that \(A_i M_j \subset M_{i+j}\) for all \(i,j \in \Z/2\Z\).
+  \item A homomorphism between \(A\)-modules \(M\) and \(N\) is a
+    linear map \(f \from M \to N\) such that \[
+      f(am) = (-1)^{|f||a|} a f(m) \text{ for all }a \in A, m \in M
+    \]
+    and \[
+      \Hom_A(M,N) := \Hom_A(M,N)_{\ov{0}} \oplus \Hom_A(M,N)_{\ov{1}}
+    \]
+    where \(\Hom_A(M,N)_{\ov{1}} \subset \Hom_\C(M,N)\) such that
+    \(M_i \to N_{i+1}\) for all \(i \in \Z/2\Z\).
+  \end{enumerate}
+\end{defn}
 \begin{bibdiv}
   \begin{biblist}
     \bib{macdonald}{book}{
