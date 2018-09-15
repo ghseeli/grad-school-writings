@@ -7,6 +7,7 @@
 
 \usepackage{./notes}
 \usepackage{../ReAdTeX/readtex-core}
+\usepackage{../ReAdTeX/readtex-dangerous}
 \usepackage{../ReAdTeX/readtex-abstract-algebra}
 \usepackage{../ReAdTeX/readtex-lie-algebras}
 
@@ -2295,7 +2296,7 @@ an \de{elementary module}.
   type \(\lambda\)), \todo{Where does this duality come from?
     Transposition of the JCF type argument?} \[
     \{N \st N \submodule M, N \text{ has type }\nu \text{ and cotype
-    }\mu \} \onetoonecorrespondance \{\hat{N}  \st \hat{N} \submodule \hat{M} \st \hat{N}
+    }\mu \} \onetoonecorrespondence \{\hat{N}  \st \hat{N} \submodule \hat{M} \st \hat{N}
     \text{ has type }\mu \text{ and cotype }\nu\}
   \]
   The associativity follows from the fact that the coefficient of
@@ -2626,7 +2627,7 @@ algebras.
 \end{proof}
 From now on, assume \(\Q\) is Dynkin. Recall that we then have
 \begin{align*}
-  \{\text{Indecomposables}\} & \onetoonecorrespondance \roots_+ \text{
+  \{\text{Indecomposables}\} & \onetoonecorrespondence \roots_+ \text{
                                (Positive roots)} \\
   I_\alpha & \mapsfrom \alpha \\
   \text{Isomorphism classes in } \Rep(\Q) & \correspondsto \N^{\roots_+} :=
