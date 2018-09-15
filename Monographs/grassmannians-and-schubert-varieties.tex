@@ -1,0 +1,660 @@
+\documentclass[11pt,leqno,oneside]{amsart}
+\usepackage[alphabetic,abbrev]{amsrefs} % use AMS ref scheme
+\usepackage{../ReAdTeX/readtex-core}
+\usepackage{../ReAdTeX/readtex-dangerous}
+\usepackage{../ReAdTeX/readtex-abstract-algebra}
+\usepackage{../ReAdTeX/readtex-topology}
+\usepackage{./monographs}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{todonotes}
+\usepackage{ytableau}
+\usepackage{xcolor}
+\usepackage{mathtools}
+\usepackage{pgf}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric}
+\usepackage{tikz-cd}
+\usepackage{graphicx}
+\numberwithin{thm}{section}
+
+\newcommand{\T}{\mathsf{T}} % use for tableaux
+\renewcommand{\S}{\mathsf{S}}
+\newcommand{\TP}{\mathsf{P}}
+\newcommand{\TQ}{\mathsf{Q}}
+\newcommand{\inv}{\operatorname{inv}}
+\newcommand{\charge}{\operatorname{charge}}
+\newcommand{\cocharge}{\operatorname{cocharge}}
+\newcommand{\des}{\operatorname{des}}
+\newcommand{\row}{\operatorname{row}}
+\newcommand{\col}{\operatorname{col}}
+
+\newcommand{\Vdet}{\Delta}
+\newcommand{\rowshift}{\rho}
+\newcommand{\SSYT}{\operatorname{SSYT}} % Semistandard Young Tableaux
+\newcommand{\defeq}{\coloneqq}
+\newcommand{\partitionof}{\vdash}
+\newcommand{\dominates}{\mathrel{\unrhd}}
+\newcommand{\strictlydominates}{\mathrel{\rhd}}
+\newcommand{\dominatedby}{\mathrel{\unlhd}}
+\newcommand{\strictlydominatedby}{\mathrel{\lhd}}
+\newcommand{\covers}{\mathrel{\gtrdot}}
+\newcommand{\coveredby}{\mathrel{\lessdot}}
+
+\newcommand{\sym}{\Lambda}
+\renewcommand{\k}{\Bbbk}
+
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+   \node[shape=circle,draw,inner sep=1pt] (char) {#1};}}
+\newcommand{\mymk}[1]{\tikz \node[draw,circle, inner sep=0pt, minimum size=7mm]{#1};}
+
+\makeatletter
+\newcommand\mathcircled[1]{%
+  \mathpalette\@mathcircled{#1}%
+}
+\newcommand\@mathcircled[2]{%
+  \tikz[baseline=(math.base)] \node[draw,circle,inner sep=1pt] (math) {$\m@th#1#2$};%
+}
+\makeatother
+
+\newcommand{\quantumBinom}[3][q]{\left[ \begin{array}{c} #2 \\
+                                          #3 \end{array} \right]_#1}
+\newcommand{\qbinom}{\quantumBinom}
+\newcommand{\stat}{\operatorname{stat}}
+\newcommand{\Des}{\operatorname{Des}}
+\newcommand{\maj}{\operatorname{maj}}
+\newcommand{\comaj}{\operatorname{comaj}}
+\newcommand{\height}{\operatorname{ht}}
+\newcommand{\size}{\operatorname{size}}
+\newcommand{\sh}{\operatorname{sh}}
+\newcommand{\spin}{\operatorname{spin}}
+\newcommand{\cospin}{\operatorname{cospin}}
+\newcommand{\wt}{\operatorname{wt}}
+\newcommand{\length}{\operatorname{len}}
+\newcommand{\LLT}{\operatorname{LLT}}
+
+\renewcommand{\P}{\mathbb{P}}
+\newcommand{\A}{\mathbb{A}}
+\newcommand{\ExtP}{\bigwedge}
+
+\title[Grassmannians and Schubert Varieties]{Grassmannians and
+  Schubert Varieties}
+\author{George H. Seelinger}
+\date{August 2018}
+\begin{document}
+\maketitle
+\section{Introduction}
+\section{Projective Varieties}
+The language of projective varieties is inherently useful for
+describing Grassmannians. Therefore, this section contains a terse
+reiteration of the relevant notions about projective varieties. For a
+more complete treatment, consult any introductory text on algebraic
+geometry. 
+\begin{defn}
+  Given \(n \in \N\), we define \de{projective \(n\)-space} over a
+  field \(K\), denoted \(\P_K^n\) or \(\P^n\) when \(K\) is
+  understood, to be the set of all 
+  \(1\)-dimensional linear subpsaces of the vector space \(K^{n+1}\). 
+\end{defn}
+\begin{example}
+  The easiest example of a projective variety is \(\P^1\). If we take
+  two copies of the affine line \(\A^1\), denoted \(X_1, X_2\), and
+  ``glue'' the open sets \(U,U' = \A^1 \setminus \{0\}\) together via
+  the map \(f(x) = \frac{1}{x}\), we get \(\P^1\). In such a space, we
+  have the identity ``\(\frac{1}{0} = \infty\)'' in the persective of
+  \(X_1\) and so we have a compactification of the affine line. When
+  \(K=\C\), this 
+  resulting space is the same as the Riemann sphere \(\C \union
+  \{\infty\} = \C\P^1\).
+\end{example}
+\begin{rmk}
+  One often describes projective space using ``homogeneous coordinates'',
+  which are invariant under scalar multiple, arising from the
+  description \[
+    \P^n = (K^{n+1} \setminus \{0\})/\sim
+  \]
+  where \(\sim\) is given by \[
+    (x_0, \ldots, x_n) \sim (y_0, \ldots, y_n) \iff \exists \lambda
+    \in K^\times \text{ such that } x_i = \lambda y_i \ \forall i
+  \]
+  We denote such an equivalence class by \([x_0:\cdots:x_n] \in \P^n\).
+\end{rmk}
+A projective variety can also be described by a set of homogeneous
+polynomials \(f_1, \ldots, f_r \in K[x_0,\ldots,x_n]\) since, if
+\(f_i\) is homogeneous of degree \(d\), then \[
+  f_i(\lambda x_0, \ldots, \lambda x_n) = \lambda^d f(x_0, \ldots,
+  x_n), \ \ \lambda \in K
+\]
+and so all scalar multiples of a solution to \(f_i(x_0, \ldots, x_n) =
+0\) are solutions. 
+\begin{defn}
+  Let \(\pi \from \A^{n+1} \setminus \{0\} \to \P^n\) send \((x_0,
+  \ldots, x_n) \mapsto [x_0 : \cdots : x_n]\). Then,
+  \begin{enumerate}
+  \item We say an affine variety \(X \subset \A^{n+1}\) is a \de{cone}
+    if \(0 \in X\) and \(\lambda x \in X\) for all \(\lambda \in K\)
+    and \(x \in X\).
+  \item Given a cone \(X \subset \A^{n+1}\), we say \[
+      \P(X) := \pi(X \setminus \{0\}) = \{[x_0 : \cdots : x_n] \in
+      \P^n \st (x_0, \ldots, x_n) \in X\} \subset \P^n
+    \]
+    is the \de{projectivization} of \(X\).
+  \item Given a projective variety \(X \subset \P^n\), we say \[
+      C(X) := \{0\} \union \pi^{-1}(X) = \{0\} \union \{(x_0, \ldots,
+      x_n) \st [x_0 : \cdots : x_n] \in X\} \subset \A^{n+1}
+    \]
+    is the \de{cone} over \(X\).
+  \end{enumerate}
+\end{defn}
+\begin{rmk}
+  From above, with some additional work, one can show there is a
+  one-to-one correspondence
+  \begin{align*}
+    \{\text{cones in }\A^{n+1}\} & \correspondsto \{\text{projective
+    varieties in }\P^n\}\\
+    X & \mapsto \P(X)\\
+    C(X) & \leftarrow X
+  \end{align*}
+\end{rmk}
+\begin{lem}
+  For non-empty projective variety \(X \subset \P^n\), the dimension
+  of the cone \(C(X) \subset \A^{n+1}\)  is \(\dim X + 1\).
+\end{lem}
+\begin{proof}
+  Let \[
+    \emptyset \neq X_0 \propsubset \cdots \propsubset X_n \subset X
+  \]
+  be a chain of irreducible closed subsets in \(X\). Then, \[
+    \{0\} \propsubset C(X_0) \propsubset \cdots \propsubset C(X_n)
+    \subset C(X)
+  \]
+  is a chain of irreducible closed subsets in \(C(X)\). So, we have
+  that \[
+    \dim C(X) \geq \dim X + 1
+  \]
+  Similarly, if we show \todo{Do this explicitly} \[
+    \codim(C(X)) \geq \codim(X) = n - \dim X
+  \]
+  If we assume \(X\) is irreducible (if not, take an irreducible
+  decomposition), then \[
+    \dim(C(X))+ \codim(C(X)) = \dim(\A^{n+1}) = n+1
+  \]
+  and so \[
+    \dim(C(X)) = n+1 - \codim(C(X)) \leq n+1-n+\dim(X) = \dim(X)+1
+  \]
+\end{proof}
+\section{Grassmannians}
+\subsection{Defining and Understanding Grassmannians}
+\begin{defn}
+  A \de{Grassmannian}, denoted \(G(m,n)\), is the set of
+  linear subpsaces of dimension \(m\) 
+  (and therefore of codimension \(n\)) in \(K^{m+n}\). 
+\end{defn}
+In this way, one can represent the Grassmannian \(G(m,n)\) as
+equivalence classes of full rank \(m \times (m+n)\) matrices whose 
+row space encodes a linear subspace in \(G(m,n)\),
+where the equivalence class is given by row operations, or more
+formally \[ 
+  A \sim B \iff A = E B,\ E \in GL_m(K)
+\]
+Therefore, we can always pick represenetatives of the form \[
+  \left(
+    \begin{array}{ccccccc}
+      1&0&\cdots&0&x_{11}&\cdots&x_{1n}\\
+      0&1&\cdots&0&x_{21}&\cdots&x_{2n}\\
+      \vdots&&\ddots&&\vdots&&\vdots\\
+      0&0&\cdots&1&x_{m1}&\cdots&x_{mn}
+    \end{array}
+\right)
+\]
+\begin{prop}
+  The \(m\)-dimensional linear subspaces of \(K^{m+n}\) are in natural
+  one-to-one correspondence with \((m-1)\)-dimensional linear
+  subspaces of \(\P^{m+n-1}\). 
+\end{prop}
+\begin{proof}
+  Given such a subspace of \(K^{m+n}\), an \(m\)-dimensional linear
+  subspace \(W\) (which is defined by a set of homogeneous
+  polynomials and thus a cone) can be sent to \(\P(W)\), which has
+  dimension \(m-1\) in \(\P^{m+n-1}\).
+\end{proof}
+Therefore, we may also think of \(G(m,n)\) as the set of such
+projective linear subspaces.
+\subsection{The Pl\"{u}cker Embedding}
+We wish to give a concrete realization of \(G(m,n)\) as a subset of
+projective space via the ``Pl\"{u}cker Embedding.''
+\begin{lem}
+  If \(W \in G(m,n)\), then \(\ExtP^m W\) is a line (a cone of dimension
+  \(1\)) in \(\ExtP^m K^{m+n}\).
+\end{lem}
+\begin{proof}
+  Given \(W \isom K^m = \Span \{e_1, \ldots, e_n\}\), we have that
+  \(\ExtP^m K^m \isom K\) since it 
+  only has a single basis vector, namely \(e_1 \wedge \cdots \wedge
+  e_n\).
+\end{proof}
+\begin{lem}
+  Let \(v_1, \ldots, v_k \in K^n\) and \(w_1, \ldots, w_k \in K^n\)
+  both be linearly independent. Then, \(v_1 \wedge \cdots \wedge v_k\)
+  and \(w_1 \wedge \cdots \wedge w_k\) are linearly dependent in
+  \(\ExtP^k K^n\) if and only if \(\Span \{v_1, \ldots, v_k\} =
+  \Span\{w_1, \ldots, w_k\}\).
+\end{lem}
+\begin{proof}
+  This is an exercise using only multi-linear algebra skills.
+\end{proof}
+\begin{thm}
+  The map
+  \begin{align*}
+    \phi \from G(m,n) & \to \P(\ExtP^m K^{m+n}) \\
+    W = \Span \{w_1, \ldots, w_m\} & \mapsto [w_1 \wedge \cdots
+                                     \wedge w_m]
+  \end{align*}
+  is an embedding, called the \de{Pl\"{u}cker Embedding}.
+\end{thm}
+\begin{proof}
+  The map is well-defined by the \(\impliedby\) direction of the lemma
+  above and is injective by the \(\implies\) direction of the lemma
+  above. 
+\end{proof}
+However, the description given by the proposition is not very
+concrete. Using multi-linear algebra, we can remedy this problem.
+\begin{lem}
+  Given \(0 \leq k \leq n\) and \(v_1, \ldots, v_k \in K^n\) with
+  \(v_j = \sum_i a_{j,i} 
+  e_i\), we have \[
+    v_1 \wedge \cdots \wedge v_k = \sum_{i_1, \ldots, i_k} a_{1,i_1}
+    \cdots a_{k,i_k} \cdot e_{i_1} \wedge \cdots \wedge e_{i_k}
+  \]
+  and, for stricly increasing index sequence \((j_1, \ldots, j_k)\),
+  we get the coefficient of \(e_{j_1} \wedge \cdots \wedge e_{j_k}\)
+  in \(v_1 \wedge \cdots \wedge v_k\) is given by \[
+    \sum \sgn(\sigma) a_{1,j_{\sigma(1)}} \cdots a_{k,j_{\sigma(k)}} =
+    \det (a_{i,j})_{1 \leq i \leq k, j \in \{j_1, \ldots, j_k\}}
+  \]
+\end{lem}
+Thus, we have
+\begin{thm}[Pl\"{u}cker Coordinates]
+  The homogeneous coordinates of \(\phi(W)\) in \(\P(\ExtP^m
+  K^{m+n})\) are the minors of order \(m\) of the matrix whose row
+  space is \(W\), say \((x_{i,j})_{1 \leq i \leq m, 1 \leq j \leq
+    m+n}\), which we denote \[
+    P_{i_1, \ldots, i_m} := \det(x_{p,i_q})_{1
+      \leq p,q \leq m}, \ i_1 
+    < \cdots < i_m
+  \]
+\end{thm}
+\begin{example}
+  Consider \(G(1,n-1)\) will have \[
+    \Span\{a_1 e_1 + \cdots + a_n e_n\} \mapsto [a_1: \cdots :a_n] \in
+    \P^{n-1} 
+  \]
+  Furthermore, since this map is surjective, we get \(G(1,n-1) \isom
+  \P^{n-1}\), as discussed above.
+
+  For a more complicated example, consider \(G(2,1)\). If we take the
+  space spanned by \(e_1+e_2,e_1+e_3\), then we have \[
+    \left(
+      \begin{array}{ccc}
+        1&1&0\\
+        1&0&1
+      \end{array}
+\right) \mapsto [P_{1,2}:P_{1,3}:P_{2,3}] = \left[ \det \left(
+    \begin{array}{cc}
+      1&1\\
+      1&0
+    \end{array}
+\right), \det \left(
+  \begin{array}{cc}
+    1&0\\
+    1&1
+  \end{array}
+\right), \det \left(
+  \begin{array}{cc}
+    1&0\\
+    0&1
+  \end{array}
+\right) \right] = [-1:1:1]
+  \]
+  
+\end{example}
+Thus, we have realized the Grassmannian in projective
+space. However, we wish to show it is a variety. To do that, we must
+show that it is a vanishing set of polynomials.
+\begin{defn}
+  \begin{enumerate}
+  \item Let \(J_{m,n}\) be the set of strictly increasing\(m\)-tuples
+  consisting of integers between \(1\) and \(m+n\).
+  \item Let \(K[P_J \st J \in J_{m,n}]\) be the ring of polynomials in
+    the Pl\"{u}cker coordinates.
+  \item Let \(I(G(m,n))\) be the ideal consisting of homogeneous
+    polynomials vanishing identically on \(G(m,n)\). 
+  \end{enumerate}
+\end{defn}
+\begin{thm}
+  Let \(i_1, \ldots, i_m\) and \(j_1, \ldots, j_m\) be two sets of
+  integers between \(1\) and \(m+n\) and let \(l\) be an integer
+  between \(1\) and \(m\). Then, identically on \(G(m,n)\), we have
+  the relation \[
+    \sum_{w \in
+      \Sym_{i_l,\ldots,i_m,j_1,\ldots,j_l}/\Sym_{i_l,\ldots,i_m}
+      \times \Sym_{j_1, \ldots, j_l}} \sgn(w) P_{i_1, \ldots,
+      i_{l-1},w(i_l), \ldots,w(i_m)} P_{w(j_1),\ldots,w(j_l), j_{l+1},
+    \ldots, j_m} = 0
+  \]
+\end{thm}
+\begin{example}
+  \cite{manivel}*{Exercise 3.1.5} If \(m=n=2\) and \(l=2\), then
+  \(\Sym_{2,3,4}/\Sym_{2} \times 
+  \Sym_{3,4} 
+  \isom \{id, (23), (243)\}\) and we have the single equation \[
+    P_{1,2}P_{3,4} - P_{1,3}P_{2,4} + P_{1,4} P_{2,3} = 0
+  \]
+  One can use this relation to show that the Pl\"{u}cker embedding
+  gives \(G(2,2)\) as a quadratic hypersurface of \(\P^5\).
+\end{example}
+\begin{proof}
+  \todo{Fill in proof}
+\end{proof}
+% However, the work
+% involved is non-trivial, so we refer the reader to the lecture notes \cite{gathmann}
+\section{Schubert Cells and Schubert Varieties}
+\begin{defn}
+  \cite{manivel}*{p 105} Fix a flag \[
+    0 = V_0 \subset V_1 \subset \cdots \subset V_i \subset \cdots
+    \subset V_{n+m} = \C^{m+n}
+  \]
+  Then, if \(\lambda\) is a partition contained in an \(n \times m\)
+  rectangle, that is \(n \geq \lambda_1 \geq \cdots \geq \lambda_m
+  \geq 0\), we associate to it the \de{Schubert cell} \[
+    \Omega_\lambda := \{W \in G(m,n) \st \dim(W \intersect V_j) = i
+    \text{ if } n+i-\lambda_i \leq j \leq n+i-\lambda_{i+1}\}
+  \]
+  and the \de{Schubert variety} \[
+    X_\lambda = \{W \in G(m,n) \st \dim(W \intersect
+    V_{n+i-\lambda_i}) \geq i, 1 \leq i \leq m\}
+  \]
+\end{defn}
+\begin{example}
+  \begin{enumerate}
+  \item We have that \(X_\emptyset = G(m,n)\) since \[
+      W \in G(m,n) \implies \dim W = m \implies \dim W + \dim V_{n+i}
+      = m+n+i \implies \dim(W \intersect V_{n+i}) \geq i
+    \]
+  \item On the other extreme, \(X_{(n^m)} = \{V_m\}\) since \[
+      \dim(W \intersect V_{n+i-n}) = \dim(W \intersect V_i) \geq i, \forall 1 \leq i \leq m
+      \implies V_i \subset W, \forall 1 \leq i \leq m \implies W = V_m
+    \]
+  \item If \(\lambda = (k)\), that is, \(\lambda\) has only one part,
+    then \[
+      X_k = \{W \in G(m,n) \st W \intersect V_{n+1-k} \neq 0\}
+    \]
+    since \[
+      \dim(W \intersect V_{n+1-k}) \geq 1 \iff W \intersect V_{n+1-k} \neq 0
+    \]
+    and we always have \(\dim(W \intersect V_{n+i}) \geq i\) for \(2
+    \leq i \leq m\) 
+    as discussed in (a).
+  \item If \(\lambda\) is a partition such that its diagram is the
+    complement of a \(q \times p\) rectangle inside an \(n \times m\)
+    rectangle, then \[
+      X_\lambda = \{W \in G(m,n) \st V_{m-p} \subset W \subset
+      V_{m+q}\} \isom G(p,q)
+    \]
+    To see this, consider that \(\lambda\) is of the form \[
+      \lambda = (\underbrace{n,n, \ldots, n}_{m-p}, \underbrace{n-q,
+        \ldots, n-q}_{p}) 
+    \]
+    and so, as discussed in (b), we know that the first \(m-p\)
+    entries of \(n\)'s will force \(V_{m-p} \subset
+    W\). Furthermore, \[
+      \dim(W \intersect V_{n+i-(n-q)}) \geq i, \forall m-p+1 \leq i
+      \leq m \iff \dim(W \intersect V_{m+q}) \geq m \iff W \subset V_{m+q}
+    \]
+  \end{enumerate}
+\end{example}
+One important use of Schubert cells is that they form a cellular
+decomposition of the Grassmannian.
+\begin{lem}
+  We have that \[
+    G(m,n) = \Dunion_{\mu \text{ in an }n \times m \text{ rectangle}}
+    \Omega_\mu 
+  \]
+\end{lem}
+\begin{proof}
+  Given \(W \in G(m,n)\), the sequence \(\{\dim(W \intersect V_i)\}_{1
+  \leq i \leq n+m}\) runs from \(0\) to \(m\), increasing at most by
+\(1\) for each step. Thus, since there are \(m\) jumps in the
+sequence, say \(j_1, \ldots, j_m\), we can define a partition \(\mu\)
+via \(\mu_i := n+i-j_i \iff j_i = n+i-\mu_i\) and, since \(j_i \geq
+i\), get that \(\mu\) is contained in an \(n \times m\)
+rectangle. Thus, \(W \in \Omega_\mu\) and, since we can recover all
+such partitions this way, we get the cellular decomposition result.
+\end{proof}
+\begin{prop}
+  \cite{manivel}*{Proposition 3.2.3} For all partitions \(\lambda\)
+  inside an \(n 
+  \times m\) rectangle, we have
+  \begin{enumerate}
+  \item the Schubert variety \(X_\lambda\) is an algebraic subvariety
+    of \(G(m,n)\).
+  \item \(X_\lambda = \Dunion_{\mu \supset
+      \lambda} \Omega_\mu\)
+  \item \(\Omega_\lambda \isom \C^{mn-|\lambda|}\)
+  \item \(X_\lambda \supset X_\mu\) if and only if \(\lambda \subset
+    \mu\).
+  \item \(\Omega_\lambda\) is a dense open set of \(X_\lambda\)
+    contained in the set of nonsingular points.
+  \end{enumerate}
+\end{prop}
+\begin{proof}
+  (a) follows from the fact that \[
+    \dim(W \intersect V_i) \geq j \iff \rank(W \subset \C^{m+n} \to
+    \C^{m+n}/V_i) \leq m-j
+  \]
+  which is equivalent to the vanishing of minors of order \(m-j+1\) of
+  the matrix representing the map.
+
+  For (b), we first note that, as in the proof of the lemma above,
+  given a \(W \in 
+  X_\lambda\), we have a sequence of dimensions \(\{\dim(W \intersect
+  V_j)\}_{1 \leq j \leq n+m}\), but moreover we also
+  have that \(\dim(W \intersect V_{n-i+\lambda_j}) \geq i\) for \(1
+  \leq i \leq m\) and so, the first \(i\) jumps in our sequence must
+  occur before \(n+i-\lambda_i\), which means \(n+i-\lambda_i \geq j_i
+  = n+i-\mu_i \implies \lambda_i \leq \mu_i\). Thus, this gives \[
+    X_\lambda = \Dunion_{\mu \supset \lambda} \Omega_\mu
+  \]
+
+  For (c), we choose a basis of \(\C^{m+n}\) that is compatible with
+  our flag, that is \(v_1, \ldots, v_{m+n}\) such that \(V_i =
+  \Span\{v_1, \ldots, v_i\}\). Then, for \(W \in \Omega_\lambda\), we
+  have a unique basis consisting of vectors of the form \[
+    w_i = v_{n+i-\lambda_i} + \sum_{\substack{1 \leq j \leq
+        n+i-\lambda_i \\ j \neq n+k-\lambda_k \\ k \leq i}} x_{ij} v_j
+  \]
+  and thus the matrix defined by \((x_{ij})\) defines a linear
+  transformation from \(\Omega_\lambda\) to \(\C^{mn-|\lambda|}\).
+
+  To finish the proof, one argues that \(\Omega_\mu \subset
+  \ov{\Omega_\lambda}\) by looking at elements of \(\Omega_\lambda\)
+  and considering the limiting values. Thus, we get \(\Omega_\lambda
+  \subset X_\lambda = \Dunion_{\mu \supset \lambda} \Omega_\mu \subset
+  \ov{\Omega_\lambda}\), but since \(X_\lambda\) is closed, it must be
+  that \(X_\lambda = \ov{\Omega_\lambda}\).
+\end{proof}
+Now, we are particularly interested in the consequences of this result
+on the cohomology of the Grassmannian.
+\begin{cor}
+  \begin{enumerate}
+  \item   Thus, the Poincar\'{e} duals of the cohomology classes of
+    \(\ov{\Omega_\lambda} = X_\lambda\), say \(\sigma_\lambda :=
+    [X_\lambda]^*\), form a basis for the 
+    integral cohomology of \(G(m,n)\). We call such classes
+    \de{Schubert classes}.
+  \item For
+    all partitions \(\lambda\) contained in an \(n \times m\)
+    rectangle, \(\sigma_\lambda\) is an element of
+    \(H^{2|\lambda|(G(m,n))}\)
+  \item In fact, we have the decomposition \[
+      H^*(G(m,n)) = \bigoplus_{\lambda \text{ in an }n \times m\text{
+          rectangle}} \Z \sigma_\lambda
+    \]
+  \end{enumerate}
+\end{cor}
+\begin{proof}
+  For part (a), since each of the Schubert cells are isomorphic to
+  \(\C^{mn-|\lambda|}\), it must be that all the cells are
+  concentrated in even (real) dimension, thus giving that there are no
+  relations for for the fundamental classes in the cohomology groups,
+  and so they form a basis.
+
+  For (b), this follows from the fact that \(\Omega_\lambda\) has real
+  dimension \(2(mn-|\lambda|)\), and so when we take the Poincar\'{e}
+  dual, we will end up in \(H^{2|\lambda|}\).
+
+  (c) is an immediate consequence of (a).
+\end{proof}
+To analyze the cohomology further, we define
+\begin{defn}
+  Given a flag \[
+    0 = V_0 \subset \cdots \subset C_{m+n} = \C^{m+n}
+  \]
+  with compatible basis \(v_1, \ldots, v_{m+n}\), we define the
+  \de{dual flag} to be given by \[
+    V_i' = \Span\{v_{m+n-i+1}, \ldots, v_{m+n}\}
+  \]
+  To the dual flag correspond Schubert cells and Schubert varieties,
+  which we will denote by \(\Omega_\lambda'\) and \(X_\lambda'\).
+\end{defn}
+\begin{prop}
+  Two Schubert varieties associated to the same partition \(\lambda\)
+  (thus differing only by their defining flags)
+  have the 
+  same Schubert class \(\sigma_\lambda\).
+\end{prop}
+\begin{proof}
+  The connected group \(GL_{m+n}(\C)\) acts transitively on the set of
+  complete flags, so there is an element \(g \in GL_{m+n}(\C)\) such
+  that \(g\) sends flag \(F\) to flag \(F'\). Since \(GL_{m+n}(\C)\)
+  is connected,  there is a path \(H \from [0,1] \to GL_{m+n}(\C)\)
+  such that \(H(0) = g\) and \(H(1) = I_{m+n}\).  Furthermore,
+  \(GL_{m+n}(\C)\) acts continuously on 
+  \(G(m,n)\), so this path induces a homotopy sending \(g \from G(m,n)
+  \to G(m,n)\) to the identity map on \(G(m,n)\). Thus, since the two
+  cells are homotopic, they are represented by the same (co)homology
+  class. 
+\end{proof} 
+In particular, \(X_\lambda\) and \(X_\lambda'\) have the same
+Schubert class \(\sigma_\lambda\).
+\begin{lem}
+  Given partitions \(\eta, \tau\) inside an \(n \times m\) rectangle,
+  we have that \[
+    \Omega_\eta \intersect \Omega_\tau' \neq \emptyset \implies \eta
+    \subset \hat{\tau}
+  \]
+\end{lem}
+\begin{proof}
+  See exponsition in \cite{manivel}*{p 108}. Essentially, this result
+  follows from analyzing what an element of \(\Omega_\eta \intersect
+  \Omega_\nu'\) must look like, and it foces the desired containment.
+\end{proof}
+\begin{lem}
+  Given  irreducible algebraic subvarieties \(Y\) and
+  \(Y'\) of a compact and connected complex variety \(X\) with
+  codimensions \(c\) and \(c'\), respectively, we have \[
+    Y \intersect Y' = \Intersect_{i \in I} Z_i
+  \]
+  for \(Z_i\) some irreducible subvarieties of \(X\) and, furthermore, 
+  if this intersection is ``transverse'' (which implies \(Z_i\) has
+  codimension \(c+c'\)), \[ 
+    [Y] \cupprod [Y'] = \sum_{i \in I} [Z_i] \in H^{2c+2c'}(X)
+  \]
+\end{lem}
+\begin{proof}
+  This is a proof from algebraic geometry. See, for instance,
+  \cite{fulton} appendix B. 
+\end{proof}
+Of course, since cohomology forms a
+ring, we may ask about the ring 
+structure on \(H^*(G(m,n))\). We get
+\begin{prop}
+  Given two partitions \(\lambda,\mu\) contained in an \(n \times m\)
+  rectangle such that \(|\lambda|+|\mu|=mn\), we get that \[
+    \sigma_\lambda \cupprod \sigma_\mu = \delta_{\mu,\hat{\lambda}}
+  \]
+  where \(\hat{\lambda}\) is the complementary partition partition of
+  \(\lambda\) in an \(n \times m\) rectangle, that is, the partition
+  such that \(\lambda_i+\hat{\lambda}_{m-i} \leq n\). 
+\end{prop}
+\begin{proof}
+  By the first lemma above, since \(|\lambda|+|\mu| = mn\), it must be
+  that \[
+    \mu \neq \hat{\lambda} \implies X_\lambda \intersect X_\mu' =
+    \emptyset \implies \sigma_\lambda \cupprod \sigma_\mu = 0
+  \]
+  since \[
+    \sigma_\lambda \cupprod \sigma_\mu = [X_\lambda \intersect X_\mu]^*
+  \]
+  by the second lemma above. Similarly, if \(\mu = \hat{\lambda}\),
+  then \(\mu_i + \lambda_{m+1-i} = n\) for all \(i\) and \(X_\lambda
+  \intersect X_\mu' \neq \emptyset\). So, take \(W \in X_\lambda
+  \intersect X_\mu'\). This requires that  \[
+    \begin{cases}
+      \dim(W \intersect \Span\{v_1, \ldots, v_{n+i-\lambda_i}\}) \geq i \\
+      \dim(W \intersect \Span\{v_{m+n-(n+i-\mu_i)+1}, \ldots,
+      v_{m+n}\}) \geq i \\
+      \iff \dim(W \intersect
+      \Span\{v_{n+(m+1-i)-\lambda_{m+1-i}}, \ldots, v_{m+n}\}) \geq i
+    \end{cases}
+  \]
+  The only \(W\) that can meet these conditions is \(W^\lambda :=
+  \Span\{v_{n+1-\lambda_1}, \ldots, v_{n+m-\lambda_m}\}\). Thus, \[
+    \sigma_\lambda \cupprod \sigma_\mu = [X_\lambda \intersect
+    X_\mu]^* = [\{W^\lambda\}]^* = 1
+  \]
+  granting that \(X_\lambda\) and \(X_\mu\) intersect transversely.
+  % which implies that 
+  % \begin{align*}
+  %   \dim W \intersect V_i \intersect V_{m+1-i}' + \dim W
+  %   & =
+  %   \dim (W \intersect V_i) \oplus (W \intersect V_{m+1-i}') \geq  m+1
+  %   \\ & \implies \dim W \intersect V_i \intersect V_{m+1-i}' \geq 1
+  % \end{align*}
+  % However, since \(V_i \intersect V_{m+1-i}' =
+  % \Span\{v_{n+i-\lambda_i}\}\), it must be that 
+  % Furthermore, this point must be of
+  % the form \[
+  %   W^\lambda := \Span\{v_{n+1-\lambda_1}, \ldots, v_{n+m-\lambda_m}\}
+  % \]
+\end{proof}
+\begin{bibdiv}
+  \begin{biblist}
+    \bib{fulton}{book}{
+      author={Fulton, William}
+      title={Young Tableaux}
+      year={1997}
+    }
+    \bib{gathmann}{article}{
+      author={Gathmann, Andreas}
+      title={Algebraic Geometry}
+      year={2014}
+      
+    }
+    \bib{macdonald}{book}{
+      author={Macdonald, I.G.}
+      title={Symmetric Functions and Hall Polynomials}
+      year={1979}
+      note={2nd Edition, 1995}
+    }
+    \bib{manivel}{book}{
+      author={Manivel, Laurent}
+      title={Symmetric Functions, Schubert Polynomials, and Degeneracy
+        Loci}
+      year={1998}
+      note={Translated by John R. Swallow; 2001}
+    }
+  \end{biblist}
+\end{bibdiv}
+
+\end{document}
