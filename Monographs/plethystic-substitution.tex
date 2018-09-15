@@ -1,6 +1,7 @@
 \documentclass[11pt,leqno,oneside]{amsart}
 \usepackage[alphabetic,abbrev]{amsrefs} % use AMS ref scheme
 \usepackage{../ReAdTeX/readtex-core}
+\usepackage{../ReAdTeX/readtex-dangerous}
 \usepackage{./monographs}
 \usepackage{../ReAdTeX/readtex-abstract-algebra}
 \usepackage{../ReAdTeX/readtex-lie-algebras}
@@ -212,10 +213,9 @@ for \(h(x)\) the hook-length of cell \(x \in \lambda\) and
   \]
   At this point, \cite{stanley} claims that \(\lim_{n \to \infty}
   (1-t^{n}) = 1\), so we are done. \todo{Of course, I do not
-    understand why this should be ture; certainly, it would not work
-    for my calculus students.} % Perhaps since we are using an
-                               % expansion where t < 1 anyways, this
-                               % follows. 
+    understand why this should be true; certainly, it would not work
+    for my calculus students. Perhaps since we are using an
+    expansion where t < 1 anyways, this follows. } 
 \end{proof}
 \begin{prop}
   Let \(\lambda\) be a partition. Then, \[

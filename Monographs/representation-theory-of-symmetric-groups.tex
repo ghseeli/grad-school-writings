@@ -1,6 +1,7 @@
 \documentclass[11pt,leqno,oneside]{amsart}
 \usepackage[alphabetic,abbrev]{amsrefs} % use AMS ref scheme
 \usepackage{../ReAdTeX/readtex-core}
+\usepackage{../ReAdTeX/readtex-dangerous}
 \usepackage{./monographs}
 \usepackage{../ReAdTeX/readtex-abstract-algebra}
 \usepackage{../ReAdTeX/readtex-lie-algebras}
@@ -60,7 +61,8 @@ trivial representation and the sign representation given by \(w.v =
 \begin{example}
   For \(G = \Sym_3\), since there are \(3\) conjugacy classes, there
   is only one missing representation of dimension \(2\). Thus, giving
-  the character table
+  the remaining character table values by using the character
+  orthogonality relations.
   \begin{center}
     \begin{tabular}{c|ccc}
       &(1)&(12)&(123) \\
@@ -323,7 +325,7 @@ action on \(\SymP^r V\) and \(\ExtP^r V\).
 \begin{proof}
    First, consider \(\SymP^{r} V\) as a representation of
   \(\Sym_r\). Then, any \(w \in \Sym_r\) permutes the terms of \(v_1
-  \otimes \cdots \otimes v_d\), but this yields the same elementby
+  \otimes \cdots \otimes v_d\), but this yields the same element by
   definition of the symmetric power. Thus, this must be the trivial
   representation of \(\Sym_r\) with character \(h_{r}\).
 
@@ -392,7 +394,7 @@ action on \(\SymP^r V\) and \(\ExtP^r V\).
 The Frobenius character formula suggests that we will need to have the
 symmetric group act on polynomials associated to standard
 tableaux in order to explicitly realize the irreducible
-representations of \(\Sym)_n\). There are a few ways to do this, one
+representations of \(\Sym_n\). There are a few ways to do this, one
 of which we expand on below, following \cite{fulton-harris}.
 \begin{defn}
   Given a tableau \(\T\) of shape \(\lambda\) labelled with integers
@@ -438,8 +440,12 @@ of which we expand on below, following \cite{fulton-harris}.
   \end{enumerate}
 \end{prop}
 \begin{proof}
-  Now, we check \[
-    a
+  We observe, for \(p \in R_\lambda\) \[
+    p \cdot a_\lambda = a_\lambda \cdot p = a_\lambda
+  \]
+  which follows almost immediately. Similarly, for \(q \in
+  C_\lambda\), we have \[
+    q \cdot b_\lambda = b_\lambda \cdot q = b_\lambda
   \]
 \end{proof}
 \begin{defn}
@@ -461,6 +467,16 @@ of which we expand on below, following \cite{fulton-harris}.
   \]
   We will compute many other examples as needed.
 \end{example}
+\begin{prop}
+  The set \(\{c_\lambda\}_{\lambda \partitionof d}\) form a set of
+  seminormal idempotents up to a scalar. That is, \[
+    c_\lambda c_\mu = \delta_{\lambda,\mu} n_\lambda c_\lambda
+  \]
+  for some \(n_\lambda \in \C \setminus \{0\}\).
+\end{prop}
+\begin{proof}
+  
+\end{proof}
 \begin{thm}
   Given a partition \(\lambda\),
   \begin{enumerate}
@@ -476,84 +492,84 @@ of which we expand on below, following \cite{fulton-harris}.
     irreducible representations of \(\Sym_d\).
   \end{enumerate}
 \end{thm}
-\begin{prop}
-  For any \(d\), we have \[
-    V_{(d)} = \C \Sym_d \cdot \sum_{w \in \Sym_d} e_w = \C\cdot\left(
-      \sum_{w \in \Sym_d} e_w \right)
-  \]
-  which is the trivial representation of \(\Sym_d\) since the sum is
-  fixed by any \(w \in \Sym_d\). Similarly, \[
-    V_{(1^d)} = \C \Sym_d \cdot \sum_{w \in \Sym_d} \sgn(w) e_w = \C
-    \cdot \left( \sum_{w \in \Sym_d} \sgn(w)e_w \right)
-  \]
-  since the alternating sum has \(w'.\sum_{w \in \Sym_d} \sgn(w)e_w =
-  \sgn(w') \sum_{w \in \Sym_d} \sgn(w) e_w\).
-\end{prop}
-\begin{prop}
-  For \(\lambda\) a partition, \[
-    V_{\lambda'} = V_\lambda \otimes U'
-  \]
-  where \(U'\) is the alternating representation.
-\end{prop}
-Recall from \cite{alg-comb} the Vandermonde determinant \[
-  \Vdet = \prod_{i < j}(x_i-x_j)
-\]
-and the power sum symmetric functions \[
-  p_j(x) = x_1^j + \cdots + x_\ell^j
-\]
-We then have, for \(\chi_\lambda\) the character of \(V_\lambda\),
-\begin{thm}[Frobenius Formula]
-  Let \(C_\mu\) be the conjugacy class of \(\Sym_d\) of elements of
-  cycle type \(\mu = (\mu_1, \ldots, \mu_d)\) where \(\mu_i\) is the
-  number of \(i\) cycles in the permutations of \(C_\mu\). Then, \[
-    \chi_\lambda(C_\mu) = \left( \Vdet \cdot \prod_j p_j(x)^{\mu_j}
-    \right)_{\lambda+\rowshift}
-  \]
-  where \(\rowshift = (\ell-1, \ell-2,\ldots,1,0)\) and so the right
-  hand side is the coefficient of \[
-    x^{\lambda+\rowshift} = x^{\lambda_1+\ell-1}x^{\lambda_2+\ell-2}
-    \cdots x^{\lambda_\ell}
-  \]
-  Rewriting the formula, we get \[
-    \prod_j p_j(x)^{\mu_j} = \sum_{\lambda \partitionof d,
-      \ell(\lambda) \leq \ell} \chi_\lambda(C_\mu) s_\lambda(x)
-  \]
-  where \(s_\lambda(x)\) is a Schur function.
-\end{thm}
-\begin{cor}
-  If \(\nu = \lambda+\rowshift\)
-  \[
-    \dim V_\lambda = \frac{d!}{\nu_1!\nu_2!\cdots\nu_\ell!} \prod_{i <
-    j} (\nu_i - \nu_j)
-  \]
-\end{cor}
-\begin{proof}[Proof of Corollary]
- The identity element \(id \in \Sym_d\) is the only element in the
- conjugacy class indexed by \(\mu = (d)\). So, the Frobenius formula
- gives \[
-   \dim V_\lambda = \chi_{\lambda}(C_{(d)}) = (\Vdet \cdot
-   (x_1+\cdots+x_\ell)^d)_{\lambda+\rowshift}
- \]
- However, using the Leibniz determinant formula, \[
-   \Vdet = \sum_{\sigma \in \Sym_\ell} (\sgn(\sigma)) \prod_{j=1}^\ell
-   x_j^{\sigma(\ell-j+1)-1} 
- \]
- and using the multinomial formula \[
-   (x_1+\cdots+x_\ell)^d = \sum_{r_1+\cdots+r_\ell=d}
-   \frac{d!}{r_1!\cdots r_\ell!} x_1^{r_1} \cdots x_{\ell}^{r_\ell}
- \]
+% \begin{prop}
+%   For any \(d\), we have \[
+%     V_{(d)} = \C \Sym_d \cdot \sum_{w \in \Sym_d} e_w = \C\cdot\left(
+%       \sum_{w \in \Sym_d} e_w \right)
+%   \]
+%   which is the trivial representation of \(\Sym_d\) since the sum is
+%   fixed by any \(w \in \Sym_d\). Similarly, \[
+%     V_{(1^d)} = \C \Sym_d \cdot \sum_{w \in \Sym_d} \sgn(w) e_w = \C
+%     \cdot \left( \sum_{w \in \Sym_d} \sgn(w)e_w \right)
+%   \]
+%   since the alternating sum has \(w'.\sum_{w \in \Sym_d} \sgn(w)e_w =
+%   \sgn(w') \sum_{w \in \Sym_d} \sgn(w) e_w\).
+% \end{prop}
+% \begin{prop}
+%   For \(\lambda\) a partition, \[
+%     V_{\lambda'} = V_\lambda \otimes U'
+%   \]
+%   where \(U'\) is the alternating representation.
+% \end{prop}
+% Recall from \cite{alg-comb} the Vandermonde determinant \[
+%   \Vdet = \prod_{i < j}(x_i-x_j)
+% \]
+% and the power sum symmetric functions \[
+%   p_j(x) = x_1^j + \cdots + x_\ell^j
+% \]
+% We then have, for \(\chi_\lambda\) the character of \(V_\lambda\),
+% \begin{thm}[Frobenius Formula]
+%   Let \(C_\mu\) be the conjugacy class of \(\Sym_d\) of elements of
+%   cycle type \(\mu = (\mu_1, \ldots, \mu_d)\) where \(\mu_i\) is the
+%   number of \(i\) cycles in the permutations of \(C_\mu\). Then, \[
+%     \chi_\lambda(C_\mu) = \left( \Vdet \cdot \prod_j p_j(x)^{\mu_j}
+%     \right)_{\lambda+\rowshift}
+%   \]
+%   where \(\rowshift = (\ell-1, \ell-2,\ldots,1,0)\) and so the right
+%   hand side is the coefficient of \[
+%     x^{\lambda+\rowshift} = x^{\lambda_1+\ell-1}x^{\lambda_2+\ell-2}
+%     \cdots x^{\lambda_\ell}
+%   \]
+%   Rewriting the formula, we get \[
+%     \prod_j p_j(x)^{\mu_j} = \sum_{\lambda \partitionof d,
+%       \ell(\lambda) \leq \ell} \chi_\lambda(C_\mu) s_\lambda(x)
+%   \]
+%   where \(s_\lambda(x)\) is a Schur function.
+% \end{thm}
+% \begin{cor}
+%   If \(\nu = \lambda+\rowshift\)
+%   \[
+%     \dim V_\lambda = \frac{d!}{\nu_1!\nu_2!\cdots\nu_\ell!} \prod_{i <
+%     j} (\nu_i - \nu_j)
+%   \]
+% \end{cor}
+% \begin{proof}[Proof of Corollary]
+%  The identity element \(id \in \Sym_d\) is the only element in the
+%  conjugacy class indexed by \(\mu = (d)\). So, the Frobenius formula
+%  gives \[
+%    \dim V_\lambda = \chi_{\lambda}(C_{(d)}) = (\Vdet \cdot
+%    (x_1+\cdots+x_\ell)^d)_{\lambda+\rowshift}
+%  \]
+%  However, using the Leibniz determinant formula, \[
+%    \Vdet = \sum_{\sigma \in \Sym_\ell} (\sgn(\sigma)) \prod_{j=1}^\ell
+%    x_j^{\sigma(\ell-j+1)-1} 
+%  \]
+%  and using the multinomial formula \[
+%    (x_1+\cdots+x_\ell)^d = \sum_{r_1+\cdots+r_\ell=d}
+%    \frac{d!}{r_1!\cdots r_\ell!} x_1^{r_1} \cdots x_{\ell}^{r_\ell}
+%  \]
  % So, the coefficient of \(x^{\lambda+\rowshift}\) is given by \[
  %   \sum_{\sigma \in \Sym_\ell,} \sgn(\sigma)
  %   \frac{d!}{\prod_{j=1}^\(\lambda_j+\ell-1-((j)))!} =
  %   \sum_{\sigma \in \Sym_\ell,} \sgn(\sigma) \frac{d!}{\lambda_j-j-1+\sigma(j)}
  % \]
- \todo{Finish this mess some other time}
-\end{proof}
-\begin{prop}
-  We also have \[
-    \dim V_\lambda = \frac{d!}{\prod (\text{Hook lengths})}
-  \]
-\end{prop}
+%  \todo{Finish this mess some other time}
+% \end{proof}
+% \begin{prop}
+%   We also have \[
+%     \dim V_\lambda = \frac{d!}{\prod (\text{Hook lengths})}
+%   \]
+% \end{prop}
 \section{Two Sides of the Same Coin}
 Using symmetric function theory, we prove some results about the
 characters on \(\Sym_n\).
