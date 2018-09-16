@@ -125,8 +125,19 @@ Part II
       (a \otimes b)(a' \otimes b') = (-1)^{|a||b|} aa' \otimes bb'
     \]
     for homogeneous elements and extended by linearity.
+  \item A \de{commutative superalgebra} is one that is graded
+    commutative, that is \[
+      yx = (-1)^{|x||y|}xy
+    \]
+    Thus, the \de{supercommutator} of a superalgebra is given by \[
+      [x,y] = xy-(-1)^{|x||y|}yx
+    \]
+    and the \de{supercenter} is given by \[
+      Z(A) = \{a \in A \st [a,x] = 0 \text{ for all }x \in A\}
+    \]
+    which is different than the center of an ungraded algebra.
   \item Given a superalgebra \(A\), we let \(|A|\) be the associative
-    algebra where we forget the grading on \(A\),
+    algebra where we forget the grading on \(A\). 
   \end{enumerate}
 \end{defn}
 \begin{example}
@@ -150,7 +161,7 @@ Part II
 \]
 or, in other words, \(M(m|n)\) consists of all \(m|n\)-block matrices
 and has \(\grdim M(m|n) = (m^2+n^2, 2mn)\). Furthermore, \(M(m|n)\) is
-a simple superalgebra.
+a simple superalgebra since \(|M(m|n)|\) is simple as a \(\C\)-algebra.
 \item Let \(V = V(n|n)\) and \(p \in \End_\C(V)\) be an odd involution
   (that is, it sends \(V_i \to V_{i+1}\) for \(i \in \Z/2\Z\)). Then,
   we define \[
@@ -405,7 +416,7 @@ where \(z^2 = 1\) and \(z\) is central in \(\tilde{G}\). Then,
   \]
   So let \[
     \underbrace{D_1, zD_1, D_2, zD_2, \ldots, D_r, zD_r}_{\text{split}}, \underbrace{D_{r+1}, \ldots,
-  D_{r+s}}_{non-split}
+  D_{r+s}}_{\text{non-split}}
   \] be the conjugacy classes of \(\tilde{G}\) where \(r\) is the
   number of split conjugacy classes in \(G\),  \(D_i \intersect zD_i =
   \emptyset\) for \(1 \leq i \leq r\) and \(zD_j = D_j\) for \(r+1
