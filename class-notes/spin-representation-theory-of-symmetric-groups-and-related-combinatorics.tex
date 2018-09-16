@@ -51,13 +51,13 @@ In 1911, Schur started considering projective representations \[
 \]
 leading to the projective representation theory of \(\Sym_n\). It
 turns out that this corresponds to the linear representation theory of
-an extension of \(\Sym_n\), denoted \(\tilde{S}_n\) and referred to as
+an extension of \(\Sym_n\), denoted \(\tilde{\Sym}_n\) and referred to as
 the \de{double cover of the symmetric group}, fitting into the
 short exact sequence \[
-  1 \to \Z/2\Z \to \tilde{S}_n \to \Sym_n \to 1
+  1 \to \Z/2\Z \to \tilde{\Sym}_n \to \Sym_n \to 1
 \]
 where, if \(\Z/2\Z = \{1,z\}\), then \(z\) is central in
-\(\tilde{S}_n\), which gives us that \(z = 1\) or \(z=-1\).
+\(\tilde{\Sym}_n\), which gives us that \(z = 1\) or \(z=-1\).
 
 When \(z=1\), we have the representation theory of \(\Sym_n\). When,
 \(z=-1\), we have the representation theory of the \emph{spin
@@ -125,6 +125,8 @@ Part II
       (a \otimes b)(a' \otimes b') = (-1)^{|a||b|} aa' \otimes bb'
     \]
     for homogeneous elements and extended by linearity.
+  \item Given a superalgebra \(A\), we let \(|A|\) be the associative
+    algebra where we forget the grading on \(A\),
   \end{enumerate}
 \end{defn}
 \begin{example}
@@ -240,10 +242,196 @@ a simple superalgebra.
     and \[
       \Hom_A(M,N) := \Hom_A(M,N)_{\ov{0}} \oplus \Hom_A(M,N)_{\ov{1}}
     \]
-    where \(\Hom_A(M,N)_{\ov{1}} \subset \Hom_\C(M,N)\) such that
-    \(M_i \to N_{i+1}\) for all \(i \in \Z/2\Z\).
+    where \(f \in \Hom_A(M,N)_{\ov{1}} \subset \Hom_\C(M,N)\) is such that
+    \(f(M_i) \subset N_{i+1}\) for all \(i \in \Z/2\Z\).
   \end{enumerate}
 \end{defn}
+\begin{defn}
+  An \(A\)-module is said to be \de{simple} if it is nonzero and has no
+  proper \(A\)-submodules. An \(A\)-module \(M\) is said to be
+  \de{semisimple} if every \(A\)-submodule of \(M\) is a direct
+  summand of \(M\).
+\end{defn}
+\begin{thm}[Super Wedderburn Theorem]
+  The following are equivalent for a finite dimensional superalgebra \(A\).
+  \begin{enumerate}
+  \item Every \(A\)-module is semisimple
+  \item \(A\) is a finite direct sum of left simple superideals
+  \item \(A\) is a direct product of a finite number of simple algebras
+  \end{enumerate}
+\end{thm}
+\begin{defn}
+  Thus, we say a superalgebra \(A\) is \de{semisimple} if it satisfies
+  one of the three conditions.
+\end{defn}
+\begin{example}
+  \begin{enumerate}
+  \item \(M(m|n) = I_1 \oplus I_2 \oplus \cdots \oplus I_m \oplus
+    I_{m+1} \oplus \cdots \oplus I_{m+n}\) where \(I_k =
+    M(m|n)E_{k,k}\) for \(1 \leq k \leq m+n\).
+  \item \(\Q(n) = J_1 \oplus \cdots \oplus J_n\) where \[
+      J_k = \Q(n) (E_{k,k} + E_{n+k,n+k})
+    \]
+    \todo{Check this. Most likely depends on your choice of basis and
+      involution.}
+  \item \(\Hom_{M(m|n)}(I_k, I_k) \isom \C\) and \(\Hom_{\Q(n)}(J_k,
+    J_k) \isom \C \oplus \C p\). Importantly, the latter space is not
+    \(1\)-dimensional despite \(J_k\) being \(1\)-dimensional!
+  \end{enumerate}
+\end{example}
+\begin{cor}
+   A finite dimensional semisimple superalgebra \(A\) is isomorphic
+   to \[
+     A \isom \bigoplus_{i=1}^m M(r_i|s_i) \oplus \bigoplus_{j=1}^n \Q(n_j)
+   \]
+   where \(m = m(A)\) and \(q=q(A)\) are invariants of \(A\).
+ \end{cor}
+ \begin{defn}
+   A simple \(A\)-module \(V\)is said to be of type M (resp. type Q)
+   if it is annihilated by all but one summand of the form
+   \(M(r_i|s_i)\) (resp. \(\Q(n_j)\)).
+ \end{defn}
+ \begin{cor}
+   \begin{enumerate}
+   \item The number of non-isomorphic simple \(A\)-modules is given by
+     \(m(A)+q(A) = \dim (Z(|A|) \intersect A_{\ov{0}})\).
+   \item The number of non-isomorphic simple \(A\)-modules of type
+     \(Q\) is given by \(q(A) = \dim(Z(|A|) \intersect A_{\ov{1}})\).
+   \end{enumerate}
+ \end{cor}
+ \begin{thm}[Schur's Lemma]
+   If \(M\) and \(L\) are simple \(A\)-modules, then \[
+     \dim\Hom_A(M,L) =
+     \begin{cases}
+       1 & \text{ if }M \isom L\text{ of type M}\\
+       2 & \text{ if }M \isom L\text{ of type Q}\\
+       0 & \text{ otherwise}
+     \end{cases}
+   \]
+\end{thm}
+\begin{rmk}
+  \begin{enumerate}
+  \item A simple \(A\)-module \(M\) is of type M if and only if
+    \(|M|\) is a simple \(|A|\)-module
+  \item A simple \(A\)-module \(M\) is of type Q if and only if
+    \(|M|\) is a direct sum of two non-isomorphic simple \(|A|\)-modules.
+  \end{enumerate}
+\end{rmk}
+\section{Split conjugacy classses in a finite supergroup}
+Throughout, let \(G\) be a finite group with index \(2\) subgroup
+\(G_0 \subgroup G\).
+\begin{defn}
+  \begin{enumerate}
+  \item We say that the elements of \(G_0\) are \de{even elements} and the
+  elements of \(G_1 := G \setminus G_0\) are \de{odd elements},
+  \item \(\C G\) is a superalgebra, which we will denote \(\C[G,G_0]\)
+  \end{enumerate}
+\end{defn}
+\begin{thm}[Super MAschke's Theorem]
+  \(\C[G,G_0]\) is semisimple
+\end{thm}
+\begin{prop}
+  \begin{enumerate}
+  \item If \(g \in G_i\), \(h \in G\), then \(hgh^{-1} \in G_i\) for
+    all \(i \in \Z/2\Z\).
+  \item The number of non-isomorphic simple \(\C[G,G_0]\)-modules is
+    equal to the number of even conjugacy classes in \(G\).
+  \item The number of non-isomorphic simple \(\C[G,G_0]\)-module of
+    type \(Q\) is equal to the number of odd conjugacy classes in \(G\).
+  \end{enumerate}
+\end{prop}
+\begin{proof}
+  We note that, by the usual Artin-Wedderburn theorem, \(\C G\)
+  decomposes into a direct sum of simple matrix algebras, each of
+  which has a \(1\)-dimensional center and can be indexed by a
+  conjugacy class of \(G\) via \(c_i = \sum_{g \in C_i} g\) where
+  \(C_i\) is a conjugacy class of \(G\). In fact, this shows in the
+  classical theory that the number of conjugacy classes of \(G\) equal
+  the number of irreducible representations.
+  
+  Since conjugacy classes are either even or odd by (a), which is left
+  as an exercise, (b) follows
+  because \(\dim (Z(\C G) \intersect 
+  \C[G,G_0]_{\ov{0}})\) is equal to the number of non-isomorphic
+  simple \(\C[G,G_0]\)-modules and (c) follow from the fact that \(\dim(Z(\C G)
+  \intersect \C[G,G_0]_{\ov{1}})\) gives the number of those of type \(Q\).
+\end{proof}
+Now, consider the following situation. Let \(\tilde{G}\) be a group
+such that there exists an index \(2\) subgroup \(\tilde{G}_0 \subgroup
+\tilde{G}\) and there exists a short exact sequence \[
+  1 \to \{1,z\} \to \tilde{G} \to[\theta] G \to 1
+\]
+where \(z^2 = 1\) and \(z\) is central in \(\tilde{G}\). Then,
+\begin{prop}
+  For \(C\) a conjugacy class of \(G\), the preimage \[
+    \theta^{-1}(C) = \{g, gz \st g \in C\} \subset \tilde{G}
+  \]
+  has that 
+  \begin{enumerate}
+  \item \(\theta^{-1}(C)\) is a single conjugacy class in \(\tilde{G}\) if \(g\) is
+    conjugate to \(zg\) in \(\tilde{G}\) or
+  \item \(\theta^{-1}(C)\) splits into two conjugacy classes in
+    \(\tilde{G}\) if there exists a \(g \in C\) such that \(g\) is not
+    conjugate to \(zg\). In this case, we call \(C\) \de{split}.
+  \end{enumerate}
+\end{prop}
+\begin{defn}
+  We set \[
+    \C\tilde{G}^- := \C[G,G_0]/\langle z+1 \rangle
+  \]
+  and call a \(\C\tilde{G}^-\)-module a \de{spin
+    \(\C[\tilde{G},\tilde{G}_0]\)}-module. 
+\end{defn}
+\begin{prop}
+  \begin{enumerate}
+  \item   We have the isomorphism of superalgebras 
+  \[\C[\tilde{G},\tilde{G}_0] \isom \underbrace{\C[G,G_0]}_{(z=1)}
+    \oplus \underbrace{\C\tilde{G}^-}_{(z=-1)} \]
+  \item The number of non-isomorphic simple spin
+    \(\C[\tilde{G},\tilde{G}_0]\)-modules is equal to the number of
+    even split conjugacy classes of \(G\).
+  \item The number of non-isomorphic simple spin
+    \(\C[\tilde{G},\tilde{G}_0]\)-modules of type Q is equal to the
+    number of odd split conjugacy classes of \(G\).
+  \end{enumerate}
+\end{prop}
+\begin{proof}
+  Part (a) follows from the semisimplicity of
+  \(\C[\tilde{G},\tilde{G}_0]\).
+
+  Now, (a) tells us that \[
+    Z(|\C\tilde{G}^-|) = \{a \in Z(|\C[\tilde{G},\tilde{G}_0]|) \st za
+    = -a\}
+  \]
+  So let \[
+    \underbrace{D_1, zD_1, D_2, zD_2, \ldots, D_r, zD_r}_{\text{split}}, \underbrace{D_{r+1}, \ldots,
+  D_{r+s}}_{non-split}
+  \] be the conjugacy classes of \(\tilde{G}\) where \(r\) is the
+  number of split conjugacy classes in \(G\),  \(D_i \intersect zD_i =
+  \emptyset\) for \(1 \leq i \leq r\) and \(zD_j = D_j\) for \(r+1
+  \leq j \leq r+s\). Then, \[
+    Z(|\C\tilde{G}|) \intersect \C\tilde{G}_{\ov{0}} = \{a \in Z(|\C
+    \tilde{G}|) \st a \text{ is even and }za = -a\}
+  \]
+  has basis \(d_{i_1}-zd_{i_1}, d_{i_2}-zd_{i_2}, \ldots,
+  d_{i_k}-zd_{i_k}\) for \(d_i\) even
+  and \todo{Check this part} \[
+    Z(|\C\tilde{G}|) \intersect \C\tilde{G}_{\ov{1}} = \{a \in Z(|\C
+    \tilde{G}|) \st a \text{ is odd and }za = -a\}
+  \]
+  has basis \(d_{j_1}-zd_{j_1}, d_{j_2}-zd_{j_2}, \ldots,
+  d_{j_k}-zd_{j_\ell}\) for \(d_j\) odd.
+\end{proof}
+\begin{example}
+  We have \[
+    1 \to \{1,z\} \to \tilde{\Sym}_n \to \Sym_n \to 1
+  \]
+  where \(z \in \tilde{\Sym}_n\) is even and central, the subgroup of
+  index \(2\) is \(\tilde{A}_n\), and \[
+    \C\Sym_n^- := \C \tilde{\Sym}_n/\langle z+1 \rangle
+  \]
+  is the spin symmetric group algebra.
+\end{example}
 \begin{bibdiv}
   \begin{biblist}
     \bib{macdonald}{book}{
