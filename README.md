@@ -6,6 +6,7 @@ This is a GitHub repository for me to keep documents I am working on in a public
 
 1. Class notes I have typed up. This way, my peers are able to benefit from whatever I may have put together.
 1. Monographs I write. I write many of these to help me clarify points of confusion I may have about a topic. Then, later, if I need a refresher, these monographs help me remember what I had once learned, but the explanations are in my own words.
+1. Selected notes (and slides, if applicable) for presentations I give. That way, my presentations are available to others.
 
 There are many advantages to making these things public.
 

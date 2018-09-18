@@ -24,6 +24,10 @@
 \newcommand{\m}{\mathfrak{m}}
 \newcommand{\Dom}{\operatorname{Dom}}
 \renewcommand{\O}{\mathcal{O}}
+\newcommand{\cA}{\mathcal{A}}
+\newcommand{\cB}{\mathcal{B}}
+\newcommand{\adjoint}{\dashv}
+
 
 \numberwithin{thm}{section}
 
@@ -519,8 +523,65 @@ do not).
     \implies & fp^m = a_1 g_{x_1} + \cdots + a_r g_{x_r} \in K[X] \\
     \implies & f = \frac{a_1 g_{x_1} + \cdots + a_r g_{x_r}}{p^m} \in S^{-1}K[X]
   \end{align*}
-
 \end{proof}
+\begin{example}
+  Let \(X = \C^2\) and \(U = \C^2 \setminus \{(0,0)\}\). Then, we have
+  \(I = (x,y)\) and, since \(\{(0,0)\} = \{x=0\} \intersect \{y=0\}\),
+  we get \[
+    U = D((x)) \union D((y)) \implies \O_X(U) = \O_X(U_1) \intersect \O_X(U_2)
+  \]
+  where \[
+    \begin{cases}
+      \O_X(U_1) = S_1^{-1}K[x,y] & S_1 = \{1,x,x^2,\ldots\} \\
+      \O_X(U_2) = S_2^{-1}K[x,y] & S_2 = \{1,y,y^2,\ldots\}
+    \end{cases}
+  \]
+  However, this forces \[
+    O_X(U) = S_1^{-1}K[x,y] \intersect S_2^{-1}K[x,y] = K[x,y]
+  \]
+\end{example}
+Now, we observe that \(\catname{Sh}(X)\) is a full subcategory of
+\(\catname{PrSh}(X)\), so we have an embedding \(\catname{Sh}(X) \into
+\catname{PrSh}(X)\). However, many things to construct new sheaves
+from old ones, like cokernel and tensor, land in
+\(\catname{PrSh}(X)\). So, we need a way to go back.
+\begin{thm}
+  For any presheaf \(\F\) on a topological space \(X\), there exists a
+  sheaf \(\F^+\) on \(X\) together with a morphism \(\theta \from \F
+  \to \F^+\) so that, for every sheaf \(\G\) on \(X\) and a morphism
+  \(\phi \from \F \to G\), there exists a unique morphism \(\psi \from
+  \F^+ \to G\) such that the following diagram commutes \[
+    \begin{tikzcd}
+      \F \ar[rd, "\theta"] \ar[rr,"\phi"] & & \G \\
+      & \F^+ \ar[ru, dashed, "\psi"]
+    \end{tikzcd}
+  \]
+  \(\F^+\) is called the sheaf associated with presheaf \(\F\).
+\end{thm}
+\begin{proof}
+  Postponed for now.
+\end{proof}
+Using this universal property, we can take a map of presheaves and
+lift it to a map of their associated sheaves \[
+  \begin{tikzcd}
+    \F \ar[d, "\theta"]\ar[r, "\phi"] \ar[rd, dashed, "\psi"] & \F_1 \ar[d, "\theta_1"]\\
+    \F^+ \ar[r, dotted, "\phi^+"] & \F_1^+
+  \end{tikzcd}
+\]
+This gives us
+\begin{prop}
+  \(\Hom_{\catname{Sh}}(\F^+,G) \isom
+  \Hom_{\catname{PrSh}}(F,G)\). In fact, such an identification is natural.
+\end{prop}
+\begin{defn}
+  Let \(\cA\) and \(\cB\) be categories and let \(S \from \cA \to
+  \cB\)  and \(T \from \cB \to \cA\) be functors. We say \(S\) and
+  \(T\) are \de{adjoint} if, for all \(A \in \cA\) and \(B \in \cB\),
+  there is a natural bijection \[
+    \Hom_{\cB}(SA,B) \isom \Hom_{\cA}(A,TB)
+  \]
+  denoted \(S \adjoint T\).
+\end{defn}
 \begin{bibdiv}
   \begin{biblist}
   \end{biblist}
