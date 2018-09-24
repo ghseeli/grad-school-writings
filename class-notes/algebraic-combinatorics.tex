@@ -562,7 +562,7 @@ with finite support and pairs of semistandard Young tableaux \((\TP,
 \begin{defn}
   Let \(\T = (\T_{i,j})\) be a tableau and \(x\) be a positive
   integer. We define 
-  \de{row insertion}, denoted \(T \leftarrow x\) to be the algorithm,
+  \de{row insertion}, denoted \(\T \leftarrow x\) to be the algorithm,
   that takes \(\T\) and adds a cell labeled \(x\) as follows.
   \begin{enumerate}[label=(\arabic*)]
   \item Go to row \(1\). Pick \(r_1\) such that \(\T_{1,r_1-1} \leq x\)
@@ -573,7 +573,7 @@ with finite support and pairs of semistandard Young tableaux \((\TP,
     \(\T'\). Then, do \(\T' \leftarrow \T_{1,r_1}\) on row \(2\).
   \item Repeat this process until either the bumped entry can be put
     into the end of the row into which it is bumped or until it is
-    bumped out of the bottom row, in which case it will form a new row
+    bumped out of the final row, in which case it will form a new row
     with one entry. 
   \end{enumerate}
 \end{defn}

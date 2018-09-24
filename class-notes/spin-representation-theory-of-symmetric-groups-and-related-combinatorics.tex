@@ -31,6 +31,9 @@
 \renewcommand{\H}{\mathcal{H}}
 \renewcommand{\Q}{\mathcal{Q}}
 \newcommand{\Cl}{\mathcal{C\ell}}
+\newcommand{\OP}{\mathcal{OP}}
+\newcommand{\SP}{\mathcal{SP}}
+
 \numberwithin{thm}{section}
 
 \title[Spin Representation Theory of Symmetric Groups]{Spin
@@ -447,10 +450,122 @@ where \(z^2 = 1\) and \(z\) is central in \(\tilde{G}\). Then,
   \]
   is the spin symmetric group algebra.
 \end{example}
+\section{A Morita Superequivalence}
+Since \(\Sym_n\) acts on \(\Cl_n\) via \(\sigma.c_i = c_{\sigma(i)}\),
+we can define the semidirect product \(\Cl_n \rtimes \C \Sym_n\) with
+multiplication \[
+  (x,\sigma)(y,\tau) = (x \sigma(y), \sigma \tau)
+\]
+\begin{defn}
+  We define the \de{Hecke-Clifford superalgebra} as \[
+    \H := \Cl_n \rtimes \C \Sym_n
+  \]
+  with the \(c_i\) having odd parity and the \(s_j\) having even
+  parity. 
+\end{defn}
+\begin{lem}
+  There exists a superalgebra isomoprhism
+  \begin{align*}
+    \C\Sym_n^- \otimes \Cl_n & \isomto \H_n\\
+    c_i & \mapsto c_i \\
+    t_j & \mapsto \frac{1}{\sqrt{-2}} s_j(c_j-c_{j+1})
+  \end{align*}
+  \todo{Check this last map.}
+\end{lem}
+Recall that \(\Cl_n\) is a simple superalgebra and it has a unique
+simple module \(U_n\). If \(n\) is even, \(U_n\) is of type M and
+if \(n\) is odd, \(U_n\) is of type Q. This leads us to define two
+functors
+\begin{align*}
+  F_n := - \otimes U_n \from \C\Sym_n\catname{-Mod} \to
+  \H_n\catname{-Mod}\\
+  G_n := \Hom_{\Cl_n}(U_n,-) \from \H_n\catname{-Mod} \to \C\Sym_n^-\catname{-Mod}
+\end{align*}
+\begin{lem}
+  \cite{kleshchev}*{Prop 13.2.2}
+  \begin{enumerate}
+  \item If \(n\) is even, then \(F_n \circ G_n \isom id\) and \(G_n
+    \circ F_n \isom id\).
+  \item If \(n\) is odd, then \(F_n \circ G_n \isom id \oplus \pi\)
+    and \(G_n \circ F_n \isom id \oplus \pi\) where \(\pi(M)_i =
+    M_{i+1}\) for all \(i \in \Z/2\Z\). 
+  \end{enumerate}
+\end{lem}
+Thus, because \((F_n \circ G_n)(M) = \Hom_{\Cl_n}(U_n,M) \otimes
+U_n\), we have a (super)Morita equivalence between \(\C\Sym_n^-
+\otimes \Cl_n\) and \(\H_n\).
+\section{A Double Cover \(\tilde{B}_n\)}
+Recall that \(B_n = \Z_2^n \rtimes \Sym_n\). We define
+\begin{defn}
+  \[
+    \Pi_n := \left\langle z,a_1,\ldots,a_n \st
+    \begin{array}{c}
+      z^2 = a_i^2 = 1, \ \forall 1 \leq i \leq n \\
+      a_i a_j = z a_j a_i, \ i \neq j
+    \end{array}
+\right\rangle
+  \]
+\end{defn}
+Then, \(\Sym_n\) acts on \(\Pi_n\) via \(\sigma(z) = z\) and
+\(\sigma(a_i) = a_{\sigma(i)}\). This gives us the short exact
+sequence
+\begin{align*}
+  1 \to \{1,z\} \to \Pi_n \rtimes \Sym_n & \to B_n \to 1\\
+  a_i & \to b_i
+\end{align*}
+and so we define \todo{The flow here is not great.}
+\begin{defn}
+  Let \(\tilde{B}_n\) be the supergroup on \(\Pi_n \rtimes \Sym_n\)
+  with the \(a_i\) odd, \(z\) even, and \(\sigma \in \Sym_n\) even.
+\end{defn}
+Since \(\C\tilde{B}_n/ \langle z+1 \rangle = \H_n\), we wish to
+understand conjugacy classes in \(B_n\). We will do so by example.
+\begin{example}
+  Consider \[
+    x = ((+++-+++-+-),(1234)(567)(89)) \in B_{10}
+  \]
+  As an element of \(\Sym_{10}\), \((1234)(567)(89)\) has cycle type
+  \((4,3,2,1)\), but we wish to assign a parity to each of these
+  cycles. To do so, we look at the \((+,-)\)-array in the first
+  coordinate and take the product of the entries corresponding to the
+  cycle. So, \((1234)\) gets cycle type \(+ \times + \times + \times
+  - = -\) since those are entries \(1,2,3\), and \(4\) in the
+  array. This gives the cycle type as a tuple of partitions \(\rho =
+  (\rho^+, \rho^-)\) and so \(\rho(x) = ((3),(4,2,1))\). Similarly,
+  if \[
+    y = ((+---+---+-),(1386)(279)(45)) \in B_{10}
+  \]
+  then the first cycle has parity \(+ \times - \times - \times - = -\)
+  since those are the \(1,3,6,\) and \(8\) entries of the array. One
+  can check that \(y\) has the same cycle type as \(x\).
+\end{example}
+\begin{lem}
+  Two elements of \(B_n\) are conjugate if and only if their cycle
+  types are the same.
+\end{lem}
+\begin{cor}
+  The number of conjugacy classes in \(B_n\) is \[
+    \#\{(\rho^+,\rho^-) \st |\rho^+|+|\rho^-| = n\}
+  \]
+\end{cor}
+Now, the conjugacy class \(C_{\rho^+,\rho^-}\) is even if \(k\) is
+even for \(\underbrace{b_{i_1} b_{i_2} \ldots b_{i_k}}_{\in \Z_2^n} \sigma \in
+C_{\rho^+,\rho^-}\).
+\begin{thm}[Read]
+  \cite{cheng-wang}*{Theorem 3.31}
+  \begin{enumerate}
+  \item Even \(C_{\rho^+,\rho^-}\) splits if and only if \(\rho^+ \in
+    \OP_n\) and \(\rho^- = \emptyset\)
+  \item Odd \(C_{\rho^+,\rho^-}\) splits if and only if \(\rho^+ =
+    \emptyset\) and \(\rho^- \in \SP_n^- \)
+  \end{enumerate}
+  where \(\SP_n^-\) is all partitions of \(n\) with strict parts and
+  odd length.
+\end{thm}
 \begin{bibdiv}
   \begin{biblist}
-    \bib{chen-wang}{book}{
-      author={Chen, Shun-Jen}
+    \bib{cheng-wang}{book}{
+      author={Cheng, Shun-Jen}
       author={Wang, Weiqiang}
       title={Dualities and Representations of Lie Superalgebras}
       year={2012}
