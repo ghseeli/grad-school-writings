@@ -33,6 +33,8 @@
 \newcommand{\dominates}{\mathrel{\unrhd}}
 \newcommand{\strictlydominates}{\mathrel{\rhd}}
 \newcommand{\diag}{\operatorname{diag}}
+\DeclareMathOperator{\Pf}{Pf}
+\newcommand{\transpose}{t}
 
 \title[Schur \(Q\)-functions]{Schur \(Q\)-functions}
 \author{George H. Seelinger}
@@ -364,6 +366,129 @@ lay some groundwork for \(q_r(x;-1)\).
   0\). When \(\lambda\) has distinct parts, then \(b_\lambda(-1) =
   2^{\ell(\lambda)}\). Thus, we get our result.
 \end{proof}
+\begin{defn}
+  We call \(Q_\lambda(x;-1)\) the \de{Schur-\(Q\)} function indexed by
+  \(\lambda\). 
+\end{defn}
+\begin{prop}
+  The \(\{Q_\lambda\}\) with \(\lambda\) strict form a \(\Z\) basis of \(\Gamma\).
+\end{prop}
+\begin{proof}
+  We have from the previous section that \[
+    Q_\lambda(x;-1) = \prod_{i < j} \frac{1-R_{ij}}{1+R_{ij}} q_\lambda
+  \]
+  and thus \(\{Q_\lambda\}\) is unitriangularly related to the
+  \(\{q_\lambda\}\). This proves the claim.
+\end{proof}
+\subsection{The Pfaffian Definition of the Schur-\(Q\) function (Optional)}
+Originally, Schur defined the Schur-\(Q\) functions using the
+``Pfaffian'' of a matrix (indirectly named after a German
+mathematician Johann Friedrich Pfaff). From a combinatorial
+standpoint, this section is optional, but can paint a nice picture and
+give more intuition for working with Schur-\(Q\) functions.
+\begin{prop}
+  A \(2n \times 2n\) real skew-symmetric matrix \(A\) with eigenvalues
+  \(i\lambda_1, -i\lambda_1, i\lambda_2, -i\lambda_2, \ldots,
+  i\lambda_r, -i\lambda_r\) with \(i = \sqrt{-1}\) and \(\lambda_j \in
+  \R\) can be written in the
+  form \(A = QSQ^\transpose\) where \(Q\) is an orthogonal matrix
+  and \[
+    \def\arraystretch{1.5}
+    S = \left(
+      \begin{tikzcd}[ampersand replacement=\&]
+        \begin{array}{cccc}
+        0&\lambda_1 \\
+          -\lambda_1&0 \\
+          &&0&\lambda_2\\
+          &&-\lambda_2&0
+        \end{array} \ar[rd,dash] \\
+        \&
+        \begin{array}{cccc}
+          0&\lambda_r\\
+          -\lambda_r&0\\
+           &&\ 0&\\
+          &&&\ 0
+        \end{array}\ar[rd,dash] \\
+        \&\&0
+      \end{tikzcd}
+  \right)
+\]
+\end{prop}
+\begin{cor}
+  From the above characterization of a \(2n \times 2n\) skew symmetric matrix \(A\), we
+  have that \(\det A\) is a perfect square.
+\end{cor}
+\begin{defn}
+  The \de{Pfaffian} of a \(2n \times 2n\) skew-symmetric matrix \(A =
+  (a_{ij})_{1 \leq i,j \leq 2n}\) is given by \[
+    \Pf(A) = \sum_{\substack{w \in
+      \Sym_{2n} \\ w(2r-1) < w(2r), 1 \leq r \leq n \\ w(2r-1) < w(2r+1),
+    1 \leq r \leq n-1}} \sgn(w) a_{w(1),w(2)} \cdots a_{w(2n-1)w(2n)}
+  \]
+\end{defn}
+\begin{lem}
+  \[
+    \Pf(A) = \frac{1}{2^n n!}\sum_{w \in \Sym_{2n}} \sgn(w) a_{w(1),w(2)} \cdots a_{w(2n-1)w(2n)}
+  \]
+\end{lem}
+\begin{prop}
+  Given a \(2n \times 2n\) skew-symmetric matrix \(A\), \[
+    (\Pf(A))^2 = \det A
+  \]
+\end{prop}
+\begin{lem}
+  Given \(m\) an even positive integer, denote the Pfaffian of the
+  \(m \times m\) matrix \[
+    P(t_1, \ldots, t_m) = \Pf \left(\frac{t_i-t_j}{t_i+t_j}  \right)_{1 \leq i,j \leq m}
+  \]
+  Then, from the definition of the Pfaffian, we get \[
+    P(t_1, \ldots, t_m) = \sum_{i=2}^m (-1)^i P(t_1, t_i) P(t_2,
+    \ldots, \hat{t_i}, \ldots, t_m)
+  \]
+\end{lem}
+\begin{lem}
+  From the formula in the proof above, we have for \(r > s
+  \geq 0\), \[
+    Q_{(r,s)} = q_r q_s + 2 \sum_{i=1}^s (-1)^i q_{r+i}q_{s-i}
+  \]
+\end{lem}
+\begin{proof}
+  \begin{align*}
+    Q_{(r,s)}(x;-1)
+    & = \prod_{i < j} \frac{1-R_{ij}}{1+R_{ij}} q_{(r,s)} \\
+    & = \prod_{i < j} (1-R_{ij})(1-R_{ij}+R_{ij}^2-R_{ij}^3+\cdots)
+      q_{(r,s)} \\
+    & = \prod_{i < j} (1-2R_{ij}+2R_{ij}^2+\cdots) q_{(r,s)}\\
+    & = q_r q_s + 2 \sum_{i=1}^s (-1)^i q_{r+i}q_{s-i}
+  \end{align*}
+\end{proof}
+\begin{prop}
+  Given \(\lambda\) a strict partition written in the form \(\lambda_1
+  > \lambda_2 > \cdots > \lambda_{2n} \geq 0\), the \(2n \times 2n\)
+  matrix \[
+    M_\lambda := (Q_{(\lambda_i,\lambda_j)})_{i,j}
+  \]
+  is skew-symmetric. Then, \[
+    Q_\lambda(x;-1) = \Pf(M_\lambda) = \sum_{\substack{w \in
+      \Sym_{2n} \\ w(2r-1) < w(2r), 1 \leq r \leq n \\ w(2r-1) < w(2r+1),
+    1 \leq r \leq n-1}} \sgn(w) Q_{\lambda_{w(1)}, \lambda_{w(2)}} \cdots
+    Q_{\lambda_{w(2n-1)} \lambda_{w(2n)}}
+  \]
+\end{prop}
+\begin{cor}
+  We have the following recursive relations for \(Q_\lambda\)
+  \begin{align*}
+    Q_\lambda & = \sum_{j=2}^m (-1)^j Q_{(\lambda_1, \lambda_j)}
+                Q_{(\lambda_2, \ldots, \hat{\lambda_j}, \ldots,
+                \lambda_\ell)} & \text{ for }\ell \text{ even} \\
+    Q_\lambda & = \sum_{j=1}^m (-1)^{j-1} Q_{(\lambda_j)} Q_{(\lambda_1,
+                \ldots, \hat{\lambda_j}, \ldots, \lambda_\ell)}
+                            & \text{ for }\ell\text{ odd}
+  \end{align*}
+\end{cor}
+Note that this description of Schur-\(Q\) functions is somewhat
+difficult to work with by hand, but is natural with respect to
+projective characters of the Symmetric group. 
 \section{Orthogonality}
 When working with the Hall inner product on \(\sym\), one typically
 encounters the Cauchy kernel \[
