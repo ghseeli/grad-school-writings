@@ -30,9 +30,11 @@
 
 \renewcommand{\H}{\mathcal{H}}
 \renewcommand{\Q}{\mathcal{Q}}
-\newcommand{\Cl}{\mathcal{C\ell}}
-\newcommand{\OP}{\mathcal{OP}}
-\newcommand{\SP}{\mathcal{SP}}
+\newcommand{\Cl}{\mathcal{C\ell}} % Clifford algebra
+\newcommand{\OP}{\mathcal{OP}} % Odd partitions
+\newcommand{\SP}{\mathcal{SP}} % Strict partitions
+\newcommand{\CC}{\mathcal{C}} % Conjugacy class
+\DeclareMathOperator{\ch}{ch} 
 
 \numberwithin{thm}{section}
 
@@ -362,8 +364,8 @@ Throughout, let \(G\) be a finite group with index \(2\) subgroup
   We note that, by the usual Artin-Wedderburn theorem, \(\C G\)
   decomposes into a direct sum of simple matrix algebras, each of
   which has a \(1\)-dimensional center and can be indexed by a
-  conjugacy class of \(G\) via \(c_i = \sum_{g \in C_i} g\) where
-  \(C_i\) is a conjugacy class of \(G\). In fact, this shows in the
+  conjugacy class of \(G\) via \(c_i = \sum_{g \in \CC_i} g\) where
+  \(\CC_i\) is a conjugacy class of \(G\). In fact, this shows in the
   classical theory that the number of conjugacy classes of \(G\) equal
   the number of irreducible representations.
   
@@ -450,7 +452,7 @@ where \(z^2 = 1\) and \(z\) is central in \(\tilde{G}\). Then,
   \]
   is the spin symmetric group algebra.
 \end{example}
-\section{A Morita Superequivalence}
+\section{A Morita Superequivalence (presented by Jinkui Wan)}
 Since \(\Sym_n\) acts on \(\Cl_n\) via \(\sigma.c_i = c_{\sigma(i)}\),
 we can define the semidirect product \(\Cl_n \rtimes \C \Sym_n\) with
 multiplication \[
@@ -494,7 +496,7 @@ functors
 Thus, because \((F_n \circ G_n)(M) = \Hom_{\Cl_n}(U_n,M) \otimes
 U_n\), we have a (super)Morita equivalence between \(\C\Sym_n^-
 \otimes \Cl_n\) and \(\H_n\).
-\section{A Double Cover \(\tilde{B}_n\)}
+\section{A Double Cover \(\tilde{B}_n\) (presented by Jinkui Wan)}
 Recall that \(B_n = \Z_2^n \rtimes \Sym_n\). We define
 \begin{defn}
   \[
@@ -548,20 +550,203 @@ understand conjugacy classes in \(B_n\). We will do so by example.
     \#\{(\rho^+,\rho^-) \st |\rho^+|+|\rho^-| = n\}
   \]
 \end{cor}
-Now, the conjugacy class \(C_{\rho^+,\rho^-}\) is even if \(k\) is
+Now, the conjugacy class \(\CC_{\rho^+,\rho^-}\) is even if \(k\) is
 even for \(\underbrace{b_{i_1} b_{i_2} \ldots b_{i_k}}_{\in \Z_2^n} \sigma \in
 C_{\rho^+,\rho^-}\).
 \begin{thm}[Read]
   \cite{cheng-wang}*{Theorem 3.31}
   \begin{enumerate}
-  \item Even \(C_{\rho^+,\rho^-}\) splits if and only if \(\rho^+ \in
+  \item Even \(\CC_{\rho^+,\rho^-}\) splits if and only if \(\rho^+ \in
     \OP_n\) and \(\rho^- = \emptyset\)
-  \item Odd \(C_{\rho^+,\rho^-}\) splits if and only if \(\rho^+ =
+  \item Odd \(\CC_{\rho^+,\rho^-}\) splits if and only if \(\rho^+ =
     \emptyset\) and \(\rho^- \in \SP_n^- \)
   \end{enumerate}
   where \(\SP_n^-\) is all partitions of \(n\) with strict parts and
   odd length.
 \end{thm}
+\begin{defn}
+  For \(\alpha \in \OP_n\), let \(\CC_\alpha^+\) be the split
+  conjugacy class in \(\tilde{B}_n\) satisfying
+  \begin{enumerate}
+  \item \(\CC_\alpha^+ = \theta_n^{-1}(\CC_{\alpha,\emptyset})\)
+  \item There exists \(\sigma \in \CC_\alpha^+\) such that \(\sigma \in
+    \Sym_n\) with cycle type \(\alpha\).
+  \end{enumerate}
+\end{defn}
+\section{A ring structure on \(R^-\) (presented by Jinkui Wan)}
+\begin{defn}
+  We give the following definition
+  \begin{enumerate}
+  \item Let \(R_n^- := [\H_n\catname{-Mod}]\), the Grothendieck group
+    of \(\H_n\catname{-Mod}\).
+  \item Let \(R^- := \bigoplus_{n=0}^\infty R_n^-\) where \(R_0^- =
+    \Z\)
+  \item Let \(R^-_{\mathbb{Q}} = \mathbb{Q} \otimes_\Z R^-\)
+  \item Let \(\H_{m,n}\) be the subalgebra of \(\H_{m+n}\) generated
+    by \(\Cl_{m+n}\) and \(S_m \times S_n\). Note that \(\H_{m,n}
+    \isom \H_m \otimes \H_n\) as a superalgebra.
+  \item Given \(M \in \H_m\catname{-Mod}\) and \(N \in
+    \H_n\catname{-Mod}\), we define \[
+      [M] \cdot [N] := [\Ind_{\H_m \otimes \H_n}^{\H_{m+n}} M \otimes N]
+    \]
+  \end{enumerate}
+\end{defn}
+\begin{prop}
+  \(R^-\) is commutative with respect to the above multiplication.
+\end{prop}
+\begin{defn}
+  Define a bilinear form via \[
+    \langle [M],[N] \rangle := \dim \Hom_{\H_n}(M,N)
+  \]
+  for \(M,N \in \H_n\)
+\end{defn}
+\begin{lem}
+  For \(\phi \in R_n^-\) (viewed as a character of \(\tilde{B}_n\)),
+  set \(\phi_\alpha := \phi(x)\) for any \(x \in \CC_\alpha\). Then,
+  \begin{enumerate}
+  \item For \(\phi \in R_m^-, \psi \in R_n^-\), and \(\gamma \in
+    \OP_{m+n}\), \[
+      (\phi \cdot \psi)_\gamma = \sum_{\substack{\alpha \in \OP_m,
+          \beta \in \OP_n \\ \alpha \union \beta = \gamma}}
+      \frac{z_\gamma}{z_\alpha z_\beta} \phi_\alpha \psi_\beta
+    \]
+    where \(z_\alpha\) is the order of the centralizer of \(\sigma\)
+    of cycle type \(\alpha\) in \(\Sym_n\).
+  \item \[
+      \langle \phi, \psi \rangle = \sum_{\alpha \in \OP}
+      2^{-\ell(\alpha)} z_\alpha^{-1} \phi_\alpha \psi_\alpha
+    \]
+  \end{enumerate}
+\end{lem}
+\begin{prop}
+  The character value vanishes unless you are in an even split
+  conjugacy class.
+\end{prop}
+\section{The ring \(\Gamma\) (presented by Jinkui Wan)}
+\begin{defn}
+  Let \(x = \{x_1, x_2, \ldots\}\).
+  \begin{enumerate}
+  \item Define \(q_r = q_r(x)\) via the generating function
+    \[ Q(t) = \sum_{r \geq 0} q_r(x) t^r = \prod_{i \geq 1}
+      \frac{1+tx_i}{1-tx_i}
+    \]
+  \item Let \(\Gamma\) be the \(\Z\)-subring of the ring of symmetric
+    functions generated by \(q_r\), \(r \geq 0\).
+  \item \(\Gamma_{\mathbb{Q}} := \mathbb{Q} \otimes_\Z \Gamma\)
+  \end{enumerate}
+\end{defn}
+\begin{prop}
+  \begin{enumerate}
+  \item \(\sum_{r+s=n} (-1)^r q_r q_s = 0\) because \(Q(t)Q(-t) = 1\)
+  \item \(q_n = \sum_{\alpha \in \OP_n} 2^{\ell(\alpha)} z_\alpha^{-1}
+    p_\alpha\) where \(p_\alpha = P_{\alpha_1} \cdots
+    p_{\alpha_\ell}\) because \(\ln Q(t) = \sum_{r \text{ odd}}
+    \frac{2 p_r(x) t^r}{r}\).
+  \end{enumerate}
+\end{prop}
+\begin{thm}
+  \begin{enumerate}
+  \item \(\Gamma_{\mathbb{Q}}\) is a polynomial algebra with
+    polynomial generators \(p_{2r-1}\) for \(r \geq 1\).
+  \item \(\{p_\mu \st \mu \in \OP\}\) is a basis for \(\Gamma_{\mathbb{Q}}\)
+  \end{enumerate}
+\end{thm}
+\begin{defn}
+  Let us define inner product on \(\Gamma_{\mathbb{Q}}\) via \[
+    \langle p_\alpha, p_\beta \rangle := 2^{-\ell(\alpha)} z_\alpha
+    \delta_{\alpha \beta}, \forall \alpha, \beta \in \OP
+  \]
+\end{defn}
+\begin{defn}
+  Define the \de{(spin) characteristic map} to be
+  \begin{align*}
+    \ch^- \from R_{\mathbb{Q}}^- & \to \Gamma_{\mathbb{Q}}\\
+    \phi & \mapsto \sum_{\alpha \in \OP_n} z_\alpha^{-1} \phi_\alpha
+           p_\alpha 
+  \end{align*}
+\end{defn}
+\begin{prop}
+  \begin{enumerate}
+  \item \(\ch^-\) is an algebra isomorphism.
+  \item \(\ch^-\) is an isometry (that is, \(\langle \phi,\psi \rangle
+    = \langle \ch^-(\phi), \ch^-(\psi) \rangle\)).
+  \end{enumerate}
+\end{prop}
+Now, we seek to construct the basic spin module.
+\begin{prop}
+  \(\H_n = \Cl_n \rtimes \C \Sym_n\) acts on \(\Cl_n = \Span\{c_I \st
+  I \subset \{1,2,\ldots,n\}\}\) via \[
+    \begin{cases}
+      c_i.(c_{i_1} \cdots c_{i_k}) = c_i c_{i_1} \cdots c_{i_k} \\
+      \sigma.(c_{i_1} \cdots c_{i_k}) = c_{\sigma(i_1)} \cdots
+      c_{\sigma(i_k)} 
+    \end{cases}
+  \]
+  where \(c_i \in \Cl_n\), \(\sigma \in \Sym_n\), and the action is
+  extended by linearity. 
+\end{prop}
+\begin{prop}
+  Let \(\sigma = \sigma_1 \cdots \sigma_\ell\) be a cycle
+  decomposition of \(\sigma\). Then \[
+    \sigma c_I =
+    \begin{cases}
+      \pm c_I & \text{ if }I\text{ is a union of some supports of
+      }\sigma_1, \ldots, \sigma_\ell \\
+      \pm c_J (J \neq I) & \text{ otherwise}
+    \end{cases}
+  \]
+\end{prop}
+\begin{example}
+  Let \(\sigma = (134)(25) \in \Sym_5\). Then, \[
+    \sigma c_3 c_5 = c_4 c_2
+  \]
+  but \[
+    \sigma c_1 c_3 c_4 = c_3 c_4 c_1 = c_1 c_3 c_4
+  \]
+\end{example}
+Thus, the character of this action, say \(\xi^n\), satisfies \[
+  \xi^n(\alpha) = 2^{\ell(\alpha)}, \alpha \in \OP_n
+\]
+and thus \(\ch^-(\xi^n) = \sum_{\alpha \in \OP_n} z_\alpha^{-1}
+2^{\ell(\alpha)} p_\alpha = q_n\).
+\begin{defn}
+ For \(\lambda \in \SP\), we define \(\xi^\lambda\) via the recursive
+ formulas
+ \begin{align*}
+   \xi^{(\lambda_1, \lambda_2)} & = \xi^{\lambda_1} \xi^{\lambda_2} + 2
+   \sum_{i=1}^{\lambda_2}(-1)^i \xi^{\lambda_1 + i} \xi^{\lambda_2 -
+   i} \\
+   \xi^\lambda & =
+   \begin{cases}
+     \sum_{j=2}^k (-1)^j \xi^{(\lambda_1,\lambda_j)} \xi^{(\lambda_2,
+       \ldots, \hat{\lambda}_j, \ldots, \lambda_k)} & k =
+     \ell(\lambda) \text{ is even} \\
+     \sum_{j=1}^k (-1)^{j-1} \xi^{\lambda_j} \xi^{(\lambda_1, \ldots,
+       \hat{\lambda}_j, \ldots, \lambda_k)} & k = \ell(\lambda) \text{
+     is odd}
+   \end{cases}
+ \end{align*}
+\end{defn}
+\begin{thm}
+  \begin{enumerate}
+  \item \(\ch^-(\xi^\lambda) = Q_\lambda\), the Schur-\(Q\) function
+    (to be defined in the next lecture).
+  \item \(\left\{ \zeta^\lambda :=
+      2^{-\frac{\ell(\lambda)-\delta(\lambda)}{2}} \xi^\lambda \st
+      \lambda \in \SP_n \right\}\), where \(\delta(\lambda) =
+    \chi\{\ell(\lambda) \text{ is odd}\}\), is a complete list of
+    simple characters.
+  \item \(\zeta^\lambda\) is of type M if \(\ell(\lambda)\) is even
+    and of type Q if \(\ell(\lambda)\) is odd.
+  \item The degree of \(\zeta^\lambda\) is \[
+      2^{n-\frac{\ell(\lambda)-\delta(\lambda)}{2}}
+      \frac{n!}{\lambda_1! \cdots \lambda_\ell!}\left( \prod_{i<j}
+      \frac{\lambda_i-\lambda_j}{\lambda_i+\lambda_j}\right) 
+    \]
+  \end{enumerate}
+\end{thm}
+\section{Schur-\(Q\) functions and related combinatorics (presented by
+  George H. Seelinger)}
 \begin{bibdiv}
   \begin{biblist}
     \bib{cheng-wang}{book}{
