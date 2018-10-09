@@ -27,7 +27,7 @@
 \newcommand{\cA}{\mathcal{A}}
 \newcommand{\cB}{\mathcal{B}}
 \newcommand{\adjoint}{\dashv}
-
+\DeclareMathOperator{\Supp}{Supp} % Support
 
 \numberwithin{thm}{section}
 
@@ -403,11 +403,11 @@ need that \[
 \begin{defn}
   Let \(X\) be a topological space. For all open sets \(U \subset X\),
   take an open cover (not necessarily finite)  \(U = \Union_{\alpha
-    \in I} U_\alpha\). A presheaf \(\F\) on \(X\) is a sheaf if
+    \in I} U_\alpha\). A presheaf \(\F\) on \(X\) is a \de{sheaf} if
   \begin{enumerate}
-  \item For \(x,t \in \F(U)\) and \(\rho^U_{U_\alpha}(s) =
+  \item[(S1)] For \(x,t \in \F(U)\) and \(\rho^U_{U_\alpha}(s) =
     \rho^U_{U_\alpha}(t)\), then \(s=t\) and
-  \item Given \(s_\alpha \in \F(U_\alpha)\) for \(\alpha \in I\) such that
+  \item[(S2)] Given \(s_\alpha \in \F(U_\alpha)\) for \(\alpha \in I\) such that
     \(\rho^{U_\alpha}_{U_\alpha \intersect U_\beta}(s_\alpha) =
     \rho^{U_\beta}_{U_\alpha \intersect U_\beta}(s_\beta) \), there
     exists an \(s \in \F(U)\) such that \(\rho^U_{U_\alpha}(s) =
@@ -582,6 +582,121 @@ This gives us
   \]
   denoted \(S \adjoint T\).
 \end{defn}
+So, in our setup with \[
+  \catname{PrSh}(X) \to[S] \catname{Sh}(X), \ \catname{Sh}(X) \to[T] \catname{PrSh}(X)
+\]
+since \(TG = G\), we get that \(S\) and \(T\) are adjoint.
+\section{Limits}
+In class, there were several lectures on categorical colimits and
+direct limits that are ommitted here 
+since they are relatively straightforward
+\section{Some Basic Theorems}
+\begin{defn}
+  Given a presheaf \(\F\) on a topological space \(X\), for \(x \in
+  X\), define the \de{stalk at \(x\)} to be \[
+    \F_x := \varinjlim_{U \ni x} \F(U)
+  \]
+  where \(U\) is a neighborhood of \(x\). Elements of the stalk are
+  called \de{germs}. Finally, for all such \(U\), we define the map \[
+    \rho_x^U \from \F(U) \to \F_x
+  \]
+  and, given a homomorphism of presheaves \(\phi \from \F \to \G\), we
+  say \[
+    \phi_x \from \F_x \to \G_x
+  \]
+  is the induced homomorphism.
+\end{defn}
+\begin{lem}
+  Let \(\F\) be a sheaf. Given open \(U \subset X\) and \(s,t \in
+  \F(U)\), if \(\rho_x^U(s) = \rho_x^U(t)\) for all \(x \in U\), then
+  \(s=t\). In other words, \[
+    \F(U) \to \prod_{x \in U} F_x \text{ is injective.}
+  \]
+\end{lem}
+\begin{proof}
+  Let \(\rho_x^U(s) = \rho_x^U(t)\). Then, there exists an open neighborhood
+  \(U_x\) of \(x\) such that \(\rho_{U_x}^U(s) =
+  \rho_{U_x}^U(t)\). Now, \(U = \Union_{x \in U} U_x \implies s=t\) by
+  (S1). 
+\end{proof}
+\begin{cor}
+  Let \(\F\) be a presheaf, \(\G\) a sheaf, and \[
+    \phi_1, \phi_2 \from \F \to \G
+  \]
+  If \(\phi_{1x} = \phi_{2x}\) for all \(x \in X\), then \(\phi_1 =
+  \phi_2\). 
+\end{cor}
+\begin{proof}
+  Consider that \[
+    \rho^U_x(\G)(\phi_{1U}(s)) = \phi_{1x}(\rho_x^U(\F)(s)) =
+    \phi_{2x}(\rho^U_x(\G)(s)) = \rho^U_x(\G)(\phi_{2U}(s))
+  \]
+  Then, by the lemma above, the corollary follows.
+\end{proof}
+\begin{defn}
+  Given a sheaf \(\F\) and \(s \in \F(X)\), we define \[
+    \Supp s := \{x \in X \st \rho^X_x(s) \neq 0\}
+  \]
+\end{defn}
+\begin{prop}
+  \(\Supp s\) is closed in \(X\).
+\end{prop}
+\begin{proof}
+  Let \(x \in X \setminus \Supp s\). Then, \[
+    \rho^X_x(s) = 0 \implies \exists \text{ open } V \ni x \text{ such that }
+    \rho^X_V(s) = 0
+  \]
+  Thus, there is a \(y \in V\) such that \(\rho^X_y(s) = 0\), so \(V
+  \subset X \setminus \Supp s\).
+\end{proof}
+\begin{prop}
+  Let \(\phi \from \F \to \G\) be a morphism of presheaves.
+  \begin{enumerate}
+  \item Assume that \(\F\) is a sheaf. Then \[
+      \phi_x \from \F_x \to \G_x \text{ are injective }\forall x \in X
+      \iff \phi_U \from \F(U) \to \G(U) \text{ are injective }\forall
+      U \subset X
+    \]
+  \item Assume both \(\F\) and \(\G\) are sheaves. Then, \[
+      \phi_x \from \F_x \to \G_x \text{ are bijective }\iff \phi_U
+      \text{ are bijective.}
+    \]
+  \end{enumerate}
+\end{prop}
+\begin{proof}
+  \begin{enumerate}
+  \item For \((\implies)\), let \(s,t \in \F(U)\) with \(\phi_U(s) =
+    \phi_U(t)\). Then, \[
+      \rho^U_x(\phi_U(s)) = \rho^U_x(\phi_U(t)) \iff
+      \phi_x(\rho^U_x(s)) = \phi_x(\rho^U_x(t))
+    \]
+    (where \(\rho^U_x\) has domain for the appropriate
+    (pre)sheaf). Then, since \(\phi_x\) is injective, we have that
+    \(\rho^U_x(s) = \rho^U_x(t)\) and so \(s=t\) by our lemma.
+
+    For \((\impliedby)\), let \(s_x,t_x \in F_x\) and \(\phi_x(s_x) =
+    \phi_x(t_x)\). Then, there exists open set \(U \ni x\) and
+    \(s_U,t_U \in F(U)\) such that \(s_x = \rho^U_x(s_u)\) and \(t_x =
+    \rho^U_x(t_u)\). However, from the definition of the stalk of
+    \(G\), there 
+    exists an open set \(V\) such that \(x \in V \subset U\) with \[
+      \rho^U_V(\phi_U(s_U)) = \rho^U_V(\phi_U(t_U)) \iff
+      \phi_V(\rho^U_V(s_U)) = \phi_V(\rho^U_V(t_U))
+    \]
+    and so, by the injectivity of \(\phi_V\), \(\rho^U_V(s_U) =
+    \rho^U_V(t_U)\). Thus, by our lemma, \(s_U = t_U\).
+  \item For \((\implies)\), we have by the first part that the
+    \(\phi_U\) are injective, and thus only need to show
+    surjectivity. Let \(t \in \G(U)\) and let \(x \in U\). Then, by
+    the surjectivity of \(\phi_x\), there
+    exists an \(s_x \in \F_x\) such that \[
+      \rho^U_x(G)(t) = \phi_x(s_x)
+    \]
+    Now, by definition of \(\phi_x\),  there is some \(s_{U_x} \in U_x
+    \subset U\) such
+    that \(\phi_{U_x}(s_{U_x}) = \phi_{U_x}(t)\). \todo{Finish this proof!}
+  \end{enumerate}
+\end{proof}
 \begin{bibdiv}
   \begin{biblist}
   \end{biblist}
