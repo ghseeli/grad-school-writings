@@ -15,11 +15,10 @@
 \newcommand{\Res}{\operatorname{Res}}
 \newcommand{\Ind}{\operatorname{Ind}}
 \newcommand{\bs}{\textbackslash}
-\newcommand{\partitionof}{\vdash}
-\newcommand{\T}{\mathsf{T}} % Tableau
-\renewcommand{\S}{\mathsf{S}}
-\renewcommand{\F}{F}
+\renewcommand{\F}{F} % Sheaves
 \newcommand{\G}{G}
+\renewcommand{\H}{H}
+\newcommand{\K}{K}
 \newcommand{\cF}{\mathcal{F}}
 \newcommand{\m}{\mathfrak{m}}
 \newcommand{\Dom}{\operatorname{Dom}}
@@ -404,10 +403,10 @@ need that \[
   Let \(X\) be a topological space. For all open sets \(U \subset X\),
   take an open cover (not necessarily finite)  \(U = \Union_{\alpha
     \in I} U_\alpha\). A presheaf \(\F\) on \(X\) is a \de{sheaf} if
-  \begin{enumerate}
-  \item[(S1)] For \(x,t \in \F(U)\) and \(\rho^U_{U_\alpha}(s) =
+  \begin{enumerate}[label=(S\arabic*)]
+  \item\label{sheaf-1} For \(x,t \in \F(U)\) and \(\rho^U_{U_\alpha}(s) =
     \rho^U_{U_\alpha}(t)\), then \(s=t\) and
-  \item[(S2)] Given \(s_\alpha \in \F(U_\alpha)\) for \(\alpha \in I\) such that
+  \item\label{sheaf-2} Given \(s_\alpha \in \F(U_\alpha)\) for \(\alpha \in I\) such that
     \(\rho^{U_\alpha}_{U_\alpha \intersect U_\beta}(s_\alpha) =
     \rho^{U_\beta}_{U_\alpha \intersect U_\beta}(s_\beta) \), there
     exists an \(s \in \F(U)\) such that \(\rho^U_{U_\alpha}(s) =
@@ -649,7 +648,7 @@ since they are relatively straightforward
   Thus, there is a \(y \in V\) such that \(\rho^X_y(s) = 0\), so \(V
   \subset X \setminus \Supp s\).
 \end{proof}
-\begin{prop}
+\begin{prop}\label{inj-and-bij-lift-from-stalk}
   Let \(\phi \from \F \to \G\) be a morphism of presheaves.
   \begin{enumerate}
   \item Assume that \(\F\) is a sheaf. Then \[
@@ -685,7 +684,9 @@ since they are relatively straightforward
     \]
     and so, by the injectivity of \(\phi_V\), \(\rho^U_V(s_U) =
     \rho^U_V(t_U)\). Thus, by our lemma, \(s_U = t_U\).
-  \item For \((\implies)\), we have by the first part that the
+  \item For \((\impliedby)\), \todo{Do this exercise}
+
+    For \((\implies)\), we have by the first part that the
     \(\phi_U\) are injective, and thus only need to show
     surjectivity. Let \(t \in \G(U)\) and let \(x \in U\). Then, by
     the surjectivity of \(\phi_x\), there
@@ -696,6 +697,83 @@ since they are relatively straightforward
     \subset U\) such
     that \(\phi_{U_x}(s_{U_x}) = \phi_{U_x}(t)\). \todo{Finish this proof!}
   \end{enumerate}
+\end{proof}
+\todo{Insert stuff about direct limits and exactness}
+\begin{defn}
+  Given \(\F,\G,\H\) all presheaves of abelian groups and \(\phi \from
+  \F \to \G\) and \(\psi \from \G \to \H\) morphisms. Then, we say \[
+    \F \to[\phi] \G \to[\psi] \H
+  \]
+  is \de{exact in the category of presheaves} if \[
+    \F(U) \to[\phi_U] \G(U) \to[\psi_U] \H(U)
+  \]
+  is exact for every open set \(U \subset X\).
+\end{defn}
+\begin{cor}
+  If \[
+    \F \to[\phi] \G \to[\psi] \H
+  \] is exact in \(\catname{PrSh}\),
+  then, for every point \(x \in X\), \[
+    \F_x \to[\phi_x] \G_x \to[\psi_x] \H_x
+  \]
+  is also exact. In particular, if \[
+    0 \to \F \to[\phi] \G \to[\psi] \H \to 0
+  \]
+  is exact, then, for all \(x \in X\), \[
+    0 \to \F_x \to[\phi_x] \G_x \to[\psi_x] \H_x \to 0
+  \]
+\end{cor}
+\begin{defn}
+  A sequence of sheaves \[
+    \F \to[\phi] \G \to[\psi] \H
+  \] is \de{exact in
+  \(\catname{Sh}\)} if \[
+    \F_x \to[\phi_x] \G_x \to[\psi_x] \H_x
+  \]
+  is exact for every \(x \in X\).
+\end{defn}
+\begin{thm}
+  Let \[
+    0 \to \F \to \G \to \H
+  \]
+  be an exact sequence of sheaves. Then, for every open \(U \subset
+  X\), \[
+    0 \to \F(U) \to[\phi_U] \G(U) \to[\psi_U] \H(U)
+  \]
+  is exact.
+\end{thm}
+\begin{proof}
+  The exactness at \(\F(U)\) follow from the fact that \[
+    0 \to \F_x \to \G_x \to \H_x
+  \]
+  is exact and the above proposition
+  \ref{inj-and-bij-lift-from-stalk}.
+
+  The exactness at \(\G(U)\) requires the following lemma.
+  \begin{lem}
+    Let \(\K(U) = \ker \psi_U\). Then, \(\K\) is a sheaf and \(\K_x =
+    \ker(\G_x \to[\psi_x] \H_x)\).
+  \end{lem}
+  \begin{proof}[Proof of Lemma]
+    Take \(U = \Union_{\alpha \in I} U_\alpha\). Then, for \(s \in
+    \K(U) \subset \G(U)\), if
+    \(\rho^U_{U_\alpha}(s) = 0\) for all \(\alpha \in I\), then \(s 
+    = 0\) because \(\G\) is a sheaf. Thus, \(\K(U)\) satisfies
+    \ref{sheaf-1}.
+
+    Now take \(s_\alpha \in \K(U_\alpha) \subset \G(U_\alpha)\) such
+    that \(\rho^{U_\alpha}_{U_\alpha \intersect U_\beta}(s_\alpha) =
+    \rho^{U_\beta}_{U_\alpha \intersect U_\beta}(s_\beta)\). Then,
+    since \(\G\) is a sheaf, there exists \(s \in \G(U)\) such that
+    \(\rho^U_{U_\alpha}(s) = s_\alpha\) for all \(\alpha\). From this,
+    we get \[
+      \rho^U_{U_\alpha}(\H)(\psi_U(s)) = \psi_{U_\alpha}(s_\alpha) = 0
+      \implies \psi_U(s) = 0 \implies s \in \K(U)
+    \]
+    thus giving us that \(\K\) satisfies \ref{sheaf-2}.
+  \end{proof}
+  \todo{Finish this proof and maybe try to understand the proof of the
+  lemma better.}
 \end{proof}
 \begin{bibdiv}
   \begin{biblist}

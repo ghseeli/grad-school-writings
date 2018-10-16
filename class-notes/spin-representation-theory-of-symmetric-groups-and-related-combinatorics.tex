@@ -34,6 +34,7 @@
 \newcommand{\OP}{\mathcal{OP}} % Odd partitions
 \newcommand{\SP}{\mathcal{SP}} % Strict partitions
 \newcommand{\CC}{\mathcal{C}} % Conjugacy class
+\DeclareMathOperator{\Supp}{Supp}
 \DeclareMathOperator{\ch}{ch} 
 
 \numberwithin{thm}{section}
@@ -747,6 +748,127 @@ and thus \(\ch^-(\xi^n) = \sum_{\alpha \in \OP_n} z_\alpha^{-1}
 \end{thm}
 \section{Schur-\(Q\) functions and related combinatorics (presented by
   George H. Seelinger)}
+\section{Center of Symmetric Group Algebras and Spin Symmetric Group
+  Algebras (presented by Jinkui Wan)}
+\subsection{Garahat-Higman's Construction for \(\Sym_n\)}
+Given a permutation \(\sigma\), we note that its cycle type is not
+stable under inclusion from \(\Sym_n \into \Sym_{n+1}\).
+\begin{example}
+  Let \(\sigma = (134)(2576) \in \Sym_8\). Then, \(\sigma\) has cycle
+  type \[
+    (4,3,1) = \ydiagram{4,3,1}
+  \]
+  but, when included into \(\Sym_n9\), \(\sigma\) has cycle type \[
+    (4,3,1,1) = \ydiagram{4,3,1,1}
+  \]
+\end{example}
+\begin{defn}
+  Given a cycle \(\sigma \in \Sym_n\), its \de{modified cycle type},
+  \(\lambda\), is given by removing the first column from its cycle
+  type. 
+\end{defn}
+\begin{example}
+  The modified cycle type of \(\sigma = (134)(2576) \in \Sym_8\) is
+  \(\lambda = (3,2)\). Note that this is stable with respect to
+  \(\Sym_8 \into \Sym_9\).
+\end{example}
+\begin{prop}
+  \begin{enumerate}
+  \item If \(\sigma\) is of modified type \(\lambda\), then
+    \(|\lambda|\) is the minimal length for \(\sigma\) as a product of
+    (not necessarily simple) transpositions.
+  \item If \[
+      \begin{cases}
+        \sigma \text{ is of modified type }\lambda\\
+        \tau \text{ is of modified type }\mu\\
+        \sigma\tau \text{ is of modified type }\nu
+      \end{cases},
+      \text{ then } |\nu| \leq |\lambda| + |\mu|
+    \]
+  \end{enumerate}
+\end{prop}
+\begin{example}
+  \((134) = (13)(34)\) and has modified type \((2)\).
+\end{example}
+\begin{defn}
+  \begin{enumerate}
+  \item Let \(\CC_\lambda(n)\) be the conjugacy class of \(\Sym_n\) of
+    modified type \(\lambda\). Note \(\CC_\lambda(n) = \emptyset\) if
+    \(n < |\lambda|+\ell(\lambda)\).
+  \item Let \[
+      C_\lambda(n) :=
+      \begin{cases}
+        \text{Class sum of }\CC_\lambda(n) & \text{ if } n \geq
+        |\lambda|+\ell(\lambda) \\
+        0 & \text{ otherwise}
+      \end{cases}
+    \]
+  \end{enumerate}
+\end{defn}
+\begin{prop}
+  \(\{C_\lambda(n) \st |\lambda|+\ell(\lambda) \leq n\}\) is a basis
+  for \(Z(\Z \Sym_n)\). 
+\end{prop}
+\begin{defn}
+  Write \[
+    C_\lambda(n) C_\mu(n) = \sum A_{\lambda \mu}^\nu(n) C_\nu(n)
+  \]
+\end{defn}
+\begin{example}
+  \[
+    C_{(1)}(n) C_{(1)}(n) = 3 C_{(2)}(n) + 2 C_{(1,1)}(n) +
+    \frac{1}{2}n(n-1) C_0(n)
+  \]
+\end{example}
+\begin{thm}[Farat-Higman]
+  Let \(\lambda,\mu,\nu\) be partitions. Then,
+  \begin{enumerate}
+  \item There is a unique polynomial \(f_{\lambda \mu}^\nu(x) \in
+    \Q[x]\) such that \(a_{\lambda \mu}^\nu(n) = f_{\lambda
+      \mu}^\nu(n)\) for all \(n \geq |\nu|+\ell(\nu)\).
+  \item \(f_{\lambda \mu}^\nu(x) = 0\) unless \(|\nu| \leq
+    |\lambda|+|\mu|\)
+  \item If \(|\nu| = |\lambda|+|\mu|\), then \(f_{\lambda
+      \mu}^\nu(x)\) is a constant. In other words, \(a_{\lambda
+      \mu}^\nu(n)\) is independent of \(n\).
+  \end{enumerate}
+\end{thm}
+\begin{proof}[Proof Idea]
+  Let \(\Gamma = \{(\sigma,\tau) \st \sigma \in \CC_\lambda(n), \tau
+  \in \CC_\mu(n), \sigma \tau \in \CC_\nu(n)\}\). Then, once
+  computes \[
+    a_{\lambda \mu}^\nu(n) = \frac{\# \Gamma}{\# \CC_\lambda(n)}
+  \]
+  If we let \(\Sym_n\) act on \(\Gamma\) by conjugation, that is
+  \(\gamma.(\sigma,\tau) = (\gamma \sigma \gamma^{-1}, \gamma \tau
+  \gamma^{-1})\), then we get that \[
+    \Gamma = \Gamma_1 \union \Gamma_2 \union \cdots \union \Gamma_k
+  \]
+  Without loss of generality, take \((\sigma_1, \tau_1) \in
+  \Gamma_1\). Then, \[
+    \# \Gamma_1 = \frac{n!}{\#\text{ of centralizers of
+      }(\sigma_1,\tau_1)\text{ in }\Sym_n}
+  \]
+  Suppose \(\gamma.(\sigma_1,\tau_1) = (\sigma_1,\tau_1)\). Then, \[
+    \gamma \sigma_1 \gamma^{-1} = \sigma_1 \text{ and } \gamma \tau_1
+    \gamma^{-1} = \tau_1
+  \]
+  Thus, \[
+    \gamma \in \Sym_{\Supp(\sigma_1,\tau_1)} \times
+    \Sym_{\{1,\ldots,n\} \setminus \Supp(\sigma_1, \tau_1)}
+  \]
+  where \(\Supp(\sigma_1,\tau_1) = \{j \in \{1,\ldots,n\} \st
+  \sigma_1(j) \neq j \text{ or }\tau_1(j) \neq j\}\). So, \[
+    \# \text{ centralizers of }(\sigma_1, \tau_1)\text{ in }\Sym_n =
+    \# \text{ centralizers of }(\sigma_1, \tau_1)\text{ in
+    }\Sym_{\Supp(\sigma_1,\tau_1)} \times (n - \# \Supp(\sigma_1,\tau_1))!
+  \]
+  Thus, using our formula above for \(a_{\lambda \mu}^\nu\), we arrive
+  at \todo{Finish this formula}\[
+    a_{\lambda \mu}^\nu(n) = \frac{\sum_i \# \Gamma_i}{\#
+      \CC_\lambda(n)} = 
+  \]
+\end{proof}
 \begin{bibdiv}
   \begin{biblist}
     \bib{cheng-wang}{book}{
