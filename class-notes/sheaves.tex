@@ -605,6 +605,30 @@ since they are relatively straightforward
   \]
   is the induced homomorphism.
 \end{defn}
+While it is easy to say \(\phi_x \from \F_x \to \G_x\) is the induced
+homomorphism (and well-defined), it is worth thinking about how via
+this commutative diagram exhibiting the universal property of \(\varinjlim
+\F(U)\): \[
+    \begin{tikzcd}
+      \F(U) \ar[dd, "\rho^U_V"] \ar[rd, "\rho^U_x"] \ar[rr, "\phi_U"] & & \G(U)
+      \ar[rd] \ar[dd]\\
+      & \F_x = \varinjlim \F(U) \ar[rr, dashed]& & \G_x\\
+      \F(V) \ar[ru, "\rho^V_x"] \ar[rr, "\phi_V"] & & \G(V) \ar[ru]
+    \end{tikzcd}
+  \]
+From this, we list a few consequences of the colimit consturction in
+this setting.
+\begin{prop}\todo{Double check these are true.}
+  \begin{enumerate}
+  \item Given an \(s \in \F_x\), there exists some open neighborhood
+    \(U\) of \(x\) and some \(t \in U\) such that \(\rho^U_x(t) = s\).
+  \item Given a homomorphism of presheaves \(\phi \from \F \to \G\),
+    we have \[
+      \rho^U_x(\G) \circ \phi_U = \phi_x \circ \rho^U_x(\F)
+    \]
+    from the commutative diagram.
+  \end{enumerate}
+\end{prop}
 \begin{lem}
   Let \(\F\) be a sheaf. Given open \(U \subset X\) and \(s,t \in
   \F(U)\), if \(\rho_x^U(s) = \rho_x^U(t)\) for all \(x \in U\), then
@@ -684,18 +708,85 @@ since they are relatively straightforward
     \]
     and so, by the injectivity of \(\phi_V\), \(\rho^U_V(s_U) =
     \rho^U_V(t_U)\). Thus, by our lemma, \(s_U = t_U\).
-  \item For \((\impliedby)\), \todo{Do this exercise}
+  \item For both parts, we need only show surjectivity. 
 
-    For \((\implies)\), we have by the first part that the
-    \(\phi_U\) are injective, and thus only need to show
-    surjectivity. Let \(t \in \G(U)\) and let \(x \in U\). Then, by
+    For \((\impliedby)\), given \(s_x \in \G_x\), there exists a
+    neighborhood \(U_x\) and an
+    \(s \in \G(U_x)\) such that \(\rho^{U_x}_x(s) = s_x\). Since
+    \(\phi_{U_x}\) is surjective, then there is a \(t \in \F(U_x)\)
+    such that \(\phi_{U_x}(t) = s\). Thus, \[
+      \phi_x(\rho^{U_x}_x(t)) = \rho^{U_x}_x(\phi_{U_x}(t)) =
+      \rho^{U_x}_x(s) = s_x
+    \]
+    and so \(\phi_x\) is surjective. 
+
+    For \((\implies)\), let \(t \in \G(U)\) and let \(x \in U\). Then, by
     the surjectivity of \(\phi_x\), there
     exists an \(s_x \in \F_x\) such that \[
-      \rho^U_x(G)(t) = \phi_x(s_x)
+      \rho^U_x(t) = \phi_x(s_x)
     \]
     Now, by definition of \(\phi_x\),  there is some \(s_{U_x} \in U_x
     \subset U\) such
-    that \(\phi_{U_x}(s_{U_x}) = \phi_{U_x}(t)\). \todo{Finish this proof!}
+    that \(\phi_{U_x}(s_{U_x}) = \phi_{U_x}(t)\). 
+    \[
+      \hspace{-0.5in}
+      \begin{tikzcd}
+        & \F(U) \ar[ld] \ar[dd, "\rho^U_x"]\ar[r, "\phi_U", hookrightarrow]&
+        \G(U) \ar[dd, "\rho^U_x"] \ar[rd]\\
+        \F(U_x) \ar[rd, "\rho^{U_x}_x"] & & & \G(U_x) \ar[ld] \\
+        & \F_x \ar[r, "\phi_x", twoheadrightarrow, hook]& \G_x
+      \end{tikzcd}
+      \rightsquigarrow
+      \begin{tikzcd}
+        & &t \ar[dd,mapsto, "\rho^U_x"] \\
+        s_{U_x} \ar[rd,mapsto, "\rho^{U_x}_x"]& & &
+        \phi_{U_x}(s_{U_x}) \ar[ld, mapsto]\\
+        & s_x \ar[r, mapsto, "\phi_x"]& \phi_x(s_x) = \rho^U_x(t)
+      \end{tikzcd}
+    \]
+    Note that \(\phi_{U_x}(s_{U_x})\) gives the same element in
+    \(\G_x\) as \(t\) under the appropriate restriction maps. So,
+    there exists a \(V_x \subset U_x \subset U\) such that, for \(s_{V_x} =
+    \rho^{U_x}_{V_x}(s_{U_x})\), \[
+      \phi_{V_x}(s_{V_x}) = \rho^U_{V_x}(t)
+    \]
+    Now, in order to glue this into a section in \(\F(U)\), we need to
+    check the 
+    gluing condition. Namely, we want to show
+    \(\rho^{V_{x_1}}_{V_{x_1} \intersect V_{x_2}}(s_{V_{x_1}}) =
+    \rho^{V_{x_2}}_{V_{x_1} \intersect V_{x_2}}(s_{V_{x_2}})\) for any
+    \(x_1, x_2 \in U\) (where \(U = \Union_{x \in U}
+    V_x\)). Consider \[
+      \rho^{V_{x_1}}_{V_{x_1} \intersect
+        V_{x_2}}(\phi_{V_{x_1}}(s_{V_{x_1}}))  =
+      \rho^{V_{x_1}}_{V_{x_1} \intersect V_{x_2}}(\rho^U_{V_{x_1}}(t))
+      = \rho^{V_{x_2}}_{V_{x_1} \intersect
+        V_{x_2}}(\rho^U_{V_{x_2}}(t)) = \rho^{V_{x_2}}_{V_{x_1} \intersect
+        V_{x_2}}(\phi_{V_{x_2}}(s_{V_{x_2}}))
+    \]
+    However, we can then commute our homomorphism and restriction to
+    get \[
+      \hspace{-0.5in} \rho^{V_{x_1}}_{V_{x_1} \intersect
+        V_{x_2}}(\phi_{V_{x_1}}(s_{V_{x_1}})) = \rho^{V_{x_2}}_{V_{x_1} \intersect
+        V_{x_2}}(\phi_{V_{x_2}}(s_{V_{x_2}})) \implies \phi_{V_{x_1}
+        \intersect V_{x_2}}(\rho^{V_{x_1}}_{V_{x_1} \intersect
+        V_{x_2}}(s_{v_{x_1}})) = \phi_{V_{x_1}
+        \intersect V_{x_2}}(\rho^{V_{x_2}}_{V_{x_1} \intersect
+        V_{x_2}}(s_{v_{x_2}})) 
+    \]
+    However, by part (a), \(\phi_{V_{x_1} \intersect V_{x_2}}\) is
+    injective. Thus, we get \[
+      \rho^{V_{x_1}}_{V_{x_1} \intersect
+        V_{x_2}}(s_{v_{x_1}}) = \rho^{V_{x_2}}_{V_{x_1} \intersect
+        V_{x_2}}(s_{v_{x_2}})
+    \]
+    Then, since \(\F\) is a sheaf, there exists an \(s \in \F(U)\)
+    such that \(\rho^U_{V_x}(s) = s_{V_x}\). In conclusion, we observe
+    that \[
+      \rho^U_{V_x}(t) = \phi_{V_x}(s_{V_x}) =
+      \phi_{V_x}(\rho^U_{V_x}(s)) = \rho^U_{V_x}(\phi_U(s))
+    \]
+    and so, because \(G\) is a sheaf, \(\phi_U(s) = t\).
   \end{enumerate}
 \end{proof}
 \todo{Insert stuff about direct limits and exactness}
