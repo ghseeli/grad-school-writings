@@ -34,8 +34,12 @@
 \newcommand{\OP}{\mathcal{OP}} % Odd partitions
 \newcommand{\SP}{\mathcal{SP}} % Strict partitions
 \newcommand{\CC}{\mathcal{C}} % Conjugacy class
+\newcommand{\partitions}{\mathcal{P}} % Partitions
+\newcommand{\B}{\mathbb{B}}
+\newcommand{\K}{\mathcal{K}}
 \DeclareMathOperator{\Supp}{Supp}
 \DeclareMathOperator{\ch}{ch} 
+\DeclareMathOperator{\gr}{gr}
 
 \numberwithin{thm}{section}
 
@@ -750,7 +754,7 @@ and thus \(\ch^-(\xi^n) = \sum_{\alpha \in \OP_n} z_\alpha^{-1}
   George H. Seelinger)}
 \section{Center of Symmetric Group Algebras and Spin Symmetric Group
   Algebras (presented by Jinkui Wan)}
-\subsection{Garahat-Higman's Construction for \(\Sym_n\)}
+\subsection{Farahat-Higman's Construction for \(\Sym_n\)}
 Given a permutation \(\sigma\), we note that its cycle type is not
 stable under inclusion from \(\Sym_n \into \Sym_{n+1}\).
 \begin{example}
@@ -866,9 +870,56 @@ stable under inclusion from \(\Sym_n \into \Sym_{n+1}\).
   Thus, using our formula above for \(a_{\lambda \mu}^\nu\), we arrive
   at \todo{Finish this formula}\[
     a_{\lambda \mu}^\nu(n) = \frac{\sum_i \# \Gamma_i}{\#
-      \CC_\lambda(n)} = 
+      \CC_\lambda(n)}
   \]
 \end{proof}
+\begin{defn}
+  \begin{enumerate}
+  \item  Let \(\B\) be the ring of polynomials \(f(x) \in \mathcal{Q}[x]\) such that
+  \(f(n) \in \Z\) for all \(n \in \Z\).
+  \item Let \(\K\) be the \(\B\)-algebra with basis \(\{c_\lambda \st
+    \lambda \in \partitions\}\) such that \[
+      c_\lambda c_\mu := \sum_{\nu \in \partitions} f_{\lambda
+        \mu}^\nu(x) c_\nu
+    \]
+    We call this ring the \de{Farahat-Higman ring}.
+  \end{enumerate}
+\end{defn}
+\begin{prop}
+  We have the following facts
+  \begin{enumerate}
+  \item \(\K\) is commutative and associative.
+  \item \(\K\) is filtered via \(\deg(c_\lambda) = |\lambda|\) for all
+    \(\lambda \in \partitions\).
+  \end{enumerate}
+\end{prop}
+\begin{defn}
+  Let \(\gr \K\) be the graded algebra.
+\end{defn}
+\begin{prop}
+  Let \(\lambda = (i^{m_i(\lambda)})_{i \geq 1}\) \todo{How does htis
+    make sense. \(\lambda\) depends on itself...}. Then, the top
+  degree of \(c_\lambda c_{(s)}\) is given by \[
+    (c_\lambda c_{(s)})^* = \sum_{\mu \subset \lambda, \ell(\mu) \leq
+      s+1} \frac{(m_{s+|\mu|}(\lambda)+1)(s+|\mu|+1)s!}{(s+1-\ell(\mu))!
+    \prod_{i \geq 1} m_i(\mu)!} c_{\lambda \union(s+|\mu|) - \mu}
+  \]
+\end{prop}
+\begin{rmk}
+  \(\mu = (i^{m_i(\mu)}) \subset \lambda \iff m_i(\mu) \leq
+  m_i(\lambda) \ \forall i \geq i\).
+\end{rmk}
+\begin{example}
+  Consider cycles \(\sigma = (134)(2567)(8)\) and \(\tau =
+  (28)\). Then, \(\lambda = (3,2)\) is the modified cycle type of
+  \(\sigma\) and \(s=1\) gives the modified cycle type of
+  \(\tau\). Then, \[
+    \sigma \tau = (134)(28567)
+  \]
+  which has modified cycle type \((4,2) = (3,2) \union (3+|(3)|) -
+  (3)\). This is in line with \todo{What is even going on in this
+    example?}
+\end{example}
 \begin{bibdiv}
   \begin{biblist}
     \bib{cheng-wang}{book}{
