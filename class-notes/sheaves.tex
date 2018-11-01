@@ -837,10 +837,18 @@ this setting.
   The exactness at \(\F(U)\) follow from the fact that \[
     0 \to \F_x \to \G_x \to \H_x
   \]
-  is exact and the above proposition
+  is exact by definition of the exactness of sheaves and the above
+  proposition 
   \ref{inj-and-bij-lift-from-stalk}.
 
-  The exactness at \(\G(U)\) requires the following lemma.
+  For exactness of \(\G(U)\), first consider \(s \in \F(U)\). Then,
+  for every \(x \in U\), we get \[
+    \rho^U_x(\psi_U(\psi_U(s))) = \psi_x(\phi_x(\rho^U_x(s))) = 0
+  \]
+  because \(\phi_x \circ \phi_x = 0\) by the exactness
+  assumption. Thus, \(\psi_U \circ \phi_U = 0\) and so \(\phi_U(\F(U))
+  \subset \ker \psi_U\). To show the other inclusion, we require the
+  following lemma. 
   \begin{lem}
     Let \(\K(U) = \ker \psi_U\). Then, \(\K\) is a sheaf and \(\K_x =
     \ker(\G_x \to[\psi_x] \H_x)\).
@@ -863,8 +871,59 @@ this setting.
     \]
     thus giving us that \(\K\) satisfies \ref{sheaf-2}.
   \end{proof}
-  \todo{Finish this proof and maybe try to understand the proof of the
-  lemma better.}
+  So now we wish to check if \(\phi_U(\F(U)) \subset \K(U)\). From the
+  lemma, we get that \[
+    \phi_x(\F_x) = \ker \psi_x = K_x \implies \phi_x \from \F_x \to
+    \K_x \text{ is an isomorphism for all }x
+  \]
+  and so, by \ref{inj-and-bij-lift-from-stalk}, \(\phi\) is an
+  isomorphism of the sheaves \(\F\) 
+  and \(\K\). 
+  \todo{Finish this proof.}
+\end{proof}
+A question to ask is \[
+  \text{When does }0 \to \F \to \G \to \H \to 0 \text{ exact }\implies
+  0 \to \F(U) \to \G(U) \to \H(U) \to 0 \text{ exact?}
+\]
+Given some surjection \(\G_x \onto \H_x\), some \(t \in \H(U)\), then
+for every \(x \in U\), there is a neighborhood \(U_x \subset U\) and
+\(s \in \G(U_x)\) such that \(\psi_{U_x}(s) = \rho^U_{U_x}(t)\). In
+other words, we have some local lift. Can we glue all these local
+lifts together? Sometimes not. 
+\begin{defn}
+  Let \(\F\) be a sheaf on \(X\). \(\G\) is called \de{flasque} (or
+  \de{flabby}) if the restriction maps \(\rho^U_V \from \F(U) \to
+  \F(V)\) are all surjective.
+\end{defn}
+In particular, for a flasque sheaf, \(\rho^X_V \from \F(X) \to \F(V)\)
+is surjective.
+\begin{examples}
+  \begin{enumerate}
+  \item The skyscraper sheaf is flasque.
+  \item \todo{Check this} The sheaf of smooth functions on a connected
+    differentiable manifold. 
+  \end{enumerate}
+\end{examples}
+\begin{thm}
+  Let \[
+    0 \to \F \to[\phi] \G \to[\psi] \H \to 0
+  \]
+  be an exact sequence of sheaves. If \(\F\) is flasque, then \[
+    0 \to \F(X) \to[\phi_X] \G(X) \to[\psi_X] \H(X) \to 0
+  \]
+  is exact. If, in addition, \(\G\) is flasque, then \(\H\) is flasque
+\end{thm}
+\begin{rmk}
+  \(X\) can be replaced with any open set \(U \subset X\) and the
+  result still holds.
+\end{rmk}
+\begin{proof}
+  By the previous theorem, we need only show \(\psi_U\) is
+  surjective. Let \(t \in \H(X)\). Then, for all \(x \in X\), there
+  exists an open 
+  neighborhood \(U\) with \(x
+  \in U, s \in \G(U)\) such that \(\psi_U(s) = \rho^X_U(t)\) by the
+  surjectivity of the stalks. 
 \end{proof}
 \begin{bibdiv}
   \begin{biblist}
