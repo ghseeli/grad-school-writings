@@ -2888,7 +2888,8 @@ proof.
     \ch V = \sum_{\mu} \dim V_{\mu} e_\mu \in \Z[\weightlattice] 
   \]
   where the sum is over all weights of \(V\) and \(e_\mu(\lambda) =
-  \delta_{\mu \lambda}\).
+  \delta_{\mu \lambda}\). \todo{Explain the ring structure here; the
+    multiplication is not clear.}
 \end{defn}
 \begin{prop}
   Let \(V,V_1,V_2\) be \(\g\)-modules that admit characters. Then,
@@ -2985,7 +2986,7 @@ We state the following theorem without proof.
   L(w \cdot \lambda)\) for some \(w \in \W\). 
 \end{thm}
 \begin{thm}[Weyl Character Formula]
-  \cite{carter}*{Theorem 12/17} Given semisimple Lie algebra \(\g\)
+  \cite{carter}*{Theorem 12.17} Given semisimple Lie algebra \(\g\)
   with Cartan subalgebra 
   \(\h\). Then, for \(\lambda\) a dominant weight, \[
     \ch L(\lambda) = \frac{\sum_{w \in \W} (-1)^{\ell(w)}
@@ -3124,6 +3125,40 @@ our proof of the Weyl Character Formula).
   function'' \(s_\lambda(x_1 \ldots, x_{n-1})\) to
   \(s_\lambda(1,\ldots,1)\). 
 \end{example}
+\begin{rmk}
+  In fact, in type A, one can view the Weyl Character Formula gives a
+  ``Schur function'' using the Jacobi Bi-alternate Formula
+  characterization of Schur functions. In type A, \(\W \isom
+  \Sym_n\) and \(\weightlattice = \Span_\Z\{\epsilon_1, \ldots,
+  \epsilon_n\}\). 
+
+  Then, since \(e_{\lambda} = e_{\lambda_1 \epsilon_1 + \cdots +
+    \lambda_n \epsilon_n}\), we get \[
+    \hspace{-0.75in} \sum_{w \in \Sym_n} (-1)^{\ell(w)} e_{w(\lambda+\rho)}
+    = \sum_{w \in \Sym_n} \sgn(w) \prod_{i=1}^n
+    e_{(\lambda_i+n-i)\epsilon_{w(i)}} = \det \left(
+      \begin{array}{cccc}
+        e_{(\lambda_1+n-1)\epsilon_1}&e_{(\lambda_1+n-1)\epsilon_2}&\cdots
+        &e_{(\lambda_1+n-1)\epsilon_n}\\
+        e_{(\lambda_2+n-2)\epsilon_1}&e_{(\lambda_2+n-2)\epsilon_2}&\cdots
+        &e_{(\lambda_2+n-2)\epsilon_n}\\
+        \vdots&\vdots&&\vdots\\
+        e_{(\lambda_n)\epsilon_1}&e_{(\lambda_n)\epsilon_2}&\cdots
+        &e_{(\lambda_n)\epsilon_n}
+      \end{array}
+    \right)
+\]
+Then, the initiated observe that this is the Vandermonde determinant
+\(\Delta_{\lambda+\rho}\) where \(e_{(\lambda_i+n-i)\epsilon_j}\)
+corresponds to the variable \(x_j^{\lambda_i+n-1}\). Thus, in our type
+A setting, \[
+\ch L(\lambda) = \frac{\sum_{w \in \Sym_n} (-1)^{\ell(w)} e_{w(\lambda+\rho)}}{\sum_{w
+    \in \Sym_n} (-1)^{\ell(w)} e_{w(\rho)}} =
+\frac{\Delta_{\lambda+\rho}}{\Delta_{\rho}} =
+s_\lambda(e_{\epsilon_1}, e_{\epsilon_2}, \ldots, e_{\epsilon_n})
+\]
+\end{rmk}
+
 \begin{bibdiv}
   \begin{biblist}
     \bib{carter}{book}{

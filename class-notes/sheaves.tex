@@ -823,7 +823,7 @@ this setting.
   \]
   is exact for every \(x \in X\).
 \end{defn}
-\begin{thm}
+\begin{thm}\label{section-functor-is-left-exact}
   Let \[
     0 \to \F \to \G \to \H
   \]
@@ -918,12 +918,39 @@ is surjective.
   result still holds.
 \end{rmk}
 \begin{proof}
-  By the previous theorem, we need only show \(\psi_U\) is
+  By the previous theorem (\ref{section-functor-is-left-exact}), we
+  need only show \(\psi_U\) is 
   surjective. Let \(t \in \H(X)\). Then, for all \(x \in X\), there
   exists an open 
   neighborhood \(U\) with \(x
   \in U, s \in \G(U)\) such that \(\psi_U(s) = \rho^X_U(t)\) by the
-  surjectivity of the stalks. 
+  surjectivity of the stalks. Now, consider all pairs \((U,s)\) such
+  that \(U \subset X\) is open and \(s\) is a lift over \(U\), ie \(s
+  \in \F(U)\) and \(\psi_U(s) = \rho^X_U(t)\).
+
+  Our first step is to construct a maximal pair with the partial
+  order \[
+    (U_1,s_1) \leq (U_2,s_w) \iff U_1 \subset U_2 \text{ and
+    }s_2|_{U_1} = s_1
+  \]
+  Let \(\{(U_\alpha,s_\alpha)\}_\alpha\) be a totally ordered
+  subset. We wish to find an upper bound. Take \(U := \Union
+  U_\alpha\). Then, since we are in a totally ordered set, for
+  \(U_\alpha \subset U_\beta\), we have \[
+    s_\alpha = \rho^{U_\alpha}_{U_\alpha}(s_\alpha) =
+    \rho^{U_\beta}_{U_\alpha}(s_\beta)
+  \]
+  and so, by \ref{sheaf-2}, there exists an \(s_U \in \G(U)\) such
+  that \((U,s_U)\) is an upper bound. Thus, by Zorn's lemma, there is
+  a maximal \((U^*,s_{U^*})\) for our set of pairs.
+
+  Assume there exists an \(x \in X \setminus U^*\). Then, there is an
+  open set \(V\) containing \(X\) and \(s_V \in \G(V)\) such that
+  \(\psi_V(s_V) = \rho^X_V(t)\). So, take \[
+    \psi_{U^* \intersect V}(s_{U^*}|_{U^* \intersect V} - s_{V}|_{U^*
+      \intersect V}) = \rho^X_{U^* \intersect V}(t) - \rho^X_{U^*
+      \intersect V}(t)
+  \]
 \end{proof}
 \begin{bibdiv}
   \begin{biblist}
