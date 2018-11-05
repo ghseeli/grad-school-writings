@@ -32,11 +32,14 @@
 \renewcommand{\Q}{\mathcal{Q}}
 \newcommand{\Cl}{\mathcal{C\ell}} % Clifford algebra
 \newcommand{\OP}{\mathcal{OP}} % Odd partitions
+\newcommand{\EP}{\mathcal{EP}} % Odd partitions
 \newcommand{\SP}{\mathcal{SP}} % Strict partitions
 \newcommand{\CC}{\mathcal{C}} % Conjugacy class
 \newcommand{\partitions}{\mathcal{P}} % Partitions
 \newcommand{\B}{\mathbb{B}}
-\newcommand{\K}{\mathcal{K}}
+\newcommand{\K}{\mathcal{K}} % Farahat-Higman ring
+\renewcommand{\D}{\mathcal{D}} % Even split conjugacy class
+\renewcommand{\q}{\mathfrak{q}}
 \DeclareMathOperator{\Supp}{Supp}
 \DeclareMathOperator{\ch}{ch} 
 \DeclareMathOperator{\gr}{gr}
@@ -450,7 +453,7 @@ where \(z^2 = 1\) and \(z\) is central in \(\tilde{G}\). Then,
 \end{proof}
 \begin{example}
   We have \[
-    1 \to \{1,z\} \to \tilde{\Sym}_n \to \Sym_n \to 1
+    1 \to \{1,z\} \to \tilde{\Sym}_n \to[\theta_n] \Sym_n \to 1
   \]
   where \(z \in \tilde{\Sym}_n\) is even and central, the subgroup of
   index \(2\) is \(\tilde{A}_n\), and \[
@@ -458,6 +461,10 @@ where \(z^2 = 1\) and \(z\) is central in \(\tilde{G}\). Then,
   \]
   is the spin symmetric group algebra.
 \end{example}
+\begin{defn}
+  Throughout the remainder of these notes, we define \(\theta_n \from
+  \tilde{\Sym}_n \to \Sym_n\) to be the double covering may above.
+\end{defn}
 \section{A Morita Superequivalence (presented by Jinkui Wan)}
 Since \(\Sym_n\) acts on \(\Cl_n\) via \(\sigma.c_i = c_{\sigma(i)}\),
 we can define the semidirect product \(\Cl_n \rtimes \C \Sym_n\) with
@@ -810,6 +817,10 @@ stable under inclusion from \(\Sym_n \into \Sym_{n+1}\).
     \]
   \end{enumerate}
 \end{defn}
+\begin{example}
+  \(\CC_0(n) = \{id\}\) and \(\CC_{(1)}(n)\) contains all transpositions
+  of \(\Sym_n\). Thus, \(C_{(1)}(n) = \sum_{1 \leq i < j \leq n} (ij)\).
+\end{example}
 \begin{prop}
   \(\{C_\lambda(n) \st |\lambda|+\ell(\lambda) \leq n\}\) is a basis
   for \(Z(\Z \Sym_n)\). 
@@ -824,8 +835,10 @@ stable under inclusion from \(\Sym_n \into \Sym_{n+1}\).
     C_{(1)}(n) C_{(1)}(n) = 3 C_{(2)}(n) + 2 C_{(1,1)}(n) +
     \frac{1}{2}n(n-1) C_0(n)
   \]
+  since \(C_{(1)}(n)^2 = \sum (ij)(kl)\) for all transpositions
+  \((ij),(kl)\) in \(\Sym_n\).
 \end{example}
-\begin{thm}[Farat-Higman]
+\begin{thm}[Farahat-Higman]
   Let \(\lambda,\mu,\nu\) be partitions. Then,
   \begin{enumerate}
   \item There is a unique polynomial \(f_{\lambda \mu}^\nu(x) \in
@@ -894,15 +907,46 @@ stable under inclusion from \(\Sym_n \into \Sym_{n+1}\).
     \(\lambda \in \partitions\).
   \end{enumerate}
 \end{prop}
+\begin{rmk}
+  \(\K\) is not graded because \(\sum_{\nu \in \partitions} f_{\lambda
+  \mu}^\nu(x) c_\nu\) is not homogeneous. However, if we say \(\K_r =
+  \Span\{c_\lambda \st |\lambda| \leq r\}\), then \(\K_r \K_s \subset
+  \K_{r+s}\), making \(\K\) filtered. 
+\end{rmk}
 \begin{defn}
-  Let \(\gr \K\) be the graded algebra.
+  Let \(\gr \K\) be the associated graded algebra, that is, \(\gr \K\)
+  is defined by \((\gr
+  \K)_r = \K_r/\K_{r-1}\) and then \(\gr \K = \bigoplus_{r \geq 0}
+  (\gr \K)_r\).
 \end{defn}
+\begin{lem}
+  We have the following facts.
+  \begin{enumerate}
+  \item   If \(|\lambda|+s = m\), then \[
+    a_{\lambda,(s)}^{(m)} =
+    \begin{cases}
+      \frac{(m+1)s!}{\prod_{i \geq 0} m_i(\lambda)!} & \text{ if
+      }\ell(\lambda) \leq s+1\\
+      0 & \text{otherwise}
+    \end{cases}
+  \]
+  where \(m_0(\lambda) = r+1-\ell(\lambda)\).
+\item If \(|\lambda|+s = |\nu|\), then \[
+    a_{\lambda,(s)}^\nu = \sum_{\substack{(i,\mu) \in \N \times
+        \partitions  \\
+        1 \leq i \leq \ell(\lambda) \\ \mu \union \nu = \lambda \union
+      (\nu_i)}} a_{\mu,(s)}^{(\nu_i)}
+  \]
+  
+  \end{enumerate}
+\end{lem}
 \begin{prop}
   Let \(\lambda\) be a partition and let \(m_i(\lambda)\) be the
   number of \(i\)'s in \(\lambda\) such 
   that \(\lambda = (i^{m_i(\lambda)})_{i \geq 1}\). Then, the top
   degree of \(c_\lambda c_{(s)}\) is given by \[
-    (c_\lambda c_{(s)})^* = \sum_{\mu \subset \lambda, \ell(\mu) \leq
+    (c_\lambda c_{(s)})^* = \sum_{|\nu|=|\lambda|+s}
+    a^\nu_{\lambda,(s)} c_\nu = \sum_{\mu \subset \lambda, \ell(\mu) \leq
       s+1} \frac{(m_{s+|\mu|}(\lambda)+1)(s+|\mu|+1)s!}{(s+1-\ell(\mu))!
     \prod_{i \geq 1} m_i(\mu)!} c_{\lambda \union(s+|\mu|) - \mu}
   \]
@@ -927,7 +971,9 @@ stable under inclusion from \(\Sym_n \into \Sym_{n+1}\).
     c_{\lambda_1} c_{\lambda_2} \cdots c_{\lambda_\ell} = \sum_{\mu
       \dominates \lambda} d_{\lambda \mu} c_\mu
   \]
-  and \(d_{\lambda \lambda} > 0\) in \(\gr \K\).
+  and \(d_{\lambda \lambda} > 0\) in \(\gr \K\). Thus, \(c_{1}, c_2,
+  \ldots\) are algebraically independent elements of
+  \(\Span_\Z\{c_\lambda\}\).
 \end{cor}
 \begin{prop}
   \(\mathbb{Q} \otimes_\Z \gr \K\) is a polynomial algebra generated
@@ -936,7 +982,9 @@ stable under inclusion from \(\Sym_n \into \Sym_{n+1}\).
 \begin{rmk}
   \begin{enumerate}
   \item There exists a ring isomorphism \(\Lambda \isomto
-    \gr\K\). See 
+    \gr\K\) sending duals of \(h_\lambda^*\) (images of \(h_\lambda\)
+    under a certain automorphism), called \(g_\lambda\), to
+    \(c_\lambda\). See  
     \cite{macdonald}*{p 132--3}.
   \item \(\gr Z(\Z \Sym_n) \isom H^*(\Hilb^n(\C^2);\Z)\), the
     cohomology ring of the Hilbert Scheme of points on \(\C^2\), as a
@@ -1006,6 +1054,181 @@ where \[
     \(|\lambda|+\ell(\lambda) = n\) or \(n-1\).
   \end{enumerate}
 \end{lem}
+\begin{prop}
+  \(\sigma \in \Sym_n\) of modified type \(\lambda\) is even if and
+  only if \(|\lambda|\) is even.
+\end{prop}
+\begin{defn}
+  Let \(\D_\lambda(n)\) be the even split conjugacy class in
+  \(\tilde{\Sym}_n\) containing
+  \([1,2,\ldots,\lambda_1+1][\lambda_1+2,\ldots,
+  \lambda_1+\lambda_2+2] \ldots\).
+\end{defn}
+\begin{prop}
+  \begin{enumerate}
+  \item \(\theta^{-1}(\CC_\lambda(n)) = \D_\lambda(n) \union z
+    \D_\lambda(n)\).
+  \item \(\{d_\lambda(n) \st \lambda \in \EP, |\lambda|+\ell(\lambda)
+    \leq n\}\) is a basis for the even center of \(\Z\Sym_n^- = \Z
+    \tilde{\Sym}_n/\langle z+1 \rangle\). 
+  \end{enumerate}
+\end{prop}
+\begin{defn}
+  Define \(b_{\lambda \mu}^\nu(n)\) by \[
+    d_{\lambda}(n) d_{\mu}(n) = \sum_{\nu \in \EP} b_{\lambda \mu}^\nu
+    (n) c_\nu(n)
+  \]
+\end{defn}
+\begin{example}
+  \[
+    d_{(4)}(8) d_{(2)}(8) = 13 d_{(4)}(8) - 35 d_{(2)}(8) - 18
+    d_{(2,2)}(8) - 7d_{(6)}(8) + 2d_{(4,2)}(8) \in Z(\Z\Sym_8^-)
+  \]
+\end{example}
+\begin{thm}[Tysse-Wang]
+  Let \(\lambda,\mu,\nu \in \EP\).
+  \begin{enumerate}
+  \item There exists a unique \(g_{\lambda \mu}^\nu(x) \in \Q[x]\)
+    such that \(b_{\lambda \mu}^\nu(n) = g_{\lambda \mu}^\nu(n)\) for
+    all \(n \geq |\nu|+\ell(\nu)\).
+  \item \(g_{\lambda \mu}^\nu(x) = 0\) unless \(|\nu| \leq
+    |\lambda|+|\mu|\)
+  \item If \(|\nu| = |\lambda|+|\mu|\), then \(g_{\lambda
+      \mu}^\nu(x)\) is a constnat. 
+  \end{enumerate}
+\end{thm}
+\begin{defn}
+  Let the \de{spin Farahat-Higman algebra} \(\F\) be a \(\B\)-algebra with basis \(\{d_\lambda \st \lambda
+  \in \EP\}\) and \[
+    d_\lambda d_\mu = \sum_{\nu \in \EP} g_{\lambda \mu}^\nu(x) d_\nu
+  \]
+  which is filtered with respect to \(\deg(d_\lambda) = |\lambda|\).
+\end{defn}
+\begin{prop}
+  Let \(\lambda\) be a partition and rewrite \(\lambda =
+  (i^{m_i(\lambda)}_{i \geq 1})\). Let \(s \geq 0\) be event. Then, \[
+    (d_\lambda d_{(s)})^* = \sum_\mu (-1)^{\ell(\mu)}
+    \frac{(m_{s+|\mu|}(\lambda)+1)(s+|\mu|+1)s!}{(s+1-\ell(\mu))!
+      \prod_{i \geq 1} m_i(\mu)!} d_{\lambda \union(s+|\mu|)-\mu}
+  \]
+  \todo{What is this summation over?}
+\end{prop}
+\begin{cor}
+  \begin{enumerate}
+  \item \(\mathbb{Q} \otimes_{\Z[\frac{1}{2}]} \gr \F\) is generated
+    by \(d_2, d_4 ,\ldots\)
+  \item There exists an injective homomorphism \(\Q
+    \otimes_{\Z[\frac{1}{2}]} \gr \F \into \Q \otimes_\Z \K\) via (for
+    \(\lambda \in \EP\)) 
+    \(d_\lambda \mapsto (-1)^{\ell(\lambda)c_\lambda}\). 
+  \end{enumerate}
+\end{cor}
+\subsection{Connections to odd Jucys-Murphy elements}
+\begin{defn}
+  Let us define \[ M_k := \sum_{i=1}^{k-1} [i,k] \in \Z \Sym_n^-
+  \]
+\end{defn}
+\begin{prop}
+  We have
+  \begin{enumerate}
+  \item \(M_k M_l = - M_l M_k\) for \(k \neq l\)
+  \item \[
+      M_k^2 = -(k-1) - \sum_{1 \leq i \neq j \leq k-1} [i,j,k] \in \Z\Sym_n^-
+    \]
+  \end{enumerate}
+\end{prop}
+\begin{defn}
+  we define \[
+    e_{r,n} := \sum_{1 \leq i_1 < i_2 < \cdots < i_r \leq n} M_{i_1}^2
+    M_{i_2}^2 \cdots M_{i_r}^2 \in Z(\Z \Sym_n^-)
+  \]
+\end{defn}
+\begin{prop}
+  \begin{enumerate}
+  \item \(e_{r,n}\) has top degree \(2r\)
+  \item \(e_{r,n} = \sum_{\lambda \in \EP, |\lambda|+\ell(\lambda)
+      \leq n} A_\lambda(n) d_\lambda(n)\) for some \(A_\lambda(n)\).
+  \item \(A_\lambda(n)\) is the coefficient of \([1,2,\ldots,
+    \lambda_1+1][\lambda_1+2,\ldots,\lambda_1+\lambda_2+2]\cdots\) in
+    \(e_{r,n}\) and is independent of \(n\). 
+  \end{enumerate}
+\end{prop}
+\begin{defn}
+  In light of the proposition above, we write \(A_\lambda :=
+  A_\lambda(n)\) and define \[
+    e_r^* := \sum_{\lambda \in \EP, |\lambda|=2r} A_\lambda d_\lambda
+    \in \F
+  \]
+\end{defn}
+\begin{example}
+  \(e_1^* = -d_2\) and \(e_2^* = d_{(2,2)}-2d_4\).
+\end{example}
+\begin{prop}
+  \(A_\lambda = (-1)^{\ell(\lambda) \prod_{i \geq 1}
+    c_{\frac{\lambda_i}{2}}}\) where \(c_0 = 1\) and \(c_r =
+  \frac{1}{r+1}\binom{2r}{r}\) are the Cartan numbers.
+\end{prop}
+\begin{thm}
+  \(\B\left[\frac{1}{2}\right] \otimes_\B \F\) is generated by
+  \(e_1^*, e_2^*, e_3^*, \ldots\)
+\end{thm}
+\begin{cor}
+  Via the surjective homomorphism
+  \begin{align*}
+    \B\left[\frac{1}{2}\right] \otimes_\B \F
+    & \to Z(\Z\left[ \frac{1}{2} \right] \Sym_n^-) \\
+    \sum_{\lambda \in \EP} f_\lambda(x) d_\lambda
+    & \mapsto \sum_{\lambda \in \EP} f_\lambda(n) d_\lambda(n)
+  \end{align*}
+  the even center of \(\Z\left[ \frac{1}{2} \right] \Sym_n^-\) is
+  generated by (the top degree of) \(e_{r,n}\).
+\end{cor}
+\section{Schur-Sergeev duality for \(\q(n)\) (presented by Chris Chung)}
+\section{Seminormal form construction for irreducible \(\H_n\)-modules
+  (presented by Jinkui Wan)}
+A review for the symmetric group case was presented, but not written
+up here yet.
+\begin{defn}
+  We define the \de{Jucys-Murphy elements} in \(\H_n = \Cl_n \rtimes
+  \C\Sym_n\) as \[
+    J_k := \sum_{1 \leq j < k \leq n} (1+c_j c_k) (jk), 
+  \]
+\end{defn}
+\begin{prop}
+  The Jucys-Murphy elements have the following properties.
+  \begin{enumerate}
+  \item \(J_k J_l = J_l J_k\) for \(l \leq k \neq l \leq n\).
+  \item \(c_k J_k = -J_k c_k\) and \(c_l J_k = J_k c_l\) for \(k \neq
+    l\).
+  \item \(s_k J_k = J_{k+1}s_k - (1+c_k c_{k+1})\) for \(1 \leq k \leq
+    n-1\) and \(s_l J_k = J_k s_l\) for \(k \neq l,l+1\).
+  \end{enumerate}
+\end{prop}
+\begin{defn}
+  The \de{degenerate affine Hecke-Clifford algebra} is given by \[
+    \hat{\H}_n = \langle s_1, \ldots, s_{n-1}, c_1, \ldots, c_n, x_1
+    ,\ldots, x_n\rangle
+  \]
+  with additional relations \[
+    \begin{cases}
+      x_k x_l = x_l x_k\\
+      s_k x_k = x_{k+1} s_k - (1+c_k c_{k+1})\\
+      s_i x_k = x_k s_i & k \neq i,i+1\\
+      x_k c_k = - c_k x_k \\
+      x_k c_l = c_l x_k & l \neq k
+    \end{cases}
+  \]
+\end{defn}
+\begin{prop}
+  There exists a projection \(\pi \from \hat{\H}_n \onto \H_n\) such
+  that \[
+    \pi(s_i) = s_i, \pi(c_k) = c_k, \pi(x_l) = J_l
+  \]
+  In particular, \(\pi(x_1) = J_1 = 0\), so \(x_1 \in \ker \pi\). 
+\end{prop}
+In fact, \(\ker \pi = \langle x_1 \rangle\) and so
+\catname{\(\H_n\)-Mod} can be identified as the subcategory of
+\catname{\(\hat{\H}_n\)-Mod} on which \(x_1 = 0\).
 \begin{bibdiv}
   \begin{biblist}
     \bib{cheng-wang}{book}{
