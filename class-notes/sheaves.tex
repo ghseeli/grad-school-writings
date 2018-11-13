@@ -949,8 +949,20 @@ is surjective.
   \(\psi_V(s_V) = \rho^X_V(t)\). So, take \[
     \psi_{U^* \intersect V}(s_{U^*}|_{U^* \intersect V} - s_{V}|_{U^*
       \intersect V}) = \rho^X_{U^* \intersect V}(t) - \rho^X_{U^*
-      \intersect V}(t)
+      \intersect V}(t) = 0
   \]
+  and thus \(s_{U^*}|_{U^* \intersect V} - s_{V}|_{U^* \intersect V}
+  \in \ker \psi_{U^* \intersect V} = \phi_{U^* \intersect V}(\F(U^*
+  \intersect V))\) by Theorem
+  \ref{section-functor-is-left-exact}. However, since \(\F\) is
+  flasque, we have that \[
+    \F(V) \onto \F(U^* \intersect V)
+  \]
+  that is, the restriction map is surjective. Thus, \[
+    s_{U^*}|_{U^* \intersect V} - s_V|_{U^* \intersect V} = \phi_{U^*
+      \intersect V}(\rho^{U^*}_{U^* \intersect V}(z))
+  \]
+  for some \(z \in \F(V)\).
 \end{proof}
 \begin{bibdiv}
   \begin{biblist}
