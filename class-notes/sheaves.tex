@@ -962,8 +962,93 @@ is surjective.
     s_{U^*}|_{U^* \intersect V} - s_V|_{U^* \intersect V} = \phi_{U^*
       \intersect V}(\rho^{U^*}_{U^* \intersect V}(z))
   \]
-  for some \(z \in \F(V)\).
+  for some \(z \in \F(V)\). Now, take \(s_V' = s_V+\phi_V(z)\). Then,
+  \(s_{U^*}|_{U^* \intersect V} = s_V'|_{U^* \intersect V}\) by
+  construction. Therefore, using \ref{sheaf-2}, there exists an
+  element \(s_{U^* \union V} \in \G(U^* \union V)\) such that \(s_{U^*
+    \union V}|_{U^*} = s_{U^*}\) and \(s_{U^* \union V}|_V =
+  s_V'\). So, we have construced \(s_{U^* \union V}\) such that \[
+    (U^*, s_{U^*}) \prec (U^* \union V,s_{U^* \union V})
+  \]
+  violating the maximality of \((U^*,s_{U^*})\). Thus, it must be that
+  \(X \setminus U^* = \emptyset\).
+
+  Our second step is to consider the commutative diagram with exact
+  rows, \(V \subset U\), and \(\G\) flasque. \[
+  \begin{tikzcd}
+    0 \ar[r] & \F(U) \ar[d] \ar[r] & \G(U) \ar[d, two heads] \ar[r] & \H(U)
+    \ar[d] \ar[r] & 0\\
+    0 \ar[r] & \F(V) \ar[r] & \G(V) \ar[r] & \H(V) \ar[r] & 0
+  \end{tikzcd}
+\]
+The surjectivity of \(\G(U) \to \G(V)\) follows from \(\G\) flasque,
+and so \(\H(U) \to \H(V)\) must be surjective by a straightforward
+diagram chase. 
 \end{proof}
+Now, given an exact sequence of sheaves, \[
+  0 \to \F \to \G \to \H \to 0
+\]
+the sequence of global sections may not be exact. We provide an
+explicit example to illustrate what can go wrong.
+\begin{example}
+  Take \(X = \C \setminus\{(0,0)\} \subset \C\) and consider \(\O\)
+  the sheaf of holomorphic functions. In otherwords, for \(U \subset
+  X, \O(U)\) is the \(\C\)-algebra of holomorphic functions on
+  \(U\). Next, consider the induced derivative map
+  \begin{align*}
+    \O & \to \O \\
+    f & \mapsto f'
+  \end{align*}
+  which has kernel given by the locally constant functions on \(X\),
+  say \(C_X\). Then, we have exact sequence of sheaves \[
+    0 \to C_X \to \O \to[\psi] \O \to 0
+  \]
+  However, every holomorphic function has a local antiderivative. In
+  other words, given \(f \in \O(U)\), for all \(x \in U\), there
+  exists a \(U_x \subset U\) with \(x \in U_x\) and \(g_x \in
+  \O(U_x)\) such that \(g_x' = \psi(g_x) = f|_{U_x}\). However,
+  \(\psi_X(\O(X))\) consists of holomorphic functions with a global
+  antiderivative, which is not all of \(\O(X)\). Thus, \(\psi_X\) is
+  not surjective and so we only have exactness up to \[
+    0 \to C_x \to \O(X) \to[\psi_X] \O(X)
+  \]
+  To capture the failure of the exactness, we introduce the long exact
+  sequence of cohomology
+  groups (using the necessary homological algebra) \[
+    \O(X) \to[\psi_X] \O(X) \to H^1(X,C_X) \to H^1(X,\O) \to \cdots
+  \]
+  However, because \(X\) is a
+  Riemann surface but not compact, \(H^1(X,\O) = 0\) and thus \[
+    H^1(X,C_X) \isom \O(X) / \psi_X(\O(X)) \isom \C
+  \]
+  because \(\psi_X(\O(X))\) is the \(\C\)-algebra of all functions
+  that integrate to zero on the unit circle. Note that this gives the
+  same result as the singular cohomology of \(X\).
+\end{example}
+\begin{prop}
+  \(\phi \from \F \to \G\) is an epimorphism in the category of
+  presheaves if and only if \(\phi_U \from \F(U) \to \G(U)\) is
+  surjective for every \(U \subset X\).
+\end{prop}
+\begin{proof}
+  Let \(C := \coker \phi\) be the presheaf cokernel of \(\phi\). Then,
+  \(\phi\) is an epimorphism if and only if \(C\) is the zero
+  sheaf. Thus, \[
+\hspace{-0.5in}    \phi \text{ is an epimorphism } \iff C = 0 \iff
+     C(U) := \coker \phi_U = 0, \forall U 
+    \subset X \iff \phi_U \text{ is surjective }\forall U \subset X
+  \]
+\end{proof}
+In the category of sheaves, however, the cokernel presheaf is not
+necessarily a sheaf, so we have to do a little more work.
+\begin{prop}
+  Let \(\phi \from \F \to \G\) be a morphism of sheaves of abelian
+  groups. Then, \(\phi\) is an epimorphism in the category of sheaves of
+    abelian groups if and only if \(\phi_x \from \F_x \to \G_x\) is surjective for all \(x \in X\)
+  \end{prop}
+  \begin{proof}
+    
+  \end{proof}
 \begin{bibdiv}
   \begin{biblist}
   \end{biblist}
