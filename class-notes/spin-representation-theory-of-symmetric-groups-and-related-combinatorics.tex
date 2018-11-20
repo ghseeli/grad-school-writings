@@ -44,7 +44,8 @@
 \DeclareMathOperator{\ch}{ch} 
 \DeclareMathOperator{\gr}{gr}
 \DeclareMathOperator{\Hilb}{Hilb}
-
+\DeclareMathOperator{\wt}{wt}
+\renewcommand{\vec}[1]{\mathbf{#1}}
 \numberwithin{thm}{section}
 
 \title[Spin Representation Theory of Symmetric Groups]{Spin
@@ -1297,6 +1298,70 @@ We have the following useful relations for the intertwining elements.
   \end{cases}
 \]
 \end{prop}
+\begin{prop}
+  If \(v\) is some eigenvector of \(x_j^2\), that is, if \(x_j^2 v
+= av\), then \(x_j^2 \Phi_j v = a \Phi_j v\), so \(\Phi_j v\) is an
+\(x_j^2\) eigenvector with the same eigenvalue.
+\end{prop}
+\begin{proof}
+  Since \(x_j^2 \Phi_j = \Phi_j x_{j+1}^2\), we get that \[
+    x_j^2 \Phi_j x = \Phi_j x_{j+1}^2 v =
+  \]
+  \todo{Finish this}
+\end{proof}
+\begin{defn}
+  A finite dimensional \(\hat{\H}_n\)-module \(M\) is called
+  \de{completely splittable (CS)} if \(x_1, x_2, \ldots, x_n\) act
+  semisimply, ie the actions of \(x_1, \ldots, x_n\) can be
+  diagonalized simultaneously.
+\end{defn}
+\begin{prop}
+  Every integral CS \(\hat{\H}_n\)-module \(M\) can be decomposed
+  as \[
+    M = \bigoplus_{\vec{i} \in \Z_+^n} M_{\vec{i}}
+  \]
+  where \[
+    M_{\vec{i}} = \{v \in M \st x_k^2 v = q(i_k)v, 1 \leq k \leq n\}
+  \]
+  is the common eigenspace of \(x_1^2, x_2^2, \ldots, x_n^2\) with
+  eigenvalues \(q(i_1), q(i_2), \ldots, q(i_k)\). Furthermore,
+  define \[
+    \wt(M) := \{\vec{i} \in \Z_+^n \st M_{\vec{i}} \neq 0\}
+  \]
+\end{prop}
+Our goal is to describe \(\wt(M)\) for integral irreducible CS
+\(\hat{\H}_n\)-modules.
+\begin{lem}
+  If \(\vec{i} = (i_1, \ldots, i_n) \in \Z_+^n\) is in \(\wt(M)\) for
+  some integral irreducible CS \(\hat{\H}_n\)-module, then \(i_k \neq
+  i_{k+1}\) for all \(1 \leq k \leq n-1\).
+\end{lem}
+\begin{proof}
+  Suppose \(i_k = i_{k+1}\) so that \(x_k^2 v = x_{k+1}^2 v\) for \(v \in 
+  M_{\vec{i}}\). Since \[
+    x_k^4 s_k - 2 q(i_k) x_k^2 s_k  + q(i_k)^2 s_k  = x_k^2 (s_k
+    x_{k+1}^2 - s_k(1+c_k c_{k+1})(1+x_k)s_k) - 2 q(i_k) x_k^2 s_k +
+    q(i_k)^2 s_k
+  \]
+  Somehow we get \todo{figure this out} that \(s_k v \in
+  M_{\vec{i}}\). Then, we get
+  \begin{align*}
+    & \implies x_k^2 s_k v = q(i_k)s_k v\\
+    & \implies (x_k^2 - q(i_k))s_k v = 0 \\
+    & \implies (s_k x_{k+1}^2 - x_k(1-c_k c_{k+1}) - (1-c_k
+      c_{k+1})x_{k+1})v-q(i_k)s_k v = 0
+  \end{align*}
+  However, \(x_{k+1}^2 v = q(i_{k+1})v = q(i_k)v\) by assumption, so
+  \begin{align*}
+    & \implies (x_k(1-c_k c_{k+1})+(1-c_k c_{k+1})x_k)v = 0 \\
+    & \implies 2(x_k^2+x_{k+1}^2) v = 0 \\
+    & \implies i_k = i_{k+1} = 0\\
+    & \implies x_k^2 v = 0 = x_{k+1}^2 v\\
+    & \implies x_k v = 0 = x_{k+1}v & \text{ since }M\text{ is CS}\\
+    & \implies v = 0 & \text{ since }
+  \end{align*}
+  \todo{Finish this proof.}
+\end{proof}
 \begin{bibdiv}
   \begin{biblist}
     \bib{cheng-wang}{book}{

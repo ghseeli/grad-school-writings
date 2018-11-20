@@ -555,7 +555,8 @@ from old ones, like cokernel and tensor, land in
       & \F^+ \ar[ru, dashed, "\psi"]
     \end{tikzcd}
   \]
-  \(\F^+\) is called the sheaf associated with presheaf \(\F\).
+  \(\F^+\) is called the sheaf associated with presheaf \(\F\). The
+  functor sending \(\F\) to \(\F^+\) is called \de{sheafification}.
 \end{thm}
 \begin{proof}
   Postponed for now.
@@ -642,7 +643,7 @@ this setting.
   \rho_{U_x}^U(t)\). Now, \(U = \Union_{x \in U} U_x \implies s=t\) by
   (S1). 
 \end{proof}
-\begin{cor}
+\begin{cor}\label{equality-of-induced-stalk-maps-implies-equality-of-maps}
   Let \(\F\) be a presheaf, \(\G\) a sheaf, and \[
     \phi_1, \phi_2 \from \F \to \G
   \]
@@ -1040,15 +1041,118 @@ explicit example to illustrate what can go wrong.
   \]
 \end{proof}
 In the category of sheaves, however, the cokernel presheaf is not
-necessarily a sheaf, so we have to do a little more work.
+necessarily a sheaf, so we have to do a little more work. We will make
+use of the following lemma.
+% \begin{lem}
+%   Given a presheaf \(\F\), we have \(\F_x \isom \F^+_x\).
+% \end{lem}
+% \begin{proof}
+%   By definition of \(\F^+\), 
+% \end{proof}
 \begin{prop}
   Let \(\phi \from \F \to \G\) be a morphism of sheaves of abelian
   groups. Then, \(\phi\) is an epimorphism in the category of sheaves of
     abelian groups if and only if \(\phi_x \from \F_x \to \G_x\) is surjective for all \(x \in X\)
-  \end{prop}
-  \begin{proof}
-    
-  \end{proof}
+\end{prop}
+\begin{proof}
+    Let \(C(U) := \G(U)/\phi_U(\F(U)) = \coker \phi_U\). From above,
+    this is a presheaf.
+    % As in intermeidate step, we will show that
+    % \(C^+ = 0\) in both directions.
+
+    % The exact sequence of presheaves \[
+    %   \F \to \G \to C \to 0
+    % \]
+    % induces exact sequence \[
+    %   \F_x \to \G_x \to C_x \to 0
+    % \]
+    % which gives us that \(C_x = G_x/\phi_x(F_x)\).
+    % % Furthermore,
+    % % sheafification does not change the stalks by \ref{}, so \(C_x^+ =
+    % % C_x = G_x/\phi_x(F_x)\).
+    % Thus, \(\phi_x \from \F_x \to \G_x\) be surjective for all
+    % \(x\) if and only if \(C_x = 0\) for all \(x\).
+
+    Assume \(\phi_x \from \F_x \to \G_x\) is surjective for all
+    \(x\). Then, consider the diagram \[
+      \begin{tikzcd}
+        \F \ar[r, "\phi"] & \G \ar[r, bend left, "g_1"] \ar[r, bend
+        right, swap, "g_2"]
+        & \H
+      \end{tikzcd}
+    \]
+    such that \(g_1 \circ \phi = g_2 \circ \phi\). Then, on stalks, we
+    have \((g_1)_x \circ \phi_x = (g_2)_x \circ \phi_x\) and
+    \(\phi_x\) is surjective by assumption. So, this means
+    \(\phi_x\) is a epimorphism in the category of abelian groups, and
+    thus \((g_1)_x = (g_2)_x \implies g_1 = g_2\) by
+    \ref{equality-of-induced-stalk-maps-implies-equality-of-maps}.
+
+    Conversely, assume that \(\phi\) is an epimorphism in
+    \(\catname{Sh}(X)\). We then define maps via the commutative
+    diagram \[
+      \begin{tikzcd}
+        \F \ar[r, "\phi"] & \G \ar[r, bend left, "\pi"] \ar[r, bend
+        right, swap, "0"] & C 
+      \end{tikzcd}
+    \]
+    where \(C = \coker \phi\) is the cokernel presheaf and \(\pi\) is
+    the natural projection sending \(\pi \from \F \to C \isom
+    \G/\phi(F)\). Now, \(\pi \circ \phi = 0 \circ \phi = 0\), so
+    \(\pi = 0\) since \(\phi\) is an epimorphism. However, this tells
+    us that \(C = 0\) and thus  \(0 = C_x = \coker(\phi_x \from \F_x
+    \to \G_x)\). Therefore, \(\phi_x\) must be surjective for all \(x\).
+\end{proof}
+\begin{prop}
+    Given sheaves \(\F,\G\), we have 
+    \begin{enumerate}
+    \item \(\phi \from \F \to \G\) is a monomorphism \(\iff\) \(\phi\)
+      is injective, ie \(\phi_U \from \F_U \to \G_U\) is injective for
+      all open \(U \subset X\).
+    \item \(K\) is the kernel in the categorical sense.
+    \end{enumerate}
+\end{prop}
+\section{\'{E}tale space of a presheaf and sheafification}
+We recall some basic facts from topology.
+\begin{defn}
+  A map \(\pi \from E \to X\) between topological spaces is a
+  \de{local homeomorphism} if every \(e \in E\) has a neighborhood
+  \(O_e\) such that \(\pi(O_e) = U_x\) where \(U_x\) is a
+  neighborhood of \(x = \pi(e)\). 
+\end{defn}
+In what follows, we will have the following setup. Given a projection
+\(\pi \from E \to X\), 
+\begin{itemize}
+\item we will call \(X\) the ``base space'',
+\item we will call \(E\) the ``total space'',
+\item we will denote \(E_x := \pi^{-1}(x)\) and call these the ``stalks
+  of \(\pi\)'',
+\item we will denote \(\Gamma(U,\pi) := \{\sigma \from U \to E \st
+  U \subset X, \sigma \text{ continuous such that }\pi \circ \sigma =
+  id_U\}\) and we will call this the ``set of sections over \(U\)'',
+\item and, for \(V \subset U\), we will denote \(\sigma|_V\) to ve the
+  restriction of \(\sigma\) to \(V\).
+\end{itemize}
+Our first goal is to show that \(\Gamma\) is a sheaf.
+\begin{prop}
+  Let \(\pi \from E \to X\) be a local homeomorphism. Then,
+  \begin{enumerate}
+  \item \(\pi\) is an open map.
+  \item \(E = \Disjunion_{x \in X} E_x\)
+  \item The induced topology on each stalk is discrete.
+  \item If \(s \from U \to E\)is a section, then for every \(V \subset
+    U\), \(s|_V \from V \to E\) is a section.
+  \item If two sections coincide at a point, then they coincide at a
+    neighborhood of that point.
+  \item Sets of the form \(s(U)\) for open \(U \subset X\), \(s \in
+    \Gamma(U,\pi)\) form a base of the topology on \(E\).
+  \end{enumerate}
+\end{prop}
+\begin{thm}
+  Let \(\pi \from E \to X\) be a local homeomorphism. Then, \(\F(U) =
+  \Gamma(U,\pi)\) is a sheaf on \(X\) and \(\F_x\) can be identified
+  with \(\pi^{-1}(x) = E_x\).
+\end{thm}
 \begin{bibdiv}
   \begin{biblist}
   \end{biblist}
