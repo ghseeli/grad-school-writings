@@ -1,6 +1,7 @@
 amscls
 amsmath
 amsrefs
+atbegshi
 bbm
 bbm-macros
 beamer
@@ -16,6 +17,7 @@ fmtcount
 geometry
 graphics
 hyperref
+ifpdf
 jknapltx
 l3kernel
 l3packages
@@ -36,6 +38,7 @@ times
 tocloft
 todonotes
 tools
+translator
 txfonts
 ucs
 url
