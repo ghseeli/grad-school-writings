@@ -1,0 +1,441 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Beamer Presentation
+% LaTeX Template
+% Version 1.0 (10/11/12)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND THEMES
+%----------------------------------------------------------------------------------------
+
+\documentclass{beamer}
+
+\mode<presentation> {
+
+% The Beamer class comes with a number of default slide themes
+% which change the colors and layouts of slides. Below this is a list
+% of all the themes, uncomment each in turn to see what they look like.
+
+%\usetheme{default}
+%\usetheme{AnnArbor}
+%\usetheme{Antibes}
+%\usetheme{Bergen}
+%\usetheme{Berkeley}
+%\usetheme{Berlin}
+%\usetheme{Boadilla}
+%\usetheme{CambridgeUS}
+%\usetheme{Copenhagen}
+%\usetheme{Darmstadt}
+%\usetheme{Dresden}
+%\usetheme{Frankfurt}
+%\usetheme{Goettingen}
+%\usetheme{Hannover}
+%\usetheme{Ilmenau}
+%\usetheme{JuanLesPins}
+%\usetheme{Luebeck}
+\usetheme{Madrid}
+%\usetheme{Malmoe}
+%\usetheme{Marburg}
+%\usetheme{Montpellier}
+%\usetheme{PaloAlto}
+%\usetheme{Pittsburgh}
+%\usetheme{Rochester}
+%\usetheme{Singapore}
+%\usetheme{Szeged}
+%\usetheme{Warsaw}
+
+% As well as themes, the Beamer class has a number of color themes
+% for any slide theme. Uncomment each of these in turn to see how it
+% changes the colors of your current slide theme.
+
+%\usecolortheme{albatross}
+%\usecolortheme{beaver}
+%\usecolortheme{beetle}
+%\usecolortheme{crane}
+%\usecolortheme{dolphin}
+%\usecolortheme{dove}
+%\usecolortheme{fly}
+%\usecolortheme{lily}
+%\usecolortheme{orchid}
+%\usecolortheme{rose}
+%\usecolortheme{seagull}
+%\usecolortheme{seahorse}
+%\usecolortheme{whale}
+%\usecolortheme{wolverine}
+
+%\setbeamertemplate{footline} % To remove the footer line in all slides uncomment this line
+%\setbeamertemplate{footline}[page number] % To replace the footer line in all slides with a simple slide count uncomment this line
+
+\setbeamertemplate{navigation symbols}{} % To remove the navigation symbols from the bottom of all slides uncomment this line
+}
+
+\usepackage{graphicx} % Allows including images
+\usepackage{booktabs} % Allows the use of \toprule, \midrule and
+                      % \bottomrule in tables
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usepackage{amsmath}
+% \usepackage{../ReAdTeX/readtex-core}
+% \usepackage{../ReAdTeX/readtex-dangerous}
+% \usepackage{../ReAdTeX/readtex-abstract-algebra}
+\usepackage{ytableau}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%%  MACRO DEFINITIONS:  Co-authors -- PLEASE use these! 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\T}{\mathsf{T}} % use for tableaux
+\newcommand{\U}{\mathsf{U}} % use for tableaux
+\newcommand{\TA}{\mathsf{A}} % use for tableaux
+\newcommand{\TB}{\mathsf{B}} % use for tableaux
+\newcommand{\TC}{\mathsf{C}} % use for tableaux
+\newcommand{\shape}{\operatorname{shape}} % shape of a tableua
+\newcommand{\col}[2]{\genfrac{}{}{0pt}{1}{#1}{#2}} % column of bitableau
+\newcommand{\dd}{\partial} % use for diagram basis; e.g. d(V_l)
+\newcommand{\X}{\mathbb{X}} % use for the JM-subalgebra
+\newcommand{\Std}{\operatorname{Std}} % set of standard tableaux
+\newcommand{\StdB}{\operatorname{StdB}} % set of standard bitableaux
+\newcommand{\Orb}{\mathcal{O}} % use for orbits
+\newcommand{\OS}{\ov{\Orb}} % use for orbit sums
+\newcommand{\OSS}{\ov{\OS}} % use for double bar orbit sums
+\newcommand{\OR}{\mathscr{R}} % orbit representatives
+\newcommand{\rev}{\operatorname{rev}} % reverse of a cycle
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\title[Symmetric Functions]{Building Mathematical Bridges Between
+  Symmetric Functions} % The short title appears at the bottom of every slide, the full title is only on the title page
+
+\author[George H. Seelinger]{George H. Seelinger} % Your name
+\institute[JSF] % Your institution as it will appear on the bottom of every slide, may be shorthand to save space
+{
+Jefferson Scholars Foundation \\ % Your institution for the title page
+\medskip
+\textit{ghs9ae@virginia.edu} % Your email address
+}
+\date{28 November 2018} % Date, can be changed to a custom date
+
+\begin{document}
+
+\begin{frame}
+\titlepage % Print the title page as the first slide
+\end{frame}
+\begin{frame}
+  \frametitle{Partitions of \(5\)}
+  How many ways can we write a positive integer as a sum of positive
+  integers? \pause
+  \ytableausetup{boxsize=0.5em, aligntableaux=center}
+    \begin{align*}
+    5 \to &\ \ydiagram{5}\\
+    4+1 \to &\ \ydiagram{4,1}\\
+    3+2 \to &\ \ydiagram{3,2}\\
+    3+1+1 \to &\ \ydiagram{3,1,1}\\
+    2+2+1 \to&\ \ydiagram{2,2,1}\\
+    2+1+1+1 \to&\ \ydiagram{2,1,1,1} \\
+    1+1+1+1+1 \to&\ \ydiagram{1,1,1,1,1}
+\end{align*}
+\end{frame}
+\begin{frame}
+  \frametitle{Raising Operators}
+  We can change partition diagrams by moving boxes.
+  \[
+    R_{13} \left( \ydiagram{3,1,1}*[*(red)]{0,0,1} \right) = \ydiagram{4,1}*[*(red)]{3+1}
+  \]
+\[
+  R_{23} \left( \ydiagram{1,1,1}*[*(red)]{0,0,1} \right) = \ydiagram{1,2}*[*(red)]{0,1+1}
+\]
+\pause
+If the result ``does not make sense'', we get \(0\): \[
+  R_{14}\left( \ydiagram{1,1,1} \right) = 0
+\]
+\end{frame}
+\begin{frame}
+  \frametitle{Symmetric Functions}
+  Let us introduce a rule for multiplication of partition diagrams by ``stacking.''
+\begin{block}{Rule for Multiplication Example}
+  \(
+  \ydiagram{3} \cdot \ydiagram{2} = \ydiagram{3,2} =
+  \ydiagram{2,3} = \ydiagram{2} \cdot \ydiagram{3}
+  \)
+\end{block}
+\end{frame}
+\begin{frame}
+  \frametitle{Schur functions}
+  We define a new class of functions. Given a partition diagram
+  \(\lambda\) with 
+  \(\ell\) rows, we say
+  \begin{align*}
+    s_\lambda = &(1-R_{1,2})\\
+    &(1-R_{1,3})(1-R_{2,3})\\
+    & \cdots\\
+    &(1-R_{1,
+      \ell})(1-R_{2,\ell})\cdots(1-R_{\ell-2,\ell})(1-R_{\ell-1,\ell})
+    \lambda\\
+  \end{align*}
+  \begin{example}
+    \[
+      s_{\ydiagram{3,2,1}} = (1-R_{1,2})(1-R_{1,3})(1-R_{2,3})
+      \ydiagram{3,2,1}
+    \]
+  \end{example}
+    \pause For those who know about matrices, this is determinant of a matrix
+    of partition diagrams.
+\end{frame}
+\begin{frame}
+  \frametitle{Example continued}
+    \begin{example}
+    \[
+      s_{\ydiagram{3,2,1}} = (1-R_{1,2})(1-R_{1,3})(1-R_{2,3})
+      \ydiagram{3,2,1}
+    \]
+  \end{example}
+  \ytableausetup{boxsize=0.25em}\pause
+    \[
+  \begin{array}[center]{ccc}
+    &\ydiagram{3,2,1}&\\
+    -R_{12}(\ydiagram{3,2,1}*[*(red)]{0,1+1})&-R_{13}(\ydiagram{3,2,1})&-R_{23}(\ydiagram{3,2,1})\\
+    +R_{12}R_{13}(\ydiagram{3,2,1})&+R_{12}R_{23}(\ydiagram{3,2,1})&+R_{13}R_{23}(\ydiagram{3,2,1})\\
+    &-R_{12}R_{13}R_{23}(\ydiagram{3,2,1})
+  \end{array}
+  \pause =
+  \begin{array}{ccc}
+    &\ydiagram{3,2,1}& \\
+    -\ydiagram{4,1,1}*[*(red)]{3+1}&-\ydiagram{4,2}&-\ydiagram{3,3}\\
+    +\ydiagram{5,1} & +\ydiagram{4,2}&+0\\
+    & -0 &
+  \end{array}
+\]
+\pause
+Adding it all together, we get \[
+  s_{\ydiagram{3,2,1}} = \ydiagram{3,2,1} - \ydiagram{4,1,1} -
+  \ydiagram{3,3} + \ydiagram{5,1}
+\]
+\end{frame}
+\begin{frame}
+  \frametitle{Why Schur functions?}
+  \begin{itemize}
+  \item Schur functions encode the possible ways certain abstract
+    algebraic objects appear in \(n\)-dimensional space.\pause
+  \item Schur functions are ``orthogonal'' to each other in a certain
+    sense, making computations easier.
+  \end{itemize}
+  \pause
+  \begin{block}{Problem}
+    However, the definition of Schur functions is complicated. If we
+    had another formula for Schur functions, how can we prove they are
+    the same thing?
+  \end{block}
+\end{frame}
+\begin{frame}
+  \frametitle{The Pieri Rule}
+  Schur functions are defined in terms of partition
+  diagrams, so it makes sense to multiply a diagram and a Schur function.
+  \begin{example}
+    \[
+      \ydiagram[*(red)]{4} \cdot s_{\ydiagram{2,1}} =
+      s_{\ydiagram{2,1}*[*(red)]{2+2,1+1,1}} +
+      s_{\ydiagram{2,1}*[*(red)]{2+3,0,1}} +
+      s_{\ydiagram{2,1}*[*(red)]{2+3,1+1}} +
+      s_{\ydiagram{2,1}*[*(red)]{2+4}}
+    \]
+  \end{example}
+  \pause We call this the Pieri rule and it is a fundamental property
+  of Schur functions.
+\end{frame}
+\begin{frame}[fragile]
+  \frametitle{Proof Technique}
+  One approach to show two formulas for Schur functions are the same:
+  \begin{block}{Proof technique}
+    \[
+      \begin{tikzcd}[cramped, column sep=0.01em]
+        \text{Base cases are equal} \ar[rd]&\, & \ar[ld] \text{Pieri rules are the same}\\
+        \ &\text{Linear algebra} \ar[d] & \ \\
+        \ &\text{Functions are the same!} & \
+      \end{tikzcd}
+    \]
+  \end{block}
+\end{frame}
+\begin{frame}
+  \frametitle{What do I think about?}
+  \begin{itemize}
+  \item Schur functions are very well-understood.\pause
+  \item Instead, I think about a class of functions called ``type C
+    dual affine Stanley symmetric functions'' which serve a similar
+    geometric role to the Schur functions, but in a different context.\pause
+  \item However, the current formula for these functions is ``group
+    theoretic'' instead of ``combinatorial,'' like the definition for
+    Schur functions presented earlier.
+  \end{itemize}
+\end{frame}
+\begin{frame}
+  \frametitle{Type C dual affine Stanley symmetric functions}
+  Start with ``word'' with letters given by colors,\ytableausetup{boxsize=0.5em}
+  \(\{\ydiagram[*(red)]{1}, \ydiagram[*(blue)]{1},
+  \ydiagram[*(green)]{1}\}\). For example, let's use \(w = 
+  \begin{ytableau}
+   *(green) & *(blue) & *(green)
+  \end{ytableau}
+  \). \pause
+
+  We must find all ``subword decompositions'' of \(w\) that are also subwords of \(
+  \rho = \begin{ytableau}
+    *(blue) & *(green) & *(blue) & *(red)
+  \end{ytableau}\) or any of its ``rotations'' \(\begin{ytableau}
+    *(red)& *(blue) & *(green) & *(blue) 
+  \end{ytableau}, \begin{ytableau}
+     *(blue) &*(red)& *(blue) & *(green)
+  \end{ytableau}, \begin{ytableau}
+      *(green) & *(blue) &*(red)& *(blue)
+  \end{ytableau}
+\). \pause
+\begin{example}
+  \(
+  \begin{ytableau}
+    *(green) & *(blue)
+  \end{ytableau} |
+  \begin{ytableau}
+    *(green)
+  \end{ytableau}
+\) is a subword decomposition of \(w\) where each part appears as a
+subword of \(\rho = \begin{ytableau}
+    *(blue) & *(green) & *(blue) & *(red)
+  \end{ytableau}\), but \(
+  \begin{ytableau}
+    *(green) & *(blue) & *(green)
+  \end{ytableau}
+\) is not a subword of \(\rho\) or any of its rotations.
+\end{example}
+\end{frame}
+\begin{frame}
+  \frametitle{Example continued}
+  Then, you take all such subword decompositions to get a formula \[
+  \begin{array}{c}
+    \begin{ytableau}
+    *(green) & *(blue)
+  \end{ytableau} |
+  \begin{ytableau}
+    *(green)
+  \end{ytableau}  \\
+  \begin{ytableau}
+    *(green) 
+  \end{ytableau} |
+  \begin{ytableau}
+    *(blue) & *(green)
+  \end{ytableau} \\
+  \begin{ytableau}
+    *(green) 
+  \end{ytableau} |
+  \begin{ytableau}
+    *(blue)  
+  \end{ytableau} |
+  \begin{ytableau}
+    *(green)
+  \end{ytableau}
+  \end{array} \to
+  \ytableausetup{aligntableaux=top}
+  \begin{array}{c}
+    \ydiagram{2,1} \\
+    \ydiagram{1,1,1}
+  \end{array}
+  \ytableausetup{aligntableaux=center}
+  \to Q^{(2)}_{
+    \begin{ytableau}
+      *(green) & *(blue) & *(green)
+    \end{ytableau}
+  } = 4* \ydiagram{2,1} + 8 * \ydiagram{1,1,1}\] \pause
+But, you are not done! \pause You then have to take the ``dual'' of
+this function to get the Type C dual affine Stanley symmetric function.
+\end{frame}
+\begin{frame}[fragile]
+  \frametitle{What have I done?}
+  \begin{itemize}
+  \item I have a conjectured combinatorial formula that describes type
+    C dual affine Stanley symetric functions directly (and
+    combinatorially) using raising operators. \pause
+  
+   \item Computational evidence suggests my conjecture is correct. \pause
+  
+   \item However, proving the formulas are the same directly would be quite
+    hard, so instead I am seeking to use the Peri rule approach \[
+      \begin{tikzcd}[cramped, column sep=0.01em]
+        \text{Base cases are equal} \ar[rd]&\, & \ar[ld, dashed] \text{Pieri rules are the same}\\
+        \ &\text{Linear algebra} \ar[d] & \ \\
+        \ &\text{Functions are the same!} & \
+      \end{tikzcd}
+    \]
+  \end{itemize}
+  \end{frame}
+  \begin{frame}
+    \begin{center}
+      Thank you for listening!\\
+      \includegraphics[scale=0.5]{images/jsf_horizontal_logo.pdf}
+    \end{center}
+  \end{frame}
+  \begin{frame}[noframenumbering]
+    \frametitle{Symmetric Functions?}
+    I pulled the wool over your eyes. Our partition diagrams represent
+    polynomial functions with an infinite number of variables and an infinite
+    number of terms.
+    \begin{block}{Dictionary}
+      \[
+        \begin{array}{ccc}
+          \ydiagram{1}&\to h_{\ydiagram{1}}(x_1,x_2,x_3,\ldots) =
+          & x_1 + x_2 + x_3 + \cdots\\
+          \ydiagram{2}&\to h_{\ydiagram{2}}(x_1, x_2, x_3, \ldots) =
+          & x_1^2 + x_1x_2 + x_1x_3 + \cdots \\
+                      &&+ x_2^2 + x_2 x_3 + \cdots\\
+                      && + x_3^2 + x_3 x_4 + \cdots \\
+          \ydiagram{3}& \to h_{\ydiagram{3}}(x_1, x_2, x_3, \ldots) =
+          & x_1^3 + x_1^2 x_2 + x_1^2 x_3 + \cdots\\
+          \vdots
+        \end{array}
+      \]\[
+        s_{\ydiagram{3,2,1}} = h_{\ydiagram{3,2,1}} - h_{\ydiagram{4,1,1}} -
+  h_{\ydiagram{3,3}} + h_{\ydiagram{5,1}}
+      \]
+    \end{block}
+
+  \end{frame}
+  \begin{frame}[noframenumbering]
+    \frametitle{Applications?}
+\begin{picture}(150, 150)(-100, -100)
+\put(-25,42){\line(-3,-5){25}}
+\put(-25, 42){\line(1, 0){50}}
+\put(25, 42){\line(3,-5){25}}
+\put(-25, -42){\line(1,0){50}}
+\put(-25, -42){\line(-3, 5){25}}
+\put(25, -42){\line(3, 5){25}}
+
+\put(-25, 42){\circle*{3}}
+\put(-25, -42){\circle*{3}}
+\put(25, 42){\circle*{3}}
+\put(25, -42){\circle*{3}}
+\put(-50, 0){\circle*{3}}
+
+\put(50, 0){\circle*{3}}
+\put(0, 3){\circle*{3}}
+\put(0, -3){\circle*{3}}
+
+\put(-28, 47){$K^{0}$}
+\put(28, 47){$K^{+}$}
+\put(-28, -55){$K^{-}$}
+\put(28, -55){$\overline{K}^{0}$}
+\put(55, 0){$\pi^{+}$}
+\put(-65, 0){$\pi^{-}$}
+\put(0, 10){$\pi^{0}$}
+\put(0, -15){$\eta$}
+\end{picture}
+
+The ``eightfold way'' from particle physics is encoded in Schur functions by \[
+  s_{\ydiagram{1,1}}(\epsilon_1, \epsilon_2)x+1
+\]
+\end{frame}
+\end{document}
