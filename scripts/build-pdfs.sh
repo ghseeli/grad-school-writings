@@ -7,7 +7,7 @@ for DIR in $(ls -d */ | grep ''); do
         latexmk -pdf -interaction=nonstopmode "$FI" > output.txt 2>&1
         EXITCODE="$?"
 	echo "Exitcode is $EXITCODE"
-        if $((EXITCODE > 0)); then
+        if [ $EXITCODE -gt 0 ]; then
             echo "$(<output.txt)"
 	    # LOGFILE="${FI//.tex}.log"
 	    # echo "$(<$LOGFILE)"
