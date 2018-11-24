@@ -4,12 +4,12 @@ for DIR in $(ls -d */ | grep ''); do
     cd "$DIR"
     for FI in $(ls | grep --regexp="\.tex$"); do
         echo "$FI"
-        latexmk -pdf -interaction=nonstopmode -silent "$FI" > output.txt 2>&1
+        latexmk -pdf -interaction=nonstopmode "$FI" > output.txt 2>&1
         EXITCODE="$?"
         if [ $EXITCODE > 0 ]; then
             echo "$(<output.txt)"
-	    LOGFILE="${FI//.tex}.log"
-	    echo "$(<$LOGFILE)"
+	    # LOGFILE="${FI//.tex}.log"
+	    # echo "$(<$LOGFILE)"
         fi
         echo "$EXITCODE" >> ../exit-codes.txt
         echo "$FI $EXITCODE" >> ../exit-codes-with-filenames.txt
