@@ -1,7 +1,7 @@
 # Latex files
  
 *.pdf
-!images/*.pdf
+!/presentations/images/*.pdf
 *.ps
 *.aux
 *.fdb_latexmk
