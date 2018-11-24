@@ -6,11 +6,12 @@ for DIR in $(ls -d */ | grep ''); do
         echo "$FI"
         latexmk -pdf -interaction=nonstopmode "$FI" > output.txt 2>&1
         EXITCODE="$?"
-        if [ $EXITCODE > 0 ]; then
-            echo "$(<output.txt)"
-	    # LOGFILE="${FI//.tex}.log"
-	    # echo "$(<$LOGFILE)"
-        fi
+	echo "Exitcode is $EXITCODE"
+        # if [ $EXITCODE > 0 ]; then
+        #     echo "$(<output.txt)"
+	#     # LOGFILE="${FI//.tex}.log"
+	#     # echo "$(<$LOGFILE)"
+        # fi
         echo "$EXITCODE" >> ../exit-codes.txt
         echo "$FI $EXITCODE" >> ../exit-codes-with-filenames.txt
     done
