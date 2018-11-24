@@ -1,7 +1,7 @@
 # Latex files
  
 *.pdf
-!/images/*.pdf
+!images/*.pdf
 *.ps
 *.aux
 *.fdb_latexmk
@@ -32,7 +32,6 @@
 *.mtc1
 *.out
 *.synctex.gz
-*.pdf
  
 # Mac IDE files
 *.swp
