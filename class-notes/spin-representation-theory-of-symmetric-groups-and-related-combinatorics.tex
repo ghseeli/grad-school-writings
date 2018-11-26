@@ -4,7 +4,6 @@
 \usepackage{bbm}
 \usepackage{ytableau}
 \usepackage{todonotes}
-
 \usepackage{./notes}
 \usepackage{../ReAdTeX/readtex-core}
 \usepackage{../ReAdTeX/readtex-dangerous}
@@ -1361,6 +1360,44 @@ Our goal is to describe \(\wt(M)\) for integral irreducible CS
     & \implies v = 0 & \text{ since }
   \end{align*}
   \todo{Finish this proof.}
+\end{proof}
+\begin{lem}
+  Suppose \(\vec{i} = (i_1, \ldots, i_n) \in \wt(M) \subset \Z_+^n\)
+  for some integral, irreducible, CS \(\hat{\H}_n\)-module. Fix \(1
+  \leq k \leq n-1\).
+  \begin{enumerate}
+  \item If \(i_k \neq i_{k+1}\pm 1\), then \(\Phi_k z \neq 0\) for all
+    \(0 \neq z \in M_{\vec{i}}\).
+  \item If \(i_k = i_{k+1} \pm 1\), then \(\Phi_k = 0\) on
+    \(M_{\vec{i}}\). 
+  \end{enumerate}
+\end{lem}
+\begin{proof}
+  Since \(\Phi_k^2 = 2(x_k^2+x_{k+1}^2) - (x_k^2-x_{k+1}^2)^2\), then \[
+    \Phi_k^2 z = (2(q(i_k)+q(i_{k+1})) - q(i_k)^2 + 2q(i_k)q(i_{k+1}) -
+    q(i_{k+1})^2)z = 0
+  \]
+  if and only if \[
+    (q(i_k)-q(i_{k+1}))^2 = 2(q(i_k)+q(i_{k+1}))
+  \]
+  Now, if we write \(i_k = i_{k+1}+c\), then \[
+    \begin{cases}
+      q(i_k) = i_{k+1}^2+2c i_{k+1}+c^2 + i_{k+1}+c\\
+      q(i_{k+1}) = i_{k+1}^2+i_{k+1}
+    \end{cases}
+    \implies
+    \begin{cases}
+      q(i_k)-q(i_{k+1}) = 2 c i_{k+1} + c^2 + c \\
+      q(i_k)+q(i_{k+1}) = 2i_{k+1}^2+2c i_{k+1}+c^2 + 2i_{k+1}+c
+    \end{cases}
+  \]
+  From here, one checks that \(c = \pm 1\) certainly gives 
+  solutions independent of \(i_{k+1}\). Thus, \(i_k = i_{k+1} \pm 1
+  \implies \Phi_k^2 z = 0\). \todo{However, there are other solutions
+    to these equations, namely \(c = -2 i_{k+1}\) and
+    \(c=-2(i_{k+1}+1)\). So, how do I prove the first staent?}
+
+  So, to prove the second part, since \(\Phi_k^2 z = 0\)
 \end{proof}
 \begin{bibdiv}
   \begin{biblist}
