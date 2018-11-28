@@ -1397,8 +1397,18 @@ Our goal is to describe \(\wt(M)\) for integral irreducible CS
     to these equations, namely \(c = -2 i_{k+1}\) and
     \(c=-2(i_{k+1}+1)\). So, how do I prove the first staent?}
 
-  So, to prove the second part, since \(\Phi_k^2 z = 0\)
-\end{proof}
+  So, to prove the second part, since \(\Phi_k^2 z = 0\), it must be
+  that if \(\Phi_k z \neq 0\) and so \(\Phi_k z \in M_{s_k \vec{i}}\)
+  \todo{Why is this true?}. Then, there exists a minimal sequence \(\Phi_{j_1}, \ldots,
+  \Phi_{j_r}\) such that \(\Phi_{j_1} \cdots \Phi_{j_r} \Phi_k z \in
+  M_{\vec{i}}\) since \(M\) is irreducible \todo{Also not clear
+    why}. Then, if \(\sigma = s_{j_1} \cdots s_{j_r} s_k \in \Sym_n\),
+  it must be that \(\sigma \cdot \vec{i} = \vec{i}\). If one assumes
+  \(\sigma \neq 1\), this leads to a violation of Lemma \ref{} with
+  some work. Then, using the exchange condition for Coxeter groups,
+  one shows that \(r=1\) which gives \(j_1 = k\), so \(\Phi_k^2 z \neq
+  0\), contradicting what we showed above.
+\end{proof} 
 \begin{bibdiv}
   \begin{biblist}
     \bib{cheng-wang}{book}{
