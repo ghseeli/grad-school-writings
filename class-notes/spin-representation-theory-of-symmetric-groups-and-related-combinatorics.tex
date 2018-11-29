@@ -1029,8 +1029,7 @@ where \[
     x_i := t_i t_{i+1} \cdots t_{n-1} t_n t_{n-1} \cdots t_{i+1} t_i
   \]
   which gets mapped to the transposition \((i,n) \in \Sym_n\) under
-  the map \(\theta_n\) \todo{The map \(\theta_n\) was never properly
-    defined}. Then, we let \[
+  the map \(\theta_n\). Then, we let \[
     [i_1 i_2 \cdots i_m] :=
     \begin{cases}
       z & \text{ if } m=1\\
@@ -1209,8 +1208,7 @@ up here yet.
     \hat{\H}_n = \langle s_1, \ldots, s_{n-1}, c_1, \ldots, c_n, x_1
     ,\ldots, x_n\rangle
   \]
-  with additional relations \todo{Additional to the Hecke-Clifford
-    algebra?} \[
+  with additional relations \[
     \begin{cases}
       x_k x_l = x_l x_k\\
       s_k x_k = x_{k+1} s_k - (1+c_k c_{k+1})\\
@@ -1298,15 +1296,15 @@ We have the following useful relations for the intertwining elements.
 \]
 \end{prop}
 \begin{prop}
-  If \(v\) is some eigenvector of \(x_j^2\), that is, if \(x_j^2 v
+  If \(v\) is some eigenvector of \(x_{j+1}^2\), that is, if
+  \(x_{j+1}^2 v 
 = av\), then \(x_j^2 \Phi_j v = a \Phi_j v\), so \(\Phi_j v\) is an
 \(x_j^2\) eigenvector with the same eigenvalue.
 \end{prop}
 \begin{proof}
   Since \(x_j^2 \Phi_j = \Phi_j x_{j+1}^2\), we get that \[
-    x_j^2 \Phi_j x = \Phi_j x_{j+1}^2 v =
+    x_j^2 \Phi_j x = \Phi_j x_{j+1}^2 v = \Phi_j a v = a \Phi_j x
   \]
-  \todo{Finish this}
 \end{proof}
 \begin{defn}
   A finite dimensional \(\hat{\H}_n\)-module \(M\) is called
@@ -1401,8 +1399,7 @@ Our goal is to describe \(\wt(M)\) for integral irreducible CS
   that if \(\Phi_k z \neq 0\) and so \(\Phi_k z \in M_{s_k \vec{i}}\)
   \todo{Why is this true?}. Then, there exists a minimal sequence \(\Phi_{j_1}, \ldots,
   \Phi_{j_r}\) such that \(\Phi_{j_1} \cdots \Phi_{j_r} \Phi_k z \in
-  M_{\vec{i}}\) since \(M\) is irreducible \todo{Also not clear
-    why}. Then, if \(\sigma = s_{j_1} \cdots s_{j_r} s_k \in \Sym_n\),
+  M_{\vec{i}}\) since \(M\) is irreducible. Then, if \(\sigma = s_{j_1} \cdots s_{j_r} s_k \in \Sym_n\),
   it must be that \(\sigma \cdot \vec{i} = \vec{i}\). If one assumes
   \(\sigma \neq 1\), this leads to a violation of Lemma \ref{} with
   some work. Then, using the exchange condition for Coxeter groups,
