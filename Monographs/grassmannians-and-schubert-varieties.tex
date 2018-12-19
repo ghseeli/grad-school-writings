@@ -485,7 +485,7 @@ such partitions this way, we get the cellular decomposition result.
 \end{proof}
 Now, we are particularly interested in the consequences of this result
 on the cohomology of the Grassmannian.
-\begin{cor}
+\begin{cor}\label{schubert-classes-form-basis}
   \begin{enumerate}
   \item   Thus, the Poincar\'{e} duals of the cohomology classes of
     \(\ov{\Omega_\lambda} = X_\lambda\), say \(\sigma_\lambda :=
@@ -557,10 +557,10 @@ Schubert class \(\sigma_\lambda\).
 \begin{proof}
   See exponsition in \cite{manivel}*{p 108}. Essentially, this result
   follows from analyzing what an element of \(\Omega_\eta \intersect
-  \Omega_\nu'\) must look like, and it foces the desired containment.
+  \Omega_\nu'\) must look like, and it forces the desired containment.
 \end{proof}
 \begin{lem}
-  Given  irreducible algebraic subvarieties \(Y\) and
+  Given irreducible algebraic subvarieties \(Y\) and
   \(Y'\) of a compact and connected complex variety \(X\) with
   codimensions \(c\) and \(c'\), respectively, we have \[
     Y \intersect Y' = \Intersect_{i \in I} Z_i
@@ -579,7 +579,7 @@ Of course, since cohomology forms a
 ring, we may ask about the ring 
 structure on \(H^*(G(m,n))\). We get
 \begin{prop}
-  Given two partitions \(\lambda,\mu\) contained in an \(n \times m\)
+  \cite{manivel}*{Proposition 3.2.7} Given two partitions \(\lambda,\mu\) contained in an \(n \times m\)
   rectangle such that \(|\lambda|+|\mu|=mn\), we get that \[
     \sigma_\lambda \cupprod \sigma_\mu = \delta_{\mu,\hat{\lambda}}
   \]
@@ -613,7 +613,10 @@ structure on \(H^*(G(m,n))\). We get
     \sigma_\lambda \cupprod \sigma_\mu = [X_\lambda \intersect
     X_\mu]^* = [\{W^\lambda\}]^* = 1
   \]
-  granting that \(X_\lambda\) and \(X_\mu\) intersect transversely.
+  granting that \(X_\lambda\) and \(X_\mu\) intersect
+  transversely. \todo{Apparently this is ``obvious'' because
+    \(\Omega_\lambda\) and \(\Omega_{\mu}'\) correspond to coordinate
+    subspaces.} 
   % which implies that 
   % \begin{align*}
   %   \dim W \intersect V_i \intersect V_{m+1-i}' + \dim W
@@ -627,6 +630,50 @@ structure on \(H^*(G(m,n))\). We get
   % the form \[
   %   W^\lambda := \Span\{v_{n+1-\lambda_1}, \ldots, v_{n+m-\lambda_m}\}
   % \]
+\end{proof}
+\begin{defn}
+  Given the above, we say that the classes \(\sigma_{\lambda}\) and
+  \(\sigma_{\hat{\lambda}}\) are \de{dual} to each other.
+\end{defn}
+\begin{cor}
+  Given \(x \in H^*(G(m,n))\), we have \[
+    x = \sum_{\lambda \text{ in an }n \times m\text{ rectangle}} (x
+    \cupprod \sigma_{\hat{\lambda}}) \sigma_\lambda
+  \]
+\end{cor}
+\begin{proof}
+  This follows immediately from the cup product structure outlined in
+  the above proposition and the fact that the Schubert classes form a
+  \(\Z\)-basis of the cohomology (\ref{schubert-classes-form-basis}).
+\end{proof}
+\begin{thm}[Pieri Rule]
+  \cite{manivel}*{3.2.8} If \(\lambda\) is a partition contained in an
+  \(n \times m\) rectangle and \(1 \leq k \leq n\), then \[
+    \sigma_\lambda \cupprod \sigma_k = \sum_{\substack{\nu \text{
+          contained in an }n\times m\text{ rectangle} \\ \nu = \lambda
+        + \text{a horizontal }k\text{-strip}}} \sigma_\nu
+  \]
+\end{thm}
+\begin{proof}
+  By the previous corollary, we need only show that \[
+    (\sigma_\lambda \cupprod \sigma_k) \cupprod \sigma_{\hat{\nu}} = 1
+    \iff \nu \text{ is a summand of the sum above.}
+  \]
+  For \(\mu\) a partiton contained in an \(n \times m\) rectangle and
+  \(|\lambda|+|\mu| = nm-k\), then \[
+    n-\lambda_m \geq \mu_1 \geq n-\lambda_{m-1} \geq \mu_2 \geq \cdots
+    \geq n-\lambda_1 \geq \mu_m \implies \sigma_\lambda \cupprod
+    \sigma_\mu \cupprod \sigma_k = 1
+  \]
+  and, if the inequalities are not satisfied, then the product is
+  zero. If \(\lambda_i + \mu_{n+1-i} > n\), then \(\sigma_\lambda
+  \cupprod \sigma_\mu = 0\), so we will assume that \(\lambda_i +
+  \mu_{n+1-i} \leq n\). Now, we set
+  \begin{align*}
+    A_i & = \Span\{v_1, \cdots, v_{n+i-\lambda_i}\}
+    & = V_{n+i-\lambda_i} \\
+    B_i & = 
+  \end{align*}
 \end{proof}
 \begin{bibdiv}
   \begin{biblist}
