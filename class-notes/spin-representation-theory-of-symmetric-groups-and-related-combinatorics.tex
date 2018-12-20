@@ -1312,7 +1312,7 @@ We have the following useful relations for the intertwining elements.
   semisimply, ie the actions of \(x_1, \ldots, x_n\) can be
   diagonalized simultaneously.
 \end{defn}
-\begin{prop}
+\begin{prop}\label{weight-decomposition}
   Every integral CS \(\hat{\H}_n\)-module \(M\) can be decomposed
   as \[
     M = \bigoplus_{\vec{i} \in \Z_+^n} M_{\vec{i}}
@@ -1359,7 +1359,7 @@ Our goal is to describe \(\wt(M)\) for integral irreducible CS
   \end{align*}
   \todo{Finish this proof.}
 \end{proof}
-\begin{lem}
+\begin{lem}\label{integer-step-lemma}
   Suppose \(\vec{i} = (i_1, \ldots, i_n) \in \wt(M) \subset \Z_+^n\)
   for some integral, irreducible, CS \(\hat{\H}_n\)-module. Fix \(1
   \leq k \leq n-1\).
@@ -1431,9 +1431,61 @@ Our goal is to describe \(\wt(M)\) for integral irreducible CS
   k \leq n-2\), then \(i_k = i_{k+2}=0\) and \(i_{k+1}=1\).
 \end{cor}
 \begin{proof}
-  If \(i_k = i_{k+2}\), then it must be that \(i_{k+1} = i_k \pm 1\)
-  \todo{Why?} and so \(\Phi_k = 0 = \Phi_{k+1}\) on \(V_{\vec{i}}\) by
-  the above proposition. 
+  If \(i_k \neq i_{k+1} \pm 1\), then \(s_k \cdot \vec{i} \in \wt V\) by the first part
+  of \ref{integer-step-lemma}, but 
+  \(s_k \cdot \vec{i} = (\cdots, i_{k+1},i_k,i_{k+2} \cdots)\) and, by
+  assumption, \(i_k = i_{k+2}\) contradicting
+  \ref{consecutive-weights-distinct}. So, it must be that \(i_{k+1} =
+  i_k \pm 1\) and so \(\Phi_k = 0 = \Phi_{k+1}\) on \(V_{\vec{i}}\) by
+  the second part of \ref{integer-step-lemma}. Thus, for \(z \in V\), \[
+    \begin{cases}
+      \Phi_k z = 0 & \implies (q(i_k)-q(i_{k+1}))s_k z =
+      -((x_k+x_{k+1})+c_k c_{k+1}(x_k-x_{k+1}))z \\
+      \Phi_{k+1} z = 0 & \implies (q(i_{k+1})-q(i_{k+2}))s_{k+1} z =
+      -((x_{k+1}+x_{k+2})+c_{k+1} c_{k+2}(x_{k+1}-x_{k+2}))z
+    \end{cases}
+  \]
+  which gives us the \(s_k\) and \(s_{k+1}\) actions on
+  \(V_{\vec{i}}\). From here, we can use the braid relation \(s_k
+  s_{k+1} s_k = s_{k+1} s_k s_{k+1}\) to arrive
+  at the equality \[
+    ((x_k+x_{k+2})(6 x_{k+1}^2 + 2 x_k x_{k+2})+c_k c_{k+2}(x_k -
+    x_{k+2})(6 x_{k+1}^2 - 2 x_k x_{k+2}))z = 0
+  \]
+  Now, \(x_k z = \pm \sqrt{q(i_k)} z\). Furthermore, since \(i_k =
+  i_{k+2}\), we have that either \(x_k z = x_{k+2} 
+  z\) or \(x_k z = -x_{k+2}z\). Decompose \[
+    V_{\vec{i}} = W_1 \oplus W_2
+  \]
+  where \(W_1 := \{z \in V_{\vec{i}} \st x_k z = x_{k+2} z\}\) and
+  \(W_2  := \{z \in V_{\vec{i}} \st x_k z = -x_{k+2} z\}\). Now, we
+  can break up our braid relation equality.
+  \begin{align*}
+    z \in W_1 \implies  0
+    &= ((x_k+x_{k+2})(6 x_{k+1}^2 + 2 x_k x_{k+2})+c_k c_{k+2}(x_k -
+      x_{k+2})(6 x_{k+1}^2 - 2 x_k x_{k+2}))z\\
+    & = 2 x_k (6 x_{k+1}^2 + 2 x_k^2) z \\
+    & = 2 \sqrt{q(i_k)}(6 q(i_{k+1})+2q(i_k))z \\
+    z \in W_2 \implies 0
+    &= ((x_k+x_{k+2})(6 x_{k+1}^2 + 2 x_k x_{k+2})+c_k c_{k+2}(x_k -
+      x_{k+2})(6 x_{k+1}^2 - 2 x_k x_{k+2}))z\\
+    &= c_k c_{k+2}2 x_k (6 x_{k+1}^2+2x_k^2)z\\
+    & = c_k c_{k+2}(2 \sqrt{q(i_k)}(6 q(i_{k+1})+2q(i_k)))z
+  \end{align*}
+  Thus, we obtain that \[
+    2 \sqrt{q(i_k)}(6 q(i_{k+1})+2q(i_k)) = 0
+  \]
+  Moreover, we know that \(i_{k+1} = i_k \pm 1\), so we get \[
+    \begin{cases}
+      \sqrt{i_k(i_k+1)}(6(i_k-1)i_k+2(i_k+1)i_k) = 0 & \text{ if
+      }i_{k+1} = i_k - 1\\
+      \sqrt{i_k(i_k+1)}(6(i_k +1)(i_k+2)+2(i_k+1)i_k) = 0 & \text{ if
+      }i_{k+1} = i_k+1
+    \end{cases}
+  \]
+  There are no solutions to the first equation that give \(i_k\) and
+  \(i_{k+1}\) as non-negative integers and the only such solution for
+  the second equation is \(i_k = 0\) and \(i_{k+1} = 1\).
 \end{proof}
 \begin{bibdiv}
   \begin{biblist}
