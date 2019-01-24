@@ -37,6 +37,8 @@
 \newcommand{\partitions}{\mathcal{P}} % Partitions
 \newcommand{\B}{\mathbb{B}}
 \newcommand{\K}{\mathcal{K}} % Farahat-Higman ring
+\newcommand{\T}{\mathfs{T}} % Tableau
+\newcommand{\cF}{\mathcal{F}}
 \renewcommand{\D}{\mathcal{D}} % Even split conjugacy class
 \renewcommand{\q}{\mathfrak{q}}
 \DeclareMathOperator{\Supp}{Supp}
@@ -1426,7 +1428,7 @@ Our goal is to describe \(\wt(M)\) for integral irreducible CS
   \end{align*}
   \todo{The second \(\hat{\H}_{(1^k,n-k-r,1^r)}\) is not defined.}
 \end{rmk}
-\begin{cor}\ref{same-diff-same}
+\begin{cor}\label{same-diff-same}
   Suppose \(\vec{i} \in \wt(V)\) for some integral, irreducible, CS
   \(\hat{\H}_n\)-module \(V\). If \(i_k = i_{k+2}\) for some \(1 \leq
   k \leq n-2\), then \(i_k = i_{k+2}=0\) and \(i_{k+1}=1\).
@@ -1497,7 +1499,7 @@ In conclusion, we have the following.
   \item If \(i_k = i_{\ell} = 0\) for some \(1 \leq k < \ell \leq n\),
     then \(1 \in \{i_{k+1}, \ldots, i_{\ell-1}\}\).
   \item If \(i_k = i_\ell \geq 1\) for some \(1 \leq k < \ell \leq
-    n\), then \(\{i_k -1, i_k+1 \subset \{i_{k+1} ,\ldots, i_{\ell-1}\}\).
+    n\), then \(\{i_k -1, i_k+1\} \subset \{i_{k+1} ,\ldots, i_{\ell-1}\}\).
   \end{enumerate}
 \end{thm}
 \begin{proof}
@@ -1564,6 +1566,80 @@ shape \(\nu = (6,3,1)\):\[
   \(\hat{\H}_n\)-module \(V\), then \(T(\vec{i})\) and \(T(\vec{j})\)
   have the same shape.
 \end{prop}
+\begin{proof}
+  If \((i_1, \ldots, i_k, i_{k+1}, \ldots, i_n)\), then \((i_1, \ldots,
+  i_{k-1}, i_{k+1}, i_k, \ldots, i_n)\) is a weight only if \(i_k \neq
+  i_{k+1} \pm 1\) by \ref{}\todo{What is the reference here?}. However, under such a condition, it does 
+  not matter 
+  in which order we add the boxes corresponding to \(i_k\) and
+  \(i_{k+1}\). Thus, these two weights will yield the same shape.
+\end{proof}
+\begin{defn}
+  Given \(\xi/\nu\) a skew-shifted Ferrer's diagram of size \(n\), we
+  define \[
+    \cF(\xi/\nu) := \{\T \st \T \text{ a standard Young tableau of
+      shape }\xi/\nu\}
+  \]
+  and \[
+    \hat{D}^{\xi/\nu} := \bigoplus_{\T \in \cF(\xi/\nu)} \Cl_n v_\T
+  \]
+  as a vector space with actions \[
+    x_k v_\T = \sqrt{q(c(\T_k))} v_\T
+  \]
+  where \(c(\T_k)\) is the content of the box labelled by \(k\) in
+  \(\T\) and where \(\Cl_n\) acts by multiplication on the left.
+\end{defn}
+\begin{prop}
+  We have \[
+    s_k v_\T = \left(
+      \frac{1}{\sqrt{q(c(\T_{k+1}))}-\sqrt{q(c(\T_k))}} +
+      \frac{1}{\sqrt{q(c(\T_{k+1}))}+\sqrt{q(c(\T_k))}} c_k c_{k+1}
+    \right) v_\T + \sqrt{1 -
+      \frac{2(q(c(\T_{k+1})))+q(c(\T_k))}{(q(c(\T_{k+1}))-q(c(\T_k)))^2}}
+    v_{s_k \T}
+  \]
+\end{prop}
+\begin{proof}
+  This fact follows formally from the fact that \(\Phi_k v_\T = a
+  v_{s_k \T}\) for some scalar \(a\) if \(s_k \T\) is
+  standard. \todo{Actually do this proof.}
+\end{proof}
+\begin{cor}
+  \(\hat{D}^{\xi/\nu}\) is an integral CS \(\hat{\H}_n\)-module.
+\end{cor}
+\begin{proof}
+  Mainly, one needs to check the Coxeter relations. \todo{Fill in this
+  proof.}
+\end{proof}
+\section{Spin Kostka Polynomials}
+\begin{defn}
+  Let \(\nu \in \SP\) and \(\mu\) be a partition. Then, the \de{spin
+    Kostka polynomials} are the transition polynomials from the
+  Hall-Littlewood \(P\)-functions to the \(Q\)-Schur functions. In
+  other words, \[
+    Q_\nu(x) = \sum_{\mu} K_{\nu \mu}^-(t) P_\mu(x;t)
+  \]
+\end{defn}
+If we also let \(b_{\nu \lambda}\) be such that \[
+  Q_\nu(x) = \sum_{\lambda} b_{\nu \lambda} s_\lambda(x)
+\]
+then we get
+\begin{prop}
+  For \(\nu \in \SP\) and \(\mu\) a partition, \[
+    K_{\nu \mu}^-(t) = \sum_{\lambda} b_{\nu \lambda} K_{\lambda \mu}(t)
+  \]
+  where \(K_{\lambda \mu}(t)\) are the Kostka-Foulkes polynomials.
+\end{prop}
+\begin{proof}
+  By definition of Kostka-Foulkes, we have \[
+    s_\lambda = \sum_\mu K_{\lambda \mu}(t) P_\mu(x;t)
+  \]
+  and so \[
+   \sum_\mu K_{\nu \mu}(t) P_\mu(x;t) = Q_\nu(x) = \sum_{\lambda}
+   b_{\nu \lambda} s_\lambda = \sum_{\lambda, \mu}
+   b_{\nu \lambda} K_{\lambda \mu}(t) P_\mu(x;t) 
+  \]
+\end{proof}
 \begin{bibdiv}
   \begin{biblist}
     \bib{cheng-wang}{book}{

@@ -656,25 +656,58 @@ structure on \(H^*(G(m,n))\). We get
 \end{thm}
 \begin{proof}
   By the previous corollary, we need only show that \[
-    (\sigma_\lambda \cupprod \sigma_k) \cupprod \sigma_{\hat{\nu}} = 1
-    \iff \nu \text{ is a summand of the sum above.}
+    (\sigma_\lambda \cupprod \sigma_k) \cupprod \sigma_{\hat{\nu}} =
+    \begin{cases}
+      1 & \text{ if }\nu \text{ is a summand of the sum above}\\
+      0 & \text{ otherwise}
+    \end{cases}
   \]
   For \(\mu\) a partiton contained in an \(n \times m\) rectangle and
-  \(|\lambda|+|\mu| = nm-k\), then \[
-    n-\lambda_m \geq \mu_1 \geq n-\lambda_{m-1} \geq \mu_2 \geq \cdots
-    \geq n-\lambda_1 \geq \mu_m \implies \sigma_\lambda \cupprod
+  \(|\lambda|+|\mu| = nm-k\), then
+  \begin{align*}
+    \hspace{-0.25in} \mu = \text{ complement of }(\lambda + \text{a horizontal }k\text{
+    strip}) & \iff \hat{\lambda} = \mu + \text{a horizontal }k\text{ strip}\\
+    & \iff n-\lambda_m \geq \mu_1 \geq n-\lambda_{m-1} \geq \mu_2 \geq \cdots
+    \geq n-\lambda_1 \geq \mu_m \\
+    & \implies \sigma_\lambda \cupprod
     \sigma_\mu \cupprod \sigma_k = 1
-  \]
+  \end{align*}
   and, if the inequalities are not satisfied, then the product is
   zero. If \(\lambda_i + \mu_{n+1-i} > n\), then \(\sigma_\lambda
   \cupprod \sigma_\mu = 0\), so we will assume that \(\lambda_i +
   \mu_{n+1-i} \leq n\). Now, we set
   \begin{align*}
-    A_i & = \Span\{v_1, \cdots, v_{n+i-\lambda_i}\}
+    A_i & = \Span\{v_1, \ldots, v_{n+i-\lambda_i}\}
     & = V_{n+i-\lambda_i} \\
-    B_i & = 
+    B_i & = \Span\{v_{\mu_{m+1-i}+i}, \ldots, v_{m+n}\}
+    & = V'_{n+m+1-i-\mu_{m+1-i}} \\
+    C_i & = \Span \{v_{\mu_{m+1-i}+i}, \ldots, v_{n+i-\lambda_i}\}
+    & = A_i \intersect B_i
   \end{align*}
+  We note that \(\dim C_i = n-\lambda_i-\mu_{m+1-i}\), so if
+  \(\mu_{m+1-i} \geq n-\lambda_i\), then \(A_i \intersect B_i = C_i =
+  0\). \tood{Finish this proof; maybe find a different one.}
 \end{proof}
+The important fact about the Pieri rule is that it totally determines
+the structure constants of the algebra. Furthermore, the ring of
+symmetric function has its structure constants completely determined
+by the Pieri rule.
+\begin{cor}
+  Let \(\sym_m\) be the symmetric functions in \(m\) variables. Then,
+  the map \\
+  \begin{minipage}{1.0\linewidth}
+    \begin{align*}
+      \phi_{m,n} \from \sym_m & \to H^*(G(m,n))\\
+      s_\lambda & \to
+                  \begin{cases}
+                    \sigma_\lambda & \lambda \text{ in an }n \times
+                    m\text{ rectangle}\\
+                    0 & \text{ else}
+                  \end{cases}
+    \end{align*}
+  \end{minipage}
+  is a surjective ring homomorphism.
+\end{cor}
 \begin{bibdiv}
   \begin{biblist}
     \bib{fulton}{book}{
