@@ -80,7 +80,7 @@ we remark that \[
   \(K_\mu\) for \(\mu \in \weightlattice^\vee\) with the following
   relations
   \begin{enumerate}
-  \item \(K_\mu = 1, K_{\mu} K_{\mu'} = K_{\mu+\mu'}\) for \(\mu,\mu' \in
+  \item \(K_0 = 1, K_{\mu} K_{\mu'} = K_{\mu+\mu'}\) for \(\mu,\mu' \in
     \weightlattice^\vee\)
   \item \(K_\mu e_i K_{-\mu} = q^{\alpha_i(\mu)}e_i\) for \(\mu \in
     \weightlattice^\vee\) 
@@ -95,13 +95,16 @@ we remark that \[
   \end{enumerate}
 \end{defn}
 \begin{example}
-  Let \(\g = \sl_2\). Then, \(\U_q(\sl_2) = \langle e,f,K_h,K_h^{-1}
+  Let \(\g = \sl_2 = \langle e,f,h \rangle\). Then, we will write \(K
+  := K_h\) since 
+  \(\weightlattice^\vee\) is spanned only by \(h\). Thus,
+  \(\U_q(\sl_2) = 
+  \langle e,f,K,K^{-1} 
   \rangle\). Since the Cartan matrix for \(\sl_2\) is just \(A =
   (2)\), which is already symmetric, we will take \(D = Id\). Then, many relations simplify. For instance, \[
-    K_h e K_h^{-1} = q e, K_h f K_h^{-1}= q^{-1} f, ef-fe = \frac{K_{h}-K_{h}^{-1}}{q-q^{-1}}
+    K e K^{-1} = q e, K f K^{-1}= q^{-1} f, ef-fe =
+    \frac{K-K^{-1}}{q-q^{-1}} 
   \]
-  Since \(\weightlattice^\vee\) is spanned only by \(h\), we will
-  usually just write \(K := K_h\) when working in \(\U_q(\sl_2)\).
 \end{example}
 \begin{example}
   Now, consider \(\U_q(\hat{\sl}_2)\), which has Cartan matrix \[
@@ -156,10 +159,10 @@ we remark that \[
 \begin{defn}
   In order to simplify notation, we will write
   \begin{enumerate}
-  \item \(K_i := K_{s_i}\)
-  \item \(\tilde{K}_i := K_{s_i h_i}\)
+  \item \(q_i := q^{s_i}\)
+  \item \(K_i := K_{s_i h_i}\)
   \item For \(\alpha = \sum_i \eta_i \alpha_i\) a root, we will write
-    \(\tilde{K}_\alpha := \prod_i K_i^{\eta_i}\).
+    \(K_\alpha := \prod_i K_i^{\eta_i}\).
   \end{enumerate}
 \end{defn}
 \begin{prop}\label{root-space-decomp}
@@ -192,8 +195,8 @@ we remark that \[
 \end{defn}
 \begin{lem}
   We get \[
-    (\ad_q e_i)^N(e_j) = \sum_{k=0}^N (-1)^k K_i^{k(N+a_{ij}-1)}
-    \qbinom[K_i]{N}{k} e_i^{N-k} e_j e_i^k
+    (\ad_q e_i)^N(e_j) = \sum_{k=0}^N (-1)^k q_i^{k(N+a_{ij}-1)}
+    \qbinom[q_i]{N}{k} e_i^{N-k} e_j e_i^k
   \]
 \end{lem}
 \begin{rmk}
@@ -348,10 +351,12 @@ we remark that \[
 \end{proof}
 \subsection{Representation theory of quantum groups}
 The representation theory of quantum groups has similar results to
-that of the representation theory of Kac-Moody algebras.
+that of the representation theory of Kac-Moody algebras. \todo{This
+  section has no proofs. To be filled in later, maybe when I take a
+  quantum groups course.}
 \begin{defn}
   \begin{enumerate}
-  \item   We say a \(\U_q(\g)\)-module \(V^q\) is a \de{weight module} if it
+  \item  We say a \(\U_q(\g)\)-module \(V^q\) is a \de{weight module} if it
   admits a weight space decomposition \[
     V^q = \bigoplus_{\mu \in \weightlattice} V_\mu^q \text{ where }
     V_\mu^1 = \{v \in V^q \st K_h v = q^{\mu(h)} v \text{ for all }h
@@ -379,8 +384,123 @@ that of the representation theory of Kac-Moody algebras.
   \end{enumerate}
 \end{defn}
 \begin{prop}
-  Every submodule of a weight module over \(\U_q(\g)\) is also a
+  \cite{hong-kang}*{Proposition 3.2.1} Every submodule of a weight
+  module over \(\U_q(\g)\) is also a 
   weight module.
+\end{prop}
+\begin{defn}
+  \begin{enumerate}
+  \item For \(\lambda \in \weightlattice\), we set \[
+      D(\lambda) := \{\mu \in \weightlattice \st \mu \leq \lambda\}
+    \]
+  \item The \de{category \(\O^q\)} consists of all weight modules
+    \(V^q\) over \(\U_q(\g)\) with finite dimensional weight spaces
+    for which there exist a finite number of elements \(\lambda_1,
+    \ldots, \lambda_s \in \weightlattice\) such that \[
+      \wt(V^q) = D(\lambda_1) \union \cdots \union D(\lambda_s)
+    \]
+  \item A weight module \(V^q\) is called a \de{highest weight module}
+    with \de{highest weight \(\lambda\)} if there exists weight vector
+    of weight \(\lambda\), say \(0 \neq
+    v_\lambda \in V^q\), such that \(v_\lambda\) is a maximal vector
+    and \(V^1 = \U_q(\g) v_\lambda\). In this setting, the vector
+    \(v_\lambda\) is unique up to constant multiple and is called the
+    \de{highest weight vector}.
+  \end{enumerate}
+\end{defn}
+\begin{prop}
+  \cite{hong-kang}{pp 43--44} Given \(V^q\) a highest weight module
+  with highest weight 
+  \(\lambda\),
+  \begin{enumerate}
+  \item \(V^q = \U_q^- v_\lambda\) by the triangular decomposition of
+    \(\U_q(\g)\),
+  \item \(\dim V^q_\lambda = 1\),
+  \item \(\dim V^q_\mu < \infty\) for all \(\mu \in \wt(V^q)\),
+  \item and \(V^q = \bigoplus_{\mu \leq \lambda} V^q_\mu\).
+  \end{enumerate}
+\end{prop}
+\begin{defn}
+  Fix \(\lambda \in \weightlattice\). Then, we define
+  \begin{enumerate}
+  \item \(J^q(\lambda)\) to be the left \(\U_q(\g)\) ideal generated
+    \(e_i\) for \(i \in I\) and \(K_h - q^{\lambda(h)}1\) for \(h \in
+    \weightlattice^\vee\) and
+  \item the \de{Verma module} \(M^q(\lambda) = \U_q(\g)/J^q(\lambda)\).
+  \end{enumerate}
+\end{defn}
+\begin{example}
+  For \(\U_q(\sl_2)\), we have that \(J^q(1) = (e, K-q\cdot
+  1)\). Then, observe in \(M^q(1) = \U_q(\sl_2)/J^q(1)\) that \[
+    \begin{cases}
+      e.(1+J^q(1)) = e+J^q(1) = J^q(1) = 0 \\
+      K.(1+J^q(1)) = K+J^q(1) = q \cdot (1 + J^q(1)) \\
+    \end{cases}
+  \]
+  so \(1+J^q(1)\) is a maximal weight vector of weight
+  \(1\). Furthermore, \[
+    K.f.(1+J^q(1)) = q^{-\alpha(h)} f K^{-1} (1+J^q(1)) = q^{-1}
+    f.(1+J^q(1)) 
+  \]
+  So, by iterating this computation, we see that \(f^m.(1+J^q(1))\)
+  has weight \(1-2m\).
+\end{example}
+\begin{prop}
+  \cite{hong-kang}*{Proposition 3.2.2}
+  \begin{enumerate}
+  \item The Verma module \(M^q(\lambda)\) is a highest weight module
+    with highest weight \(\lambda\) and highest weight vector
+    \(v_\lambda = 1 + J^q(\lambda)\).
+  \item As a \(\U_q^-\)-module, \(M^q(\lambda)\) is free of rank \(1\)
+    generated by the highest weight vector \(v_\lambda\).
+  \item Every highest weight \(\U_q(\g)\)-module with highest weight
+    \(\lambda\) is a homomorphic image of \(M^q(\lambda)\).
+  \item The Verma module \(M^q(\lambda)\) has a unique maximal
+    submodule, denoted \(N^q(\lambda)\).
+  \item The quotient \(M^q(\lambda)/N^q(\lambda)\) is an irreducible
+    highest weight module with highest weight \(\lambda\). We will
+    denote this module by \(V^q(\lambda)\).
+  \end{enumerate}
+\end{prop}
+\begin{defn}
+  \begin{enumerate}
+  \item A weight module \(V^q\) over the quantum group \(\U_q(\g)\) is
+    called \de{integrable} if all \(e_i\) and \(f_i\) for \(i \in I\)
+    are locally nilpotent on \(V^q\), that is, for each \(e_i\), there
+    exists a positive integer \(N\) such that \(e_i^N v = 0\) for all
+    \(v \in V^q\), and similarly for the \(f_i\).
+  \item The \de{category \(\O^q_{int}\)} is the category consisting of
+    all \(\U_q(\g)\)-modules in the category \(\O^q\) that are
+    integrable.
+  \item For a fixed \(i \in I\), let the \(\U_q(\g)\)-subalgebra
+    \(\U_q(\g_{(i)}) = \langle e_i, 
+    f_i, \tilde{K}_i^\pm \rangle\).
+  \end{enumerate}
+\end{defn}
+\begin{prop}
+  \begin{enumerate}
+  \item \(\U_q(\g_{(i)}) \isom \U_{q_i}(\sl_2)\)
+  \item \cite{hong-kang}*{Proposition 3.2.4} Let \(V^q \in
+    \O^q_{int}\). Then, for each \(i \in I\), 
+    \(V^q\) decomposes into a direct sum of \(\U_q(\h)\)-invariant
+    finite dimensional irreducible \(\U_q(\g_{(i)})\)-submodules.
+  \item \cite{hong-kang}*{Proposition 3.2.6} If we let \(f_i^{(k)} := f_i^k/[k]_{q_i}!\) be the divided
+    power of \(f_i\), then, for \(\lambda \in \weightlattice^+\) and
+    \(v_\lambda\) the highest weight vector of \(V^q(\lambda)\), we
+    have \[
+      f_i^{\lambda(h_i)+1} v_\lambda = 0 \text{ for all }i \in I
+    \]
+  \item \cite{hong-kang}*{Proposition 3.2.7} A highest weight
+    \(\U_q(\g)\)-module \(V^q\) with highest weight \(\lambda \in
+    \weightlattice\) and highest weight vector \(v_\lambda\) is
+    integrable if and only if for every \(i \in I\), there exists some
+    \(N_i\) such that \(f_i^{N_i}v_\lambda = 0\).
+  \item \cite{hong-kang}*{Proposition 3.2.8} Let \(V^q(\lambda)\) be
+    the irreducible highest weight 
+    \(\U_q(\g)\)-module with highest weight \(\lambda \in
+    \weightlattice\). Then \(V^q(\lambda) \in \O^q_{int}\) if and only
+    if \(\lambda \in \weightlattice^+\).
+  \end{enumerate}
 \end{prop}
 \subsection{\(\A_1\)-forms}
 \begin{defn}
@@ -397,6 +517,31 @@ that of the representation theory of Kac-Moody algebras.
   and \[
     (y;n)_x := \frac{yx^n-1}{x-1}
   \]
+\end{enumerate}
+\end{defn}
+Notice that \([n]_{q_i} \in \A_1\) and \(\qbinom[q_i]{m}{n} \in \A_1\)
+since they are elements of \(\Z[q,q^{-1}]\).
+\begin{example}
+  \begin{enumerate}
+  \item \[
+      [q_i^m;n]_{q_i} = \frac{q_i^{m+n} - q_i^{-m-n}}{q_i-q_i^{-1}} = [m+n]_{q_i}
+      \in \A_1
+    \]
+  \item \[
+      (q_i^m;n)_{q_i} = \frac{q_i^{m+n}-1}{q_i-1} \in \A_1
+    \]
+    since we can factor \((q_i^m;n)_{q_i} = q_i^{m+n-1}+q_i^{m+n-2} +
+    \cdots + 1\).
+  \item \[
+      [K_h;n]_q = \frac{K_h q^n - K_{-h}q^{-n}}{q-q^{-1}} \in \U_q^0
+    \]
+  \item \[
+      (K_h;n)_q = \frac{K_h q^n-1}{q-1} \in \U_q^0
+    \]
+  \end{enumerate}
+\end{example}
+\begin{defn}
+  \begin{enumerate}
   \item Define the \de{\(\A_1\)-form}, denoted \(\U_{\A_1}\), of the
     quantum group \(\U_q(\g)\) to be the \(\A_1\)-subalgebra of
     \(\U_q(\g)\) generated by the elements \(e_i, f_i, K_h\), and
@@ -409,7 +554,66 @@ that of the representation theory of Kac-Moody algebras.
     \weightlattice^\vee\). 
   \end{enumerate}
 \end{defn}
-
+\begin{lem}
+  \cite{hong-kang}*{Lemma 3.3.2}
+  \begin{enumerate}
+  \item \((K_h;n)_q \in \U_{\A_1}^0\) for all \(n \in \Z\) and \(h \in
+    \weightlattice^\vee\).
+  \item \([K_i;n]_{q_i} \in \U_{\A_1}^0\) for all \(n \in \Z\) and \(i
+    \in I\).
+  \end{enumerate}
+\end{lem}
+\begin{prop}
+  \cite{hong-kang}*{Proposition 3.3.3} We have a natural isomomorphism
+  of \(\A_1\)-modules \[
+    \U_{\A_1} \isom \U_{\A_1}^- \otimes \U_{\A_1}^0 \otimes \U_{\A_1}^+
+  \]
+  induced from the triangular decomposition of \(\U_q(\g)\).
+\end{prop}
+\begin{defn}
+  The \(\A_1\)-form of the highest weight module \(V^q\) with highest
+  weight \(\lambda \in \weightlattice\) and highest weight vector
+  \(v_\lambda\) is defined to be the \(\U_{\A_1}\)-module \(V_{\A_1} =
+  \U_{\A_1} v_\lambda\).
+\end{defn}
+\begin{prop}
+  Letting \(V^q\) be as above,
+  \begin{enumerate}
+  \item \cite{hong-kang}*{Proposition 3.3.5} \(V_{\A_1} = \U_{\A_1}^-
+    v_\lambda\)
+  \item \cite{hong-kang}*{Proposition 3.3.6} \[
+      V_{\A_1} = \bigoplus_{\mu \leq \lambda} (V_{\A_1})_\mu \text{
+        where } (V_{\A_1})_\mu = V_{\A_1} \intersect V^q_\mu
+    \]
+  \item \cite{hong-kang}*{Proposition 3.3.7} For each \(\mu \in
+    \weightlattice\), the weight space \((V_{\A_1})_\mu\) is a free
+    \(\A_1\)-module with \(\rank_{\A_1}(V_{\A_1})_\mu = \dim_{F(q)}
+    V^q_\mu\).
+  \item \cite{hong-kang}*{Proposition 3.3.8} The \(F(q)\)-linear map
+    \(\phi \from F(q) \otimes_{\A_1} V_{\A_1} \to V^q\) given by \(c
+    \otimes v \mapsto cv\) is an isomorphism.
+  \end{enumerate}
+\end{prop}
+\begin{rmk}
+  \cite{hong-kang}*{Remark 3.3.9}
+  \begin{enumerate}
+  \item From the last part of the proposition, one can deduce that the
+    \(\A_1\)-form \(V_{\A_1}\) of a highest weight module \(V^q\) is
+    an integral form over \(\A_1\). In other words, it can be viewed
+    as an \(\A_1\)-lattice in \(V^q\).
+  \item Item (c) can be generalized; see \cite{hong-kang}*{Exercise
+      3.10}. 
+  \end{enumerate}
+\end{rmk}
+\subsection{Classical Limit}
+The classical limit construction demonstrates how the Hopf algebra
+\(\U_q(\g)\) really is a deformation of the Hopf algera structure of
+\(\U(\g)\) and how you can recover the structure by taking \(q \to
+1\). Furthermore, this limit will allow us to see that various quantum
+group representations truly correspond to their classical Lie
+theoretic counterparts. Most notably, the characters remain unchanged
+by the limit construction and this allows us to prove uniquenss
+results about the irreducible quantum group representations.
 \begin{bibdiv}
   \begin{biblist}
     \bib{carter}{book}{
