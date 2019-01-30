@@ -243,6 +243,18 @@ short exact sequences. See \cite{humph}*{p 11} for more information.
   Since simple Lie algebras have no non-trivial ideals, their radical
   is \(0\) and thus any simple Lie algebra is also semisimple.
 \end{rmk}
+\begin{prop}\label{solvable-has-non-trivial-abelian-ideal}
+  Any non-abelian solvable Lie algebra has a non-trivial abelian
+  ideal.
+\end{prop}
+\begin{proof}
+  Consider that the derived series of \(\g\) has some minimal \(n \in
+  \N\) 
+  such that \(\g^{(n)} = 0\). Then, \(\g^{(n-1)} \neq 0\) but
+  \([\g^{(n-1)}, \g^{(n-1)}] = 0\), so \(\g^{(n-1)}\) is abelian and
+  is an ideal of \(\g\) by repeated application of the fact that the
+  Lie bracket of two ideals is an ideal of \(\g\).
+\end{proof}
 \begin{prop}
   Let \(\g\) be a Lie algebra. Then \(\g / \Rad \g\) is semisimple.
 \end{prop}
@@ -326,7 +338,7 @@ the style of \cite{humph}*{p 12}
   the sum of 
   two nilpotent elements is again nilpotent, so \(\ad_g\) must be nilpotent.
 \end{proof}
-We will also use the following result to prove Engel's Theorem
+We will also use the following results to prove Engel's Theorem
 \begin{thm}\label{nilp-has-nontrivial-simult-0-eigenspace}
   Let \(\g\) be a subalgebra of \(\gl(V)\), with \(V \neq 0\)
   finite-dimensional. If all \(g \in \g\) are nilpotent, then there
@@ -339,7 +351,7 @@ We will also use the following result to prove Engel's Theorem
   We proceed by induction on the dimension of \(\g\). If \(\g\) is
   1-dimensional, we are done, since \(\g\) must be abliean. So, assume
   the result is true for all Lie algebras with dimension less than
-  \(n\) and let \(\g\) have dimension \(n\). Since \(\g\) consis of
+  \(n\) and let \(\g\) have dimension \(n\). Since \(\g\) consists of
   ad-nilpotent elements, then \(\ad \g \subset 
   \gl(\g)\) satisfies the above theorem. Thus, there is a \(0 \neq x \in
   \g\) such that \(ad_g x \neq 0\) for all \(g \in \g\), that is to
@@ -368,6 +380,18 @@ into the structure of nilpotent Lie algebras. \todo{Add some
 Thus, we see that any nilpotent Lie algebra will ``look like'' the Lie
 algebra of strictly upper triangular matrices with the appropriate
 choice of basis.
+\begin{cor}\label{nilpotent-has-nontrivial-center}
+  Let \(\g\) be a nilpotent Lie algebra. If \(0 \neq I \ideal \g\),
+  then \(I \intersect Z(\g) \neq 0\). In particular, \(Z(\g) \neq 0\)
+  if \(\g\) is not trivial. 
+\end{cor}
+\begin{proof}
+  This essentially follows from the proof of Engel's theorem given
+  above. By \ref{nilp-has-nontrivial-simult-0-eigenspace}, there is
+  a \(0 \neq x \in I\) such that \([g,x] = 0\) for all \(g \in
+  \g\). Thus, \(x \in Z(\g) \implies 0 \neq x \in I \intersect
+  Z(\g)\). 
+\end{proof}
 \section{Lie's Theorem and Consequences}
 Engel's theorem provided us with insight into the structure of
 nilpotent Lie algebras. Solvability is a slightly weaker condition,
@@ -667,7 +691,8 @@ This corollary will be useful due to the way the Killing form is defined.
   \]
   Thus, \([x,g] \in I^\perp \implies I^\perp \ideal \g\).
 \end{proof}
-However, the most useful fact about the Killing form is the following.
+However, the most useful fact about the Killing form is the
+following. To prove it, we will use the following lemma.
 \begin{thm}\label{cartan-semisimplicity-criterion}
   Let \(\g\) be a Lie algebra. Then, \(\g\) is semisimple if and only
   if its Killing form is nondegenerate. 
@@ -689,10 +714,11 @@ However, the most useful fact about the Killing form is the following.
   0. So, \[
     0 = \tr(\ad x \ad y) = \kappa(x,y) \implies I \subset S = 0.
   \]
-  Therefore, \(\g\) has no nontrivial abelian ideals and nontrivial
-  \(\Rad \g\) 
-  always contains a nontrivial abelian ideal, so \(\g\) must
-  therefore be semisimple.
+  Therefore, \(\g\) has no nontrivial abelian ideals. Furthermore,
+  nontrivial \(\Rad \g\) 
+  always contains a nontrivial abelian ideal by
+  \ref{solvable-has-non-trivial-abelian-ideal}. So, \(\g\) must
+  therefore be semisimple. 
 \end{proof}
 \begin{rmk}
   Note that, in \((\implies)\) direction of the proof, we did not use
