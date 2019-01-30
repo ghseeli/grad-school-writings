@@ -75,9 +75,35 @@ Recall one of our main goals is to understand the following theorem.
     \sum_i \alpha_i^+ + \sum_i \alpha_i^- + \sum_i \beta_i^+ + \sum_i
     \beta_i^- < \infty, \ \ \ \beta_1^+ + \beta_1^- \leq 1
   \]
+  Furthermore, these functions have the form \[
+    \chi_{\alpha^\pm, \beta^\pm, \gamma^\pm}(x_1, x_2, \ldots) =
+    \prod_{j=1}^\infty \Phi_{\alpha^\pm, \beta^\pm, \gamma^\pm}(u_j)
+  \]
+  where \(\Phi_{\alpha^\pm, \beta^\pm, \gamma^\pm} \from \T \to \C\)
+  is the continuous function \[
+    \Phi_{\alpha^\pm ,\beta^\pm, \gamma^\pm}(x) :=
+    e^{\gamma^+(x-1)+\gamma^-(x^{-1}-1)} \prod_{i=1}^\infty \left(
+      \frac{1+\beta_i^+(x-1)}{1-\alpha_i^{-} (x-1)} \cdot
+      \frac{1+\beta_i^-(x^{-1}-1)}{1-\alpha_i^-(x^{-1}-1)}\right).
+  \]
 \end{thm}
 In this, we will outline two very special examples of this
-parameterization.
+parameterization, namely when
+\begin{enumerate}
+\item \(\beta^+ = (b,0,0,\ldots), \beta^- = \alpha^\pm = (0,0,\ldots),
+  \gamma^\pm = 0\) for \(b \in [0,1]\) so that \[
+    \Phi_{\alpha^\pm ,\beta^\pm, \gamma^\pm}(x) = 1+b(x-1) \implies
+    \chi_{\alpha^\pm, \beta^\pm, \gamma^\pm}(x_1, x_2, \ldots) =
+    \prod_{j=1}^\infty (1+b(x_j-1))
+  \]
+\item \(\alpha^- = (a,0,0,\ldots), \beta^\pm = \alpha^+ = (0,0,\ldots),
+  \gamma^\pm = 0\) for \(a \in [0,1]\) so that \[
+    \Phi_{\alpha^\pm ,\beta^\pm, \gamma^\pm}(x) =
+    \frac{1}{1-a(x^{-1}-1)} \implies
+    \chi_{\alpha^\pm, \beta^\pm, \gamma^\pm}(x_1, x_2, \ldots) =
+    \prod_{j=1}^\infty \frac{1}{1-a(x_j^{-1}-1)}
+  \]
+\end{enumerate}
 \section{Symmetric Functions}
 In the last lecture, we introduced the following.
 \begin{defn}
@@ -133,11 +159,59 @@ We will work with two special cases of the Schur polynomials.
     \end{align*}
   \end{enumerate}
 \end{example}
-These function encode the ``determinant representation'' of \(U(N)\),
+These functions encode the ``determinant representation'' of \(U(N)\),
 that is \[
   T(U)v = (\det U)v = x_1 x_2 \cdots x_N v
 \]
-since the determinant is just the product of the eigenvalues. Now, we
+since the determinant is just the product of the
+eigenvalues. Importantly, we also compute, generalizing our example
+above
+\begin{prop}
+  For \(0 < m \leq n\), 
+  \[
+    e_m(x_1, x_2, \ldots, x_n) = \sum_{T \in \SSYT((1^m)) \text{
+        filled with elements of }\{1,\ldots,n\}} = \sum_{I \subset
+      \{1, \ldots, n\}, |I| = L(N)} x^I
+  \]
+  where \(x^I := \prod_{i \in I} x_i\) and consequently, \[
+    e_m(\underbrace{1, \ldots, 1}_{n}) = \binom{n}{m}
+  \]
+\end{prop}
+\begin{proof}
+  To see this, we simply observe that a single column semistandard
+  tableau with \(m\) rows filled with letters \(\{1,\ldots,n\}\) is a
+  choice of \(m\) distinct elements of \(\{1,\ldots,n\}\) since
+  columns must be strictly increasing. 
+\end{proof}
+\begin{defn}
+  Let \(h_m(x_1, \ldots, x_N) := s_{(m)}(x_1, \ldots, x_N)\) be the
+  \de{complete homogeneous symmetric polynomials}.
+\end{defn}
+\begin{prop}
+  For \(0 < m \leq n\), 
+  \[
+    h_m(x_1, x_2, \ldots, x_n) = \sum_{T \in \SSYT((m)) \text{
+        filled with elements of }\{1,\ldots,n\}} = \sum_{I \text{
+        multiset of }
+      \{1, \ldots, n\}, |I| = L(N)} x^I
+  \]
+  where \(x^I := \prod_{i \in I} x_i\) and consequently, \[
+    h_m(\underbrace{1, \ldots, 1}_n) = \text{Number of ways to choose
+      a multiset of size } m \text{ from n things} = \binom{n+m-1}{m}
+    = \binom{n+m-1}{n-1}
+  \]
+\end{prop}
+\begin{rmk}
+  The combinatorics of the identity above follow by considering a
+  ``stars and bars'' approach, namely, both expressions are in
+  bijection with the number of ways to place \(N-1\) bars among
+  \(L(N)\) 
+  stars, allowing bars to be consecutive with each other. \[
+    \{1,1,1,2,4,5\} \to \star \star \star | \star || \star | \star
+  \]
+\end{rmk}
+\section{Two Examples of \(U(\infty)\) characters}
+Now, we
 wish to take a sequence of these representations to get a
 representation of \(U(\infty)\).
 \begin{defn}
@@ -169,28 +243,79 @@ representation of \(U(\infty)\).
   Now, for a fixed \(K \leq N\), we have
   \begin{align*}
     & e_{L(N)}(x_1, \ldots, x_K, 1, \ldots, 1)
-    = \sum_{\text{binary }N\text{ sequences } \epsilon}
-    |\SSYT(1^{L(N)},\epsilon)| x^{(\epsilon_1, \ldots, \epsilon_K)}
+    = \sum_{\text{binary }K\text{ sequences } \epsilon}
+    |\{\text{number of binary }N\text{ sequences that start with
+      }\epsilon\}| x^{(\epsilon_1, \ldots, \epsilon_K)} 
      \\
     \implies & \frac{e_{L(N)}(x_1, \ldots, x_K, 1, \ldots,
     1)}{e_{L(N)}(1,\ldots,1)} =\\
-    & \sum_{\text{binary }N\text{
-    sequences}} x^{(\epsilon_1,\ldots,\epsilon_K)} \P(\text{first
+    & \sum_{\text{binary }K\text{
+    sequences }\epsilon} x^{(\epsilon_1,\ldots,\epsilon_K)} \P(\text{first
     }K\text{ coordinates of 
-    the binary sequence are }(\epsilon_1, \ldots, \epsilon_K))
+    a binary }N\text{ sequence are }(\epsilon_1, \ldots, \epsilon_K))
   \end{align*}
   where
   \begin{align*}
     & \P(\text{first
     }K\text{ coordinates of 
-    the binary sequence are }(\epsilon_1, \ldots, \epsilon_K)) \\ & =
+    a binary } N \text{ sequence are }(\epsilon_1, \ldots,
+      \epsilon_K)) \\ & = 
   \binom{N-K}{L(N)-\sum_{i=1}^K \epsilon_i} / \binom{N}{L(N)} \\
    & = \frac{(N-K)!}{N!} \times \frac{(L(N))!}{(L(N)-\sum_{i=1}^K
     \epsilon_i)!} \times \frac{(N-L(N))!}{(N-L(N)-(K-\sum_{i=1}^K
      \epsilon_i))!} \\
-  & \overset{N \to \infty}{\longrightarrow} \beta^{\sum_{i=1}^K \epsilon_i}
-    (1-\beta)^{\sum_{i=1}^K 
+  & \overset{N \to \infty}{\longrightarrow} \beta^{\sum_{i=1}^K
+    \epsilon_i} (1-\beta)^{\sum_{i=1}^K 
     \epsilon_i} & \text{ since } L(N)/N \to \beta
+  \end{align*}
+  Thus, taking the limit as \(N \to \infty\) on our ratio, we get \[
+    \sum_{\text{binary } K \text{sequences }\epsilon}
+    x_1^{\epsilon_1} \cdots x_K^{\epsilon_K} \beta^{\sum_{i=1}^K
+      \epsilon_i} (1-\beta)^{K-\sum_{i=1}^K\ \epsilon_i} =
+    \prod_{i=1}^K ((1-\beta) + \beta x_i)
+  \]
+  and so, taking \(K \to \infty\) completes the proof.
+\end{proof}
+\begin{prop}
+  Let \(L \from \N \to \N\) be a sequence such that \(L(N)/N \to
+  \alpha \in [0,1]\) as \(N \to \infty\). Then, \[
+    \frac{h_{L(N)}(x_1, \ldots, x_N)}{h_{L(N)}(1, \ldots, 1)} \to
+    \prod_{i=1}^\infty \frac{1}{1-\alpha(x_i-1)}, \ \ (x_1, x_2,
+    \ldots) \in \T^\infty_{fin}
+  \]
+\end{prop}
+\begin{proof}
+  We proceed much as in the proposition above. \todo{Fill in setup}
+  Consider that, for 
+  fixed \(K \leq N\), we have
+  \begin{align*}
+    \P(\text{first }K\text{ coordinates of }N\text{ sequence are
+    }(\epsilon_1, \ldots, \epsilon_K)) \\
+    = \left( \binom{N-K}{L(N)-\sum_{i=1}^K \epsilon} \right) / \left(
+    \binom{N}{L(N)} \right) \\
+    = \binom{N-K+L(N)-\sum_{i=1}^K \epsilon_i-1}{L(N)-\sum_{i=1}^K
+    \epsilon_i} / \binom{N+L(N)-1}{L(N)}\\
+    = \frac{(N+L(N)-K-\sum \epsilon_i -1)!}{(N+L(N)-1)!} \times
+    \frac{(L(N))!}{(L(N)-\sum \epsilon_i)!} \times
+    \frac{(N-1)!}{(N-K-1)!} \\
+    \approx \frac{(L(N))^{\sum \epsilon_i} N^K}{(N+L(N))^{K+\sum
+    \epsilon_i}} \\
+    = \left(\frac{L(N)}{N}\right)^{\sum \epsilon_i} \left(
+    \frac{1}{1+\frac{L(N)}{N}} \right)^{K+\sum \epsilon_i} \\
+    \to \left( \frac{\alpha}{1+\alpha} \right)^{\sum \epsilon_i}\left(
+    \frac{1}{1+\alpha} \right)^K 
+  \end{align*}
+  Thus,
+  \begin{align*}
+    \sum_{\epsilon} \left( \frac{1}{\alpha+1} \right)^K \left(
+      \frac{\alpha}{1+\alpha} \right)^{\sum \epsilon_i} x^\epsilon \\
+    = \prod_{i=1}^K \left( \frac{1}{\alpha+1} \right)\left( 1 +
+      \frac{\alpha}{1+\alpha}x_i + \left( \frac{\alpha}{1+\alpha}
+    \right)^2 x_i^2 + \cdots \right) \\
+    = \prod_{i=1}^K
+    \frac{1}{1+\alpha} 
+    \times \frac{1}{1-\frac{\alpha}{1+\alpha}x_i} \\
+    = \prod_{i=1}^K \frac{1}{1+\alpha-\alpha x_i}
   \end{align*}
 \end{proof}
 \begin{bibdiv}
