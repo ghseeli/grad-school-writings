@@ -15,10 +15,13 @@
 
 \newcommand{\trace}{\operatorname{Tr}}
 \newcommand{\transpose}{t}
-\newcommand{\T}{T} % Torus
+\newcommand{\T}{\mathbb{T}} % Torus
 \DeclareMathOperator{\SSYT}{SSYT}
 \DeclareMathOperator{\wt}{wt}
 \renewcommand{\P}{\mathbb{P}} % Probability
+\def\multiset#1#2{\ensuremath{\left(\kern-.3em\left(\genfrac{}{}{0pt}{}{#1}{#2}\right)\kern-.3em\right)}}
+
+\newtheorem{goal}[thm]{Goal}
 
 \title[Two Elementary Examples of Extreme Characters of
   \(U(\infty)\)]{Two Elementary Examples of Extreme Characters of
@@ -52,12 +55,20 @@ First, we recall some definitions.
   \end{enumerate}
 \end{defn}
 Normalized characters form a convex set since \(t \chi_1 + (1-t)
-\chi_t\) meets all the axioms of a normalized character for all \(t
+\chi_2\) meets all the axioms of a normalized character for all \(t
 \in [0,1]\). Then, we can discuss the following notion.
 \begin{defn}
   An \de{extreme character} \(\chi \from U(N) \to \C\) is a normalized
   character such that \(\chi \neq t \chi_1 + (1-t) \chi_2\) for any
-  \(t \in [0,1]\).
+  \(t \in (0,1)\) for normalized characters \(\chi_1,\chi_2 \neq
+  \chi\). 
+\end{defn}
+\begin{defn}
+  The \de{\(N\)-dimensional} torus is \[
+    \T^N := \{(x_1, \ldots, x_N) \in \C^N \st |x_i| = 1\}
+  \]
+  and lies in \(U(N)\) as diagonal matrices. The \de{finitary torus}
+  is \(\T^\infty_{fin} := \Union_{N=1}^\infty \T^N\).
 \end{defn}
 Recall one of our main goals is to understand the following theorem.
 \begin{thm}[Edrei-Voiculescu]
@@ -77,33 +88,40 @@ Recall one of our main goals is to understand the following theorem.
   \]
   Furthermore, these functions have the form \[
     \chi_{\alpha^\pm, \beta^\pm, \gamma^\pm}(x_1, x_2, \ldots) =
-    \prod_{j=1}^\infty \Phi_{\alpha^\pm, \beta^\pm, \gamma^\pm}(u_j)
+    \prod_{j=1}^\infty \Phi_{\alpha^\pm, \beta^\pm, \gamma^\pm}(x_j)
   \]
   where \(\Phi_{\alpha^\pm, \beta^\pm, \gamma^\pm} \from \T \to \C\)
   is the continuous function \[
     \Phi_{\alpha^\pm ,\beta^\pm, \gamma^\pm}(x) :=
     e^{\gamma^+(x-1)+\gamma^-(x^{-1}-1)} \prod_{i=1}^\infty \left(
-      \frac{1+\beta_i^+(x-1)}{1-\alpha_i^{-} (x-1)} \cdot
+      \frac{1+\beta_i^+(x-1)}{1-\alpha_i^{+} (x-1)} \cdot
       \frac{1+\beta_i^-(x^{-1}-1)}{1-\alpha_i^-(x^{-1}-1)}\right).
   \]
 \end{thm}
-In this, we will outline two very special examples of this
-parameterization, namely when
-\begin{enumerate}
-\item \(\beta^+ = (b,0,0,\ldots), \beta^- = \alpha^\pm = (0,0,\ldots),
-  \gamma^\pm = 0\) for \(b \in [0,1]\) so that \[
-    \Phi_{\alpha^\pm ,\beta^\pm, \gamma^\pm}(x) = 1+b(x-1) \implies
-    \chi_{\alpha^\pm, \beta^\pm, \gamma^\pm}(x_1, x_2, \ldots) =
-    \prod_{j=1}^\infty (1+b(x_j-1))
-  \]
-\item \(\alpha^- = (a,0,0,\ldots), \beta^\pm = \alpha^+ = (0,0,\ldots),
-  \gamma^\pm = 0\) for \(a \in [0,1]\) so that \[
-    \Phi_{\alpha^\pm ,\beta^\pm, \gamma^\pm}(x) =
-    \frac{1}{1-a(x^{-1}-1)} \implies
-    \chi_{\alpha^\pm, \beta^\pm, \gamma^\pm}(x_1, x_2, \ldots) =
-    \prod_{j=1}^\infty \frac{1}{1-a(x_j^{-1}-1)}
-  \]
-\end{enumerate}
+\begin{goal}
+  In this presentation, we will outline two very special examples of
+  this 
+  parameterization, namely when
+  \begin{enumerate}
+  \item
+    \(\beta^+ = (\beta,0,0,\ldots), \beta^- = \alpha^\pm =
+    (0,0,\ldots), 
+    \gamma^\pm = 0\) for \(\beta \in [0,1]\) so that
+    \[ \Phi_{\alpha^\pm ,\beta^\pm, \gamma^\pm}(x) = 1+\beta(x-1) \implies
+      \chi_{\alpha^\pm, \beta^\pm, \gamma^\pm}(x_1, x_2, \ldots) =
+      \prod_{j=1}^\infty (1+\beta(x_j-1))
+    \]
+  \item
+    \(\alpha^+ = (\alpha,0,0,\ldots), \beta^\pm = \alpha^+ =
+    (0,0,\ldots), 
+    \gamma^\pm = 0\) for \(\alpha \in [0,1]\) so that
+    \[ \Phi_{\alpha^\pm ,\beta^\pm, \gamma^\pm}(x) =
+      \frac{1}{1-\alpha(x-1)} \implies \chi_{\alpha^\pm, \beta^\pm,
+        \gamma^\pm}(x_1, x_2, \ldots) = \prod_{j=1}^\infty
+      \frac{1}{1-\alpha(x_j-1)}
+    \]
+  \end{enumerate}
+\end{goal}
 \section{Symmetric Functions}
 In the last lecture, we introduced the following.
 \begin{defn}
@@ -113,6 +131,22 @@ In the last lecture, we introduced the following.
     \frac{\det(x_j^{\lambda_i+N-i})_{i,j=1}^N}{\det(x_j^{N-i})_{i,j=1}^N}
   \]
 \end{defn}
+Also, if \(\lambda\) has \(\lambda_N \geq 0\), we can use
+``Littlewood's Combinatorial Description'' of Schur functions
+\begin{prop}
+  Given a sequence of integers \(\lambda_1 \geq \lambda_2 \geq \cdots
+  \geq \lambda_N \geq 0\), \[
+    s_\lambda(x_1, \ldots, x_N) = \sum_{T \in \SSYT(\lambda)} x^{\wt(T)}
+  \]
+  where \(x^{\wt(T)} = \prod_{j = 1}^{\sum \lambda_i} x_j^{\# \text{
+      of }j\text{'s in }T}\).
+\end{prop}
+\begin{example}
+  \begin{align*}
+    s_{(2,1)}(x_1,x_2) & = x_1^2 x_2 + x_1x_2^2 \\
+    & \ytableaushort{11,2} + \ytableaushort{12,2}
+  \end{align*}
+\end{example}
 We also proved that
 \begin{thm}
   The irreducible representations of \(U(N)\) are in one-to-one
@@ -159,19 +193,28 @@ We will work with two special cases of the Schur polynomials.
     \end{align*}
   \end{enumerate}
 \end{example}
-These functions encode the ``determinant representation'' of \(U(N)\),
-that is \[
-  T(U)v = (\det U)v = x_1 x_2 \cdots x_N v
-\]
-since the determinant is just the product of the
-eigenvalues. Importantly, we also compute, generalizing our example
-above
+\begin{rmk}
+  \(e_N(x_1, \ldots, x_N)\) encodes character of the ``determinant
+  representation'' 
+  of \(U(N)\), that is \[
+    T(U)v = (\det U)v = x_1 x_2 \cdots x_N v
+  \]
+  since the determinant is just the product of the
+  eigenvalues. More generally, \(e_m(x_1, \ldots, x_N)\) encodes the
+  representation induced by the \(U(N)\)-action on \(\bigwedge^m
+  \C^N\): \[
+    U\cdot(v_1 \wedge \cdots \wedge v_m) = (Uv_1 \wedge \cdots \wedge
+    Uv_m)
+  \]
+\end{rmk}
+Importantly, we also compute, generalizing our example above
 \begin{prop}
   For \(0 < m \leq n\), 
   \[
     e_m(x_1, x_2, \ldots, x_n) = \sum_{T \in \SSYT((1^m)) \text{
-        filled with elements of }\{1,\ldots,n\}} = \sum_{I \subset
-      \{1, \ldots, n\}, |I| = L(N)} x^I
+        filled with elements of }\{1,\ldots,n\}} x^{\wt(T)} = \sum_{I
+      \subset 
+      \{1, \ldots, n\}, |I| = m} x^I
   \]
   where \(x^I := \prod_{i \in I} x_i\) and consequently, \[
     e_m(\underbrace{1, \ldots, 1}_{n}) = \binom{n}{m}
@@ -187,37 +230,64 @@ above
   Let \(h_m(x_1, \ldots, x_N) := s_{(m)}(x_1, \ldots, x_N)\) be the
   \de{complete homogeneous symmetric polynomials}.
 \end{defn}
+\begin{example}
+  Using again our tableaux formula for Schur functions, we compute
+  \begin{enumerate}
+  \item
+    \begin{align*}
+      h_2(x_1,x_2) & = x_1^2 + x_1 x_2 + x_2^2\\
+      & \ytableaushort{11} + \ytableaushort{12} + \ytableaushort{22}
+    \end{align*}
+  \item
+    \begin{align*}
+      h_2(x_1,x_2,x_3)
+      & = x_1^2 + x_1 x_2 + x_1 x_3 + x_2^2 + x_2 x_3 + x_3^2\\
+      & \ytableaushort{11} + \ytableaushort{12} + \ytableaushort{13} +
+      \ytableaushort{22} + \ytableaushort{23} + \ytableaushort{33}
+    \end{align*}
+  \end{enumerate}
+\end{example}
 \begin{prop}
   For \(0 < m \leq n\), 
   \[
     h_m(x_1, x_2, \ldots, x_n) = \sum_{T \in \SSYT((m)) \text{
-        filled with elements of }\{1,\ldots,n\}} = \sum_{I \text{
-        multiset of }
-      \{1, \ldots, n\}, |I| = L(N)} x^I
+        filled with elements of }\{1,\ldots,n\}} x^{\wt(T)} = \sum_{I
+      \text{ multiset of }
+      \{1, \ldots, n\}, |I| = m} x^I
   \]
-  where \(x^I := \prod_{i \in I} x_i\) and consequently, \[
-    h_m(\underbrace{1, \ldots, 1}_n) = \text{Number of ways to choose
-      a multiset of size } m \text{ from n things} = \binom{n+m-1}{m}
-    = \binom{n+m-1}{n-1}
-  \]
+  where \(x^I := \prod_{i \in I} x_i\) and consequently,
+  \begin{align*}
+    & h_m(\underbrace{1, \ldots, 1}_n)  \\
+    & = \text{Number of ways to choose
+      a multiset of size } m \text{ from n things} \\
+    & = \binom{n+m-1}{m} = \binom{n+m-1}{n-1}
+  \end{align*}
 \end{prop}
 \begin{rmk}
   The combinatorics of the identity above follow by considering a
   ``stars and bars'' approach, namely, both expressions are in
-  bijection with the number of ways to place \(N-1\) bars among
-  \(L(N)\) 
+  bijection with the number of ways to place \(n-1\) bars among
+  \(m\) 
   stars, allowing bars to be consecutive with each other. \[
     \{1,1,1,2,4,5\} \to \star \star \star | \star || \star | \star
   \]
 \end{rmk}
+\begin{defn}
+  Let \[
+    \multiset{n}{m} := \binom{n+m-1}{m}
+  \]
+  be the number of ways to choose a multiset of size \(m\) from \(n\)
+  things. 
+\end{defn}
 \section{Two Examples of \(U(\infty)\) characters}
 Now, we
-wish to take a sequence of these representations to get a
-representation of \(U(\infty)\).
-\begin{defn}
-  We say that a sequence of central functions \(f_N\) on \(U(N)\)
-  converge to a \de{central function} \(f\) on \(U(\infty)\) if, for
-  every fixed \(K\), we have \[
+wish to take a sequence of \(U(N)\) characters to get a
+character of \(U(\infty)\).
+\begin{defn}\label{converge-defn}
+  We say that a sequence of central functions \(f_N\) (i.e. \(f_N\)
+  only depends on the eigenvalues of the input) on \(U(N)\)
+  \de{converge} to a central function \(f\) on \(U(\infty)\) if,
+  for every fixed \(K\), we have \[
     f_N(x_1, \ldots, x_K,1,1, \ldots, 1) \to f(x_1, \ldots, x_K, 1, 1,
     \ldots)
   \]
@@ -231,51 +301,72 @@ representation of \(U(\infty)\).
   \]
 \end{prop}
 \begin{proof}
-  Consider that \[
-    e_{L(N)}(x_1, \ldots, x_N) = \sum_{T \in \SSYT(1^{L(N)}) \text{filled
-        with elements of }\{1, \ldots, N\}} x^{\wt(T)} = \sum_{I \subset \{1,\ldots,N\}, |I| =
-    L(N)} x^{I}
-  \]
-  and thus also \[
-    e_{L(N)}(\underbrace{1, \ldots, 1}_{N}) = \sum_{I \subset
-      \{1,\ldots,N\}, |I|=L(N)} 1 = \binom{N}{L(N)}
-  \]
-  Now, for a fixed \(K \leq N\), we have
+  Fix \(K \leq N\). Then, 
   \begin{align*}
     & e_{L(N)}(x_1, \ldots, x_K, 1, \ldots, 1)
-    = \sum_{\text{binary }K\text{ sequences } \epsilon}
-    |\{\text{number of binary }N\text{ sequences that start with
-      }\epsilon\}| x^{(\epsilon_1, \ldots, \epsilon_K)} 
-     \\
+    \\
+    & = \sum_{T \in \SSYT((1^{L(N)})) \text{ labelled with
+      }\{1,\ldots,N\}} x^{\wt(T|_{\leq K})}\\
+    & = \sum_{\text{binary }K\text{ sequences } \epsilon}
+    \#\{N\text{ sequences with sum }L(N)\text{
+      that start with 
+      }(\epsilon_1, \ldots, \epsilon_K)\} x^{(\epsilon_1, \ldots,
+      \epsilon_K)}  \\
+    & = \sum_{\text{binary }K\text{ sequences } \epsilon}
+      \binom{N-K}{L(N) - \sum_{i=1}^K \epsilon_i} x_1^{\epsilon_1}
+      \cdots x_K^{\epsilon_K} \\
+  \end{align*}
+  where the last equality comes from considering how to fill tableaux
+  of the form\\
+  \begin{tabular}{p{0.1cm}l}
+    \vspace{-1cm}
+    \(
+    \ytableausetup{boxsize=1ex,aligntableaux=top}
+    \ydiagram{1,1,1,1,1,1,1,1,1,1}\)
+    &
+    \(
+    \begin{array}{l}
+    \left.\rule{0pt}{3ex}\right\}\text{Fill }\sum_{i=1}^K
+        \epsilon_i\text{ boxes with }\{1,\ldots,K\} \\
+    \left.\rule{0pt}{3ex}\right\}\text{Fill }L(N)-\sum_{i=1}^K
+      \epsilon_i\text{ boxes with }\{K+1,\ldots,N\}
+    \end{array}
+    \)
+  \end{tabular}
+\begin{align*}
     \implies & \frac{e_{L(N)}(x_1, \ldots, x_K, 1, \ldots,
-    1)}{e_{L(N)}(1,\ldots,1)} =\\
-    & \sum_{\text{binary }K\text{
-    sequences }\epsilon} x^{(\epsilon_1,\ldots,\epsilon_K)} \P(\text{first
-    }K\text{ coordinates of 
-    a binary }N\text{ sequence are }(\epsilon_1, \ldots, \epsilon_K))
+    1)}{e_{L(N)}(1,\ldots,1)} = \sum_{\text{binary }K\text{
+    sequences }\epsilon} \left(\binom{N-K}{L(N)-\sum_{i=1}^K
+      \epsilon_i} / \binom{N}{L(N)}\right) x_1^{\epsilon_1}\cdots
+      x_K^{\epsilon_K}  
   \end{align*}
   where
   \begin{align*}
-    & \P(\text{first
-    }K\text{ coordinates of 
-    a binary } N \text{ sequence are }(\epsilon_1, \ldots,
-      \epsilon_K)) \\ & = 
-  \binom{N-K}{L(N)-\sum_{i=1}^K \epsilon_i} / \binom{N}{L(N)} \\
+ \binom{N-K}{L(N)-\sum_{i=1}^K \epsilon_i} / \binom{N}{L(N)}
    & = \frac{(N-K)!}{N!} \times \frac{(L(N))!}{(L(N)-\sum_{i=1}^K
     \epsilon_i)!} \times \frac{(N-L(N))!}{(N-L(N)-(K-\sum_{i=1}^K
      \epsilon_i))!} \\
   & \overset{N \to \infty}{\longrightarrow} \beta^{\sum_{i=1}^K
     \epsilon_i} (1-\beta)^{\sum_{i=1}^K 
-    \epsilon_i} & \text{ since } L(N)/N \to \beta
+    \epsilon_i} \text{ since } L(N)/N \to \beta
   \end{align*}
   Thus, taking the limit as \(N \to \infty\) on our ratio, we get \[
-    \sum_{\text{binary } K \text{sequences }\epsilon}
+    \sum_{\text{binary } K \text{ sequences }\epsilon}
     x_1^{\epsilon_1} \cdots x_K^{\epsilon_K} \beta^{\sum_{i=1}^K
       \epsilon_i} (1-\beta)^{K-\sum_{i=1}^K\ \epsilon_i} =
     \prod_{i=1}^K ((1-\beta) + \beta x_i)
   \]
   and so, taking \(K \to \infty\) completes the proof.
 \end{proof}
+\begin{rmk}
+  An astute reader may notice that \((1-\beta)^{K-\sum_{i=1}^K
+    \epsilon_i} \beta^{\sum_{i=1}^K \epsilon_i}\) represenents the
+  probability of \(\sum_{i=1}^K \epsilon_i\) successes in \(K\) trials
+  where each attempt has probability of success \(\beta\). One can use
+  ``de Finetti's theorem'' in order to derive the proposition directly
+  from this observation. See \cite{petrov}{\S 4.1.10} for this
+  approach. 
+\end{rmk}
 \begin{prop}
   Let \(L \from \N \to \N\) be a sequence such that \(L(N)/N \to
   \alpha \in [0,1]\) as \(N \to \infty\). Then, \[
@@ -285,58 +376,73 @@ representation of \(U(\infty)\).
   \]
 \end{prop}
 \begin{proof}
-  We proceed much as in the proposition above. \todo{Fill in setup}
-  Consider that, for 
-  fixed \(K \leq N\), we have
+  We proceed much as in the proposition above.
+  For a fixed \(K \leq N\), we have
   \begin{align*}
-    \P(\text{first }K\text{ coordinates of }N\text{ sequence are
-    }(\epsilon_1, \ldots, \epsilon_K)) \\
-    = \left( \binom{N-K}{L(N)-\sum_{i=1}^K \epsilon} \right) / \left(
-    \binom{N}{L(N)} \right) \\
-    = \binom{N-K+L(N)-\sum_{i=1}^K \epsilon_i-1}{L(N)-\sum_{i=1}^K
+    & h_{L(N)}(x_1, \ldots, x_K, 1, \ldots, 1) \\
+    & = \sum_{\epsilon \in
+      \N_0^K} \#\{N\text{ sequences with sum }L(N)\text{ starting with
+      }(\epsilon_1, \ldots, \epsilon_K)\} x_1^{\epsilon_1}
+      \cdots x_K^{\epsilon_K} \\
+    & = \sum_{\epsilon \in \N_0^K}
+      \multiset{N-K}{L(N)-\sum_{i=1}^K \epsilon_i}
+      x_1^{\epsilon_1} \cdots x_K^{\epsilon_K}
+  \end{align*}
+  where the last line comes from thinking about \[
+    \underbrace{\ydiagram{20}}_{\substack{\text{Fill }\sum_{i=1}^K \epsilon_i
+      \text{boxes}\\ \text{with }\{1,\ldots,K\}}} \hspace{-0.05cm}
+  \underbrace{\ydiagram{20}}_{\substack{\text{Fill }N-\sum_{i=1}^K
+      \epsilon_i \text{ boxes}\\ \text{with }\{K+1, \ldots, N\}}}
+  \]
+  and so
+  \begin{align*}
+    & \frac{h_{L(N)}(x_1, \ldots, x_K, 1, \ldots,
+    1)}{h_{L(N)}(1,\ldots,1)} \\
+    & = \sum_{\epsilon \in
+      \N_0^K} \left[\multiset{N-K}{L(N)-\sum_{i=1}^K \epsilon_i}/\multiset{N}{L(N)}\right] x_1^{\epsilon_1} \cdots x_K^{\epsilon_K}
+  \end{align*}
+  Consider that, for fixed \(K \leq N\), we have
+  \begin{align*}
+    & \multiset{N-K}{L(N)-\sum_{i=1}^K \epsilon} / 
+    \multiset{N}{L(N)} \\
+    & = \binom{N-K+L(N)-\sum_{i=1}^K \epsilon_i-1}{L(N)-\sum_{i=1}^K
     \epsilon_i} / \binom{N+L(N)-1}{L(N)}\\
-    = \frac{(N+L(N)-K-\sum \epsilon_i -1)!}{(N+L(N)-1)!} \times
+    & = \frac{(N+L(N)-K-\sum \epsilon_i -1)!}{(N+L(N)-1)!} \times
     \frac{(L(N))!}{(L(N)-\sum \epsilon_i)!} \times
     \frac{(N-1)!}{(N-K-1)!} \\
-    \approx \frac{(L(N))^{\sum \epsilon_i} N^K}{(N+L(N))^{K+\sum
+    & \approx \frac{(L(N))^{\sum \epsilon_i} N^K}{(N+L(N))^{K+\sum
     \epsilon_i}} \\
-    = \left(\frac{L(N)}{N}\right)^{\sum \epsilon_i} \left(
+    & = \left(\frac{L(N)}{N}\right)^{\sum \epsilon_i} \left(
     \frac{1}{1+\frac{L(N)}{N}} \right)^{K+\sum \epsilon_i} \\
-    \to \left( \frac{\alpha}{1+\alpha} \right)^{\sum \epsilon_i}\left(
+    & \overset{N \to \infty}{\longrightarrow} \left( \frac{\alpha}{1+\alpha} \right)^{\sum \epsilon_i}\left(
     \frac{1}{1+\alpha} \right)^K 
   \end{align*}
   Thus,
   \begin{align*}
-    \sum_{\epsilon} \left( \frac{1}{\alpha+1} \right)^K \left(
-      \frac{\alpha}{1+\alpha} \right)^{\sum \epsilon_i} x^\epsilon \\
-    = \prod_{i=1}^K \left( \frac{1}{\alpha+1} \right)\left( 1 +
+   \lim_{N \to \infty} \frac{h_{L(N)}(x_1, \ldots, x_K, 1, \ldots,
+    1)}{h_{L(N)}(1,\ldots,1)} & = \sum_{\epsilon} \left(
+                                \frac{1}{1+\alpha} \right)^K \left( 
+      \frac{\alpha}{1+\alpha} \right)^{\sum \epsilon_i}
+                                x_1^{\epsilon_1} \cdots
+                                x_K^{\epsilon_K} \\ 
+    & = \prod_{i=1}^K \left( \frac{1}{1+\alpha} \right)\left( 1 +
       \frac{\alpha}{1+\alpha}x_i + \left( \frac{\alpha}{1+\alpha}
     \right)^2 x_i^2 + \cdots \right) \\
-    = \prod_{i=1}^K
+    & = \prod_{i=1}^K
     \frac{1}{1+\alpha} 
     \times \frac{1}{1-\frac{\alpha}{1+\alpha}x_i} \\
-    = \prod_{i=1}^K \frac{1}{1+\alpha-\alpha x_i}
+    & = \prod_{i=1}^K \frac{1}{1+\alpha-\alpha x_i}
   \end{align*}
+  So, taking \(K \to \infty\) completes the proof.
 \end{proof}
 \begin{bibdiv}
   \begin{biblist}
-    \bib{ash}{book}{
-      author={Ash, Robert B.}
-      title={A Course In Algebraic Number Theory}
-      year={2003}
-      note={\url{https://faculty.math.illinois.edu/~r-ash/ANT.html}}
-    }
-    \bib{conrad}{article}{
-      author={Conrad, Keith}
-      title={Discriminants and Ramified Primes}
-      note={\url{http://www.math.uconn.edu/~kconrad/blurbs/gradnumthy/disc.pdf}}
-    }
-    \bib{mack-crane}{article}{
-      author={Mack-Crane, Sander}
-      title={Prime Splitting in Quadratic Extensions I: One Prime,
-        Many Fields}
-      year={2016}
-      note={\url{https://algebrateahousejmath.wordpress.com/2016/11/23/prime-splitting-in-quadratic-extensions-i-one-prime-many-fields/}}
+    \bib{petrov}{article}{
+      author={Petrov, Leonic}
+      title={Representation Theory of Big Groups and Probability}
+      year={2012}
+      note={Accessed as a draft from
+        \url{https://lpetrov.cc/reading-2019/} on January 31, 2019}
     }
   \end{biblist}
 \end{bibdiv}
