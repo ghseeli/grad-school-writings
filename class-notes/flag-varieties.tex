@@ -57,7 +57,7 @@ section and refer back to it as necessary.
   A rank \(n\) \de{(complex) vector bundle} \(\xi\), consists of
   \begin{enumerate}
   \item a topological space \(E\) called \de{the total space},
-  \item a topolocial space \(B\) called \de{the base space},
+  \item a topological space \(B\) called \de{the base space},
   \item and a continuous projection map \(\rho \from E \to B\) such that
     \begin{enumerate}[label=(\roman*)]
     \item for all \(b \in B\), the preimage \(\rho^{-1}(b)\), which is
@@ -118,7 +118,14 @@ section and refer back to it as necessary.
     with \(\pi_1^{-1}(x) = \C^n\). If \(X\) is a single point, then
     the trivial bundle is essentially just the vector space
     \(\C^n\). In this way, we see that vector bundles serve as a
-    generalization of vector spaces.
+    generalization of vector spaces. A particular example of a real
+    trivial bundle would be \[
+      \begin{tikzcd}
+        S^1 \times \R \ar[d, "\pi_1"]\\
+        S^1
+      \end{tikzcd}
+    \]
+    where \(S^1 \times \R\) is a cylinder. 
   \item Given a M\"{o}bius strip \(M\), we have a real vector bundle \[
       \begin{tikzcd}
         M \ar[d,"\rho"] \\
@@ -126,7 +133,11 @@ section and refer back to it as necessary.
       \end{tikzcd}
     \]
     where \(\rho \from M \to S^1\) sends a point in the M\"{o}bius
-    strip to the circle embedded along the ``middle''. \[
+    strip to the circle embedded along the ``middle''. For instance,
+    every point on the dashed line is sent by \(\rho\) to the point
+    where the 
+    dashed line intersects the red line in the picture below.
+    \[
       \begin{tikzpicture}[
         decoration={
           markings,
@@ -137,10 +148,14 @@ section and refer back to it as necessary.
         \draw[postaction=decorate] (2,-2) -- (0,-2);
         \draw (0,0) -- (0,-2);
         \draw[red] (1,0) -- (1,-2);
+        \draw[dashed] (0,-0.5) -- (2,-0.5);
       \end{tikzpicture}
     \]
-    The fibers \(\rho^{-1}(x) = \R\) which is homeomorphic to
-    \((0,1)\). 
+    The fiber is given by \(\rho^{-1}(x) = (0,1)\) which is
+    homeomorphic to \(\R\). In fact, this example is not equivalent to
+    the trivial bundle \(S^1 \times \R \to S^1\). Informally, this can
+    be seen by noticing that one can pick a consistent choice of
+    orientation on the trivial bundle but not on this bundle.
   \item Given a space \(B = \CP^n\), the points \(x \in \CP^n\) are
     lines. Then, we define the ``tautological line
     bundle'' to be given by total space \(E = \{(x,v) \in \CP^n \times
