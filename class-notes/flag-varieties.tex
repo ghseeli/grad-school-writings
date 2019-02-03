@@ -1,0 +1,317 @@
+\documentclass[11pt,leqno,oneside]{amsbook}
+\usepackage{tikz}
+\usetikzlibrary{cd}
+\usetikzlibrary{decorations.markings}
+\usepackage{bbm}
+\usepackage{ytableau}
+\usepackage{todonotes}
+\usepackage{./notes}
+\usepackage{../ReAdTeX/readtex-core}
+\usepackage{../ReAdTeX/readtex-dangerous}
+\usepackage{../ReAdTeX/readtex-abstract-algebra}
+\usepackage{../ReAdTeX/readtex-topology}
+
+\newcommand{\bbk}{\mathbbm{k}}
+\newcommand{\Class}{\operatorname{Class}}
+\newcommand{\Res}{\operatorname{Res}}
+\newcommand{\Ind}{\operatorname{Ind}}
+\newcommand{\bs}{\textbackslash}
+\newcommand{\partitionof}{\vdash}
+\newcommand{\T}{\mathsf{T}} % Tableau
+\renewcommand{\S}{\mathsf{S}}
+\newcommand{\sh}{\operatorname{shape}}
+\newcommand{\grdim}{\boldsymbol{\dim}}
+
+\newcommand{\dominatedby}{\trianglelefteq}
+\newcommand{\dominates}{\trianglerighteq}
+\newcommand{\lexicoleq}{\leq}
+\newcommand{\lexicogeq}{\geq}
+\newcommand{\covers}{\gtrdot}
+\newcommand{\coveredby}{\lessdot}
+
+\renewcommand{\H}{\mathcal{H}}
+\renewcommand{\Q}{\mathcal{Q}}
+\newcommand{\Cl}{\mathcal{C\ell}} % Clifford algebra
+\newcommand{\OP}{\mathcal{OP}} % Odd partitions
+\newcommand{\EP}{\mathcal{EP}} % Odd partitions
+\newcommand{\SP}{\mathcal{SP}} % Strict partitions
+\newcommand{\CC}{\mathcal{C}} % Conjugacy class
+\newcommand{\partitions}{\mathcal{P}} % Partitions
+\newcommand{\B}{\mathbb{B}}
+\newcommand{\K}{\mathcal{K}} % Farahat-Higman ring
+\newcommand{\cF}{\mathcal{F}}
+\renewcommand{\D}{\mathcal{D}} % Even split conjugacy class
+\renewcommand{\q}{\mathfrak{q}}
+\DeclareMathOperator{\Supp}{Supp}
+\DeclareMathOperator{\ch}{ch} 
+\DeclareMathOperator{\gr}{gr}
+\DeclareMathOperator{\Hilb}{Hilb}
+\DeclareMathOperator{\wt}{wt}
+\DeclareMathOperator{\wts}{\mathcal{W}}
+\renewcommand{\vec}[1]{\mathbf{#1}}
+\numberwithin{thm}{section}
+
+\title[Flag Varieties]{Flag Varieties \\ Notes
+  from a reading course in Spring 2019}
+\author{George H. Seelinger}
+\date{Spring 2010}
+\begin{document}
+\maketitle
+\section{Introduction (presented by Weiqiang Wang)}
+\section{A Quick Introduction to Vector Bundles (not presented)}
+This section will list some facts about vector bundles without
+proof. For a more comprehensive treatment, see references such as
+\cite{bott-tu} and \cite{milnor-stasheff}. The reader may skip this
+section and refer back to it as necessary. 
+\begin{defn}\label{defn-of-vector-bundle}
+  A rank \(n\) \de{(complex) vector bundle} \(\xi\), consists of
+  \begin{enumerate}
+  \item a topological space \(E\) called \de{the total space},
+  \item a topolocial space \(B\) called \de{the base space},
+  \item and a continuous projection map \(\rho \from E \to B\) such that
+    \begin{enumerate}
+    \item for all \(b \in B\), the preimage \(\pi^{-1}(b)\), which is
+      called the \de{fiber over \(b\)} is a vector space, and
+    \item (local triviality) for all \(b \in B\), there exists a neighborhood \(U \subset
+      B\) with \(b \in U\) and a homeomorphism \(h \from U \times \C^n
+      \to \rho^{-1}(U)\) (called a \de{local trivialization}) such
+      that, for all \(x \in U\), \(h|_{\{x\} 
+        \times \C^n} \from \C^n \to \rho^{-1}(x)\) is a vector space
+      isomorphism. \[
+        \begin{tikzcd}
+          U \times \C^n \ar[rd, "\pi_1"] \ar[rr, "h"]& & \rho^{-1}(U)
+          \ar[ld, "\rho"]\\
+          & U &
+        \end{tikzcd}
+      \]
+    \end{enumerate}
+  \end{enumerate}
+\end{defn}
+\begin{rmk}
+  One can just as easily define a \de{real vector bundle} by simply
+  replacing \(\C\) with \(\R\) everywhere in the definition.
+\end{rmk}
+\begin{example}\label{first-examples}
+  \begin{enumerate}
+  \item Perhaps the most familiar example of a (smooth) real vector
+    bundle is that of a ``tangent bundle'' of a manifold. That is,
+    given an \(n\)-dimensional smooth manifold \(M\), we have a
+    \(2n\)-dimensional manifold \(TM := 
+    \{(x,v) \in M \times \R^n \st v \in T_xM\}\) where \(T_xM\) is the
+    tangent space of \(x\) and map \(\pi_1 \from TM \to M\) given by
+    \(\pi_1(x,v) = x\). Then, we have tangent bundle \(\tau(M)\) given
+    by \[
+      \begin{tikzcd}
+        TM \ar[d, "\pi_1"] \\
+        M
+      \end{tikzcd}
+    \]
+    with fiber \(\pi_1^{-1}(x) = T_xM \isom \R^n\). Similarly, the
+    ``normal bundle'' \(\nu(M)\) is a vector bundle. 
+  \item Given a space \(X\), we have the \de{trivial bundle}
+    \(\epsilon_n\) given by \[
+      \begin{tikzcd}
+        X \times \C^n \ar[d, "\pi_1"]\\
+        X
+      \end{tikzcd}
+    \]
+    with \(\pi_1^{-1}(x) = \C^n\). If \(X\) is a single point, then
+    the trivial bundle is essentially just the vector space
+    \(\C^n\). In this way, we see that vector bundles serve as a
+    generalization of vector spaces.
+  \item Given a M\"{o}bius strip \(M\), we have a real vector bundle \[
+      \begin{tikzcd}
+        M \ar[d,"\rho"] \\
+        S^1
+      \end{tikzcd}
+    \]
+    where \(\rho \from M \to S^1\) sends a point in the M\"{o}bius
+    strip to the circle embedded along the ``middle''. \[
+      \begin{tikzpicture}[
+        decoration={
+          markings,
+          mark=at position 0.5 with {\arrow{>}}}
+        ] 
+        \draw[postaction=decorate] (0,0) -- (2,0);
+        \draw (2,0) -- (2,-2);
+        \draw[postaction=decorate] (2,-2) -- (0,-2);
+        \draw (0,0) -- (0,-2);
+        \draw[red] (1,0) -- (1,-2);
+      \end{tikzpicture}
+    \]
+    The fibers \(\rho^{-1}(x) = \R\) which is homeomorphic to
+    \((0,1)\). 
+  \item Given a space \(B = \CP^n\), the points \(x \in \CP^n\) are
+    lines. Then, we define the ``tautological line
+    bundle'' to be given by total space \(E = \{(x,v) \in \P^n \times
+    \C^n \st v \text{ lies on }x\}\) and map \(\rho(x,v) = x\). Then,
+    \(\rho^{-1}(x) = \Span_\C\{v\} \isom \C\).
+  \item If we do the tautological line bundle construction over
+    \(\RP^1 \isom S^1\), we recover the M\"{o}bius strip example
+    above. 
+  \end{enumerate}
+\end{example}
+\begin{defn}
+  A \de{line bundle} is a rank \(1\) vector bundle.
+\end{defn}
+\begin{prop}\label{new-bundles-from-old}
+  Given a rank \(n\) vector bundle \(\xi\) with base space \(B\) and
+  total space 
+  \(E\) and \(\rho \from E \to B\), we can construct new vector
+  bundles  
+  in a variety of ways.
+  \begin{enumerate}
+  \item Given some map \(f \from B' \to B\), we can construct the
+    \de{pullback bundle} \(f^*(\xi)\) over \(B'\) by setting \(f^*(E)
+    = \{(x',v) \in B' \times E \st f(x) = \rho(e)\}\) and \(\rho'
+    \from f^*(E) \to B\) to be given by \(\rho'(x',e) = x'\) so that
+    \((\rho')^{-1}(x') = \rho^{-1}(f(x'))\). This is a
+    specific version of a pullback square: 
+    \[
+      \begin{tikzcd}
+        f^*(E) \ar[d,"\rho'"] \ar[r,"\tilde{f}"] & E \ar[d,"\rho"]\\
+        B' \ar[r, "f"] & B
+      \end{tikzcd}
+    \]
+
+  \item We can take the \de{Whitney sum} of two vector bundles over
+    \(B\) induced by taking the pullback bundle of the diagonal
+    inclusion \(\iota \from B \to B \times B\). 
+  \item Any operation that makes sense to be done on a vector space
+    can also be done on two vector bundles over \(B\) to get a vector
+    bundle over \(B\).
+  \item Given a complex vector bundle \(\xi\) of rank \(n\), one can
+    get a rank \(2n\) 
+    real vector bundle \(\xi_\R\) by simply forgetting the complex
+    structure. 
+  \end{enumerate}
+\end{prop}
+\begin{defn}
+  Given a vector bundle \(\xi\), a \de{section} is a map \(s \from B
+  \to E\) such that \(\rho \circ s = Id_B\).
+\end{defn}
+\begin{example}
+  \begin{enumerate}
+  \item For every vector bundle, there exists a \de{zero section}
+    \(s_0 \from B \to E\) defined by \(s_0(b) = (b,0)\).
+  \item In general, there are uncountably many sections whose images
+    intersect 
+    the image of the zero section. These are called \de{vanishing
+      sections} and are relatively uninteresting.
+  \item \todo{Add something not boring.}
+  \end{enumerate}
+\end{example}
+\begin{defn}
+  In the discussion that follows, for any vector space \(V\), let
+  \(V_0 = V \setminus \{0\}\) and for any total space \(E\), let \(E_0
+  = E \setminus s_0(E)\) where \(s_0\) is the zero section.
+\end{defn}
+\begin{defn}
+  \cite{milnor-stafheff}*{p 96} An \de{orientation} of a real vector
+  bundle 
+  \(\xi\) is a function which assigns an orientation to each fiber
+  \(F\) of \(\xi\) such that for every point \(b_0 \in B\), there is a
+  neighborhood \(U\) containing \(b_0\) with local
+  trivialization \(h \from U \times \C^n \to \rho^{-1}(U)\) such that
+  for each fiber \(F = \rho^{-1}(b)\) for \(b \in B\), the
+  homomorphism \(h_b \from \C^n \to F\) given by \(h_b(x) := h(b,x)\)
+  is orientation preserving. 
+\end{defn}
+This definition tells us that, for an orientable rank \(n\) complex
+vector bundle \(\xi\), for each fiber \(F \isom \R^n\), we can pick a
+preferred generator \(u_F \in H^n(F,F_0;\Z) = \Z\). Then, the local
+conditions in the definition of orientation imply that, for every
+\(b_0 \in B\), there is a neighborhood \(U\) and a cohomology class
+\(u \in H^n(\rho^{-1}(U), \rho^{-1}(U)_0;\Z)\) so that for every fiber
+\(F = \rho^{-1}(b)\) over \(U\), \[
+  \iota^*(u) = u_F \in H^n(F,F_0;\Z)
+\]
+where \(\iota \from \rho^{-1}(b) \into \rho^{-1}(U)\).
+\begin{thm}
+  \cite{milnor-stasheff}*{Theorem 9.1} Let \(\xi\) be an oriented
+  real vector bundle of rank \(n\) with total space \(E\). Then,
+  \begin{enumerate}
+  \item \(H^i(E,E_0;\Z) = 0\) for \(i < n\) and
+  \item \(H^n(E,E_0;\Z)\) contains a unique cohomology class \(u\),
+    called the \de{Thom class}, 
+    whose restriction \[
+      \iota^*(u) = u_F \in H^n(F,F_0;\Z)
+    \]
+    for every fiber \(F\) of \(\xi\) where \(\iota \from F \into E\)
+    is the standard inclusion.
+  \item The correspondence \(y \mapsto y \cupprod u\) maps
+    \(H^k(E;\Z)\) isomorphically to \(H^{k+n}(E,E_0;\Z)\) for every
+    integer \(k\).
+  \end{enumerate}
+\end{thm}
+\begin{defn}
+  The \de{Thom isomorphism} \[
+    \phi \from H^k(B;\Z) \isomto H^k(E,E_0;\Z)
+  \]
+  is given by the formula \[
+    \phi(x) := \rho^* x \cupprod u
+  \]
+\end{defn}
+We will take for granted that this is an isomorphism of abelian
+groups. Now, the inclusion \((E, \emptyset) \into (E, E_0)\) induces a
+restriction \(H^*(E,E_0;\Z) \to H^*(E;\Z)\) which we will denote by
+\(y \mapsto y|_E\). Then, for \(u \in H^n(E,E_0;\Z)\), we can take \[
+  u \mapsto u|_E \in H^n(E;\Z) \isom H^n(B;\Z)
+\]
+via the Thom isomorphism above. Thus, we define
+\begin{defn}
+  The \de{Euler class} of an oriented rank \(n\) vector bundle \(\xi\)
+  is the cohomology class \[
+    e(\xi) \in H^n(B;\Z)
+  \]
+  which corresponds to \(u|_E\) under the Thom isomorphism
+  \(H^n(B;\Z) \isom H^n(E;\Z)\).
+\end{defn}
+\begin{prop}
+  \begin{enumerate}
+  \item \cite{milnor-stasheff}*{Property 9.2} If \(f \from B \to B'\)
+    is continuous and covered by an orientation preserving map \(f
+    \from \xi \to \xi'\), then \(e(\xi) = f^*e(\xi')\).
+  \item \cite{milnor-stasheff}*{Property 9.6} The Euler class of a
+    Whitney sum is given by \(e(\xi \oplus \xi') = e(\xi) \cupprod
+    e(\xi')\).
+  \item \cite{milnor-stasheff}*{Property 9.7} If the oriented real
+    vector bundle \(\xi\) possesses a nowhere 
+    zero section, then \(e(\xi)\) must be zero
+  \end{enumerate}
+\end{prop}
+\section{Chern Classes  (presented by
+  Thomas Sale)}
+The material in this section will roughly correspond to
+\cite{bott-tu}*{Sections 20--21}.
+\begin{defn}
+  Given a complex line bundle \(\xi\), we define the \de{first Chern
+    class of \(\xi\)} to be \(c_1(\xi) :=
+  e(\xi_\R)\).
+\end{defn}
+\begin{prop}
+  Given line bundles \(\xi, \xi'\),
+  \begin{enumerate}
+  \item \(c_1(\xi \otimes \xi') = c_1(\xi) + c_1(\xi')\).
+  \item \(0 = c_1(\xi \otimes \xi^*) = c_1(\xi) + c_1(\xi^*) \implies
+    c_1(\xi^*) = -c_1(\xi)\).
+  \end{enumerate}
+
+\end{prop}
+\begin{bibdiv}
+  \begin{biblist}
+    \bib{bott-tu}{book}{
+      author={Bott, Raoul}
+      author={Tu, Loring W.}
+      title={Differential Forms in Algebraic Topology}
+      year={1982}
+    }
+    \bib{milnor-stasheff}{book}{
+      author={Milnor, John W.}
+      author={Stasheff, James D.}
+      title={Characteristic Classes}
+      year={1974}
+    }
+  \end{biblist}
+\end{bibdiv}
+\end{document}
