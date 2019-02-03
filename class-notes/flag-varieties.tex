@@ -159,8 +159,8 @@ section and refer back to it as necessary.
   \item Given a space \(B = \CP^n\), the points \(x \in \CP^n\) are
     lines. Then, we define the ``tautological line
     bundle'' to be given by total space \(E = \{(x,v) \in \CP^n \times
-    \C^n \st v \text{ lies on }x\}\) and map \(\rho(x,v) = x\). Then,
-    \(\rho^{-1}(x) = \Span_\C\{v\} \isom \C\).
+    \C \st v \text{ lies on }x\}\) and map \(\rho(x,v) = x\). Then,
+    \(\rho^{-1}(x) = \{x\} \times \C v \isom \C\).
   \item If we do the tautological line bundle construction over
     \(\RP^1 \isom S^1\), we recover the M\"{o}bius strip example
     above. 
@@ -191,10 +191,20 @@ section and refer back to it as necessary.
 
   \item We can take the \de{Whitney sum} of two vector bundles over
     \(B\) induced by taking the pullback bundle of the diagonal
-    inclusion \(\iota \from B \to B \times B\). 
+    inclusion \(\iota \from B \to B \times B\) and this induces fibers
+    \((\rho')^{-1}(b) \isom \rho_1^{-1}(b) \oplus \rho_2^{-1}(b)\).
+    \[
+      \begin{tikzcd}
+       i^*(E_1 \times E_2) \ar[d,"\rho' "] \ar[r,"\tilde{\iota}"]& E_1
+       \times E_2 \ar[d,"\rho_1 
+       \times \rho_2"]\\ 
+       B \ar[r, "\iota"] & B \times B
+      \end{tikzcd}
+    \]
+    We will denote this as \(\xi_1 \oplus \xi_2\).
   \item Any operation that makes sense to be done on a vector space
     can also be done on two vector bundles over \(B\) to get a vector
-    bundle over \(B\).
+    bundle over \(B\). \todo{Flush out with some explcit constructions.}
   \item Given a complex vector bundle \(\xi\) of rank \(n\), one can
     get a rank \(2n\) 
     real vector bundle \(\xi_\R\) by simply forgetting the complex
