@@ -274,7 +274,9 @@ via the Thom isomorphism above. Thus, we define
 \section{Chern Classes  (presented by
   Thomas Sale)}
 The material in this section will roughly correspond to
-\cite{bott-tu}*{Sections 20--21}.
+\cite{bott-tu}*{Sections 20--21}. Because of this, throughout this
+section all cohomology is de Rham cohomology and thus over \(\R\). All
+spaces can be assumed to be smooth manifolds.
 \begin{rmk}
   As one gets more accustomed to using vector bundles, typically one
   stops denoting the bundle by something like \(\xi\) and just denotes
@@ -350,9 +352,36 @@ generator \(x = c_1(\tilde{S}^*) = -c_1(\tilde{S})\), we have
   Given the setup above, \[
      H^*(B;\R) \otimes \R[1,x,\ldots,x^{n-1}] \isom H^*(\P(E);\R)
   \]
-  as \(\R\)-modules. In other words, the cohomology of
-  \(H^*(\P(E);\R)\) is a free module over \(H^*(M;\R)\). 
+  as \(\R\)-modules.
+  % given by \[
+  %   \sum_{i,j} b_i \otimes i^* c_1(S)^j \mapsto \sum_{i,j} \pi^* b_i
+  %   \cupprod 
+  % \]
+  In other words, the cohomology of
+  \(H^*(\P(E);\R)\) is a free module over \(H^*(M;\R)\) with basis
+  \(\{1,x, \ldots, x^{n-1}\}\). 
 \end{thm}
+\begin{rmk}
+  For a gentle treatment on Leray-Hirsch in generality, see
+  \cite{hatcher}*{Section 4.D}.
+\end{rmk}
+From this fact, we can write \(x^n \in H^*(P(E);\R)\) as a linear
+combination with coefficients in \(H^*(M)\).
+\begin{defn}
+  \begin{enumerate}
+  \item The \de{Chern classes} of the bundle \(\xi\) with data
+    \(\rho \from E \to B\) are elements \(c_i(\xi) \in H^*(B;\R)\)
+    which are the unique coefficients such that
+    \[ x^n + \pi^* c_1(\xi) x^{n-1} + \cdots + \pi^* c_n(\xi) = 0 \in
+      H^*(\P(E);\R)
+    \]
+    Thus, \(c_i(\xi) \in H^{2i}(B;\R)\). \todo{Understand this better.}
+  \item We define the \de{total Chern class} to be \[
+      c(\xi) := 1 + c_1(\xi) + \cdots + c_n(\xi) \in H^*(B;\R)
+    \]
+  \end{enumerate}
+\end{defn}
+
 \begin{bibdiv}
   \begin{biblist}
     \bib{bott-tu}{book}{
@@ -360,6 +389,11 @@ generator \(x = c_1(\tilde{S}^*) = -c_1(\tilde{S})\), we have
       author={Tu, Loring W.}
       title={Differential Forms in Algebraic Topology}
       year={1982}
+    }
+    \bib{hatcher}{book}{
+      author={Hatcher, Allen}
+      title={Algebraic Topology}
+      year={2001}
     }
     \bib{milnor-stasheff}{book}{
       author={Milnor, John W.}
