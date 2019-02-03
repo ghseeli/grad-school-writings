@@ -59,8 +59,8 @@ section and refer back to it as necessary.
   \item a topological space \(E\) called \de{the total space},
   \item a topolocial space \(B\) called \de{the base space},
   \item and a continuous projection map \(\rho \from E \to B\) such that
-    \begin{enumerate}
-    \item for all \(b \in B\), the preimage \(\pi^{-1}(b)\), which is
+    \begin{enumerate}[label=(\roman*)]
+    \item for all \(b \in B\), the preimage \(\rho^{-1}(b)\), which is
       called the \de{fiber over \(b\)} is a vector space, and
     \item (local triviality) for all \(b \in B\), there exists a neighborhood \(U \subset
       B\) with \(b \in U\) and a homeomorphism \(h \from U \times \C^n
@@ -78,8 +78,18 @@ section and refer back to it as necessary.
   \end{enumerate}
 \end{defn}
 \begin{rmk}
-  One can just as easily define a \de{real vector bundle} by simply
-  replacing \(\C\) with \(\R\) everywhere in the definition.
+  \begin{enumerate}
+  \item One can just as easily define a \de{real vector bundle} by
+    simply replacing \(\C\) with \(\R\) everywhere in the definition.
+  \item One can define a vector bundle where the \(\rho^{-1}(b) \isom
+    C^n\) and \(\rho^{-1}(b') = \C^m\) for \(n \neq m\) if \(b\) and
+    \(b'\) are in different connected components of \(B\). However,
+    for simplicity, we will usually keep the rank of every fiber the
+    same.
+  \item If \(b,b' \in B\) are in the same connected component, then
+    the local triviality condition forces that \(\rho^{-1}(b) \isom
+    \C^n \isom \rho^{-1}(b')\).
+  \end{enumerate}
 \end{rmk}
 \begin{example}\label{first-examples}
   \begin{enumerate}
@@ -235,7 +245,8 @@ where \(\iota \from \rho^{-1}(b) \into \rho^{-1}(U)\).
   \end{enumerate}
 \end{thm}
 \begin{defn}
-  The \de{Thom isomorphism} \[
+  For an oriented real vector bundle \(\xi\), the \de{Thom
+    isomorphism} \[ 
     \phi \from H^k(B;\Z) \isomto H^k(E,E_0;\Z)
   \]
   is given by the formula \[
