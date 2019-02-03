@@ -29,19 +29,9 @@
 \newcommand{\covers}{\gtrdot}
 \newcommand{\coveredby}{\lessdot}
 
-\renewcommand{\H}{\mathcal{H}}
-\renewcommand{\Q}{\mathcal{Q}}
-\newcommand{\Cl}{\mathcal{C\ell}} % Clifford algebra
-\newcommand{\OP}{\mathcal{OP}} % Odd partitions
-\newcommand{\EP}{\mathcal{EP}} % Odd partitions
-\newcommand{\SP}{\mathcal{SP}} % Strict partitions
-\newcommand{\CC}{\mathcal{C}} % Conjugacy class
-\newcommand{\partitions}{\mathcal{P}} % Partitions
-\newcommand{\B}{\mathbb{B}}
-\newcommand{\K}{\mathcal{K}} % Farahat-Higman ring
 \newcommand{\cF}{\mathcal{F}}
-\renewcommand{\D}{\mathcal{D}} % Even split conjugacy class
 \renewcommand{\q}{\mathfrak{q}}
+\renewcommand{\P}{\mathbb{P}}
 \DeclareMathOperator{\Supp}{Supp}
 \DeclareMathOperator{\ch}{ch} 
 \DeclareMathOperator{\gr}{gr}
@@ -143,7 +133,7 @@ section and refer back to it as necessary.
     \((0,1)\). 
   \item Given a space \(B = \CP^n\), the points \(x \in \CP^n\) are
     lines. Then, we define the ``tautological line
-    bundle'' to be given by total space \(E = \{(x,v) \in \P^n \times
+    bundle'' to be given by total space \(E = \{(x,v) \in \CP^n \times
     \C^n \st v \text{ lies on }x\}\) and map \(\rho(x,v) = x\). Then,
     \(\rho^{-1}(x) = \Span_\C\{v\} \isom \C\).
   \item If we do the tautological line bundle construction over
@@ -207,7 +197,7 @@ section and refer back to it as necessary.
   = E \setminus s_0(E)\) where \(s_0\) is the zero section.
 \end{defn}
 \begin{defn}
-  \cite{milnor-stafheff}*{p 96} An \de{orientation} of a real vector
+  \cite{milnor-stasheff}*{p 96} An \de{orientation} of a real vector
   bundle 
   \(\xi\) is a function which assigns an orientation to each fiber
   \(F\) of \(\xi\) such that for every point \(b_0 \in B\), there is a
@@ -267,7 +257,7 @@ via the Thom isomorphism above. Thus, we define
   which corresponds to \(u|_E\) under the Thom isomorphism
   \(H^n(B;\Z) \isom H^n(E;\Z)\).
 \end{defn}
-\begin{prop}
+\begin{prop}\label{euler-class-props}
   \begin{enumerate}
   \item \cite{milnor-stasheff}*{Property 9.2} If \(f \from B \to B'\)
     is continuous and covered by an orientation preserving map \(f
@@ -275,6 +265,7 @@ via the Thom isomorphism above. Thus, we define
   \item \cite{milnor-stasheff}*{Property 9.6} The Euler class of a
     Whitney sum is given by \(e(\xi \oplus \xi') = e(\xi) \cupprod
     e(\xi')\).
+  \item \(e(\xi \otimes \xi') = e(\xi) + e(\xi')\).
   \item \cite{milnor-stasheff}*{Property 9.7} If the oriented real
     vector bundle \(\xi\) possesses a nowhere 
     zero section, then \(e(\xi)\) must be zero
@@ -284,6 +275,11 @@ via the Thom isomorphism above. Thus, we define
   Thomas Sale)}
 The material in this section will roughly correspond to
 \cite{bott-tu}*{Sections 20--21}.
+\begin{rmk}
+  As one gets more accustomed to using vector bundles, typically one
+  stops denoting the bundle by something like \(\xi\) and just denotes
+  it by the total space \(E\) when the bundle structure is clear.
+\end{rmk}
 \begin{defn}
   Given a complex line bundle \(\xi\), we define the \de{first Chern
     class of \(\xi\)} to be \(c_1(\xi) :=
@@ -296,8 +292,67 @@ The material in this section will roughly correspond to
   \item \(0 = c_1(\xi \otimes \xi^*) = c_1(\xi) + c_1(\xi^*) \implies
     c_1(\xi^*) = -c_1(\xi)\).
   \end{enumerate}
-
 \end{prop}
+\begin{proof}
+  The first part is immediate from \ref{euler-class-props}(c) and the
+  second follows from the fact that \(\xi \otimes \xi^* =
+  \Hom(\xi,\xi)\) always has a nonvanishing section sending \(b \in
+  B\) to the identity map in \(\Hom(E,E)\) and so \(e(L_\R) = 0\).
+\end{proof}
+\begin{defn}
+  \begin{enumerate}
+  \item Given a rank \(n\) complex vector bundle \(\xi\), we define
+    the \de{projectivized bundle \(\P(\xi)\)} to be the
+    bundle \[
+      \begin{tikzcd}
+        \P(E) \ar[d, "\pi"] \\
+        B
+      \end{tikzcd}
+    \]
+    where \(\pi^{-1}(b) = \P(\rho^{-1}(b)) \isom \P^n\). Note that
+    \(\pi \circ \P = \rho\). \[
+      \begin{tikzcd}
+        & E \ar[d, "\rho"] \ar[ld, dashed, "\P"]\\
+      \P(E) \ar[r, "\pi"] & B
+      \end{tikzcd}
+    \]
+   \item We define the pullback vector bundle \(\pi^*(\xi)\) of the
+     projectivization map 
+    \(\pi \from \P(E) \to M\) and the
+    fiber \((\rho')^{-1}(x) = \rho^{-1}(\pi(x))\). \[
+      \begin{tikzcd}
+        \pi^*(E) \ar[r,"\tilde{\pi}"] \ar[d, "\rho'"] & E
+        \ar[d,"\rho"] \\ 
+        \P(E) \ar[r, "\pi"] & B
+      \end{tikzcd}
+    \]
+  \item The \de{universal sub-bundle} of \(\pi^*(\xi)\) is defined by
+    taking the total space \[
+      S = \{(x,v) \in \pi^*(E) \st v \in x\}
+    \]
+    and is a copy of the tautological line bundle over \(\P(E)\) (see
+    \ref{first-examples}(d)). Note that \(S\) is a rank \(1\) vector
+    bundle. 
+  \item The \de{universal quotient bundle} \(Q\) of \(\pi^*(E)\) is
+    defined by taking the short exact sequence \[
+      0 \to S \to \pi^*E \to Q \to 0
+    \]
+    Then, \(Q\) is a rank \(n-1\) vector bundle.
+  \item If we restrict the unviversal sub-bundle \(S\) to be over a
+    fiber \(\pi^{-1}(b) \isom \P^n\), then we have a bundle with
+    total space \(\tilde{S}\) which is a copy of the tautological
+    line bundle over \(\P^n\).
+  \end{enumerate}
+\end{defn}
+Now, using the fact that \(H^*(\P^n;\R) \isom \R[x]/(x^n)\) with
+generator \(x = c_1(\tilde{S}^*) = -c_1(\tilde{S})\), we have
+\begin{thm}[Leray-Hirsch (special case)]
+  Given the setup above, \[
+     H^*(B;\R) \otimes \R[1,x,\ldots,x^{n-1}] \isom H^*(\P(E);\R)
+  \]
+  as \(\R\)-modules. In other words, the cohomology of
+  \(H^*(\P(E);\R)\) is a free module over \(H^*(M;\R)\). 
+\end{thm}
 \begin{bibdiv}
   \begin{biblist}
     \bib{bott-tu}{book}{
