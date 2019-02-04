@@ -226,6 +226,42 @@ section and refer back to it as necessary.
   \item \todo{Add something not boring.}
   \end{enumerate}
 \end{example}
+More generally, we wish to define a generalization of vector bundles
+that we will use sparringly.
+\begin{defn}
+   A \de{fiber bundle} \(\xi\) with total space \(E\), base space
+   \(B\), projection map \(\rho \from B \to E\), and fiber \(F\) is
+   defined analogously to a complex vector bundle where every
+   occurrence of \(\C^n\) is replaced by \(F\).
+\end{defn}
+See \cite{hatcher}*{pp 376--377} for a more precise definition. 
+One reason to study vector bundles is that they can give us insight
+into the cohomology rings of the spaces involved. A general theorem
+which we will state without proof is
+\begin{thm}[Leray-Hirsch]
+  \cite{hatcher}*{Theorem 4D.1} Let \(\xi\) be a fiber bundle with
+  \(\rho \from E \to B\) such that, for some coefficient ring \(R\),
+  \begin{enumerate}
+  \item \(H^n(F;R)\) is a finitely generated free \(R\)-module for
+    each \(n\).
+  \item There exist classes \(e_j \in H^{k_j}(E;R)\) who restrictions
+    \(u^*(e_j)\) form a basis for \(H^*(F;R)\) in each fiber \(F\),
+    where \(i \from F \to E\) is the inclusion.
+  \end{enumerate}
+  Then, the map \(\Phi \from H^*(B;R) \otimes_R H^*(F;R) \to
+  H^*(E;R)\) given by \[
+    \sum_{i,j} b_i \otimes i^*(e_j) \mapsto \sum_{i,j} \rho^*(b_i)
+    \cupprod e_j
+  \]
+  is an isomorphism of \(R\)-modules.
+\end{thm}
+In particular, the Leray-Hirsch theorem tells us that \(H^*(E;R)\) is
+a free \(H^*(B;R)\)-module with basis \(\{e_j\}\) where we view
+\(H^*(E;R)\) as a module over the ring \(H^*(B;R)\) by defining the
+action \[
+  b.e = \rho^*(b) \cupprod e
+\]
+for \(b \in H^*(B;R)\) and \(e \in H^*(E;R)\).
 \begin{defn}
   In the discussion that follows, for any vector space \(V\), let
   \(V_0 = V \setminus \{0\}\) and for any total space \(E\), let \(E_0
@@ -318,6 +354,7 @@ spaces can be assumed to be smooth manifolds.
   stops denoting the bundle by something like \(\xi\) and just denotes
   it by the total space \(E\) when the bundle structure is clear.
 \end{rmk}
+\subsection{The first Chern class of a line bundle}
 \begin{defn}
   Given a complex line bundle \(\xi\), we define the \de{first Chern
     class of \(\xi\)} to be \(c_1(\xi) :=
@@ -337,6 +374,7 @@ spaces can be assumed to be smooth manifolds.
   \Hom(\xi,\xi)\) always has a nonvanishing section sending \(b \in
   B\) to the identity map in \(\Hom(E,E)\) and so \(e(L_\R) = 0\).
 \end{proof}
+\subsection{Projectivized vector bundles and Chern clases}
 \begin{defn}
   \begin{enumerate}
   \item Given a rank \(n\) complex vector bundle \(\xi\), we define
@@ -417,7 +455,82 @@ combination with coefficients in \(H^*(M)\).
     \]
   \end{enumerate}
 \end{defn}
-
+\begin{prop}[Main properties of Chern classes]
+  \begin{enumerate}
+  \item Given a map \(f \from B' \to B\), Chern classes have
+    naturality \(c(f^*(\xi)) = f^*(c(\xi))\). As an immediate
+    corollary, this menas that Chern classes are an invariant of
+    vector bundles, that is, \(\xi \isom \xi' \implies c(\xi) =
+    c(\xi')\). 
+  \item Given \(\gamma^1\) to be the tautological complex line bundle
+    over \(\P^n\), then \(H^*(\P^n;\R) \isom
+    \R[c_1(\gamma^1)]/((c_1(\gamma^1)))^{n+1}\).
+  \item \(c(\xi \oplus \xi') = c(\xi) \cupprod c(\xi')\), called the
+    \de{Whitney product formula}.
+  \item If \(\xi\) has rank \(n\), then \(c_i(\xi) := 0\) for \(i >
+    n\).
+  \item If \(\xi\) has a non-vanishing section, then \(c_n(\xi) = 0\).
+  \item The top Chern class of a complex vector bundle \(\xi\) is the
+    Euler class of \(\xi_\R\). In other words, \(c_n(\xi) =
+    e(\xi_\R)\). 
+  \end{enumerate}
+\end{prop}
+\subsection{The Splitting Principle}
+\begin{defn}
+  Let \(\xi\) with data \(\tau \from E \to M\) be a smooth complex
+  vector bundle of rank 
+  \(n\) over a manifold \(M\). Then, we define a \de{split manifold}
+  of \(\tau\) to be a space \(F(E)\) with map \(\sigma \from F(E) \to
+  M\) such that
+  \begin{enumerate}
+  \item \(\sigma^*\xi\) is a direct sum of line bundles and
+  \item the induced map on cohomology \(\sigma^* \from H^*(M;\R) \to
+    H^*(F(E);\R)\) is injective.
+  \end{enumerate}
+\end{defn}
+\begin{example}
+  Given a rank \(2\) complex vector bundle \(\xi\) with \(\rho \from E
+  \to M\), we can take \(F(E) = \P(E)\) because \(\pi^*(\xi)\)
+  decomposes as a direct sum of \(S \oplus Q\), its universal sub and
+  quotient bundles. \[
+    \begin{tikzcd}
+      E \ar[d,"\rho"] & \pi^*(E) \isom S \oplus Q \ar[d]  \\
+      M & \P(E) \ar[l,"\pi"]
+    \end{tikzcd}
+  \]
+\end{example}
+\begin{example}
+  Given a rank \(3\) complex vector bundle \(\xi\) with \(\rho \from E
+  \to M\), we can iterate the construction above where the
+  \(2\)-dimensional quotient bundle \(Q_E\) can be split into a direct sum of
+  line bundles when pulled back to \(\P(Q_E)\).
+  \[
+    \begin{tikzcd}
+      E \ar[d,"\rho"] & \alpha^*(E) \isom S_E \oplus Q_E \ar[d] &
+      \beta^*(S_E \oplus Q_E) \isom \beta^* S_e \oplus S_{Q_E} \oplus
+      Q_{Q_E} \ar[d] \\
+      M & \P(E) \ar[l,"\alpha"] & \ar[l, "\beta"] \P(Q_E) 
+    \end{tikzcd}
+  \]
+  Thus, \(\P(Q_E)\) is the split manifold \(F(E)\).
+\end{example}
+This leads us to the general idea
+\begin{prop}[The Splitting Principle]
+  To prove a polynomial identity in Chern classes, it suffices to
+  assume that the vector bundles are direct sums of line bundles.
+\end{prop}
+\begin{proof}
+  Given a polynomial \(f\), we want to show \(f(c(E)) = 0\). Then,
+  with setup \[
+    \begin{tikzcd}
+      E \ar[d] & \sigma^*E \\
+      M & \ar[l, "\sigma"] F(E)
+    \end{tikzcd}
+  \]
+  we get \(\sigma^*(f(c(E))) = f(c(\sigma^*E))\) and so, because
+  \(\sigma^*\) is injective by definition of \(F(E)\),
+  \(f(c(\sigma^*(E))) = 0 \implies f(c(E)) = 0\).
+\end{proof}
 \begin{bibdiv}
   \begin{biblist}
     \bib{bott-tu}{book}{
