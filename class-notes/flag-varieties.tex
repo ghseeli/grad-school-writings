@@ -152,18 +152,18 @@ section and refer back to it as necessary.
       \end{tikzpicture}
     \]
     The fiber is given by \(\rho^{-1}(x) = (0,1)\) which is
-    homeomorphic to \(\R\). In fact, this example is not equivalent to
+    homeomorphic to \(\R\). Furthermore, this example is not equivalent to
     the trivial bundle \(S^1 \times \R \to S^1\). Informally, this can
     be seen by noticing that one can pick a consistent choice of
     orientation on the trivial bundle but not on this bundle.
   \item Given a space \(B = \CP^n\), the points \(x \in \CP^n\) are
-    lines. Then, we define the ``tautological line
-    bundle'' to be given by total space \(E = \{(x,v) \in \CP^n \times
-    \C \st v \text{ lies on }x\}\) and map \(\rho(x,v) = x\). Then,
+    lines. Then, we define the \de{tautological line
+    bundle} \(\gamma_n^1\) to be given by total space \(E = \{(x,v) \in \CP^n \times
+    \C^{n+1} \st v \text{ lies on }x\}\) and map \(\rho(x,v) = x\). Then,
     \(\rho^{-1}(x) = \{x\} \times \C v \isom \C\).
   \item If we do the tautological line bundle construction over
     \(\RP^1 \isom S^1\), we recover the M\"{o}bius strip example
-    above. 
+    above. To see this in detail, see \cite{milnor-stasheff}*{pp 16--17}
   \end{enumerate}
 \end{example}
 \begin{defn}
@@ -385,8 +385,9 @@ spaces can be assumed to be smooth manifolds.
         B
       \end{tikzcd}
     \]
-    where \(\pi^{-1}(b) = \P(\rho^{-1}(b)) \isom \P^n\). Note that
-    \(\pi \circ \P = \rho\). \[
+    where \(\pi^{-1}(b) = \P(\rho^{-1}(b)) \isom \P(\C^n) \isom \CP^{n-1}\). Note that
+    \(\pi \circ \P = \rho\) and that a point \(x \in \P(E)\) is a
+    line in \(\pi^{-1}(\pi(x))\). \[
       \begin{tikzcd}
         & E \ar[d, "\rho"] \ar[ld, dashed, "\P"]\\
       \P(E) \ar[r, "\pi"] & B
@@ -404,52 +405,43 @@ spaces can be assumed to be smooth manifolds.
     \]
   \item The \de{universal sub-bundle} of \(\pi^*(\xi)\) is defined by
     taking the total space \[
-      S = \{(x,v) \in \pi^*(E) \st v \in x\}
+      S = \{(x,v) \in \pi^*(E) \st v \in x\} 
     \]
     and is a copy of the tautological line bundle over \(\P(E)\) (see
-    \ref{first-examples}(d)). Note that \(S\) is a rank \(1\) vector
-    bundle. 
+    \ref{first-examples}(d)) and so \(S\) is a rank \(1\) vector
+    bundle.
   \item The \de{universal quotient bundle} \(Q\) of \(\pi^*(E)\) is
     defined by taking the short exact sequence \[
       0 \to S \to \pi^*E \to Q \to 0
     \]
     Then, \(Q\) is a rank \(n-1\) vector bundle.
   \item If we restrict the unviversal sub-bundle \(S\) to be over a
-    fiber \(\pi^{-1}(b) \isom \P^n\), then we have a bundle with
+    fiber \(\pi^{-1}(b) \isom \CP^{n-1}\), then we have a bundle with
     total space \(\tilde{S}\) which is a copy of the tautological
-    line bundle over \(\P^n\).
+    line bundle over \(\CP^{n-1}\).
   \end{enumerate}
 \end{defn}
-Now, using the fact that \(H^*(\P^n;\R) \isom \R[x]/(x^n)\) with
-generator \(x = c_1(\tilde{S}^*) = -c_1(\tilde{S})\), we have
-\begin{thm}[Leray-Hirsch (special case)]
-  Given the setup above, \[
-     H^*(B;\R) \otimes \R[1,x,\ldots,x^{n-1}] \isom H^*(\P(E);\R)
-  \]
-  as \(\R\)-modules.
-  % given by \[
-  %   \sum_{i,j} b_i \otimes i^* c_1(S)^j \mapsto \sum_{i,j} \pi^* b_i
-  %   \cupprod 
-  % \]
-  In other words, the cohomology of
-  \(H^*(\P(E);\R)\) is a free module over \(H^*(M;\R)\) with basis
-  \(\{1,x, \ldots, x^{n-1}\}\). 
-\end{thm}
-\begin{rmk}
-  For a gentle treatment on Leray-Hirsch in generality, see
-  \cite{hatcher}*{Section 4.D}.
-\end{rmk}
+Now, recall the fact that \(H^*(\P(\pi^{-1}(b));\R) = H^*(\CP^{n-1};\R) \isom \R[a]/(a^{n})\) as
+rings. If we set \(x = c_1(\tilde{S}^*) = -c_1(\tilde{S}) \in
+H^2(\P(E))\) and \(i \from \P(\pi^{-1}(b)) \into \P(E)\), then
+\(-i^*(x) = a \in H^2(\CP^{n-1};\R)\) \todo{Explain why}. Since this works for every
+fiber simultaneously, we can apply
+\begin{cor}[Leray-Hirsch (special case)]
+  The cohomology of \(H^*(\P(E);\R)\) is a free module over \(H^*(B;\R)\) with basis
+  \(\{1,x, \ldots, x^{n-1}\}\) with action \(y.x^k = \pi^* (y)
+  \cupprod x\).
+\end{cor}
 From this fact, we can write \(x^n \in H^*(P(E);\R)\) as a linear
-combination with coefficients in \(H^*(M)\).
+combination with coefficients in \(H^*(B)\).
 \begin{defn}
   \begin{enumerate}
   \item The \de{Chern classes} of the bundle \(\xi\) with data
     \(\rho \from E \to B\) are elements \(c_i(\xi) \in H^*(B;\R)\)
     which are the unique coefficients such that
-    \[ x^n + \pi^* c_1(\xi) x^{n-1} + \cdots + \pi^* c_n(\xi) = 0 \in
+    \[ x^n + \pi^*(c_1(\xi)) x^{n-1} + \cdots + \pi^*(c_n(\xi)) = 0 \in
       H^*(\P(E);\R)
     \]
-    Thus, \(c_i(\xi) \in H^{2i}(B;\R)\). \todo{Understand this better.}
+    Thus, \(c_i(\xi) \in H^{2i}(B;\R)\).
   \item We define the \de{total Chern class} to be \[
       c(\xi) := 1 + c_1(\xi) + \cdots + c_n(\xi) \in H^*(B;\R)
     \]
@@ -516,20 +508,23 @@ combination with coefficients in \(H^*(M)\).
 \end{example}
 This leads us to the general idea
 \begin{prop}[The Splitting Principle]
-  To prove a polynomial identity in Chern classes, it suffices to
+  \cite{bott-tu}*{p 275} To prove a polynomial identity in Chern
+  classes, it suffices to 
   assume that the vector bundles are direct sums of line bundles.
 \end{prop}
 \begin{proof}
   Given a polynomial \(f\), we want to show \(f(c(E)) = 0\). Then,
   with setup \[
     \begin{tikzcd}
-      E \ar[d] & \sigma^*E \\
+      E \ar[d] & \sigma^*E \ar[d] \\
       M & \ar[l, "\sigma"] F(E)
     \end{tikzcd}
   \]
   we get \(\sigma^*(f(c(E))) = f(c(\sigma^*E))\) and so, because
   \(\sigma^*\) is injective by definition of \(F(E)\),
-  \(f(c(\sigma^*(E))) = 0 \implies f(c(E)) = 0\).
+  \(f(c(\sigma^*(E))) = 0 \implies f(c(E)) = 0\). Since
+  \(\sigma^*(E)\) is a direct sum of line bundles by construction, we
+  are done. 
 \end{proof}
 \begin{bibdiv}
   \begin{biblist}
