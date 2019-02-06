@@ -41,6 +41,8 @@
 \renewcommand{\vec}[1]{\mathbf{#1}}
 \numberwithin{thm}{section}
 
+\newcommand{\Fl}{\mathcal{F\ell}}
+
 \title[Flag Varieties]{Flag Varieties \\ Notes
   from a reading course in Spring 2019}
 \author{George H. Seelinger}
@@ -360,7 +362,7 @@ spaces can be assumed to be smooth manifolds.
     class of \(\xi\)} to be \(c_1(\xi) :=
   e(\xi_\R)\).
 \end{defn}
-\begin{prop}
+\begin{prop}\label{first-chern-class-of-line-bundle-props}
   Given line bundles \(\xi, \xi'\),
   \begin{enumerate}
   \item \(c_1(\xi \otimes \xi') = c_1(\xi) + c_1(\xi')\).
@@ -375,7 +377,7 @@ spaces can be assumed to be smooth manifolds.
   B\) to the identity map in \(\Hom(E,E)\) and so \(e(L_\R) = 0\).
 \end{proof}
 \subsection{Projectivized vector bundles and Chern clases}
-\begin{defn}
+\begin{defn}\label{projectivization}
   \begin{enumerate}
   \item Given a rank \(n\) complex vector bundle \(\xi\), we define
     the \de{projectivized bundle \(\P(\xi)\)} to be the
@@ -447,7 +449,7 @@ combination with coefficients in \(H^*(B)\).
     \]
   \end{enumerate}
 \end{defn}
-\begin{prop}[Main properties of Chern classes]
+\begin{prop}[Main properties of Chern classes]\label{chern-class-props}
   \begin{enumerate}
   \item Given a map \(f \from B' \to B\), Chern classes have
     naturality \(c(f^*(\xi)) = f^*(c(\xi))\). As an immediate
@@ -467,8 +469,15 @@ combination with coefficients in \(H^*(B)\).
     e(\xi_\R)\). 
   \end{enumerate}
 \end{prop}
+\begin{cor}\label{total-class-of-line-bundle}
+  As a consequence of the above properties, the total Chern class of a
+  line bundle \(\lambda\) is always of the form \[
+    c(\lambda) = 1 + c_1(\lambda)
+  \]
+  where \(c_1(\lambda) = e(\lambda_\R)\) by definition.
+\end{cor}
 \subsection{The Splitting Principle}
-\begin{defn}
+\begin{defn}\label{split-manifold}
   Let \(\xi\) with data \(\tau \from E \to M\) be a smooth complex
   vector bundle of rank 
   \(n\) over a manifold \(M\). Then, we define a \de{split manifold}
@@ -507,7 +516,7 @@ combination with coefficients in \(H^*(B)\).
   Thus, \(\P(Q_E)\) is the split manifold \(F(E)\).
 \end{example}
 This leads us to the general idea
-\begin{prop}[The Splitting Principle]
+\begin{prop}[The Splitting Principle]\label{splitting-principle}
   \cite{bott-tu}*{p 275} To prove a polynomial identity in Chern
   classes, it suffices to 
   assume that the vector bundles are direct sums of line bundles.
@@ -526,6 +535,165 @@ This leads us to the general idea
   \(\sigma^*(E)\) is a direct sum of line bundles by construction, we
   are done. 
 \end{proof}
+\section{Chern class computations, flag manifolds, and the
+  Grassmannian (presented by George H. Seelinger)}
+\subsection{Proof of the Whitney Product Formula}
+\begin{lem}\label{whitney-product-formula-on-line-bundles}
+  Let \(\xi\) be a direct sum of line bundles, that is \(\xi =
+  \lambda_1 \oplus \cdots \oplus \lambda_n\) where each \(\lambda_i\)
+  is a line bundle over \(B\). Then, \[
+    c(\xi) = c(\lambda_1) c(\lambda_2) \cdots c(\lambda_n)
+  \]
+\end{lem}
+\begin{proof}
+  First, let us take vector bundle \(\xi\) to be a a direct sum of
+  line bundles. Then, if we take pullback bundle \(\xi\) by the
+  projectivization map (see \ref{projectivization}) \(\pi \from \P(E) \to M\), \(\pi^* \xi\) is a
+  direct sum of line bundles, let us say \(\pi^*\xi = L_1 \oplus
+  \cdots \oplus L_n\).
+  \[
+      \begin{tikzcd}
+       S \ar[r, hookrightarrow] &\pi^* E \isom  L_1 \oplus \ldots \oplus L_n 
+        \ar[r,"\tilde{\pi}"] \ar[d, "\rho'"] & E
+        \ar[d,"\rho"] \\ 
+        & \P(E) \ar[r, "\pi"] & M
+      \end{tikzcd}
+  \]
+  Now, let \(s_i \from S \to L_i\) be the projection of vector
+  bundles. Thus, \(s_i\) induces a section of the bundle \(\Hom(S,L_i)
+  \to M\). \footnote{This is a special case of a canonical fact. The map \(s_i\) induces
+    a vector space isomorphism on each fiber over \(b\), say
+    \((s_i)_b\), and so the
+    canonical associated section of the \(\Hom\) bundle sends each
+    \(b\) to the map \((s_i)_b\).} Furthermore, since the fiber of
+  \(S\) over every point \(y \in \P(E)\) is a \(1\)-dimensional
+  subspace of the fiber of \(y\) in \(\pi^* \xi\), that is
+  \((\rho')^{-1}(y)\), the projections \(s_1, \ldots, s_n\) cannot be
+  simultaneously zero and so the open sets \[
+    U_i := \{y \in \P(E) \st s_i(y) \neq 0\}
+  \]
+  form an open cover of \(\P(E)\).
+
+  Now, it is useful to note that the bundle \(\Hom(S,L_i) \isom S^*
+  \otimes L_i\). Then, for each \(i\), \(c_1(S^* \otimes L_i) \in
+  H^2(\P(E))\) restricts to zero in \(H^2(U_i)\) by construction of
+  \(U_i\) (\(L_i\) is a trivial line bundle over \(U_i\)), and so we
+  can lift this element to \(H^2(\P(E),U_i)\). So, if we take the
+  product, we can lift to \(H^2(\P(E), U_1 \union \cdots \union U_n) =
+  H^2(\P(E),\P(E)) = 0\). Therefore, \[
+    0 = \prod_{i=1}^n c_1(S^* \otimes L_i)
+    \overset{\ref{first-chern-class-of-line-bundle-props}(a)}{=}
+    \prod_{i=1}^n(c_1(S^*) + c_1(L_i))
+  \]
+  and if we set \(x = c_1(S^*)\), we get \[
+    0 = \prod_{i=1}^n(x + c_1(L_i)) = x^n + e_1(c_1(L_1), \ldots,
+    c_1(L_n)) x^{n-1} + \cdots + e_n(c_1(L_1), \ldots, c_1(L_n))
+  \]
+  where \(e_i\) is the \(i\)th symmetric polynomial. However, this is
+  precisely how we defined \(c_i(\xi)\), so we get \[
+    c_i(\xi) = e_i(c_1(L_1), \ldots, c_1(L_n)) \implies c(E) = \prod
+    (1+c_1(L_i)) = \prod c(L_i)
+  \]
+\end{proof}
+\begin{cor}[Corollary of proof]\label{chern-classes-are-elementary-symmetric-functions}
+  Given a complex vector bundle \(\xi\) of rank \(n\), \[
+    c(E) = \prod_{i=1}^n (1+c_1(L_i))
+  \]
+  where \(\pi^* \xi = L_1 \oplus \cdots \oplus L_n\) is a direct sum
+  of line bundles and, as before, \(\pi \from \P(E) \to M\).
+\end{cor}
+\begin{proof}[Proof of \ref{chern-class-props}(c)]
+  We now use the lemma above and the splitting principle
+  \ref{splitting-principle} to prove the
+  formula in general. Given complex vector bundles \(\xi, \xi'\) over
+  \(M\) of rank \(n\) and \(m\), respectively,
+  we can iterate the splitting constructions to get a direct sum of
+  line bundles for which the Chern class identites are equivalent. \[
+    \begin{tikzcd}
+      E \oplus E' \ar[d] & L_1 \oplus \cdots \oplus L_n \oplus \pi^* E
+      \ar[d] & L_1
+      \oplus \cdots \oplus L_n \oplus L_1' \oplus \cdots \oplus L_m' \ar[d]
+      \\
+      M & \ar[l, "\pi"] F(E) & \ar[l,"\pi'"] F(\pi^*E)
+    \end{tikzcd}
+  \]
+  Now, if \(\sigma = \pi' \circ \pi\), then
+  \begin{align*}
+    \sigma^*(c(\xi \oplus \xi'))
+    & = c(\sigma^*(\xi \oplus \xi'))
+    & \text{By naturality of Chern classes \ref{chern-class-props}(a)}\\
+    & = c(L_1 \oplus \cdots \oplus L_n \oplus L_1' \oplus \cdots
+      \oplus L_m')
+    & \text{By splitting principle construction above}\\
+    & = c(L_1) \cdots c(L_n) c(L_1') \cdots c(L_m')
+    & \text{By Lemma \ref{whitney-product-formula-on-line-bundles}} \\
+    & = c(L_1 \oplus \cdots \oplus L_n) c(L_1' \oplus \cdots \oplus
+      L_m')
+    & \text{By Lemma \ref{whitney-product-formula-on-line-bundles}}\\
+    & = c(\sigma^* \xi) c(\sigma^* \xi') 
+    & \text{By splitting principle construction above} \\
+    & = \sigma^* c(\xi)c(\xi')
+    & \text{By naturality of Chern classes}
+  \end{align*}
+  However, also by construction (since we have a split manifold
+  \ref{split-manifold}), \(\sigma^*\) is injective, and thus \(c(\xi
+  \oplus \xi') = c(\xi)c(\xi')\).
+\end{proof}
+\begin{rmk}
+  \begin{enumerate}
+  \item Given a short exact sequence of smooth complex vector
+    bundles \[
+      0 \to A \to B \to C \to 0
+    \]
+    one can prove that \(c(B) = c(A)c(C)\) using the fact that \(B \isom A
+    \oplus C\) as smooth bundles and the Whitney product formula.
+  \item Using the splitting principle and the Whitney product formula,
+    one can directly prove \ref{chern-class-props}(f), that is
+    \(c_n(\xi) = e(\xi_\R)\). See \cite{bott-tu}*{p 278} for a
+    complete proof.
+  \end{enumerate}
+\end{rmk}
+\subsection{Computing some Chern classes}
+Recall from Corollary \ref{chern-classes-are-elementary-symmetric-functions}
+that the Chern classes of a rank \(n\) complex 
+vector bundle \(\xi\) are precisely the elementary symmetric functions in the
+first Chern classes of the line bundles into which \(\xi\) splits when
+pulled back to the splitting manifold \(F(E)\). Thus, by the
+fundamental theorem of symmetric functions, any symmetric polynomial
+in these variables is a polynomial in \(c_1(\xi), \ldots, c_n(\xi)\).
+\subsection{Flag manifolds}
+\begin{defn}
+  \begin{enumerate}
+  \item Given a complex vector space \(V\) of dimension \(n\), a
+    \de{(complete) flag} in \(V\) is a sequence of subspaces
+    \[ A_1 \propsubset A_2 \propsubset \cdots \propsubset A_n = V,
+      \dim_\C A_i = i
+    \]
+    Note that a flag on \(V\) induces a \(\C\) basis on \(V\) by
+    picking basis vector \(b_i \in A_{i}/A_{i-1}\) (take \(A_0 = \{0\}\)).
+  \item Let \(\Fl(V)\) be the collection of all flags of \(V\), called
+    the \de{flag manifold}. 
+  \end{enumerate}
+\end{defn}
+In fact, \(\Fl(V)\) is a manifold because \(GL(n,\C)\) acts
+transitively on \(\Fl(V)\) and the stabilizer of a flag is the closed subgroup
+of all upper triangular matrices (with respect to the induced basis),
+say \(H\), and so \(\Fl(V) \isom GL(n,\C)/H\) as a \(G\)-space, but
+\(GL(n,\C)/H\) can be given a manifold structure since \(H\) is a
+closed subgroup and \(GL(n,\C)\) is a Lie group.
+\begin{defn}
+  Given a vector bundle \(\xi\) with \(\rho \from E \to M\), one can form the
+  \de{associated flag bundle} \(\Fl(\xi)\) with \(f \from \Fl(E) \to M\)
+  where \(f^{-1}(x) = \Fl(\rho^{-1}(x))\) with the natural transition maps.
+\end{defn}
+Since the fiber is not a vector space, the associated flag bundle is
+not a vector bundle, but it is still a fiber bundle.
+\begin{prop}
+  The associated flag bundle \(\Fl(\xi)\) of a vector bundle \(\xi\)
+  is the split manifold constructed in the examples after
+  \ref{split-manifold}. 
+\end{prop}
+
 \begin{bibdiv}
   \begin{biblist}
     \bib{bott-tu}{book}{
