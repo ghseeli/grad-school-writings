@@ -193,7 +193,8 @@ section and refer back to it as necessary.
 
   \item We can take the \de{Whitney sum} of two vector bundles over
     \(B\) induced by taking the pullback bundle of the diagonal
-    inclusion \(\iota \from B \to B \times B\) and this induces fibers
+    inclusion \(\iota \from B \to B \times B\) that sends \(b \mapsto
+    (b,b)\) and this induces fibers 
     \((\rho')^{-1}(b) \isom \rho_1^{-1}(b) \oplus \rho_2^{-1}(b)\).
     \[
       \begin{tikzcd}
@@ -267,7 +268,7 @@ for \(b \in H^*(B;R)\) and \(e \in H^*(E;R)\).
 \begin{defn}
   In the discussion that follows, for any vector space \(V\), let
   \(V_0 = V \setminus \{0\}\) and for any total space \(E\), let \(E_0
-  = E \setminus s_0(E)\) where \(s_0\) is the zero section.
+  = E \setminus s_0(B)\) where \(s_0\) is the zero section.
 \end{defn}
 \begin{defn}
   \cite{milnor-stasheff}*{p 96} An \de{orientation} of a real vector
@@ -389,7 +390,7 @@ spaces can be assumed to be smooth manifolds.
     \]
     where \(\pi^{-1}(b) = \P(\rho^{-1}(b)) \isom \P(\C^n) \isom \CP^{n-1}\). Note that
     \(\pi \circ \P = \rho\) and that a point \(x \in \P(E)\) is a
-    line in \(\pi^{-1}(\pi(x))\). \[
+    line in \(\rho^{-1}(\pi(x))\). \[
       \begin{tikzcd}
         & E \ar[d, "\rho"] \ar[ld, dashed, "\P"]\\
       \P(E) \ar[r, "\pi"] & B
@@ -435,7 +436,7 @@ fiber simultaneously, we can apply
 \end{cor}
 From this fact, we can write \(x^n \in H^*(P(E);\R)\) as a linear
 combination with coefficients in \(H^*(B)\).
-\begin{defn}
+\begin{defn}\label{general-def-of-chern-classes}
   \begin{enumerate}
   \item The \de{Chern classes} of the bundle \(\xi\) with data
     \(\rho \from E \to B\) are elements \(c_i(\xi) \in H^*(B;\R)\)
@@ -675,12 +676,14 @@ in these variables is a polynomial in \(c_1(\xi), \ldots, c_n(\xi)\).
     the \de{flag manifold}. 
   \end{enumerate}
 \end{defn}
-In fact, \(\Fl(V)\) is a manifold because \(GL(n,\C)\) acts
-transitively on \(\Fl(V)\) and the stabilizer of a flag is the closed subgroup
-of all upper triangular matrices (with respect to the induced basis),
-say \(H\), and so \(\Fl(V) \isom GL(n,\C)/H\) as a \(G\)-space, but
-\(GL(n,\C)/H\) can be given a manifold structure since \(H\) is a
-closed subgroup and \(GL(n,\C)\) is a Lie group.
+\begin{rmk}\label{flag-manifold-is-a-manifold}
+  In fact, \(\Fl(V)\) is a manifold because \(GL(n,\C)\) acts
+  transitively on \(\Fl(V)\) and the stabilizer of a flag is the
+  closed subgroup of all upper triangular matrices (with respect to
+  the induced basis), say \(H\), and so \(\Fl(V) \isom GL(n,\C)/H\) as
+  a \(G\)-space, but \(GL(n,\C)/H\) can be given a manifold structure
+  since \(H\) is a closed subgroup and \(GL(n,\C)\) is a Lie group.
+\end{rmk}
 \begin{defn}
   Given a vector bundle \(\xi\) with \(\rho \from E \to M\), one can form the
   \de{associated flag bundle} \(\Fl(\xi)\) with \(f \from \Fl(E) \to M\)
@@ -689,11 +692,278 @@ closed subgroup and \(GL(n,\C)\) is a Lie group.
 Since the fiber is not a vector space, the associated flag bundle is
 not a vector bundle, but it is still a fiber bundle.
 \begin{prop}
-  The associated flag bundle \(\Fl(\xi)\) of a vector bundle \(\xi\)
+  \cite{bott-tu}*{Proposition 21.15} The associated flag bundle \(\Fl(\xi)\) of a vector bundle \(\xi\)
   is the split manifold constructed in the examples after
   \ref{split-manifold}. 
 \end{prop}
+\begin{proof}
+  Let \(V \to \{*\}\) be a rank \(3\) vector bundle over a point (ie a
+  \(3\) dimensional vector space.) Then, we have \[
+    \begin{tikzcd}
+      V \ar[d]& S_V \oplus Q_V \ar[d]& S_V \oplus S_{Q_V} \oplus Q_{Q_V} \ar[d]\\
+      \{*\} &\ar[l] \P(V) & \ar[l] \P(Q_V) = F(V)
+    \end{tikzcd}
+  \]
+  However, we have correspondences
+  \begin{center}
+    \begin{tabular}{c|c}
+      A point in \(x \in \P(V)\)&  a line \(\ell_x\) in \(V\)\\
+      A point in \(S_V \oplus Q_V\) & \((x,(v_1,v_2))\) such that \(
+      x \in \P(V), v_1 \in \ell_x, v_2 \in \R^3 / \ell_x\) \\
+      A point in \(\P(Q_V)\)& a line \(\ell\) in \(V\)
+      and a line \(\ell'\) in \(V/\ell\).
+    \end{tabular}
+  \end{center}
+  However, this means that we can similarly regard \(\ell'\) as a
+  \(2\)-dimensional plane in \(V\) containing \(\ell\), so \[
+    F(V) = \P(Q_V) = \{\ell \subset \ell \oplus \ell' \subset V\} = \Fl(V)
+  \]
 
+  More generally, given rank \(n\) vector bundle \(E \to M\), the
+  split manifold \(F(E)\) is obtained by a sequence of \(n-1\)
+  projectivizations (see \ref{projectivization}). Then,\\
+  \begin{center}
+    \noindent
+    \begin{tabular}{@{}c|c}
+      A point in \(\P(E)\)
+      & \((p,\ell)\) where \(p \in M\) and
+        \(\ell\) is a line in \(\rho^{-1}(p)\)\\
+      A point in \(\P(Q_1)\) over \((p,\ell_1) \in \P(E)\)
+      & \((p,\ell_1,\ell_2)\) where \(\ell_2 \in \rho^{-1}(p) /
+        \ell_1\)\\
+      A point in \(\P(Q_2)\) over \((p,\ell_1,\ell_2) \in \P(Q_1)\)
+      & \((p,\ell_1,\ell_2,\ell_3)\) where \(\ell_3 \in \rho^{-1}(p) /
+        (\ell_1 \oplus \ell_2)\) \\
+      \vdots & \vdots \\
+      A point in \(F(E) = \P(Q_{n-1})\) over \((p,\ell_1, \ell_2,
+      \ldots, \ell_{n-1})\)
+      & \((p, \ell_1, \ldots, \ell_n)\) where \(\ell_n \in
+        \rho^{-1}(p)/(\ell_1 \oplus \cdots \oplus \ell_{n-1})\)
+    \end{tabular}
+  \end{center}
+  But this last point naturally identifies with the flag \[
+    (p, \ell_1 \subset \ell_1 \oplus \ell_2 \subset \cdots \subset \rho^{-1}(p))
+  \]
+  Thus, \(F(E)\) and \(\Fl(E)\) are the same under this equivalence.
+\end{proof}
+Recall from before (\ref{general-def-of-chern-classes}) that we
+essentially constructed the Chern classes 
+of \(M\) such that \[
+  H^*(\P(E)) \isom H^*(M)[x]/(x^n + c_1(\xi) x^{n-1} + \cdots
+  c_n(\xi)), \ \ x = c_1(S^*)
+\]
+as rings. However, we have another useful characterization given by
+\begin{prop}
+  \cite{bott-tu}*{Proposition 21.16} Given the setup \[
+    \begin{tikzcd}
+      E \ar[d] & 0 \to S \to \pi^*E \to Q \to 0 \ar[d]\\
+      M & \ar[l, "\pi"] \P(E)
+    \end{tikzcd}
+  \]
+  we have
+  \[
+    H^*(\P(E);\R) = H^*(M;R)[c_1(S),c_1(Q), \ldots,c_{n-1}(Q)]/(c(S)c(Q) = \pi^* c(E))
+  \]  
+\end{prop}
+\begin{proof}
+  We simply eliminate the generators \(c_1(Q), \ldots, c_{n-1}(Q)\)
+  using the relation \(c(S)c(Q) = \pi^*c(E)\) by equating terms of
+  equal degrees in \[
+    (1-c_1(S^*))(1+c_1(Q) + \cdots + c_{n-1}(Q)) = 1+\pi^*c_1(E) +
+    \cdots + \pi^* c_{n}(E)
+  \]
+  gives us
+  \begin{align*}
+      c_1(Q) - c_1(S^*) & = \pi^*c_1(E) \\
+      c_2(Q) - c_1(S^*)c_1(Q) & = \pi^*c_2(E)\\
+      c_3(Q) - c_1(S^*)c_2(Q) & = \pi^*c_3(E)\\
+       \vdots \\
+       c_{n-1}(Q) - c_1(S^*) c_{n-2}(Q) & = \pi^* c_{n-1}(E)\\
+       -c_1(S^*) c_{n-1}(Q) & = \pi^* c_{n}(E)
+    \end{align*}
+  This shows that \(c_i(Q), 1 \leq i \leq n-1\) can be
+  expressed in terms 
+  of \(c_1(S^*)\) and elements of \(H^*(M)\) and so they can be
+  eliminated as generators. The one remaining relation transformed by
+  the other relations will give \[
+    - c_1(S^*) c_{n-1}(Q) = \pi^* c_n(E) \iff c_1(S^*)^n + \pi^* c_1(E)
+    c_1(S^*)^{n-1} + \cdots + \pi^* c_n(E) = 0
+  \]
+  and so we have established the equivalence.
+\end{proof}
+\begin{prop}
+  \cite{bott-tu}{Proposition 21.17 (enhanced)} Let \(E \to M\) be a
+  complex rank \(n\) vector bundle. Then, cohomology ring of the flag
+  manifold \(\Fl(E)\) is \[
+    H^*(\Fl(E);\R) = \R[x_1, \ldots, x_n] / \left( \prod_{i=1}^n
+      (1+x_i) = c(E) \right)
+  \]
+  where \(x_i = c_1(S_i)\) for \(1 \leq i \leq n-1\) amd \(x_n =
+  c_1(Q_{n-1})\) where the \(S_i\)'s and \(Q_i\)'s come from iterating the
+  projectivization construction to acheive the splitting
+  principle. Furthermore, in the special case where our vector 
+  bundle is \(V \to \{*\}\), 
+  we get the identity above with \(c(E) = 1\).
+\end{prop}
+\begin{proof}
+  Since the flag bundle is obtained by a sequence of \(n-1\)
+  projectivizations, we can compute first
+  \begin{align*}
+    H^*(\P(Q_1);\R)
+    & = H^*(\P(E);\R)[c(S_2), c(Q_2)]/(c(S_2) c(Q_2) = c(Q_1)) \\
+    & = H^*(M;\R)[c(S_1), c(Q_1), c(S_2), c(Q_2)]/(c(S_1) c(Q_1) =
+      c(E), c(S_2) c(Q_2) = c(Q_1)) \\
+    & = H^*(M;\R)[c(S_1), c(S_2), c(Q_2)]/(c(S_1) c(S_2) c(Q_2) = c(E))
+  \end{align*}
+  Then, using induction, \[
+    H^*(\P(Q_{n-2});\R) = H^*(M;\R)[c(S_1), \ldots, c(S_{n-1}),
+    c(Q_{n-1})]/(c(S_1) \cdots c(S_{n-1})c(Q_{n-1}) = c(E))
+  \]
+  Then, since \(c(S_i) = (1+x_i)\) and \(c(Q_{n-1}) = (1+x_n)\), we
+  are done.
+\end{proof}
+\begin{defn}
+  Given a manifold \(M\), the \de{Poincar\'{e} series} of a manifold
+  \(M\) is \[
+    P_t(M) := \sum_{i=0}^\infty \dim H^i(M;\R) t^i
+  \]
+  More generally, if \(A = \bigoplus_{i=0}^\infty A_i\)  is a graded
+  algebra over a field \(K\), then the Poincar\'{e} series is given
+  by \[
+    P_t(A) := \sum_{i=0}^\infty (\dim_K A_i) t^i
+  \]
+\end{defn}
+\begin{lem}
+  Since \[
+    H^*(\P(E);\R) = H^*(M;\R) \otimes H^*(\CP^{n-1};\R)
+  \]
+  we have that \[
+    P_t(\P(E)) = P_t(M) \frac{1-t^{2n}}{1-t^2}
+  \]
+\end{lem}
+\begin{proof}
+  Since \(H^*(\CP^{n-1};\R) = \R[x]/(x^n)\) with \(\deg x = 2\), we
+  get immediately that \[
+    P_t(\CP^{n-1}) = 1 + t^2 + \cdots + t^{2(n-1)} = \frac{1-t^{2n}}{1-t^2}
+  \]
+  and so the result follows immediately from dimension counting of the
+  tensor product.
+\end{proof}
+\begin{cor}\label{poincare-of-flag-manifold}
+  Let \(V\) be a complex complex vector space of dimension
+  \(n\). Then, \[
+    P_t(\Fl(V)) = \frac{(1-t^2)(1-t^4) \cdots (1-t^{2n})}{(1-t^2)^n}
+  \]
+  and, more generally, if \(E \to M\) is a rank \(n\) vector bundle,
+  then \[
+    P_t(\Fl(E)) = P_t(M) \frac{(1-t^2)(1-t^4) \cdots (1-t^{2n})}{(1-t^2)^n}
+  \]
+\end{cor}
+\begin{proof}
+  The flag manifold is constructed by a sequence of projectivizations
+  and, since each time we projectivize a rank \(k\) vector bundle we
+  multiply the Poincar\'{e} polynomial by \((1-t^{2k})/(1-t^2)\), we
+  get \[
+    P_t(\Fl(E)) = \frac{1-t^{2n}}{1-t^2} P_t(\P(Q_{n-3})) = \cdots =
+    \frac{1-t^{2n}}{1-t^2} \frac{1-t^{2n-2}}{1-t^2} \cdots \frac{1-t^2}{1-t^2} P_t(M)
+  \]
+\end{proof}
+\subsection{The Grassmannian}
+\begin{defn}
+  The \de{Grassmannian} of a complex vector space \(V\), denoted \(G_k(V)\) is the set of
+  all subspaces of codimension \(k\) in \(V\).
+\end{defn}
+\begin{example}
+  Note that for \(V\) a complex vector space of dimension \(n\),
+  \(G_{n-1}(V) = \P(V) \isom \CP^{n-1}\).
+\end{example}
+\begin{rmk}
+  The Grassmannian is a manifold because it can be represented as the
+  space \[
+    G_k(V) = \frac{U(n)}{U(k)\times U(n-k)}
+  \]
+  The argument follows a similar one to \ref{flag-manifold-is-a-manifold}.
+\end{rmk}
+\begin{defn}
+  Given a complex vector space of dimension \(n\), we define the
+  following vector bundles over \(G_k(V)\).
+  \begin{enumerate}
+  \item The \de{universal subbundle} which has total space \[
+      S := \{(x,v) \in G_k(V) \times V \st v \in x\}
+    \]
+    and thus the fiber of \(x \in G_k(V)\) is the plane \(x\) defines
+    in \(V\).
+  \item The \de{product bundle} \(\hat{V} := G_k(V) \times V\).
+  \item The \de{universal quotient bundle} \(Q\) defined by the exact
+    sequence \[
+      0 \to S \to \hat{V} \to Q \to 0
+    \]
+  \end{enumerate}
+\end{defn}
+\begin{prop}
+  \cite{bott-tu}*{Proposition 23.1} The cohomology of the complex
+  Grassmannian \(G_k(V)\)has Poincar\'{e} polynomial \[
+    P_t(G_k(V)) = \frac{(1-t^2) \cdots (1-t^{2n})}{(1-t^2) \cdots
+      (1-t^{2k})(1-t^2) \cdots (1-t^{2(n-k)})}
+  \]
+\end{prop}
+\begin{proof}
+  Consider the setup over the Grassmannian
+  \[
+    \begin{tikzcd}
+      S \oplus Q \ar[d]& f^*Q \ar[d]\\
+      G_k(V) & \ar[l,"f"] F(S) & \ar[l] F(f^*Q)
+    \end{tikzcd}
+  \]
+  Then, we consider
+  \begin{center}
+    \begin{tabular}{c|c}
+      A point in \(F(S)\)&\((P, L_1 \subset \cdots \subset P)\) for
+                           \((n-k)\) plane \(P \subset V\) and flag in
+                           \(P\)\\
+      A point in \(F(f^*Q)\) & A point \((P,L_1 \subset \cdots \subset
+                               P)\) in \(F(S)\) together with a flag
+                               in \(V/P\)\\
+      & ie \((P, L_1 \subset \cdots \subset L_{n-k-1} \subset P
+        \subset L_{n-k+1} \subset \cdots \subset V)\)
+    \end{tabular}
+  \end{center}
+  Thus, \(F(f^*Q)\) is the flag manifold \(F(V)\) and is obtained from
+  the Grassmannian by \(2\) flag constructions. Thus, by our
+
+  computations of the flag manfold Poincar\'{e} polynomials \ref{poincare-of-flag-manifold}, \[
+    P_t(F(V)) = P_t(F(f^*Q)) = P_t(G_k(V)) \frac{(1-t^2) \cdots (1-t^{2(n-k)})(1-t^2)
+    \cdots (1-t^{2k})}{(1-t^2)^{n}}
+  \]
+\end{proof}
+\begin{prop}
+  \cite{bott-tu}*{Proposition 23.2} Let \(V\) be a complex vector
+  space of dimension \(n\).
+  \begin{enumerate}
+  \item As a ring, \[
+      H^*(G_k(V);\R) = \frac{\R[c_1(S), \ldots, c_{n-k}(S), c_1(Q),
+        \ldots, c_k(Q)]}{(c(S)c(Q)=1)}
+    \]
+  \item The Chern classes \(c_1(Q) ,\ldots, c_k(Q)\) of the quotient
+    bundle generate the cohomology ring \(H^*(G_k(V))\).
+  \item For a fixed \(k\) and a fixed \(i\), there are no polynomial
+    relations of degree \(i\) among \(c_1(Q), \ldots, c_k(Q)\) if the
+    dimension of \(V\) is large enough.
+  \end{enumerate}
+\end{prop}
+To prove this, we will need the following lemma
+\begin{lem}
+  \cite{bott-tu}*{p 297} If \(I\) is an ideal in \(A = \R[x_1, \ldots,
+  x_{n-k}, y_1, \ldots, 
+  y_k]\) generated by the homogeneous terms of \[
+    (1+x_1+\cdots + x_{n-k})(1+y_1+\cdots+y_k)-1
+  \]
+  where \(\deg x_i = 2i\) and \(\deg y_i = 2i\), then the Poincar\'{e}
+  series of \(A/I\) is given by \[
+    P_t(A/I) = \frac{(1-t^2) \cdots (1-t^{2n})}{(1-t^2) \cdots
+      (1-t^{2(n-k)})(1-t^2) \cdots (1-t^{2k})}
+  \]
+\end{lem}
 \begin{bibdiv}
   \begin{biblist}
     \bib{bott-tu}{book}{
