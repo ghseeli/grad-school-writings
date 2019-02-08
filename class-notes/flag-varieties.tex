@@ -578,10 +578,14 @@ This leads us to the general idea
   Now, it is useful to note that the bundle \(\Hom(S,L_i) \isom S^*
   \otimes L_i\). Then, for each \(i\), \(c_1(S^* \otimes L_i) \in
   H^2(\P(E))\) restricts to zero in \(H^2(U_i)\) by construction of
-  \(U_i\) (\(L_i\) is a trivial line bundle over \(U_i\)), and so we
-  can lift this element to \(H^2(\P(E),U_i)\). So, if we take the
-  product, we can lift to \(H^2(\P(E), U_1 \union \cdots \union U_n) =
-  H^2(\P(E),\P(E)) = 0\). Therefore, \[
+  \(U_i\) (\(S^* \otimes L_i\) is a trivial line bundle over \(U_i\)),
+  and so we 
+  can lift this element to \(H^2(\P(E),U_i)\) by a long exact sequence
+  argument. Thus, if we take the
+  product, \[
+    \prod_{i=1}^n c_1(S^* \otimes L_i)
+  \] we can lift to \(H^2(\P(E), U_1 \union \cdots \union U_n) =
+  H^2(\P(E),\P(E)) = 0\) by using a relative cup product. Therefore, \[
     0 = \prod_{i=1}^n c_1(S^* \otimes L_i)
     \overset{\ref{first-chern-class-of-line-bundle-props}(a)}{=}
     \prod_{i=1}^n(c_1(S^*) + c_1(L_i))
@@ -592,13 +596,15 @@ This leads us to the general idea
   \]
   where \(e_i\) is the \(i\)th symmetric polynomial. However, this is
   precisely how we defined \(c_i(\xi)\), so we get \[
-    c_i(\xi) = e_i(c_1(L_1), \ldots, c_1(L_n)) \implies c(E) = \prod
+    \pi^* c_i(\xi) = e_i(c_1(L_1), \ldots, c_1(L_n)) \implies \pi^* c(E) = \prod
     (1+c_1(L_i)) = \prod c(L_i)
   \]
+  and so \(c(E) = \prod c(\lambda_i)\).
 \end{proof}
 \begin{cor}[Corollary of proof]\label{chern-classes-are-elementary-symmetric-functions}
   Given a complex vector bundle \(\xi\) of rank \(n\), \[
-    c(E) = \prod_{i=1}^n (1+c_1(L_i))
+    \pi^* c(E) = \prod_{i=1}^n (1+c_1(L_i)) = \sum_{j=1}^n
+    e_j(c_1(L_1), \ldots, c_1(L_n))
   \]
   where \(\pi^* \xi = L_1 \oplus \cdots \oplus L_n\) is a direct sum
   of line bundles and, as before, \(\pi \from \P(E) \to M\).
@@ -662,6 +668,49 @@ first Chern classes of the line bundles into which \(\xi\) splits when
 pulled back to the splitting manifold \(F(E)\). Thus, by the
 fundamental theorem of symmetric functions, any symmetric polynomial
 in these variables is a polynomial in \(c_1(\xi), \ldots, c_n(\xi)\).
+\begin{example}
+  Given \(V\) a complex vector space with basis \(\{v_1, \ldots, v_n\}\),
+  \begin{enumerate}
+  \item \(\wedge^p V\) has a basis \(\{v_{i_1} \wedge \cdots \wedge
+    v_{i_p}\}_{1 \leq i_1 < \cdots < i_p \leq n}\). So, similarly, if
+    we have a bundle \(\xi = \lambda_1 \oplus \cdots \oplus
+    \lambda_n\) where \(\lambda_i\)'s are all line bundles, then \[
+      \wedge^p \xi = \bigoplus_{1 \leq i_1 < \cdots < i_p \leq n}
+      (L_{i_1} \otimes \cdots \otimes L_{i_p})
+    \]
+    and thus
+    \begin{align*}
+      c(\wedge^p \xi)
+      & = \prod (1 + c_1(\lambda_{i_1} \otimes \cdots \otimes
+        \lambda_{i_p}))
+      & \text{by the Whitney product formula}\\
+      & = \prod (1+x_{i_1} + \cdots + x_{i_p}) & x_i := c_1(\lambda_i)
+    \end{align*}
+    Note, however, that this is symmetric in the \(x_i\)'s! Thus, by
+    the Fundamental Theorem of Symmetric Polynomials and the fact that
+    \(c_i(\xi) = e_i(x_1,\ldots,x_n)\), we can write \[
+      c\left( \wedge^p \xi \right) = Q(c_1(\xi), \ldots, c_n(\xi))
+    \]
+    where \(Q\) is some polynomial. Note that this result holds for
+    any \(\xi\) by the splitting principle and \(Q\) depends only on
+    \(n\) and \(p\).
+  \item \(c\left( \operatorname{Sym}^p \xi \right) = \prod_{1 \leq i_1
+      \leq \cdots \leq i_p \leq n} (1+x_{i_1} + \cdots + x_{i_p})\)
+  \item \(c(\xi \otimes \xi') = \prod_{1 \leq i \leq n, 1 \leq j \leq
+      m} (1+x_i+y_j)\)n
+  \item Since \(c_1(L^*) = -c_1(L)\) for a line bundle \(L\) by
+    definition,
+    \begin{align*}
+      \xi = \lambda_1 \oplus \cdots \oplus \lambda_n
+      & \implies c(\xi) = (1+c_1(\lambda_1) \cdots (1+c_1(\lambda_n)))
+      \\
+      \xi^* = \lambda_1^* \oplus \cdots \oplus \lambda_n^*
+      & \implies c(\xi) = (1-c_1(\lambda_1) \cdots (1-c_1(\lambda_n)))
+    \end{align*}
+    and so, setting the homogeneous parts equal to each other,
+    \(c_q(\xi^*) = (-1)^q c_q(\xi)\).
+  \end{enumerate}
+\end{example}
 \subsection{Flag manifolds}
 \begin{defn}
   \begin{enumerate}
@@ -682,7 +731,8 @@ in these variables is a polynomial in \(c_1(\xi), \ldots, c_n(\xi)\).
   closed subgroup of all upper triangular matrices (with respect to
   the induced basis), say \(H\), and so \(\Fl(V) \isom GL(n,\C)/H\) as
   a \(G\)-space, but \(GL(n,\C)/H\) can be given a manifold structure
-  since \(H\) is a closed subgroup and \(GL(n,\C)\) is a Lie group.
+  since \(H\) is a closed subgroup and \(GL(n,\C)\) is a Lie
+  group. For those with some Lie theory knowledge, \(H\) is a ``Borel subgroup.''
 \end{rmk}
 \begin{defn}
   Given a vector bundle \(\xi\) with \(\rho \from E \to M\), one can form the
@@ -723,8 +773,7 @@ not a vector bundle, but it is still a fiber bundle.
   split manifold \(F(E)\) is obtained by a sequence of \(n-1\)
   projectivizations (see \ref{projectivization}). Then,\\
   \begin{center}
-    \noindent
-    \begin{tabular}{@{}c|c}
+    \noindent\begin{tabular}{@{}c|c}
       A point in \(\P(E)\)
       & \((p,\ell)\) where \(p \in M\) and
         \(\ell\) is a line in \(\rho^{-1}(p)\)\\
@@ -737,7 +786,8 @@ not a vector bundle, but it is still a fiber bundle.
       \vdots & \vdots \\
       A point in \(F(E) = \P(Q_{n-1})\) over \((p,\ell_1, \ell_2,
       \ldots, \ell_{n-1})\)
-      & \((p, \ell_1, \ldots, \ell_n)\) where \(\ell_n \in
+               & \((p, \ell_1, \ldots, \ell_n)\) \\
+               & where \(\ell_n \in
         \rho^{-1}(p)/(\ell_1 \oplus \cdots \oplus \ell_{n-1})\)
     \end{tabular}
   \end{center}
@@ -794,16 +844,24 @@ as rings. However, we have another useful characterization given by
 \begin{prop}\label{cohomology-of-flag-manifold}
   \cite{bott-tu}*{Proposition 21.17 (enhanced)} Let \(E \to M\) be a
   complex rank \(n\) vector bundle. Then, cohomology ring of the flag
-  manifold \(\Fl(E)\) is \[
-    H^*(\Fl(E);\R) = \R[x_1, \ldots, x_n] / \left( \prod_{i=1}^n
-      (1+x_i) = c(E) \right)
-  \]
-  where \(x_i = c_1(S_i)\) for \(1 \leq i \leq n-1\) amd \(x_n =
+  manifold \(\Fl(E)\) is
+  \begin{align*}
+    H^*(\Fl(E);\R)
+    & = \R[x_1, \ldots, x_n] / \left( \prod_{i=1}^n (1+x_i) = c(E)
+      \right)\\
+    & = \R[x_1, \ldots, x_n] / \left( e_j(x_1, \ldots, x_n) = c_j(E)
+      \ \ \ \forall j \right)
+  \end{align*}
+  where \(x_i = c_1(S_i)\) for \(1 \leq i \leq n-1\) and \(x_n =
   c_1(Q_{n-1})\) where the \(S_i\)'s and \(Q_i\)'s come from iterating the
   projectivization construction to acheive the splitting
-  principle. Furthermore, in the special case where our vector 
+  principle.
+
+  Furthermore, in the special case where our vector 
   bundle is \(V \to \{*\}\), 
-  we get the identity above with \(c(E) = 1\).
+  we get the identity above with \(c(E) = 1\), which says that all the
+  non-trivial elementary symmetric polynomials in \(x_1, \ldots, x_n\)
+  would be zero.
 \end{prop}
 \begin{proof}
   Since the flag bundle is obtained by a sequence of \(n-1\)
@@ -833,6 +891,11 @@ as rings. However, we have another useful characterization given by
     P_t(A) := \sum_{i=0}^\infty (\dim_K A_i) t^i
   \]
 \end{defn}
+\begin{rmk}
+  \(P_t(A)\) is sometimes usually called the ``graded dimension of
+  \(A\)'' by algebraists and so the Poincar\'{e} series of a manifold
+  is the graded dimension of its cohomology ring.
+\end{rmk}
 \begin{example}
   Since \(H^*(\CP^{n-1};\R) = \R[x]/(x^n)\) with \(\deg x = 2\), we
   get immediately that \[
@@ -870,6 +933,14 @@ as rings. However, we have another useful characterization given by
     \frac{1-t^{2n}}{1-t^2} \frac{1-t^{2n-2}}{1-t^2} \cdots \frac{1-t^2}{1-t^2} P_t(M)
   \]
 \end{proof}
+\begin{rmk}
+  One can reformulate the above using notions of ``quantum factorial''
+  and ``quantum binomial'' as follows.
+  \begin{enumerate}
+  \item \(P_t(\CP^{n-1}) = \frac{1-t^{2n}}{1-t^2} =: [n]_{t^2}\)
+  \item \(P_t(\Fl(V)) = [n]_{t^2} [n-1]_{t^2} \cdots [1]_{t^2} =: [n]_{t^2}!\)
+  \end{enumerate}
+\end{rmk}
 \subsection{The Grassmannian}
 \begin{defn}
   The \de{Grassmannian} of a complex vector space \(V\), denoted \(G_k(V)\) is the set of
@@ -884,7 +955,10 @@ as rings. However, we have another useful characterization given by
   space \[
     G_k(V) = \frac{U(n)}{U(k)\times U(n-k)}
   \]
-  The argument follows a similar one to \ref{flag-manifold-is-a-manifold}.
+  The argument follows a similar one to
+  \ref{flag-manifold-is-a-manifold}. In Lie theoretic language, a Grassmannian can be
+  thought of as \(GL(V)/P\) for \(P\) a parabolic subgroup of
+  \(GL(V)\).
 \end{rmk}
 \begin{defn}
   Given a complex vector space \(V\) of dimension \(n\), we define the
@@ -938,6 +1012,11 @@ as rings. However, we have another useful characterization given by
     \cdots (1-t^{2k})}{(1-t^2)^{n}}
   \]
 \end{proof}
+\begin{rmk}
+  Thus, once again using the ``quantum factorial language'', \[
+    P_t(G_k(V)) = \frac{[n]_{t^2}!}{[n-k]_{t^2}! [k]_{t^2}!} =: \binom{n}{k}_{t^2}
+  \]
+\end{rmk}
 \begin{prop}
   \cite{bott-tu}*{Proposition 23.2} Let \(V\) be a complex vector
   space of dimension \(n\).
@@ -984,17 +1063,25 @@ To prove this, we will need the following lemma
   \end{align*}
   but also by the special case of \ref{cohomology-of-flag-manifold},
   we have directly that \[
-    H^*(\Fl(V);\R) = \R[x_1, \ldots, x_{n-k}, y_1, \ldots, y_k] / \left(
-      \prod (1-x_i) \prod (1+y_j) = 1 \right)
+    H^*(\Fl(V);\R) = \R[x_1, \ldots, x_{n-k}, y_1, \ldots, y_k] / \left(\left(
+      \prod (1+x_i) \prod (1+y_j) = 1 \right)\right)
   \]
   and so \(c(S), c(Q)\) have no other relations besides \(c(S)c(Q) =
-  1\) otherwise, they would be present in the presentation above
-  presentation. Then, it follows \todo{how?} that there is an
-  injection of algebras \[
-    \frac{\R[c(S), c(Q)]}{(c(S)c(Q) = 1)} \into H^*(G_k(V);\R)
-  \]
-  However, by the lemma abovem \[
-    P_t\left(  \frac{\R[c(S), c(Q)]}{(c(S)c(Q) = 1)} \right) =
+  1\) in \(H^*(G_k(V;\R))\), otherwise they would be present in the
+  presentation above. Then, it follows that there is an 
+  injection of algebras where the left algebra is thought of as a formal polynomial
+  ring with relations.
+  \begin{align*}
+    \frac{\R[a_1, \ldots, a_{n-k}, b_1, \ldots, b_{k}]}{\left(\left(
+    1+\sum_{i=1}^{n-k} a_i \right)\left( 1+\sum_{j=1}^k b_j \right) = 1\right)}
+    & \into H^*(G_k(V);\R)\\
+    a_i & \mapsto c_i(S)\\
+    b_j & \mapsto c_j(Q)
+  \end{align*}
+  However, by the lemma above, \[
+    P_t\left( \frac{\R[a_1, \ldots, a_{n-k}, b_1, \ldots, b_{k}]}{\left(
+    1+\sum_{i=1}^{n-k} a_i \right)\left( 1+\sum_{j=1}^k b_j \right) = 1}
+  \right) =
     \frac{(1-t^2)^n}{(1-t^2) \cdots (1-t^{2(n-k)})(1-t^2) \cdots
       (1-t^{2k})} = P_t(G_k(V))
   \]
