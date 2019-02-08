@@ -709,7 +709,7 @@ not a vector bundle, but it is still a fiber bundle.
     \begin{tabular}{c|c}
       A point in \(x \in \P(V)\)&  a line \(\ell_x\) in \(V\)\\
       A point in \(S_V \oplus Q_V\) & \((x,(v_1,v_2))\) such that \(
-      x \in \P(V), v_1 \in \ell_x, v_2 \in \R^3 / \ell_x\) \\
+      x \in \P(V), v_1 \in \ell_x, v_2 \in V / \ell_x\) \\
       A point in \(\P(Q_V)\)& a line \(\ell\) in \(V\)
       and a line \(\ell'\) in \(V/\ell\).
     \end{tabular}
@@ -750,7 +750,7 @@ Recall from before (\ref{general-def-of-chern-classes}) that we
 essentially constructed the Chern classes 
 of \(M\) such that \[
   H^*(\P(E)) \isom H^*(M)[x]/(x^n + c_1(\xi) x^{n-1} + \cdots
-  c_n(\xi)), \ \ x = c_1(S^*)
+  + c_n(\xi)), \ \ x = c_1(S^*)
 \]
 as rings. However, we have another useful characterization given by
 \begin{prop}
@@ -762,7 +762,7 @@ as rings. However, we have another useful characterization given by
   \]
   we have
   \[
-    H^*(\P(E);\R) = H^*(M;R)[c_1(S),c_1(Q), \ldots,c_{n-1}(Q)]/(c(S)c(Q) = \pi^* c(E))
+    H^*(\P(E);\R) = H^*(M;\R)[c_1(S),c_1(Q), \ldots,c_{n-1}(Q)]/(c(S)c(Q) = \pi^* c(E))
   \]  
 \end{prop}
 \begin{proof}
@@ -791,8 +791,8 @@ as rings. However, we have another useful characterization given by
   \]
   and so we have established the equivalence.
 \end{proof}
-\begin{prop}
-  \cite{bott-tu}{Proposition 21.17 (enhanced)} Let \(E \to M\) be a
+\begin{prop}\label{cohomology-of-flag-manifold}
+  \cite{bott-tu}*{Proposition 21.17 (enhanced)} Let \(E \to M\) be a
   complex rank \(n\) vector bundle. Then, cohomology ring of the flag
   manifold \(\Fl(E)\) is \[
     H^*(\Fl(E);\R) = \R[x_1, \ldots, x_n] / \left( \prod_{i=1}^n
@@ -833,21 +833,23 @@ as rings. However, we have another useful characterization given by
     P_t(A) := \sum_{i=0}^\infty (\dim_K A_i) t^i
   \]
 \end{defn}
+\begin{example}
+  Since \(H^*(\CP^{n-1};\R) = \R[x]/(x^n)\) with \(\deg x = 2\), we
+  get immediately that \[
+    P_t(\CP^{n-1}) = 1 + t^2 + \cdots + t^{2(n-1)} = \frac{1-t^{2n}}{1-t^2}
+  \]  
+\end{example}
 \begin{lem}
   Since \[
-    H^*(\P(E);\R) = H^*(M;\R) \otimes H^*(\CP^{n-1};\R)
+    H^*(\P(E);\R) \isom H^*(M;\R) \otimes H^*(\CP^{n-1};\R)
   \]
-  we have that \[
+  as modules, we have that \[
     P_t(\P(E)) = P_t(M) \frac{1-t^{2n}}{1-t^2}
   \]
 \end{lem}
 \begin{proof}
-  Since \(H^*(\CP^{n-1};\R) = \R[x]/(x^n)\) with \(\deg x = 2\), we
-  get immediately that \[
-    P_t(\CP^{n-1}) = 1 + t^2 + \cdots + t^{2(n-1)} = \frac{1-t^{2n}}{1-t^2}
-  \]
-  and so the result follows immediately from dimension counting of the
-  tensor product.
+  The result follows immediately from dimension counting of the
+  tensor product and the example above.
 \end{proof}
 \begin{cor}\label{poincare-of-flag-manifold}
   Let \(V\) be a complex complex vector space of dimension
@@ -885,7 +887,7 @@ as rings. However, we have another useful characterization given by
   The argument follows a similar one to \ref{flag-manifold-is-a-manifold}.
 \end{rmk}
 \begin{defn}
-  Given a complex vector space of dimension \(n\), we define the
+  Given a complex vector space \(V\) of dimension \(n\), we define the
   following vector bundles over \(G_k(V)\).
   \begin{enumerate}
   \item The \de{universal subbundle} which has total space \[
@@ -932,7 +934,7 @@ as rings. However, we have another useful characterization given by
   the Grassmannian by \(2\) flag constructions. Thus, by our
 
   computations of the flag manfold Poincar\'{e} polynomials \ref{poincare-of-flag-manifold}, \[
-    P_t(F(V)) = P_t(F(f^*Q)) = P_t(G_k(V)) \frac{(1-t^2) \cdots (1-t^{2(n-k)})(1-t^2)
+    P_t(\Fl(V)) = P_t(F(f^*Q)) = P_t(G_k(V)) \frac{(1-t^2) \cdots (1-t^{2(n-k)})(1-t^2)
     \cdots (1-t^{2k})}{(1-t^2)^{n}}
   \]
 \end{proof}
@@ -964,6 +966,56 @@ To prove this, we will need the following lemma
       (1-t^{2(n-k)})(1-t^2) \cdots (1-t^{2k})}
   \]
 \end{lem}
+\begin{proof}[Proof of Proposition]
+  Consider once again the setup \[
+    \begin{tikzcd}
+      S \oplus Q \ar[d]& f^*Q \ar[d]\\
+      G_k(V) & \ar[l,"f"] F(S) & \ar[l] F(f^*Q) = \Fl(V)
+    \end{tikzcd}
+  \]
+  Then, we have by repeated application of
+  \ref{cohomology-of-flag-manifold} for \(H^*(F(f^*Q))\) that
+  \begin{align*}
+    H^*(\Fl(V)\R)
+    & = H^*(F(S);\R)[y_1, \ldots, y_k]/\left( \prod (1+y_j) = c(Q)
+      \right)\\
+    & = H^*(G_k(V);\R)[x_1, \ldots, x_{n-k}, y_1, \ldots, y_k]/\left(
+      \prod (1+x_i) = c(S), \prod (1+y_j) = c(Q) \right)
+  \end{align*}
+  but also by the special case of \ref{cohomology-of-flag-manifold},
+  we have directly that \[
+    H^*(\Fl(V);\R) = \R[x_1, \ldots, x_{n-k}, y_1, \ldots, y_k] / \left(
+      \prod (1-x_i) \prod (1+y_j) = 1 \right)
+  \]
+  and so \(c(S), c(Q)\) have no other relations besides \(c(S)c(Q) =
+  1\) otherwise, they would be present in the presentation above
+  presentation. Then, it follows \todo{how?} that there is an
+  injection of algebras \[
+    \frac{\R[c(S), c(Q)]}{(c(S)c(Q) = 1)} \into H^*(G_k(V);\R)
+  \]
+  However, by the lemma abovem \[
+    P_t\left(  \frac{\R[c(S), c(Q)]}{(c(S)c(Q) = 1)} \right) =
+    \frac{(1-t^2)^n}{(1-t^2) \cdots (1-t^{2(n-k)})(1-t^2) \cdots
+      (1-t^{2k})} = P_t(G_k(V))
+  \]
+  Thus, the injection is an isomorphism by dimension counting, proving
+  part (a).
+
+  For part (b), we write \[
+    c(S) \overset{(a)}{=} \frac{1}{c(Q)} = \frac{1}{\prod (1+y_j)} =
+    \prod_j \left( \sum_{r=0}^N y_j^r \right)
+  \]
+  since there exists an \(N\) such that \(y_j^N = 0\) for all
+  \(j\) since the Grassmannian is finite dimensional. Thus, \(c(S)\)
+  can be written in terms of 
+  \(c_i(Q)\)'s and it follows that the \(c_i(S)\) terms are
+  unnecessary generators.
+
+  However, this process also induces polynomial relations of degrees
+  \(2(n-k+1), \ldots, 2n\) among the \(c_1(Q), \ldots, c_k(Q)\). So,
+  if \(2(n-k+1) > i\), there exists no polynomial relations of degree
+  \(i\) among the \(c_j(Q)\)'s. 
+\end{proof}
 \begin{bibdiv}
   \begin{biblist}
     \bib{bott-tu}{book}{
