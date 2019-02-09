@@ -971,8 +971,8 @@ algebra.
   In the example above, it is relatively straightforward to compute
 \(C_\g(\h) = \h\). In fact, this statement ends up being true for all
 semisimple Lie algebras. We wish to show this is true. Furthermore, we
-end up finding that \(\roots\) completely characterize the structure
-of \(\g\). We seek to show that this is true in the remaining parts of
+end up finding that the roots \(\roots\) completely characterize the structure
+of \(\g\). We will show that this is true in the remaining parts of
 this section.
 \end{rmk}
 \begin{prop}
@@ -1384,6 +1384,24 @@ the action of \(\h\) is determined by the roots,
 \alpha\), and \([x_\alpha, x_{-\alpha}]\) is a scalar multiple of
 \(h_\alpha\). Finally, we wish to prove \(\roots\) has a
 well-understood strucutre.
+\begin{lem}\label{killing-form-sum-over-evals}
+  For \(\alpha, \beta \in \roots\), we have \[
+    \kappa(t_\alpha, t_\beta) = \sum_{\gamma \in \roots}
+    \gamma(t_\alpha) \gamma(t_\beta)
+  \]
+\end{lem}
+\begin{proof}
+  By definition, \[
+    \kappa(t_\alpha, t_\beta) = \tr(\ad_{t_\alpha} \ad_{t_\beta})
+  \]
+  However, as a map, \(\ad_{t_\alpha} \ad_{t_\beta} \from \g \to \g\)
+  has \(\ad_{t_\alpha} \ad_{t_\beta}(h) = 0\) for all \(h \in \h\)
+  and, for \(x \in \g_\gamma\), we have \[
+    x \mapsto [t_\alpha, [t_\beta, x]] = [t_\alpha, \gamma(t_\beta)x]
+    = \gamma(t_\alpha) \gamma(t_\beta)x
+  \]
+  So, the trace of the map will be the sum in the proposition.
+\end{proof}
 \begin{lem}\label{killing-form-on-roots-is-rational}
   If \(\alpha,\beta \in \roots\), then \(\kappa(h_\alpha, h_\beta) \in
   \Z\) and \(\kappa(t_\alpha, t_\beta) \in \Q\).
@@ -1394,7 +1412,8 @@ well-understood strucutre.
     \sum_{\gamma \in \roots} \gamma(h_\alpha)\gamma(h_\beta)
   \]
   since the trace is the sum of the eigenvalues with
-  multiplicity. However, all these eigenvalues are integers, so
+  multiplicity as in \ref{killing-form-sum-over-evals}. However, all
+  these eigenvalues are integers, so 
   \(\kappa(h_\alpha, h_\beta) \in \Z\). Next, we compute \[
     \kappa(t_\alpha, t_\beta) =
     \kappa \left(\frac{\kappa(t_\alpha,t_\alpha)}{2}h_\alpha,
@@ -1436,8 +1455,21 @@ well-understood strucutre.
   Consider \(\beta = \sum c_i \alpha_i\). Then, we compute \[
     (\beta, \alpha_j) = \sum_i (\alpha_i, \alpha_j)c_i
   \]
-  which gives us \(n\) equations with \(n\) unknowns with rational
-  coefficients. Since \((\cdot, \cdot)\) is non-degenerate, the
+  which gives us \(n\) equations with \(n\) unknowns (the \(c_i\)'s)
+  with rational coefficients.
+  \begin{align*}
+    (\beta, \alpha_1) & = (\alpha_1, \alpha_1)c_1 + (\alpha_2,
+                        \alpha_1)c_2 + \cdots + (\alpha_n, \alpha_1)
+                        c_n\\
+    (\beta, \alpha_2) & = (\alpha_1, \alpha_2)c_1 + (\alpha_2,
+                        \alpha_2)c_2 + \cdots + (\alpha_n, \alpha_2)
+                        c_n\\
+    \vdots & \\
+    (\beta, \alpha_n) & = (\alpha_1, \alpha_n)c_1 + (\alpha_2,
+                        \alpha_n)c_2 + \cdots + (\alpha_n, \alpha_n)
+                        c_n
+  \end{align*}
+  Since \((\cdot, \cdot)\) is non-degenerate, the
   associated matrix is non-degenerate and thus
   invertible. Furthermore, since all the coefficients are rational,
   its solutions will be rational. Thus, \(c_i \in \Q\).
@@ -1469,7 +1501,9 @@ more structure on \(E_\Q\).
   \]
   but \(c_i,d_j \in \Q\) by definition of \(E_\Q\). Finally, given
   \(\lambda \in E_\Q\), \[
-    (\lambda, \lambda) = \sum_{\gamma \in \roots} \gamma(t_\lambda)^2
+    (\lambda, \lambda) = \kappa(t_\lambda, t_\lambda)
+    \overset{\ref{killing-form-sum-over-evals}}{=} \sum_{\gamma \in
+      \roots} \gamma(t_\lambda)^2 
     = \sum_{\gamma \in \roots} (\gamma, \lambda)^2 \geq 0
   \]
   If \((\lambda,\lambda) = 0\), then \(\gamma(t_\lambda) = 0\) for all
@@ -1482,7 +1516,7 @@ more structure on \(E_\Q\).
 \end{lem}
 \begin{proof}
   Using the fact that \(h_\alpha =
-  \frac{t_\alpha}{\kappa(t_\alpha,t_\alpha)}\), we see \[
+  \frac{2t_\alpha}{\kappa(t_\alpha,t_\alpha)}\), we see \[
     \frac{2(\beta,\alpha)}{(\alpha,\alpha)} =
     \frac{2\kappa(t_\beta,t_\alpha)}{\kappa(t_\alpha,t_\alpha)} =
     \kappa\left( t_\beta, \frac{2t_\alpha}{\kappa(t_\alpha,t_\alpha)}
