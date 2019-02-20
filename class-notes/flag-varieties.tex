@@ -1104,10 +1104,105 @@ To prove this, we will need the following lemma
   \(i\) among the \(c_j(Q)\)'s. 
 \end{proof}
 \begin{rmk}
-  A more careful proof of statement (a) for the cohomology of
-  \(G_k(V)\) with
-  \(\Z\) coefficeints can be found in \cite{hatcher}*{pp 435--437}.
+  \begin{enumerate}
+  \item A more careful proof of statement (a) for the cohomology of
+    \(G_k(V)\) with \(\Z\) coefficeints can be found in
+    \cite{hatcher}*{pp 435--437}.
+  \item In these notes, we have chosen to look at Grassmannians with
+    codimension \(k\) planes. The whole theory translates into
+    Grassmannians with dimension \(k\) planes by dualizing the whole
+    picture. Then, the roles of the universal sub-bundle and universal
+    quotient bundle are reversed. 
+  \item The Grassmannian plays a special role in the theory of fiber
+    bundles because the universal quotient bundle over the Grassmannian
+    is a ``universal vector bundle'' in the sense that every vector
+    bundle is a pullback for sufficiently large \(n\) in
+    \(G_k(\C^n)\). More precisely, if \(\xi\) is a rank \(k\) complex
+    vector bundle over a compact base space, then there exists an
+    \(n \in \N\) and a map \(f \from B \to G_k(\C^n)\) such that
+    \(\xi\) is the pullback under \(f\) of the universal quotient
+    bundle. This is essentially \cite{bott-tu}*{Proposition
+      23.9}. This idea is also covered in
+    \cite{milnor-stasheff}*{Section 5}, although for real vector
+    bundles. 
+  \end{enumerate}
 \end{rmk}
+\section{Equivariant cohomology and Chern classes (presented by Liron
+  Speyer) }
+In this talk, we will introduce notions of equivariant cohomology and
+equivariant Chern classes while simultaneously abandoning the
+``differential'' assumptions of the earlier chapters since we will
+move away from \cite{bott-tu} as a reference and move instead to
+lecture notes by Anderson and Fulton.\footnote{Author did not attend this talk.}
+\begin{defn}
+  Let \(G\) be a Lie group acting on the left on a space \(X\). Then,
+  we define abstractly spaces
+  \begin{enumerate}
+  \item \(EG\) a contractible space on which \(G\) acts freely (on the
+    right) and
+  \item \(BG\), the \de{classifying space}, which is given by \[
+      BG := EG/G = EG/(x = x.g, \forall g \in G)
+    \]
+  \item \[
+      EG \times^G X := EG \times X /((e.g, x) \sim (e,g.x))
+    \]
+  \end{enumerate}
+\end{defn}
+Since \(EG\) is contractible, \(EG \times^G X\) is homotopy-equivalent
+to \(X\) on which \(G\) acts freely, which it may not have done on
+just \(X\).
+\begin{defn}
+  The \de{equivariant cohomology} of \(X\) with respect to a Lie group
+  \(G\) is given by \[
+    H_G^i(X) := H^i(EG \times^G X)
+  \]
+  where \(H^i(-)\) is ordinary (singular) cohomology. 
+\end{defn}
+\begin{prop}
+  \begin{enumerate}
+  \item Since \(BG = EG \times^G \{pt\}\),
+    \(H^*_G(\{pt\}) = H^*(BG)\).
+  \item The (unique) map \(X \to \{pt\}\) induces pullback on
+    cohomology \(H_G^*(\{pt\}) \to H_G^*(X)\), so the equivariant
+    cohomology of \(X\) has the structure of a
+    \(H_G^*(\{pt\})\)-module. 
+  \end{enumerate}
+\end{prop}
+\begin{example}
+  Let \(G = \C^\times = S^1\). Then, \(G\) acts freely on \(\C^\infty
+  \setminus \{0\}\), which is contractible, so we will take \(EG =
+  \C^\infty \setminus \{0\}\). (Remember we do not yet have a way to
+  construct \(EG\) in general). Then, \(BG = \CP^\infty\) and so \[
+    H_{\C^\times}^*(\{pt\}) = H^*(\CP^\infty) = \Z[t]
+  \]
+  where \(t = c_1(L)\) for \(L\) the tautological line bundle over
+  \(\CP^\infty\). Thus, \(H_{\C^\times}^*(X)\) is always a
+  \(\Z[t]\)-module.
+\end{example}
+\begin{rmk}
+  Equivariant cohomology can recover ordinary cohomology by taking
+  \(G\) to be the trivial group. Then, \(H^*(\{pt\}) = \Z\) and we
+  recover the fact that \(H^*(X;\Z)\) always has the structure of a
+  \(\Z\)-module. 
+\end{rmk}
+\begin{defn}
+  \begin{enumerate}
+  \item We say \(\xi\) is a \de{\(G\)-equivariant complex vector bundle} if
+    the total space and base spaces have \(G\)-actions and the
+    \(G\)-action commutes with the projection map. In other words, for
+    \(\rho \from E \to B\), we have \(\rho(g.x) = g.\rho(x)\).
+  \item To a \(G\)-equivariant complex vector bundle \(\xi\) given by
+    \(\rho \from E \to B\), we associate a
+    complex vector bundle \(\xi'\) given by \(\rho' \from EG \times^G
+    E \to EG \times^G B\). This is nonstandard terminology. 
+  \item If \(\xi\) is a \(G\)-equivariant complex vector bundle over
+    \(B\), then it has \de{equivariant Chern classes} \[
+      c_i^G(\xi) \in H_G^{2i}(B)
+    \]
+    where \(c_i^G(\xi) = c_i(\xi')\) for \(\xi'\) the associated
+    complex vector bundle to \(\xi\).
+  \end{enumerate}
+\end{defn}
 \begin{bibdiv}
   \begin{biblist}
     \bib{bott-tu}{book}{
