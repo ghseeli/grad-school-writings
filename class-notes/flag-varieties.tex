@@ -2,6 +2,7 @@
 \usepackage{tikz}
 \usetikzlibrary{cd}
 \usetikzlibrary{decorations.markings}
+\usetikzlibrary{decorations.pathmorphing}
 \usepackage{bbm}
 \usepackage{ytableau}
 \usepackage{todonotes}
@@ -42,6 +43,7 @@
 \numberwithin{thm}{section}
 
 \newcommand{\Fl}{\mathcal{F\ell}}
+\newcommand{\Gr}{Gr}
 
 \title[Flag Varieties]{Flag Varieties \\ Notes
   from a reading course in Spring 2019}
@@ -241,7 +243,7 @@ See \cite{hatcher}*{pp 376--377} for a more precise definition.
 One reason to study vector bundles is that they can give us insight
 into the cohomology rings of the spaces involved. A general theorem
 which we will state without proof is
-\begin{thm}[Leray-Hirsch]
+\begin{thm}[Leray-Hirsch]\label{leray-hirsch}
   \cite{hatcher}*{Theorem 4D.1} Let \(\xi\) be a fiber bundle with
   \(\rho \from E \to B\) such that, for some coefficient ring \(R\),
   \begin{enumerate}
@@ -1017,7 +1019,7 @@ as rings. However, we have another useful characterization given by
     P_t(G_k(V)) = \frac{[n]_{t^2}!}{[n-k]_{t^2}! [k]_{t^2}!} =: \binom{n}{k}_{t^2}
   \]
 \end{rmk}
-\begin{prop}
+\begin{prop}\label{cohomology-ring-of-grassmannian}
   \cite{bott-tu}*{Proposition 23.2} Let \(V\) be a complex vector
   space of dimension \(n\).
   \begin{enumerate}
@@ -1133,7 +1135,15 @@ In this talk, we will introduce notions of equivariant cohomology and
 equivariant Chern classes while simultaneously abandoning the
 ``differential'' assumptions of the earlier chapters since we will
 move away from \cite{bott-tu} as a reference and move instead to
-lecture notes by Anderson and Fulton.\footnote{Author did not attend this talk.}
+lecture notes by Anderson and Fulton.\footnote{Author did not attend
+  this talk.}
+
+If a Lie group \(G\) acts on a space \(X\), we want to construct a
+cohomology theory for \(X\) that reflects the \(G\)-action. A natural
+guess might be that \(H^*(X/G)\) would reflect this, but if the
+\(G\)-action is not free, \(X/G\) could be quite ugly (eg not
+Hausdorff). So, instead, we need to modify our picture to get a free
+\(G\)-action. 
 \begin{defn}
   Let \(G\) be a Lie group acting on the left on a space \(X\). Then,
   we define abstractly spaces
@@ -1169,15 +1179,24 @@ just \(X\).
   \end{enumerate}
 \end{prop}
 \begin{example}
-  Let \(G = \C^\times = S^1\). Then, \(G\) acts freely on \(\C^\infty
-  \setminus \{0\}\), which is contractible, so we will take \(EG =
-  \C^\infty \setminus \{0\}\). (Remember we do not yet have a way to
-  construct \(EG\) in general). Then, \(BG = \CP^\infty\) and so \[
-    H_{\C^\times}^*(\{pt\}) = H^*(\CP^\infty) = \Z[t]
-  \]
-  where \(t = c_1(L)\) for \(L\) the tautological line bundle over
-  \(\CP^\infty\). Thus, \(H_{\C^\times}^*(X)\) is always a
-  \(\Z[t]\)-module.
+  \begin{enumerate}
+  \item Let \(G = \C^\times = S^1\). Then, \(G\) acts freely on
+    \(\C^\infty \setminus \{0\}\), which is contractible, so we will
+    take \(EG = \C^\infty \setminus \{0\}\). (Remember we do not yet
+    have a way to construct \(EG\) in general). Then,
+    \(BG = \CP^\infty\) and so
+    \[ H_{\C^\times}^*(\{pt\}) = H^*(\CP^\infty) = \Z[t]
+    \]
+    where \(t = c_1(L)\) for \(L\) the tautological line bundle over
+    \(\CP^\infty\). Thus, \(H_{\C^\times}^*(X)\) is always a
+    \(\Z[t]\)-module.
+  \item Let \(G = GL_n(\C)\). Then, \(BG = \Gr(n,\C^\infty) = \{W
+    \subset \C^\infty \st \dim W = n\}\) (we will prove this
+    later). So, then, \(H_{GL_n(\C)}^*(\{pt\}) = H^*(\Gr(n,\C^\infty))
+    = \Z[t_1, \ldots, t_n]\) for \(t_i = c_i(S)\) where \(S\) is the
+    universal sub-bundle over \(\Gr(n,\C^\infty)\) (see
+    \ref{cohomology-ring-of-grassmannian}). 
+  \end{enumerate}
 \end{example}
 \begin{rmk}
   Equivariant cohomology can recover ordinary cohomology by taking
@@ -1187,10 +1206,72 @@ just \(X\).
 \end{rmk}
 \begin{defn}
   \begin{enumerate}
+  \item A (right) \de{\(G\)-bundle} is a fiber bundle
+    \(\rho \from E \to B\) with \(G\) acting on \(E\) on the right
+    preserving fibers. In otherwords, for \(x \in B, y \in
+    \rho^{-1}(x)\), then \(y.g \in \rho^{-1}(x)\) for all \(g \in G\).
+  \item A \de{principal \(G\)-bundle} is a \(G\)-bundle on which \(G\)
+    acts freely and transitively on fibers. 
+  \end{enumerate}
+\end{defn}
+\begin{rmk}
+  It is immediate that a principal \(G\)-bundle has fiber \(\rho^{-1}(x) = G.x
+  \subset E\) since the \(G\)-action is transitive and \(G.x\) is
+  isomorphic to \(G\) as a \(G\)-set since the \(G\)-action is free.
+\end{rmk}
+\begin{prop}
+  The bundle \(EG \to BG\) is a principal \(G\)-bundle with the
+  universal property that, if \(E \to B\) is a principal \(G\)-bundle,
+  then there exists a map \(f \from B \to BG\) such that \(E \to B\)
+  is the pullback bundle of \(EG \to BG\).\[
+    \begin{tikzcd}
+      f^*(EG) = E \ar[d] & EG \ar[d]\\
+      B \ar[r,"f"] & BG
+    \end{tikzcd}
+  \]
+\end{prop}
+In general, \(EG\) is infinite-dimensional, so it is not necessarily
+an algebraic variety. However, we will find finite-dimensional
+approximation spaces by constructing principal \(G\)-bundles \(EG_m
+\to BG_m\) for \(m \in \N\) such that \(\pi_i(EG_m) = 0 = H^i(EG_m)\)
+for \(0 < i < k(m)\) where \(k(m) \to \infty\) as \(m \to
+\infty\). For this to work, we need a corollary to Leray-Hirsch \ref{leray-hirsch}.
+\begin{cor}
+  \begin{enumerate}
+  \item If \(H^i(F) = 0\) for \(0 < i \leq m\), then
+    \(H^i(B) \to H^i(E)\) is an isomorphism for \(i \leq m\).
+  \item If \(E \to B\) and \(E' \to B'\) are two principal right
+    \(G\)-bundles with \(H^i(E) = H^i(E') = 0\) for \(0 < i \leq k\), then
+    there is a canonical isomorphism \[
+      H^i(E \times^G X) \isom H^i(E' \times^G X) \ \ \ i < k
+    \]
+  \end{enumerate}
+\end{cor}
+\begin{proof}
+  We prove the second part granting the first. If we let \(G\) act
+  diagonally on \(E \times E'\), we get the diagram \[
+    \begin{tikzcd}
+      E \times X \ar[d] & \ar[l] E \times E' \times X \ar[d] \ar[r] & E' \times X \ar[d]\\
+      E \times^G X & \ar[l] (E \times E') \times^G X \ar[r] & E' \times^G X
+    \end{tikzcd}
+  \]
+  where each vertical map is a \(G\)-bundle, the horizontal maps on
+  the left are bundles with fiber \(E'\), and the horizontal maps on
+  the right are bundles with fiber \(E\). Then, the induced maps \[
+    \begin{tikzcd}
+      H^i(E \times^G X) \ar[r] & H^i((E \times E') \times^G X) &
+      \ar[l] H^i(E' \times^G X)
+    \end{tikzcd}
+  \]
+  are isomorphisms for \(i < k\) by the first part of the corollary. 
+\end{proof}
+\begin{defn}
+  \begin{enumerate}
   \item We say \(\xi\) is a \de{\(G\)-equivariant complex vector bundle} if
     the total space and base spaces have \(G\)-actions and the
     \(G\)-action commutes with the projection map. In other words, for
-    \(\rho \from E \to B\), we have \(\rho(g.x) = g.\rho(x)\).
+    \(\rho \from E \to B\), we have \(\rho(g.x) = g.\rho(x)\) and
+    \(g.\rho^{-1}(x) \subset \rho^{-1}(g.x)\).
   \item To a \(G\)-equivariant complex vector bundle \(\xi\) given by
     \(\rho \from E \to B\), we associate a
     complex vector bundle \(\xi'\) given by \(\rho' \from EG \times^G
@@ -1203,6 +1284,117 @@ just \(X\).
     complex vector bundle to \(\xi\).
   \end{enumerate}
 \end{defn}
+\begin{rmk}
+  \begin{enumerate}
+  \item Note, we can replace \(EG\) with \(EG_m\) for \(m\)
+    sufficiently large.
+  \item If we have a \(G\)-equivariant vector bundle \(E \to \{pt\}\),
+    then \(E \isom \C^n\) is an \(n\)-dimensional representation of
+    \(G\). In other words, the \(G\)-action on \(E \isom \C^n\) can be
+    encoded by a group homomorphism \(\rho \from G \to GL_n(\C)\) such
+    that, for \(x \in E = \C^n\), \[
+      g.x = \rho(g)x
+    \]
+    Thus, we will often write \(E_\rho \to \{pt\}\) to indicate that
+    \(G\) acts on \(E\) via \(\rho\) or that \(E_\rho\) is the vector
+    space corresponding to representation \(\rho\).
+  \end{enumerate}
+\end{rmk}
+\begin{example}
+  \begin{enumerate}
+  \item Let \(G = \C^\times\) act on the line bundle \(\C = L \to
+    \{pt\}\) via multiplication: \(g.z = gz\). Then, we have
+    the picture \[
+      \begin{tikzcd}
+        L \ar[d]  \ar[r, squiggly] & EG \times^{\C^\times} L \ar[d] &
+        (\C^\infty \setminus \{0\}) \times^{\C^\times} L \ar[d]\\
+        \{pt\} & EG \times^{\C^\times} \{pt\} \ar[r, equal]& \CP^\infty
+      \end{tikzcd}
+    \]
+    Now, we know we have a map on the total spaces
+    \begin{align*}
+      EG_m \times L \to & \CP^{m-1} \times \C^m \\
+      (z_1, \ldots, z_m) \times z \mapsto & [z_1, \ldots, z_m] \times (z_1
+                                      z, \ldots, z_m z)
+    \end{align*}
+    whose image gives the tautological bundle since \((z_1 z, \ldots,
+    z_m z) \in [z_1, \ldots, z_m]\). Now, if we quotient by the
+    \(\C^\times\) action, we have \[
+      \begin{tikzcd}
+        (z_1 g, \ldots, z_m g) \times z \ar[r, mapsto] & {[z_1, \ldots,
+        z_m]} \times (z_1 z, \ldots, z_m z) \ar[d, equals]\\
+        (z_1, \ldots, z_m) \times g z \ar[r, mapsto] & {[z_1, \ldots,
+        z_m]} \times (z_1 gz, \ldots, z_m g z)
+      \end{tikzcd}
+    \]
+    and so our map passes nicely to the quotient, 
+    giving us an isomorphism of vector bundles \[
+      \begin{tikzcd}
+        EG \times^{\C^\times} L \ar[d] \ar[r, equal] &
+        (\C^\infty \setminus \{0\}) \times^{\C^\times} L \ar[d]\\
+        EG \times^{\C^\times} \{pt\} \ar[r, equal]& \CP^\infty
+      \end{tikzcd}
+    \]
+    Thus, \(c_i^{\C^\times}(L) = c_i(EG \times^{\C^\times} L) \in H^{2i}(\CP^\infty) =
+    \Z[t]\) where \(t = c_1(S)\). So, by pulling back over our isomoprhism, we get that
+    \(c_i^{\C^\times}(L) = t \in \Z[t]\).
+  \item More generally, if we let \(G = \C^\times\) act on the line
+    bundle \(\C = L \to \{pt\}\) via \(g.z = g^a z\) for \(a \in
+    \Z\). Let us denote such a bundle \(L_a \to \{pt\}\). Then we have the picture \[
+      \begin{tikzcd}
+        L_a \ar[d]  \ar[r, squiggly] & EG \times^{\C^\times} L \ar[d] &
+        (\C^\infty \setminus \{0\}) \times^{\C^\times} L \ar[d]\\
+        \{pt\} & EG \times^{\C^\times} \{pt\} = \CP^\infty \ar[r, "f"]& \CP^\infty
+      \end{tikzcd}
+    \]
+    where \(f\) is the map such that we have a pullback. In
+    particular, we have that \todo{Come back to this example!}
+  \item If we let \(G = (\C^\times)^n\), we have that \(EG_m = (\C^m
+    \setminus \{0\})^n\) and \(BG_m = (\CP^{m-1})^n\). Furthermore, we let
+    \(L_{\xi_i}\) be the \(1\)-dimensional representation of \(G\)
+    with character \(\chi_i(z_1, \ldots, z_n) = z_i\). Then,
+    \(C_1^G(L_{\xi_i}) := c_i(EG_m \times^G L_{\xi_i})\) and so, on
+    bundles, \[
+      \begin{tikzcd}
+        EG \times^G L_{\xi_i} \ar[r, "\sim"] & \pi_i^*(S) \ar[r] & S\\
+        BG_m \ar[r, "\sim"] & (\CP^{m-1})^n \ar[r, "\pi_i"] & \CP^{m-1}
+      \end{tikzcd}
+    \]
+    where \(\pi_i\) is the projection onto the \(i\)-th
+    coordinate. Thus, we get \(c_1(EG_m \times^G L_{\xi_i}) =
+    c_1(\pi^*_i(S)) = t_i \in \Z[t_1, \ldots, t_n] =
+    H^*_G(\{pt\})\).
+  \item Let \(G = GL_n \C\). Then, for \(m \geq n\), we take \(EG_m = M_{m,n}^0 = \{A
+    \in M_{m,n} \st A \text{ has rank }n\}\) with \(G\) acting on the
+    right by matrix multiplication. We will take as given that
+    \(\pi_i(M_{m,n}^0) = 0\) for \(0 < i \leq 2(m-n)\). Then, \(BG_m =
+    M_{m,n}^0 / G \isom \Gr(n, \C^m)\) by mapping a matrix \(A\) to
+    its image, which defined an \(n\)-plane in \(\C^m\).
+
+    We already know that \(H^*(\Gr(n, V))\) is generated by the Chern
+    classes of the tautological subbundle of rank \(n\) with relations
+    in degrees \(m-n+1, \ldots, m\). Thus, \(H^*_G(\{pt\}) = \Z[c_1,
+    \ldots, c_n]\) since these relations disappear as \(m \to
+    \infty\).
+
+    Now, we have a \(G\)-equivariant vector bundle \(V \to \{pt\}\)
+    and this yields isomorphisms \[
+      \begin{tikzcd}
+        EG_m \times^G V \ar[d] \ar[r,"\sim"] & S \ar[d] \\
+        BG_m \ar[r, "\sim"] & \Gr(n,\C^m)
+      \end{tikzcd}
+    \]
+    where the map is given by \(\phi \times v \mapsto \phi(v) \in
+    \im(\phi)\), which all works out since \(\phi \cdot g \times v\)
+    and \(\phi \times gv\) both map to \(\phi(gv)\).
+  \item For subgroups \(G \subgroup GL_n \C\), we can use the same
+    \(EG_m = M_{m,n}^0\). So, if we take the torus \((\C^\times)^n \subset
+    GL_n \C\), then we get \[
+      BG_m = M_{m,n}^0 / (\C^\times)^n = \left\{ L \subset \C^m \st
+        \dim L = n, L = L_1 \oplus \cdots \oplus L_n \right\}
+    \]
+  \end{enumerate}
+\end{example}
 \begin{bibdiv}
   \begin{biblist}
     \bib{bott-tu}{book}{
