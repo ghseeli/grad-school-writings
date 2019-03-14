@@ -44,6 +44,7 @@
 
 \newcommand{\Fl}{\mathcal{F\ell}}
 \newcommand{\Gr}{Gr}
+\renewcommand{\O}{\mathcal{O}}
 
 \title[Flag Varieties]{Flag Varieties \\ Notes
   from a reading course in Spring 2019}
@@ -1392,7 +1393,7 @@ for \(0 < i < k(m)\) where \(k(m) \to \infty\) as \(m \to
     \(EG_m = M_{m,n}^0\). So, if we take the torus \(G = (\C^\times)^n \subset
     GL_n \C\), then we get \[
       BG_m = M_{m,n}^0 / (\C^\times)^n = \left\{ (L_1, \ldots, L_n)
-        \st \dim L_k = 0, L_i \intersect L_j = \{0\}, \forall i \neq j
+        \st \dim L_k = 1, L_i \intersect L_j = \{0\}, \forall i \neq j
         \right\} 
     \]
     comes equipped with tautological line bundles \(L_1,\ldots,
@@ -1440,6 +1441,140 @@ for \(0 < i < k(m)\) where \(k(m) \to \infty\) as \(m \to
   \]
   and thus we get our map on cohomology via functoriality. 
 \end{proof}
+\section{Localization in Equivariant Cohomology (presented by Chris
+  Chung)}
+\subsection{Background}
+\begin{defn}
+  Throughout this talk, we will denote the tautological line bundle
+  \(\O_{\P^{n-1}}(-1)\) and its dual \(\O_{\P^{n-1}}(1)\), dropping
+  the \(\P^{n-1}\) when it is clear by context.
+\end{defn}
+\begin{rmk}
+  This notation is identifying line bundles with the structure sheaf
+  of \(\P^{n-1}\), denoted \(\O_{\P^{n-1}}\), combined with a grading
+  shift or ``twisting'' given by the number in parentheses. It is not
+  important to understand this notion for this talk.
+\end{rmk}
+\begin{example}
+  Let \(T = (\C^\times)^n\) act on \(\C^n\) via the standard
+  action. Then, \(H^*_T(\{pt\}) = \Z[t_1, \ldots, t_n]\) where \(t_i =
+  c_1(\O(-1))\). This induces an action of \(T\) on \(\P^{n-1} =
+  \P(\C^n)\). 
+\end{example}
+\begin{prop}
+  Both \(\O_{\P^{n-1}}(-1)\) and \(\O_{\P^{n-1}}(1)\) are
+  \(T\)-equivariant line bundle.
+\end{prop}
+\begin{defn}
+  Let \(\zeta := c_1^T(\O_{\P^{n-1}}(1))\). 
+\end{defn}
+\begin{prop}
+  \begin{align*}
+    H^*_T(\P^{n-1})
+    & \isom \Z[t_1, \ldots, t_n][\zeta] / (\zeta^n + e_1(t)
+      \zeta^{n-1} + \cdots + e_r(t)) \\
+    & \isom \Z[t_1, \ldots, t_n][\zeta] / \left( \prod_{i=1}^n \zeta +
+      t_i\right)
+  \end{align*}
+\end{prop}
+\begin{proof}
+  Let \(T\) act on \(\C^n \to \{pt\}\). Then, we have associated
+  approximation space \(E = ET_m \times^T \C^n \to BT_m\) where \(ET_m
+  = (S^m)^n\) and \(BT_m = (\CP^{m-1})^n\). Thus, we have \(ET_m
+  \times^T \P^{n-1} = \P(E)\) and so, abusing notation slightly, we
+  have \(ET_m \times^T \O_{\P^{n-1}}(1) \isom \O_{\P(E)}(1)\).
+
+  Next, recall that \[
+    H^*(\P(E)) = H^*(BT)[\zeta] / (\zeta^n + c_1(E) \zeta^{n-1} +
+    \cdots + c_n(E))
+  \]
+  Then, \(\zeta := c_1^T(\O_{\P^{n-1}}(1)) =
+  c_1(\O_{\P(E)}(1))\). Thus, we get \(c_i^T(\C^n) = c_i(E) = e_i(t)\).
+\end{proof}
+\begin{thm}[A Generalization]
+  Let \(T = (\C^\times)^n\) act on vector space \(V\) of dimension
+  \(r\) by characters (weights) \(\chi_1, \ldots, \chi_r\), ie \[
+    t.(v_1, \ldots, c_r) = (\chi_1(t)v_1, \ldots, \chi_r(t)v_r)
+  \]
+  Then, we have that \[
+    H^*_T(\P(V)) = \Z[t_1, \ldots, t_n][\zeta]/\left( \prod_{i=1}^r (\zeta+\chi_i) \right)
+  \]
+  where, in the expression above, we think of \(\chi_i\) as the
+  pullback of \(c_1^T(L_{\chi_i})\) across the splitting map. 
+\end{thm}
+So, if \(r=n\) and \(\chi_i = t_i = c_1^T(\O(1))\), we recover the
+standard action in the proposition above. Now, consider the setup \[
+  \begin{tikzcd}
+    X \ar[d] \ar[r] & EG \times^G X \ar[d]\\
+    \{pt\} \ar[r] & BG
+  \end{tikzcd}
+\]
+where \(G\) acts on \(X\). Then,
+\begin{enumerate}
+\item We have a canonical map \(H^*_G(X) \to H^*(X)\) compatible with
+  \(H^*_G(\{pt\}) \to \Z\). Furthermore, under nice conditions, we get
+  \(H^*_G(X) \to H^*X\) is surjective with kernel given by
+  \(\ker(H^*_G(\{pt\}) \to \Z)\).
+\item Let \(X^G\) be the \(G\) fixed points of \(X\). Then, the
+  ``fixed locus'' \(\iota \from X^G \into X\) induces a
+  ``restriction'' \(\iota^* \from H_G^* X \to H_G^*
+  X^G\). Furthermore, under nice conditions, \(\iota^*\) is
+  injective. 
+\end{enumerate}
+\begin{example}
+  We give an example where these nice condtions are not met. Let \(G =
+  \C^\times = X\) with \(G\) acting on \(X\) via left
+  multiplication. Then, \[
+    H^1_{C^\times}(\C^\times) = H^1(S^\infty \times^{\C^\times}
+    \C^\times) = H^1(S^\infty) = 0
+  \]
+  but \(H^1(\C^\times) = H^1(S^1) = \Z\). Also, \(X^G =
+  \emptyset\). Thus, both nice situations fail. 
+\end{example}
+\subsection{Restriction and Gysin Maps}
+Throughout this section, let \(T = (\C^\times)^n\) and \(\Lambda_T =
+H^*_T(\{pt\}) = \Z[t_1, \ldots, t_n]\).
+\begin{defn}
+  For \(T\) acting on \(X\) and \(p \in X^T\) a \(T\)-action fixed
+  point, let \(\iota_p \from \{p\} \into X\) be the inclusion map of
+  this point. 
+\end{defn}
+Thus, we have induced map \(\iota^*_p \from H_T^*(X) \to \Lambda_T\).
+\begin{example}
+  \begin{enumerate}
+  \item Let \(E \to X\) be a rank \(r\) \(T\)-equivariant vector
+    bundle with \(p \in X^T\) and fiber at \(p\) denoted \(E_p \to
+    \{p\}\). Such a fiber is a representation of \(T\) with weights,
+    say \(\chi_1, \ldots, \chi_r\). Then, \[
+      \iota^*_p(c_i^T(E)) = c_i^T(E_p) = e_i(\chi_1, \ldots, \chi_r)
+    \]
+    In particular, if \(i=r\), then \[
+      \iota^*_p(c_r^T(E)) = \chi_1 \cdots \chi_r
+    \]
+  \item If \(X = \CP^{n-1}\) and \(T\) acts on \(X\) by the standard
+    action \[
+      (z_1, \ldots, z_n).[x_1, \ldots, x_n] = [z_1 x_1, \ldots, z_n x_n]
+    \]
+    The fixed points of this action are \(p_i = [0, \ldots,
+    0,1,0,\ldots,0]\) where the \(1\) is in the \(i\)th coordinate for
+    \(i = 1,\ldots,n\). The fiber of \(\O(-1)\) at \(p_i\) is given by
+    \(\C \epsilon_i\), the ``coordinate line''. One can check that
+    \(T\) acts on \(\O(-1)_{p_i}\) by the character \(t_i\) and
+    on \(\O(1)_{p_i}\) by the character \(-t_i\) (where we write
+    characters additively, ie \((z_1, \ldots, z_n).x = x
+    z_i^{-1}\)). Thus, if \(\zeta = c_1^T(\O(1))\), then
+    \(\iota^*_{p_i} \zeta = -t_i\). Hence, on cohomology, the map
+    \begin{align*}
+      \iota^* \from H_T^* \P^{n-1} = \Lambda_T[\zeta] / \left( \prod (\zeta+t_i) \right) \to
+      & H_T^* X^T = \bigoplus_{p_i \in X^T} H_T^*(p_i) =
+        \Lambda_T^{\oplus n}\\
+      \zeta \mapsto & (-t_1, \ldots, -t_n)
+    \end{align*}
+    is injective. This idea generalized to \(T\) acting on
+    \(\P^{n-1}\) by characters \(\chi_1,\ldots,\chi_n\) and the map
+    above would then send \(\zeta \mapsto (-\chi_1, \ldots, -\chi_n)\).
+  \end{enumerate}
+\end{example}
 \begin{bibdiv}
   \begin{biblist}
     \bib{bott-tu}{book}{
