@@ -11,6 +11,7 @@
 \usepackage{../ReAdTeX/readtex-dangerous}
 \usepackage{../ReAdTeX/readtex-abstract-algebra}
 \usepackage{../ReAdTeX/readtex-topology}
+\usepackage{multicol}
 
 \newcommand{\bbk}{\mathbbm{k}}
 \newcommand{\Class}{\operatorname{Class}}
@@ -1540,7 +1541,7 @@ H^*_T(\{pt\}) = \Z[t_1, \ldots, t_n]\).
   this point. 
 \end{defn}
 Thus, we have induced map \(\iota^*_p \from H_T^*(X) \to \Lambda_T\).
-\begin{example}
+\begin{example}\label{t-equivariant-coh-of-p}
   \begin{enumerate}
   \item Let \(E \to X\) be a rank \(r\) \(T\)-equivariant vector
     bundle with \(p \in X^T\) and fiber at \(p\) denoted \(E_p \to
@@ -1572,8 +1573,238 @@ Thus, we have induced map \(\iota^*_p \from H_T^*(X) \to \Lambda_T\).
     \end{align*}
     is injective. This idea generalized to \(T\) acting on
     \(\P^{n-1}\) by characters \(\chi_1,\ldots,\chi_n\) and the map
-    above would then send \(\zeta \mapsto (-\chi_1, \ldots, -\chi_n)\).
+    above would then send \(\zeta \mapsto (-\chi_1, \ldots,
+    -\chi_n)\).
+  \item Let \(T = \C^\times\) act on \(\P^2\) with characters
+    \(0,z,2z\), ie \[
+      z.[x_1, x_2, x_3] = [x_1, zx_1, z^2 x_2]
+    \]
+    (remember that we are using additive notation for characters.)
+    Then, the fixed points are \([1,0,0], [0,1,0],\) and
+    \([0,0,1]\), which we will call \(p_1, p_2,\) and \(p_3\),
+    respectively. Furthermore, every closed \(T\)-invariant curve is 
+    isomorphic to \(P^1\) and contains two of \(\{p_1, p_2, p_3\}\).
+
+    So, for instance, if \(x_1=0\), then \[
+      z.[0,1,b] =[0,z,z^2b] = [0,1,zb]
+    \]
+    has character \(\pm z\). Similarly, \(x_2 = 0\) has character
+    \(\pm 2z\) and \(x_3 = 0\) has character \(\pm z\). Also, for
+    \(\lambda \neq 0\), we have a family of conics passing through
+    \(p_1, p_3\) via \[
+      x_2^2-\lambda x_1 x_3 = 0
+    \]
+    with character \(\pm t\). Now, from above work, we see
+    \begin{align*}
+      H_T^* \P^2 = \Lambda_T[\zeta]/(\zeta(\zeta+z)(\zeta+2z))
+      & \into \Lambda_T^{\oplus 3} \\
+      \zeta & \mapsto (0,-z,-2z)
+    \end{align*}
+    Furthermore, one can work out that this image consists of triples
+    \((u_1,u_2,u_3)\) satisfying conditions
+    \begin{enumerate}[label=(\roman*)]
+    \item \(x \divides u_2-u_1\), \(2z \divides u_3-u_1\), \(z
+      \divides u_3-u_2\)
+    \item \(2z^2 \divides u_1-2u_2+u_3\)
+    \end{enumerate}
   \end{enumerate}
+\end{example}
+\begin{defn}
+  For \(X,Y\) non-singular \(G\)-varieties and a proper equivariant
+  map \(f \from Y \to X\), we can define \[
+    f_* \from H_G^i(Y) \to H_G^{i+2d}(X)
+  \]
+  where \(d = \dim X - \dim Y\) (not necessarily non-negative) called
+  the \de{Gysin pushforward}.
+\end{defn}
+We will not actually construct this map here. For the curious, see
+\todo{reference?}
+\begin{prop}[Properties of Gysin maps]\label{props-of-gysin-maps}
+  \begin{enumerate}
+  \item Functoriality: given \(q \from Z \to Y\) another proper
+    equivariant map, \[
+      (f \circ q)_* = f_* \circ q_*
+    \]
+  \item Naturality: given \(g \from Y' \to X\) another proper
+    equivariant map and \(g(Y') \intersect f(Y) = \emptyset\), then
+    \(g^* \circ f_* = 0\).
+  \item Closed embedding: Given a \(G\)-invariant closed embedding
+    \(\iota \from Y \into X\) of codimension \(d\), then we have
+    induced map \[
+      \iota_* \from H_G^j(Y) \to H_G^{j+2d}(X)
+    \]
+    that satisfies
+    \begin{enumerate}[label=(\roman*)]
+    \item \(\iota_*(1) = [Y]^G = [EG \times^G Y]\)
+    \item (self-intersection), for \(\alpha \in H_G^*(Y)\) we have
+      \(\iota^* \iota_*(\alpha) = c_d^G(N_{Y|X}) \alpha\). In other
+      words, \(\iota^* \iota_*\) is multiplication by the Euler class
+      of the normal bundle. \todo{normal or conormal?}
+    \end{enumerate}
+  \item Equivariant integration: given \(X\) a complete nonsingular
+    variety of dimension \(n\), then for \(\rho \from X \to
+    \{pt\}\), \[
+      \rho_* \from H_T^j(X) \to H_T^{j-2n}(\{pt\})
+    \]
+  \end{enumerate}
+\end{prop}
+\begin{example}
+  Let \(T\) act on \(\P^1\) with weights \(\chi_1 \neq \chi_2\) so \[
+    z.[x_1,x_2] = [\chi_1(z)x_1, \chi_2(z)x_2]
+  \]
+  Set \(\chi := \chi_1 - \chi_2\), \(p_1 = [0,1]\), and \(p_2 =
+  [1,0]\).
+  
+  \begin{minipage}{1.0\linewidth}
+    \begin{multicols}{2}
+      \begin{tikzpicture}[scale=2,cap=round,>=latex]
+        % Unit circle
+        % Original Author: Supreme Aryal
+        % Modified by George Seelinger
+    
+        % draw the coordinates
+        % \draw[->] (-1.5cm,0cm) -- (1.5cm,0cm) node[right,fill=white]
+        % {};
+        % \draw[->] (0cm,-1.5cm) -- (0cm,1.75cm)
+        % node[above,fill=white]
+        % {};
+
+        % draw the unit circle
+        \draw[thick] (0cm,0cm) circle(1cm);
+
+        % draw the points
+        \filldraw[black] (0:1cm) circle(0.4pt); \filldraw[black]
+        (90:1cm) circle(0.4pt);
+    
+        % label the points
+        \draw (0cm,1.25cm) node[fill=white] {$\left[ 1,0 \right]$};
+        \draw (1.25cm,0cm) node[above=1pt] {$\left[ 0,1 \right]$};
+
+        % draw the tangent line
+        \draw (1cm,-1.5cm) -- (1cm,1.75cm) node[above,fill=white]
+        {$T_{p_1}\P^1$};
+      \end{tikzpicture}
+    
+      \columnbreak
+    
+      \begin{align*}
+        z.[a,1] & = [\chi_1(z) a, \chi_2(z)] \\
+                & = [(\chi_1-\chi_2)(z)a,1] \\
+                & = [\chi(z)a,1]
+      \end{align*}
+      So, \(T_{p_1}\P^1\) has weight
+      \(\chi\). Similarly, \(T_{p_2} \P^1\) has weight \(-\chi\).
+    \end{multicols}
+  \end{minipage}
+  From an earlier example \ref{t-equivariant-coh-of-p},
+  \(\iota^*_{p_1}(\zeta) = -\chi_1 = \chi-\chi_2\). So, in
+  \(H_T^*(\P^1)\), \[
+    [p_1]^T = \zeta+\chi_2,\, [p_2]^T = \zeta+\chi_1
+  \]
+  The general consequence (for \(\P^{n-1}\)) is that \[
+    c_n^T(T_{p_i}(\P^{n-1})) = \iota^*_{p_i}([p_i]^T) = \prod_{j \neq i}(\chi_j-\chi_i)
+  \]
+\end{example}
+\subsection{Localization}
+Let \(T\) act on \(X\), a nonsingular variety with \(X^T\)
+finite. Consider \[
+  \bigoplus_{p \in X^T} \Lambda_T = H_T^* (X^T) \to[\iota_*] H^*(X)
+  \to[\iota^*] \bigoplus_{p \in X^T} \Lambda_T
+\]
+By naturality (\ref{props-of-gysin-maps}(b)), \(\iota^* \circ
+\iota_*\from \Lambda^{\oplus |X^T|} \to \Lambda^{\oplus |X^T|}\) is
+diagonal and is multiplication by \(c_n^T(T_p X)\) on the summand for
+\(p \in X^T\).
+\begin{thm}[First Locatlization Theorem]\label{first-localization-theorem}
+  Let \(S\) be a multiplicatively close set containing \(c := \prod_{p
+    \in X^T} c_n^T(T_p X)\).
+  \begin{enumerate}
+  \item The map \(S^{-1}\iota^* \from S^{-1} H_T^* X \to S^{-1} H_T^*
+    X^T\) is surjective and \(\coker(\iota^* \from H_T^* X \to H_T^*
+    X^T)\) is annihilated by \(c\).
+  \item If, in addition, \(H_T^* X\) is a free \(\Lambda_T\)-module
+    with rank less than or equal to \(|X^T|\), then \(S^{-1} \iota^*\)
+    is an isomorphism. 
+  \end{enumerate}
+\end{thm}
+\begin{proof}
+  For the first part, observe \(\det(\iota^* \circ \iota_*) = c\) and
+  \(S^{-1}(\iota^* \circ \iota_*) = (S^{-1} \iota^*) \circ (S^{-1}
+  \iota_*)\). After localizing at \(S\), which contains \(c\), we get
+  that \(c\) is a unit, giving us that \(S^{-1}(\iota^* \circ
+  \iota_*)\) is surjective. Thus, \(S^{-1} \iota^*\) is surjective.
+
+  The second part follows since \(S^{-1} \Lambda_T\) is Noetherian. 
+\end{proof}
+One may wonder when the conditions in the
+\ref{first-localization-theorem}(b) hold.
+\begin{defn}
+  we say that \(X\) is \de{equivariantly formal} if \(H_T^*(X)\) is a
+  free \(\Lambda_T\)-module and has a basis that restricts to a
+  \(\Z\)-basis for \(H^*(X)\).
+\end{defn}
+\begin{prop}
+  If \(X\) is a non-singular projective variety with \(X^T\) finite,
+  then \(X\) is equivariantly formal.
+\end{prop}
+\begin{cor}
+  For such a \(T\)-variety, \(H_T^*(X) \onto H^*(X)\) and \(H_T^*(X)
+  \into H_T^*(X^T)\)
+\end{cor}
+\begin{rmk}
+  This corollary is peculiar to \(T\)-actions.
+\end{rmk}
+\begin{thm}[Atiyah-Bott-Berline-Vergne, ABBV Integration Formula]\label{integration-formula}
+  Let \(X\) be a compact nonsingular \(T\)-variety of dimension \(n\),
+  \(X^T\) finite. Let \(\rho \from X \to \{pt\}\) and thus \[
+    \rho_* \from H_T^j(X) \to H_T^{j-2n}(\{pt\})
+  \]
+  Then, for any \(\alpha \in H_T^*(X)\), \[
+    \rho_* \alpha = \sum_{p \in X^T} \frac{\iota_p^* \alpha}{c_n(T_p X)}
+  \]
+\end{thm}
+\begin{proof}
+  \[
+    \begin{tikzcd}
+      H_T^*(X^T) \ar[r,"\iota_*"] \ar[d,equals]& H_T^*(X)
+      \ar[r,"\iota^*"] \ar[d, "\rho_*"]&
+      H_T^*(X^T) = \bigoplus_{p \in X^T} H_T^*(\{p\}) \\
+      \bigoplus_{p \in X^T} H_T^*(\{p\}) \ar[r, dashed,
+      "\text{addition}"] & H_T^*(\{pt\})
+    \end{tikzcd}
+  \]
+  where the square commutes by the functoriality of the Gysin map for
+  the composition \(\{p\} \into X \onto \{pt\}\). It
+  suffices to show the theorem after we invert \(c = \prod_{p \in X^T}
+  c_n^T(T_pX)\) so that \(\iota^*,\iota_*\) become isomorphisms by
+  \ref{first-localization-theorem}. So, we reduce to \(\alpha =
+  (\iota_p)_*(\beta)\) for fixed \(p\). Then, \[
+    \rho_*(\alpha) = \rho_*(\iota_p)_*(\beta) = (\rho \circ
+    \iota_p)_*(\beta) = \beta
+  \]
+  On the other hand, \[
+    \sum_{q \in X^T} \frac{\iota_q^*(\iota_p)_*(\beta)}{c_n^T(T_qX)} =
+    \frac{\iota_p^*(\iota_p)_*(\beta)}{c_n^T(T_p X)} = \beta
+  \]
+\end{proof}
+\begin{example}
+  Let \(T\) act on \(\P^{n-1}\) with distinct characters \(\chi_1,
+  \ldots, \chi_n\) and fixed points \(p_1, \ldots, p_n\). For
+  \(\zeta^k \in H_T^{2k}(X)\), we get \[
+    \rho_*(\zeta^k) =
+    \begin{cases}
+      0 & \text{ if }k < n-1\\
+      1 & \text{ if }k=n-1
+    \end{cases}
+  \]
+  However, by ABBV, \[
+    \rho_*(\zeta^k) = \sum_{i=1}^n \frac{(-\chi_i)^k}{\prod_{j \neq
+        i}(\chi_j-\chi_i)} =
+    \begin{cases}
+      0 & \text{ if }k < n-1\\
+      1 & \text{ if }k=n-1
+    \end{cases}
+  \]
 \end{example}
 \begin{bibdiv}
   \begin{biblist}
