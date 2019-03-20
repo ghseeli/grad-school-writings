@@ -50,10 +50,17 @@
 \title[Flag Varieties]{Flag Varieties \\ Notes
   from a reading course in Spring 2019}
 \author{George H. Seelinger}
-\date{Spring 2010}
+\date{Spring 2019}
 \begin{document}
 \maketitle
+
 \section{Introduction (presented by Weiqiang Wang)}
+These notes will start with a quick introduction to vector bundles and
+Chern classes following \cite{bott-tu}*{Sections 20--21,23}. Then,
+they will shift to a discussion of equivariant cohomology, loosely
+following \cite{fulton}. Note that citations may be incomplete because
+the author is basing these notes off of lectures presented in a
+reading course organized by Weiqiang Wang. 
 \section{A Quick Introduction to Vector Bundles (not presented)}
 This section will list some facts about vector bundles without
 proof. For a more comprehensive treatment, see references such as
@@ -1541,7 +1548,8 @@ H^*_T(\{pt\}) = \Z[t_1, \ldots, t_n]\).
   this point. 
 \end{defn}
 Thus, we have induced map \(\iota^*_p \from H_T^*(X) \to \Lambda_T\).
-\begin{example}\label{t-equivariant-coh-of-p}
+\begin{example}
+  \label{t-equivariant-coh-of-p}
   \begin{enumerate}
   \item Let \(E \to X\) be a rank \(r\) \(T\)-equivariant vector
     bundle with \(p \in X^T\) and fiber at \(p\) denoted \(E_p \to
@@ -1618,7 +1626,7 @@ Thus, we have induced map \(\iota^*_p \from H_T^*(X) \to \Lambda_T\).
   the \de{Gysin pushforward}.
 \end{defn}
 We will not actually construct this map here. For the curious, see
-\todo{reference?}
+\cite{fulton}*{Appendix A}.
 \begin{prop}[Properties of Gysin maps]\label{props-of-gysin-maps}
   \begin{enumerate}
   \item Functoriality: given \(q \from Z \to Y\) another proper
@@ -1806,8 +1814,105 @@ One may wonder when the conditions in the
     \end{cases}
   \]
 \end{example}
+\section{Schubert Calculus (presented by Weinan Zhang)}
+\begin{defn}
+  Let \(V = \C^n\). Then, we will define \de{the Grassmannian of
+    \(V\)} to be \(\Gr_d(V) := \{E \subset V
+  \st \dim W = d\}\). 
+\end{defn}
+\begin{prop}
+  There is an embedding of the Grassmannian, called the
+  \de{Pl\"{u}cker embedding} given by
+  \begin{align*}
+    \Gr_d(V) & \to \P\left(\wedge^d V  \right) \\
+    E = \langle v_1, \ldots, v_d \rangle & \mapsto [v_1 \wedge \cdots
+                                           \wedge v_d]
+  \end{align*}
+  Thus, \(\Gr_d(V)\) has the structure of a projective variety.
+\end{prop}
+\begin{defn}
+  Let \((e_1, \ldots, e_n)\) be the standard basis of \(V\). For \(I =
+  (i_1, \ldots, i_d)\), we define \[
+    E_I := \langle e_{i_1}, \ldots, e_{i_d} \rangle
+  \]
+\end{defn}
+\begin{defn}
+  Given the subgroup of upper triangular matrices \(B \subgroup
+  GL_n\C\) (a Borel subgroup),
+  \begin{enumerate}
+  \item the \de{Schubert cells} in \(\Gr_d(V)\) are \(C_I := BE_I\)
+  \item the \de{Schubert varieties} in \(\Gr_d(V)\) are \(X_I :=
+    \ov{C_I}\). 
+  \end{enumerate}
+\end{defn}
+\begin{rmk}
+  \(\Gr_d(V)\) is a disjoint union of Schubert cells if one insists
+  that \(i_1 < i_2 < \cdots < i_d\). This is a
+  straightforward consequence of the next proposition.
+\end{rmk}
+\begin{example}
+  Let \(d=1\). Then \(\Gr_1(V) = \P(V)\), \(C_j = Be_j\), and \(X_j
+  \isom \P^{j-1}\). So, we have \[
+    X_1 \subset X_2 \subset \cdots \subset X_n = \P(V)
+  \]
+\end{example}
+\begin{prop}
+  Let \(I = (i_1, \ldots, i_d)\) with \(i_1 < i_2 < \cdots <
+  i_d\). 
+  \begin{enumerate}
+  \item \(C_I \isom \C^{|I|}\) are locally closed subsets of
+    \(\Gr_d(V)\) where \(|I| := \sum_{j=1}^d (i_j-j)\).
+  \item The \(X_I\) are irreducible closed subvarieties of
+    \(\Gr_d(V)\). 
+  \item \(E \in C_I \iff \dim(E \intersect \langle e_1, \ldots, e_j
+    \rangle) = |\{k \st 1 \leq k \leq d, i_k < j\}|\).
+  \item \(E \in X_I \iff \dim(E \intersect \langle e_1, \ldots, e_j
+    \rangle) \geq |\{k \st 1 \leq k \leq d, i_k < j\}|\).
+  \item \(X_I = \Union_{J \leq I} C_J\) where ``\(\leq\)'' means \(j_k
+    \leq i_k\) for all \(k\).
+  \end{enumerate}
+\end{prop}
+\begin{proof}
+  Take \(B = UT\) where \(U\) is the subgroup of unipotent matrices
+  and \(T\) is the subgroup of diagonal matrices. Then, the stabalizer
+  of \(E_I\) is \[
+    U_{E_I} := \{A \in U \st a_{ij} = 0 \text{ if }i \not \in I \text{
+    and }j \in I\}
+\]
+Let us also define its logical complement, \[
+  U^I := \{A \in U \st a_{ij} = 0 \text{ if }i \in I \text{ or }j \not
+  \in I\}
+\]
+So, \(U = U^I \times U_{E_I}\). Both \(T\) and \(U_{E_I}\) fix
+\(E_I\) and since any \(g \in GL_n \C\) can be decomposed in \(U^I
+\times U_{E_I} \times T\), we need only concern ourselves with
+matrices lying in \(U^I\). Now, the map
+\begin{align*}
+  U^I & \to \Gr_d(V) = G/P\\
+  g & \mapsto gE_I
+\end{align*}
+is a locally closed embedding with image \(C_I\), so \(C_I \isom
+\C^{|I|}\). \todo{Expand on this.}
+\end{proof}
+\begin{rmk}
+  Note, there is a correspondence between the indices \(I\) with
+  strictly increasing entries and partitions \(\lambda = (\lambda_1,
+  \ldots, 
+  \lambda_d)\) where \(\lambda_j = i_j - j\). 
+\end{rmk}
+\begin{defn}
+  For a partition \(\lambda\), we will define \(X_\lambda := X_I\)
+  under the correspondence described in the remark above. 
+\end{defn}
 \begin{bibdiv}
   \begin{biblist}
+    \bib{fulton}{article}{
+      author={Fulton, William}
+      title={Equivariant Cohomology in Algebraic Geometry}
+      year={2007}
+      note={Notes by Dave Anderson. Available at
+        \url{https://people.math.osu.edu/anderson.2804/eilenberg/}} 
+    }
     \bib{bott-tu}{book}{
       author={Bott, Raoul}
       author={Tu, Loring W.}
