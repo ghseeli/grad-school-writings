@@ -1883,7 +1883,18 @@ Let us also define its logical complement, \[
   U^I := \{A \in U \st a_{ij} = 0 \text{ if }i \in I \text{ or }j \not
   \in I\}
 \]
-So, \(U = U^I \times U_{E_I}\). Both \(T\) and \(U_{E_I}\) fix
+For example, if \(I=(2,4)\) and \(\dim V = 4\), then \[
+  U^{(2,4)} = \left(
+    \begin{array}{cccc}
+      1&*&0&*\\
+      0&1&0&0\\
+      0&0&1&*\\
+      0&0&0&1
+    \end{array}
+\right)
+\]
+So, \(U = U^I \times U_{E_I}\). Both
+\(T\) and \(U_{E_I}\) fix 
 \(E_I\) and since any \(g \in GL_n \C\) can be decomposed in \(U^I
 \times U_{E_I} \times T\), we need only concern ourselves with
 matrices lying in \(U^I\). Now, the map
@@ -1892,13 +1903,69 @@ matrices lying in \(U^I\). Now, the map
   g & \mapsto gE_I
 \end{align*}
 is a locally closed embedding with image \(C_I\), so \(C_I \isom
-\C^{|I|}\). \todo{Expand on this.}
+\C^{|I|}\). Continuing with our example, \[
+ \left(
+    \begin{array}{cccc}
+      1&a_{1,2}&0&a_{1,4}\\
+      0&1&0&0\\
+      0&0&1&a_{3,4}\\
+      0&0&0&1
+    \end{array}
+  \right)\langle e_2, e_4 \rangle  = \left\{ \langle
+    a_{1,2}e_1+e_2,a_{1,4}e_1+a_{3,4}e_3+e_4 \rangle \in G_2(\C^4)
+  \right\} \isom \C^3
+\]
+
+The second part follows because the closure of an irreducible set is
+irreducible and \(C_I\) is irreducible.
+
+Since \(U^I\) provides an embedding of \(C_I\) with respect to the
+standard basis, we see that \(E \in C_I\) (under this embedding) will
+take the form \[ 
+  E = \operatorname{rowspace} \left(
+    \begin{array}{ccccccccccc}
+      *&\cdots&1&0&\cdots&0&\cdots&&&&\\
+      *&\cdots&0&*&\cdots&1&0&\cdots&&&\\
+      \vdots&&\vdots&\vdots&&\vdots&&&&&\\
+      *&\cdots&0&*&\cdots&0&\cdots&1&0&\cdots&0
+    \end{array}
+\right)
+\]
+where the rightmost \(1\) in row \(j\) occurs in column \(i_j\). Thus,
+this immediately yields our alternative characterization of the
+elements of \(C_I\). For example, \[
+  E \in C^{(2,4)} \iff E = \operatorname{rowspace} \left(
+    \begin{array}{cccc}
+      *&1&0&0\\
+      *&0&*&1
+    \end{array}
+\right)
+\]
+
+However, we need not be so stringent with respect to our embedding, so
+if we realize instead our \(E \in C_I\) with the form \[ 
+  E = \operatorname{rowspace} \left(
+    \begin{array}{ccccccccccc}
+      *&\cdots&*&0&\cdots&0&\cdots&&&&\\
+      *&\cdots&*&*&\cdots&*&0&\cdots&&&\\
+      \vdots&&\vdots&\vdots&&\vdots&&&&&\\
+      *&\cdots&*&*&\cdots&*&\cdots&*&0&\cdots&0
+    \end{array}
+\right)
+\]
+where the rightmost \(*\) in row \(j\) occurs in column \(i_j\) and is
+nonzero but is not necessarily equal to \(1\). Then, it becomes clear
+that \(C_J \in X_I = \ov{C_I}\) if \(j_k \leq i_k\) for all \(k\),
+which also gives us characterization (d) of \(X_I\).
 \end{proof}
 \begin{rmk}
   Note, there is a correspondence between the indices \(I\) with
   strictly increasing entries and partitions \(\lambda = (\lambda_1,
   \ldots, 
-  \lambda_d)\) where \(\lambda_j = i_j - j\). 
+  \lambda_d)\) where \(\lambda_j = i_j - j\) (listed in increasing
+  order). Also, many texts take 
+  the third and fourth parts of this proposition to define the
+  Schubert cells and varieties with respect to a fixed flag. 
 \end{rmk}
 \begin{defn}
   For a partition \(\lambda\), we will define \(X_\lambda := X_I\)
