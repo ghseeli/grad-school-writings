@@ -1815,6 +1815,9 @@ One may wonder when the conditions in the
   \]
 \end{example}
 \section{Schubert Calculus (presented by Weinan Zhang)}
+This presentation mostly follows the first section of \cite{brion}
+with some additional proofs and examples.
+\subsection{The Grassmannian}
 \begin{defn}
   Let \(V = \C^n\). Then, we will define \de{the Grassmannian of
     \(V\)} to be \(\Gr_d(V) := \{E \subset V
@@ -1851,10 +1854,17 @@ One may wonder when the conditions in the
   straightforward consequence of the next proposition.
 \end{rmk}
 \begin{example}
-  Let \(d=1\). Then \(\Gr_1(V) = \P(V)\), \(C_j = Be_j\), and \(X_j
-  \isom \P^{j-1}\). So, we have \[
-    X_1 \subset X_2 \subset \cdots \subset X_n = \P(V)
-  \]
+  \begin{enumerate}
+  \item Let \(d=1\). Then \(\Gr_1(V) = \P(V)\), \(C_j = Be_j\), and
+    \(X_j \isom \P^{j-1}\). So, we have
+    \[ X_1 \subset X_2 \subset \cdots \subset X_n = \P(V)
+    \]
+  \item Notice that, for any \(d \geq 1\), \(X_{1,2,\ldots,d} =
+    \ov{C_{1,2,\ldots,d}} = \ov{BE_{1,2,\ldots,d}} =
+    \ov{\{E_{1,2,\ldots,d}\}} = \{E_{1,2,\ldots,d}\}\) is a single
+    point in the Grassmannian. In
+    an opposite scenario, \(X_{n-d+1, n-d+2, \ldots, n} = \Gr_d(V)\).
+  \end{enumerate}
 \end{example}
 \begin{prop}
   Let \(I = (i_1, \ldots, i_d)\) with \(i_1 < i_2 < \cdots <
@@ -1883,16 +1893,6 @@ Let us also define its logical complement, \[
   U^I := \{A \in U \st a_{ij} = 0 \text{ if }i \in I \text{ or }j \not
   \in I\}
 \]
-For example, if \(I=(2,4)\) and \(\dim V = 4\), then \[
-  U^{(2,4)} = \left(
-    \begin{array}{cccc}
-      1&*&0&*\\
-      0&1&0&0\\
-      0&0&1&*\\
-      0&0&0&1
-    \end{array}
-\right)
-\]
 So, \(U = U^I \times U_{E_I}\). Both
 \(T\) and \(U_{E_I}\) fix 
 \(E_I\) and since any \(g \in GL_n \C\) can be decomposed in \(U^I
@@ -1903,18 +1903,7 @@ matrices lying in \(U^I\). Now, the map
   g & \mapsto gE_I
 \end{align*}
 is a locally closed embedding with image \(C_I\), so \(C_I \isom
-\C^{|I|}\). Continuing with our example, \[
- \left(
-    \begin{array}{cccc}
-      1&a_{1,2}&0&a_{1,4}\\
-      0&1&0&0\\
-      0&0&1&a_{3,4}\\
-      0&0&0&1
-    \end{array}
-  \right)\langle e_2, e_4 \rangle  = \left\{ \langle
-    a_{1,2}e_1+e_2,a_{1,4}e_1+a_{3,4}e_3+e_4 \rangle \in G_2(\C^4)
-  \right\} \isom \C^3
-\]
+\C^{|I|}\). 
 
 The second part follows because the closure of an irreducible set is
 irreducible and \(C_I\) is irreducible.
@@ -1933,14 +1922,7 @@ take the form \[
 \]
 where the rightmost \(1\) in row \(j\) occurs in column \(i_j\). Thus,
 this immediately yields our alternative characterization of the
-elements of \(C_I\). For example, \[
-  E \in C^{(2,4)} \iff E = \operatorname{rowspace} \left(
-    \begin{array}{cccc}
-      *&1&0&0\\
-      *&0&*&1
-    \end{array}
-\right)
-\]
+elements of \(C_I\). 
 
 However, we need not be so stringent with respect to our embedding, so
 if we realize instead our \(E \in C_I\) with the form \[ 
@@ -1958,12 +1940,60 @@ nonzero but is not necessarily equal to \(1\). Then, it becomes clear
 that \(C_J \in X_I = \ov{C_I}\) if \(j_k \leq i_k\) for all \(k\),
 which also gives us characterization (d) of \(X_I\).
 \end{proof}
+\begin{example}
+Some elements of the proof are easier seen by example. For example, if
+\(I=(2,4)\) and \(\dim V = 4\), then \[ 
+  U^{(2,4)} = \left(
+    \begin{array}{cccc}
+      1&*&0&*\\
+      0&1&0&0\\
+      0&0&1&*\\
+      0&0&0&1
+    \end{array}
+\right)
+\]
+Then, to see the embedding \(C_I \into \Gr_2(\C^4) \), \[
+ \left(
+    \begin{array}{cccc}
+      1&a_{1,2}&0&a_{1,4}\\
+      0&1&0&0\\
+      0&0&1&a_{3,4}\\
+      0&0&0&1
+    \end{array}
+  \right)\langle e_2, e_4 \rangle  = \left\{ \langle
+    a_{1,2}e_1+e_2,a_{1,4}e_1+a_{3,4}e_3+e_4 \rangle \in G_2(\C^4)
+  \right\} \isom \C^3
+\]
+We can rewrite this as \[
+  E \in C^{(2,4)} \iff E = \operatorname{rowspace} \left(
+    \begin{array}{cccc}
+      *&1&0&0\\
+      *&0&*&1
+    \end{array}
+\right)
+\]
+Then, we see that \[
+  \begin{cases}
+    \dim(E \intersect \langle e_1 \rangle) = 0\\
+    \dim(E \intersect \langle e_1, e_2 \rangle) = 1\\
+    \dim(E \intersect \langle e_1, e_2, e_3 \rangle) = 1\\
+    \dim(E \intersect \langle e_1, e_2, e_3, e_4 \rangle) = 2\\
+  \end{cases}
+\]
+From looking at this example, one may notice that the proposition
+forces these dimension intersections to jump by at most \(1\) and
+that those jumps happen precisely at the indices \(2\) and \(4\).
+\end{example}
 \begin{rmk}
-  Note, there is a correspondence between the indices \(I\) with
+  Note, there is a
+  correspondence between the indices \(I\) with 
   strictly increasing entries and partitions \(\lambda = (\lambda_1,
   \ldots, 
   \lambda_d)\) where \(\lambda_j = i_j - j\) (listed in increasing
-  order). Also, many texts take 
+  order). Furthermore, such a partition must have length \(\leq d\) and
+  each part must be bounded above by \(n-d\).
+
+  Also, many texts take 
   the third and fourth parts of this proposition to define the
   Schubert cells and varieties with respect to a fixed flag. 
 \end{rmk}
@@ -1971,20 +2001,73 @@ which also gives us characterization (d) of \(X_I\).
   For a partition \(\lambda\), we will define \(X_\lambda := X_I\)
   under the correspondence described in the remark above. 
 \end{defn}
+\subsection{Flag Varieties}
+Recall from earlier sections that \(\Fl(V)\) is the collection of all
+flags. In this section, we give \(\Fl(V)\) the structure of a
+projective variety 
+(instead of a manifold) which is realized via \[
+  \Fl(V) \subset \prod_{i=0}^n \Gr_i(V) \subset \prod_{i=0}^n
+  \P(\wedge^i V) \subset \P^N
+\]
+\(GL_n\) acts on \(\Fl(V)\) (for \(\dim V = n\)) and, since the
+standard Borel subgroup of \(GL_n\) stabalizes 
+the coordinate flag, \(0 \subset \langle e_1 \rangle \subset \langle
+e_1, e_2 \rangle \subset \cdots \subset V\), we can identify \(\Fl(V)
+= GL_n/B\).
+\begin{defn}
+  For \(w \in \Sym_n\),
+  \begin{enumerate}
+  \item We define the flag
+    \[ F_w := 0 \subset \langle e_{w(1)} \rangle \subset \langle
+      e_{w(1)}, e_{w(2)} \rangle \subset \cdots \subset V
+    \]
+  \item We define \de{Schubert cells} in \(\Fl(V)\) by \(C_w := BF_w =
+    BwB/B\).
+  \item We define \de{Schuber varieties} in \(\Fl(V)\) by \(X_w =
+    \ov{C_w}\).
+  \end{enumerate}
+\end{defn}
+\begin{rmk}
+  To state the second equality of part (b), we made use of the general
+  ``Bruhat decomposition'' \[ 
+    G = \Dunion_{\sigma \in W} B \sigma B^-
+  \]
+  for \(G\) any connected, reductive algebraic group (eg \(G =
+  GL_n\)).
+
+  In fact, if \(G = GL_n\), this is precisely the statement of the
+  existence of an LU-decomposition. 
+\end{rmk}
+\begin{prop}
+  \begin{enumerate}
+  \item \(C_w \isom \C^{\ell(w)}\) are locally closed subsets in
+    \(\Fl(V)\).
+  \item \(X_w\) are irreducible subvarieties in \(\Fl(V)\).
+  \item \(X_w = \Union_{v \leq w} C_v\) where \(\leq\) is the (strong)
+    Bruhat order. 
+  \end{enumerate}
+\end{prop}
 \begin{bibdiv}
   \begin{biblist}
+    \bib{bott-tu}{book}{
+      author={Bott, Raoul}
+      author={Tu, Loring W.}
+      title={Differential Forms in Algebraic Topology}
+      year={1982}
+    }
+    \bib{brion}{article}{
+      author={Brion, Michel}
+      title={Lectures on the Geometry of Flag Varieties}
+      journal={Topics in Cohomological Studies of Algebraic Varieties}
+      pages={33--85}
+      year={2005}
+    }
     \bib{fulton}{article}{
       author={Fulton, William}
       title={Equivariant Cohomology in Algebraic Geometry}
       year={2007}
       note={Notes by Dave Anderson. Available at
         \url{https://people.math.osu.edu/anderson.2804/eilenberg/}} 
-    }
-    \bib{bott-tu}{book}{
-      author={Bott, Raoul}
-      author={Tu, Loring W.}
-      title={Differential Forms in Algebraic Topology}
-      year={1982}
     }
     \bib{hatcher}{book}{
       author={Hatcher, Allen}
