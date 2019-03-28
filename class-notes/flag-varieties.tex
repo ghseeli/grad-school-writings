@@ -2047,6 +2047,111 @@ e_1, e_2 \rangle \subset \cdots \subset V\), we can identify \(\Fl(V)
     Bruhat order. 
   \end{enumerate}
 \end{prop}
+\begin{proof}
+  We want to show \(F_v \in X_w\) if \(v \leq w\). Without loss of
+  generality, assume \(v = w \cdot (j,k)\) such that \(j < k\) and
+  \(w(j) > w(k)\). We then define two bases \[
+    \begin{cases}
+      f_i := e_{w(i)} & \text{ if }i\neq j,k\\
+      f_j := e_{w(j)} + \frac{1}{t} e_{w(k)} \\
+      f_k := e_{w(k)}
+    \end{cases},
+    \begin{cases}
+      \tilde{f}_i = e_{w(i)} = e_{v(i)} & \text{ if } i \neq j,k\\
+      \tilde{f}_j = e_{w(k)} + t e_{w(j)} = e_{v(j)} + t e_{v(k)} \\
+      \tilde{f}_k = e_{w(j)} = e_{v(k)}
+    \end{cases}
+  \]
+  Let \(F(t)\) be the flag spanned by \(f_1, \ldots,
+  f_n\) or equivalently spanned by \(\tilde{f}_1, \ldots,
+  \tilde{f}_n\). Then, we note \(F(t) \in X_w\) by the first
+  description. The second description gives us that \[
+    F(t) \overset{t \to 0}{\longrightarrow} F_v \implies F_w \in X_w
+  \]
+  since \(X_w\) is closed. Thus, \(C_v \subset X_w\) if \(v \leq w\).
+
+  \todo{Show at least the other direction.}
+\end{proof}
+\begin{defn}
+  For \(w \in \Sym_n\),
+  \begin{enumerate}
+  \item we define the \de{opposite Schubert cell}
+    \(C^w := B^- F_w = w_\circ C_{w_\circ w}\) where \(w_\circ\) is
+    the longest element of \(\Sym_n\) and \(B^-\) is the group of all
+    lower triangular matrices, ie \(B^- = w_\circ B w_\circ\).
+  \item we define the \de{opposite Schubert variety} \(X^w := \ov{C^w}
+    = w_\circ X_{w_\circ w}\).
+  \end{enumerate}
+\end{defn}
+\begin{cor}
+  \begin{enumerate}
+  \item \(X^w = \Union_{v \geq w} C^v\)
+  \item \(\codim(X^w) = \ell(w)\)
+  \end{enumerate}
+\end{cor}
+\begin{rmk}
+  Under these definitions, \(X_{w_\circ} = \Fl(V)\) and \(X^{w_\circ}
+  = \{*\}\). 
+\end{rmk}
+\begin{thm}
+  \(X_w \intersect X^v \neq \emptyset \iff v \leq w\).
+\end{thm}
+\begin{proof}
+  If \(v \leq w\), then \(F_\sigma \in X_w \intersect X^v\) for all
+  \(v \leq \sigma \leq w\).
+
+  Suppose \(X_w \intersect X^v \neq \emptyset\). Then, \(X_w
+  \intersect X^v\) is stabalized by \(B \intersect B^- = T\). Then,
+  since the flags \(F_w\) for \(w \in \Sym_n\) are precisely the fixed
+  points of the action of \(T\) on \(\Fl(V)\) (by direct computation),
+  it must be that there 
+  is a \(\sigma\) such that \(F_\sigma \in X_w \intersect X^v \implies
+  v \leq \sigma \leq w\).
+\end{proof}
+\begin{rmk}
+  In fact, \(\dim(X_w \intersect X^v) = \ell(w) - \ell(v)\). In
+  particular, this means \(X_w \intersect X^w = \{F_w\}\) since this
+  intersection is transverse. 
+\end{rmk}
+\begin{defn}
+  Let \(M\) be an oriented compact conected \(n\)-dimensional real
+  manifold. Then, the \de{fundamental class of \(M\)} (in homology) is
+  a canonical generator of \(H_n(M) \isom \Z\).
+\end{defn}
+Recall that the fundamental class gives us an isomorphism between
+cohomology and homology via the cap product
+\begin{align*}
+  H^j(X) & \to H_{n-j}(X) \\
+  \alpha & \mapsto \alpha \cap [X]
+\end{align*}
+This then allows us to have the following definition.
+\begin{defn}
+  Let \(m = \dim_\R \Fl(V) = n(n-1)\) for \(\dim V = n\).
+  \begin{enumerate}
+  \item Given Schubert variety \(X_w \subset \Fl(V)\), we define its
+    \de{Schubert class} \([X_w] \in H^{m-2\ell(w)}\) to be the
+    Poincare dual to the representative in homology of \(X_w\). In
+    other words, it is given by sending the unique generator of
+    \(H_{2\ell(w)}(X_w)\) through these two maps: \[
+      H_{2\ell(w)}(X_w) \to[\iota_*] H_{2\ell(w)}(\Fl(V)) \to H^{m-2\ell(w)}(\Fl(V))
+    \]
+  \item Given an opposite Schubert variety \(X^w\), we define its
+    \de{Schubert class} \([X^w] \in H^{2 \ell(w)}\) to be its
+    representative in cohomology following the same procedure as
+    above. 
+  \end{enumerate}
+\end{defn}
+\begin{prop}
+ Both \(\{[X_w]\}\) and \(\{[X^w]\}\) form \(\Z\)-bases of
+ \(H^*(\Fl(V))\). 
+\end{prop}
+\begin{proof}
+  Since \(\Fl(V)\) is a disjoint union of its Schubert classes and the
+real dimensions of all its cells are concentrated in even degree, its
+integral homology groups will not exhibit any torsion. Thus, the
+Schubert classes form a basis of the integral cohomology which is a
+free \(Z\)-module with rank \(n!\).  
+\end{proof}
 \begin{bibdiv}
   \begin{biblist}
     \bib{bott-tu}{book}{
