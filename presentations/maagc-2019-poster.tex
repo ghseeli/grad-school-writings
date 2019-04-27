@@ -1,0 +1,307 @@
+\documentclass[final]{beamer}
+
+\mode<presentation>
+  {
+    \usetheme{confposter} 
+  }
+\usepackage{amsmath, amsthm, amssymb, latexsym}
+\usepackage{mathtools}
+\usepackage[alphabetic,abbrev]{amsrefs} % use AMS ref scheme
+\usepackage{anyfontsize}
+\usepackage{scalefnt, scalerel}
+\usepackage{array,booktabs,tabularx}  
+\usepackage[orientation=portrait, size=a0, scale=1.5]{beamerposter} % Use the beamerposter package for laying out the poster
+\RequirePackage{lmodern}
+\usepackage{lmodern}
+\usepackage{exscale} % Necessary for math symbols to be big enough
+\usepackage{ytableau}
+
+%% Blocks and Colors
+\definecolor{pastelred}{rgb}{1.0, 0.41, 0.38}
+\definecolor{tearose}{rgb}{0.96, 0.76, 0.76}
+\definecolor{pastelpink}{rgb}{1.0, 0.82, 0.86}
+\definecolor{palepink}{rgb}{0.98, 0.85, 0.87}
+\definecolor{indianred}{rgb}{0.8, 0.36, 0.36}
+\definecolor{coralred}{rgb}{1.0, 0.25, 0.25}
+
+\tikzset{wei/.style=%{red,double=pink,thick,doubledistance=1.5pt}}
+{red,double=red,double
+distance=0.5pt}}
+
+\tikzset{wei2/.style={red,double=red,double
+    distance=0.5pt}}
+
+\newenvironment<>{myexampleblock}[1]{%
+  \setbeamercolor{block alerted title}{fg=white,bg=coralred}
+  \setbeamercolor{block alerted body}{fg=black,bg=palepink}
+  \begin{alertblock}#2{#1}}{\end{alertblock}}
+\newenvironment<>{subtleblock}{
+  \setbeamercolor{block alerted title}{fg=white,bg=white} 
+  \setbeamercolor{block alerted body}{fg=black,bg=dblue!10}
+  \begin{alertblock}#1{}}{\end{alertblock}}
+\newenvironment<>{subtleexampleblock}{
+  \setbeamercolor{block alerted title}{fg=white,bg=white} 
+  \setbeamercolor{block alerted body}{fg=black,bg=palepink}
+  \begin{alertblock}#1{}}{\end{alertblock}}
+
+\setbeamercolor{block title}{fg=jblue,bg=white}  % Colors of the block
+% titles
+\setbeamercolor{block body}{fg=black,bg=white} % Colors of the body of blocks
+\setbeamercolor{block alerted title}{fg=white,bg=dblue!70} % Colors of the highlighted block titles
+\setbeamercolor{block alerted body}{fg=black,bg=dblue!10} % Colors of the body of highlighted blocks
+\definecolor{melon}{rgb}{0.99, 0.74, 0.71}
+\addtobeamertemplate{block end}{}{\vspace*{1ex}} % White space under blocks
+\addtobeamertemplate{block alerted end}{}{\vspace*{1ex}} % White space
+% under highlighted (alert) blocks
+
+%% Math shortcuts
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\lowers}{\mathcal{L}}
+\newcommand{\g}{\mathfrak{g}}
+
+%% Title matter
+  \title[K-theoretic Catalan Functions]{K-theoretic Catalan Functions}
+  \author[Seelinger]{George H. Seelinger (joint work with Jonah
+    Blasiak and Jennifer Morse)}
+  \institute[UVA]{University of Virginia}
+  \date{May 4, 2019}
+%% Document
+  \begin{document}
+  \begin{frame}[t] % The whole poster is in one Beamer frame
+    \begin{columns}[t] % Align all column contents to the top
+      \begin{column}{.3\paperwidth}
+        \begin{block}{Background}
+          \begin{itemize}
+          \item Schur functions \(s_\lambda \in \Lambda\) give an
+            explicit understanding of Schubert classes in the
+            cohomology ring of the complex Grassmannian,
+            \(H^*(Gr(m,n))\). Furthermore, their Pieri rule is
+            controlled by semistandard Young tableaux. That is \[
+              h_r s_\lambda = \sum_{\mathclap{\mu = \lambda + \text{ a
+                  horizontal }r\text{-strip}}} s_{\mu} \iff s_\lambda =
+              \sum_\mu K_{\lambda,\mu} m_\mu
+            \]
+            where \(K_{\lambda\mu}\) is the number of semistandard
+            Young tableaux of shape \(\lambda\) and weight \(\mu\).
+            \ytableausetup{boxsize=0.3em}
+            \[
+              h_3 s_{\ydiagram{1,2}} = s_{\ydiagram{1,2,3}}+s_{\ydiagram{1,1,4}}+s_{\ydiagram{2,4}}+s_{\ydiagram{1,5}}
+            \]
+          \item Grothendieck polynomials, \(G_\lambda\), play a
+            similar role as representations for the \(K\)-theory
+            classes determined by the structure sheaves of Schubert
+            varieties.  Unlike Schur functions, these are not self-dual. 
+            So, the dual Grothendieck polynomials are denoted
+            \(g_\lambda\). Furthermore, the Pieri rule for \(G_\lambda\) is controlled by
+            reverse plane partitions. Thus, we have \[
+              G_r G_\lambda = \sum_{\mu }
+            \]
+          \item \(k\)-Schur functions, \(s_\lambda^{(k)}\) for
+            \(k\)-bounded partitions \(\lambda\) also play
+            an analogous role for the structure of quantum cohomology
+            of the Grassmanian and homology of the affine
+            Grassmannians. When \(t=1\), their Pieri rule is controlled by strong
+            marked tableaux. Thus, \[
+              h_r s_\lambda^{(k)} = \; \sum_{\mathclap{\kappa =
+                core(\lambda)+\text{strong marked }r\text{-strip}}}
+              \; s_{part(\kappa)}^{(k)} 
+            \]\[
+              \iff s_\lambda^{(k)} = \sum_\mu
+              K_{core(\lambda),\mu}^{(k)} m_\mu
+            \]
+            where \(K_{core(\lambda),\mu}^{(k)}\) is the number of strong
+            marked tableaux of shape \(core(\lambda)\) and weight
+            \(\mu\). \[
+              h_3 s_{\ydiagram{1,2}}^{(3)} = s_{\ydiagram{1,2,3}}^{(3)}
+            \]
+          \item The \emph{affine Grothendieck polynomials},
+            \(G_\lambda^{(k)}\), and \emph{dual affine Grothendieck polynomials},
+            \(g_\lambda^{(k)}\), play the analogous K-theoretic
+            role of the \(k\)-Schur functions. Furthermore, the Pieri
+            rule for \(g_\lambda^{(k)}\) is controlled by affine
+            set-valued tableaux, but there is no known combinatoric
+            for the Pieri rule of \(G_\lambda^{(k)}\). By duality,
+            this is
+            equivalent to finding a dual Pieri rule for \(g_\lambda^{(k)}\)
+          \end{itemize}
+        \end{block}
+        \begin{alertblock}{Problems}
+          \begin{enumerate}
+          \item What are the branching coefficients for
+            \(g_\lambda^{(k)}\), ie what are the coefficients \[
+              g_\lambda^{(k)} = \sum_\mu c_{\lambda,\mu} g_\mu?
+            \] 
+          \item What is the dual (vertical) Pieri rule for
+            \(g_\lambda^{(k)}\), 
+            ie what are the coefficients \(a_{\lambda,\mu}^{(k)}\) for
+            \[
+              G_{1^r}^\perp g_\lambda^{(k)} = \sum_\mu
+            a_{\lambda,\mu}^{(k)} g_\mu^{(k)}?
+            \] 
+          \end{enumerate}
+        \end{alertblock}
+        \end{column}
+        \begin{column}{.3\paperwidth}
+                  \begin{block}{Raising Operators and Catalan Functions}
+          For \(1 \leq i < j \leq \ell\), a raising operator
+            \(R_{i,j}\) acts on \(\gamma \in \Z^\ell\) by
+            \begin{subtleblock}
+            \[
+              R_{i,j} \gamma = \gamma+\epsilon_i-\epsilon_j
+            \]
+            \end{subtleblock}
+            for \(\epsilon_i\) the standard basis vector with a \(1\)
+            in coordinate \(i\).\\
+          \begin{alertblock}{Example: Jacobi-Trudi}
+            One can re-state the Jacobi-Trudi identity as \(s_\lambda
+            = \prod_{i < j}(1-R_{ij})h_\lambda\) where 
+            \(R_{ij}h_\lambda = h_{\lambda+\epsilon_i-\epsilon_j}\). 
+          \end{alertblock}
+
+          Given an order
+          ideal of positive roots in type A, \(\Psi \subset
+          \Delta^+_\ell\) and an index \(\gamma \in \Z^\ell\), the
+          \emph{Catalan function} corresponding to this data is
+          \begin{subtleblock}
+          \[
+            H(\Psi;\gamma)(x;t) = \prod_{(i,j) \in \Delta^+_\ell
+              \setminus \Psi} (1-tR_{ij}) H_\gamma(x;t)
+          \]
+          \end{subtleblock}
+          for a ``compositional Hall-Littlewood''
+          \(H_\gamma(x;t)\).
+          \begin{itemize}
+          \item \(H(\emptyset;\lambda) = s_\lambda\) for any partition
+            \(\lambda\).
+          \item \(H(\Delta^{(k)}(\lambda);\lambda) = s_\lambda^{(k)}\)
+            for \(\lambda\) a \(k\)-bounded partition of length
+            \(\ell\) and \(\Delta^{(k)}(\lambda) := \{(i,j) \in
+            \Delta^+_\ell \mid k-\lambda_i+i<j\}\).
+          \end{itemize}
+          Catalan functions were recently used in~\cite{bmps} to
+            prove an incredibly useful property called
+            \emph{shift invariance}:
+            \begin{subtleblock}
+              \[
+                e_\ell^\perp s_{\lambda+1^\ell}^{(k+1)} =
+                s_\lambda^{(k)}
+              \]
+            \end{subtleblock}
+            Using the known dual vertical pieri rule, one gets the
+            branching coefficients:
+            \begin{subtleblock}
+              \[
+                s_\lambda^{(k)} = e_\ell^\perp
+                s_{\lambda+1^\ell}^{(k+1)} = \, \sum_{\mathclap{T \in
+                  VSMT^{k+1}_{(d)}(\lambda+1^\ell)}} \, t^{spin(T)} s_{inside(T)}^{(k+1)}
+              \]
+            \end{subtleblock}
+          \end{block}
+          \begin{block}{K-theory and Symmetric Functions}
+            When working with (co)homology representatives, the
+            symmetric functions tend to be homogeneous in degree. With
+            K-theory representatives, this no longer holds. We define
+            a few inhomogeneous symmetric functions. For \(m \in \Z, r
+            \in \Z_{\geq 0}\)\[
+              Kh_m^{(r)} := \sum_{i=0}^m \binom{r+i-1}{i} h_{m-i}
+            \]
+            and for \(\gamma \in \Z^\ell\),
+            \[
+              Kh_\lambda := Kh_{\lambda_1}^{(0)} Kh_{\lambda_2}^{(1)} \cdots Kh_{\lambda_\ell}^{(\ell-1)}
+            \]
+            
+          \end{block}
+      \end{column}
+      \begin{column}{0.3\paperwidth}
+          \begin{block}{K-theoretic Catalan Functions}
+            We must introduce another operator called a \emph{lowering
+            operator} acting via
+          \begin{subtleblock}
+            \[
+              L_i \gamma = \gamma - \epsilon_i
+            \]
+          \end{subtleblock}
+          Then, for two order ideals of positive roots in type A,
+          \(\Psi,\lowers \subset \Delta_\ell^+\) and \(\gamma \in
+          \Z^\ell\), we get 
+          \begin{subtleblock}
+            \[
+              K(\Psi;\lowers;\gamma) := \prod_{\mathclap{(i,j) \in \lowers}}
+              (1-L_j) \prod_{\mathclap{(i,j) \in \Delta^+_\ell \setminus \Psi}} (1-R_{ij}) Kh_\gamma
+            \]
+          \end{subtleblock}
+          \begin{itemize}
+          \item The top degree term of \(K(\Psi;\lowers;\gamma)\) is
+            \(H(\Psi;\gamma)\).
+          \item \(K(\Psi;\Delta^+_\ell;\gamma) =
+            H(\Psi;\gamma)\). 
+          \end{itemize}
+          \begin{alertblock}{Conjectures}
+            \begin{enumerate}
+            \item If \(\Psi = \lowers\), then the coefficients in \(K(\Psi;\lowers;\lambda) = \sum
+              (-1)^{|\lambda|-|\mu|} b_{\lambda,\mu} g_\mu\) are such 
+              that \(b_{\lambda,\mu} \in \Z_{\geq 0}\).
+            \item For any \(k\) bounded partition \(\lambda\), \[
+                K(\Delta^{(k)}(\lambda);\Delta^{(k+1)}(\lambda);\lambda)
+                = g_\lambda^{(k)}
+              \]
+            \end{enumerate}
+          \end{alertblock}
+          We will say \(\g_\lambda^{(k)} :=
+          K(\Delta^{(k)}(\lambda);\Delta^{(k+1)}(\lambda);\lambda)\). 
+        \end{block}
+        \begin{block}{Shift Invariance for K-Catalan Functions}
+          For \(s \geq 0\), \(\Psi,\lowers \subset \Delta^+_\ell\),
+          \(\gamma \in \Z^\ell\), we have \[
+            e_s^\perp K(\Psi;\lowers;\lambda) = \sum_{S \subset \{1,
+              \ldots, \ell\}, |S| = d} K(\Psi;\lambda-\epsilon_S)
+          \]
+          for \(\epsilon_S = \sum_{j \in S} \epsilon_j\). It follows
+          that
+          \begin{alertblock}{Theorem}
+            For \(\gamma \in \Z^\ell\), 
+            \[
+              G_{1^\ell}^\perp K(\Psi;\lowers;\gamma) =
+              K(\Psi;\lowers;\gamma-1^\ell)
+            \]
+            Thus, for a \(k\)-bounded partition \(\lambda\)
+            \[ G_{1^\ell}^\perp \g_{\lambda+1^\ell}^{(k)} = \g_\lambda^{(k)}
+            \]
+          \end{alertblock}
+        \end{block}
+        \begin{block}{Towards a Vertical Dual Pieri Rule}
+          Unlike with \(k\)-Schur functions, there is no known
+          combinatoric to guide what the dual Pieri rule
+          \(G_{1^r}^\perp g_\lambda^{(k)}\) should be. However, we have made
+          progress towards understanding \(G_{1^r}^\perp
+          \g_\lambda^{(k)}\) using the combinatorics of K-theoretic
+          Catalan functions.
+        \end{block}
+        \setbeamercolor{block title}{fg=jblue,bg=white} % Change the block title color
+
+        \begin{block}{References}
+          \begin{bibdiv}
+            \begin{biblist}
+              \bib{bmps}{article}{
+                author={Blasiak, Jonah}
+                author={Morse, Jennifer}
+                author={Pun, Anna}
+                author={Summers, Daniel}
+                title={Catalan Functions and \(k\)-Schur Positivity}
+                year={2019}
+                journal={Journal of the AMS}
+              }
+              \bib{morse}{article}{
+                author={Morse, Jennifer}
+                title={Combinatorics of the K-theory of affine
+                  Grassmannians}
+                year={2011}
+                journal={Advances in Mathematics}
+              }
+            \end{biblist}
+          \end{bibdiv}
+        \end{block}
+      \end{column}
+    \end{columns}
+  \end{frame} % End the wrapping frame
+  \end{document}
