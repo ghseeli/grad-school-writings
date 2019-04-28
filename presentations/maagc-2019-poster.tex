@@ -7,6 +7,7 @@
 \usepackage{../ReAdTeX/readtex-core}
 \usepackage{amsmath, amsthm, amssymb, latexsym}
 \usepackage{mathtools}
+\usepackage{mathdots}
 \usepackage[alphabetic,abbrev]{amsrefs} % use AMS ref scheme
 \usepackage{anyfontsize}
 \usepackage{scalefnt, scalerel}
@@ -99,7 +100,7 @@ distance=0.5pt}}
             \]
             \end{itemize}
           \item Grothendieck polynomials, \(G_\lambda \in
-            \hat{\Lambda}^{(n)}\)
+            \hat{\Lambda}\)
             \begin{itemize}
             \item \(G_\lambda = s_\lambda + \text{ higher order
                 terms}\)
@@ -115,16 +116,16 @@ distance=0.5pt}}
                   \ytableaushort{3,1{\scriptstyle\{1,2\}}} \
                   \ytableaushort{{\scriptstyle\{2,3\}},11} \cdots
               \end{align*}
-            \item Gives Schubert basis representatives for \(K^*(Gr_{SL_n})\).
+            \item Gives Schubert basis representatives for \(K(Gr(d,n))\).
             % \item \(K^*(Gr_{SL_n}) \isom \hat{\Lambda}^{(n)}\)
             %   identifies Schubert basis to \(G_\lambda\)
             \end{itemize}
             \item dual Grothendieck polynomials \(g_\lambda \in
-              \Lambda_{(n)}\)
+              \Lambda\)
             \begin{itemize}              
             \item \(g_\lambda = s_\lambda + \text{ lower order
                 terms}\)
-            \item Gives Schubert basis representatives for \(K_*(Gr_{SL_n})\).
+
             \end{itemize}
           \item \(k\)-Schur functions, \(s_\lambda^{(k)} \in \Lambda_t\) for
             \(k\)-bounded partitions \(\lambda\)
@@ -161,10 +162,16 @@ distance=0.5pt}}
             \begin{itemize}
             \item \(G_\lambda^{(k)} = s_\lambda^{(k)} + \text{
                 higher order terms}\)
+            \item \(G_\lambda^{(k)}\) given as a sum of monomials over
+              ``affine set-valued tableaux.''
+            \item \(G_\lambda^{(k)}\) gives Schubert basis
+              representatives for \(K^*(Gr_{SL_k})\).
             \item \(g_\lambda^{(k)} = s_\lambda^{(k)} + \text{ lower order
                 terms}\)
             \item \(g_\lambda^{(k)} = g_\lambda\) when \(k \geq
-              \lambda_1+\ell(\lambda)\)
+              \lambda_1+\ell(\lambda)\).
+            \item \(g_\lambda^{(k)}\) gives Schubert basis
+              representatives for \(K_*(Gr_{SL_k})\).
             \end{itemize}
             % play the analogous K-theoretic
             % role of the \(k\)-Schur functions. Furthermore, the Pieri
@@ -202,7 +209,7 @@ distance=0.5pt}}
         \begin{column}{.3\paperwidth}
           \begin{block}{Raising Operators and Catalan Functions}
             \begin{itemize}
-            \item Raising operators \(R_{i,j}\) \ytableausetup{boxsize=0.4em}
+            \item Raising operators \(R_{i,j}\) \ytableausetup{boxsize=0.5em}
               \begin{itemize}
               \item \[
                   R_{1,3} \left( \ydiagram{1,1,3}*[*(red)]{1} \right)
@@ -281,15 +288,15 @@ distance=0.5pt}}
             \item \(Kh_4^{(2)} = h_4+2h_3+3h_2+4h_1+5h_0\)
             \item \(\gamma \in \Z^\ell\),
               \[
-                Kh_\lambda := Kh_{\lambda_1}^{(0)}
-                Kh_{\lambda_2}^{(1)} \cdots
-                Kh_{\lambda_\ell}^{(\ell-1)}
+                Kh_\gamma := Kh_{\gamma_1}^{(0)}
+                Kh_{\gamma_2}^{(1)} \cdots
+                Kh_{\gamma_\ell}^{(\ell-1)}
               \]
+            \item Similar role to \(h_\lambda\), but \(Kh_{25} \neq Kh_{52}\)
+            \item \(g_\lambda = \prod_{i<j}(1-R_{ij})Kh_\lambda\)
             \end{itemize}
           \end{block}
-      \end{column}
-      \begin{column}{0.3\paperwidth}
-        \begin{block}{K-theoretic Catalan Functions}
+                  \begin{block}{K-theoretic Catalan Functions}
           \begin{itemize}
           \item Lowering operators \(L_j\)
 \[            L_3\left( \ydiagram{1,1,3} \right) =
@@ -346,10 +353,12 @@ distance=0.5pt}}
             \end{enumerate}
           \end{alertblock}
         \end{block}
+      \end{column}
+      \begin{column}{0.3\paperwidth}
         \begin{block}{Shift Invariance for K-Catalan Functions}
           \begin{alertblock}{Theorem}
             \[
-              G_{1^\ell}^\perp
+              G_{1^\ell}^\perp \ 
                  \begin{tikzpicture}[every node/.style={minimum size=1.95cm-\pgflinewidth, outer sep=0pt}]
                     \draw[step=2cm,color=black] (0,0) grid (8.01,-8.01);
                     \node[fill=red] at (3,-1) {};
@@ -380,6 +389,139 @@ distance=0.5pt}}
                   G_{1^\ell}^\perp g_{\lambda+1^\ell}^{(k+1)} = g_\lambda^{(k)}
                 \]
           \end{alertblock}
+        \end{block}
+        \begin{block}{Vertical Pieri Rule}
+          \begin{itemize}
+          \item \[
+              g_{11} \ \begin{tikzpicture}[every node/.style={minimum
+                  size=0.95cm-\pgflinewidth, outer sep=0pt}]
+                \draw[step=1cm,color=black] (0,0) grid (4.0,-4.0);
+                \node[fill=red] at (1.5,-0.5) {}; \node[fill=violet]
+                at (2.5,-0.5) {}; \node[fill=violet] at (3.5,-0.5) {};
+                \node[fill=red] at (3.5,-1.5) {}; \node at (0.5,-0.5)
+                {$4$}; \node at (1.5,-1.5)
+                {$3$}; \node at (2.5,-2.5)
+                {$1$}; \node at (3.5,-3.5) {$1$};
+              \end{tikzpicture}
+              = \begin{tikzpicture}[every node/.style={minimum
+                  size=.95cm-\pgflinewidth, outer sep=0pt}]
+                \draw[step=1cm,color=black] (0,0) grid (6.0,-6.0);
+                \node[fill=red] at (1.5,-0.5) {}; \node[fill=violet]
+                at (2.5,-0.5) {}; \node[fill=violet] at (3.5,-0.5) {};
+                \node[fill=violet] at (4.5,-0.5) {};
+                \node[fill=violet] at (5.5,-0.5) {}; \node[fill=red]
+                at (3.5,-1.5) {}; \node[fill=violet] at (4.5,-1.5) {};
+                \node[fill=violet] at (5.5,-1.5) {};
+                \node[fill=violet] at (4.5,-2.5) {};
+                \node[fill=violet] at (5.5,-2.5) {};
+                \node[fill=violet] at (4.5,-3.5) {};
+                \node[fill=violet] at (5.5,-3.5) {}; \node at
+                (0.5,-0.5) {$4$}; \node at (1.5,-1.5)
+                {$3$}; \node at (2.5,-2.5)
+                {$1$}; \node at (3.5,-3.5)
+                {$1$}; \node at (4.5,-4.5)
+                {$1$}; \node at (5.5,-5.5) {$1$};
+              \end{tikzpicture}
+            \]
+          \item Apply root removal identities, eg
+            \begin{align*}
+                            \begin{tikzpicture}[every node/.style={minimum
+                  size=.95cm-\pgflinewidth, outer sep=0pt}]
+                \draw[step=1cm,color=black] (0,0) grid (6.0,-6.0);
+                \node[fill=red] at (1.5,-0.5) {}; \node[fill=violet]
+                at (2.5,-0.5) {}; \node[fill=violet] at (3.5,-0.5) {};
+                \node[fill=violet] at (4.5,-0.5) {};
+                \node[fill=violet] at (5.5,-0.5) {}; \node[fill=red]
+                at (3.5,-1.5) {}; \node[fill=violet] at (4.5,-1.5) {};
+                \node[fill=violet] at (5.5,-1.5) {};
+                \node[fill=violet] at (4.5,-2.5) {};
+                \node[fill=violet] at (5.5,-2.5) {};
+                \node[fill=violet] at (4.5,-3.5) {};
+                \node[fill=violet] at (5.5,-3.5) {}; \node at
+                (0.5,-0.5) {$4$}; \node at (1.5,-1.5)
+                {$3$}; \node at (2.5,-2.5)
+                {$1$}; \node at (3.5,-3.5)
+                {$1$}; \node at (4.5,-4.5)
+                {$1$}; \node at (5.5,-5.5) {$1$};
+              \end{tikzpicture}
+              & = \begin{tikzpicture}[every node/.style={minimum
+                  size=.95cm-\pgflinewidth, outer sep=0pt}]
+                \draw[step=1cm,color=black] (0,0) grid (6.0,-6.0);
+                \node[fill=red] at (1.5,-0.5) {}; \node[fill=violet]
+                at (2.5,-0.5) {}; \node[fill=violet] at (3.5,-0.5) {};
+                \node[fill=violet] at (4.5,-0.5) {};
+                \node[fill=violet] at (5.5,-0.5) {}; \node[fill=red]
+                at (3.5,-1.5) {}; \node[fill=violet] at (4.5,-1.5) {};
+                \node[fill=violet] at (5.5,-1.5) {};
+                \node[fill=violet] at (4.5,-2.5) {};
+                \node[fill=violet] at (5.5,-2.5) {};
+                \node[fill=violet] at (5.5,-3.5) {}; \node at
+                (0.5,-0.5) {$4$}; \node at (1.5,-1.5)
+                {$3$}; \node at (2.5,-2.5)
+                {$1$}; \node at (3.5,-3.5)
+                {$1$}; \node at (4.5,-4.5)
+                {$1$}; \node at (5.5,-5.5) {$1$};
+              \end{tikzpicture}
+                +
+                \underbrace{
+                \begin{tikzpicture}[every node/.style={minimum
+                  size=.95cm-\pgflinewidth, outer sep=0pt}]
+                \draw[step=1cm,color=black] (0,0) grid (6.0,-6.0);
+                \node[fill=red] at (1.5,-0.5) {}; \node[fill=violet]
+                at (2.5,-0.5) {}; \node[fill=violet] at (3.5,-0.5) {};
+                \node[fill=violet] at (4.5,-0.5) {};
+                \node[fill=violet] at (5.5,-0.5) {}; \node[fill=red]
+                at (3.5,-1.5) {}; \node[fill=violet] at (4.5,-1.5) {};
+                \node[fill=violet] at (5.5,-1.5) {};
+                \node[fill=violet] at (4.5,-2.5) {};
+                \node[fill=violet] at (5.5,-2.5) {};
+                \node[fill=violet] at (4.5,-3.5) {};
+                \node[fill=violet] at (5.5,-3.5) {}; \node at
+                (0.5,-0.5) {$4$}; \node at (1.5,-1.5)
+                {$3$}; \node at (2.5,-2.5)
+                {$1$}; \node at (3.5,-3.5)
+                {$2$}; \node at (4.5,-4.5)
+                {$0$}; \node at (5.5,-5.5) {$1$};
+              \end{tikzpicture}
+              }_{=0}\\
+              & -
+              \underbrace{
+              \begin{tikzpicture}[every node/.style={minimum
+                  size=.95cm-\pgflinewidth, outer sep=0pt}]
+                \draw[step=1cm,color=black] (0,0) grid (6.0,-6.0);
+                \node[fill=red] at (1.5,-0.5) {}; \node[fill=violet]
+                at (2.5,-0.5) {}; \node[fill=violet] at (3.5,-0.5) {};
+                \node[fill=violet] at (4.5,-0.5) {};
+                \node[fill=violet] at (5.5,-0.5) {}; \node[fill=red]
+                at (3.5,-1.5) {}; \node[fill=violet] at (4.5,-1.5) {};
+                \node[fill=violet] at (5.5,-1.5) {};
+                \node[fill=violet] at (4.5,-2.5) {};
+                \node[fill=violet] at (5.5,-2.5) {};
+                \node[fill=violet] at (4.5,-3.5) {};
+                \node[fill=violet] at (5.5,-3.5) {}; \node at
+                (0.5,-0.5) {$4$}; \node at (1.5,-1.5)
+                {$3$}; \node at (2.5,-2.5)
+                {$1$}; \node at (3.5,-3.5)
+                {$1$}; \node at (4.5,-4.5)
+                {$0$}; \node at (5.5,-5.5) {$1$};
+              \end{tikzpicture}
+                }_{=0} \\
+            & \vdots \\
+            & =
+              g_{431111}^{(4)}+\textcolor{red}{g_{43121}^{(4)}}+g_{43211}^{(4)}+g_{4322}^{(4)}\\
+            & -2g_{43111}^{(4)}-g_{4321}^{(4)}-\textcolor{red}{g_{4312}^{(4)}}+g_{4311}^{(4)}
+            \end{align*}
+            \item Apply ``straightening identities.''
+              \begin{itemize}
+              \item \(g_{43121}^{(4)} = g_{44111}^{(4)}+g_{43111}^{(4)}\)
+              \item \(g_{4312}^{(4)} = g_{4411}^{(4)}+g_{4311}^{(4)}\)
+              \end{itemize}
+            \end{itemize}
+            \begin{alertblock}{Technique}
+              Use above approach to show formula of Conjecture 3 and
+              \(g_\lambda^{(k)}\) satisfy the same vertical Pieri
+              rule, thus proving Conjecture 3.
+            \end{alertblock}
         \end{block}
         \begin{block}{Towards a Vertical Dual Pieri Rule}
           \begin{itemize}
