@@ -32,6 +32,7 @@ pgf
 pgfopts
 pgfplots
 psnfss
+scalerel
 setspace
 subfiles
 tikz-cd
