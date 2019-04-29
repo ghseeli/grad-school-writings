@@ -17,6 +17,7 @@ enumitem
 etoolbox
 float
 fmtcount
+fp
 geometry
 graphics
 hyperref
