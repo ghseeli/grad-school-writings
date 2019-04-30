@@ -12,7 +12,7 @@
 \usepackage{anyfontsize}
 \usepackage{scalefnt, scalerel}
 \usepackage{array,booktabs,tabularx}  
-\usepackage[orientation=portrait, size=a0, scale=1.5]{beamerposter} % Use the beamerposter package for laying out the poster
+\usepackage[orientation=landscape, size=a0, scale=1.5]{beamerposter} % Use the beamerposter package for laying out the poster
 \RequirePackage{lmodern}
 \usepackage{lmodern}
 \usepackage{exscale} % Necessary for math symbols to be big enough
@@ -59,18 +59,20 @@ distance=0.5pt}}
 %% Math shortcuts
 \newcommand{\lowers}{\mathcal{L}}
 \newcommand{\g}{\mathfrak{g}}
+\newcommand{\covers}{\mathrel{\gtrdot}}
+\newcommand{\coveredby}{\mathrel{\lessdot}}
+
 
 %% Title matter
-  \title[K-theoretic Catalan Functions]{K-theoretic Catalan Functions}
-  \author[Seelinger]{George H. Seelinger (joint work with Jonah
-    Blasiak and Jennifer Morse)}
-  \institute[UVA]{University of Virginia}
-  \date{May 4, 2019}
+  \title[K-theoretic Catalan Functions]{K-theoretic Catalan Functions: George H. Seelinger (joint work with Jonah Blasiak and Jennifer Morse)}
+  \author[Seelinger]{\ \vspace{-3ex}}
+  \institute[UVA]{\ \vspace{-3ex}}
+  \date{\ \vspace{-1ex}}
 %% Document
-  \begin{document}
+\begin{document}
   \begin{frame}[t] % The whole poster is in one Beamer frame
     \begin{columns}[t] % Align all column contents to the top
-      \begin{column}{.3\paperwidth}
+      \begin{column}{.19\paperwidth}
         \begin{block}{Background}
           \begin{itemize}
           \item Schur functions \(s_\lambda \in \Lambda\)
@@ -85,62 +87,91 @@ distance=0.5pt}}
             % \[
             %   h_3 s_{\ydiagram{1,2}} = s_{\ydiagram{1,2,3}}+s_{\ydiagram{1,1,4}}+s_{\ydiagram{2,4}}+s_{\ydiagram{1,5}}
             % \]
-            \item
+            \item Weight generating function of SSYTs
               \begin{align*}
-                s_{21} & = m_{21} + 2m_{111}\\
-               & \ytableaushort{2,11} \ \ytableaushort{2,13} \ \ytableaushort{3,12}
+                s_{21} & = x_1^2x_2 + 2x_1x_2x_3+\cdots\\
+               & \ytableaushort{2,11} \ \ytableaushort{2,13} \
+                 \ytableaushort{3,12}
               \end{align*}
-            \item \(\Lambda_m \onto H^*(Gr(m,n))\) via \[
-                s_\lambda \mapsto
-                \begin{cases}
-                  \sigma_\lambda & \lambda \text{ in an }m \times
-                  n\text{ rectangle}\\
-                  0 & \text{else}
-                \end{cases}
-            \]
-            \end{itemize}
-          \item Grothendieck polynomials, \(G_\lambda \in
-            \hat{\Lambda}\)
-            \begin{itemize}
-            \item \(G_\lambda = s_\lambda + \text{ higher order
-                terms}\)
-            \item
-              \begin{align*}
-                G_{21} & = m_{21}+2m_{111}-m_{22}-3m_{211}-\cdots
-                \\
-                & \ytableaushort{2,11} \ \ytableaushort{2,13} \
-                  \ytableaushort{3,12} \\
-                & \\
-                & \ytableaushort{2,1{\scriptstyle\{1,2\}}} \
-                  \ytableaushort{2,1{\scriptstyle\{1,3\}}} \
-                  \ytableaushort{3,1{\scriptstyle\{1,2\}}} \
-                  \ytableaushort{{\scriptstyle\{2,3\}},11} \cdots
-              \end{align*}
-            \item Gives Schubert basis representatives for \(K(Gr(d,n))\).
-            % \item \(K^*(Gr_{SL_n}) \isom \hat{\Lambda}^{(n)}\)
-            %   identifies Schubert basis to \(G_\lambda\)
-            \end{itemize}
-            \item dual Grothendieck polynomials \(g_\lambda \in
-              \Lambda\)
-            \begin{itemize}              
-            \item \(g_\lambda = s_\lambda + \text{ lower order
-                terms}\)
-
+            \item Equivalently defined by Pieri rule: \ytableausetup{boxsize=0.3em}
+              \[
+                s_3 s_{\ydiagram{1,2}} = s_{\ydiagram{1,2,3}}+s_{\ydiagram{1,1,4}}+s_{\ydiagram{2,4}}+s_{\ydiagram{1,5}}
+              \]
             \end{itemize}
           \item \(k\)-Schur functions, \(s_\lambda^{(k)} \in \Lambda_t\) for
             \(k\)-bounded partitions \(\lambda\)
             \begin{itemize}
-            \item When \(t=1\),
+            \item Underlying combinatorics by Bruhat order on
+              Grassmannian elements of \(\tilde{S}_n\)
+            \item Shapes have no cell with hook length \(k+1\)
+              \ytableausetup{boxsize=0.6em}
+              \[
+                \ydiagram{1,2,3,4,5,5}*[\bullet]{0,1+1,1+1,1+1,1+4}*[*(red)]{0,0,0,0,1+1}
+                \ \ \text{red cell has hook-length }7
+              \]
+            \item Ordered by containment
+              \ytableausetup{boxsize=0.3em}
+
+              \[
+                \ytableausetup{centertableaux}
+                % \ydiagram{1,1,4,4} \coveredby \ydiagram{1,1,1,4,4}
+                % \coveredby \ydiagram{1,1,2,4,5} \coveredby
+                % \ydiagram{2,2,2,4,5} \coveredby \ydiagram{2,2,2,5,5}
+                % \coveredby \ydiagram{1,2,2,3,5,6} \coveredby
+                \ydiagram{1,1,2,2,3,5,6} \coveredby
+                \ydiagram{1,1,1,1,3,3,3,5,6} \coveredby
+                \ydiagram{1,1,1,1,3,3,3,6,6} \coveredby
+                \ydiagram{1,2,2,3,4,4,5,6,6}*[*(red)]{0,1+1,1+1,1+2,3+1,3+1,3+2}
+                \to
+              \]
+            \item Mark one ribbon in skew of \(\lambda \coveredby
+              \mu\), \ytableausetup{boxsize=1em}
               \begin{align*}
-                s_{21}^{(2)} & = m_3+2m_{21}+3m_{111}\\
-                & \ytableaushort{{1},{1^*}{1^*}{1^*}} \
-                  \ytableaushort{{2},{1^*}{1^*}{2^*}} \
-                  \ytableaushort{{2^*},{1^*}{1^*}{2}} \\
-                & \ytableaushort{{3},{1^*}{2^*}{3^*}} \ 
-                  \ytableaushort{{3^*},{1^*}{2^*}{3}} \
-                  \ytableaushort{{2^*},{1^*}{3}{3^*}} \ 
+                \ytableausetup{boxsize=0.6em}
+                \emptyset \subset \ydiagram[*(black)]{1} \subset
+                \ydiagram{1,1}*[*(black)]{1} \subset
+                \ydiagram{1,1,2}*[*(black)]{1}
+                \to
+                &
+                  \ytableausetup{boxsize=1em}
+                  \ytableaushort{{\textcolor{red}{3}},{\textcolor{red}{2}},{\textcolor{red}{1}}3}
+                & \searrow
+                \\
+                \ytableausetup{boxsize=0.6em}
+                \emptyset \subset \ydiagram[*(black)]{1} \subset
+                \ydiagram{1,1}*[*(black)]{1} \subset
+                \ydiagram{1,1,2}*[*(black)]{0,0,1+1} 
+                \to
+               & \ytableausetup{boxsize=1em}
+                 \ytableaushort{3,{\textcolor{red}{2}},{\textcolor{red}{1}}{\textcolor{red}{3}}}
+                & \to
+                & 3x_1x_2x_3
+                \\
+                \ytableausetup{boxsize=0.6em}
+               \emptyset \subset \ydiagram[*(black)]{1} \subset
+                \ydiagram{2}*[*(black)]{1+1} \subset
+                \ydiagram{1,1,2}*[*(black)]{1,1} \to
+                &\ytableausetup{boxsize=1em}
+                  \ytableaushort{{\textcolor{red}{3}},{\textcolor{red}{3}},{\textcolor{red}{1}}{\textcolor{red}{2}}}
+                & \nearrow
               \end{align*}
-            \item Schubert representatives for (co)homology of affine Grassmannian.
+            \item Weight generating function: \(s_\lambda^{(k)} = \sum_T x^{weight(T)}\) eg \[
+                s_{111}^{(2)}(x_1, x_2, x_3) = 3 x_1 x_2 x_3 + x_1^2
+                x_2 + x_1 x_2^2 + \cdots
+              \]
+            \item Equivalently defined by Pieri rule: 
+            % \item When \(t=1\),
+            %   \ytableausetup{boxsize=normal}
+            %   \begin{align*}
+            %     s_{21}^{(2)} & = m_3+2m_{21}+3m_{111}\\
+            %     & \ytableaushort{{1},{1^*}{1^*}{1^*}} \
+            %       \ytableaushort{{2},{1^*}{1^*}{2^*}} \
+            %       \ytableaushort{{2^*},{1^*}{1^*}{2}} \\
+            %     & \ytableaushort{{3},{1^*}{2^*}{3^*}} \ 
+            %       \ytableaushort{{3^*},{1^*}{2^*}{3}} \
+            %       \ytableaushort{{2^*},{1^*}{3}{3^*}} \ 
+            %   \end{align*}
+            % \item Schubert representatives for (co)homology of affine Grassmannian.
             \item \(s_\lambda^{(k)} = s_\lambda\) when \(k \geq \lambda_1+\ell(\lambda)\).
             % \item When \(t=1\)
             %   \begin{align*}
@@ -156,23 +187,25 @@ distance=0.5pt}}
             %   h_3 s_{\ydiagram{1,2}}^{(3)} = s_{\ydiagram{1,2,3}}^{(3)}
             % \]
             \end{itemize}
-          \item The \emph{affine Grothendieck polynomials},
-            \(G_\lambda^{(k)}\), and \emph{dual affine Grothendieck polynomials},
-            \(g_\lambda^{(k)}\).
-            \begin{itemize}
-            \item \(G_\lambda^{(k)} = s_\lambda^{(k)} + \text{
-                higher order terms}\)
-            \item \(G_\lambda^{(k)}\) given as a sum of monomials over
-              ``affine set-valued tableaux.''
-            \item \(G_\lambda^{(k)}\) gives Schubert basis
-              representatives for \(K^*(Gr_{SL_k})\).
-            \item \(g_\lambda^{(k)} = s_\lambda^{(k)} + \text{ lower order
-                terms}\)
-            \item \(g_\lambda^{(k)} = g_\lambda\) when \(k \geq
-              \lambda_1+\ell(\lambda)\).
-            \item \(g_\lambda^{(k)}\) gives Schubert basis
-              representatives for \(K_*(Gr_{SL_k})\).
-            \end{itemize}
+           \item Dual \(k\)-Schur functions, \(F_\lambda^{(k)}\) for
+             \(k\)-bounded partitions \(\lambda\).
+             \begin{itemize}
+             \item Underlying combinatorics by weak order on
+               Grassmannian elements of \(\tilde{S}_n\)
+             \item Ordered by ``residue order'' (Describe this better)
+             \item \[
+                 \emptyset \subset \ydiagram{1} \subset
+                \ydiagram{1,1} \subset
+                \ydiagram{1,1,2}
+                \to \ytableaushort{3,2,13} \to x_1x_2x_3
+              \]
+            \item Weight generating function \(F_\lambda^{(k)} =
+              \sum_T x^{weight(T)}\) eg \[
+                F_{111}^{(2)} = x_1 x_2 x_3
+              \]
+             \item Equivalently defined by Pieri rule:
+             \end{itemize}
+
             % play the analogous K-theoretic
             % role of the \(k\)-Schur functions. Furthermore, the Pieri
             % rule for \(g_\lambda^{(k)}\) is controlled by affine
@@ -182,63 +215,172 @@ distance=0.5pt}}
             % equivalent to finding a dual Pieri rule for \(g_\lambda^{(k)}\)
           \end{itemize}
         \end{block}
-        \begin{alertblock}{Problems}
-          \begin{enumerate}
-          \item What are the branching coefficients for
-            \(g_\lambda^{(k)}\), ie what are the coefficients
-            \(c_{\lambda,\mu}^{(k)}\) for \[
-              g_\lambda^{(k)} = \sum_\mu (-1)^{|\lambda|-|\mu|} c_{\lambda,\mu}^{(k)} g_\mu^{(k+1)}?
-            \]
-          \item What is the dual (vertical) Pieri rule for
-            \(g_\lambda^{(k)}\), 
-            ie what are the coefficients \(a_{\lambda,\mu}^{(k)}\) for
-            \[
-              G_{1^r}^\perp g_\lambda^{(k)} = \sum_\mu (-1)^{|\lambda|-|\mu|}
-            a_{\lambda,\mu}^{(k)} g_\mu^{(k)}?
-            \] 
-          \end{enumerate}
-        \end{alertblock}
-        \begin{alertblock}{Conjectures}
-          \begin{enumerate}
-          \item~\cite{lss}*{7.20(iii)}: \(c_{\lambda,\mu}^{(k)} \in \Z_{\geq 0}\)
-          \item~\cite{lss}*{7.21(iii)}: \(a_{\lambda,\mu}^{(k)} \in
-            \Z_{\geq 0}\)
-          \end{enumerate}
-        \end{alertblock}
-        \end{column}
-        \begin{column}{.3\paperwidth}
-          \begin{block}{Raising Operators and Catalan Functions}
+      \end{column}
+      \begin{column}{.19\paperwidth}
+        \begin{block}{Grothendieck polynomials}
+          \begin{itemize}
+
+          \item Grothendieck polynomials, \(G_\lambda \in
+            \hat{\Lambda}\)
             \begin{itemize}
-            \item Raising operators \(R_{i,j}\) \ytableausetup{boxsize=0.5em}
+            \item \(G_\lambda = s_\lambda + \text{ higher order
+                terms}\)
+            \item Set-valued tableaux \ytableausetup{boxsize=normal}
+              \begin{align*}
+                G_{21} & = m_{21}+2m_{111}-m_{22}-3m_{211}-\cdots
+                \\
+                & \ytableaushort{2,11} \ \ytableaushort{2,13} \
+                  \ytableaushort{3,12} \\
+                & \\
+                & \ytableaushort{2,1{\scriptstyle\{1,2\}}} \
+                  \ytableaushort{2,1{\scriptstyle\{1,3\}}} \
+                  \ytableaushort{3,1{\scriptstyle\{1,2\}}} \
+                  \ytableaushort{{\scriptstyle\{2,3\}},11} \cdots
+              \end{align*}
+            \item Equivalently defined by Pieri rule:
+            % \item Gives Schubert basis representatives for \(K(Gr(d,n))\).
+            % \item \(K^*(Gr_{SL_n}) \isom \hat{\Lambda}^{(n)}\)
+            %   identifies Schubert basis to \(G_\lambda\)
+            \end{itemize}
+            \item dual Grothendieck polynomials \(g_\lambda \in
+              \Lambda\)
+            \begin{itemize}              
+            \item \(g_\lambda = s_\lambda + \text{ lower order
+                terms}\)
+            \item Reverse plane partitions
+              \begin{align*}
+                g_{21} = x_1^2x_2 + 2 x_1 x_2 x_3 + x_1^2 + x_1 x_2 +
+                \cdots \\
+                \ytableaushort{2,11} \
+                \ytableaushort{2,13} \
+                \ytableaushort{3,12} \
+                \ytableaushort{1,11} \
+                \ytableaushort{1,12} 
+              \end{align*}
+            \item Equivalently defined by Pieri rule:            
+            \end{itemize}
+          \end{itemize}
+        \end{block}
+        \end{column}
+        \begin{column}{.19\paperwidth}
+          \begin{block}{Affine Grothendieck Polynomials}
+            \begin{itemize}
+            \item \(G_\lambda^{(k)} = s_\lambda^{(k)} + \text{
+                higher order terms}\)
+            \item \(G_\lambda^{(k)}\) given as a sum of monomials over
+              ``affine set-valued tableaux.''
+            \item Each \(T_{\geq x}\) is a \(k+1\)-core \[
+                \hspace{-0.5in} T =
+                \ytableaushort{7,{\scriptstyle{\{2,5\}}}6,1{\scriptstyle{\{2,3\}}}4{\scriptstyle{\{4,6\}}}}
+                \ \
+                T_{\leq 4} = \ytableaushort{2,1{\scriptstyle{\{2,3\}}}44}
+              \]
+            \item \[
+                G_\lambda^{(k)} = \sum_{T}
+                (-1)^{|\lambda|+|weight(T)|} x^{weight(T)}
+              \]
+            \end{itemize}
+            \begin{alertblock}{Open Problem}
+              What is the \(G_\lambda^{(k)}\) Pieri rule?
+            \end{alertblock}
+            % \item \(G_\lambda^{(k)}\) gives Schubert basis
+            %   representatives for \(K^*(Gr_{SL_k})\).
+            \begin{itemize}
+            \item \(g_\lambda^{(k)}\) defined by its Pieri rule (from
+              duality): \[
+                h_r g_\lambda^{(k)} = \sum_{\mu = \lambda + \text{
+                    horizontal affine sv }r\text{-strip}} g_\mu^{(k)}
+              \]
+            \item \(g_\lambda^{(k)} = s_\lambda^{(k)} + \text{ lower order
+                terms}\)
+            % \item \(g_\lambda^{(k)}\) gives Schubert basis
+            %   representatives for \(K_*(Gr_{SL_k})\).
+            \end{itemize}
+            \begin{alertblock}{Open Problem}
+              Is there any definition for \(g_\lambda^{(k)}\) other
+              than by duality?
+            \end{alertblock}
+            \begin{alertblock}{Bonus Problem: Branching}
+              The coefficients \(s_\lambda^{(k)} = \sum_\mu a_{\lambda
+              \mu}^{(k)} s_\mu^{(k+1)}\) are given by counting certain
+            strong tableaux. What are the coefficients
+            \(g_\lambda^{(k)} = \sum_\mu b_{\lambda \mu}^{(k)}
+            g_\mu^{(k+1)}\) ?
+            \end{alertblock}
+        %     \begin{alertblock}{Problems}
+        %   \begin{enumerate}
+        %   \item What are the branching coefficients for
+        %     \(g_\lambda^{(k)}\), ie what are the coefficients
+        %     \(c_{\lambda,\mu}^{(k)}\) for \[
+        %       g_\lambda^{(k)} = \sum_\mu (-1)^{|\lambda|-|\mu|} c_{\lambda,\mu}^{(k)} g_\mu^{(k+1)}?
+        %     \]
+        %   \item What is the dual (vertical) Pieri rule for
+        %     \(g_\lambda^{(k)}\), 
+        %     ie what are the coefficients \(a_{\lambda,\mu}^{(k)}\) for
+        %     \[
+        %       G_{1^r}^\perp g_\lambda^{(k)} = \sum_\mu (-1)^{|\lambda|-|\mu|}
+        %     a_{\lambda,\mu}^{(k)} g_\mu^{(k)}?
+        %     \] 
+        %   \end{enumerate}
+        % \end{alertblock}
+        % \begin{alertblock}{Conjectures}
+        %   \begin{enumerate}
+        %   \item~\cite{lss}*{7.20(iii)}: \(c_{\lambda,\mu}^{(k)} \in \Z_{\geq 0}\)
+        %   \item~\cite{lss}*{7.21(iii)}: \(a_{\lambda,\mu}^{(k)} \in
+        %     \Z_{\geq 0}\)
+        %   \end{enumerate}
+        % \end{alertblock}
+        \end{block}
+          % \begin{block}{K-theory and Symmetric Functions}
+          %   \begin{itemize}
+          %   \item \(m \in \Z, r \in \Z_{\geq
+          %       0}\)\[ Kh_m^{(r)} := \sum_{i=0}^m \binom{r+i-1}{i}
+          %       h_{m-i}
+          %     \]
+          %   \item \(Kh_m^{(0)} = h_m\)
+          %   \item \(Kh_4^{(2)} = h_4+2h_3+3h_2+4h_1+5h_0\)
+          %   \item \(\gamma \in \Z^\ell\),
+          %     \[
+          %       Kh_\gamma := Kh_{\gamma_1}^{(0)}
+          %       Kh_{\gamma_2}^{(1)} \cdots
+          %       Kh_{\gamma_\ell}^{(\ell-1)}
+          %     \]
+          %   \item Similar role to \(h_\lambda\), but \(Kh_{25} \neq Kh_{52}\)
+          %   \item \(g_\lambda = \prod_{i<j}(1-R_{ij})Kh_\lambda\)
+          %   \end{itemize}
+          % \end{block}
+      \end{column}
+      \begin{column}{0.19\paperwidth}
+        \begin{block}{Catalan Functions}
+          \begin{itemize}
+          \item For \(\gamma \in \Z^\ell\), \[
+              H(\Psi;\gamma) = \prod_{(i,j) \in \Delta^+\setminus
+                \Psi} (1-R_{ij}) h_\gamma
+            \]
+          \item Raising operators \(R_{i,j}\) \ytableausetup{boxsize=0.5em}
               \begin{itemize}
               \item \[
                   R_{1,3} \left( \ydiagram{1,1,3}*[*(red)]{1} \right)
                   = \ydiagram{1,4}*[*(red)]{0,3+1} \ \ \ R_{2,3}
-                  \left( \ydiagram{1,1,1}*[*(red)]{0,0,1} \right) =
-                  \ydiagram{1,2}*[*(red)]{0,1+1} 
+                  \left( \ydiagram{1,1,1}*[*(red)]{1} \right) =
+                  \ydiagram{2,1}*[*(red)]{1+1} 
                 \]
               \item Jacobi-Trudi: \(s_\lambda
                 = \prod_{i < j}(1-R_{ij})h_\lambda\) for
                 \(R_{ij}h_\lambda =
                 h_{\lambda+\epsilon_i-\epsilon_j}\). 
               \end{itemize}
-            \item Catalan functions
+            \item Root ideal: upper order ideal of roots. \[
+                  \Psi = \begin{tikzpicture}[every node/.style={minimum size=1.95cm-\pgflinewidth, outer sep=0pt}]
+                    \draw[step=2cm,color=black] (0,0) grid (8.01,-8.01);
+                    \node[fill=red] at (3,-1) {1,2};
+                    \node[fill=red] at (5,-1) {1,3};
+                    \node[fill=red] at (7,-1) {1,4};
+                    \node[fill=red] at (7,-3) {2,4};
+                   \end{tikzpicture}
+              \]
               \begin{itemize}
-              \item \[
-                  \begin{tikzpicture}[every node/.style={minimum size=0.95cm-\pgflinewidth, outer sep=0pt}]
-                    \draw[step=1cm,color=black] (0,0) grid (4.0,-4.0);
-                    \node[fill=red] at (1.5,-0.5) {};
-                    \node[fill=red] at (2.5,-0.5) {};
-                    \node[fill=red] at (3.5,-0.5) {};
-                    \node[fill=red] at (3.5,-1.5) {};
-                    \node at (0.5,-0.5) {$3$};
-                    \node at (1.5,-1.5) {$4$};
-                    \node at (2.5,-2.5) {$2$};
-                    \node at (3.5,-3.5) {$1$};
-                  \end{tikzpicture}
-                  := (1-tR_{2,3})(1-tR_{3,4}) H_{3421}(x;t)
-                \]
-              \item \[
+              \item \(H(\emptyset;\lambda) = s_\lambda\) \[
                   \begin{tikzpicture}[every node/.style={minimum size=0.95cm-\pgflinewidth, outer sep=0pt}]
                     \draw[step=1cm,color=black] (0,0) grid (4.0,-4.0);
                     \node at (0.5,-0.5) {$3$};
@@ -246,7 +388,10 @@ distance=0.5pt}}
                     \node at (2.5,-2.5) {$1$};
                     \node at (3.5,-3.5) {$1$};
                   \end{tikzpicture}
-                  = s_{3211} \ \ \ \ \ 
+                  = s_{3211}
+                \]
+              \item If \(\Psi\) has \(\lambda_i + \)non-roots in row
+                \(i = k\) (ie bandwidth\(=k\)), then \(H(\Psi;\lambda) = s_\lambda^{(k)}\) \[
                   \begin{tikzpicture}[every node/.style={minimum size=0.95cm-\pgflinewidth, outer sep=0pt}]
                     \draw[step=1cm,color=black] (0,0) grid (4.0,-4.0);
                     \node[fill=red] at (1.5,-0.5) {};
@@ -260,7 +405,7 @@ distance=0.5pt}}
                   \end{tikzpicture}
                   = s^{(4)}_{4311}
                 \]
-             \item~\cite{bmps} use Catalan functions to show
+             \item  Use Catalan functions to show
                \emph{shift invariance}:
                  \[
                    e_\ell^\perp s_{\lambda+1^\ell}^{(k+1)} =
@@ -278,48 +423,40 @@ distance=0.5pt}}
                \]
           \end{alertblock}
           \end{block}
-          \begin{block}{K-theory and Symmetric Functions}
-            \begin{itemize}
-            \item \(m \in \Z, r \in \Z_{\geq
-                0}\)\[ Kh_m^{(r)} := \sum_{i=0}^m \binom{r+i-1}{i}
-                h_{m-i}
-              \]
-            \item \(Kh_m^{(0)} = h_m\)
-            \item \(Kh_4^{(2)} = h_4+2h_3+3h_2+4h_1+5h_0\)
-            \item \(\gamma \in \Z^\ell\),
-              \[
-                Kh_\gamma := Kh_{\gamma_1}^{(0)}
-                Kh_{\gamma_2}^{(1)} \cdots
-                Kh_{\gamma_\ell}^{(\ell-1)}
-              \]
-            \item Similar role to \(h_\lambda\), but \(Kh_{25} \neq Kh_{52}\)
-            \item \(g_\lambda = \prod_{i<j}(1-R_{ij})Kh_\lambda\)
-            \end{itemize}
-          \end{block}
-                  \begin{block}{K-theoretic Catalan Functions}
+      \end{column}
+      \begin{column}{0.19\paperwidth}
+        \begin{block}{K-theoretic Catalan Functions}
           \begin{itemize}
+          \item For \(\gamma \in \Z^\ell\), root ideals
+            \(\Psi,\lowers\) \[
+              \hspace{-0.5in} K(\Psi;\lowers;\gamma) := \prod_{\mathclap{(i,j) \in
+                \lowers}}(1-L_j)\prod_{\mathclap{(i,j) \in \Delta^+ \setminus
+                \Psi}}(1-R_{ij}) Kh_\gamma
+            \]
           \item Lowering operators \(L_j\)
-\[            L_3\left( \ydiagram{1,1,3} \right) =
-              \ydiagram{1,3}, L_{1}\left( \ydiagram{1,1,3} \right)
+            \[ L_3\left( \ydiagram{1,1,3} \right) =
+              \ydiagram{1,3} \ \ L_{1}\left( \ydiagram{1,1,3} \right)
               = \ydiagram{1,1,2}
             \]
-          \item K-theoretic Catalan functions
             \begin{itemize}
-            \item \[
+            \item For example (\(\textcolor{red}{\Psi},
+              \textcolor{blue}{\lowers}, \textcolor{violet}{\Psi
+                \intersect \lowers}\)) \[
                   \begin{tikzpicture}[every node/.style={minimum size=0.95cm-\pgflinewidth, outer sep=0pt}]
                     \draw[step=1cm,color=black] (0,0) grid (4.0,-4.0);
                     \node[fill=red] at (1.5,-0.5) {};
                     \node[fill=red] at (2.5,-0.5) {};
                     \node[fill=violet] at (3.5,-0.5) {};
                     \node[fill=violet] at (3.5,-1.5) {};
+                    \node[fill=blue] at (3.5,-2.5) {};
                     \node at (0.5,-0.5) {$3$};
                     \node at (1.5,-1.5) {$4$};
                     \node at (2.5,-2.5) {$2$};
                     \node at (3.5,-3.5) {$1$};
                   \end{tikzpicture}
-                  := (1-L_4)^2(1-R_{23})(1-R_{34})Kh_{3421}
-                \]
-              \item \[
+                  := (1-L_4)^3(1-R_{23})(1-R_{34})Kh_{3421}
+                \]            
+              \item \(K(\emptyset;\emptyset;\lambda) = g_\lambda\) \[
                                     \begin{tikzpicture}[every node/.style={minimum size=0.95cm-\pgflinewidth, outer sep=0pt}]
                     \draw[step=1cm,color=black] (0,0) grid (4.0,-4.0);
                     \node at (0.5,-0.5) {$3$};
@@ -327,7 +464,9 @@ distance=0.5pt}}
                     \node at (2.5,-2.5) {$1$};
                     \node at (3.5,-3.5) {$1$};
                   \end{tikzpicture}
-                  = g_{3211} \ \ \ \ 
+                  = g_{3211}\]
+              \item \(\g_\lambda^{(k)} = K(\Psi;\lowers;\lambda)\) with
+                \(band(\Psi) = k\), \(band(\lowers)=k+1\) \[
                   \begin{tikzpicture}[every node/.style={minimum size=0.95cm-\pgflinewidth, outer sep=0pt}]
                     \draw[step=1cm,color=black] (0,0) grid (4.0,-4.0);
                     \node[fill=red] at (1.5,-0.5) {};
@@ -338,25 +477,11 @@ distance=0.5pt}}
                     \node at (1.5,-1.5) {$3$};
                     \node at (2.5,-2.5) {$1$};
                     \node at (3.5,-3.5) {$1$};
-                  \end{tikzpicture} = g_{4311}^{(4)}
+                  \end{tikzpicture} = \g_{4311}^{(4)}
                 \]
               \end{itemize}
             \end{itemize}
-          \begin{alertblock}{Conjectures}
-            \begin{enumerate}
-            \setcounter{enumi}{2}
-            \item K-theoretic Catalan functions with matching root
-              ideals (all roots are purple) and partition weight are
-              \(g_\lambda\) positive.
-            \item All \(g_\lambda^{(k)}\)'s arise as K-theoretic
-              Catalan functions with same pattern as above.
-            \end{enumerate}
-          \end{alertblock}
-        \end{block}
-      \end{column}
-      \begin{column}{0.3\paperwidth}
-        \begin{block}{Shift Invariance for K-Catalan Functions}
-          \begin{alertblock}{Theorem}
+            \begin{alertblock}{Theorem: Shift Invariance}
             \[
               G_{1^\ell}^\perp \ 
                  \begin{tikzpicture}[every node/.style={minimum size=1.95cm-\pgflinewidth, outer sep=0pt}]
@@ -385,154 +510,155 @@ distance=0.5pt}}
                     \node at (7,-7) [font=\fontsize{20}{0}\selectfont] {$\gamma_\ell-1$};
                   \end{tikzpicture}
                 \]
-                Granting conjecture \(2\) above, this implies \[
-                  G_{1^\ell}^\perp g_{\lambda+1^\ell}^{(k+1)} = g_\lambda^{(k)}
-                \]
+                In particular, \(G_{1^\ell}^\perp\g_{\lambda+1^\ell}^{(k+1)} = \g_\lambda^{(k)}\).
+          \end{alertblock}
+          \begin{alertblock}{Conjecture}
+              \[\g_\lambda^{(k)} = g_\lambda^{(k)}\]
           \end{alertblock}
         \end{block}
-        \begin{block}{Vertical Pieri Rule}
-          \begin{itemize}
-          \item \[
-              g_{11} \ \begin{tikzpicture}[every node/.style={minimum
-                  size=0.95cm-\pgflinewidth, outer sep=0pt}]
-                \draw[step=1cm,color=black] (0,0) grid (4.0,-4.0);
-                \node[fill=red] at (1.5,-0.5) {}; \node[fill=violet]
-                at (2.5,-0.5) {}; \node[fill=violet] at (3.5,-0.5) {};
-                \node[fill=red] at (3.5,-1.5) {}; \node at (0.5,-0.5)
-                {$4$}; \node at (1.5,-1.5)
-                {$3$}; \node at (2.5,-2.5)
-                {$1$}; \node at (3.5,-3.5) {$1$};
-              \end{tikzpicture}
-              = \begin{tikzpicture}[every node/.style={minimum
-                  size=.95cm-\pgflinewidth, outer sep=0pt}]
-                \draw[step=1cm,color=black] (0,0) grid (6.0,-6.0);
-                \node[fill=red] at (1.5,-0.5) {}; \node[fill=violet]
-                at (2.5,-0.5) {}; \node[fill=violet] at (3.5,-0.5) {};
-                \node[fill=violet] at (4.5,-0.5) {};
-                \node[fill=violet] at (5.5,-0.5) {}; \node[fill=red]
-                at (3.5,-1.5) {}; \node[fill=violet] at (4.5,-1.5) {};
-                \node[fill=violet] at (5.5,-1.5) {};
-                \node[fill=violet] at (4.5,-2.5) {};
-                \node[fill=violet] at (5.5,-2.5) {};
-                \node[fill=violet] at (4.5,-3.5) {};
-                \node[fill=violet] at (5.5,-3.5) {}; \node at
-                (0.5,-0.5) {$4$}; \node at (1.5,-1.5)
-                {$3$}; \node at (2.5,-2.5)
-                {$1$}; \node at (3.5,-3.5)
-                {$1$}; \node at (4.5,-4.5)
-                {$1$}; \node at (5.5,-5.5) {$1$};
-              \end{tikzpicture}
-            \]
-          \item Apply root removal identities, eg
-            \begin{align*}
-                            \begin{tikzpicture}[every node/.style={minimum
-                  size=.95cm-\pgflinewidth, outer sep=0pt}]
-                \draw[step=1cm,color=black] (0,0) grid (6.0,-6.0);
-                \node[fill=red] at (1.5,-0.5) {}; \node[fill=violet]
-                at (2.5,-0.5) {}; \node[fill=violet] at (3.5,-0.5) {};
-                \node[fill=violet] at (4.5,-0.5) {};
-                \node[fill=violet] at (5.5,-0.5) {}; \node[fill=red]
-                at (3.5,-1.5) {}; \node[fill=violet] at (4.5,-1.5) {};
-                \node[fill=violet] at (5.5,-1.5) {};
-                \node[fill=violet] at (4.5,-2.5) {};
-                \node[fill=violet] at (5.5,-2.5) {};
-                \node[fill=violet] at (4.5,-3.5) {};
-                \node[fill=violet] at (5.5,-3.5) {}; \node at
-                (0.5,-0.5) {$4$}; \node at (1.5,-1.5)
-                {$3$}; \node at (2.5,-2.5)
-                {$1$}; \node at (3.5,-3.5)
-                {$1$}; \node at (4.5,-4.5)
-                {$1$}; \node at (5.5,-5.5) {$1$};
-              \end{tikzpicture}
-              & = \begin{tikzpicture}[every node/.style={minimum
-                  size=.95cm-\pgflinewidth, outer sep=0pt}]
-                \draw[step=1cm,color=black] (0,0) grid (6.0,-6.0);
-                \node[fill=red] at (1.5,-0.5) {}; \node[fill=violet]
-                at (2.5,-0.5) {}; \node[fill=violet] at (3.5,-0.5) {};
-                \node[fill=violet] at (4.5,-0.5) {};
-                \node[fill=violet] at (5.5,-0.5) {}; \node[fill=red]
-                at (3.5,-1.5) {}; \node[fill=violet] at (4.5,-1.5) {};
-                \node[fill=violet] at (5.5,-1.5) {};
-                \node[fill=violet] at (4.5,-2.5) {};
-                \node[fill=violet] at (5.5,-2.5) {};
-                \node[fill=violet] at (5.5,-3.5) {}; \node at
-                (0.5,-0.5) {$4$}; \node at (1.5,-1.5)
-                {$3$}; \node at (2.5,-2.5)
-                {$1$}; \node at (3.5,-3.5)
-                {$1$}; \node at (4.5,-4.5)
-                {$1$}; \node at (5.5,-5.5) {$1$};
-              \end{tikzpicture}
-                +
-                \underbrace{
-                \begin{tikzpicture}[every node/.style={minimum
-                  size=.95cm-\pgflinewidth, outer sep=0pt}]
-                \draw[step=1cm,color=black] (0,0) grid (6.0,-6.0);
-                \node[fill=red] at (1.5,-0.5) {}; \node[fill=violet]
-                at (2.5,-0.5) {}; \node[fill=violet] at (3.5,-0.5) {};
-                \node[fill=violet] at (4.5,-0.5) {};
-                \node[fill=violet] at (5.5,-0.5) {}; \node[fill=red]
-                at (3.5,-1.5) {}; \node[fill=violet] at (4.5,-1.5) {};
-                \node[fill=violet] at (5.5,-1.5) {};
-                \node[fill=violet] at (4.5,-2.5) {};
-                \node[fill=violet] at (5.5,-2.5) {};
-                \node[fill=violet] at (4.5,-3.5) {};
-                \node[fill=violet] at (5.5,-3.5) {}; \node at
-                (0.5,-0.5) {$4$}; \node at (1.5,-1.5)
-                {$3$}; \node at (2.5,-2.5)
-                {$1$}; \node at (3.5,-3.5)
-                {$2$}; \node at (4.5,-4.5)
-                {$0$}; \node at (5.5,-5.5) {$1$};
-              \end{tikzpicture}
-              }_{=0}\\
-              & -
-              \underbrace{
-              \begin{tikzpicture}[every node/.style={minimum
-                  size=.95cm-\pgflinewidth, outer sep=0pt}]
-                \draw[step=1cm,color=black] (0,0) grid (6.0,-6.0);
-                \node[fill=red] at (1.5,-0.5) {}; \node[fill=violet]
-                at (2.5,-0.5) {}; \node[fill=violet] at (3.5,-0.5) {};
-                \node[fill=violet] at (4.5,-0.5) {};
-                \node[fill=violet] at (5.5,-0.5) {}; \node[fill=red]
-                at (3.5,-1.5) {}; \node[fill=violet] at (4.5,-1.5) {};
-                \node[fill=violet] at (5.5,-1.5) {};
-                \node[fill=violet] at (4.5,-2.5) {};
-                \node[fill=violet] at (5.5,-2.5) {};
-                \node[fill=violet] at (4.5,-3.5) {};
-                \node[fill=violet] at (5.5,-3.5) {}; \node at
-                (0.5,-0.5) {$4$}; \node at (1.5,-1.5)
-                {$3$}; \node at (2.5,-2.5)
-                {$1$}; \node at (3.5,-3.5)
-                {$1$}; \node at (4.5,-4.5)
-                {$0$}; \node at (5.5,-5.5) {$1$};
-              \end{tikzpicture}
-                }_{=0} \\
-            & \vdots \\
-            & =
-              g_{431111}^{(4)}+\textcolor{red}{g_{43121}^{(4)}}+g_{43211}^{(4)}+g_{4322}^{(4)}\\
-            & -2g_{43111}^{(4)}-g_{4321}^{(4)}-\textcolor{red}{g_{4312}^{(4)}}+g_{4311}^{(4)}
-            \end{align*}
-            \item Apply ``straightening identities.''
-              \begin{itemize}
-              \item \(g_{43121}^{(4)} = g_{44111}^{(4)}+g_{43111}^{(4)}\)
-              \item \(g_{4312}^{(4)} = g_{4411}^{(4)}+g_{4311}^{(4)}\)
-              \end{itemize}
-            \end{itemize}
-            \begin{alertblock}{Technique}
-              Use above approach to show formula of Conjecture 3 and
-              \(g_\lambda^{(k)}\) satisfy the same vertical Pieri
-              rule, thus proving Conjecture 3.
-            \end{alertblock}
-        \end{block}
-        \begin{block}{Towards a Vertical Dual Pieri Rule}
-          \begin{itemize}
-          \item Conjecture 4 gives Catalan formula for \(g_\lambda^{(k)}\).
-          \item Catalan-theoretic techniques are promising for dual
-            Pieri rule. Could yield an answer to Conjecture 2.
-          \item Theorem + Conjecture 2 answers Conjecture 1.
-          \end{itemize}
-        \end{block}
+        % \begin{block}{Vertical Pieri Rule}
+        %   \begin{itemize}
+        %   \item \[
+        %       g_{11} \ \begin{tikzpicture}[every node/.style={minimum
+        %           size=0.95cm-\pgflinewidth, outer sep=0pt}]
+        %         \draw[step=1cm,color=black] (0,0) grid (4.0,-4.0);
+        %         \node[fill=red] at (1.5,-0.5) {}; \node[fill=violet]
+        %         at (2.5,-0.5) {}; \node[fill=violet] at (3.5,-0.5) {};
+        %         \node[fill=red] at (3.5,-1.5) {}; \node at (0.5,-0.5)
+        %         {$4$}; \node at (1.5,-1.5)
+        %         {$3$}; \node at (2.5,-2.5)
+        %         {$1$}; \node at (3.5,-3.5) {$1$};
+        %       \end{tikzpicture}
+        %       = \begin{tikzpicture}[every node/.style={minimum
+        %           size=.95cm-\pgflinewidth, outer sep=0pt}]
+        %         \draw[step=1cm,color=black] (0,0) grid (6.0,-6.0);
+        %         \node[fill=red] at (1.5,-0.5) {}; \node[fill=violet]
+        %         at (2.5,-0.5) {}; \node[fill=violet] at (3.5,-0.5) {};
+        %         \node[fill=violet] at (4.5,-0.5) {};
+        %         \node[fill=violet] at (5.5,-0.5) {}; \node[fill=red]
+        %         at (3.5,-1.5) {}; \node[fill=violet] at (4.5,-1.5) {};
+        %         \node[fill=violet] at (5.5,-1.5) {};
+        %         \node[fill=violet] at (4.5,-2.5) {};
+        %         \node[fill=violet] at (5.5,-2.5) {};
+        %         \node[fill=violet] at (4.5,-3.5) {};
+        %         \node[fill=violet] at (5.5,-3.5) {}; \node at
+        %         (0.5,-0.5) {$4$}; \node at (1.5,-1.5)
+        %         {$3$}; \node at (2.5,-2.5)
+        %         {$1$}; \node at (3.5,-3.5)
+        %         {$1$}; \node at (4.5,-4.5)
+        %         {$1$}; \node at (5.5,-5.5) {$1$};
+        %       \end{tikzpicture}
+        %     \]
+        %   \item Apply root removal identities, eg
+        %     \begin{align*}
+        %                     \begin{tikzpicture}[every node/.style={minimum
+        %           size=.95cm-\pgflinewidth, outer sep=0pt}]
+        %         \draw[step=1cm,color=black] (0,0) grid (6.0,-6.0);
+        %         \node[fill=red] at (1.5,-0.5) {}; \node[fill=violet]
+        %         at (2.5,-0.5) {}; \node[fill=violet] at (3.5,-0.5) {};
+        %         \node[fill=violet] at (4.5,-0.5) {};
+        %         \node[fill=violet] at (5.5,-0.5) {}; \node[fill=red]
+        %         at (3.5,-1.5) {}; \node[fill=violet] at (4.5,-1.5) {};
+        %         \node[fill=violet] at (5.5,-1.5) {};
+        %         \node[fill=violet] at (4.5,-2.5) {};
+        %         \node[fill=violet] at (5.5,-2.5) {};
+        %         \node[fill=violet] at (4.5,-3.5) {};
+        %         \node[fill=violet] at (5.5,-3.5) {}; \node at
+        %         (0.5,-0.5) {$4$}; \node at (1.5,-1.5)
+        %         {$3$}; \node at (2.5,-2.5)
+        %         {$1$}; \node at (3.5,-3.5)
+        %         {$1$}; \node at (4.5,-4.5)
+        %         {$1$}; \node at (5.5,-5.5) {$1$};
+        %       \end{tikzpicture}
+        %       & = \begin{tikzpicture}[every node/.style={minimum
+        %           size=.95cm-\pgflinewidth, outer sep=0pt}]
+        %         \draw[step=1cm,color=black] (0,0) grid (6.0,-6.0);
+        %         \node[fill=red] at (1.5,-0.5) {}; \node[fill=violet]
+        %         at (2.5,-0.5) {}; \node[fill=violet] at (3.5,-0.5) {};
+        %         \node[fill=violet] at (4.5,-0.5) {};
+        %         \node[fill=violet] at (5.5,-0.5) {}; \node[fill=red]
+        %         at (3.5,-1.5) {}; \node[fill=violet] at (4.5,-1.5) {};
+        %         \node[fill=violet] at (5.5,-1.5) {};
+        %         \node[fill=violet] at (4.5,-2.5) {};
+        %         \node[fill=violet] at (5.5,-2.5) {};
+        %         \node[fill=violet] at (5.5,-3.5) {}; \node at
+        %         (0.5,-0.5) {$4$}; \node at (1.5,-1.5)
+        %         {$3$}; \node at (2.5,-2.5)
+        %         {$1$}; \node at (3.5,-3.5)
+        %         {$1$}; \node at (4.5,-4.5)
+        %         {$1$}; \node at (5.5,-5.5) {$1$};
+        %       \end{tikzpicture}
+        %         +
+        %         \underbrace{
+        %         \begin{tikzpicture}[every node/.style={minimum
+        %           size=.95cm-\pgflinewidth, outer sep=0pt}]
+        %         \draw[step=1cm,color=black] (0,0) grid (6.0,-6.0);
+        %         \node[fill=red] at (1.5,-0.5) {}; \node[fill=violet]
+        %         at (2.5,-0.5) {}; \node[fill=violet] at (3.5,-0.5) {};
+        %         \node[fill=violet] at (4.5,-0.5) {};
+        %         \node[fill=violet] at (5.5,-0.5) {}; \node[fill=red]
+        %         at (3.5,-1.5) {}; \node[fill=violet] at (4.5,-1.5) {};
+        %         \node[fill=violet] at (5.5,-1.5) {};
+        %         \node[fill=violet] at (4.5,-2.5) {};
+        %         \node[fill=violet] at (5.5,-2.5) {};
+        %         \node[fill=violet] at (4.5,-3.5) {};
+        %         \node[fill=violet] at (5.5,-3.5) {}; \node at
+        %         (0.5,-0.5) {$4$}; \node at (1.5,-1.5)
+        %         {$3$}; \node at (2.5,-2.5)
+        %         {$1$}; \node at (3.5,-3.5)
+        %         {$2$}; \node at (4.5,-4.5)
+        %         {$0$}; \node at (5.5,-5.5) {$1$};
+        %       \end{tikzpicture}
+        %       }_{=0}\\
+        %       & -
+        %       \underbrace{
+        %       \begin{tikzpicture}[every node/.style={minimum
+        %           size=.95cm-\pgflinewidth, outer sep=0pt}]
+        %         \draw[step=1cm,color=black] (0,0) grid (6.0,-6.0);
+        %         \node[fill=red] at (1.5,-0.5) {}; \node[fill=violet]
+        %         at (2.5,-0.5) {}; \node[fill=violet] at (3.5,-0.5) {};
+        %         \node[fill=violet] at (4.5,-0.5) {};
+        %         \node[fill=violet] at (5.5,-0.5) {}; \node[fill=red]
+        %         at (3.5,-1.5) {}; \node[fill=violet] at (4.5,-1.5) {};
+        %         \node[fill=violet] at (5.5,-1.5) {};
+        %         \node[fill=violet] at (4.5,-2.5) {};
+        %         \node[fill=violet] at (5.5,-2.5) {};
+        %         \node[fill=violet] at (4.5,-3.5) {};
+        %         \node[fill=violet] at (5.5,-3.5) {}; \node at
+        %         (0.5,-0.5) {$4$}; \node at (1.5,-1.5)
+        %         {$3$}; \node at (2.5,-2.5)
+        %         {$1$}; \node at (3.5,-3.5)
+        %         {$1$}; \node at (4.5,-4.5)
+        %         {$0$}; \node at (5.5,-5.5) {$1$};
+        %       \end{tikzpicture}
+        %         }_{=0} \\
+        %     & \vdots \\
+        %     & =
+        %       g_{431111}^{(4)}+\textcolor{red}{g_{43121}^{(4)}}+g_{43211}^{(4)}+g_{4322}^{(4)}\\
+        %     & -2g_{43111}^{(4)}-g_{4321}^{(4)}-\textcolor{red}{g_{4312}^{(4)}}+g_{4311}^{(4)}
+        %     \end{align*}
+        %     \item Apply ``straightening identities.''
+        %       \begin{itemize}
+        %       \item \(g_{43121}^{(4)} = g_{44111}^{(4)}+g_{43111}^{(4)}\)
+        %       \item \(g_{4312}^{(4)} = g_{4411}^{(4)}+g_{4311}^{(4)}\)
+        %       \end{itemize}
+        %     \end{itemize}
+        %     \begin{alertblock}{Technique}
+        %       Use above approach to show formula of Conjecture 3 and
+        %       \(g_\lambda^{(k)}\) satisfy the same vertical Pieri
+        %       rule, thus proving Conjecture 3.
+        %     \end{alertblock}
+        % \end{block}
+        % \begin{block}{Towards a Vertical Dual Pieri Rule}
+        %   \begin{itemize}
+        %   \item Conjecture 4 gives Catalan formula for \(g_\lambda^{(k)}\).
+        %   \item Catalan-theoretic techniques are promising for dual
+        %     Pieri rule. Could yield an answer to Conjecture 2.
+        %   \item Theorem + Conjecture 2 answers Conjecture 1.
+        %   \end{itemize}
+        % \end{block}
+        
         \setbeamercolor{block title}{fg=jblue,bg=white} % Change the block title color
-
         \begin{block}{References}
           \begin{bibdiv}
             \begin{biblist}
