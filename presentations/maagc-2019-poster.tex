@@ -44,9 +44,9 @@ distance=0.5pt}}
   \setbeamercolor{block alerted body}{fg=black,bg=dblue!10}
   \begin{alertblock}#1{}}{\end{alertblock}}
 \newenvironment<>{subtleexampleblock}{
-  \setbeamercolor{block alerted title}{fg=white,bg=white} 
+  \setbeamercolor{block alerted title}{fg=white,bg=white}
   \setbeamercolor{block alerted body}{fg=black,bg=palepink}
-  \begin{alertblock}#1{}}{\end{alertblock}}
+  \begin{alertblock}#1{\vspace{-20ex}}}{\end{alertblock}}
 
 \setbeamercolor{block title}{fg=jblue,bg=white}  % Colors of the block
 % titles
@@ -373,7 +373,7 @@ distance=0.5pt}}
               \ydiagram{2,1}*[*(red)]{1+1} 
             \]
           \item Root ideal: given by Dyck path. \[
-              \Psi = \begin{tikzpicture}[every node/.style={minimum size=1.95cm-\pgflinewidth, outer sep=0pt}]
+              \Psi = \begin{tikzpicture}[baseline=-8ex,every node/.style={minimum size=1.95cm-\pgflinewidth, outer sep=0pt}]
                 \draw[step=2cm,color=black] (0,0) grid (8.01,-8.01);
                 \node[fill=red] at (3,-1) {1,2};
                 \node[fill=red] at (5,-1) {1,3};
@@ -383,7 +383,7 @@ distance=0.5pt}}
               \]
             \item \(H(\emptyset;\lambda) = s_\lambda\) (Jacobi-Trudi
               Identity) \[
-                \begin{tikzpicture}[every node/.style={minimum size=0.95cm-\pgflinewidth, outer sep=0pt}]
+                \begin{tikzpicture}[baseline=-4ex,every node/.style={minimum size=0.95cm-\pgflinewidth, outer sep=0pt}]
                   \draw[step=1cm,color=black] (0,0) grid (4.0,-4.0);
                   \node at (0.5,-0.5) {$3$};
                   \node at (1.5,-1.5) {$2$};
@@ -393,11 +393,12 @@ distance=0.5pt}}
                 = s_{3211}
               \]
             \end{itemize}
-            \end{block}
+          \end{block}
+          \vspace{-1cm}
             \begin{block}{\(k\)-Schur Catalans}
               If \(\Psi\) has \(\lambda_i + \)non-roots in row
                 \(i = k\) (ie bandwidth\(=k\)), then \(H(\Psi;\lambda) = s_\lambda^{(k)}\) \[
-                  \begin{tikzpicture}[every node/.style={minimum size=0.95cm-\pgflinewidth, outer sep=0pt}]
+                  \begin{tikzpicture}[baseline=-4ex, every node/.style={minimum size=0.95cm-\pgflinewidth, outer sep=0pt}]
                     \draw[step=1cm,color=black] (0,0) grid (4.0,-4.0);
                     \node[fill=red] at (1.5,-0.5) {};
                     \node[fill=red] at (2.5,-0.5) {};
@@ -410,7 +411,7 @@ distance=0.5pt}}
                   \end{tikzpicture}
                   = s^{(4)}_{4311}
                 \]
-                \vspace{-0.5in}
+                \vspace{-0.3in}
                 \begin{subtleblock}
                   \textbf{Key Feature:} Catalan function definition of \(s_\lambda^{(k)}\) yields \emph{shift
                     invariance}:
@@ -420,7 +421,7 @@ distance=0.5pt}}
                   \] 
                   \[
                     e_{\ell}^\perp \ 
-                 \begin{tikzpicture}[every node/.style={minimum size=1.95cm-\pgflinewidth, outer sep=0pt}]
+                 \begin{tikzpicture}[baseline=-8ex, every node/.style={minimum size=1.95cm-\pgflinewidth, outer sep=0pt}]
                     \draw[step=2cm,color=black] (0,0) grid (8.01,-8.01);
                     \node[fill=red] at (3,-1) {};
                     \node[fill=red] at (5,-1) {};
@@ -432,7 +433,7 @@ distance=0.5pt}}
                     \node at (7,-7) {$\gamma_\ell$};
                   \end{tikzpicture}
                   =
-                  \begin{tikzpicture}[every node/.style={minimum size=1.95cm-\pgflinewidth, outer sep=0pt}]
+                  \begin{tikzpicture}[baseline=-8ex,every node/.style={minimum size=1.95cm-\pgflinewidth, outer sep=0pt}]
                     \draw[step=2cm,color=black] (0,0) grid (8.01,-8.01);
                     \node[fill=red] at (3,-1) {};
                     \node[fill=red] at (5,-1) {};
@@ -492,7 +493,7 @@ distance=0.5pt}}
             \item For example (\(\textcolor{red}{\Psi},
               \textcolor{blue}{\lowers}, \textcolor{violet}{\Psi
                 \intersect \lowers}\)) \[
-                  \begin{tikzpicture}[every node/.style={minimum size=0.95cm-\pgflinewidth, outer sep=0pt}]
+                  \begin{tikzpicture}[baseline=-4ex,every node/.style={minimum size=0.95cm-\pgflinewidth, outer sep=0pt}]
                     \draw[step=1cm,color=black] (0,0) grid (4.0,-4.0);
                     \node[fill=red] at (1.5,-0.5) {};
                     \node[fill=red] at (2.5,-0.5) {};
@@ -507,7 +508,7 @@ distance=0.5pt}}
                   := (1-L_4)^3(1-R_{23})(1-R_{34})Kh_{3421}
                 \]            
               \item \(K(\emptyset;\emptyset;\lambda) = g_\lambda\) \[
-                                    \begin{tikzpicture}[every node/.style={minimum size=0.95cm-\pgflinewidth, outer sep=0pt}]
+                  \begin{tikzpicture}[baseline=-4ex,every node/.style={minimum size=0.95cm-\pgflinewidth, outer sep=0pt}]
                     \draw[step=1cm,color=black] (0,0) grid (4.0,-4.0);
                     \node at (0.5,-0.5) {$3$};
                     \node at (1.5,-1.5) {$2$};
@@ -520,7 +521,7 @@ distance=0.5pt}}
               \begin{subtleblock}
                 \(\g_\lambda^{(k)} = K(\Psi;\lowers;\lambda)\) with
                 \(band(\Psi) = k\), \(band(\lowers)=k+1\) \[
-                  \begin{tikzpicture}[every node/.style={minimum
+                  \begin{tikzpicture}[baseline=-4ex, every node/.style={minimum
                       size=0.95cm-\pgflinewidth, outer sep=0pt}]
                     \draw[step=1cm,color=black] (0,0) grid (4.0,-4.0);
                     \node[fill=red] at (1.5,-0.5) {};

@@ -39,6 +39,7 @@ scalerel
 setspace
 subfiles
 tikz-cd
+tikzmark
 times
 tocloft
 todonotes
