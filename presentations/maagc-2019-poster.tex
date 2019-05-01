@@ -63,7 +63,8 @@ distance=0.5pt}}
 \newcommand{\g}{\mathfrak{g}}
 \newcommand{\covers}{\mathrel{\gtrdot}}
 \newcommand{\coveredby}{\mathrel{\lessdot}}
-
+\DeclareMathOperator{\weight}{weight}
+\DeclareMathOperator{\band}{band}
 
 %% Title matter
   \title[K-theoretic Catalan Functions]{K-theoretic Catalan Functions  George H. Seelinger (joint with Jonah Blasiak and Jennifer Morse)}
@@ -134,34 +135,6 @@ distance=0.5pt}}
            \]
          \item Process is bijective
          \end{itemize}
-
-           % \item Dual \(k\)-Schur functions, \(F_\lambda^{(k)}\) for
-           %   \(k\)-bounded partitions \(\lambda\).
-           %   \begin{itemize}
-           %   \item Underlying combinatorics by weak order on
-           %     Grassmannian elements of \(\tilde{S}_n\)
-           %   \item Ordered by ``residue order'' (Describe this better)
-           %   \item \[
-           %       \emptyset \subset \ydiagram{1} \subset
-           %      \ydiagram{1,1} \subset
-           %      \ydiagram{1,1,2}
-           %      \to \ytableaushort{3,2,13} \to x_1x_2x_3
-           %    \]
-           %  \item Weight generating function \(F_\lambda^{(k)} =
-           %    \sum_T x^{weight(T)}\) eg \[
-           %      F_{111}^{(2)} = x_1 x_2 x_3
-           %    \]
-           %   \item Equivalently defined by Pieri rule:
-           %   \end{itemize}
-
-            % play the analogous K-theoretic
-            % role of the \(k\)-Schur functions. Furthermore, the Pieri
-            % rule for \(g_\lambda^{(k)}\) is controlled by affine
-            % set-valued tableaux, but there is no known combinatoric
-            % for the Pieri rule of \(G_\lambda^{(k)}\). By duality,
-            % this is
-            % equivalent to finding a dual Pieri rule for \(g_\lambda^{(k)}\)
-%          \end{itemize}
         \end{block}
       \end{column}
       \begin{column}{.38\paperwidth}
@@ -170,7 +143,15 @@ distance=0.5pt}}
           \begin{column}{.18\paperwidth}
             \begin{block}{Dual \(k\)-Schur Functions}
               Weight generating functions of weak tableaux of shape \(c(\lambda)\). \[
-                F_\lambda^{(k)} := \sum_T x^{weight(T)}
+                F_\lambda^{(k)} := \sum_T x^{\weight(T)}
+              \] \[
+                \ytableausetup{boxsize=1em}
+                \emptyset \subset \ydiagram{1} \subset
+                \ydiagram{1,1} \subset
+                \ydiagram{1,1,2}
+                \to \ytableaushort{3,2,13} \to x_1x_2x_3
+              \]\[
+                F_{111}^{(2)} = x_1 x_2 x_3
               \]
               Pieri rule: 
             \end{block}
@@ -178,8 +159,20 @@ distance=0.5pt}}
           \begin{column}{.18\paperwidth}
             \begin{block}{\(k\)-Schur Functions}
               Weight generating functons of strong marked tabelaux of shape \(c(\lambda)\). \[
-                s_\lambda^{(k)} := \sum_T x^{weight(T)}
-              \]
+                s_\lambda^{(k)} := \sum_T x^{\weight(T)}
+              \] \ytableausetup{boxsize=0.3em}
+              \begin{align*}
+                \emptyset \subset \ydiagram[*(black)]{1} \subset
+                \ydiagram{1,1}*[*(black)]{1} \subset
+                \ydiagram{1,1,2}*[*(black)]{1} \searrow & \\
+                \emptyset \subset \ydiagram[*(black)]{1} \subset
+                \ydiagram{1,1}*[*(black)]{1} \subset
+                \ydiagram{1,1,2}*[*(black)]{0,0,1+1} 
+                \to & 3 x_1 x_2 x_3 \\
+                \emptyset \subset \ydiagram[*(black)]{1} \subset
+                \ydiagram{2}*[*(black)]{1+1} \subset
+                \ydiagram{1,1,2}*[*(black)]{1,1} \nearrow
+              \end{align*}
               Dual Pieri rule:
             \end{block}
           \end{column}
@@ -195,12 +188,12 @@ distance=0.5pt}}
           \begin{column}{.18\paperwidth}
             \begin{block}{Affine Grothendieck Polynomials}
             \(G_\lambda^{(k)}\) given as a weight generating function of
-            affine set-valued tableaux. \[
+            affine set-valued tableaux of shape \(c(\lambda)\). \[
                 G_\lambda^{(k)} = \sum_{T}
-                (-1)^{|\lambda|+|weight(T)|} x^{weight(T)}
+                (-1)^{|\lambda|+|\weight(T)|} x^{\weight(T)}
               \]
             \begin{itemize}
-            \item Each \(T_{\geq x}\) is a \(k+1\)-core
+            \item Each \(T_{\leq x}\) is a \(k+1\)-core
               \ytableausetup{boxsize=1.0em}
               \[
                 \hspace{-0.6in} T =
@@ -317,7 +310,7 @@ distance=0.5pt}}
                 \vspace{-0.3in}
                 \begin{subtleblock}
                   \textbf{Key Feature:} yields \emph{shift
-                    invariance}:
+                    invariance}
                   \[
                     e_\ell^\perp s_{\lambda+1^\ell}^{(k+1)} =
                     s_\lambda^{(k)}
@@ -423,7 +416,7 @@ distance=0.5pt}}
             \end{itemize}
               \begin{subtleblock}
                 \(\g_\lambda^{(k)} := K(\Psi;\lowers;\lambda)\) with
-                \(band(\Psi) = k\), \(band(\lowers)=k+1\) \[
+                \(\band(\Psi) = k\), \(\band(\lowers)=k+1\) \[
                   \begin{tikzpicture}[baseline=-4ex, every node/.style={minimum
                       size=0.95cm-\pgflinewidth, outer sep=0pt}]
                     \draw[step=1cm,color=black] (0,0) grid (4.0,-4.0);
