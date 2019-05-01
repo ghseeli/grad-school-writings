@@ -27,6 +27,7 @@
 \definecolor{palepink}{rgb}{0.98, 0.85, 0.87}
 \definecolor{indianred}{rgb}{0.8, 0.36, 0.36}
 \definecolor{coralred}{rgb}{1.0, 0.25, 0.25}
+\definecolor{lightblue}{rgb}{.68,.85,.9} % 
 
 \tikzset{wei/.style=%{red,double=pink,thick,doubledistance=1.5pt}}
 {red,double=red,double
@@ -65,10 +66,35 @@ distance=0.5pt}}
 \newcommand{\coveredby}{\mathrel{\lessdot}}
 \DeclareMathOperator{\weight}{weight}
 \DeclareMathOperator{\band}{band}
+\newcommand{\mynone}{\ }
+
+%% Title
+
+\setbeamertemplate{headline}{
+ \leavevmode
+  \begin{columns}
+   \begin{column}{\linewidth}
+    \vskip1cm
+    \raggedright
+    \usebeamercolor{title in
+      headline}{\color{jblue}\Large{\textbf{\inserttitle}}\\[0.5ex]}
+    \raggedleft
+    \vspace{-2cm}
+    \usebeamercolor{author in headline}{\color{fg}\large{\insertauthor}\\[0.5ex]}
+%    \usebeamercolor{institute in headline}{\color{fg}\large{\insertinstitute}\\[1ex]}
+%    \vskip1cm
+   \end{column}
+   \vspace{1cm}
+  \end{columns}
+ \vspace{0.5in}
+ \hspace{0.5in}\begin{beamercolorbox}[wd=47in,colsep=0.15cm]{cboxb}\end{beamercolorbox}
+ \vspace{0.1in}
+}
 
 %% Title matter
-  \title[K-theoretic Catalan Functions]{K-theoretic Catalan Functions  George H. Seelinger (joint with Jonah Blasiak and Jennifer Morse)}
-  \author[Seelinger]{\ \vspace{-3ex}}
+  \title[K-theoretic Catalan Functions]{\(K\)-THEORETIC CATALAN FUNCTIONS}
+  \author{George H. Seelinger (joint with Jonah Blasiak and Jennifer
+      Morse)}
   \institute[UVA]{\ \vspace{-3ex}}
   \date{\ \vspace{-1ex}}
 %% Document
@@ -76,41 +102,48 @@ distance=0.5pt}}
   \begin{frame}[t] % The whole poster is in one Beamer frame
     \begin{columns}[t] % Align all column contents to the top
       \begin{column}{.19\paperwidth}
-        \begin{block}{Background}
+        \begin{block}{Overview}
           \begin{itemize}
-          \item Schur functions and Grothendieck polynomials give
+          \item Schur functions, \(s_\lambda\), and Grothendieck
+            polynomials, \(G_\lambda\), give
             representatives for cohomology and \(K\)-theory of the
             Grassmannian.
           \item Pieri rules determine the structure constants of these
             rings.
-          \item We seek to do the same for the affine Grassmannian.
+          \item Representatives and Pieri rules are known for
+            cohomology of affine Grassmannian.
+          \item We seek to better understand the corresponding picture
+            for the \(K\)-theory of the affine Grassmannian.
           \end{itemize}
         \end{block}
         \begin{block}{Affine combinatorics}
-        Grassmannian words \(w \in \tilde{S}_n\) correspond to
-        \(n\)-cores, ie shapes that have no cell with hook length
-        \(n\):
+          \(w \in \tilde{S}_n \correspondsto\) 
+        \(n\)-cores
         \ytableausetup{boxsize=0.6em}
         \[
           \ydiagram{1,2,3,4,5,5}*[\bullet]{0,1+1,1+1,1+1,1+4}*[*(red)]{0,0,0,0,1+1}
-          \ \ \text{red cell has hook-length }7
+          \ \ \overset{n\text{-core}=\text{partition with no cell of
+              hook-length }n}{\scriptstyle \text{\emph{red cell has hook-length }}7}
         \]
-        Weak order
+        \textbf{Weak order}
         \begin{itemize}
-        \item Ordered by adding all cells of same reside.
-          \ytableausetup{boxsize=1.0em} \[
-            \emptyset \coveredby \ytableaushort{0}*[*(red)]{1} \coveredby
-            \ytableaushort{{}1}*[*(red)]{1+1} \coveredby \ytableaushort{2,{}{}2}*[*(red)]{1,2+1}
-            \coveredby \ytableaushort{{}0,{}{}{}0}*[*(red)]{1+1,3+1}
-          \]\[
-            \to \ytableaushort{34,1234}
+        \item Covers differ by boxes of same color.
+          \ytableausetup{boxsize=0.8em}
+          \[
+            \ydiagram{1,1,2,4,6,8,10,12}*[*(blue)]{1}*[*(red)]{0,0,1}*[*(blue)]{0,0,1+1,1}*[*(red)]{0,0,0,2+1,1+1,1}*[*(blue)]{0,0,0,3+1,2+1,1+1,1}*[*(red)]{0,0,0,0,4+1,3+1,2+1,1+1}*[*(blue)]{0,0,0,0,5+1,4+1,3+1,2+1}*[*(red)]{0,0,0,0,0,6+1,5+1,4+1}*[*(blue)]{0,0,0,0,0,7+1,6+1,5+1}*[*(red)]{0,0,0,0,0,0,8+1,7+1}*[*(blue)]{0,0,0,0,0,0,9+1,8+1}*[*(red)]{0,0,0,0,0,0,0,10+1}*[*(blue)]{0,0,0,0,0,0,0,11+1}
           \]
-        \item Weak tableaux = chain in weak order
+          \\
+          \[
+            \emptyset \coveredby \ydiagram{1}*[*(black)]{1} \coveredby
+            \ydiagram{2}*[*(black)]{1+1} \coveredby \ydiagram{1,3}*[*(black)]{1,2+1}
+            \coveredby \ydiagram{2,4}*[*(black)]{1+1,3+1}
+          \]
         \end{itemize}
-        Strong (Bruaht) order
+        \textbf{Strong (Bruaht) order}
         \begin{itemize}
-        \item Ordered by containment
-              \ytableausetup{boxsize=0.3em}
+        \item Ordered by containment of shapes.
+        \item Covers differ by a ribbon \(+\) its copies.
+          \ytableausetup{boxsize=0.45em}
               \[
                 \ytableausetup{centertableaux}
                 % \ydiagram{1,1,4,4} \coveredby \ydiagram{1,1,1,4,4}
@@ -122,233 +155,220 @@ distance=0.5pt}}
                 \ydiagram{1,1,1,1,3,3,3,6,6} \coveredby
                 \ydiagram{1,2,2,3,4,4,5,6,6}*[*(red)]{0,1+1,1+1,1+2,3+1,3+1,3+2}
               \]
-            \item Strong strip = copies of a ribbon
-            \item Strong marked strip = one copy of ribbon marked
-            \item Strong marked tableaux = chain in strong order with markings
-         \end{itemize}
-         \(k+1\)-core to \(k\)-bounded partition
-         \begin{itemize}
-         \item Highlight all cells with hook length \(\leq k\) and
-           justify highlighted cells \[
-             \ydiagram{1,2,2,5,5,8,12}*[*(blue)]{1,2,2,2+3,2+3,5+3,8+4}
-             \to \ydiagram[*(blue)]{1,2,2,3,3,3,4}
-           \]
-         \item Process is bijective
          \end{itemize}
         \end{block}
       \end{column}
       \begin{column}{.38\paperwidth}
-        \vspace{-0.1in}
+        \vspace{-2cm}
         \begin{columns}[t]
           \begin{column}{.18\paperwidth}
             \begin{block}{Dual \(k\)-Schur Functions}
-              Weight generating functions of weak tableaux of shape \(c(\lambda)\). \[
-                F_\lambda^{(k)} := \sum_T x^{\weight(T)}
-              \] \[
-                \ytableausetup{boxsize=1em}
-                \emptyset \subset \ydiagram{1} \subset
-                \ydiagram{1,1} \subset
-                \ydiagram{1,1,2}
-                \to \ytableaushort{3,2,13} \to x_1x_2x_3
-              \]\[
-                F_{111}^{(2)} = x_1 x_2 x_3
+              Generating functions of weak tableaux. \[
+                F_\lambda^{(k)} := \sum x^{\weight(T)}
               \]
-              Pieri rule: 
+              \vspace{-1,5cm}
+              \begin{subtleblock}
+                \textbf{Weak Tableaux:} \\
+                Maximal chains in the weak order.
+                \[
+                  \ytableausetup{boxsize=0.6em} \emptyset \subset
+                  \ydiagram{1} \subset \ydiagram{1,1} \subset
+                  \ydiagram{1,1,2} \subset \ydiagram{1,1,3} \to
+                  \ytableausetup{boxsize=1em} \ytableaushort{3,2,134}
+                \]
+              \end{subtleblock}
+
             \end{block}
           \end{column}
           \begin{column}{.18\paperwidth}
             \begin{block}{\(k\)-Schur Functions}
-              Weight generating functons of strong marked tabelaux of shape \(c(\lambda)\). \[
-                s_\lambda^{(k)} := \sum_T x^{\weight(T)}
-              \] \ytableausetup{boxsize=0.3em}
-              \begin{align*}
-                \emptyset \subset \ydiagram[*(black)]{1} \subset
-                \ydiagram{1,1}*[*(black)]{1} \subset
-                \ydiagram{1,1,2}*[*(black)]{1} \searrow & \\
-                \emptyset \subset \ydiagram[*(black)]{1} \subset
-                \ydiagram{1,1}*[*(black)]{1} \subset
-                \ydiagram{1,1,2}*[*(black)]{0,0,1+1} 
-                \to & 3 x_1 x_2 x_3 \\
-                \emptyset \subset \ydiagram[*(black)]{1} \subset
-                \ydiagram{2}*[*(black)]{1+1} \subset
-                \ydiagram{1,1,2}*[*(black)]{1,1} \nearrow
-              \end{align*}
-              Dual Pieri rule:
+              Generating functons of strong tabelaux. \[
+                s_\lambda^{(k)} := \sum x^{\weight(T)}
+              \]
+              \vspace{-1.5cm}
+              \begin{subtleblock}
+                \textbf{Marked cover:} Strong cover with selection of
+                one ribbon \\
+                \textbf{Strong Tableaux:} Maximal strong order chains of marked covers
+                \ytableausetup{boxsize=0.3em}
+                \begin{align*}
+                  \emptyset \subset \ydiagram[*(black)]{1} \subset
+                  \ydiagram{1,1}*[*(black)]{1} \subset
+                  \ydiagram{1,1,2}*[*(black)]{1} & \\
+                  \emptyset \subset \ydiagram[*(black)]{1} \subset
+                  \ydiagram{1,1}*[*(black)]{1} \subset
+                  \ydiagram{1,1,2}*[*(black)]{0,0,1+1} 
+                   \\
+                  \emptyset \subset \ydiagram[*(black)]{1} \subset
+                  \ydiagram{2}*[*(black)]{1+1} \subset
+                  \ydiagram{1,1,2}*[*(black)]{1,1}
+                \end{align*}
+              \end{subtleblock}
             \end{block}
           \end{column}
         \end{columns}
+        \vspace{-2cm}
+        \textbf{Pieri rule:}
         \[
           e_r F_\lambda^{(k)} = \ \ \ \sum_{\mathclap{\substack{\mu = \lambda + \text{ strong
               marked vertical }\\\text{strip of size }r}}} \ \ \ F_\mu^{(k)}
           \iff e_r^\perp s_\mu^{(k)} = \ \ \ \sum_{\mathclap{\substack{\lambda = \mu - \text{
               strong marked vertical }\\\text{strip of size }r}}} \ \
       \ s_\lambda^{(k)}
-        \]
+    \]
+    where a \textbf{strong vertical strip} is a chain of marked covers
+    with marking proceeding north to south.
         \begin{columns}[t]
           \begin{column}{.18\paperwidth}
             \begin{block}{Affine Grothendieck Polynomials}
-            \(G_\lambda^{(k)}\) given as a weight generating function of
-            affine set-valued tableaux of shape \(c(\lambda)\). \[
-                G_\lambda^{(k)} = \sum_{T}
+            Generating functions of affine SVTs.\[
+                G_\lambda^{(k)} := \sum
                 (-1)^{|\lambda|+|\weight(T)|} x^{\weight(T)}
               \]
-            \begin{itemize}
-            \item Each \(T_{\leq x}\) is a \(k+1\)-core
-              \ytableausetup{boxsize=1.0em}
-              \[
-                \hspace{-0.6in} T =
-                \ytableaushort{7,{\scriptstyle{2,5}}6,1{\scriptstyle{2,3}}4{\scriptstyle{4,6}}}
-                \ \
-                T_{\leq 4} = \ytableaushort{2,1{\scriptstyle{2,3}}44}
-              \]
-            \item \(G_\lambda^{(k)} = F_\lambda^{(k)} + \text{
-                higher order terms}\)
-            \end{itemize}
+              \vspace{-1.5cm}
+              \begin{subtleblock}
+                \textbf{Affine Set-Valued Tableaux:} \\
+                Each \(T_{\leq x}\) is a \(k+1\)-core.
+                  \ytableausetup{boxsize=1.0em}
+                  \[
+                    \hspace{-0.6in} T =
+                    \ytableaushort{7,{\scriptstyle{2,5}}6,1{\scriptstyle{2,3}}4{\scriptstyle{4,6}}}
+                    \ \ T_{\leq 4} =
+                    \ytableaushort{2,1{\scriptstyle{2,3}}44}
+                  \]                
+                \end{subtleblock}
+                \begin{itemize}
+                \item \(G_\lambda^{(k)} = F_\lambda^{(k)} + \text{ higher
+                    order terms}\)
+                \item \(G_\lambda^{(k)} = G_\lambda\) for
+                  large \(k\).
+                \end{itemize}
             \end{block}
           \end{column}
           \begin{column}{.18\paperwidth}
             \begin{block}{Dual Affine Grothendieck Polynomials}
-              \(g_\lambda^{(k)}\) defined by duality with respect to
+              \(g_\lambda^{(k)}\) is dual basis to
               \(G_\lambda^{(k)}\).
-              \begin{subtleblock}
-                There is no known direct definition of
-                \(g_\lambda^{(k)}\).
-                \end{subtleblock}
               \begin{itemize}
               \item \(g_\lambda^{(k)} = s_\lambda^{(k)} + \text{ lower
-                order terms}\)
+                  order terms}\)
+              \item \(g_\lambda^{(k)} = g_\lambda\), dual to
+                \(G_\lambda\), for large \(k\).
             \end{itemize}
-            \begin{subtleblock}
-              \textbf{Remarkable Property:}
-              \begin{itemize}
-              \item k-Schur branching:
-                \(s_\lambda^{(k)} = \sum s_\mu^{(k+1)}\).
-              \item Similarly,
-                \(g_\lambda^{(k)} = \sum_\mu a_{\lambda \mu}^{(k)}
-                g_\mu^{(k)}\) for unknown \(a_{\lambda \mu}^{(k)}\).
-              \end{itemize}
-            \end{subtleblock}
+            \begin{alertblock}{Open Problem}
+              Find a direct definition of \(g_\lambda^{(k)}\).
+            \end{alertblock}
             \end{block}
           \end{column}
         \end{columns}
         \begin{alertblock}{Open Problem}
           \begin{center}
-            What is the \(G_\lambda^{(k)}\) Pieri rule? \(\iff\) What
-            is the \(g_\lambda^{(k)}\) dual Pieri rule?
+            Describe the \(G_\lambda^{(k)}\) Pieri rule. \(\iff\) Describe the \(g_\lambda^{(k)}\) dual Pieri rule.
           \end{center}
         \end{alertblock}
+        \begin{block}{Branching}
+          \begin{itemize}
+          \item \(k\)-Schur functions are \(k+1\)-Schur positive:
+            \(s_\lambda^{(k)} = \sum a_{\lambda \mu}^{(k)} s_\mu^{(k+1)}\).
+          \item Iteration gives Schur positivity of \(k\)-Schur functions.
+          \item \textbf{Conjecture:} \(g_\lambda^{(k)}\) is Schur positive.
+          \item \textbf{Conjecture:} \(g_\lambda^{(k)} = \sum_\mu (-1)^{|\lambda|-|\mu|} a_{\lambda \mu}^{(k)}
+            g_\mu^{(k+1)}\) for \(a_{\lambda \mu}^{(k)} \in \Z_{\geq 0}\).
+          \end{itemize}
+        \end{block}
         \end{column}
         \begin{column}{0.19\paperwidth}
         \begin{block}{Catalan Functions}
           For \(\gamma \in \Z^\ell\), \[
-            H(\Psi;\gamma) := \prod_{(i,j) \in \Delta^+\setminus
+            H(\Psi;\gamma) := \prod_{(i,j) \not\in 
               \Psi} (1-R_{ij}) h_\gamma
           \]
           \begin{itemize}
-          \item Raising operators \(R_{i,j}\) \ytableausetup{boxsize=0.5em}
+          \item Raising operators \(R_{i,j}(h_\lambda) = h_{\lambda+\epsilon_i-\epsilon_j}\) \ytableausetup{boxsize=0.5em}
             \[
               R_{1,3} \left( \ydiagram{1,1,3}*[*(red)]{1} \right)
               = \ydiagram{1,4}*[*(red)]{0,3+1} \ \ \ R_{2,3}
               \left( \ydiagram{1,1,1}*[*(red)]{1} \right) =
               \ydiagram{2,1}*[*(red)]{1+1} 
             \]
-          \item Root ideal: given by Dyck path. \[
-              \Psi = \begin{tikzpicture}[baseline=-8ex,every node/.style={minimum size=1.95cm-\pgflinewidth, outer sep=0pt}]
-                \draw[step=2cm,color=black] (0,0) grid (8.01,-8.01);
-                \node[fill=red] at (3,-1) {1,2};
-                \node[fill=red] at (5,-1) {1,3};
-                \node[fill=red] at (7,-1) {1,4};
-                \node[fill=red] at (7,-3) {2,4};
-              \end{tikzpicture}
-              \]
+          \item Root ideal \(\Psi\): given by Dyck path.
+            \ytableausetup{mathmode, boxsize=1em,centertableaux}
+            \[
+              \Psi =
+              \begin{ytableau}
+                \mynone &*(lightblue)\text{\tiny (12)}  &*(red)\text{\tiny (13)}   &*(red)\text{\tiny (14)}  &*(red)
+                \text{\tiny (15)}\\
+                \mynone &\mynone &*(red) \text{\tiny (23)}  &*(red)\text{\tiny (24)}
+                &*(red) \text{\tiny (25)}\\
+                \mynone &\mynone &\mynone &*(lightblue) \text{\tiny (34)}
+                &*(red)\text{\tiny (35)} \\
+                \mynone &\mynone &\mynone&\mynone&*(lightblue) \text{\tiny (45)}\\
+                \mynone &\mynone &\mynone&\mynone&\mynone\\
+              \end{ytableau}
+              \ \ \ \overset{\text{\textcolor{red}{\scriptsize{Roots above Dyck
+                    path}}}}{\text{\textcolor{blue}{\scriptsize{Non-roots below}}}}
+            \]
+          \end{itemize}
+          \vspace{-0.5cm}
+          \begin{align*}
+            & H(\Psi;54332) \\
+            & = \textcolor{blue}{(1-R_{12})(1-R_{34})(1-R_{45})} h_{54332} \\
+            & = h_{54332}-h_{45332}-h_{54422}-h_{54341}\\
+            & + h_{45422} + h_{45341} + h_{54431} - h_{45431}
+          \end{align*}
+          \vspace{-1cm}
+          \begin{itemize}
             \item \(H(\emptyset;\lambda) = s_\lambda\) (Jacobi-Trudi
-              Identity) \[
-                \begin{tikzpicture}[baseline=-4ex,every node/.style={minimum size=0.95cm-\pgflinewidth, outer sep=0pt}]
-                  \draw[step=1cm,color=black] (0,0) grid (4.0,-4.0);
-                  \node at (0.5,-0.5) {$3$};
-                  \node at (1.5,-1.5) {$2$};
-                  \node at (2.5,-2.5) {$1$};
-                  \node at (3.5,-3.5) {$1$};
-                \end{tikzpicture}
-                = s_{3211}
-              \]
+              Identity)
             \end{itemize}
-            \vspace{-1.5cm}
-            \begin{align*}
-              \begin{tikzpicture}[baseline=-4ex, every node/.style={minimum size=0.95cm-\pgflinewidth, outer sep=0pt}]
-                    \draw[step=1cm,color=black] (0,0) grid (4.0,-4.0);
-                    \node[fill=red] at (1.5,-0.5) {};
-                    \node[fill=red] at (2.5,-0.5) {};
-                    \node[fill=red] at (3.5,-0.5) {};
-                    \node[fill=red] at (3.5,-1.5) {};
-                    \node at (0.5,-0.5) {$4$};
-                    \node at (1.5,-1.5) {$3$};
-                    \node at (2.5,-2.5) {$1$};
-                    \node at (3.5,-3.5) {$1$};
-                  \end{tikzpicture}
-              & = (1-R_{23})(1-R_{34})h_{4311} \\
-              & = h_{4311}-h_{4401}-h_{432}+h_{441}
-            \end{align*}
           \end{block}
-          \vspace{-1.5cm}
-            \begin{block}{\(k\)-Schur Catalans}
-              If \(\Psi\) has \(\lambda_i + \)non-roots in row
-                \(i = k\) (ie bandwidth\(=k\)), then \(H(\Psi;\lambda) = s_\lambda^{(k)}\) \[
-                  \begin{tikzpicture}[baseline=-4ex, every node/.style={minimum size=0.95cm-\pgflinewidth, outer sep=0pt}]
-                    \draw[step=1cm,color=black] (0,0) grid (4.0,-4.0);
-                    \node[fill=red] at (1.5,-0.5) {};
-                    \node[fill=red] at (2.5,-0.5) {};
-                    \node[fill=red] at (3.5,-0.5) {};
-                    \node[fill=red] at (3.5,-1.5) {};
-                    \node at (0.5,-0.5) {$4$};
-                    \node at (1.5,-1.5) {$3$};
-                    \node at (2.5,-2.5) {$1$};
-                    \node at (3.5,-3.5) {$1$};
-                  \end{tikzpicture}
-                  = s^{(4)}_{4311}
-                \]
-                \vspace{-0.3in}
+          \begin{block}{\(k\)-Schur Catalans}
+            \(s_\lambda^{(k)} = H(\Psi;\lambda)\) for particular
+            \(\Psi\), \\
+            defined by \(\underbrace{\lambda_i+\#
+              \text{non-roots in row } i}_{\text{bandwidth}}~=~k\).
+            \ytableausetup{mathmode, boxsize=1em,centertableaux}
+            \[
+              s_{33211}^{(4)} = 
+              {\footnotesize
+                \begin{ytableau}
+                  *(white) 3     &*(blue)  &*(red)   &*(red)  &*(red)  &*(red) \\
+                  \mynone & *(white)3 & *(blue) & *(red) & *(red)  &*(red)  \\
+                  \mynone &*(white)  & *(white)2 & *(blue) & *(blue)  &*(red)  \\
+                  \mynone &*(white)  & *(white)  & *(white)1 & *(blue) &*(blue) \\
+                  \mynone &\mynone  &\mynone  &\mynone  & *(white)1 & *(blue) \\
+                  \mynone &\mynone  &\mynone  &\mynone  &*(white)  & *(white) 1
+                \end{ytableau}
+              }
+              \leftarrow\,\text{\small{4 - 2 non-roots}}
+              \quad
+            \]\[
+              s_{44322}^{(5)} =
+              {\footnotesize
+                \begin{ytableau}
+                  *(white) 4     &*(blue)  &*(red)   &*(red)  &*(red)  &*(red) \\
+                  \mynone & *(white)4 & *(blue) & *(red) & *(red)  &*(red)  \\
+                  \mynone &*(white)  & *(white)3 & *(blue) & *(blue)  &*(red)  \\
+                  \mynone &*(white)  & *(white)  & *(white)3 & *(blue) &*(blue) \\
+                  \mynone &\mynone  &\mynone  &\mynone  & *(white)2 & *(blue) \\
+                  \mynone &\mynone  &\mynone  &\mynone  &*(white)  & *(white) 2
+                \end{ytableau}
+              }
+              \leftarrow\, \text{\small{5 - 3 non-roots}}
+            \]
+            \textbf{Why use Catalan \(k\)-Schurs?} \\
                 \begin{subtleblock}
-                  \textbf{Key Feature:} yields \emph{shift
-                    invariance}
+                  \textbf{Shift Invariance:}
                   \[
                     e_\ell^\perp s_{\lambda+1^\ell}^{(k+1)} =
                     s_\lambda^{(k)}
-                  \] 
-                  \[
-                    e_{\ell}^\perp \ 
-                 \begin{tikzpicture}[baseline=-8ex, every node/.style={minimum size=1.95cm-\pgflinewidth, outer sep=0pt}]
-                    \draw[step=2cm,color=black] (0,0) grid (8.01,-8.01);
-                    \node[fill=red] at (3,-1) {};
-                    \node[fill=red] at (5,-1) {};
-                    \node[fill=red] at (7,-1) {};
-                    \node[fill=red] at (7,-3) {};
-                    \node at (1,-1) {$\gamma_1$};
-                    \node at (3,-3) {$\gamma_2$};
-                    \node at (5,-5) {$\ddots$};
-                    \node at (7,-7) {$\gamma_\ell$};
-                  \end{tikzpicture}
-                  =
-                  \begin{tikzpicture}[baseline=-8ex,every node/.style={minimum size=1.95cm-\pgflinewidth, outer sep=0pt}]
-                    \draw[step=2cm,color=black] (0,0) grid (8.01,-8.01);
-                    \node[fill=red] at (3,-1) {};
-                    \node[fill=red] at (5,-1) {};
-                    \node[fill=red] at (7,-1) {};
-                    \node[fill=red] at (7,-3) {};
-                    \node at (1,-1) [font=\fontsize{20}{0}\selectfont]
-                    {$\tiny \gamma_1-1$};
-                    \node at (3,-3) [font=\fontsize{20}{0}\selectfont]
-                    {$\tiny \gamma_2-1$};
-                    \node at (5,-5) {$\ddots$};
-                    \node at (7,-7) [font=\fontsize{20}{0}\selectfont] {$\gamma_\ell-1$};
-                  \end{tikzpicture}
-                \]
+                  \]
               \end{subtleblock}
               \vspace{-0.3cm}
-          \begin{alertblock}{Technique}
-              \(s^{(k)}_\lambda\) branching coefficients are dual
+              \begin{alertblock}{Corollary}
+              \(s^{(k)}_\lambda\) branching follows from dual
               Pieri rule!
-              
+              \vspace{0.5cm}
               \[
                   s_\lambda^{(k)} \tikzmarknode{shift}{=} e_\ell^\perp
                   s_{\lambda+1^\ell}^{(k+1)} \tikzmarknode{pieri}{=} \, \sum_{\mu} \, s_{\mu}^{(k+1)}
@@ -362,7 +382,7 @@ distance=0.5pt}}
               ;
 
               \draw[->,>=latex,ultra thick]
-              ++(319pt,125pt) 
+              ++(319pt,100pt) 
               node[anchor=south,text width=5cm] 
               {dual Pieri
               } -| ([shift={(0pt,0pt)}]pieri)
@@ -373,110 +393,103 @@ distance=0.5pt}}
       \end{column}
       \begin{column}{0.19\paperwidth}
         \begin{block}{K-theoretic Catalan Functions}
-          \begin{itemize}
-          \item For \(\gamma \in \Z^\ell\), root ideals
+          For \(\gamma \in \Z^\ell\), root ideals
             \(\Psi,\lowers\) \[
               \hspace{-0.5in} K(\Psi;\lowers;\gamma) := \prod_{\mathclap{(i,j) \in
-                \lowers}}(1-L_j)\prod_{\mathclap{(i,j) \in \Delta^+ \setminus
+                \lowers}}(1-L_j)\prod_{\mathclap{(i,j) \not\in
                 \Psi}}(1-R_{ij}) Kh_\gamma
             \]
-          \item Lowering operators \(L_j\)
+          \begin{itemize}
+          \item Lowering operators \(L_j(Kh_\lambda) = Kh_{\lambda-\epsilon_j}\)
+            \ytableausetup{boxsize=0.6em}
             \[ L_3\left( \ydiagram{1,1,3} \right) =
               \ydiagram{1,3} \ \ L_{1}\left( \ydiagram{1,1,3} \right)
               = \ydiagram{1,1,2}
             \]
-            \begin{itemize}
-            \item For example (\(\textcolor{red}{\Psi},
-              \textcolor{blue}{\lowers}, \textcolor{violet}{\Psi
-                \intersect \lowers}\)) \[
-                  \begin{tikzpicture}[baseline=-4ex,every node/.style={minimum size=0.95cm-\pgflinewidth, outer sep=0pt}]
-                    \draw[step=1cm,color=black] (0,0) grid (4.0,-4.0);
-                    \node[fill=red] at (1.5,-0.5) {};
-                    \node[fill=red] at (2.5,-0.5) {};
-                    \node[fill=violet] at (3.5,-0.5) {};
-                    \node[fill=violet] at (3.5,-1.5) {};
-                    \node[fill=blue] at (3.5,-2.5) {};
-                    \node at (0.5,-0.5) {$3$};
-                    \node at (1.5,-1.5) {$4$};
-                    \node at (2.5,-2.5) {$2$};
-                    \node at (3.5,-3.5) {$1$};
-                  \end{tikzpicture}
-                  := (1-L_4)^3(1-R_{23})(1-R_{34})Kh_{3421}
-                \]            
-              \item \(K(\emptyset;\emptyset;\lambda) = g_\lambda\) \[
-                  \begin{tikzpicture}[baseline=-4ex,every node/.style={minimum size=0.95cm-\pgflinewidth, outer sep=0pt}]
-                    \draw[step=1cm,color=black] (0,0) grid (4.0,-4.0);
-                    \node at (0.5,-0.5) {$3$};
-                    \node at (1.5,-1.5) {$2$};
-                    \node at (2.5,-2.5) {$1$};
-                    \node at (3.5,-3.5) {$1$};
-                  \end{tikzpicture}
-                  = g_{3211}\]
+          \item \(\textcolor{blue}{\text{non-roots of }\Psi},
+              \textcolor{coralred}{\text{roots of }\lowers}\)
+              \ytableausetup{mathmode,
+                boxsize=1em,centertableaux} \[
+              \begin{ytableau}
+                \mynone &*(lightblue)\text{\tiny (12)}  &*(white)\text{\tiny (13)}   &*(coralred)\text{\tiny (14)}  &*(coralred)
+                \text{\tiny (15)}\\
+                \mynone &\mynone &*(white) \text{\tiny (23)}  &*(coralred)\text{\tiny (24)}
+                &*(coralred) \text{\tiny (25)}\\
+                \mynone &\mynone &\mynone &*(lightblue) \text{\tiny (34)}
+                &*(white)\text{\tiny (35)} \\
+                \mynone &\mynone &\mynone&\mynone&*(lightblue) \text{\tiny (45)}\\
+                \mynone &\mynone &\mynone&\mynone&\mynone\\
+              \end{ytableau}
+            \]
+            \begin{align*}
+              & K(\Psi;\lowers;54332) \\
+              & = \textcolor{coralred}{(1-L_{4})^2(1-L_{5})^2}\\
+              & \cdot \textcolor{blue}{(1-R_{12})(1-R_{34})(1-R_{45})} Kh_{54332}
+            \end{align*}
+              \item \(K(\emptyset;\emptyset;\lambda) = g_\lambda\).
               \end{itemize}
-            \end{itemize}
               \begin{subtleblock}
                 \(\g_\lambda^{(k)} := K(\Psi;\lowers;\lambda)\) with
                 \(\band(\Psi) = k\), \(\band(\lowers)=k+1\) \[
-                  \begin{tikzpicture}[baseline=-4ex, every node/.style={minimum
-                      size=0.95cm-\pgflinewidth, outer sep=0pt}]
-                    \draw[step=1cm,color=black] (0,0) grid (4.0,-4.0);
-                    \node[fill=red] at (1.5,-0.5) {};
-                    \node[fill=violet] at (2.5,-0.5) {};
-                    \node[fill=violet] at (3.5,-0.5) {};
-                    \node[fill=red] at (3.5,-1.5) {}; \node at
-                    (0.5,-0.5) {$4$}; \node at (1.5,-1.5)
-                    {$3$}; \node at (2.5,-2.5)
-                    {$1$}; \node at (3.5,-3.5) {$1$};
-                  \end{tikzpicture}
-                  = \g_{4311}^{(4)}
+                  \g_{33211}^{(4)} = {\footnotesize
+                \begin{ytableau}
+                  *(white) 3     &*(blue)  &*(white)   &*(coralred)  &*(coralred)  &*(coralred) \\
+                  \mynone & *(white)3 & *(blue) & *(white) & *(coralred)  &*(coralred)  \\
+                  \mynone &*(white)  & *(white)2 & *(blue) & *(blue)  &*(white)  \\
+                  \mynone &*(white)  & *(white)  & *(white)1 & *(blue) &*(blue) \\
+                  \mynone &\mynone  &\mynone  &\mynone  & *(white)1 & *(blue) \\
+                  \mynone &\mynone  &\mynone  &\mynone  &*(white)  & *(white) 1
+                \end{ytableau}
+              }
                 \]
               \end{subtleblock}
+              \begin{alertblock}{Theorem: Shift Invariance}
+                \[
+                  G_{1^\ell}^\perp\, \g_{\lambda+1^\ell}^{(k+1)} =
+                  \g_\lambda^{(k)}
+                \]
+              \end{alertblock}
+              \begin{alertblock}{Corollary}
+                \(\g_\lambda^{(k)}\) branching follows from dual Pieri rule.
+              \end{alertblock}
               \begin{alertblock}{Conjecture}
                 \[\g_\lambda^{(k)} = g_\lambda^{(k)}\]
               \end{alertblock}              
-              \begin{alertblock}{Theorem: Shift Invariance}
-                \[
-                  G_{1^\ell}^\perp \g_{\lambda+1^\ell}^{(k+1)} =
-                  \g_\lambda^{(k)}
-                \]
-                Thus, understanding dual Pieri rule gives the
-                \(\g_\lambda^{(k)}\) branching coefficients. 
-              \end{alertblock}
             \end{block}        
-        \setbeamercolor{block title}{fg=jblue,bg=white} % Change the block title color
-        \begin{block}{References}
-          \begin{bibdiv}
-            \begin{biblist}
-              \bib{bmps}{article}{
-                author={Blasiak, Jonah}
-                author={Morse, Jennifer}
-                author={Pun, Anna}
-                author={Summers, Daniel}
-                title={Catalan Functions and \(k\)-Schur Positivity}
-                year={2019}
-                journal={Journal of the AMS}
-              }
-              \bib{lss}{article}{
-                author={Lam, Thomas}
-                author={Schilling, Anne}
-                author={Shimozono, Mark}
-                title={K-theory Schubert calculus of the affine
-                  Grassmannian}
-                year={2010}
-                journal={Compositio Math.}
-                volume={146}
-                pages={811--852}
-              }
-              \bib{morse}{article}{
-                author={Morse, Jennifer}
-                title={Combinatorics of the K-theory of affine
-                  Grassmannians}
-                year={2011}
-                journal={Advances in Mathematics}
-              }
-            \end{biblist}
-          \end{bibdiv}
-        \end{block}
+        % \setbeamercolor{block title}{fg=jblue,bg=white} % Change the block title color
+        % \begin{block}{References}
+        %   \begin{bibdiv}
+        %     \begin{biblist}
+        %       \bib{bmps}{article}{
+        %         author={Blasiak, Jonah}
+        %         author={Morse, Jennifer}
+        %         author={Pun, Anna}
+        %         author={Summers, Daniel}
+        %         title={Catalan Functions and \(k\)-Schur Positivity}
+        %         year={2019}
+        %         journal={Journal of the AMS}
+        %       }
+        %       \bib{lss}{article}{
+        %         author={Lam, Thomas}
+        %         author={Schilling, Anne}
+        %         author={Shimozono, Mark}
+        %         title={K-theory Schubert calculus of the affine
+        %           Grassmannian}
+        %         year={2010}
+        %         journal={Compositio Math.}
+        %         volume={146}
+        %         pages={811--852}
+        %       }
+        %       \bib{morse}{article}{
+        %         author={Morse, Jennifer}
+        %         title={Combinatorics of the K-theory of affine
+        %           Grassmannians}
+        %         year={2011}
+        %         journal={Advances in Mathematics}
+        %       }
+        %     \end{biblist}
+        %   \end{bibdiv}
+        % \end{block}
       \end{column}
     \end{columns}
   \end{frame} % End the wrapping frame
