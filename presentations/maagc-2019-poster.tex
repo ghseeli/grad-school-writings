@@ -116,7 +116,7 @@ distance=0.5pt}}
             for the \(K\)-theory of the affine Grassmannian.
           \end{itemize}
         \end{block}
-        \begin{block}{Affine combinatorics}
+        \begin{block}{Affine Combinatorics}
           \(w \in \tilde{S}_n \correspondsto\) 
         \(n\)-cores
         \ytableausetup{boxsize=0.6em}
@@ -125,7 +125,7 @@ distance=0.5pt}}
           \ \ \overset{n\text{-core}=\text{partition with no cell of
               hook-length }n}{\scriptstyle \text{\emph{red cell has hook-length }}7}
         \]
-        \textbf{Weak order}
+        \textbf{Weak Order}
         \begin{itemize}
         \item Covers differ by boxes of same color.
           \ytableausetup{boxsize=0.8em}
@@ -139,7 +139,7 @@ distance=0.5pt}}
             \coveredby \ydiagram{2,4}*[*(black)]{1+1,3+1}
           \]
         \end{itemize}
-        \textbf{Strong (Bruaht) order}
+        \textbf{Strong (Bruaht) Order}
         \begin{itemize}
         \item Ordered by containment of shapes.
         \item Covers differ by a ribbon \(+\) its copies.
@@ -187,7 +187,7 @@ distance=0.5pt}}
               \]
               \vspace{-1.5cm}
               \begin{subtleblock}
-                \textbf{Marked cover:} Strong cover with selection of
+                \textbf{Marked Cover:} Strong cover with selection of
                 one ribbon \\
                 \textbf{Strong Tableaux:} Maximal strong order chains of marked covers
                 \ytableausetup{boxsize=0.3em}
@@ -208,7 +208,7 @@ distance=0.5pt}}
           \end{column}
         \end{columns}
         \vspace{-2cm}
-        \textbf{Pieri rule:}
+        \textbf{Pieri Rule:}
         \[
           e_r F_\lambda^{(k)} = \ \ \ \sum_{\mathclap{\substack{\mu = \lambda + \text{ strong
               marked vertical }\\\text{strip of size }r}}} \ \ \ F_\mu^{(k)}
@@ -269,11 +269,12 @@ distance=0.5pt}}
         \begin{block}{Branching}
           \begin{itemize}
           \item \(k\)-Schur functions are \(k+1\)-Schur positive:
-            \(s_\lambda^{(k)} = \sum a_{\lambda \mu}^{(k)} s_\mu^{(k+1)}\).
+            \(s_\lambda^{(k)} = \sum a_{\lambda \mu}^{(k)}
+            s_\mu^{(k+1)}\) with \(a_{\lambda \mu}^{(k)} \in \Z_{\geq 0}\).
           \item Iteration gives Schur positivity of \(k\)-Schur functions.
           \item \textbf{Conjecture:} \(g_\lambda^{(k)}\) is Schur positive.
-          \item \textbf{Conjecture:} \(g_\lambda^{(k)} = \sum_\mu (-1)^{|\lambda|-|\mu|} a_{\lambda \mu}^{(k)}
-            g_\mu^{(k+1)}\) for \(a_{\lambda \mu}^{(k)} \in \Z_{\geq 0}\).
+          \item \textbf{Conjecture:} \(g_\lambda^{(k)} = \sum_\mu (-1)^{|\lambda|-|\mu|} b_{\lambda \mu}^{(k)}
+            g_\mu^{(k+1)}\) for \(b_{\lambda \mu}^{(k)} \in \Z_{\geq 0}\).
           \end{itemize}
         \end{block}
         \end{column}
@@ -329,7 +330,7 @@ distance=0.5pt}}
               \text{non-roots in row } i}_{\text{bandwidth}}~=~k\).
             \ytableausetup{mathmode, boxsize=1em,centertableaux}
             \[
-              s_{33211}^{(4)} = 
+              s_{332111}^{(4)} = 
               {\footnotesize
                 \begin{ytableau}
                   *(white) 3     &*(blue)  &*(red)   &*(red)  &*(red)  &*(red) \\
@@ -343,13 +344,13 @@ distance=0.5pt}}
               \leftarrow\,\text{\small{4 - 2 non-roots}}
               \quad
             \]\[
-              s_{44322}^{(5)} =
+              s_{443222}^{(5)} =
               {\footnotesize
                 \begin{ytableau}
                   *(white) 4     &*(blue)  &*(red)   &*(red)  &*(red)  &*(red) \\
                   \mynone & *(white)4 & *(blue) & *(red) & *(red)  &*(red)  \\
                   \mynone &*(white)  & *(white)3 & *(blue) & *(blue)  &*(red)  \\
-                  \mynone &*(white)  & *(white)  & *(white)3 & *(blue) &*(blue) \\
+                  \mynone &*(white)  & *(white)  & *(white)2 & *(blue) &*(blue) \\
                   \mynone &\mynone  &\mynone  &\mynone  & *(white)2 & *(blue) \\
                   \mynone &\mynone  &\mynone  &\mynone  &*(white)  & *(white) 2
                 \end{ytableau}
@@ -431,7 +432,7 @@ distance=0.5pt}}
               \begin{subtleblock}
                 \(\g_\lambda^{(k)} := K(\Psi;\lowers;\lambda)\) with
                 \(\band(\Psi) = k\), \(\band(\lowers)=k+1\) \[
-                  \g_{33211}^{(4)} = {\footnotesize
+                  \g_{332111}^{(4)} = {\footnotesize
                 \begin{ytableau}
                   *(white) 3     &*(blue)  &*(white)   &*(coralred)  &*(coralred)  &*(coralred) \\
                   \mynone & *(white)3 & *(blue) & *(white) & *(coralred)  &*(coralred)  \\
