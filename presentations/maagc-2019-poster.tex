@@ -133,9 +133,9 @@ distance=0.5pt}}
           \]
           \\
           \[
-            \emptyset \coveredby \ydiagram{1}*[*(black)]{1} \coveredby
-            \ydiagram{2}*[*(black)]{1+1} \coveredby \ydiagram{1,3}*[*(black)]{1,2+1}
-            \coveredby \ydiagram{2,4}*[*(black)]{1+1,3+1}
+            \emptyset \coveredby \ydiagram{1} \coveredby
+            \ydiagram{2}*[*(red)]{1+1} \coveredby \ydiagram{1,3}*[*(red)]{0,1+1}*[*(blue)]{1,2+1}
+            \coveredby \ydiagram{2,4}*[*(red)]{0,1+1}*[*(blue)]{1,2+1}
           \]
         \end{itemize}
         \textbf{Strong (Bruaht) Order}
@@ -447,10 +447,10 @@ distance=0.5pt}}
                 \begin{ytableau}
                   *(white) 3     &*(lightblue)  &*(white)   &*(coralred)  &*(coralred)  &*(coralred) \\
                   \mynone & *(white)3 & *(lightblue) & *(white) & *(coralred)  &*(coralred)  \\
-                  \mynone &*(white)  & *(white)2 & *(lightblue) & *(lightblue)  &*(white)  \\
-                  \mynone &*(white)  & *(white)  & *(white)1 & *(lightblue) &*(lightblue) \\
+                  \mynone &\mynone  & *(white)2 & *(lightblue) & *(lightblue)  &*(white)  \\
+                  \mynone &\mynone  & \mynone  & *(white)1 & *(lightblue) &*(lightblue) \\
                   \mynone &\mynone  &\mynone  &\mynone  & *(white)1 & *(lightblue) \\
-                  \mynone &\mynone  &\mynone  &\mynone  &*(white)  & *(white) 1
+                  \mynone &\mynone  &\mynone  &\mynone  &\mynone   & *(white) 1
                 \end{ytableau}
               }
                 \]
