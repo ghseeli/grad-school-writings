@@ -20,6 +20,8 @@
 \newcommand{\ch}{\operatorname{ch}}
 \newcommand{\halfsum}{\rho}
 \newcommand{\numposrootcombos}{\mathfrak{P}}
+\DeclareMathOperator{\SSYT}{SSYT}
+\DeclareMathOperator{\weight}{weight}
 
 \title[Introduction to the Structure of Semisimple Lie Algebras and
 Their Representation Theory]{Introduction to the Structure of Semisimple Lie
@@ -3153,15 +3155,23 @@ our proof of the Weyl Character Formula).
       \epsilon_i-\epsilon_j \rangle}\\
     & = \prod_{1 \leq i < j \leq n}
       \frac{(\lambda_i+n-i)-(\lambda_j+n-j)}{(n-i)-(n-j)} \\
-    & = \prod_{1 \leq i < j \leq n} \frac{\lambda_i-\lambda_j+j-i}{j-i}
+    & = \prod_{1 \leq i < j \leq n}
+      \frac{\lambda_i-\lambda_j+j-i}{j-i} 
   \end{align*}
   In fact, the formula above is given by specializing the ``Schur
-  function'' \(s_\lambda(x_1 \ldots, x_{n-1})\) to
-  \(s_\lambda(1,\ldots,1)\). 
+  function'' \(s_\lambda(x_1 \ldots, x_n)\) to
+  \(s_\lambda(1,\ldots,1)\). Furthermore, since \[
+    s_\lambda(x_1, \ldots, x_{n}) = \sum_{\T \in \SSYT_{n}(\lambda)}
+    x^{\weight(\T)} 
+  \]
+  where \(\SSYT_{n}(\lambda)\) is the set of all semistandard Young
+  tableaux with letters in \(\{1,\ldots,n\}\), we get \[
+    \dim L(\lambda) = s_{\lambda}(1,\ldots,1) = |\SSYT_{n}(\lambda)|
+  \]
 \end{example}
 \begin{rmk}
-  In fact, in type A, one can view the Weyl Character Formula gives a
-  ``Schur function'' using the Jacobi Bi-alternate Formula
+  In fact, in type A, one can see the Weyl Character Formula gives a
+  ``Schur function'' using the Jacobi Bialternate Formula
   characterization of Schur functions. In type A, \(\W \isom
   \Sym_n\) and \(\weightlattice = \Span_\Z\{\epsilon_1, \ldots,
   \epsilon_n\}\). 
