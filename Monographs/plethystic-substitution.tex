@@ -54,8 +54,12 @@ Departing from \cite{macdonald}, we define the following.
   \ldots\), we define \(p_n[A]\) to be the series where each \(a_i\)
   is changed to \(a_i^n\). In other words, each indeterminate is
   raised to the \(n\)th power. In particular, given a symmetric function
-  \(g \in \sym\), \(p_n[g] = g(x_1^n, x_2^n, \cdots)\).
+  \(g \in \sym\), \(p_n[g(x_1,x_2,\ldots)] = g(x_1^n, x_2^n, \cdots)\).
 \end{defn}
+Furthermore, it is a common convention to let \(X =
+x_1+x_2+x_3+\cdots\) and then write things such as \[
+  p_n[X] = p_n(x_1, x_2, x_3, \ldots)
+\]
 \begin{example}\label{first-examples}
   \begin{enumerate}
   \item If \(A = a_1+a_2+a_3+\cdots\), then \(p_n[A] =
@@ -89,11 +93,15 @@ evaluating the plethysm on each term.
     p_n\left[\frac{1}{1-t}\right] = 1+t^n+t^{2n}+\cdots =
     p_n(1,t,t^2,\ldots) 
   \]
-  \item Recall \(p_1(x) = x_1 + x_2 + \cdots\). Then, \(f[p_1+a]\) adds a
-    variable \(a\) to our set of variables. Similarly, \(f[p_1-x_i]\)
+  \item Recall \(p_1(x) = x_1 + x_2 + \cdots =: X\). Then, \(f[X+a]\) adds a
+    variable \(a\) to our set of variables. Similarly, \(f[X-x_i]\)
     removes \(x_i\) from the set of variables.
-  \item Combining the ideas above, \(f[p_1-(1-t)x_i]\) removes
+  \item Combining the ideas above, \(f[X-(1-t)x_i]\) removes
     variable \(x_i\) but replaces it with variable \(tx_i\).
+  \item Finally, \(f[\frac{1}{1-t}] = f(1,t,t^2,\ldots\) and
+    \(f[\frac{X}{1-t}] = f(x_1,tx_1, t^2x_1, \ldots,x_2,tx_2,
+    t^2x_2, \ldots)\) since \(\frac{X}{1-t} = x_1+tx_1+t^2x_1 +
+    \cdots + x_2 + tx_2 + t^2 x_2 + \cdots\).
   \end{enumerate}
 \end{example}
 \begin{prop}
@@ -106,6 +114,29 @@ evaluating the plethysm on each term.
   This follows since plethysm affects indeterminates but not
   constants. 
 \end{proof}
+\begin{rmk}
+  The proposition above can be the source of much confusion. On way to
+  distinguish between these two different kinds of values is to call
+  the constants \de{binomial variables}. So, in the proposition above,
+  we say that \(c\) is a binomial variable but \(t\) is not.
+\end{rmk}
+\begin{defn}
+  It can be convenient to introduce a minus sign to each variable in
+  the plethystic substitution. So, we define the variable \(\epsilon\)
+  such that \[
+    p_r[\epsilon X] := p_r(-x_1, -x_2, -x_3, \ldots) = (-1)^r p_r[X]
+  \]
+  where \(X = x_1 + x_2 + x_3 + \cdots\).
+\end{defn}
+\begin{rmk}
+  Notice that \(p_r[\epsilon X]\) is not necessarily equal to
+  \(p_r[-X]\) in our notation. In particular, for a binomial variable
+  \(c \in \Q\), we have \[
+    p_r[cX] = cp_r[X] \text{ but } p_r[\epsilon X] = (-1)^r p_r[X]
+  \]
+  Furthermore, authors are often not careful with this distinction, so
+  one needs to use context. 
+\end{rmk}
 \begin{prop}
   \cite{macdonald}*{p 135} Plethysm is associative. That is, \[
    (f[g])[h] = f[g[h]]
@@ -161,6 +192,26 @@ for formal power series \(X = \sum x_i\) and \(Y = \sum y_j\).
   \]
   Finally, part (c) follows from repeated iteration of part (a).
 \end{proof}
+\begin{cor}
+  \begin{enumerate}
+  \item \(e_r[X] = h_r[-\epsilon X] = (-1)^r h_r[-X]\).
+  \item The involution on symmetric functions \(\omega \from \sym \to
+    \sym\) corresponds to the plethystic substitution \(X \mapsto
+    -\epsilon X\).
+  \end{enumerate}
+\end{cor}
+\begin{proof}
+  To start, we note \(\Omega[tX] = \prod_{i \geq 1} \frac{1}{1-tx_i} =
+  \sum_{r 
+    \geq 0} h_r[X]t^r\) and \[
+\sum_{r
+    \geq 0} h_r[-\epsilon X]t^r = \Omega[-t\epsilon X] = \prod_{i \geq
+    1} 1+x_i = \sum_{r \geq 0} e_r[X]t^r.
+   \]
+   Then, the first part follows
+   immediately. The second part follows from the first since one
+   definition of \(\omega\) is precisely that \(\omega(h_r) = e_r\).
+\end{proof}
 % \begin{lem}
 %   For any dual bases \(\{u_\lambda\}\) and \(\{v_\lambda\}\) under the
 %   Hall inner product \(\langle \cdot,\cdot \rangle\), \[
@@ -199,7 +250,7 @@ for \(h(x)\) the hook-length of cell \(x \in \lambda\) and
       \prod_{x \in \lambda}(1-t^{h(x)})
       \prod_{i<j}(1-t^{\lambda_i-\lambda_j-i+j}) = \prod_{i=1}^n \prod_{k=1}^{\lambda_i+n-i}(1-t^k)
     \]
-    and so, pluggin this in, we get \[
+    and so, plugging this in, we get \[
       s_\lambda(1,t,t^2,\ldots,t^{n-1}) =  t^{n(\lambda)}
       \frac{\prod_{i=1}^n \prod_{k=1}^{\lambda_i+n-i}(1-t^k)}{\prod_{x
         \in \lambda} (1-t^{h(x)}) \prod_{i=1}^n
@@ -260,6 +311,14 @@ for \(h(x)\) the hook-length of cell \(x \in \lambda\) and
   \]
   following from formal manipulations of skew-Schur functions.
 \end{proof}
+\begin{rmk}
+  One can actually take this as the definition of a skew-Schur
+  function. That is, we can define the skew-Schur function
+  \(s_{\lambda/\mu}\) to be such that \[
+    s_\lambda[X+Y] = \sum_\mu s_{\lambda/\mu}[X] s_\mu[Y]
+  \]
+  for \(X = x_1 + x_2 + \cdots\) and \(Y = y_1 + y_2 + \cdots\).
+\end{rmk}
 Finally, we state without proof
 \begin{thm}
   Given partitions \(\lambda,\mu\), we get \[
@@ -267,24 +326,30 @@ Finally, we state without proof
   \]
   with \(a_{\lambda \mu}^{\nu} \in \Z_{\geq 0}\).
 \end{thm}
-\section{Representation Theoretic Interpretation}
-In the study of the representation theory of the symmetric group, one
-useful fact is that there is an isometry \(\ch \from R \to \sym
-\otimes_\Z \C\) where \(R = \bigoplus_n R^{(n)}\) and \(R^{(n)}\) the
-free \(\Z\)-module generated by the irreducible characters of
-\(\Sym_n\). Amazingly, this isometry can be used to understand
-plethysm in representation theoretic terms.
-\begin{defn}
-  Let \(u,v \in R\). Then, define \(u[v] = u \circ v := \ch^{-1}(\ch u
-  \circ \ch v) = \ch^{-1}((\ch u)[\ch v])\). 
-\end{defn}
-\begin{prop}
-  Given \(u,v \in R\),
-  \begin{enumerate}
-  \item \(u \circ v\) is a character of \(\Sym_{mn}\).
-  \item 
-  \end{enumerate}
-\end{prop}
+\begin{rmk}
+  While one can prove that these coefficients are non-negative (see
+  \cite{macdonald}*{Appendix I.A}), actually describing these
+  coefficients is an old and difficult problem in general, sometimes
+  referred to as the ``plethysm problem.''
+\end{rmk}
+% \section{Representation Theoretic Interpretation}
+% In the study of the representation theory of the symmetric group, one
+% useful fact is that there is an isometry \(\ch \from R \to \sym
+% \otimes_\Z \C\) where \(R = \bigoplus_n R^{(n)}\) and \(R^{(n)}\) the
+% free \(\Z\)-module generated by the irreducible characters of
+% \(\Sym_n\). Amazingly, this isometry can be used to understand
+% plethysm in representation theoretic terms.
+% \begin{defn}
+%   Let \(u,v \in R\). Then, define \(u[v] = u \circ v := \ch^{-1}(\ch u
+%   \circ \ch v) = \ch^{-1}((\ch u)[\ch v])\). 
+% \end{defn}
+% \begin{prop}
+%   Given \(u,v \in R\),
+%   \begin{enumerate}
+%   \item \(u \circ v\) is a character of \(\Sym_{mn}\).
+%   \item 
+%   \end{enumerate}
+% \end{prop}
 \begin{bibdiv}
   \begin{biblist}
     \bib{haiman}{article}{
@@ -299,6 +364,13 @@ plethysm in representation theoretic terms.
       year={1979}
       note={2nd Edition, 1995}
     }
+    \bib{manivel}{book}{
+      author={Manivel, Laurent}
+      title={Symmetric Functions, Schubert Polynomials, and Degeneracy
+        Loci}
+      year={1998}
+      note={Translated by John R. Swallow; 2001}
+    }    
     \bib{ucd}{misc}{
       author={Schilling, Anne}
       title={Plethystic notation}
