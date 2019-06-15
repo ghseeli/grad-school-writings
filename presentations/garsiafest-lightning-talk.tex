@@ -124,7 +124,7 @@ GarsiaFest 2019 \\ % Your institution for the title page
 \begin{frame}{Overview of Schubert Calculus Combinatorics}
   \begin{block}{Geometric problem}
     Find \(c_{\lambda \mu}^\nu = \#\) of points in
-    intersection of subvarities in a variety \(X\). \pause
+    intersection of subvarieties in a variety \(X\). \pause
   \end{block}
   \[
     \downarrow
@@ -168,12 +168,14 @@ GarsiaFest 2019 \\ % Your institution for the title page
   \end{example}
 \end{frame}
 \begin{frame}{Schubert Calculus Variations}
-  There are many variations on classical Schubert calculus of the
-  Grassmannian (Type A)
   \begin{itemize}
+  \item There are many variations on classical Schubert calculus of the
+  Grassmannian (Type A)\pause
   \item (Co)homology of Types BCD Grassmannian, \(K\)-theory of
     Grassmannian, (Co)homology of affine Grassmannian,\ldots \pause
-  \item Focus: \(K\)-theory of the affine Grassmannian \pause
+  \begin{block}{Focus}
+    \(K\)-theory of the affine Grassmannian \pause
+  \end{block}
   \item Simulatenously generalizes \(K\)-theory of Grassmannian and
     (co)homology of affine Grassmannian.
   \end{itemize}
@@ -219,18 +221,19 @@ GarsiaFest 2019 \\ % Your institution for the title page
     \begin{enumerate}
     \item \(K\)-theory classes of Grassmannian (not affine!)
       represented by
-      ``dual Grothendieck 
-      polynomials'' \[
+      ``Grothendieck 
+      polynomials.'' We are interested in their dual: \[
         g_\lambda = \prod_{i < j} (1-R_{ij}) Kh_\lambda
       \]
       for \(Kh_\gamma\) an inhomogeneous analogue of \(h_\gamma\).\pause
-    \item Cohomology classes of affine Grassmannian represented by
+    \item Homology classes of affine Grassmannian represented by
       \(k\)-Schur functions (\(t=1\)) \[
         s_\lambda^{(k)} = \prod_{(i,j) \in \Delta^+_\ell \setminus
           \Delta^{(k)}(\lambda)} (1-R_{ij}) h_\lambda
-      \] \pause
+        \] \pause
+    \vspace{-0.2in}
     \item No direct formulation of \(K\)-theory class representatives of affine 
-      Grassmannian! However, Pieri rule is known~\cite{morse}
+      Grassmannian! However, Pieri rule is known~\cite{lss}~\cite{morse}
     \end{enumerate}
   \end{block}
 \end{frame}
@@ -344,7 +347,22 @@ GarsiaFest 2019 \\ % Your institution for the title page
   \begin{definition}
     \(g_\lambda^{(k)} := f_\lambda = K(\Delta^{(k)}(\lambda);
     \Delta^{(k+1)}(\lambda);\lambda) \) 
-  \end{definition}\pause
+  \end{definition}
+  \begin{example}
+\(              g_{332111}^{(4)} = \){\footnotesize
+                \begin{ytableau}
+                  *(white) 3     &*(lightblue)  &*(white)   &*(coralred)  &*(coralred)  &*(coralred) \\
+                  \mynone & *(white)3 & *(lightblue) & *(white) & *(coralred)  &*(coralred)  \\
+                  \mynone &\mynone  & *(white)2 & *(lightblue) & *(lightblue)  &*(white)  \\
+                  \mynone &\mynone  & \mynone  & *(white)1 & *(lightblue) &*(lightblue) \\
+                  \mynone &\mynone  &\mynone  &\mynone  & *(white)1 & *(lightblue) \\
+                  \mynone &\mynone  &\mynone  &\mynone  &\mynone & *(white) 1
+                \end{ytableau}
+              }
+\hspace{1in}\(\textcolor{blue}{\Delta^+_6 / \Delta^{(4)}(332111)}, \textcolor{coralred}{\Delta^{(5)}(332111)}\)
+\end{example}
+\end{frame}
+\begin{frame}{Property and Further Work}
   \begin{theorem}[Blasiak-Morse-S., 2019]
      The \(g_\lambda^{(k)}\) are ``shift
         invariant'', ie for \(\ell = \ell(\lambda)\)
@@ -353,9 +371,10 @@ GarsiaFest 2019 \\ % Your institution for the title page
       \]
   \end{theorem}\pause
   \begin{block}{Further work}
+    For \(G_\lambda^{(k)}\) an affine Grothendieck polynomial (dual to \(g_\lambda^{(k)}\)),
     \begin{enumerate}
     \item Dual Pieri rule: \(G_{1^r}^\perp g_\lambda^{(k)} = \sum_\mu
-      ?? g_\mu^{(k)}\) for \(1 \leq r \leq k\)
+      ?? g_\mu^{(k)} \iff G_{1^r} G_\mu^{(k)} = \sum_\lambda ?? G_\lambda^{(k)}\),  \(1 \leq r \leq k\)
     \item Branching rule: \(g_\lambda^{(k)} = \sum_\mu ?? g_\mu^{(k+1)}\)
     \end{enumerate}
   \end{block}
