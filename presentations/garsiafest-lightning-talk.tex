@@ -162,8 +162,9 @@ GarsiaFest 2019 \\ % Your institution for the title page
       \ydiagram{1,4}*[*(red)]{0,3+1} \ \ \ R_{2,3} \left(
         \ydiagram{1,1,1}*[*(red)]{1} \right) =
       \ydiagram{2,1}*[*(red)]{1+1}
-    \] \pause
-    \item Structure constants are determined by the Pieri rule: \(h_r s_\lambda = \sum_{\mu} s_\mu\)
+    \] 
+%    \pause
+%    \item Structure constants are determined by the Pieri rule: \(h_r s_\lambda = \sum_{\mu} s_\mu\)
     \end{itemize}
   \end{example}
 \end{frame}
@@ -174,7 +175,7 @@ GarsiaFest 2019 \\ % Your institution for the title page
   \item (Co)homology of Types BCD Grassmannian, \(K\)-theory of
     Grassmannian, (Co)homology of affine Grassmannian,\ldots \pause
   \begin{block}{Focus}
-    \(K\)-theory of the affine Grassmannian \pause
+    \(K\)-theory and \(K\)-homology of the affine Grassmannian \pause
   \end{block}
   \item Simulatenously generalizes \(K\)-theory of Grassmannian and
     (co)homology of affine Grassmannian.
@@ -218,6 +219,7 @@ GarsiaFest 2019 \\ % Your institution for the title page
 \end{frame}
 \begin{frame}{\(K\)-Theory of Affine Grassmannian}
   \begin{block}{What is known?}
+  \pause
     \begin{enumerate}
     \item \(K\)-theory classes of Grassmannian (not affine!)
       represented by
@@ -232,8 +234,7 @@ GarsiaFest 2019 \\ % Your institution for the title page
           \Delta^{(k)}(\lambda)} (1-R_{ij}) h_\lambda
         \] \pause
     \vspace{-0.2in}
-    \item No direct formulation of \(K\)-theory class representatives of affine 
-      Grassmannian! However, Pieri rule is known~\cite{lss}~\cite{morse}
+    \item \cite{lss} leave open the question: what is a direct formulation of the \(K\)-homology representatives of the affine Grassmannian (\(K\)-\(k\)-Schur functions)?
     \end{enumerate}
   \end{block}
 \end{frame}
@@ -323,32 +324,31 @@ GarsiaFest 2019 \\ % Your institution for the title page
     unique root ideal with \(\lambda_i + \#\)non-roots in row \(i =
     k\).
   \end{definition}
+  \begin{example}
+  \(k=4, \lambda = 332111\)
               \[
               \Delta^{(4)}(332111) = 
               {\footnotesize
                 \begin{ytableau}
                   *(white) 3     &*(lightblue)  &*(red)   &*(red)  &*(red)  &*(red) \\
                   \mynone & *(white)3 & *(lightblue) & *(red) & *(red)  &*(red)  \\
-                  \mynone &*(white)  & *(white)2 & *(lightblue) & *(lightblue)  &*(red)  \\
-                  \mynone &*(white)  & *(white)  & *(white)1 & *(lightblue) &*(lightblue) \\
+                  \mynone & \mynone  & *(white)2 & *(lightblue) & *(lightblue)  &*(red)  \\
+                  \mynone & \mynone  & \mynone  & *(white)1 & *(lightblue) &*(lightblue) \\
                   \mynone &\mynone  &\mynone  &\mynone  & *(white)1 & *(lightblue) \\
-                  \mynone &\mynone  &\mynone  &\mynone  &*(white)  & *(white) 1
+                  \mynone &\mynone  &\mynone  &\mynone  & \mynone  & *(white) 1
                 \end{ytableau}
               }
               \leftarrow\,\text{\small{4 - 2 non-roots}}
               \quad
-            \] \pause
-  \begin{block}{Answer (Blasiak-Morse-S., 2019)}
-    For \(K\)-theory of affine Grassmannian, \(f_\lambda =
-    K(\Delta^{(k)}(\lambda); \Delta^{(k+1)}(\lambda);\lambda)\) since
-    this family satisfies the correct Pieri rule. 
-  \end{block}
+            \]
+            \end{example}
 \end{frame}
-\begin{frame}{Property and Further Work}
-  \begin{definition}
-    \(g_\lambda^{(k)} := f_\lambda = K(\Delta^{(k)}(\lambda);
-    \Delta^{(k+1)}(\lambda);\lambda) \) 
-  \end{definition}\pause
+\begin{frame}{Affine \(K\)-Theory Representatives with Raising Operators}
+  \begin{block}{Answer (Blasiak-Morse-S., 2019)}
+    \pause For \(K\)-homology of affine Grassmannian, \(f_\lambda = g_\lambda^{(k)} :=
+    K(\Delta^{(k)}(\lambda); \Delta^{(k+1)}(\lambda);\lambda)\) since this family satisfies the correct Pieri rule. 
+  \end{block}
+  \pause
   \begin{example}
 \(              g_{332111}^{(4)} = \){\footnotesize
                 \begin{ytableau}
@@ -365,7 +365,7 @@ GarsiaFest 2019 \\ % Your institution for the title page
 \end{frame}
 \begin{frame}{Property and Further Work}
   \begin{theorem}[Blasiak-Morse-S., 2019]
-     The \(g_\lambda^{(k)}\) are ``shift
+     \pause The \(g_\lambda^{(k)}\) are ``shift
         invariant'', ie for \(\ell = \ell(\lambda)\)
       \[
         G_{1^\ell}^\perp g_{\lambda+1^\ell}^{(k+1)} = g_\lambda^{(k)}
