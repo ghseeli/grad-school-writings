@@ -1,0 +1,241 @@
+\documentclass[11pt,leqno,oneside]{amsbook}
+\usepackage{tikz}
+\usetikzlibrary{cd}
+\usepackage{bbm}
+\usepackage{ytableau}
+\usepackage{todonotes}
+
+\usepackage{./notes}
+\usepackage{../ReAdTeX/readtex-core}
+\usepackage{../ReAdTeX/readtex-dangerous}
+\usepackage{../ReAdTeX/readtex-abstract-algebra}
+\usepackage{../ReAdTeX/readtex-lie-algebras}
+
+\newcommand{\bbk}{\mathbbm{k}}
+\newcommand{\Class}{\operatorname{Class}}
+\newcommand{\Res}{\operatorname{Res}}
+\newcommand{\Ind}{\operatorname{Ind}}
+\newcommand{\bs}{\textbackslash}
+\newcommand{\partitionof}{\vdash}
+\newcommand{\T}{\mathsf{T}} % Tableau
+\renewcommand{\S}{\mathsf{S}}
+\newcommand{\sh}{\operatorname{shape}}
+
+\newcommand{\dominatedby}{\trianglelefteq}
+\newcommand{\dominates}{\trianglerighteq}
+\newcommand{\lexicoleq}{\leq}
+\newcommand{\lexicogeq}{\geq}
+\newcommand{\covers}{\gtrdot}
+\newcommand{\coveredby}{\lessdot}
+\numberwithin{thm}{section}
+
+\newcommand{\rootlattice}{Q}
+\newcommand{\weightlattice}{P}
+\renewcommand{\simpleroots}{\Pi}
+\newcommand{\U}{\mathcal{U}}
+\renewcommand{\b}{\mathfrak{b}}
+\newcommand{\ch}{\operatorname{ch}}
+\newcommand{\halfsum}{\rho}
+\newcommand{\numposrootcombos}{\mathfrak{P}}
+\newcommand{\qfactorial}[1]{[#1]_q!}
+\newcommand{\qbinom}[3][q]{\left[\begin{array}{c}#2\\#3\end{array}\right]_{#1}}
+\newcommand{\A}{\mathbb{A}}
+\DeclareMathOperator{\diag}{diag}
+\DeclareMathOperator{\wt}{wt}
+\renewcommand{\k}{\mathbbm{k}}
+
+\title[Quantum Groups]{Quantum Groups \\ Notes
+  from a class taught by Weiqiang Wang in Fall 2019}
+\author{George H. Seelinger}
+\date{Fall 2019}
+\begin{document}
+\maketitle
+\section{\(q\)-Numbers}
+Let \(q\) be an indeterminate. Then, we will work in any of the
+following rings \[
+  \Z[q] \subset \Z[q,q^{-1}] \subset \Q(q) \subset \C(q)
+\]
+\begin{defn}
+  For an indeterminate \(q\) and \(n \in \Z\), we define
+  \begin{enumerate}
+  \item \([n]_q := \frac{q^n-q^{-n}}{q-q^{-1}} = q^{n-1} + q^{n-3} +
+    \cdots + q^{1-n}\)
+  \item \(\qfactorial{0} := 1\) and \(\qfactorial{n} := [n]_q [n-1]_q
+    \cdots [1]_q\) for \(n \in \Z_{\geq 0}\)
+  \item If \(m \in \Z, n \geq 0\), then \[
+      \qbinom{m}{n} = \frac{[m]_q [m-1]_q \cdots
+        [m-n+1]_q}{\qfactorial{n}} \overset{\text{If }m \geq 0}{=} \frac{\qfactorial{m}}{\qfactorial{n}\qfactorial{m-n}}
+    \]
+  \end{enumerate}
+\end{defn}
+\begin{rmk}
+  When the \(q\) is clear, we will drop the \(q\) from the notation
+  and say \([n] := [n]_q\), etc.
+\end{rmk}
+\begin{example}
+  We compute some examples of \(q\)-numbers.
+  \begin{enumerate}
+  \item \([0] = 0\)
+  \item \([1] = 1\)
+  \item \([2] = q+q^{-1}\)
+  \end{enumerate}
+\end{example}
+\begin{prop}
+  We have the following simple identities on \(q\)-numbers.
+  \begin{enumerate}
+  \item \([-n] = -[n]\) for any \(n \in \Z\).
+  \item \(\qbinom{m}{0} = 1 = \qbinom{m}{m}\) for all \(m \in \Z\).
+  \item \(\qbinom{m}{n} = 0\) for \(0 \leq m < n\).
+  \end{enumerate}
+\end{prop}
+\begin{prop}
+  We have the identity \[
+    \qbinom{m+1}{n} = q^n \qbinom{m}{n} + q^{-m+n-1} \qbinom{m}{n-1}
+  \]
+  and also that both \([n]_q\) and \(\qbinom{m}{n}\) are elements of
+  \(\Z[q,q^{-1}]\) 
+\end{prop}
+\begin{proof}
+  We compute directly that
+  \begin{align*}
+     \hspace{-0.5in} q^{-n}\qbinom{m}{n}+q^{m-n+1}\qbinom{m}{n-1}
+    & =
+    q^{-n}\frac{[m][m-1]\cdots[m-n+1]}{\qfactorial{n}} +
+      q^{m-n+1}\frac{[m][m-1]\cdots [m-n+2]}{\qfactorial{n-1}}
+      \\
+    & =
+    q^{-n}\frac{[m][m-1]\cdots[m-n+1]}{\qfactorial{n}} +
+    q^{m-n+1}\frac{[n][m][m-1]\cdots [m-n+2]}{[n]\qfactorial{n-1}}\\
+    & = (q^{-n}[m-n+1] +
+    q^{m-n+1}[n])\frac{[m][m-1]\cdots[m-n+2]}{\qfactorial{n}}\\
+    & =
+      \left(\frac{q^{m-2n+1}-q^{-m-1}}{q-q^{-1}}+\frac{q^{m+1}-q^{m-2n+1}}{q-q^{-1}}\right)\frac{[m]\cdots[m-n+2]}{\qfactorial{n}}
+    \\
+    & =
+      \left(\frac{q^{m+1}-q^{-(m+1)}}{q-q^{-1}}\right)\frac{[m]\cdots[m-n+2]}{\qfactorial{n}}
+    \\
+    & = \frac{[m+1][m] \cdots [(m+1)-n+1]}{\qfactorial{n}} = \qbinom{m+1}{n}
+  \end{align*}
+  Now, observe that \[
+    [n]_q = \frac{q^n-q^{-n}}{q-q^{-1}} = \frac{q}{q^n}\cdot
+    \frac{q^{2n}-1}{q^2-1} =
+    \frac{1}{q^{n-1}}(q^{2n-2}+q^{2n-4}+\cdots+q^2+1) \in \Z[q,q^{-1}]
+  \]
+  This immediately gives that \(\qfactorial{n} \in \Z[q,q^{-1}]\). To
+  show \(\qbinom{m}{n} \in \Z[q,q^{-1}]\), we proceed by
+  induction on \(m\). Namely, \(\qbinom{m}{0} = 1 \in \Z[q,q^{-1}]\) for all
+  \(m \in \Z\). Then, \[
+    \qbinom{m+1}{n} = q^{n}\underbrace{\qbinom{m}{n}}_{\in
+      \Z[q,q^{-1}]} + q^{-m+n-1}\underbrace{\qbinom{m}{n-1}}_{\in
+      \Z[q,q^{-1}]} \in \Z[q,q^{-1}]
+  \]
+\end{proof}
+\begin{thm}{\(q\)-Binomial Theorem}\label{q-binomial-theorem}
+  \[
+    \prod_{j=0}^{r-1} (1+q^{2j}z) = \sum_{i=0}^{r-1} q^{i(r-1)}
+    \qbinom{r}{i} z^i
+  \]
+\end{thm}
+\begin{cor}
+  As consequences to~\ref{q-binomial-theorem}, we get
+  \begin{enumerate}
+  \item For \(r \geq 1\),
+    \[
+      \sum_{i=0}^r (-1)^i q^{-i(r-1)} \qbinom{r}{i} = 0
+    \]
+  \item Assume \(xy = q^2yx\). Then, \[
+      (x+y)^n = \sum_{t=0}^n q^{t(n-t)}\qbinom{n}{t}y^t x^{n-t}
+    \]
+  \end{enumerate}
+\end{cor}
+Sometimes in the literature, \(q\)-numbers are encoded slightly
+differently. We present the alternate definition here.
+\begin{defn}
+  \(\{n\}_v := 1+v+v^2 + \cdots + v^{n-1} = \frac{v^n-1}{v-1}\)
+\end{defn}
+Then, the two definitions are related as follows.
+\begin{prop}
+  Setting \(v=q^2\), \[
+    \{n\}_v = q^{n-1}[n]_q
+  \]
+\end{prop}
+\section{The Quantum Group \(\U_q(\sl_2)\)}
+Throughout this section, we will let \(\U := \U_q(\sl_2)\). Let \(\k\)
+be a field of characteristic \(0\) with \(q \in \k\), \(q \neq 0\),
+and \(q\) is not a root of \(1\).
+\begin{defn}
+  We define the \de{quantum group \(\U := \U_q(\sl_2)\)} to be the \(\k\)-algebra
+  generated by elements \(E,F,K,K^{-1}\) with relations
+  \begin{enumerate}
+  \item \(KK^{-1} = 1 = K^{-1}K\)
+  \item \(KE = q^2 EK\)
+  \item \(KF = q^{-1}FK\)
+  \item \(EF-FE = \frac{K-K^{-1}}{q-q^{-1}}\)
+  \end{enumerate}
+\end{defn}
+\begin{defn}
+  We define the \de{Drinfield double} \(\tilde{\U} = \langle E,F,K,K' \rangle\) to be the
+  \(\k\)-algebra with relations
+  \begin{enumerate}
+  \item \(K'E = q^{-2}EK'\)
+  \item \(K'F = q^2 EK'\)
+  \item \(EF-FE = \frac{K-K'}{q-q^{-1}}\)
+  \end{enumerate}
+\end{defn}
+\begin{rmk}
+  Note that \(\tilde{U}/\langle KK'-1 \rangle \isom \U\) and that
+  \(KK'\) is central in \(\tilde{U}\).
+\end{rmk}
+\begin{defn}
+  We define the following maps.
+  \begin{enumerate}
+  \item The \(\k\)-linear involution \(\omega\) acts on \(\U\) by
+    \[
+      \omega(E) = F, \omega(F) = E, \omega(K) = K^{-1}
+    \]
+  \item The \(\k\)-linear anti-involution \(\tau\) (ie \(\tau(xy) =
+    \tau(y)\tau(x)\)) acts on \(\U\) by \[
+      \tau(E) = E, \tau(F) = F, \tau(K) = K^{-1}
+    \]
+  \end{enumerate}
+\end{defn}
+\begin{defn}
+  For making computations more compact, we define the short hand
+  \begin{enumerate}
+  \item \([K;n] = \frac{q^n K-q^{-n}K^{-1}}{q-q^{-1}}\)
+  \item For \(n \in \Z_{\geq 0}\), \(E^{(n)} =
+    \frac{E^n}{\qfactorial{n}}\) and \(F^{(n)} =
+    \frac{F^n}{\qfactorial{n}}\). 
+  \end{enumerate}
+\end{defn}
+\begin{thm}[PBW Theorem]
+  \(\{F^sK^nE^r \st s,r \in \Z_{\geq 0}, n \in \Z\}\) forms a basis
+  for \(\U\). 
+\end{thm}
+\begin{proof}[Sketch of Proof]
+  \begin{enumerate}
+  \item Use the commutation relations of \(\U\) to show that this is a
+    spanning set; when commuting an \(E\) past an \(F\), one only
+    picks up lower degree correction terms.
+  \item Construct a ``regular representation'' \(M =
+    \k[\tilde{F},\tilde{E},\tilde{K},\tilde{K^{-1}}]\) on which \(\U\) acts to show linear
+    independence. This argument is more sophisticated, but since this
+    is a faithful representation, you get that the map \(\theta \from \U
+    \to \End_\k(M)\) is injective and since \(\theta(F^sK^nE^r)(1) =
+    \tilde{F}^s\tilde{K}^n\tilde{E}^r\), which is known to be linearly
+    independent, then the set \(\{\theta(F^s K^N E^r)\}\) is linearly
+    independent, thus giving us the desired linear independence by the
+    injectivity of \(\theta\). See~\cite{jantzen}*{Theorem 1.5}.
+  \end{enumerate}
+\end{proof}
+
+\begin{bibdiv}
+  \begin{biblist}
+    \bib{jantzen}{book}{
+      author={Jantzen, Jens Carsten}
+      title={Lectures on Quantum Groups}
+      year={1995}
+    }
+  \end{biblist}
+\end{bibdiv}
+\end{document}
