@@ -35,6 +35,7 @@ pgf
 pgfopts
 pgfplots
 psnfss
+ragged2e
 scalerel
 setspace
 subfiles
