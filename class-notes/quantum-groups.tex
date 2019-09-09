@@ -228,7 +228,76 @@ and \(q\) is not a root of \(1\).
     injectivity of \(\theta\). See~\cite{jantzen}*{Theorem 1.5}.
   \end{enumerate}
 \end{proof}
-
+\begin{lem}[Useful Identities]\label{useful-identities}
+  \begin{enumerate}
+  \item \([K;n]E = E[K;n+2]\)
+  \item \([K;n]F = F[K;n-2]\)
+  \item \(EF^s = F^s E + [s]F^{s-1}[K;1-s]\) for \(s \geq 0\)
+  \item \(E^rF^s = \sum_{i=0}^{\min(r,s)} \qbinom{r}{i}\qbinom{s}{i}
+    [i]! F^{s-i}\left( \prod_{j=1}^i [K;i-(r+s)+j] \right)E^{r-i}\)
+  \item[d'] \(E^{(r)}F^{(s)} = \sum_{i=0}^{\min(r,s)} F^{(s-i)}
+    \qbinom{K;2i-(r+s)}{i} E^{(r-i)}\) where \(\qbinom{K;c}{i} :=
+    \frac{[K;c][K;c-1] \cdots [K;c-i+1]}{[i]!}\).
+  \end{enumerate}
+\end{lem}
+Identity (d') gives one reason why divided powers are sometimes more
+convenient; writing identities with them can sometimes be simpler.
+\begin{rmk}
+  \(\U_q(\sl_2)\) has no zero-divisors.
+\end{rmk}
+\subsection{Finite-dimensional Representations of \(\U_q(\sl_2)\)}
+\begin{example}
+  Let \(M = \k m_0 \oplus \k m_1\) with \(K m_0 = qm_0\) and \(Km_1 =
+  q^{-1}m_1\) and \(E,F\) actions given by \[
+    \begin{tikzcd}
+      0 & \ar[l, "F"] m_1 \ar[r, bend left, "E"] & \ar[l, bend left,
+      "F"] m_0 \ar[r, "E"] & 0
+    \end{tikzcd}
+  \]
+\end{example}
+\begin{lem}
+  Let \(M\) be a finite-dimensional \(\U\)-module. Then, there exists
+  an \(r > 0\) such that \(E^r M = 0\) and \(F^r M = 0\).
+\end{lem}
+\begin{defn}
+  For \(M \in \U\catname{-mod}\), \(\lambda \in \k^\times\), let
+  \(M_\lambda := \{m \in M \st Km = \lambda m\}\) be called the
+  \de{\(\lambda\)-weight subspace} of \(M\).
+\end{defn}
+\begin{lem}
+  \begin{enumerate}
+  \item \(E M_\lambda \subset M_{q^2 \lambda}\) and
+    \(F M_{\lambda} \subset M_{q^{-2} \lambda}\).
+  \item If \(M_\lambda \neq 0\) and \(M\) is simple, then \[
+      M = \bigoplus_{n \in \Z} M_{q^{2n} \lambda}
+    \]
+  \end{enumerate}
+\end{lem}
+\begin{prop}
+  Let \(M\) be a finite-dimensional \(\U\)-module. Then, \[
+    M = \bigoplus_{a \in \Z} M_{+q^a} \oplus M_{-q^a}
+  \]
+\end{prop}
+\begin{proof}
+  It is equivalent to show that the minimal polynomial of \(K\) on
+  \(M\) is of the form \(\prod_i (K-\lambda_i)\) with distinct
+  \(\lambda_i \in \pm q^\Z\). To do this, set \[
+    h_r := \prod_{j=1-r}^{r-1} [K;r-s+j], \ \ r > 0, h_0 = 1
+  \]
+  Now, for \(s > 0\), if \(F^s M = 0\), then \(F^{s-r}h_r M = 0\) for
+  all \(0 \leq r \leq s\) because \[
+    \left(E^r F^s \prod_{j=1}^{r-1} [K;r-s+j]\right) M = \left(
+      \sum_{i=0}^r a_i F^{s-i} h_i \prod_{j=0}^{r-i-1}[K;-s-j] E^{r-i}\right)M
+  \]
+  for \(a_i = \qbinom{r}{i}\qbinom{s}{i} [i]!\)
+  by~\ref{useful-identities}(d) allows us to use induction. Then, we
+  have \[
+    0 = h_s M = \prod_{j=1-s}^{s-1} \left[ \underbrace{(q-q^{-1})^{-1}
+        q^j K^{-1}}_{\text{Invertible scalar}}
+      \underbrace{(K^2-q^{-2j})}_{\text{Minimal polynomial divides this}} \right]M
+  \]
+  and thus we have distinct \(\lambda_i \in \pm q^{\Z}\)
+\end{proof}
 \begin{bibdiv}
   \begin{biblist}
     \bib{jantzen}{book}{
