@@ -2660,14 +2660,16 @@ book.
       \lambda_1^{(2)} = 0-1+1 = 0
     \end{cases}
   \]
-  Thus, we get the \(3\)-quotient \(\lambda^* = ((1,1),(2),(0))\)   \todo{This does not quite agree with Sage, which gets
-    \(((2),(0),(1,1))\). Perhaps I did something wrong or Sage
-    uses a different definition.}
-,
+  Thus, we get the \(3\)-quotient \(\lambda^* = ((1,1),(2),(0))\),
   ie \[
     \ydiagram{2,2,4,4} \mapsto \left( \ydiagram{1,1},\ydiagram{2},
       \emptyset \right)
   \]
+  Note that, for a different choice of \(m\) (here we picked \(m=4\)),
+  we would get a cyclic rearrangement of the \(3\)-quotient. Thus,
+  \(p\)-quotients are defined up to cyclic rearrangement. This fact
+  leads~\cite{macdonald} to suggest that a \(p\)-quotient should
+  really be thought of as a ``necklace of partitions''.
 \end{example}
 \begin{prop}
   The \(p\)-core of a partition is unique and may be obtained by
@@ -3210,7 +3212,8 @@ interested in symmetric functions over \(\Q(t)\).
         \prod_{i < j} \frac{x_i-x_j}{x_i-x_j} \right) = \sum_{w \in
         \Sym_n} w(x^\lambda)
     \]
-    However, since \(w(x^\lambda) = x^{w(\lambda)}\), then we have \[
+    However, since \(\sum_{w \in \Sym_n} w(x^\lambda) = \sum_{w \in
+      \Sym_n} x^{w(\lambda)}\), then we have \[
       R(x_1, \ldots, x_n;1)  = |\Stab_{\Sym_n}(\lambda)|
       \sum_{\substack{\alpha \in \N^n \\ \alpha \sim \lambda}}  x^\alpha =
     |\Sym_n^\lambda| m_{\lambda}(x_1, \ldots, x_n)

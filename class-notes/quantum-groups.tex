@@ -88,9 +88,9 @@ following rings \[
   \item \(\qbinom{m}{n} = 0\) for \(0 \leq m < n\).
   \end{enumerate}
 \end{prop}
-\begin{prop}
+\begin{prop}\label{q-pascal-identity}
   We have the identity \[
-    \qbinom{m+1}{n} = q^n \qbinom{m}{n} + q^{-m+n-1} \qbinom{m}{n-1}
+    \qbinom{m+1}{n} = q^{-n} \qbinom{m}{n} + q^{m-n+1} \qbinom{m}{n-1}
   \]
   and also that both \([n]_q\) and \(\qbinom{m}{n}\) are elements of
   \(\Z[q,q^{-1}]\) 
@@ -131,11 +131,31 @@ following rings \[
   \]
 \end{proof}
 \begin{thm}{\(q\)-Binomial Theorem}\label{q-binomial-theorem}
+  For an indeterminate \(z\) and \(r \geq 0\), 
   \[
     \prod_{j=0}^{r-1} (1+q^{2j}z) = \sum_{i=0}^{r-1} q^{i(r-1)}
     \qbinom{r}{i} z^i
   \]
 \end{thm}
+\begin{proof}
+  This follows by induction. If \(r = 0\), then we simply have \(1 =
+  1\). Now, proceed by induction. Then, \[
+    \prod_{j=0}^r (1+q^{2j}z) = (1+q^{2r}z)\left( \sum_{i=0}^{r-1}
+      q^{i(r-1)} \qbinom{r}{i} z^i \right) = \sum_{i=0}^{r-1}
+      q^{i(r-1)} \qbinom{r}{i} z^i + \sum_{i=0}^{r-1} q^{i(r-1)+2r} \qbinom{r}{i}z^{i+1}
+  \]
+  Then, if we fix the \(z\) power for some \(1 \leq k \leq r-1\), we
+  get coefficient
+  \begin{align*}
+    q^{k(r-1)} \qbinom{r}{k} + q^{(k-1)(r-1)+2r} \qbinom{r}{k-1}
+    & =
+      q^{k(r-1)} \qbinom{r}{k} + q^{k(r-1)+r+1} \qbinom{r}{k-1} \\
+    & = q^{kr}
+      \left( q^{-k} \qbinom{r}{k} + q^{-k+r+1} \qbinom{r}{k-1}\right) \\
+    & = q^{kr} \qbinom{r+1}{k}
+  \end{align*}
+  where the last equality follows from~\ref{q-pascal-identity}.
+\end{proof}
 \begin{cor}
   As consequences to~\ref{q-binomial-theorem}, we get
   \begin{enumerate}
