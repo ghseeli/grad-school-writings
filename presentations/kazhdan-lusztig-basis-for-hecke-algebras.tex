@@ -31,7 +31,40 @@
 \begin{document}
 \maketitle
 \section{Preliminaries}
-
+We work with the Hecke algebra, for which we will give two
+presentations.
+\begin{defn}
+  \cite{humphreys}*{Section 7.4} Let \(A = \Z[q,q^{-1}]\). Then, the
+  \de{Hecke algebra} \(\H\) associated to 
+  a Weyl group \(\W\) has a basis \(\{T_w \st w \in \W\}\) with
+  relations
+  \begin{enumerate}
+  \item \(T_x T_y = T_{xy}\) if \(\ell(x) + \ell(y) = \ell(xy)\) and
+  \item \(T_s^2 = (q-1)T_s + qT_{id}\) for all simple reflections \(s
+    \in \W\).
+  \end{enumerate}
+\end{defn}
+\begin{rmk}
+  We need not restrict \(\W\) to be a Weyl group. In full generality,
+  we can replace \(\W\) with any Coxeter group.
+\end{rmk}
+For our purposes, it will also be convenient to work with the Hecke
+algebra over an enlarged ring. Let \(v := q^{-\frac{1}{2}}\). Then, we
+have the following.
+\begin{prop}\label{H-basis}
+  The Hecke algebra over \(\Z[v,v^{-1}]\) has a basis given by \(\{H_w
+  \st w \in \W\}\) where \(H_w = v^{\ell(w)} T_w\). Furthermore, this
+  basis has relations
+  \begin{enumerate}
+  \item \(H_x H_y = H_{xy}\) if \(\ell(x)+\ell(y) = \ell(xy)\) and
+  \item \(H_s^2 = 1 + (v^{-1}-v)H_s\). 
+  \end{enumerate}
+\end{prop}
+\begin{lem}
+  We have \(H_s^{-1} = H_s + (v-v^{-1})\) and so all the \(H_x\) basis
+  elements are units in \(\H\).
+\end{lem}
+\section{The Kazhdan-Lusztig Basis}
 \begin{defn}
   Recall that \(A = \Z[q,q^{-1}]\).
   \begin{enumerate}
@@ -41,9 +74,12 @@
   \item   The Hecke algebra \(\H\) admits an extension of the bar
     involution, say \(\iota \from \H
   \to \H\), given by \[
-    \iota(T_w) = T_{w^{-1}}^{-1}
+    \iota(T_w) := T_{w^{-1}}^{-1}
   \]
-  for any \(w \in \W\).
+  for any \(w \in \W\). For convenience, we will overload notation and
+  write \[
+    \ov{T_w} := \iota(T_w)
+  \]
   \end{enumerate}
 \end{defn}
 Following~\cite{williamson}, we note that if one wants to discuss elements fixed by \(\iota\), say of the form
@@ -61,8 +97,13 @@ Following~\cite{williamson}, we note that if one wants to discuss elements fixed
  -q^{\frac{1}{2}}\). So, let us redefine \(A\) to be the (larger) ring
  \(\Z[q^{\frac{1}{2}},q^{-\frac{1}{2}}]\). Then, we have such an \(\iota\)-invariant
  of the form \[
-   C_s := q^{-\frac{1}{2}} T_s - q^{\frac{1}{2}} T_{id}
+   C_s := q^{-\frac{1}{2}} T_s - q^{\frac{1}{2}} T_{id} = H_s-v^{-1} H_{id}
  \]
+ We can also introduce a similar \(\iota\)-invariant of the form \[
+   C_s' := H_s+v H_{id}
+ \]
+ This justifies why we introduced the \(H\)-basis in
+ Proposition~\ref{H-basis}. 
  In~\cite{humphreys}*{p 158}, it is noted that it could be tempting to
  construct further \(\iota\)-invariants by taking products of these
  \(C_s\) elements. However, if one has a word \(sts = tst\) with \(s,t
@@ -77,16 +118,19 @@ Following~\cite{williamson}, we note that if one wants to discuss elements fixed
  This illustrates the problem more generally we wish to solve. For
  every \(w \in \W\), we want to associate an \(\iota\)-invariant
  element, \(C_w\), which is a linear combination of \(T_x\) for \(x
- \leq w\), thus giving us a basis.
+ \leq w\), thus giving us a basis. In order to follow~\cite{soergel},
+ we will actually produce elements \(C_w'\) as a linear combination of
+ \(H_x\)'s, but the idea remains the same.
 \begin{thm}
-  \cite{humphreys}*{Theorem 7.9} For each \(w \in \W\), there exists a
-  unique element \(C_w \in \H\) having the following properties:
+  \cite{soergel}*{Theorem 2.1} For each \(w \in \W\), there exists a
+  unique element \(C_w' \in \H\) having the following properties:
   \begin{enumerate}
-  \item \(\iota(C_w) = C_w\)
-  \item \(C_w = \epsilon_w q_w^{\frac{1}{2}} \sum_{x \leq w} \epsilon_x
-    q_x^{-1} \ov{P}_{x,w} T_x\) where \(P_{w,w} = 1\) and \(P_{x,w}(q)
-    \in \Z[q]\) has degree less than
-    \(\frac{1}{2}(\ell(w)-\ell(x)-1)\) if \(x < w\).
+  \item \(\iota(C_w') = C_w'\) 
+  \item \(C_w' \in H_w + \sum_x v \Z[v] H_x\)
+  % \item \(C_w' = \epsilon_w q_w^{\frac{1}{2}} \sum_{x \leq w} \epsilon_x
+  %   q_x^{-1} \ov{P}_{x,w} T_x\) where \(P_{w,w} = 1\) and \(P_{x,w}(q)
+  %   \in \Z[q]\) has degree less than
+  %   \(\frac{1}{2}(\ell(w)-\ell(x)-1)\) if \(x < w\).
   \end{enumerate}
 \end{thm}
 Of course, it is easy to see that if \(s \in \W\) is a simple
@@ -103,6 +147,15 @@ Then, one may wish to construct
       author={Humphreys, James E.}
       title={Reflection Groups and Coxeter Groups}
       year={1990}
+    }
+    \bib{soergel}{article}{
+      author={Soergel, Wolfgang}
+      title={Kazhdan-Lusztig polynomials and a combinatoric for
+        Tilting modules}
+      journal={Representation Theory}
+      volume={1}
+      pages={83--114}
+      year={1997}
     }
     \bib{williamson}{book}{
       author={Williamson, Geordie}
