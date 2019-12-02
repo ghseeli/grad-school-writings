@@ -23,6 +23,7 @@ graphics
 hyperref
 import
 jknapltx
+kvoptions
 l3kernel
 l3packages
 latex-bin
