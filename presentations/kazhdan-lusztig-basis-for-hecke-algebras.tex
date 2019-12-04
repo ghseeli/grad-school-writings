@@ -109,38 +109,122 @@ Following~\cite{williamson}, we note that if one wants to discuss elements fixed
  \(C_s\) elements. However, if one has a word \(sts = tst\) with \(s,t
  \in \W\) both simple reflections and \(\ell(sts) = 3 = \ell(tst)\),
  then one can check that \(C_s C_t C_s \neq C_t C_s C_t\). However, if
- we compute (still assuming \(\ell(sts) = 3\)) \[
+ we compute (still assuming \(\ell(sts) = 3\)) \todo{Check this!} \[
    C_s C_t C_s - C_t = q^{-\frac{3}{2}}(T_{sts}-q(T_{st}-T_{ts})+q^2(1+q^{-1})(T_s+T_t)-q^3(1+2q^{-1})T_{id})
  \]
  we get an \(\iota\)-invariant expression where the \(s\) and \(t\)'s
- are interchangeable.
-
+ are interchangeable. Similarly, we can compute \[
+   C_s' C_t' C_s' - C_s' = H_{sts} + v(H_{ts}+H_{st})+v^2(H_s+H_t) + v^3
+   H_{id}
+ \]
+ since \(vH_s^2 = H_s-v^2H_s+vH_{id}\) and so \(vH_s^2 - C_s' = -v^2 H_s\).
+ 
  This illustrates the problem more generally we wish to solve. For
  every \(w \in \W\), we want to associate an \(\iota\)-invariant
  element, \(C_w\), which is a linear combination of \(T_x\) for \(x
  \leq w\), thus giving us a basis. In order to follow~\cite{soergel},
  we will actually produce elements \(C_w'\) as a linear combination of
  \(H_x\)'s, but the idea remains the same.
-\begin{thm}
+\begin{thm}\label{thm:KL}
   \cite{soergel}*{Theorem 2.1} For each \(w \in \W\), there exists a
   unique element \(C_w' \in \H\) having the following properties:
   \begin{enumerate}
   \item \(\iota(C_w') = C_w'\) 
-  \item \(C_w' \in H_w + \sum_x v \Z[v] H_x\)
+  \item \(C_w' \in H_w + \sum_{x < w} v \Z[v] H_x\) where \(x < w\) in
+    the (strong) Bruhat order.
   % \item \(C_w' = \epsilon_w q_w^{\frac{1}{2}} \sum_{x \leq w} \epsilon_x
   %   q_x^{-1} \ov{P}_{x,w} T_x\) where \(P_{w,w} = 1\) and \(P_{x,w}(q)
   %   \in \Z[q]\) has degree less than
   %   \(\frac{1}{2}(\ell(w)-\ell(x)-1)\) if \(x < w\).
   \end{enumerate}
 \end{thm}
-Of course, it is easy to see that if \(s \in \W\) is a simple
-reflection, then it must be that \[
-  C_s = q^{-\frac{1}{2}}(T_s-qT_{id})
-\]
 Then, one may wish to construct 
 \begin{example}
-  
+  \begin{enumerate}
+  \item From the above, we already see that if \(s \in \W\) is a simple
+    reflection, then it must be that \[
+      C_s' = H_s+v H_{id}
+    \]
+  \item We can compute the basis for \(\Sym_3 = \langle s_1, s_2
+    \rangle\) by hand. We know that the simple reflections must be of
+    the form.
+    \begin{align*}
+      C_{s_1}' = H_{s_1} +vH_{id}\\
+      C_{s_2}' = H_{s_2}+vH_{id}
+    \end{align*}
+    Then, to form \(\iota\)-invariants of length \(2\), we check \[
+      C_{s_1}' C_{s_2}' = H_{s_1 s_2} + v(H_{s_1}+H_{s_2}) + v^2 H_{id}
+    \]
+    is \(\iota\)-invariant. 
+    \[
+      C_{s_1 s_2}' = H_{s_1 s_2} + v(A(v)H_{s_1}+B(v)H_{s_2} + C(v)H_{id})
+    \]
+    and so, if we apply \(\iota\) to this, we get
+    \begin{align*}
+      \iota (C_{s_1}' C_{s_2}')
+      & = H_{s_1 s_2}+(v-v^{-1})(H_{s_1} + H_{s_2})+(v-v^{-1})^2 +
+        v^{-1}(H_{s_1} + H_{s_2}+2(v-v^{-1})) + v^{-2} \\
+      & = H_{s_1 s_2} + v(H_{s_1}+H_{s_2}) + (v-v^{-1})^2 +
+        2(1-v^{-2}) + v^{-2} \\
+      & = H_{s_1 s_2} + v(H_{s_1}+H_{s_2}) + v^2
+    \end{align*}
+    So, by uniqueness, it must be \(C_{s_1 s_2}' = C_{s_1}'
+    C_{s_2}'\). A similar computation gives \(C_{s_2 s_1}'\). For
+    length \(3\), we already computed above that \[
+      C_{s_1 s_2 s_1}' = C_{s_1}' C_{s_2}' C_{s_1}' - C_{s_1}' =
+      H_{s_1 s_2 s_1} + v(H_{s_1 s_2} + H_{s_2 s_1}) +
+      v^2(H_{s_1}+H_{s_2}) + v^3
+    \]
+  \end{enumerate}
 \end{example}
+\begin{proof}[Proof of~\ref{thm:KL}]
+  We have already established the formula for \(C_s'\) for \(s\) a
+  simple reflection. Now, we compute \[
+    H_x C_s' =
+    \begin{cases}
+      H_{xs} + vH_x & \text{if } xs > x;\\
+      H_{xs} + v^{-1} H_x & \text{if } xs < x.
+    \end{cases}
+  \]
+  \todo{Prove this formula.}
+  To show existence, we proceed by induction on
+  the Bruhat order. Certainly, \(C_{id}' = H_{id} = 1\). Now, let \(x
+  \in \W\) be 
+  given and suppose we know \(C_y'\) exists for all \(y < x\). If
+  \(x \neq id\), we can find a simple reflection \(s\) such that \(xs
+  < x\) and by induction, we get \[
+    C_{xs}' C_s' = H_x + \sum_{y < x} h_y H_y
+  \]
+  for some \(h_y \in \Z[v]\). Then, we say \[
+    C_x' = C_{xs}' C_s' - \sum_{y < x} h_y(0) C_y' \,.
+  \]
+  \(C_x'\) is \(\iota\)-invariant because it is a sum of
+  \(\iota-\)-invariant elements and it lies in \(H_x + \sum_{y <
+    x}v\Z[v] \) since, if \(C_y' = H_y + \sum_{z < y} h_{yz} H_x\) for
+  \(h_{yz} \in v\Z[v]\),
+  then \[
+    C_x' = H_x + \sum_{y < x} \left( (h_y - h_y(0)) H_y - \sum_{z<y}
+      h_y(0) h_{yz} H_z \right) \,.
+  \]
+
+  For uniqueness, we prove the following.
+  \begin{lem}
+    If \(H \in \sum_y v \Z[v] H_y\) is \(\iota\)-invariant, then \(H =
+    0\). 
+  \end{lem}
+  We have \(H_z \in C_z' + \sum_{y < z}\Z[v,v^{-1}] C_y'\) for the
+  \(C_x'\) elements described earlier in the proof by the
+  unitriangularity condition. \todo{I do not think this sentence was
+    necessary.} Now, if \(H = \sum_y h_y H_y\) and we
+  choose \(z\) maximal such that \(h_z \neq 0\), then \(\iota(H) = H\)
+  implies that \(\ov{h_z} = h_z\). However, this contradicts \(h_z \in
+  v\Z[v]\), so it must be that \(H = 0\).
+
+  Thus, if there were two \(\iota\)-invariant elements \(C_w'\) and
+  \(D_w'\) satisfying the hypotheses of~\ref{thm:KL}, then it must be
+  that \(C_w'-D_w' \in v \Z[v]\) is \(\iota\)-invariant, but the lemma
+  shows that \(C_w'-D_w' = 0\). Thus, uniqueness is established.
+\end{proof}
 \begin{bibdiv}
   \begin{biblist}
     \bib{humphreys}{book}{
