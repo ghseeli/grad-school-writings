@@ -15,6 +15,7 @@ datetime
 ec
 enumitem
 epstopdf
+epstopdf-pkg
 etoolbox
 float
 fmtcount
