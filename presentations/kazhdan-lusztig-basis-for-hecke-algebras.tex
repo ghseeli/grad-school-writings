@@ -30,6 +30,8 @@
 \date{December 9, 2019}
 \begin{document}
 \maketitle
+\section{Introduction}
+
 \section{Preliminaries}
 We work with the Hecke algebra, for which we will give two
 presentations.
@@ -64,6 +66,23 @@ have the following.
   We have \(H_s^{-1} = H_s + (v-v^{-1})\) and so all the \(H_x\) basis
   elements are units in \(\H\).
 \end{lem}
+\begin{proof}
+  \[
+    H_s^2-(v^{-1}-v)H_s = 1 \implies H_s(H_s+(v-v^{-1})) = 1 
+  \]
+\end{proof}
+\begin{lem}\label{lem:length-lowering-mult}
+  For simple reflection \(s \in \W\), if \(\ell(xs) < \ell(x)\),
+  then \[
+    H_x H_s = H_{xs} + (v^{-1}-v)H_x \,. 
+  \]
+\end{lem}
+\begin{proof}
+  We know that \[
+    H_x = H_{xs} H_s \implies H_x H_s = H_{xs} H_s^2 =
+    H_{xs}(1+(v^{-1}-v)H_s) = H_{xs} + (v^{-1}-v)H_x
+  \]
+\end{proof}
 \section{The Kazhdan-Lusztig Basis}
 \begin{defn}
   Recall that \(A = \Z[q,q^{-1}]\).
@@ -109,7 +128,7 @@ Following~\cite{williamson}, we note that if one wants to discuss elements fixed
  \(C_s\) elements. However, if one has a word \(sts = tst\) with \(s,t
  \in \W\) both simple reflections and \(\ell(sts) = 3 = \ell(tst)\),
  then one can check that \(C_s C_t C_s \neq C_t C_s C_t\). However, if
- we compute (still assuming \(\ell(sts) = 3\)) \todo{Check this!} \[
+ we compute (still assuming \(\ell(sts) = 3\)) \[
    C_s C_t C_s - C_t = q^{-\frac{3}{2}}(T_{sts}-q(T_{st}-T_{ts})+q^2(1+q^{-1})(T_s+T_t)-q^3(1+2q^{-1})T_{id})
  \]
  we get an \(\iota\)-invariant expression where the \(s\) and \(t\)'s
@@ -177,16 +196,18 @@ Then, one may wish to construct
     \]
   \end{enumerate}
 \end{example}
-\begin{proof}[Proof of~\ref{thm:KL}]
+\begin{proof}[Proof of Theorem~\ref{thm:KL}]
   We have already established the formula for \(C_s'\) for \(s\) a
   simple reflection. Now, we compute \[
     H_x C_s' =
     \begin{cases}
       H_{xs} + vH_x & \text{if } xs > x;\\
-      H_{xs} + v^{-1} H_x & \text{if } xs < x.
+      H_{xs} + v^{-1} H_x & \text{if } xs < x
     \end{cases}
   \]
-  \todo{Prove this formula.}
+  where the first case is immediate from the definition of the Hecke
+  algebra and the second case is a straightforward application
+  of Lemma~\ref{lem:length-lowering-mult}. 
   To show existence, we proceed by induction on
   the Bruhat order. Certainly, \(C_{id}' = H_{id} = 1\). Now, let \(x
   \in \W\) be 
@@ -200,11 +221,11 @@ Then, one may wish to construct
   \]
   \(C_x'\) is \(\iota\)-invariant because it is a sum of
   \(\iota-\)-invariant elements and it lies in \(H_x + \sum_{y <
-    x}v\Z[v] \) since, if \(C_y' = H_y + \sum_{z < y} h_{yz} H_x\) for
-  \(h_{yz} \in v\Z[v]\),
+    x}v\Z[v] H_y \) since, if \(C_y' = H_y + \sum_{z < y} h_{z,y} H_x\) for
+  \(h_{z,y} \in v\Z[v]\),
   then \[
     C_x' = H_x + \sum_{y < x} \left( (h_y - h_y(0)) H_y - \sum_{z<y}
-      h_y(0) h_{yz} H_z \right) \,.
+      h_y(0) h_{z,y} H_z \right) \,. 
   \]
 
   For uniqueness, we prove the following.
@@ -221,10 +242,22 @@ Then, one may wish to construct
   v\Z[v]\), so it must be that \(H = 0\).
 
   Thus, if there were two \(\iota\)-invariant elements \(C_w'\) and
-  \(D_w'\) satisfying the hypotheses of~\ref{thm:KL}, then it must be
+  \(D_w'\) satisfying the hypotheses of Theorem~\ref{thm:KL}, then it must be
   that \(C_w'-D_w' \in v \Z[v]\) is \(\iota\)-invariant, but the lemma
   shows that \(C_w'-D_w' = 0\). Thus, uniqueness is established.
 \end{proof}
+\begin{defn}
+  For \(x,y \in \W\), we define the \de{Kazhdan-Lusztig polynomials}
+  \(h_{y,x} \in \Z[v,v^{-1}]\) by the 
+  equality \[
+    C_x' = \sum_y h_{y,x} H_y
+  \]
+\end{defn}
+\begin{prop}
+  Let \(\W\) be finite, \(w_\circ \in \W\) be the longest element, and
+  \(r = \ell(w)\) its length. Then, we have \(C_w' = \sum_{y \in \W}
+  v^{r-\ell(y)} H_y\).
+\end{prop}
 \begin{bibdiv}
   \begin{biblist}
     \bib{humphreys}{book}{
