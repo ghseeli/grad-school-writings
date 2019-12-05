@@ -16,6 +16,7 @@
 
 \renewcommand{\W}{\mathcal{W}}
 \renewcommand{\H}{\mathcal{H}} % Hecke algebra
+\DeclareMathOperator{\ch}{ch}
 
 \newcommand{\trace}{\operatorname{Tr}}
 \newcommand{\transpose}{t}
@@ -31,14 +32,13 @@
 \begin{document}
 \maketitle
 \section{Introduction}
-The Kazhdan-Lusztig basis was introduced in~\cite{kl} in order to
-construct some representations of the Hecke algebra. While we will not
-get into these representations here, we will define the basis and give
+The Kazhdan-Lusztig basis was introduced in~\cite{kl}. We will define
+the basis and give 
 a proof of its existence and uniqueness, although we will mainly
 follow the proof in~\cite{soergel}. Since their introduction, the
 so-called Kazhdan-Lusztig polynomials, which appear in the definition
 of the basis, have appeared in many other fields of mathematics. For a
-more detailed overview of connections, see~\cite{brenti}*{p 5}. 
+more detailed overview of connections, see~\cite{brenti}*{p 5}.
 \section{Preliminaries}
 We work with the Hecke algebra, for which we will give two
 presentations.
@@ -108,20 +108,21 @@ have the following.
   \]
   \end{enumerate}
 \end{defn}
-Following~\cite{williamson}, we note that if one wants to discuss elements fixed by \(\iota\), say of the form
-\(F(q)T_s + G(q)T_{id}\), one finds that \[
-   \hspace{-0.5in}\iota(F(q)T_s + G(q)T_{id}) = F(q^{-1})(q^{-1}T_s+(q^{-1}-1)T_{id})
-   + G(q^{-1})T_{id} \implies
-   \begin{cases}
-     F(q) = q^{-1}F(q^{-1}) \\
-     G(q) = G(q^{-1})+F(q^{-1})(q^{-1}-1)
-   \end{cases}
- \]
- and so the simplest solution would be \(F(q) = q^{-1}+1\) and
- \(G(q)=-q\). However, if we allow \(F(q),G(q) \in \Z[q^{\frac{1}{2}},
- q^{-\frac{1}{2}}]\), then we can have \(F(q) = q^{-\frac{1}{2}}\) and \(G(q) =
- -q^{\frac{1}{2}}\). So, let us redefine \(A\) to be the (larger) ring
- \(\Z[q^{\frac{1}{2}},q^{-\frac{1}{2}}]\). Then, we have such an \(\iota\)-invariant
+% Following~\cite{williamson}, we note that if one wants to discuss elements fixed by \(\iota\), say of the form
+% \(F(q)T_s + G(q)T_{id}\), one finds that \[
+%    \hspace{-0.5in}\iota(F(q)T_s + G(q)T_{id}) = F(q^{-1})(q^{-1}T_s+(q^{-1}-1)T_{id})
+%    + G(q^{-1})T_{id} \implies
+%    \begin{cases}
+%      F(q) = q^{-1}F(q^{-1}) \\
+%      G(q) = G(q^{-1})+F(q^{-1})(q^{-1}-1)
+%    \end{cases}
+%  \]
+%  and so the simplest solution would be \(F(q) = q^{-1}+1\) and
+%  \(G(q)=-q\). However, if we allow \(F(q),G(q) \in \Z[q^{\frac{1}{2}},
+%  q^{-\frac{1}{2}}]\), then we can have \(F(q) = q^{-\frac{1}{2}}\) and \(G(q) =
+%  -q^{\frac{1}{2}}\). So, let us redefine \(A\) to be the (larger) ring
+%  \(\Z[q^{\frac{1}{2}},q^{-\frac{1}{2}}]\). 
+ Then, we have such an \(\iota\)-invariant
  of the form \[
    C_s := q^{-\frac{1}{2}} T_s - q^{\frac{1}{2}} T_{id} = H_s-v^{-1} H_{id}
  \]
@@ -150,7 +151,24 @@ Following~\cite{williamson}, we note that if one wants to discuss elements fixed
  element, \(C_w\), which is a linear combination of \(T_x\) for \(x
  \leq w\), thus giving us a basis. In order to follow~\cite{soergel},
  we will actually produce elements \(C_w'\) as a linear combination of
- \(H_x\)'s, but the idea remains the same.
+ \(H_x\)'s, but the idea remains the same. To do this, we first recall
+ a partial ordering on the Weyl group.
+ \begin{defn}
+   For \(u,v \in \W\), we say \(u \leq v\) in the (strong) \de{Bruhat
+     order} on \(\W\) if some substring of some reduce reduced word
+   for \(v\) is a reduced work for \(u\).
+ \end{defn}
+ \begin{example}
+   Let \(\W = \Sym_3 = \langle s_1, s_2 \rangle\). Then, the Bruhat
+   order is given by the following poset. \[
+     \begin{tikzcd}[row sep=tiny, column sep=tiny]
+       & s_1s_2s_1 & \\
+       s_1 s_2 \ar[ur] & & s_2 s_1 \ar[ul]\\
+       s_1 \ar[u] \ar[urr]& & s_2 \ar[u] \ar[ull]\\
+       & id \ar[ul] \ar[ur]&
+     \end{tikzcd}
+   \]
+ \end{example}
 \begin{thm}\label{thm:KL}
   \cite{soergel}*{Theorem 2.1} For each \(w \in \W\), there exists a
   unique element \(C_w' \in \H\) having the following properties:
@@ -259,13 +277,79 @@ Then, one may wish to construct
     C_x' = \sum_y h_{y,x} H_y
   \]
 \end{defn}
+\begin{rmk}
+  These polynomials are related to the Kazhdan-Lusztig polynomials
+  in~\cite{kl}, denoted \(P_{y,x}\), by \[
+    h_{y,x} = v^{\ell(x)-\ell(y)} P_{y,x}
+  \]
+\end{rmk}
 \begin{prop}
   Let \(\W\) be finite, \(w_\circ \in \W\) be the longest element, and
-  \(r = \ell(w)\) its length. Then, we have \(C_w' = \sum_{y \in \W}
+  \(r = \ell(w_\circ)\) its length. Then, we have \(C_{w_\circ}' = \sum_{y \in \W}
   v^{r-\ell(y)} H_y\).
 \end{prop}
+\subsection{Further Properties of Kazhdan-Lusztig Polynomials}
+Since their introduction, the Kazhdan-Lusztig polynomials have been an
+area of intense research. Now, much more is known than when they were
+first introduced.
+\begin{prop}
+  \cite{kl2} For any Weyl group \(\W\) and \(x,y \in \W\), we have that the
+  coefficients \(a_i\) occurring in \[
+    P_{y,x}(q) = \sum_i a_i q^i
+  \]
+  satisfy \(a_i \in \Z_{\geq 0}\).
+\end{prop}
+\begin{rmk}
+  This has been proved by~\cite{elias-williamson} for general Coxeter
+  systems. 
+\end{rmk}
+In~\cite{kl}, the following was conjectured. It was proven
+in~\cite{bb} and~\cite{bk}.
+\begin{prop}
+  Given a semisimple Lie algebra \(\g\) with Weyl group \(\W\), for
+  each \(w \in \W\), let \(M_w\) be the Verma module with heighest
+  weight \(-w(\rho)-\rho\) and let \(L_w\) be its unique irreducible
+  quotient. Then, we have the equivalent identities
+  \begin{enumerate}
+  \item \(\ch L_w = \sum_{y \leq w} (-1)^{\ell(w)+\ell(y)} P_{y,w}(1)
+    \ch M_y\)
+  \item \(\ch M_w = \sum_{y \leq w} P_{w_\circ w, w_\circ y}(1) \ch L_y\)
+  \end{enumerate}
+  where \(w_\circ\) is the longest element of \(\W\). 
+\end{prop}
+Finally, there exists a geometric interpretation of the
+Kazhdan-Lusztig polynomials using perverse sheaves.
+\subsection{Historical Note}
+Kazhdan and Lusztig were originally interested in using the
+Kazhdan-Lusztig basis to construct representations of the Hecke
+algebra, but their significance has extended far beyond this goal. Our
+expoistion here does not follow~\cite{kl} and our definitions do not
+match those in~\cite{kl}, although it is straightforward to translate
+between~\cite{kl} and these notes. The proof given for
+existence and uniqueness here is simpler; notably, this exposition will not
+include the \(R\)-polynomials. Such a proof can be found in~\cite{humphreys}.
 \begin{bibdiv}
   \begin{biblist}
+    \bib{bb}{article}{
+      author={Beilinson, A.}
+      author={Bernstein, J.}
+      title={Localisation de \(\g\)-modules}
+      journal={C. R. Acad. Sci. Paris S\'{e}r. I Math.}
+      volume={292}
+      year={1981}
+      number={1}
+      pages={15--18}
+    }
+    \bib{bk}{article}{
+      author={Brylinski, J.-L.}
+      author={Kashiwara, M.}
+      title={Kazhdan-Lusztig conjecture and holonomic systems}
+      journal={Invent. Math.}
+      volume={64}
+      year={1981}
+      number={3}
+      pages={387--410}
+    }
     \bib{brenti}{article}{
       author={Brenti, Francesco}
       title={Kazhdan-Lusztig polynomials: History, Problems, and
@@ -273,6 +357,15 @@ Then, one may wish to construct
       journal={S\'{e}minaire Lotharingien de Combinatoire}
       volume={49}
       year={2003}
+    }
+    \bib{elias-williamson}{article}{
+      author={Elias, Ben}
+      author={Williamson, Geordie}
+      title={The Hodge theory of Soergel bimodules}
+      year={2014}
+      volume={180}
+      issue={3}
+      pages={1089--136}
     }
     \bib{humphreys}{book}{
       author={Humphreys, James E.}
@@ -288,6 +381,16 @@ Then, one may wish to construct
       year={1979}
       pages={165--184}
     }
+    \bib{kl2}{article}{
+      author={Kazhdan, David}
+      author={Lusztig, George}
+      title={Schubert varieties and Poincar\'{e} duality}
+      journal={Geometry of the Laplace operator (Proc. Sympos. Pure
+        Math., Univ. Hawaii, Honolulu, Hawaii, 1979)}
+      year={1980}
+      pages={185--203}
+    }
+
     \bib{soergel}{article}{
       author={Soergel, Wolfgang}
       title={Kazhdan-Lusztig polynomials and a combinatoric for
