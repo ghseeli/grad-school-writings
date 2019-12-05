@@ -31,7 +31,14 @@
 \begin{document}
 \maketitle
 \section{Introduction}
-
+The Kazhdan-Lusztig basis was introduced in~\cite{kl} in order to
+construct some representations of the Hecke algebra. While we will not
+get into these representations here, we will define the basis and give
+a proof of its existence and uniqueness, although we will mainly
+follow the proof in~\cite{soergel}. Since their introduction, the
+so-called Kazhdan-Lusztig polynomials, which appear in the definition
+of the basis, have appeared in many other fields of mathematics. For a
+more detailed overview of connections, see~\cite{brenti}*{p 5}. 
 \section{Preliminaries}
 We work with the Hecke algebra, for which we will give two
 presentations.
@@ -235,8 +242,7 @@ Then, one may wish to construct
   \end{lem}
   We have \(H_z \in C_z' + \sum_{y < z}\Z[v,v^{-1}] C_y'\) for the
   \(C_x'\) elements described earlier in the proof by the
-  unitriangularity condition. \todo{I do not think this sentence was
-    necessary.} Now, if \(H = \sum_y h_y H_y\) and we
+  unitriangularity condition. Now, if \(H = \sum_y h_y H_y\) and we
   choose \(z\) maximal such that \(h_z \neq 0\), then \(\iota(H) = H\)
   implies that \(\ov{h_z} = h_z\). However, this contradicts \(h_z \in
   v\Z[v]\), so it must be that \(H = 0\).
@@ -260,10 +266,27 @@ Then, one may wish to construct
 \end{prop}
 \begin{bibdiv}
   \begin{biblist}
+    \bib{brenti}{article}{
+      author={Brenti, Francesco}
+      title={Kazhdan-Lusztig polynomials: History, Problems, and
+        Combinatorial Invariance}
+      journal={S\'{e}minaire Lotharingien de Combinatoire}
+      volume={49}
+      year={2003}
+    }
     \bib{humphreys}{book}{
       author={Humphreys, James E.}
       title={Reflection Groups and Coxeter Groups}
       year={1990}
+    }
+    \bib{kl}{article}{
+      author={Kazhdan, David}
+      author={Lusztig, George}
+      title={Representation of Coxeter Groups and Hecke Algebras}
+      journal={Inventiones math.}
+      volume={53}
+      year={1979}
+      pages={165--184}
     }
     \bib{soergel}{article}{
       author={Soergel, Wolfgang}
