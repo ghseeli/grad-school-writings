@@ -108,6 +108,8 @@ have the following.
   \]
   \end{enumerate}
 \end{defn}
+Note that \(\iota(H_s) = v^{-1} T_{s}^{-1} = v^{-1}(v^2 T_s - 1 + v^2
+) = H_s - v^{-1} + v = H_s^{-1} \) and, similarly, \(\iota(H_w) = H_{w^{-1}}^{-1}\).
 % Following~\cite{williamson}, we note that if one wants to discuss elements fixed by \(\iota\), say of the form
 % \(F(q)T_s + G(q)T_{id}\), one finds that \[
 %    \hspace{-0.5in}\iota(F(q)T_s + G(q)T_{id}) = F(q^{-1})(q^{-1}T_s+(q^{-1}-1)T_{id})
@@ -122,7 +124,7 @@ have the following.
 %  q^{-\frac{1}{2}}]\), then we can have \(F(q) = q^{-\frac{1}{2}}\) and \(G(q) =
 %  -q^{\frac{1}{2}}\). So, let us redefine \(A\) to be the (larger) ring
 %  \(\Z[q^{\frac{1}{2}},q^{-\frac{1}{2}}]\). 
- Then, we have such an \(\iota\)-invariant
+ Then, we have an \(\iota\)-invariant
  of the form \[
    C_s := q^{-\frac{1}{2}} T_s - q^{\frac{1}{2}} T_{id} = H_s-v^{-1} H_{id}
  \]
@@ -155,8 +157,8 @@ have the following.
  a partial ordering on the Weyl group.
  \begin{defn}
    For \(u,v \in \W\), we say \(u \leq v\) in the (strong) \de{Bruhat
-     order} on \(\W\) if some substring of some reduce reduced word
-   for \(v\) is a reduced work for \(u\).
+     order} on \(\W\) if some substring of some reduced word
+   for \(v\) is a reduced word for \(u\).
  \end{defn}
  \begin{example}
    Let \(\W = \Sym_3 = \langle s_1, s_2 \rangle\). Then, the Bruhat
@@ -199,11 +201,7 @@ Then, one may wish to construct
     Then, to form \(\iota\)-invariants of length \(2\), we check \[
       C_{s_1}' C_{s_2}' = H_{s_1 s_2} + v(H_{s_1}+H_{s_2}) + v^2 H_{id}
     \]
-    is \(\iota\)-invariant. 
-    \[
-      C_{s_1 s_2}' = H_{s_1 s_2} + v(A(v)H_{s_1}+B(v)H_{s_2} + C(v)H_{id})
-    \]
-    and so, if we apply \(\iota\) to this, we get
+    is \(\iota\)-invariant. If we apply \(\iota\) to this, we get
     \begin{align*}
       \iota (C_{s_1}' C_{s_2}')
       & = H_{s_1 s_2}+(v-v^{-1})(H_{s_1} + H_{s_2})+(v-v^{-1})^2 +
@@ -245,7 +243,7 @@ Then, one may wish to construct
     C_x' = C_{xs}' C_s' - \sum_{y < x} h_y(0) C_y' \,.
   \]
   \(C_x'\) is \(\iota\)-invariant because it is a sum of
-  \(\iota-\)-invariant elements and it lies in \(H_x + \sum_{y <
+  \(\iota\)-invariant elements and it lies in \(H_x + \sum_{y <
     x}v\Z[v] H_y \) since, if \(C_y' = H_y + \sum_{z < y} h_{z,y} H_x\) for
   \(h_{z,y} \in v\Z[v]\),
   then \[
