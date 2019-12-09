@@ -60,14 +60,21 @@ presentations.
 For our purposes, it will also be convenient to work with the Hecke
 algebra over an enlarged ring. Let \(v := q^{-\frac{1}{2}}\). Then, we
 have the following.
+\begin{prop}
+  The Hecke algebra over \(\Z[v,v^{-1}]\) is given as the associative algebra
+  with generators \(\{H_s\}\) for \(H_s = vT_s\) and relations
+  \begin{enumerate}
+  \item \(H_s^2 = 1 + (v^{-1}-v)H_s\) and 
+  \item \(H_s H_t \cdots H_s = H_t H_s \cdots H_t\) or \(H_s H_t H_s
+    \cdots H_t = H_t H_s H_t \cdots H_s\) if \(st\cdots s = ts \cdots
+    t\) or \(sts \cdots t = tst \cdots s\), repsectively, for simple
+    reflections \(s,t \in \W\)
+  \end{enumerate}
+\end{prop}
 \begin{prop}\label{H-basis}
   The Hecke algebra over \(\Z[v,v^{-1}]\) has a basis given by \(\{H_w
   \st w \in \W\}\) where \(H_w = v^{\ell(w)} T_w\). Furthermore, this
-  basis has relations
-  \begin{enumerate}
-  \item \(H_x H_y = H_{xy}\) if \(\ell(x)+\ell(y) = \ell(xy)\) and
-  \item \(H_s^2 = 1 + (v^{-1}-v)H_s\). 
-  \end{enumerate}
+  basis has relation \(H_x H_y = H_{xy}\) if \(\ell(x)+\ell(y) = \ell(xy)\).
 \end{prop}
 \begin{lem}
   We have \(H_s^{-1} = H_s + (v-v^{-1})\) and so all the \(H_x\) basis
