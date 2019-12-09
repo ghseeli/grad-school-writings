@@ -3,6 +3,7 @@ amsmath
 amsrefs
 anyfontsize
 atbegshi
+atveryend
 bbm
 bbm-macros
 beamer
