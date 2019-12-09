@@ -44,6 +44,7 @@ pgfopts
 pgfplots
 psnfss
 ragged2e
+rerunfilecheck
 scalerel
 setspace
 subfiles
