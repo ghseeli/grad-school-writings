@@ -30,6 +30,7 @@ l3kernel
 l3packages
 latex-bin
 latexmk
+letltxmacro
 mathabx
 mathdots
 mathtools
