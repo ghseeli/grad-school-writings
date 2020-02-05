@@ -81,6 +81,7 @@
                       % \bottomrule in tables
 \usepackage{tikz}
 \usepackage{tikz-cd}
+\usepackage{varwidth}
 \usepackage{amsmath}
 \usepackage[author-year]{amsrefs}
 \usepackage{../ReAdTeX/readtex-core}
@@ -91,13 +92,14 @@
 %%  MACRO DEFINITIONS:  Co-authors -- PLEASE use these! 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \definecolor{coralred}{rgb}{1.0, 0.25, 0.25}
-\definecolor{lightblue}{rgb}{.68,.85,.9} % 
+\definecolor{lightblue}{rgb}{.3,.65,1.0} %
 \DeclareMathOperator{\Gr}{Gr}
 \newcommand{\cupprod}{\cup}
 \newcommand{\sym}{\Lambda}
 \newcommand{\lowers}{\mathcal{L}}
 \newcommand{\mynone}{\ }
 \newcommand{\G}{\mathfrak{G}}
+\renewcommand{\S}{\mathfrak{S}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 
@@ -138,16 +140,23 @@ CAGE \\ % Your institution for the title page
 %   \item A resolution: \(K\)-theoretic Catalan functions
 %   \end{enumerate}
 % \end{frame}
+\begin{frame}{Overview}
+  \begin{itemize}
+  \item Schubert calculus
+  \item Catalan functions: a new approach to old problems
+  \item \(K\)-theoretic Catalan functions
+  \end{itemize}
+\end{frame}
 \begin{frame}{Overview of Schubert Calculus Combinatorics}
   \begin{block}{Geometric problem}
     Find \(c_{\lambda \mu}^\nu = \#\) of points in
-    intersection of subvarieties in a variety \(X\). %\pause
+    intersection of subvarieties in a variety \(X\). \pause
   \end{block}
   \[
     \downarrow
   \]
   \begin{block}{Cohomology}
-    Schubert basis \(\{\sigma_\lambda\}\) for \(H^*(X)\) with property \(\sigma_\lambda \cupprod \sigma_\mu = \sum_\nu c_{\lambda \mu}^\nu \sigma_\nu\) %\pause 
+    Schubert basis \(\{\sigma_\lambda\}\) for \(H^*(X)\) with property \(\sigma_\lambda \cupprod \sigma_\mu = \sum_\nu c_{\lambda \mu}^\nu \sigma_\nu\) \pause 
 \end{block}
 \[
   \downarrow
@@ -288,7 +297,8 @@ CAGE \\ % Your institution for the title page
 \begin{frame}{Classical Schubert Calculus}
     \begin{block}{Geometric problem}
     Find \(c_{\lambda \mu}^\nu = \#\) of points in
-    intersection of Schubert varieties in variety \(X = \Gr(m,n)\). %\pause
+    intersection of Schubert varieties \(\{X_\lambda\}_{\lambda
+      \subset (n^m)}\) in variety \(X = \Gr(m,n)\). \pause
   \end{block}
   \vspace{-0.1in}
   \[
@@ -297,7 +307,7 @@ CAGE \\ % Your institution for the title page
   \vspace{-0.1in}
   \begin{block}{Cohomology}
     Schubert basis \(\{\sigma_\lambda\}_{\lambda \subset (n^m)}\) for \(H^*(X)\) with property \(\sigma_\lambda \cupprod \sigma_\mu = \sum_\nu c_{\lambda \mu}^\nu \sigma_\nu\) %\pause 
-  \end{block}
+  \end{block}\pause
 \vspace{-0.1in}  
 \[
   \downarrow
@@ -309,10 +319,26 @@ CAGE \\ % Your institution for the title page
   Littlewood-Richardson coefficients \(c_{\lambda \mu}^\nu\).
 \end{block}
 \end{frame}
+\begin{frame}{Next Step: Flag Variety}
+  \begin{itemize}
+  \item
+    \(X = Fl_n(\C) = \{V_0 \subset V_1 \subset \cdots \subset
+    V_n \st \dim V_i = i\}\) \pause
 
+   \item Decomposes into Schubert varieties indexed by \(w \in S_n\).\pause
+
+    \item \(H^*(Fl_n(\C))\) supported by Schubert polynomials
+    \(\S_w \in \Z[x_1, \ldots, x_n]\) (Not necessarily symmetric!) \pause
+  \end{itemize}
+  \begin{block}{Open Problem}
+    Structure constants \(\S_w \S_u = c_{w u}^v \S_v \) are
+    combinatorially unknown.
+  \end{block}
+\end{frame}
 \begin{frame}[fragile]{Schubert Calculus Variations}
     There are many variations on classical Schubert calculus of
     the Grassmannian (Type A).
+    \pause
     \begin{tabular}{|c|c|}
       \hline
       Theory
@@ -320,6 +346,12 @@ CAGE \\ % Your institution for the title page
       \hline
       (Co)homology of Grassmannian
       & Schur functions\\
+      \hline
+      (Co)homology of flag variety
+      & Schubert polynomimals\\
+      \hline
+      Quantum cohomology of flag variety
+      & Quantum Schuberts\\
       \hline
       (Co)homology of Types BCD Grassmannian
       & Schur-\(P\) and \(Q\) functions\\
@@ -334,7 +366,7 @@ CAGE \\ % Your institution for the title page
       & \(K\)-\(k\)-Schur functions \\
       \hline
     \end{tabular}
-    And many more!
+    \pause And many more!
   % \begin{itemize}
   % \item (Co)homology of Types BCD Grassmannian
   % \item \(K\)-theory of Grassmannian
@@ -381,6 +413,50 @@ CAGE \\ % Your institution for the title page
 %     representatives for the affine Grassmannian when \(t=1\).
 %   \end{block}
 % \end{frame}
+\begin{frame}{Peterson Isomorphism}
+  \begin{itemize}
+  \item \(QH^*(Fl_{k+1})\) quantum deformation of
+    \(H^*(Fl_{k+1})\).\pause
+  \item Supported by quantum Schubert polynomials \(\S_w^Q\).\pause
+  \item Peterson isomorphism
+    \begin{align*}
+      \Phi\colon QH^*(Fl_{k+1}) & \to H_*(Gr_{SL_{k+1}})_{loc}\\
+      \S_w^Q & \mapsto \frac{s_\lambda^{(k)} }{\prod_{i \in Des(w)} \tau_i} 
+    \end{align*}
+    where \(s_\lambda^{(k)}\) is a \(k\)-Schur function.
+    \pause
+  \end{itemize}
+  \begin{block}{Upshot}
+    Computations for (quantum) Schubert polynomials can be moved into symmetric functions.
+  \end{block}
+\end{frame}
+\begin{frame}{\(k\)-Schur functions}
+  \begin{itemize}
+  \item \(s_\lambda^{(k)}\) for \(\lambda_1 \leq k\) a basis for
+    \(\Z[s_1, s_2, \ldots, s_k]\)~\cite{lapointe-lascoux-morse}. \pause
+  \item Schubert representatives for \(H_*(Gr_{SL_{k+1}})\)~\cite{Lam08}. \pause
+  \item Has a tableaux formulation and Pieri rule: \(s_{1^r}
+    s_\lambda^{(k)} = \sum_{\mu} a_{\lambda \mu} s_\mu^{(k)}\) \pause
+  \item \(s_\lambda^{(k)} = s_\lambda\) as \(k \to \infty\).\pause
+  \item Branching with positive coefficients~\cite{llms}:
+    \ytableausetup{boxsize=0.5em}
+      \[s_{\ydiagram{2,2}}^{(2)} =
+        \underbrace{s_{\ydiagram{2,2}}}_{s^{(3)}_{\ydiagram{2,2}}}+\underbrace{s_{\ydiagram{1,3}}+s_{\ydiagram{4}}}_{s_{\ydiagram{1,3}}^{(3)}}\] \pause
+      \begin{itemize}
+      \item Has geometric interpretation.\pause     
+      \item No combinatorial interpretation of branching coefficients.\pause
+      \item Definition with \(t\) important for Macdonald polynomials.\pause
+      \end{itemize}
+   \item Many definitions. A new one makes proofs easier!
+  \end{itemize}
+\end{frame}
+\begin{frame}{Overview}
+  \begin{itemize}
+  \item Schubert calculus
+  \item \textbf{Catalan functions: a new approach to old problems}
+  \item \(K\)-theoretic Catalan functions
+  \end{itemize}
+\end{frame}
 \begin{frame}{Raising Operators on Symmetric Functions}
   \begin{itemize}
   \item Raising operators \(R_{i,j}\) act on diagrams \[
@@ -389,85 +465,109 @@ CAGE \\ % Your institution for the title page
       \ydiagram{1,4}*[*(red)]{0,3+1} \ \ \ R_{2,3} \left(
         \ydiagram{1,1,1}*[*(red)]{1} \right) =
       \ydiagram{2,1}*[*(red)]{1+1}
-    \]
+    \]\pause
   \item Extend action to a symmetric function \(f_\lambda\) by
-    \(R_{i,j}(f_\lambda) = f_{\lambda+\epsilon_i-\epsilon_j}\).
+    \(R_{i,j}(f_\lambda) = f_{\lambda+\epsilon_i-\epsilon_j}\). \pause
   \item For \(h_\lambda = s_{\lambda_1} \cdots s_{\lambda_r}\), we
     have the \emph{Jacobi-Trudi identity}\[
       s_\lambda = \prod_{i < j} (1-R_{ij}) h_\lambda
-    \]
+    \]\pause
   \end{itemize}
   \begin{align*}
     s_{22} & = (1-R_{12}) h_{22} =  h_{22} - h_{31}\\
     s_{211}
     & = (1-R_{12})(1-R_{23})(1-R_{13}) h_{211}\\
     & = h_{211} - h_{301} - h_{220}\, \textcolor{red}{- h_{310}
-      +  h_{310}} + h_{32\,\text{-}1}+h_{400} -  h_{41\,\text{-}1}
+      +  h_{310}} + \underbrace{h_{32\,\text{-}1}}_{=0}+h_{400} -  \underbrace{h_{41\,\text{-}1}}_{=0}
   \end{align*}
   \textcolor{red}{some terms cancel}
 \end{frame}
 \begin{frame}{Raising Operators on Symmetric Functions}
-  Advantage: gives definition for Schur function indexed by any
-  integer vector \(\alpha \in \Z^\ell\). Amazingly: \[
+  Gives definition for Schur function indexed by any
+  integer vector \(\alpha \in \Z^\ell\). \pause Straightening: \[
 s_\alpha = \prod_{i<j} (1-R_{ij}) h_\alpha = 
 \begin{cases} \pm\, s_\lambda & \text{for a partition $\lambda$} \\0\end{cases}
+\]
+\pause For \(\langle s_{1^r}^\perp s_\lambda, s_\mu \rangle = \langle
+s_\lambda, s_{1^r} s_\mu \rangle\), 
+  \[s_{1^r}^\perp s_\lambda = \sum_{S \subset [1,\ell], |S|=r}
+    s_{\lambda - \epsilon_S}\]
+  \[
+    s_{1^2}^\perp s_{333} = s_{322} + s_{232} + s_{223}
   \]
 \end{frame}
-\begin{frame}{Root Ideals}
-  A root ideal \(\Psi\) of type \(A_{\ell-1}\) positive roots: given by Dyck path.
-            \ytableausetup{mathmode, boxsize=1em,centertableaux}
+\begin{frame}[fragile]{Root Ideals}
+  A root ideal \(\Psi\) of type \(A_{\ell-1}\) positive roots: given
+  by Dyck path (lattice path above diagonal). 
+            \ytableausetup{mathmode, boxsize=1em, centertableaux}
             \[
-              \Psi =
-              \begin{ytableau}
-                \mynone &*(lightblue)\text{\tiny (12)}  &*(red)\text{\tiny (13)}   &*(red)\text{\tiny (14)}  &*(red)
-                \text{\tiny (15)}\\
-                \mynone &\mynone &*(red) \text{\tiny (23)}  &*(red)\text{\tiny (24)}
-                &*(red) \text{\tiny (25)}\\
-                \mynone &\mynone &\mynone &*(lightblue) \text{\tiny (34)}
-                &*(red)\text{\tiny (35)} \\
-                \mynone &\mynone &\mynone&\mynone&*(lightblue) \text{\tiny (45)}\\
-                \mynone &\mynone &\mynone&\mynone&\mynone\\
-              \end{ytableau}
-              \ \ \ \overset{\text{\textcolor{red}{\scriptsize{Roots above Dyck
-                    path}}}}{\text{\textcolor{blue}{\scriptsize{Non-roots below}}}}
-          \]
-          \begin{block}{Catalan Function \((t=1)\)}
+              \begin{tikzpicture}[inner sep=0in, outer sep=0in]
+                \node (n) {
+                \begin{ytableau}
+                  \mynone &*(lightblue)\text{\tiny (12)}
+                  &*(red)\text{\tiny (13)} &*(red)\text{\tiny (14)}
+                  &*(red)
+                  \text{\tiny (15)}\\
+                  \mynone &\mynone &*(red) \text{\tiny (23)}
+                  &*(red)\text{\tiny (24)}
+                  &*(red) \text{\tiny (25)}\\
+                  \mynone &\mynone &\mynone &*(lightblue) \text{\tiny
+                    (34)}
+                  &*(red)\text{\tiny (35)} \\
+                  \mynone &\mynone &\mynone&\mynone&*(lightblue) \text{\tiny (45)}\\
+                  \mynone &\mynone &\mynone&\mynone&\mynone\\
+                \end{ytableau}};
+              \draw[thick,green] (n.north
+              west)--([xshift=2.1em]n.north
+              west)--++(0,-2.1em)--++(2.1em,0)--++(0,-1.05em)--++(1.05em,0)--++(0,-2.10em);
+              \draw[thick,lightgray] (n.north west)--(n.south east);
+              \end{tikzpicture}
+              \ \ \
+              \scalebox{1.3}{$ 
+              \overset{\text{\textcolor{red}{\scriptsize{
+                      $\Psi =$ Roots above Dyck
+                      path}
+                  }
+                }}{\text{\textcolor{lightblue}{$\scriptstyle\Delta^+_\ell
+                    \setminus \Psi = $ \scriptsize{Non-roots below}}}}
+            $}
+          \]\pause
+          \vspace{-0.1in}
+          \begin{block}{Catalan Function~\cite{CH,pany,catalans}}
             For $\Psi$ and $\gamma\in\mathbb Z^\ell$
             $$
-            H(\Psi;\gamma)(x;1) = \prod_{(i,j)\in\Delta^+_\ell
-              \setminus \Psi} (1-R_{ij}) h_\gamma(x)
+            H(\Psi;\gamma)(x) = \prod_{(i,j)\in \textcolor{lightblue}{\Delta^+_\ell
+              \setminus \Psi}} (1-R_{ij}) h_\gamma(x)
             $$
-          \end{block}
-          Initially studied by~\cite{CH} and~\cite{pany},
-          this is a specialization of the reformulation in~\cite{catalans}.
-        \end{frame}
-        \begin{frame}{Catalan functions \((t=1)\)}
+          \end{block}\pause
           \begin{itemize}
           \item \(\Psi = \emptyset \implies H(\emptyset;\gamma) =
-            s_\gamma\)
-          \item \(\Psi =\) all roots \(\implies H(\Psi;\gamma) =
-            h_\gamma\)
+            s_\gamma\)\pause
+          \item \(\Psi =\) all roots \(\implies H(\Psi;\gamma) = h_\gamma\)
           \end{itemize}
+        \end{frame}
+        \begin{frame}{Catalan functions}
           \begin{block}{\(k\)-Schur root ideal for \(\lambda\)}
             \vspace{-0.1in}
             \begin{align*}
               \Psi = \Delta^k(\lambda)
               & = \{(i,j): j > k-\lambda_i\}\\
-              & = \text{root ideal with }k-\lambda_i\text{ \textcolor{blue}{non-roots}
+              & = \text{root ideal with }k-\lambda_i\text{ \textcolor{lightblue}{non-roots}
                 in row }i
             \end{align*}
           \end{block}
+          \pause
           \[
             \Delta^4(3,3,2,2,1,1) = 
 \ytableausetup{mathmode, boxsize=.8em,centertableaux}
 % ~&*(blue!20)&*(red)&*(red)\\
 {\scriptsize
 \begin{ytableau}
-*(white) 3     &*(blue)  &*(red)   &*(red)  &*(red)  &*(red) \\
-\mynone & *(white)3 & *(blue) & *(red) & *(red)  &*(red)  \\
-\mynone &*(white)  & *(white)2 & *(blue) & *(blue)  &*(red)  \\
-\mynone &*(white)  & *(white)  & *(white)2 & *(blue) &*(blue) \\
-\mynone &\mynone  &\mynone  &\mynone  & *(white)1 & *(blue) \\
+*(white) 3     &*(lightblue)  &*(red)   &*(red)  &*(red)  &*(red) \\
+\mynone & *(white)3 & *(lightblue) & *(red) & *(red)  &*(red)  \\
+\mynone &*(white)  & *(white)2 & *(lightblue) & *(lightblue)  &*(red)  \\
+\mynone &*(white)  & *(white)  & *(white)2 & *(lightblue) &*(lightblue) \\
+\mynone &\mynone  &\mynone  &\mynone  & *(white)1 & *(lightblue) \\
 \mynone &\mynone  &\mynone  &\mynone  &*(white)  & *(white) 1
 \end{ytableau}
 }
@@ -477,30 +577,23 @@ s_\alpha = \prod_{i<j} (1-R_{ij}) h_\alpha =
 \\
 \quad
 \\
-\leftarrow \text{row $i$ has $4-\lambda_i$ \textcolor{blue}{non-roots}}
+\leftarrow \text{row $i$ has $4-\lambda_i$ \textcolor{lightblue}{non-roots}}
 \\
 \quad
 \\
 \quad
 \end{matrix}
 \]
-\begin{itemize}
-\item For partition \(\lambda\) with \(\lambda_1 \leq k\),
-  \(H(\Delta^k(\lambda);\lambda) = s_\lambda^{(k)}(x;t=1)\).
-\end{itemize}
+\pause
+  \begin{block}{\(k\)-Schur is a Catalan function~\cite{catalans}.}
+    For partition \(\lambda\) with \(\lambda_1 \leq k\),
+    \[s_\lambda^{(k)} = H(\Delta^k(\lambda);\lambda)\,.\]
+  \end{block}
 \end{frame}
-\begin{frame}{Catalan functions}
-  \cite{catalans}: proof of ``branching rule'' of \(s_\lambda^{(k)}(x;t)\).
-  \begin{itemize}
-  \item Explicit combinatorial formula for coefficients in
-    \(s_\lambda^{(k)} = \sum_\mu a_{\lambda \mu}^{(k)}(t) s_\mu^{(k+1)}
-     \implies a_{\lambda \mu}^{(k)}(t) \in \Z_{\geq 0}[t]\).
-  \item Implies \(s_\lambda^{(k)} = \sum_\mu b_{\lambda \mu}(t)
-    s_\mu\) with \(b_{\lambda \mu}(t) \in \Z_{\geq 0}[t]\).
-  \end{itemize}
-\end{frame}
-\begin{frame}{Catalan functions}
-    Key ingredient of proof:
+\begin{frame}{Key ingredient of branching proof}
+  Dual vertical Pieri rule: \(s_{1^r}^\perp s_\lambda^{(k)} = \sum_\mu
+  a_{\lambda \mu} s_\mu^{(k)}\)\,.
+  \pause
     \begin{block}{Shift Invariance~\cite{catalans}}
       For partition \(\lambda\) of length \(\ell\) with \(\lambda_1
       \leq k\),
@@ -511,7 +604,92 @@ s_\alpha = \prod_{i<j} (1-R_{ij}) h_\alpha =
       \(\langle s_{1^\ell}^\perp f, g \rangle = \langle f, s_{1^\ell}
       g \rangle\).
     \end{block}
+    \pause Proof: \(k-\lambda_i = (k+1)-(\lambda_i+1)\)
+    \pause
+              \[
+            \Delta^4(3,3,2,2,1,1) = 
+\ytableausetup{mathmode, boxsize=.8em,centertableaux}
+% ~&*(blue!20)&*(red)&*(red)\\
+{\scriptsize
+\begin{ytableau}
+*(white) 3     &*(lightblue)  &*(red)   &*(red)  &*(red)  &*(red) \\
+\mynone & *(white)3 & *(lightblue) & *(red) & *(red)  &*(red)  \\
+\mynone &*(white)  & *(white)2 & *(lightblue) & *(lightblue)  &*(red)  \\
+\mynone &*(white)  & *(white)  & *(white)2 & *(lightblue) &*(lightblue) \\
+\mynone &\mynone  &\mynone  &\mynone  & *(white)1 & *(lightblue) \\
+\mynone &\mynone  &\mynone  &\mynone  &*(white)  & *(white) 1
+\end{ytableau}
+}
+\quad
+            \Delta^5(4,4,3,3,2,2) = 
+\ytableausetup{mathmode, boxsize=.8em,centertableaux}
+% ~&*(blue!20)&*(red)&*(red)\\
+{\scriptsize
+\begin{ytableau}
+*(white) 4     &*(lightblue)  &*(red)   &*(red)  &*(red)  &*(red) \\
+\mynone & *(white)4 & *(lightblue) & *(red) & *(red)  &*(red)  \\
+\mynone &*(white)  & *(white)3 & *(lightblue) & *(lightblue)  &*(red)  \\
+\mynone &*(white)  & *(white)  & *(white)3 & *(lightblue) &*(lightblue) \\
+\mynone &\mynone  &\mynone  &\mynone  & *(white)2 & *(lightblue) \\
+\mynone &\mynone  &\mynone  &\mynone  &*(white)  & *(white) 2
+\end{ytableau}
+}
+\]
+\pause \phantom{Branching is a special case of} Pieri:
+\[
+      \phantom{s_\lambda^{(k)} =} s_{1^\ell}^\perp s_{\lambda+1^\ell}^{(k+1)} =
+      \sum_\mu a_{\lambda+1^\ell, \mu} s_{\mu}^{(k+1)}
+    \]
+\end{frame}
+\begin{frame}{Key ingredient of branching proof}
+  Dual vertical Pieri rule: \(s_{1^r}^\perp s_\lambda^{(k)} = \sum_\mu
+  a_{\lambda \mu} s_\mu^{(k)}\)\,.
+    \begin{block}{Shift Invariance~\cite{catalans}}
+      For partition \(\lambda\) of length \(\ell\) with \(\lambda_1
+      \leq k\),
+      \[
+        s_{1^\ell}^\perp s_{\lambda+1^\ell}^{(k+1)} = s_\lambda^{(k)}
+      \]
+      where
+      \(\langle s_{1^\ell}^\perp f, g \rangle = \langle f, s_{1^\ell}
+      g \rangle\).
+    \end{block}
+     Proof: \(k-\lambda_i = (k+1)-(\lambda_i+1)\)
 
+              \[
+            \Delta^4(3,3,2,2,1,1) = 
+\ytableausetup{mathmode, boxsize=.8em,centertableaux}
+% ~&*(blue!20)&*(red)&*(red)\\
+{\scriptsize
+\begin{ytableau}
+*(white) 3     &*(lightblue)  &*(red)   &*(red)  &*(red)  &*(red) \\
+\mynone & *(white)3 & *(lightblue) & *(red) & *(red)  &*(red)  \\
+\mynone &*(white)  & *(white)2 & *(lightblue) & *(lightblue)  &*(red)  \\
+\mynone &*(white)  & *(white)  & *(white)2 & *(lightblue) &*(lightblue) \\
+\mynone &\mynone  &\mynone  &\mynone  & *(white)1 & *(lightblue) \\
+\mynone &\mynone  &\mynone  &\mynone  &*(white)  & *(white) 1
+\end{ytableau}
+}
+\quad
+            \Delta^5(4,4,3,3,2,2) = 
+\ytableausetup{mathmode, boxsize=.8em,centertableaux}
+% ~&*(blue!20)&*(red)&*(red)\\
+{\scriptsize
+\begin{ytableau}
+*(white) 4     &*(lightblue)  &*(red)   &*(red)  &*(red)  &*(red) \\
+\mynone & *(white)4 & *(lightblue) & *(red) & *(red)  &*(red)  \\
+\mynone &*(white)  & *(white)3 & *(lightblue) & *(lightblue)  &*(red)  \\
+\mynone &*(white)  & *(white)  & *(white)3 & *(lightblue) &*(lightblue) \\
+\mynone &\mynone  &\mynone  &\mynone  & *(white)2 & *(lightblue) \\
+\mynone &\mynone  &\mynone  &\mynone  &*(white)  & *(white) 2
+\end{ytableau}
+}
+\]
+Branching is a special case of Pieri:
+\[
+      s_\lambda^{(k)} = s_{1^\ell}^\perp s_{\lambda+1^\ell}^{(k+1)} =
+      \sum_\mu a_{\lambda+1^\ell, \mu} s_{\mu}^{(k+1)}
+    \]
 \end{frame}
 % \begin{frame}[fragile]{Schubert Calculus Variations}
 %       \[
@@ -634,11 +812,18 @@ s_\alpha = \prod_{i<j} (1-R_{ij}) h_\alpha =
 %     \end{enumerate}
 %   \end{block}
 % \end{frame}
+\begin{frame}{Overview}
+  \begin{itemize}
+  \item Schubert calculus
+  \item Catalan functions: a new approach to old problems
+  \item \textbf{\(K\)-theoretic Catalan functions}
+  \end{itemize}
+\end{frame}
 \begin{frame}{Dual Grothendieck polynomials}
   \begin{itemize}
-  \item Inhomogeneous basis: \(g_\lambda = s_\lambda +\) lower degree terms.
+  \item Inhomogeneous basis: \(g_\lambda = s_\lambda +\) lower degree terms.\pause
   \item Satisfies Pieri rule on ``set-valued strips''
-    \ytableausetup{aligntableaux=bottom}
+    \ytableausetup{aligntableaux=bottom,boxsize=0.4em} \pause
     \begin{align*}
       g_{1^2} g_{3,2} = 
       & g_{43}
@@ -648,28 +833,30 @@ s_\alpha = \prod_{i<j} (1-R_{ij}) h_\alpha =
       - g_{33}
       -2 g_{321}
       + g_{31}\\
-      & \ydiagram{2,3}*[*(red)]{2+1,3+1},
-      \ydiagram{0,2,3}*[*(red)]{1,0,3+1},
-      \ydiagram{0,2,3}*[*(red)]{1,2+1},
-      \ydiagram{2,3}*[*(red)]{0,3+1}*[*(lightgray)]{1+1},
-      \ydiagram{2,3}*[*(red)]{2+1}*[*(lightgray)]{0,2+1},
-      \ydiagram{0,2,3}*[*(red)]{1}*[*(lightgray)]{0,1+1},
-      \ydiagram{0,2,3}*[*(red)]{1}*[*(lightgray)]{0,0,2+1},
+      & \ydiagram{2,3}*[*(red)]{2+1,3+1}\quad
+      \ydiagram{0,2,3}*[*(red)]{1,0,3+1}\quad
+      \ydiagram{0,2,3}*[*(red)]{1,2+1}\quad
+      \ydiagram{2,3}*[*(red)]{0,3+1}*[*(lightgray)]{1+1}\quad
+      \ydiagram{2,3}*[*(red)]{2+1}*[*(lightgray)]{0,2+1}\quad
+      \ydiagram{0,2,3}*[*(red)]{1}*[*(lightgray)]{0,1+1}\,
+      \ydiagram{0,2,3}*[*(red)]{1}*[*(lightgray)]{0,0,2+1}\quad
       \ydiagram{2,3}*[*(lightgray)]{1+1,2+1}
-    \end{align*}
+    \end{align*}\pause
     \item \(g_\lambda = \prod_{i < j} (1-R_{ij}) k_\lambda\) for
-      \(k_\lambda\) and inhomogeneous analogue of \(h_\lambda\).
+      \(k_\lambda\) and inhomogeneous analogue of \(h_\lambda\).\pause
+    \item Dual to Grothendieck polynomials \(G_\lambda\): Schubert representatives
+      for \(K^*(Gr(m,n))\)
   \end{itemize}
 \end{frame}
 \begin{frame}{\(K\)-\(k\)-Schur functions}
   \begin{itemize}
   \item Inhomogeneous basis: \(g_\lambda^{(k)} = s_\lambda^{(k)} +
-    \)lower degree terms
-  \item Satisfies Pieri rule on ``affine set-valued strips''
-    \ytableausetup{centertableaux}
+    \)lower degree terms \pause
+  \item Satisfies Pieri rule on ``affine set-valued strips''\pause
+    \ytableausetup{centertableaux,boxsize=1.0em}
     \begin{align*}
-      g_1 g_{\ydiagram{1,1,3}}^{(2)} & = g_{\ydiagram{1,1,2,4}}^{(2)} -
-      2g_{\ydiagram{1,1,3}}^{(2)} \\
+      g_1 g_{211}^{(2)} & = g_{2111}^{(2)} -
+      2g_{211}^{(2)} \quad\quad\quad \text{\scriptsize $2$-bounded partitions $\correspondsto$ $3$-cores}\\
       \begin{ytableau}
         \none[\textcolor{red}{\bullet}] &
         \none[\textcolor{blue}{\bullet}] &
@@ -758,9 +945,12 @@ s_\alpha = \prod_{i<j} (1-R_{ij}) h_\alpha =
         \none[\textcolor{red}{\bullet}] &
         \none[\textcolor{blue}{\bullet}]
       \end{ytableau}
-    \end{align*}
-  \item No direct formula for \(g_\lambda^{(k)}\) was know, which provided an obstacle to
-    proving many conjectured properties!
+    \end{align*}\pause
+  \item Conjecture: \(g_\lambda^{(k)}\) have positive branching into
+    \(g_\mu^{(k+1)}\)~\cite{lss,morse}.\pause
+    \begin{block}{Problem}
+      No direct formula for \(g_\lambda^{(k)}\)
+    \end{block}
   \end{itemize}
 \end{frame}
 \begin{frame}{An Extra Ingredient: Lowering Operators}
@@ -797,13 +987,13 @@ s_\alpha = \prod_{i<j} (1-R_{ij}) h_\alpha =
       K(\Psi;\lowers;\gamma) := \prod_{(i,j) \in \lowers} (1-L_j)
       \prod_{(i,j) \in \Delta^+_\ell \setminus \Psi} (1-R_{ij})
       k_\gamma
-    \]
+    \]\pause
   \end{block}
   \begin{example}
-    \(\textcolor{blue}{\text{non-roots of }\Psi},
+    \(\textcolor{lightblue}{\text{non-roots of }\Psi},
               \textcolor{coralred}{\text{roots of }\lowers}\)
               \begin{columns}
-                \begin{column}{0.35\textwidth}
+                \begin{column}{0.20\textwidth}
                   \ytableausetup{mathmode,
                     boxsize=1em,centertableaux} \[
                     \begin{ytableau}
@@ -822,17 +1012,14 @@ s_\alpha = \prod_{i<j} (1-R_{ij}) h_\alpha =
                     \end{ytableau}
                   \]
                 \end{column}
-                \begin{column}{0.65\textwidth}
+                \begin{column}{0.80\textwidth}
                   \begin{align*}
                     & K(\Psi;\lowers;54332) \\
-                    & = \textcolor{coralred}{(1-L_{4})^2(1-L_{5})^2}
-                    \\
-                    & \cdot \textcolor{blue}{(1-R_{12})(1-R_{34})(1-R_{45})} k_{54332}
+                    & = \textcolor{coralred}{(1-L_{4})^2(1-L_{5})^2} \textcolor{lightblue}{(1-R_{12})(1-R_{34})(1-R_{45})} k_{54332}
                   \end{align*}
                 \end{column}
               \end{columns}
             \end{example}
-            Note, \(K(\Psi;\lowers;\gamma) = H(\Psi;\gamma) + \cdots\)
 \end{frame}
 % \begin{frame}{Affine \(K\)-Theory Representatives with Raising
 %     Operators}
@@ -862,23 +1049,39 @@ s_\alpha = \prod_{i<j} (1-R_{ij}) h_\alpha =
 % \end{frame}
 \begin{frame}{Affine \(K\)-Theory Representatives with Raising Operators}
   \begin{block}{Answer (Blasiak-Morse-S., 2020)}
-    %\pause
-    For \(K\)-homology of affine Grassmannian, \(f_\lambda = g_\lambda^{(k)} =
-    K(\Delta^{(k)}(\lambda); \Delta^{(k+1)}(\lambda);\lambda)\) since this family satisfies the correct Pieri rule. 
+    \pause
+    For \(K\)-homology of affine Grassmannian, \(g_\lambda^{(k)} =
+    K(\Delta^{k}(\lambda); \Delta^{k+1}(\lambda);\lambda)\) since this family satisfies the Pieri rule. 
   \end{block}
-  %\pause
+  \pause
   \begin{example}
-\(              g_{332111}^{(4)} = \){\footnotesize
+\(              g_{332111111}^{(4)} = \){\footnotesize
                 \begin{ytableau}
-                  *(white) 3     &*(lightblue)  &*(white)   &*(coralred)  &*(coralred)  &*(coralred) \\
-                  \mynone & *(white)3 & *(lightblue) & *(white) & *(coralred)  &*(coralred)  \\
-                  \mynone &\mynone  & *(white)2 & *(lightblue) & *(lightblue)  &*(white)  \\
-                  \mynone &\mynone  & \mynone  & *(white)1 & *(lightblue) &*(lightblue) \\
-                  \mynone &\mynone  &\mynone  &\mynone  & *(white)1 & *(lightblue) \\
-                  \mynone &\mynone  &\mynone  &\mynone  &\mynone & *(white) 1
+                  *(white) 3     &*(lightblue)  &*(white)
+                  &*(coralred)  &*(coralred)  &*(coralred) &
+                  *(coralred) & *(coralred) & *(coralred)\\
+                  \mynone & *(white)3 & *(lightblue) & *(white) &
+                  *(coralred)  &*(coralred) & *(coralred) &
+                  *(coralred) & *(coralred)\\
+                  \mynone &\mynone  & *(white)2 & *(lightblue) &
+                  *(lightblue)  &*(white) &*(coralred) & *(coralred) &
+                  *(coralred)\\
+                  \mynone &\mynone  & \mynone  & *(white)1 &
+                  *(lightblue) &*(lightblue) & *(lightblue) & *(white)
+                  & *(coralred)\\
+                  \mynone &\mynone  &\mynone  &\mynone  & *(white)1 &
+                  *(lightblue) & *(lightblue) & *(lightblue) & *(white) \\
+                  \mynone &\mynone  &\mynone  &\mynone  &\mynone &
+                  *(white) 1 & *(lightblue) & *(lightblue) & *(lightblue)\\
+                  \mynone &\mynone  &\mynone  &\mynone  &\mynone &
+                  \mynone & *(white) 1 & *(lightblue) & *(lightblue)\\
+                  \mynone &\mynone  &\mynone  &\mynone  &\mynone &
+                  \mynone & \mynone & *(white) 1 & *(lightblue) \\
+                  \mynone &\mynone  &\mynone  &\mynone  &\mynone &
+                  \mynone & \mynone & \mynone & *(white) 1
                 \end{ytableau}
               }
-\hspace{1in}\(\textcolor{blue}{\Delta^+_6 / \Delta^{(4)}(332111)}, \textcolor{coralred}{\Delta^{(5)}(332111)}\)
+\hspace{0.25in}\(\textcolor{lightblue}{\Delta^+_9 / \Delta^{4}(332111111)}, \textcolor{coralred}{\Delta^{5}(332111111)}\)
 \end{example}
 \end{frame}
 % \begin{frame}[fragile]{Unified Description of Schubert Representative}
@@ -900,13 +1103,13 @@ s_\alpha = \prod_{i<j} (1-R_{ij}) h_\alpha =
 % \end{frame}
 \begin{frame}{Branching Positivity}
   \begin{theorem}[Blasiak-Morse-S., 2020]
-    %\pause
+    \pause
     The \(g_\lambda^{(k)}\) are ``shift
         invariant'', i.e.\,for \(\ell = \ell(\lambda)\)
       \[
         G_{1^\ell}^\perp g_{\lambda+1^\ell}^{(k+1)} = g_\lambda^{(k)}
       \]
-  \end{theorem}%\pause
+  \end{theorem}\pause
   \begin{theorem}[Blasiak-Morse-S., 2020]
     The branching coefficients in 
     \[
@@ -916,48 +1119,63 @@ s_\alpha = \prod_{i<j} (1-R_{ij}) h_\alpha =
   \end{theorem}
 \end{frame}
 \begin{frame}{\(K\)-theoretic Peterson isomorphism}
+  \vspace{-0.2in}
    \[
     \Phi \colon QK^*(Fl_{k+1}) \to K_*(Gr_{SL_{k+1}})_{loc}
   \]
+  \pause
+  \vspace{-0.2in}
   \begin{block}{Conjecture~\cite{IIM}}
-    For \(w \in S_{k+1}\) and \(\G_w^Q\) a ``quantum Grothtendieck polynomial'',
+    For \(w \in S_{k+1}\) and \(\G_w^Q\) a ``quantum Grothtendieck
+    polynomial'',
+    \vspace{-0.1in}
     \[
       \Phi(\G_w^Q) = \frac{\tilde{g}_w}{\prod_{i \in Des(w)} \tau_i}
     \]
+
+    \pause
     satisfies \(\tilde{g}_w = g_\lambda^{(k)} + \sum_\mu a_{\lambda
       \mu} g_\mu^{(k)}\) such that \((-1)^{|\lambda|-|\mu|}a_{\lambda
       \mu} \in \Z_{\geq 0}\).
-  \end{block}
-\end{frame}
-\begin{frame}{\(K\)-theoretic Peterson isomorphism}
-    \begin{theorem}[Blasiak-Morse-S., 2020]
+  \end{block}\pause
+  \setbeamercolor{block title}{use=structure,fg=white,bg=green!40!black}
+  \setbeamercolor{block body}{use=structure,fg=black,bg=lime!10!white}
+  \begin{theorem}[Blasiak-Morse-S., 2020]
     If \(\lambda \subset (d^{k+1-d})\) for some \(1 \leq d \leq k\),
-    then \(g_\lambda^{(k)} = g_\lambda\).
-  \end{theorem}
-  \begin{block}{Corollary}
-    For \(w \in S_{k+1}\) a Grassmannian word, \(\Phi(\G_w^Q)\)
-    satisfies the conjecture.
+    then \(g_\lambda^{(k)} = g_\lambda\). Thus, conjecture is true
+    for \(w\) a Grassmannian permutation (i.e. \(w\) has only one descent).
+  \end{theorem}\pause
+  \begin{block}{Conjecture (Blasiak-Morse-S., 2020)}
+    \[\tilde{g}_w = K(\Delta^k(\lambda);\Delta^k(\lambda);\lambda)\]
   \end{block}
-
 \end{frame}
 \begin{frame}{Future Directions}
-    For \(G_\lambda^{(k)}\) an affine Grothendieck polynomial (dual to \(g_\lambda^{(k)}\)),
+    For \(G_\lambda^{(k)}\) an affine Grothendieck polynomial (dual to \(g_\lambda^{(k)}\)),\pause
     \begin{enumerate}
     \item Combinatorially describe dual Pieri rule: \(G_{1^r}^\perp g_\lambda^{(k)} = \sum_\mu
-      ?? g_\mu^{(k)} \iff G_{1^r} G_\mu^{(k)} = \sum_\lambda ?? G_\lambda^{(k)}\),  \(1 \leq r \leq k\).
+      ?? g_\mu^{(k)} \iff G_{1^r} G_\mu^{(k)} = \sum_\lambda ?? G_\lambda^{(k)}\),  \(1 \leq r \leq k\).\pause
     \item Combinatorially describe branching coefficients: \(g_\lambda^{(k)} =
-      \sum_\mu ?? g_\mu^{(k+1)}\).
+      \sum_\mu ?? g_\mu^{(k+1)}\).\pause
     \item Combinatorially describe \(g_\lambda^{(k)} = \sum_\mu ??
-      s_\mu^{(k)}\).
-    \item Describe the image of \(\G_w^Q\) under Peterson isomorphism
+      s_\mu^{(k)}\).\pause
+    \item Prove the image of \(\G_w^Q\) under \(K\)-theoretic Peterson isomorphism
       for all \(w \in S_{k+1}\).
     \end{enumerate}
 \end{frame}
-\begin{frame}{References}
-  Thank you!
+\begin{frame}[shrink=10]{References}
+  \textbf{Thank you!}
   \begin{bibdiv}
     \begin{biblist}
-      \bib{catalans}{article}{
+    \bib{act}{article}{
+      author={Anderson, David}
+      author={Chen, Linda}
+      author={Tseng, Hsian-Hua}
+      title={On the quantum \(K\)-ring of the flag manifold}
+      year={2017}
+      status={preprint}
+      note={arXiv: 1711.08414}
+    }
+    \bib{catalans}{article}{
       author={Blasiak, Jonah}
       author={Morse, Jennifer}
       author={Pun, Anna}
@@ -987,6 +1205,27 @@ s_\alpha = \prod_{i<j} (1-R_{ij}) h_\alpha =
       year={2018}
       note={arXiv: 1703.08664}
     }
+    \bib{Lam08}{article}{
+      author={Lam, Thomas}
+      title={Schubert polynomials for the affine Grassmannian}
+      journal={J. Amer. Math. Soc.}
+      volume={21}
+      year={2008}
+      number={1}
+      pages={259--281}
+    }
+    \bib{llms}{article}{
+      author={Lam, Thomas}
+      author={Lapointe, Luc}
+      author={Morse, Jennifer}
+      author={Shimozono, Mark}
+      title={Affine insertion and Pieri rules for the affine
+        Grassmannian}
+      journal={Mem. Amer. Math. Soc.}
+      volume={208}
+      year={2010}
+      number={977}
+    }
     \bib{lss}{article}{
       author={Lam, Thomas}
       author={Schilling, Anne}
@@ -997,6 +1236,17 @@ s_\alpha = \prod_{i<j} (1-R_{ij}) h_\alpha =
       journal={Compositio Math.}
       volume={146}
       pages={811--852}
+    }
+    \bib{lapointe-lascoux-morse}{article}{
+      author={Lapointe, Luc}
+      author={Lascoux, Alain}
+      author={Morse, Jennifer}
+      title={Tableau atoms and a new Macdonald positivity conjecture}
+      journal={Duke Mathematical Journal}
+      year={2003}
+      volume={116}
+      number={1}
+      pages={103--146}
     }
     \bib{morse}{article}{
       author={Morse, Jennifer}
@@ -1016,6 +1266,6 @@ s_\alpha = \prod_{i<j} (1-R_{ij}) h_\alpha =
       pages={315--342}
     }
   \end{biblist}
-  \end{bibdiv}
+\end{bibdiv}
 \end{frame}
 \end{document}
