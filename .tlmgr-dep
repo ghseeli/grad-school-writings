@@ -33,6 +33,7 @@ l3packages
 latex-bin
 latexmk
 letltxmacro
+ltxcmds
 mathabx
 mathdots
 mathtools
