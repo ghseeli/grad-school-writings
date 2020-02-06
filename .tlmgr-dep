@@ -53,6 +53,7 @@ pgfopts
 pgfplots
 psnfss
 ragged2e
+refcount
 rerunfilecheck
 scalerel
 setspace
