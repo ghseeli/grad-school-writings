@@ -7,7 +7,7 @@ before_install:
 - mv $(ls | grep install) install-tl
 - ./install-tl/install-tl -profile texlive.profile
 - export PATH=$(pwd)/texlive/bin/x86_64-linux:$PATH
-- sudo apt-get install texlive texlive-extra-utils texlive-latex-recommended texlive-math-extra texlive-fonts-recommended
+- sudo apt-get install texlive texlive-extra-utils texlive-latex-base texlive-latex-recommended texlive-latex-extra texlive-math-extra texlive-fonts-recommended texlive-luatex texlive-xetex texlive-pstricks
 - sudo apt-get install latexmk
 - tlmgr update --self
 - tlmgr update --all
