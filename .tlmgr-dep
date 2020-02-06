@@ -18,6 +18,7 @@ ec
 enumitem
 epstopdf
 epstopdf-pkg
+etexcmds
 etoolbox
 float
 fmtcount
