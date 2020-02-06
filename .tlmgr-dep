@@ -41,6 +41,7 @@ mathdots
 mathtools
 ms
 oberdiek
+pdfescape
 pdftexcmds
 pgf
 pgfopts
