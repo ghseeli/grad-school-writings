@@ -28,6 +28,7 @@ hyperref
 import
 jknapltx
 kvoptions
+kvsetkeys
 l3kernel
 l3packages
 latex-bin
