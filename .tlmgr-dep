@@ -26,6 +26,7 @@ float
 fmtcount
 fp
 geometry
+gettitlestring
 graphics
 hycolor
 hyperref
@@ -70,6 +71,7 @@ type1cm
 ucs
 uniquecounter
 url
+varwidth
 was
 xcolor
 xkeyval
