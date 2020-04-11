@@ -1,0 +1,713 @@
+\documentclass[11pt,leqno,oneside]{amsart}
+\usepackage[alphabetic,abbrev]{amsrefs} % use AMS ref scheme
+\usepackage{./presentation-notes}
+\usepackage{../ReAdTeX/readtex-core}
+\usepackage{../ReAdTeX/readtex-dangerous}
+\usepackage{../ReAdTeX/readtex-abstract-algebra}
+\usepackage{../ReAdTeX/readtex-lie-algebras}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{todonotes}
+\usepackage{ytableau}
+\usepackage{xcolor}
+\usepackage{mathtools}
+\usepackage{tikz-cd}
+\usepackage{stmaryrd}
+\numberwithin{thm}{section}
+
+\renewcommand{\W}{\mathcal{W}}
+\newcommand{\Waff}{\W_{\text{aff}}}
+\newcommand{\Wfin}{\W_{\text{fin}}}
+\newcommand{\A}{\mathbb{A}}
+\newcommand{\Aaff}{\A_{\text{aff}}}
+\newcommand{\B}{\mathbb{B}}
+\renewcommand{\H}{\mathcal{H}} % Hecke algebra
+\newcommand{\eS}{\tilde{S}}
+\newcommand{\Gr}{\operatorname{Gr}}
+\newcommand{\Bc}{\mathcal{B}}
+\DeclareMathOperator{\ch}{ch}
+\newcommand{\sym}{\Lambda}
+\DeclareMathOperator{\dg}{dg}
+
+\newcommand{\trace}{\operatorname{Tr}}
+\newcommand{\transpose}{t}
+\DeclareMathOperator{\SSYT}{SSYT}
+\DeclareMathOperator{\wt}{wt}
+\DeclareMathOperator{\Frac}{Frac}
+\newcommand{\coveredby}{\mathrel{\lessdot}}
+
+\newtheorem{goal}[thm]{Goal}
+
+\title[\(k\)-Schur functions]{\(k\)-Schur functions as Schubert
+  representatives for the affine Grassmannian} 
+\author{George H. Seelinger}
+\date{April 13, 2020}
+\begin{document}
+\maketitle
+\section{Introduction}
+Classically, the Grassmannian of \(m\)-planes in \(\C^{m+n}\), denoted
+\(X = \Gr(m,n)\), has a decomposition into Schubert cells,
+\(\Omega_\lambda\) for partitions \(\lambda = (\lambda_1, \ldots,
+\lambda_m)\) with \(\lambda_i \leq n\). One can then define Schubert varieties
+\(X_\lambda = \ov{\Omega_\lambda}\), the closure of a Schubert
+cell. In turn, this gives a basis 
+for the cohomology ring \(H^*(X) = \bigoplus_\lambda \Z
+\sigma_\lambda\) for \(\sigma_\lambda\) a representative of
+\(X_\lambda\). Then, the coefficients in the product of
+\(\sigma_\lambda \sigma_\mu\) expressed as 
+a linear combination of Schubert representatives contain useful
+geometric information.
+
+On the other hand, the ring of symmetric functions \(\sym = \Z[
+h_1(x), h_2(x), \ldots]\) for \(h_d(x) = \sum_{i_1 \leq i_2 \leq \cdots \leq
+  i_d} x_{i_1} x_{i_2} \cdots x_{i_d}\) has a distinguished basis of
+Schur functions indexed by partitions \(\lambda\) given by \[
+  s_\lambda = \det(h_{\lambda_i+j-i})_{1 \leq i,j \leq \ell}
+\]
+where \(h_0(x) = 1\) and \(h_r = 0\) for \(r < 0\) by convention. The
+``Littlewood-Richardson coefficients''
+\(c_{\lambda \mu}^\nu\) in the expansion \(s_\lambda s_\mu = \sum_\nu
+c_{\lambda \mu}^\nu s_\nu\) have many combinatorial formulas and are
+well-studied. Thus, the following theorem is quite useful for
+connecting geometry and combinatorics.
+\begin{thm}
+  There is a surjection of rings \(f \from \sym \to H^*(\Gr(m,n))\)
+  given by \[
+    f(s_\lambda) =
+    \begin{cases}
+      \sigma_\lambda & \text{if }\lambda \subset (\underbrace{n,
+        \ldots, n}_{m \text{ times}}) \\
+      0 & \text{else}
+    \end{cases}
+  \]
+\end{thm}
+In this presentation, we seek to summarize how a special class of
+symmetric functions called ``\(k\)-Schur functions'', denoted
+\(s_\lambda^{(k)}(x)\), play a similar role for the affine Grassmannian
+of \(SL_{k+1}\) and then explore their combinatorics. We will make
+precise and summarize the
+original proof of~\cite{lam} that \(k\)-Schur functions are the
+Schubert representatives of the affine Grassmannian in
+Sections~\ref{preliminaries}--\ref{schubert-representatives},
+culminating in Theorem~\ref{k-schur-functions-are-schubert-reps}. Then, in
+Section~\ref{combinatorics}, we will present a more combinatorial
+treatment of \(k\)-Schur functions. These two parts can be read
+more-or-less independently.
+\section{Preliminaries}\label{preliminaries}
+\begin{defn}
+  The following is a summary of definitions in~\cite{lam}*{Section 2.1}.
+  \begin{itemize}
+  \item Let \(\W\) be a crystallographic Coxeter group with simple
+    generators \(\{s_i \st i \in I\}\).
+  \item Let \(\roots\) be the root system for \(\W\)
+  \item Let \(\roots^+\) be the positive roots and \(\{\alpha_i \st i
+    \in I\}\) be the simple roots.
+  \item Let \(Q = \bigoplus_{i \in I} \Z \alpha_i\) be the root
+    lattice and \(Q^\vee = \bigoplus_{i \in I} \Z \alpha_i^\vee\) be
+    the co-root lattice.
+  \item Let \(\h_\Z^*\) and \(\h_\Z\) be the weight and co-weight
+    lattice.
+  \item Let \(\langle \cdot, \cdot \rangle \from \h_\Z \times \h_\Z^*
+    \to \Z\) be the pairing between \(\h_\Z\) and \(\h_\Z^*\)
+  \item Let \(\Waff = \W \ltimes Q^\vee\) be the affine Weyl group with
+    additional generator \(s_0\).
+  \item For \(\lambda \in Q^\vee\), let \(t_\lambda \in \Waff\) be the
+    corresponding translation element. Note \(t_\lambda \cdot t_\mu =
+    t_{\lambda+\mu}\) and \(w t_\lambda w^{-1} = t_{w \cdot \lambda}\)
+    for \(w \in \W\).
+  \item For real root \(\alpha \in Q_{\text{aff}} = \bigoplus_{i \in I
+    \union \{0\}} \Z \alpha_i\), let \(s_\alpha\) denote the
+  corresponding reflection.
+  \item Let \(\ell \from \Waff \to \N_{\geq 0}\) be the length
+    function for \(\Waff\) and \(\epsilon(w) = (-1)^{\ell(w)}\) be the
+    sign. 
+  \item Let \(\W^0\) be the minimal length coset representatives of
+    \(\Waff/\W\), called \de{Grassmannian} elements. 
+  \end{itemize}
+\end{defn}
+\begin{prop}
+  There exists a natural bijection between \(\W^0\) and \(Q^\vee\).
+\end{prop}
+\begin{proof}
+  Each coset of \(\Waff/\W\) contains a unique element of \(Q^\vee\)
+  and a unique minimal length coset representative.
+\end{proof}
+\subsection{The affine Grassmannian}
+Let \(G\) be a simple and simply connected complex algebraic group
+with Weyl group \(\W\). Let \(K\) be a maximal compact subgroup and
+let \(T\) be a maximal torus in \(K\). Let \(\h_\Z^\vee\) be the
+weight lattice and \(\h_\Z\) be the co-weight lattice of \(T\). In our
+case, we are primarily interested in type \(A\) with \(G = SL_n\), \(\W = S_n\), \(K =
+SU_n\), \(T = (\C^\times)^n\), \(\Waff = \eS_n\) is the affine symmetric group, and
+affine simple roots are given by \(\{\alpha_i \st i \in \Z/n\Z\}\).
+
+For \(K = \C((t))\) and \(O = \C \llbracket t \rrbracket\), we define
+\(\Gr = \Gr_G = G(K)/G(O)\) to be the affine Grassmannian.
+\begin{prop}
+ \(\Gr\) is homotopy equivalent to \(\Omega K\). Thus, the two spaces
+ have isomorphic (co)homology theories.
+\end{prop}
+Let \(S = \operatorname{Sym}(\h_\Z^*)\) be the
+symmetric algebra of \(\h^*_\Z\). From my last presentation, we know
+that \(G(K)\) has Bruhat decomposition \[
+  G(K) = \Union_{w \in \Waff} \Bc w \Bc
+\]
+for Iwahori subgroup \(\Bc\). This induces a decomposition of \(\Gr\)
+into Schubert cells \(\Omega_w = \Bc w G(O) \subset G(K)/G(O)\): \[
+  \Gr = \Dunion_{w \in \W^0} \Omega_w = \Union_{w \in W^0} X_w
+\]
+where \(W^0 = \Waff/W_{\text{fin}}\) and \(X_w = \ov{\Omega_w}\) are
+Schubert varieties. Then, we define the following
+\begin{defn}
+  We denote the following Schubert classes in homology, cohomology,
+  equivariant homology, and equivariant cohomology as follows.
+  \begin{enumerate}
+  \item Let \(\sigma_w \in H_*(\Gr)\);
+  \item Let \(\sigma^w \in H^*(\Gr)\);
+  \item Let \(\sigma_{(w)} \in H_T(\Gr)\), the \(T\)-equivariant
+    homology of \(\Gr\);
+  \item Let \(\sigma^{(w)} \in H^T(\Gr)\), the \(T\)-equivariant
+    cohomology of \(\Gr\).
+  \end{enumerate}
+\end{defn}
+\begin{rmk}
+  Note that \(S = \operatorname{Sym}(\h_\Z^*) = H^T(\text{pt})\).
+\end{rmk}
+\section{Four Hopf Algebras}
+To show that (dual) \(k\)-Schur functions are Schubert representatives for
+the (co)homology of the affine Grassmannian, we will string together
+various results concerning four different Hopf algebras.
+\subsection{The affine nilHecke ring}
+\begin{defn}
+  \begin{enumerate}
+  \item Define \(\Aaff\) to be the ring with \(1\) given by generators
+    \(\{A_i \st i \in I \union \{0\}\} \union \{\lambda \st \lambda
+    \in \h_\Z^*\}\) and relations
+    \begin{align*}
+      A_i \lambda
+      & = (s_i \cdot \lambda) A_i + \langle \lambda,
+        \alpha_i^\vee \rangle \cdot 1 & \text{for }\lambda \in \h_\Z^*\\
+      A_i A_i & = 0 \\
+      (A_i A_j)^m & = (A_jA_i)^m & \text{if }(s_i s_j)^m = (s_j s_i)^m
+    \end{align*}
+    where the elements of \(\h_\Z^*\) commute with each other.
+  \item Let \(\A_0 = \Z\langle A_i \st i \in I \rangle \subset \Aaff\)
+    be the \de{affine nilCoxeter algebra}.
+  \end{enumerate}
+\end{defn}
+There is a specialization map \(\phi_0 \from \Aaff \to \A_0\) given
+by \[
+  \phi_0\left( \sum_{w} a_w A_w\right) = \sum_w \phi_0(a_w) A_w
+\]
+where \(\phi_0(s)\) evaluates the polynomial \(s \in S =
+\operatorname{Sym}(\h_\Z^*)\) at \(0\). (Recall elements in
+\(\h_\Z^*\) are maps from \(\h_\Z\) to \(\Z\).)
+\begin{prop}
+  \(\Aaff\) is a Hopf algebra with coprodcut map \(\Delta \from \Aaff
+  \to \Aaff \otimes_S \Aaff\) given by
+  \begin{align*}
+    \Delta(s) & = 1 \otimes s = s \otimes 1 & s \in S\\
+    \Delta(A_i) & = A_i \otimes 1 + 1 \otimes A_i - A_i \otimes \alpha_i A_i
+  \end{align*}
+\end{prop}
+\subsection{Hopf algebra structure of \(H_T(\Omega K)\) and Peterson's \(j\)-Homomorphism}
+Over \(\Frac(S)\), \(H_T(\Omega K)\) is spanned by the classes
+\(\{\psi_t \st t = t_\lambda \in Q^\vee \subset \Waff\}\). Since
+\(\Omega K\) is a group with \(T\)-equivariant multiplications,
+\begin{prop}
+  \(H_T(\Omega K)\) and \(H^T(\Omega K)\) have the structure of dal
+  Hopf algebras. Furthermore, \(H_T(\Omega K)\) has Hopf algebra
+  structure given by
+  \begin{align*}
+    \psi_{id} & = 1& \epsilon(\psi_t) & = 1& c(\psi_t) = \psi_{t^{-1}} \\
+    \omega(\psi_t) & = \psi_t \otimes \psi_t & \psi_t \psi_{t'} &=
+                                             \psi_{tt'}
+  \end{align*}
+  with scalars \(s \in S \subset H_T(\Omega K)\) central and \(c(s) =
+  s\). In particular, \(H_T(\Omega K)\) is commutative and
+  co-commutative as a Hopf algebra.
+\end{prop}
+\begin{defn}
+  Let the \de{Peterson subalgebra} be \(Z_{\Aaff}(S)\), the
+  centralizer of \(S\) in \(\Aaff\).
+\end{defn}
+\begin{prop}
+  There is a Hopf algebra isomorphism \(j \from H_T(\Omega K) \to
+  Z_{\Aaff}(S)\) sending classes \(\psi_{t_\lambda} \mapsto
+  t_\lambda\) where \(t_\lambda \in Q^\vee \subset \Waff\).
+\end{prop}
+\subsection{Affine Fomin-Stanley subalgebra}
+\begin{defn}
+  The \de{affine Fomin Stanley subalgebra} is the subalgebra \[
+    \B' = \{a \in \A_0 \st \phi_0(as) = \phi_0(s)a \text{ for all }s
+    \in S\}
+  \]
+\end{defn}
+The algebra \(\B'\) is a model for the homology \(H_*(\Gr)\) in the
+following sense.
+\begin{prop}\label{affine-fomin-stanley-isom-to-homology}
+  Granting that \(\phi_0(j(\sigma_{(u)})) \in \B'\),
+  \begin{enumerate}
+  \item The map
+    \begin{align*}
+      H_*(\Gr) & \to \B' \\
+      \sigma_u & \mapsto \phi_0(j(\sigma_{(u)}))
+    \end{align*}
+    is an isomorphism of Hopf algebras.
+  \item \(\phi_0(j(\sigma_{(u)}))\) is the unique element in \(\B'\)
+    with unique Grassmannian term \(A_u\).
+  \end{enumerate}
+\end{prop}
+\begin{cor}
+  \(\B'\) is a commutative algebra.
+\end{cor}
+\subsection{Combiatorial affine Fomin-Stanley subalgebra and symmetric
+  functions}
+From now on, we will restrict ourselves to type \(A\).
+\begin{defn}
+  We construct the combinatorial affine Fomin-Stanley subalgebra:
+  \begin{enumerate}
+  \item We say a word \(a\) in alphabet \(\Z/n\Z\) is \de{cyclically
+      decreasing} if no letter is repeated and, if \(i,i+1\) both
+    occur in \(a\), then \(i+1\) occurs to the west of \(i\). 
+  \item Define \(h_i \in \A_0 \subset \Aaff\) for \(i \in [0,n-1]\) by
+    \[
+      h_i = \sum_{\substack{w \in \Waff \\ w \text{ cyclically decreasing} \\ \ell(w) = i}} A_w
+    \]
+  \item Let \(\B = \langle h_i \st i \in [0,n-1] \rangle\) be the
+    \de{combinatorial affine Fomin-Stanley subalgebra} of \(\A_0\).
+  \end{enumerate}
+\end{defn}
+\begin{example}
+  The word \(s_1s_0s_2 \in \eS_3\) is cyclically decreasing but \(s_1
+  s_2 s_0\) is not. We also have that, for \(n=4\), \[
+    h_2 = A_3 A_2 + A_3 A_1 + A_0 A_3 + A_2 A_1 + A_2 A_0 + A_1 A_0
+  \]
+\end{example}
+\begin{prop}
+  \(\B\) is commutative and isomorphic to \(\sym_n =
+  \Z[h_0,h_1,\ldots,h_{n-1}]\) via
+  \begin{align*}
+    \psi \from \sym_n & \to \B \\
+    h_i(x) & \mapsto h_i
+  \end{align*}
+\end{prop}
+\begin{defn}\label{k-schur-def-1}
+  Let \(\langle \cdot, \cdot \rangle \from \A_0 \times \A_0 \to
+    \Z\) be given by \(\langle A_w, A_v \rangle = \delta_{w,v}\). We
+    define the following symmetric functions.
+  \begin{enumerate}
+  \item Let \(w \in \Waff\). We define the \de{affine Stanley
+      symmetric functions} \(\tilde{F}_w(x) \in \sym\) by
+    \[ \tilde{F}_w(x) = \sum_{a = (a_1, a_2, \ldots, a_t)} \langle
+      h_{a_t} h_{a_{t-1}} \cdots h_{a_1} \cdot 1, A_w \rangle
+      x_1^{a_1} x_2^{a_2} \cdots x_t^{a_t}
+    \]
+    where the sum is over compositions of \(\ell(w)\) satisfying
+    \(a_i \in [0,n-1]\).
+  \item Define their image in \(\sym^n = \sym/\langle m_\lambda(x) \st
+    \lambda_1 \geq n\rangle\) to be the \de{affine Schur functions}
+  \item The \de{\(k\)-Schur functions} \(\{s_w^{(k)}(x) \st w \in \W^0\}\)
+  are the dual basis of \(\sym_n\) to the affine Schur functions under
+  the Hall inner product where \(k = n-1\).
+  \item Let the \de{non-commutative \(k\)-Schur functions} be given
+    by \[
+      s_w^{(k)} := \psi(s_w^{(k)}(x)) \in \B
+    \]
+  \end{enumerate}
+\end{defn}
+\begin{rmk}
+  Affine Stanley symmetric functions ``enumerate'' all the ways of
+  factoring reduced words for \(w \in \Waff\) into groups of
+  ``cyclically decreasing'' words. In particular, the coefficient of \(x_1
+  \cdots x_\ell\) gives the number of reduced words for \(w \in \Waff\).
+\end{rmk}
+\begin{example}
+  For \(n=3=k+1\), we compute some non-commutative \(k\)-Schur functions.
+  \begin{align*}
+    s_{id}^{(k)} & = 1 \\
+    s_{s_0}^{(k)} & = h_1 = A_0+A_1+a_@ \\
+    s_{s_1 s_0}^{(k)} & = h_2 = A_{02}+A_{21}+A_{10}\\
+    s_{s_2 s_0}^{(k)} & = h_1^2-h_2=A_{20}+A_{12}+A_{01}\\
+    s_{s_2 s_1 s_0}^{(k)} & = h_2h_1 = h_1 h_2 = A_{021}+A_{010}+A_{102}+A_{121}+A_{202}+A_{210}\\
+    s_{s_1 s_2 s_0}^{(k)} & = h_1^3-h_2 h_1 = A_{120}+A_{010}+A_{201}+A_{121}+A_{202}+A_{012}
+  \end{align*}
+\end{example}
+\begin{prop}\label{k-schur-subspace-props}
+  We observe the following.
+  \begin{enumerate}
+  \item \(s_w^{(k)}\) has a unique Grassmannian term \(A_w\).
+  \item \(\sym_n\) and \(\sym^n\) are dual Hopf-algebras under the
+    Hall-inner product. Their Hopf algebra structure is inherited from
+    the Hopf algebra structure of \(\sym\) with Hopf structure
+    \begin{align*}
+      \Delta_{\sym}(h_i(x)) & = \sum_{j \leq i} h_j(x) \otimes h_i(y)
+      & \epsilon(f(x)) & = f(0) & c(h_i(x)) = (-1)^i e_i(x)
+    \end{align*}
+  \item \(\psi\) is an isomorphism of Hopf algebras. Thus, \(h_0 =
+    A_{id}\) is the unit, \(\epsilon(b)\) is the coefficient of
+    \(h_0\) when \(b\) is written as a polynomial in the \(h_i\)'s,
+    and \[
+      \Delta_\B(h_i) = \sum_{j \leq i} h_j \otimes h_{i-j} \,.
+    \]
+  \end{enumerate}
+\end{prop}
+\begin{thm}[\cite{lam}*{Theorem 7.4}]\label{affine-fomin-stanley-equal}
+  \(\B\) and \(\B'\) are identical as subalgebras of
+  \(\A_0\). Furthermore, the two Hopf structures agree and we have for
+  each \(w \in W^0\), \[
+    \phi_0(j(\sigma_{(w)})) = s_w^{(k)} \,.
+  \]
+\end{thm}
+\begin{proof}[Sketch of subalgebra equality]
+  We will grant that \(B \subset \B'\) (for the non-trivial proof,
+  see~\cite{lam}*{Subsection
+    7.1}). By Proposition~\ref{k-schur-subspace-props}(a), \(s_w^{(k)} \in \B\)
+  has a 
+  unique Grassmannain term \(A_w\) and by
+  Proposition~\ref{affine-fomin-stanley-isom-to-homology}(b), 
+  \(\phi_0(j(\sigma_{(w)}))\) is the unique element in \(\B'\) with
+  unique Grassmannian term \(A_w\). Thus, \(\phi_0(j(\sigma_{(w)})) =
+  s_w^{(k)}\) and so the \(s_w^{(k)}\)'s span \(\B'\). Thus, \(\B = \B'\).
+\end{proof}
+\section{\(k\)-Schur functions as Schubert representatives}\label{schubert-representatives}
+\begin{thm}{\cite{lam}*{Theorem 7.1}}\label{k-schur-functions-are-schubert-reps}
+  \begin{enumerate}
+  \item The map \(\theta \from H_*(\Gr) \to \sym_n\) given by
+    \[
+      \theta(\sigma_w) \mapsto s_w^{(k)}(x)
+    \]
+    is an isomorphism of Hopf algebras.
+  \item The map
+    \(\theta' \from H^*(\Gr) \to \sym^n\) given by
+    \[
+      \theta'(\sigma^w) = \tilde{F}_w(x)
+    \]
+    is an isomorphism of Hopf algebras.
+  \end{enumerate}
+\end{thm}
+\begin{proof}
+  Part (a) follows by compositing the following chain of isomorphisms \[
+    H_*(\Gr) \isomto \B' \overset{\ref{affine-fomin-stanley-equal}}{=}
+    \B \to[\psi^{-1}] \sym_n 
+  \]
+  and the statement or part (b) follows by duality.
+\end{proof}
+\section{Combinatorics of \(k\)-Schur functions}\label{combinatorics}
+Historically, \(k\)-Schur functions were first introduced for the
+study of Macdonald polynomials in~\cite{llm}. From the symmetric function
+perspective, \(k\)-Schur functions have an extra parameter \(t\) and
+were constructed to satisfy the following conjecture.
+\begin{conj}[\cite{llm}]
+  For \(\mu\) a partition let \(H_\mu(x;q,t)\) be the ``modified''
+  Macdonaly polynomials. Then, for any \(k \geq \mu_1\),
+  \begin{align*}
+    H_\mu(x;q,t)
+    &= \sum_\nu K_{\nu\mu}^{(k)}(q,t) s_\nu^{(k)}(x;t)
+    & s_\nu^{(k)} = \sum_\lambda \pi_{\lambda \nu}^{(k)}(t) s_\lambda(x)
+  \end{align*}
+  satisfy \(K_{\nu \mu}^{(k)}(q,t) \in \N[q,t]\) and \(\pi_{\lambda
+    \nu}^{(k)}(t) \in \N[t]\). 
+\end{conj}
+Note that~\cite{catalans} established that \(\pi_{\lambda \nu}^{(k)}
+\in \N[t]\), thus establishing one part of the conjecture. In this
+presentation, we will specialize \(t=1\), thereby recovering the
+\(k\)-Schur functions from the previous sections. The following
+propositions and definitions come from~\cite{lm1, lm2}, but our
+treatment is a summary of~\cite{k-schur-book}.
+\begin{defn}
+  We define the following types of partitions.
+  \begin{enumerate}
+  \item A \(k\)-bounded partition \(\lambda\) is a partition with
+    \(\lambda_1 \leq k\).
+  \item An \(r\)-core is a partition with where none of its cells
+    have a hook-length equal to \(r\).
+  \end{enumerate}
+\end{defn}
+\begin{example}
+  Given two shapes \[
+    \ydiagram{5,2,1} \ \ \ydiagram{4,3}*[\bullet]{1+3,1+1}
+  \]
+  the left shape is a \(4\)-core but the right shape is not. A hook of
+  size \(4\) is given by the dotted cells.
+\end{example}
+\begin{prop}
+  There is a bijection \(\mathfrak{p}\) between the set of \((k+1)\)-cores \(\kappa\)
+  and \(k\)-bounded partitions given by deleting all cells of hook
+  length greater than \(k+1\) in \(\kappa\) and left justifying the
+  remaining cells.
+\end{prop}
+Such a bijection is best understood via an example.
+\begin{example}
+  For \(k+1=4\), highlight the cells of hook length \(\leq 3\) and
+  remove the remaining ones. Then, left justify.
+  \[
+    \ydiagram{5,2,1}*[*(lightgray)]{2} \mapsto
+    \ydiagram{2+3,2,1} \mapsto \ydiagram{3,2,1}
+  \]
+\end{example}
+Now, recall the following.
+\begin{defn}
+  The \de{affine symmetric group} \(\eS_n\) is given by the generators
+  \(\{s_i \st i \in \Z/n\Z\}\) satisfying the relations
+  \begin{align*}
+    s_i^2 & = 1, & s_i s_{i+1} s_i & = s_{i+1} s_i s_{i+1}, & s_i s_j
+    & = s_j s_i & \text{for }i-j \not\congruent 0,1,n-1 \mod n
+  \end{align*}
+  with all indices considered modulo \(n\).
+\end{defn}
+\begin{prop}
+  The Grassmannian elements of \(\eS_n\) are the minimal length coset
+  representatives of \(\eS_n / S_n\) for \(S_n = \langle s_1, \ldots,
+  s_n \rangle\) and are characterized by having all reduced words
+  beginning with \(s_0\).
+\end{prop}
+\begin{defn}
+  \begin{enumerate}
+  \item Given a diagram representing a partition, say \(\dg(\mu)\), the \de{content} of
+    a cell \(c = (i,j)\) is given by \(j-i\). 
+  \item For a \(k+1\)-core
+    \(\kappa\), the \de{residue} of a cell \((i,j)\) is given by
+    \(j-i \mod k+1\).
+  \item We say a cell \(c = (i,j)\) is an \de{addable corner} of a
+    partition \(\mu\) if \(\dg(\mu) \union \{c\}\) is a diagram for a partition.
+  \item We say a cell \(c = (i,j)\) is a \de{removable corner} of a
+    partition \(\mu\) if \(\dg(\mu) \setminus \{c\}\) is a diagram for
+    a partition.
+  \item For a \((k+1)\)-core, we call an addable (resp.\ removable)
+    corner of residue \(r\) and \de{addable (resp.\ removable) \(r\)-corner}.
+  \end{enumerate}
+\end{defn}
+\begin{example}
+  Consider the following \(4\)-core with labelled residues. \[
+    \kappa = \ytableaushort{01230,30,2}
+  \]
+  \(\kappa\) has addable corners of residues \(1\) and \(3\) and
+  removable corners of residues \(0\) and \(2\).
+\end{example}
+Then, we define the following action of \(\eS_{k+1}\) on
+\(k+1\)-cores.
+\begin{defn}
+  Given \(s_r \in \eS_{k+1}\), we have \[
+    s_r \cdot \kappa =
+    \begin{cases}
+      \kappa + \text{all its addable $r$-corners} & \text{if $\kappa$
+        has at least one addable $r$-corner}\\
+      \kappa - \text{all its removable $r$-corners} & \text{if
+        $\kappa$ has at least one removable $r$-corner}\\
+      \kappa & \text{else.}
+    \end{cases}
+  \]
+\end{defn}
+\begin{prop}
+  There is a bijection \(\mathfrak{t}\) between \(\eS_{k+1}^0\) and \(k+1\)-cores given
+  by sending \[
+    w \mapsto s_{i_\ell} \cdots s_{i_1} \cdot \emptyset
+  \]
+  for \(s_{i_\ell} \cdots s_{i_1}\) a reduced word of \(w\).
+\end{prop}
+\begin{defn}\label{k-schur-def-2}
+  The \(k\)-Schur functions \(s_\lambda^{(k)}(x)\) are the unique
+  basis of \(\sym_{k+1} = \Z[h_1,\ldots,h_k]\) satisfying the
+  following Pieri
+  rule:
+  for \(0 \leq r \leq k\) and \(w_\lambda\) such that
+  \(\mathfrak{p}(\mathfrak{t}(w_\lambda)) = \lambda\)
+  \[
+    h_r s_\lambda^{(k)}(x) = \sum_{\substack{u \in \eS_{k+1} \\ u
+        \text{ cyclically decreasing}\\ \ell(u)
+    = r \\ \ell(uw_\lambda) = \ell(w_\lambda)+r}} s_{\mathfrak{p}(\mathfrak{t}(uw_\lambda))}^{(k)}(x)
+  \]
+\end{defn}
+This definition is actually equivalent to
+Definition~\ref{k-schur-def-1}(c), but is not very combinatorial, nor
+very explicit. However, we can work through our bijections to make it
+more combinatorial. To do this, we will define the notion of ``weak
+order'' and ``weak
+tableaux'' on cores.
+\begin{defn}
+  Consider the affine symmetric group \(\eS_{k+1}\).
+  \begin{enumerate}
+  \item The \de{(left) weak order} on \(\eS_{k+1}\) is given by saying
+    \(w \leq v\) if there exists some \(u \in \eS_{k+1}\) such that
+    \(uw = v\) and \(\ell(u) + \ell(w) = \ell(v)\).
+  \item We says \(w\) is \de{covered by} \(v\), denoted \(w \coveredby v\),
+    if there is some \(s_i \in \eS_{k+1}\) such that \(s_i w = v\) and
+    \(\ell(v) = \ell(w)+1\).
+  \item Given two \(k+1\)-cores \(\kappa\) and \(\tau\), we say
+    \(\kappa \coveredby \tau\) if \(\mathfrak{t}^{-1}(\kappa)
+    \coveredby \mathfrak{t}^{-1}(\tau)\).
+  \end{enumerate}
+\end{defn}
+\begin{example}
+  The following is the beginning of the Hasse diagram for the weak
+  order on \(\eS_{3}^0\) and on the corresponding \(k+1\)-cores.
+  \[
+    \ytableausetup{boxsize=0.5em}
+    \begin{tikzcd}[row sep=tiny, column sep=tiny]
+      &&\emptyset\ar[d,dash]&&\\
+      &&s_0\ar[ld,dash]\ar[rd,dash]&&\\
+      &s_1 s_0 \ar[d,dash]&& s_2 s_0 \ar[d,dash]&\\
+      &s_2 s_1 s_0 \ar[ld,dash]\ar[rd,dash]&&s_1 s_2 s_0\ar[ld,dash]\ar[rd,dash]&\\
+      s_0 s_2 s_1 s_0 && s_2 s_1 s_2 s_0 && s_0 s_1 s_2 s_0
+    \end{tikzcd}
+    \correspondsto
+    \begin{tikzcd}[row sep=tiny, column sep=tiny]
+      &&\emptyset\ar[d,dash]&&\\
+      &&\ydiagram{1}\ar[ld,dash]\ar[rd,dash]&&\\
+      &\ydiagram{2}\ar[d,dash]&&\ydiagram{1,1}\ar[d,dash]&\\
+      &\ydiagram{3,1}*[*(lightgray)]{1}\ar[ld,dash]\ar[rd,dash]&&\ydiagram{2,1,1}*[*(lightgray)]{1}\ar[ld,dash]\ar[rd,dash]&\\
+      \ydiagram{4,2}*[*(lightgray)]{2}&&\ydiagram{3,1,1}*[*(lightgray)]{1}&&\ydiagram{2,2,1,1}*[*(lightgray)]{1,1}
+    \end{tikzcd}
+    % \correspondsto
+    % \begin{tikzcd}[row sep=tiny, column sep=tiny]
+    %   &&\emptyset \ar[d,dash]&&\\
+    %   &&\ydiagram{1}\ar[ld,dash]\ar[rd,dash]&&\\
+    %   &\ydiagram{2}\ar[d,dash]&&\ydiagram{1,1}\ar[d,dash]&\\
+    %   &\ydiagram{2,1}\ar[ld,dash]\ar[rd,dash]&&\ydiagram{1,1,1}\ar[ld,dash]\ar[rd,dash]&\\ 
+    %   \ydiagram{2,2}&&\ydiagram{2,1,1}&&\ydiagram{1,1,1,1}
+    % \end{tikzcd}
+  \]
+\end{example}
+\begin{prop}
+  Given two \(k+1\)-cores \(\kappa\) and \(\tau\) with \(\kappa
+  \subset \tau\), then \(\kappa \coveredby \tau\) if and only if
+  \(\tau = s_i \kappa\).
+\end{prop}
+Using this perspective, we will build up a kind of semistandard
+tableau using the notion of horizontal strips. To motivate, we will
+first describe this notion for partitions and semistandard tableau.
+\begin{defn}
+  Given two partitions \(\lambda\) and \(\mu\), we say \(\lambda\) and
+  \(\mu\) differ by a \de{horizontal strip of size \(r\)} if \(\mu \setminus
+  \lambda\) has \(r\) cells lying in distinct columns.
+\end{defn}
+From this notion, one can construct a semistandard tableau from a
+sequence of partitions differing by horizontal strips. E.g., consider
+the following \[
+  \ytableausetup{boxsize=1.0em}
+  \emptyset \subset \ydiagram{3} \subset \ydiagram{5,2} \subset
+  \ydiagram{6,3,1} \correspondsto \emptyset \subset
+  \ytableaushort{111} \subset \ytableaushort{11122,22} \subset \ytableaushort{111223,223,3}
+\]
+Thus, the chain above corresponds to \[
+  \ytableaushort{111223,223,3}
+\]
+\begin{defn}
+  Given two \(k+1\)-cores \(\kappa\) and \(\tau\), we say they differ
+  by a \de{weak horizontal strip} of size \(r \leq k\) if
+  \begin{enumerate}
+  \item \(\tau \setminus \kappa\) is a horizontal strip of partitions,
+  \item \(|\mathfrak{p}(\tau)| = |\mathfrak{p}(\kappa)|+r\),
+  \item and there are exactly \(r\) residues in the set of cells
+    \(\tau \setminus \kappa\).
+  \end{enumerate}
+\end{defn}
+\begin{prop}
+  For \(0 \leq r \leq k\), we have that \[
+    h_r s_\lambda^{(k)}(x) = \sum_{\substack{\tau \text{ a
+        }k+1\text{-core} \\ \tau = \mathfrak{p}^{-1}(\lambda)+\text{a
+          weak horizontal $r$-strip}}} s_{\mathfrak{p}(\tau)}^{(k)}(x) \,.
+  \]
+\end{prop}
+\begin{defn}
+  A \de{weak tableau} of shape \(\kappa\) and composition weight \(\alpha\) is a
+  sequence of \(k+1\)-cores differing by weak horizontal strips of
+  sizes given by \(\alpha\).
+\end{defn}
+\begin{example}
+  For \(k+1=3\), a weak tableau of shape \((4,2)\) and weight
+  \((1,1,1,1)\) is given by \[
+    \ytableaushort{1234,34}
+  \]
+  Furthermore, a weak tableau of the same shape weight weight
+  \((2,2)\) is given by \[
+    \ytableaushort{1122,22}
+  \]
+\end{example}
+From this, we get a combinatorial characterization of the affine
+Stanley symmetric functions, also called dual \(k\)-Schur functions.
+\begin{prop}
+  The dual \(k\)-Schur function \(\tilde{F}_\lambda^{(k)}(x) \in
+  \sym^{k+1} = \sym/\langle m_{\lambda} \st \lambda_1 \geq k+1
+  \rangle\) is the weight generating function of weak tableau of shape
+  \(\mathfrak{p}^{-1}(\lambda)\). More preciesly, \[
+    F_\lambda^{(k)}(x) = \sum_\alpha \sum_{T \text{ a weak tableau of shape
+      }\mathfrak{p}^{-1}(\lambda)} x^\alpha
+  \]
+  where \(x^{\alpha} = \prod_i x_i^\alpha\).
+\end{prop}
+\begin{bibdiv}
+  \begin{biblist}
+    \bib{catalans}{article}{
+      author={Blasiak, Jonah}
+      author={Morse, Jennifer}
+      author={Pun, Anna}
+      author={Summers, Daniel}
+      title={Catalan Functions and \(k\)-Schur Positivity}
+      year={2019}
+      journal={J. Amer. Math. Soc.}
+      volume={32}
+      number={4}
+      pages={921--963}
+    }
+    \bib{lam}{article}{
+      author={Lam, Thomas}
+      title={Schubert polynomials for the affine Grassmannian}
+      journal={J. Amer. Math. Soc.}
+      volume={21}
+      number={1}
+      year={2008}
+      pages={259--281}
+    }
+    \bib{k-schur-book}{book}{
+      author={Lam, Thomas}
+      author={Lapointe, Luc}
+      author={Morse, Jennifer}
+      author={Schilling, Anne}
+      author={Shimozono, Mark}
+      author={Zabrocki, Mike}
+      title={\(k\)-Schur functions and affine Schubert calculus}
+      publisher={Springer}
+      year={2014}
+    }    
+    \bib{llm}{article}{
+      author={Lapointe, Luc}
+      author={Lascoux, Alain}
+      author={Morse, Jennifer}
+      title={Tableau atoms and a new Macdonald positivity conjecture}
+      journal={Duke Math. J.}
+      volume={116}
+      number={1}
+      year={2003}
+      pages={103--146}
+    }
+    \bib{lm1}{article}{
+      author={Lapointe, Luc} 
+      author={Morse, Jennifer}
+      title={Schur function analogs for a filtration of the symmetric
+        function space}
+      journal={J. Combin. Theory Ser. A}
+      volume={101}
+      number={2}
+      year={2003}
+      pages={101--224}
+    }
+    \bib{lm2}{article}{
+      author={Lapointe, Luc} 
+      author={Morse, Jennifer}
+      title={A \(k\)-tableaux characterization of \(k\)-Schur
+        functions}
+      journal={Adv. Math.}
+      volume={213}
+      number={1}
+      year={2007}
+      pages={183--204}
+    }
+  \end{biblist}
+\end{bibdiv}
+\end{document}
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
