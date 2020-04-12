@@ -115,12 +115,8 @@ more-or-less independently.
     corresponding translation element. Note \(t_\lambda \cdot t_\mu =
     t_{\lambda+\mu}\) and \(w t_\lambda w^{-1} = t_{w \cdot \lambda}\)
     for \(w \in \W\).
-  \item For real root \(\alpha \in Q_{\text{aff}} = \bigoplus_{i \in I
-    \union \{0\}} \Z \alpha_i\), let \(s_\alpha\) denote the
-  corresponding reflection.
   \item Let \(\ell \from \Waff \to \N_{\geq 0}\) be the length
-    function for \(\Waff\) and \(\epsilon(w) = (-1)^{\ell(w)}\) be the
-    sign. 
+    function for \(\Waff\).
   \item Let \(\W^0\) be the minimal length coset representatives of
     \(\Waff/\W\), called \de{Grassmannian} elements. 
   \end{itemize}
@@ -511,7 +507,7 @@ Now, recall the following.
 Then, we define the following action of \(\eS_{k+1}\) on
 \(k+1\)-cores.
 \begin{defn}
-  Given \(s_r \in \eS_{k+1}\), we have \[
+  Given \(s_r \in \eS_{k+1}\) and \(k+1\)-core \(\kappa\), we have \[
     s_r \cdot \kappa =
     \begin{cases}
       \kappa + \text{all its addable $r$-corners} & \text{if $\kappa$
@@ -595,7 +591,7 @@ tableaux'' on cores.
 \begin{prop}
   Given two \(k+1\)-cores \(\kappa\) and \(\tau\) with \(\kappa
   \subset \tau\), then \(\kappa \coveredby \tau\) if and only if
-  \(\tau = s_i \kappa\).
+  \(\tau = s_i \kappa\) for some \(s_i \in \eS_{k+1}\).
 \end{prop}
 Using this perspective, we will build up a kind of semistandard
 tableau using the notion of horizontal strips. To motivate, we will
@@ -603,7 +599,7 @@ first describe this notion for partitions and semistandard tableau.
 \begin{defn}
   Given two partitions \(\lambda\) and \(\mu\), we say \(\lambda\) and
   \(\mu\) differ by a \de{horizontal strip of size \(r\)} if \(\mu \setminus
-  \lambda\) has \(r\) cells lying in distinct columns.
+  \lambda\) consists of exactly \(r\) cells lying in distinct columns.
 \end{defn}
 From this notion, one can construct a semistandard tableau from a
 sequence of partitions differing by horizontal strips. E.g., consider
@@ -635,31 +631,41 @@ Thus, the chain above corresponds to \[
 \end{prop}
 \begin{defn}
   A \de{weak tableau} of shape \(\kappa\) and composition weight \(\alpha\) is a
-  sequence of \(k+1\)-cores differing by weak horizontal strips of
-  sizes given by \(\alpha\).
+  sequence of \(k+1\)-cores \(\emptyset = \kappa^{(0)} \subset \kappa^{(1)}
+  \subset \cdots \subset \kappa^{(\ell(\alpha))} = \kappa\) such that
+  \(\kappa^{(i)}\setminus \kappa^{(i-1)}\) is a weak horizontal strip
+  of size \(\alpha_i\).
 \end{defn}
 \begin{example}
   For \(k+1=3\), a weak tableau of shape \((4,2)\) and weight
   \((1,1,1,1)\) is given by \[
-    \ytableaushort{1234,34}
+    \emptyset \subset \ydiagram{1} \subset \ydiagram{2} \subset
+    \ydiagram{3,1} \subset \ydiagram{4,2} \correspondsto \ytableaushort{1234,34}
   \]
   Furthermore, a weak tableau of the same shape weight weight
   \((2,2)\) is given by \[
-    \ytableaushort{1122,22}
+    \emptyset \subset \ydiagram{2} \subset \ydiagram{4,2}
+    \correspondsto \ytableaushort{1122,22}
   \]
 \end{example}
 From this, we get a combinatorial characterization of the affine
-Stanley symmetric functions, also called dual \(k\)-Schur functions.
+Schur functions, also called dual \(k\)-Schur functions.
 \begin{prop}
   The dual \(k\)-Schur function \(\tilde{F}_\lambda^{(k)}(x) \in
   \sym^{k+1} = \sym/\langle m_{\lambda} \st \lambda_1 \geq k+1
   \rangle\) is the weight generating function of weak tableau of shape
   \(\mathfrak{p}^{-1}(\lambda)\). More preciesly, \[
-    F_\lambda^{(k)}(x) = \sum_\alpha \sum_{T \text{ a weak tableau of shape
-      }\mathfrak{p}^{-1}(\lambda)} x^\alpha
+    F_\lambda^{(k)}(x) = \sum_\alpha \sum_{\substack{T \text{ a weak tableau of shape
+      }\mathfrak{p}^{-1}(\lambda) \\ \text{and weight }\alpha}} x^\alpha
   \]
   where \(x^{\alpha} = \prod_i x_i^\alpha\).
 \end{prop}
+There exist many other equivalent definitions of \(k\)-Schur functions
+and their duals, including a characterization using the strong Bruhat
+order on \(\eS_{k+1}\). However~\cite{catalans} makes use of a
+completely different definition using Young's ``raising operators'' to
+prove the Schur positivity of \(k\)-Schur functions with a general
+parameter \(t\).
 \begin{bibdiv}
   \begin{biblist}
     \bib{catalans}{article}{
