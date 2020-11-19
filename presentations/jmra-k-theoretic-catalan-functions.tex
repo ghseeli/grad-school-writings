@@ -83,6 +83,7 @@
 \usepackage{tikz-cd}
 \usepackage{amsmath}
 \usepackage[author-year]{amsrefs}
+\usepackage{amsthm}
 \usepackage{../ReAdTeX/readtex-core}
 % \usepackage{../ReAdTeX/readtex-dangerous}
 % \usepackage{../ReAdTeX/readtex-abstract-algebra}
@@ -94,10 +95,14 @@
 % \definecolor{lightblue}{rgb}{.68,.85,.9} % 
 \definecolor{lightblue}{rgb}{.3,.65,1.0} %
 \DeclareMathOperator{\Gr}{Gr}
-\newcommand{\cupprod}{\cup}
+\newcommand{\cupprod}{\smile}
 \newcommand{\sym}{\Lambda}
 \newcommand{\lowers}{\mathcal{L}}
 \newcommand{\mynone}{\ }
+\newtheorem{thm}{Theorem}
+\theoremstyle{definition}
+\newtheorem{rmk}[thm]{Remark}
+\newtheorem*{rmk*}{Remark}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 
 
@@ -107,20 +112,30 @@
 
 \title[\(K\)-theoretic Catalan functions]{\(K\)-theoretic Catalan functions} % The short title appears at the bottom of every slide, the full title is only on the title page
 
-\author[George H. Seelinger]{George H. Seelinger (joint with
+\author[George H. Seelinger]{George H. Seelinger (joint work with
   J. Blasiak and J. Morse)} % Your name
 \institute[UVA] % Your institution as it will appear on the bottom of every slide, may be shorthand to save space
 {
-JMRA\\ % Your institution for the title page
+Junior Mathematician Research Archive\\ % Your institution for the title page
 \medskip
-\textit{ghs9ae@virginia.edu} % Your email address
+ghs9ae@virginia.edu\\ %Your email address
+\medskip
+Based on arXiv:2010.01759
 }
-\date{20 November 2020} % Date, can be changed to a custom date
+\date{November 2020} % Date, can be changed to a custom date
 
 \begin{document}
 
 \begin{frame}
 \titlepage % Print the title page as the first slide
+\end{frame}
+\begin{frame}
+  \frametitle{Overview}
+  \begin{enumerate}
+  \item Schubert calculus
+  \item Catalan functions
+  \item K-theoretic Catalan functions
+  \end{enumerate}
 \end{frame}
 \begin{frame}{Overview of Schubert Calculus Combinatorics}
   \begin{block}{Geometric problem}
@@ -131,7 +146,8 @@ JMRA\\ % Your institution for the title page
     \downarrow
   \]
   \begin{block}{Cohomology}
-    Schubert basis \(\{\sigma_\lambda\}\) for \(H^*(X)\) with property \(\sigma_\lambda \cupprod \sigma_\mu = \sum_\nu c_{\lambda \mu}^\nu \sigma_\nu\) \pause 
+    Schubert basis \(\{\sigma_\lambda\}\) for \(H^*(X)\) with property
+    \(\sigma_\lambda \cupprod \sigma_\mu = \sum_\nu c_{\lambda \mu}^\nu \sigma_\nu\) \pause 
 \end{block}
 \[
   \downarrow
@@ -148,16 +164,39 @@ JMRA\\ % Your institution for the title page
     calculation and proofs.
   \end{alertblock}
 \end{frame}
-\begin{frame}{Classical Example}
-  \begin{example}
-    \begin{itemize}
-    \item \(X = \Gr_{m,n}\) \pause
-    \item \(f_\lambda = s_\lambda\), the Schur functions \pause
-    \item For \(h_r = \sum_{i_1 \leq \cdots \leq i_r} x_{i_1}
-      \cdots x_{i_r}\) and \(h_\lambda = h_{\lambda_1} \cdots
-      h_{\lambda_\ell}\), we have \(s_\lambda = \prod_{i < j} (1-R_{ij})h_\lambda\)
-      (Jacobi-Trudi) \pause
-      \item Raising operators
+\begin{frame}{Classical Schubert Calculus}
+    \begin{block}{Geometric problem}
+    Find \(c_{\lambda \mu}^\nu = \#\) of points in
+    intersection of Schubert varieties \(\{X_\lambda\}_{\lambda
+      \subset (n^m)}\) in variety \(X = \Gr(m,n)\). \pause
+  \end{block}
+  \vspace{-0.1in}
+  \[
+    \downarrow
+  \]
+  \vspace{-0.1in}
+  \begin{block}{Cohomology}
+    Schubert basis \(\{\sigma_\lambda\}_{\lambda \subset (n^m)}\) for
+    \(H^*(X)\) with property \(\sigma_\lambda \cupprod \sigma_\mu = \sum_\nu c_{\lambda \mu}^\nu \sigma_\nu\) %\pause 
+  \end{block}\pause
+\vspace{-0.1in}  
+\[
+  \downarrow
+\]
+\vspace{-0.1in}
+\begin{block}{Representatives}
+  Special basis of Schur polynomials \(\{s_\lambda\}\) such that
+  \(s_\lambda \cdot s_\mu = \sum_\nu c_{\lambda \mu}^\nu s_\nu\) for
+  combinatorially understood Littlewood-Richardson coefficients \(c_{\lambda \mu}^\nu\).
+\end{block}
+\end{frame}
+\begin{frame}{Schur polynomials and raising operators}
+  \begin{itemize}
+  \item Complete homogeneous symmetric function: for \(r \in \Z\), \(h_r = \sum_{i_1 \leq \cdots \leq i_r} x_{i_1}
+    \cdots x_{i_r}\). \pause
+  \item For \(\lambda \in \Z^\ell\), \(h_\lambda = h_{\lambda_1}
+    \cdots h_{\lambda_\ell}\). \pause
+  \item Raising operators
     \(R_{i,j}(h_\lambda) = h_{\lambda+\epsilon_i-\epsilon_j}\)
     \ytableausetup{boxsize=0.5em}
     \[
@@ -165,61 +204,137 @@ JMRA\\ % Your institution for the title page
       \ydiagram{4,1}*[*(red)]{3+1} \ \ \ R_{2,3} \left(
         \ydiagram{1,1,1}*[*(red)]{0,0,1} \right) =
       \ydiagram{1,2}*[*(red)]{0,1+1}
-    \] 
-%    \pause
-%    \item Structure constants are determined by the Pieri rule: \(h_r s_\lambda = \sum_{\mu} s_\mu\)
-    \end{itemize}
-  \end{example}
+    \] \pause
+  \item Schur function \(s_\lambda = \prod_{i < j} (1-R_{ij})h_\lambda\) (Jacobi-Trudi) 
+  \end{itemize}
 \end{frame}
-\begin{frame}{Schubert Calculus Variations}
-  \begin{itemize}
-  \item There are many variations on classical Schubert calculus of the
-  Grassmannian (Type A)\pause
-  \item (Co)homology of Types BCD Grassmannian, \(K\)-theory of
-    Grassmannian, (Co)homology of affine Grassmannian,\ldots \pause
+% \begin{frame}{Classical Example}
+%   \begin{example}
+%     \begin{itemize}
+%     \item \(X = \Gr_{m,n}\) \pause
+%     \item \(f_\lambda = s_\lambda\), the Schur functions \pause
+%     \item For \(h_r = \sum_{i_1 \leq \cdots \leq i_r} x_{i_1}
+%       \cdots x_{i_r}\) and \(h_\lambda = h_{\lambda_1} \cdots
+%       h_{\lambda_\ell}\), we have \(s_\lambda = \prod_{i < j} (1-R_{ij})h_\lambda\)
+%       (Jacobi-Trudi) \pause
+%       \item Raising operators
+%     \(R_{i,j}(h_\lambda) = h_{\lambda+\epsilon_i-\epsilon_j}\)
+%     \ytableausetup{boxsize=0.5em}
+%     \[
+%       R_{1,3} \left( \ydiagram{3,1,1}*[*(red)]{0,0,1} \right) =
+%       \ydiagram{4,1}*[*(red)]{3+1} \ \ \ R_{2,3} \left(
+%         \ydiagram{1,1,1}*[*(red)]{0,0,1} \right) =
+%       \ydiagram{1,2}*[*(red)]{0,1+1}
+%     \] 
+% %    \pause
+% %    \item Structure constants are determined by the Pieri rule: \(h_r s_\lambda = \sum_{\mu} s_\mu\)
+%     \end{itemize}
+%   \end{example}
+% \end{frame}
+% \begin{frame}{Schubert Calculus Variations}
+%   \begin{itemize}
+%   \item There are many variations on classical Schubert calculus of the
+%   Grassmannian (Type A)\pause
+%   \item (Co)homology of Types BCD Grassmannian, \(K\)-theory of
+%     Grassmannian, (Co)homology of affine Grassmannian,\ldots \pause
+%   \begin{block}{Focus}
+%     \(K\)-theory and \(K\)-homology of the affine Grassmannian \pause
+%   \end{block}
+%   \item Simulatenously generalizes \(K\)-theory of Grassmannian and
+%     (co)homology of affine Grassmannian.
+%   \end{itemize}
+%   % \begin{tabular}{c|p{2.25cm}|p{2.5cm}|p{2.75cm}}
+%   %   Cohomology theory
+%   %   & Explicit basis
+%   %   & Pieri rule
+%   %   & LR coefficients \\
+%   %   \hline
+%   %   Type A
+%   %   & Schur
+%   %   & Horiz strips
+%   %   & Skew Yamanouchi tableaux \\
+%   %   \(K\)-theory
+%   %   & Grothendieck
+%   %   & Set-valued strips
+%   %   & Skew set-valued Yamanouchi tableaux \\
+%   %   Types BCD
+%   %   & Billey-Haiman
+%   %   & BH
+%   %   & ?? \\
+%   %   Quantum
+%   %   & ??
+%   %   & ??
+%   %   & ?? \\
+%   %   Affine Type A
+%   %   & \(t=1\) \(k\)-Schur 
+%   %   & Affine horiz strips
+%   %   & Gromov-Witten Invariants?\\
+%   %   Affine \(K\)-theory
+%   %   & \textcolor{red}{Only indirect}
+%   %   & Affine set-valued tableaux
+%   %   & Unkown \\
+%   %   Affine Type C
+%   %   & LSS
+%   %   & Unknown
+%   %   & Unknown
+%   %   \\
+%   % \end{tabular}
+% \end{frame}
+\begin{frame}[fragile]{Schubert Calculus Variations}
+    There are many variations on classical Schubert calculus of
+    the Grassmannian (Type A).
+    \pause
+    \begin{tabular}{|c|c|}
+      \hline
+      Theory
+      & \(f_\lambda\) \\
+      \hline
+      (Co)homology of Grassmannian
+      & Schur functions\\
+      \hline
+      (Co)homology of flag variety
+      & Schubert polynomimals\\
+      \hline
+      Quantum cohomology of flag variety
+      & Quantum Schuberts\\
+      \hline
+      (Co)homology of Types BCD Grassmannian
+      & Schur-\(P\) and \(Q\) functions\\
+      \hline
+      (Co)homology of affine Grassmannian
+      & (dual) \(k\)-Schur functions\\
+      \hline
+      \(K\)-theory of Grassmannian
+      & Grothendieck polynomials\\
+      \hline
+      \(K\)-homology of affine Grassmannian
+      & \(K\)-\(k\)-Schur functions \\
+      \hline
+    \end{tabular}
+    \pause
   \begin{block}{Focus}
     \(K\)-theory and \(K\)-homology of the affine Grassmannian \pause
   \end{block}
-  \item Simulatenously generalizes \(K\)-theory of Grassmannian and
+  Simulatenously generalizes \(K\)-theory of Grassmannian and
     (co)homology of affine Grassmannian.
-  \end{itemize}
-  % \begin{tabular}{c|p{2.25cm}|p{2.5cm}|p{2.75cm}}
-  %   Cohomology theory
-  %   & Explicit basis
-  %   & Pieri rule
-  %   & LR coefficients \\
-  %   \hline
-  %   Type A
-  %   & Schur
-  %   & Horiz strips
-  %   & Skew Yamanouchi tableaux \\
-  %   \(K\)-theory
-  %   & Grothendieck
-  %   & Set-valued strips
-  %   & Skew set-valued Yamanouchi tableaux \\
-  %   Types BCD
-  %   & Billey-Haiman
-  %   & BH
-  %   & ?? \\
-  %   Quantum
-  %   & ??
-  %   & ??
-  %   & ?? \\
-  %   Affine Type A
-  %   & \(t=1\) \(k\)-Schur 
-  %   & Affine horiz strips
-  %   & Gromov-Witten Invariants?\\
-  %   Affine \(K\)-theory
-  %   & \textcolor{red}{Only indirect}
-  %   & Affine set-valued tableaux
-  %   & Unkown \\
-  %   Affine Type C
-  %   & LSS
-  %   & Unknown
-  %   & Unknown
-  %   \\
-  % \end{tabular}
+  % \begin{itemize}
+  % \item (Co)homology of Types BCD Grassmannian
+  % \item \(K\)-theory of Grassmannian
+  % \item (Co)homology of affine Grassmannian \(\Gr_{SL_{k+1}} = SL_{k+1}(\C((t)))/SL_{k+1}(\C[[t]])\)
+  %   \begin{block}{Goal}
+  %     Understand \(K\)-theory and \(K\)-homology of \(\Gr_{SL_{k+1}}\).
+  %   \end{block}
+  % \item Simultaneously generalizes \(K\)-theory of Grassmannian and
+  %   (co)homology of affine Grassmannian:
+  %   \[
+  %     \begin{tikzcd}
+  %       H(\Gr(m,n)) \ar[d] \ar[r]& H(\Gr_{SL_{k+1}}) \ar[d] \\
+  %       K(\Gr(m,n)) \ar[r] & K(\Gr_{SL_{k+1}})
+  %     \end{tikzcd} 
+  %   \]
+  % \end{itemize}
 \end{frame}
+
 \begin{frame}{\(K\)-Theory of Affine Grassmannian}
   \begin{block}{What is known?}
   \pause
@@ -232,11 +347,12 @@ JMRA\\ % Your institution for the title page
       \]
       for \(k_\gamma\) an inhomogeneous analogue of \(h_\gamma\).\pause
     \item Homology classes of affine Grassmannian represented by
-      \(k\)-Schur functions (\(t=1\)) \[
-        s_\lambda^{(k)} = \prod_{(i,j) \in \Delta^+_\ell \setminus
-          \Delta^{(k)}(\lambda)} (1-R_{ij}) h_\lambda
-        \] \pause
-    \vspace{-0.2in}
+      \(k\)-Schur functions (\(t=1\)).\pause
+    %   \[
+    %     s_\lambda^{(k)} = \prod_{(i,j) \in \Delta^+_\ell \setminus
+    %       \Delta^{(k)}(\lambda)} (1-R_{ij}) h_\lambda
+    %     \] \pause
+    % \vspace{-0.2in}
     \item \cite{lss} leave open the question: what is a direct formulation of the \(K\)-homology representatives of the affine Grassmannian (\(K\)-\(k\)-Schur functions)?
     \end{enumerate}
   \end{block}
@@ -299,7 +415,8 @@ JMRA\\ % Your institution for the title page
         \end{frame}
         \begin{frame}{Catalan functions}
           \begin{block}{\(k\)-Schur root ideal for \(\lambda\)}
-            \vspace{-0.1in}
+            For \(k \in \Z_{\geq 0}\) and \(\lambda = (\lambda_1 \geq
+            \ldots \geq \lambda_\ell) \in \Z^\ell\), 
             \begin{align*}
               \Psi = \Delta^k(\lambda)
               & = \{(i,j): j > k-\lambda_i\}\\
@@ -308,6 +425,7 @@ JMRA\\ % Your institution for the title page
             \end{align*}
           \end{block}
           \pause
+          \vspace{-0.3in}
           \[
             \Delta^4(3,3,2,2,1,1) = 
 \ytableausetup{mathmode, boxsize=.8em,centertableaux}
@@ -335,29 +453,54 @@ JMRA\\ % Your institution for the title page
 \quad
 \end{matrix}
 \]
+\vspace{-0.2in}
 \pause
   \begin{block}{\(k\)-Schur is a Catalan function~\cite{catalans}.}
     For partition \(\lambda\) with \(\lambda_1 \leq k\),
     \[s_\lambda^{(k)} = H(\Delta^k(\lambda);\lambda)\,.\]
   \end{block}
 \end{frame}
-
+\begin{frame}{Catalan functions}
+  By realizing \(k\)-Schur functions in the framework of Catalan
+  functions,~\cite{catalans} proves\pause
+  \begin{itemize}
+  \item The \(k\)-Schur functions are``shift invariant'', i.e.\ for
+    \(\ell = \ell(\lambda)\), \(s_{1^\ell}^\perp
+    s_{\lambda+1^\ell}^{(k+1)} = s_\lambda^{(k)}\).\pause
+  \item This implies the \(k{+}1\)-Schur expansion of a \(k\)-Schur function has
+    positive coefficients. \pause
+  \item Also the Schur expansion of a \(k\)-Schur function has positive coefficients.
+  \end{itemize}
+  \begin{rmk}
+   ~\cite{catalans} show results for \(k\)-Schur functions with
+   parameter \(t\), but \(t=1\) specialization is necessary for
+   Schubert calculus.
+  \end{rmk}
+\end{frame}
 \begin{frame}{Lowering Operators}
   \begin{itemize}
-  \item Lowering Operators
+  \item Recall \(K\)-theory/homology of affine Grassmannian
+    simultaneously generalizes:
+    \begin{itemize}
+    \item \(K\)-theory of Grassmannian: \(g_\lambda = \prod_{i < j}
+      (1-R_{ij}) k_\lambda\) and \pause
+    \item Homology of affine Grassmannian: \(s_\lambda^{(k)} =
+      \prod_{(i,j)\in \Delta^+ \setminus \Delta^{k}(\lambda)}
+      (1-R_{ij}) h_\lambda\) \pause
+    \end{itemize}
+  \item Extra ingredient: lowering operators
      \(L_j(h_\lambda) = h_{\lambda-\epsilon_j}\)
             \ytableausetup{boxsize=0.6em}
             \[ L_3\left( \ydiagram{3,1,1}*[*(red)]{0,0,1} \right) =
               \ydiagram{3,1} \ \ L_{1}\left( \ydiagram{3,1,1}*[*(red)]{2+1} \right)
               = \ydiagram{2,1,1}
               \]
-              \pause
   \end{itemize}
 \end{frame}
 \begin{frame}{Affine \(K\)-Theory Representatives with Raising Operators}
   \begin{definition}
     Let \(\Psi,\lowers \subset \Delta^+_\ell\) be order ideals of
-    positive roots and \(\gamma \in \Z^\ell\), then \[
+    positive roots and \(\gamma \in \Z^\ell\)\pause, then \[
       K(\Psi;\lowers;\gamma) := \prod_{(i,j) \in \lowers} (1-L_j)
       \prod_{(i,j) \in \Delta^+_\ell \setminus \Psi} (1-R_{ij})
       k_\gamma
@@ -397,32 +540,32 @@ JMRA\\ % Your institution for the title page
               \end{columns}
   \end{example}
 \end{frame}
-\begin{frame}{Affine \(K\)-Theory Representatives with Raising
-    Operators}
-  \begin{definition}
-    The \emph{\(k\)-Schur root ideal}, \(\Delta^{(k)}(\lambda)\) is the
-    unique root ideal with \(\lambda_i + \#\)non-roots in row \(i =
-    k\).
-  \end{definition}
-  \begin{example}
-  \(k=4, \lambda = 332111\)
-              \[
-              \Delta^{(4)}(332111) = 
-              {\footnotesize
-                \begin{ytableau}
-                  *(white) 3     &*(lightblue)  &*(red)   &*(red)  &*(red)  &*(red) \\
-                  \mynone & *(white)3 & *(lightblue) & *(red) & *(red)  &*(red)  \\
-                  \mynone & \mynone  & *(white)2 & *(lightblue) & *(lightblue)  &*(red)  \\
-                  \mynone & \mynone  & \mynone  & *(white)1 & *(lightblue) &*(lightblue) \\
-                  \mynone &\mynone  &\mynone  &\mynone  & *(white)1 & *(lightblue) \\
-                  \mynone &\mynone  &\mynone  &\mynone  & \mynone  & *(white) 1
-                \end{ytableau}
-              }
-              \leftarrow\,\text{\small{4 - 2 non-roots}}
-              \quad
-            \]
-            \end{example}
-\end{frame}
+% \begin{frame}{Affine \(K\)-Theory Representatives with Raising
+%     Operators}
+%   \begin{definition}
+%     The \emph{\(k\)-Schur root ideal}, \(\Delta^{(k)}(\lambda)\) is the
+%     unique root ideal with \(\lambda_i + \#\)non-roots in row \(i =
+%     k\).
+%   \end{definition}
+%   \begin{example}
+%   \(k=4, \lambda = 332111\)
+%               \[
+%               \Delta^{(4)}(332111) = 
+%               {\footnotesize
+%                 \begin{ytableau}
+%                   *(white) 3     &*(lightblue)  &*(red)   &*(red)  &*(red)  &*(red) \\
+%                   \mynone & *(white)3 & *(lightblue) & *(red) & *(red)  &*(red)  \\
+%                   \mynone & \mynone  & *(white)2 & *(lightblue) & *(lightblue)  &*(red)  \\
+%                   \mynone & \mynone  & \mynone  & *(white)1 & *(lightblue) &*(lightblue) \\
+%                   \mynone &\mynone  &\mynone  &\mynone  & *(white)1 & *(lightblue) \\
+%                   \mynone &\mynone  &\mynone  &\mynone  & \mynone  & *(white) 1
+%                 \end{ytableau}
+%               }
+%               \leftarrow\,\text{\small{4 - 2 non-roots}}
+%               \quad
+%             \]
+%             \end{example}
+% \end{frame}
 \begin{frame}{Affine \(K\)-Theory Representatives with Raising Operators}
   \begin{block}{Answer (Blasiak-Morse-S., 2020)}
     \pause For \(K\)-homology of affine Grassmannian, \(f_\lambda = g_\lambda^{(k)} :=
@@ -441,7 +584,7 @@ JMRA\\ % Your institution for the title page
                   \mynone &\mynone  &\mynone  &\mynone  &\mynone & *(white) 1
                 \end{ytableau}
               }
-\(\textcolor{blue}{\Delta^+ \setminus \Psi = \Delta^+_6 / \Delta^{(4)}(332111)},
+\(\textcolor{blue}{\Delta^+ \setminus \Psi = \Delta^+_6 \setminus \Delta^{(4)}(332111)},
 \lowers = \Delta^{(5)}(332111)\)
 \end{example}
 \end{frame}
@@ -462,15 +605,18 @@ JMRA\\ % Your institution for the title page
     0}\). 
   \end{theorem}
   \end{frame}
-  \begin{frame}
-  \begin{block}{Further work}
-    For \(G_\lambda^{(k)}\) an affine Grothendieck polynomial (dual to \(g_\lambda^{(k)}\)),
+\begin{frame}{Future Directions}
+    For \(G_\lambda^{(k)}\) an affine Grothendieck polynomial (dual to \(g_\lambda^{(k)}\)),\pause
     \begin{enumerate}
-    \item Dual Pieri rule: \(G_{1^r}^\perp g_\lambda^{(k)} = \sum_\mu
-      ?? g_\mu^{(k)} \iff G_{1^r} G_\mu^{(k)} = \sum_\lambda ?? G_\lambda^{(k)}\),  \(1 \leq r \leq k\)
-    \item Branching rule: \(g_\lambda^{(k)} = \sum_\mu ?? g_\mu^{(k+1)}\)
+    \item Combinatorially describe dual ``Pieri rule'': \(G_{1^r}^\perp g_\lambda^{(k)} = \sum_\mu
+      ?? g_\mu^{(k)} \iff G_{1^r} G_\mu^{(k)} = \sum_\lambda ?? G_\lambda^{(k)}\),  \(1 \leq r \leq k\).\pause
+    \item Combinatorially describe branching coefficients: \(g_\lambda^{(k)} =
+      \sum_\mu ?? g_\mu^{(k+1)}\).\pause
+    \item Combinatorially describe \(g_\lambda^{(k)} = \sum_\mu ??
+      s_\mu^{(k)}\).%\pause
+    % \item Prove the image of \(\G_w^Q\) under \(K\)-theoretic Peterson isomorphism
+    %   for all \(w \in S_{k+1}\).
     \end{enumerate}
-  \end{block}
 \end{frame}
 \begin{frame}{References}
   Thank you!
