@@ -320,7 +320,49 @@ LACIM at UQAM\\ % Your institution for the title page
   Littlewood-Richardson coefficients \(c_{\lambda \mu}^\nu\).
 \end{block}
 \end{frame}
+\begin{frame}{Schur functions \(s_\lambda\)}
+  \ytableausetup{boxsize=1.0em}
+  \begin{example}
+    \emph{Semistandard tableaux}: columns increasing and rows non-decreasing.\[
+      \ytableaushort{5,34,23,1225} \ \ \ \
+      \underbrace{\ytableaushort{8,79,34,1256}}_{\text{standard = no
+          repeated letters}}
+    \]
+  \end{example}\pause
+  Schur function \(s_\lambda\) is a ``weight generating function'' of
+  semistandard tableaux:
+  \begin{align*}
+      \ytableausetup{boxsize=1.0em,aligntableaux=bottom}
+    & \ytableaushort{2,11},\  \ytableaushort{3,11},\ \ytableaushort{3,22},\
+    \ytableaushort{2,12},\ \ytableaushort{3,13},\ \ytableaushort{3,23},\
+    \ytableaushort{2,13},\ \ytableaushort{3,12}\\
+    \ytableausetup{boxsize=0.3em}
+    s_{\ydiagram{1,2}}(x_1,x_2,x_3) = & x_1^2x_2+x_1^2x_3+x_2^2x_3+x_1x_2^2+x_1x_3^2+x_2x_3^2+2x_1x_2x_3
+  \end{align*}
+\end{frame}
+\begin{frame}{Schur functions \(s_\lambda\) (cont.)}
+  \begin{block}{Pieri rule}
+    Determines multiplicative structure: \[
+      s_r s_\lambda = \sum (1 \text{ or }0) s_\nu 
+    \] \[
+      s_{\ydiagram{1}} s_{\ydiagram{1,2}} =
+      s_{\ydiagram{1,3}*[*(red)]{0,2+1}} +
+      s_{\ydiagram{2,2}*[*(red)]{1+1}} + s_{\ydiagram{1,1,2}*[*(red)]{1}}
+    \]
+  \end{block}\pause
+  Iterate Pieri rule \[
+    s_{\mu_1} \cdots s_{\mu_r} s_\lambda = \sum (\# \text{ known
+      tableaux})s_\nu
+  \]\pause
+  Since \(s_{\mu_1} \cdots s_{\mu_r} = s_{(\mu_1, \ldots, \mu_r)} +\)
+  lower order terms, subtract to get \[
+    s_{(\mu_1, \ldots, \mu_r)} s_\lambda = \sum c_{\lambda \mu}^\nu s_\nu
+  \]
+  for well-understood \emph{Littlewood-Richardson coefficients}
+  \(c_{\lambda \mu}^\nu\). 
+\end{frame}
 \begin{frame}{Next Step: Flag Variety}
+  \pause
   \begin{itemize}
   \item
     \(X = Fl_n(\C) = \{V_0 \subset V_1 \subset \cdots \subset
@@ -330,10 +372,13 @@ LACIM at UQAM\\ % Your institution for the title page
 
     \item \(H^*(Fl_n(\C))\) supported by Schubert polynomials
     \(\S_w \in \Z[x_1, \ldots, x_n]\) (Not necessarily symmetric!) \pause
+    \[
+      \S_{s_i} = x_1 + \cdots + x_i
+    \]
   \end{itemize}
   \begin{block}{Open Problem}
-    Structure constants \(\S_w \S_u = \sum_v c_{w u}^v \S_v \) are
-    combinatorially unknown.
+    Structure constants \(\S_w \S_u = \sum_v c_{w u}^v \S_v \) 
+    have no tableaux description.
   \end{block}
 \end{frame}
 \begin{frame}[fragile]{Schubert Calculus Variations}
@@ -418,16 +463,20 @@ LACIM at UQAM\\ % Your institution for the title page
   \begin{itemize}
   \item \(QH^*(Fl_{k+1})\) quantum deformation of
     \(H^*(Fl_{k+1})\) by \(q_1,\ldots,q_k\).\pause
-  \item Supported by quantum Schubert polynomials \(\S_w^Q\).\pause
+  \item Supported by quantum Schubert polynomials
+    \(\S_w^Q\)~\cite{FGP}.\pause\,(\(\S_w^Q \to \S_w\) when \(q_i =
+    0\).) \pause
   \item Peterson isomorphism
-    \begin{align*}
-      \Phi\colon QH^*(Fl_{k+1}) & \to H_*(Gr_{SL_{k+1}})_{loc}\\
-      \S_w^Q & \mapsto \frac{s_\lambda^{(k)} }{\prod_{i \in Des(w)} \tau_i} 
-    \end{align*}
-    where \(s_\lambda^{(k)}\) is a \(k\)-Schur function.
-    \pause
+    \begin{eqnarray*}
+      \Phi\colon QH^*(Fl_{k+1}) & \to H_*(Gr_{SL_{k+1}})_{loc} \pause \\
+      \S_w^Q & \mapsto \frac{\displaystyle s_\lambda^{(k)}
+               }{\prod_{i \in Des(w)} \tau_i} 
+    \end{eqnarray*}
+    where \(s_\lambda^{(k)}\) is a \(k\)-Schur symmetric function and
+    \(\Gr_{SL_{k+1}}\) is the ``affine Grassmannian.'' 
   \end{itemize}
   \begin{block}{Upshot}
+    \pause
     Computations for (quantum) Schubert polynomials can be moved into symmetric functions.
   \end{block}
 \end{frame}
@@ -444,11 +493,11 @@ LACIM at UQAM\\ % Your institution for the title page
       \[s_{\ydiagram{2,2}}^{(2)} =
         \underbrace{s_{\ydiagram{2,2}}}_{s^{(3)}_{\ydiagram{2,2}}}+\underbrace{s_{\ydiagram{1,3}}+s_{\ydiagram{4}}}_{s_{\ydiagram{1,3}}^{(3)}}\] \pause
       \begin{itemize}
-      \item Has geometric interpretation.\pause     
-      \item No combinatorial interpretation of branching coefficients.\pause
-      \item Definition with \(t\) important for Macdonald polynomials.\pause
+      \item \cite{llms} gives geometric interpretation,\pause     
+      \item but no combinatorial interpretation of branching coefficients.\pause
+      \item Branching with \(t\) important for Macdonald polynomial positivity.\pause
       \end{itemize}
-   \item Many definitions. A new one makes proofs easier!
+   \item Many conjecturally equivalent definitions. 
   \end{itemize}
 \end{frame}
 \begin{frame}{Overview}
@@ -457,6 +506,22 @@ LACIM at UQAM\\ % Your institution for the title page
   \item \textbf{Catalan functions: a new approach to old problems}
   \item \(K\)-theoretic Catalan functions
   \end{itemize}
+\end{frame}
+\begin{frame}
+  \frametitle{Why a new definition of \(k\)-Schur?}
+  \pause
+  \begin{block}{Answer}
+    \begin{enumerate}
+    \item \cite{catalans} gives a new definition of
+      \(s_\lambda^{(k)}\) and shows it is
+      equivalent to many other previous definitions. \pause
+    \item From a new definition,~\cite{catalans} shows the branching
+      coefficients \(b_{\lambda \mu}\) in the expansion
+      \(s_\lambda^{(k)} = \sum_\mu b_{\lambda \mu} s_\mu^{(k+1)}\) have
+      combinatorial interpretation!
+    \end{enumerate}
+    Key: \pause Catalan functions = large class of symmetric functions.
+  \end{block}
 \end{frame}
 \begin{frame}
   \frametitle{Ingredients for Catalan functions}
@@ -472,8 +537,8 @@ LACIM at UQAM\\ % Your institution for the title page
       \ytableausetup{boxsize=1em,centertableaux}
       R_{1,3} \left( \ydiagram{1,1,3}*[*(red)]{1} \right) =
       \ydiagram{1,4}*[*(red)]{0,3+1} \ \ \ R_{2,3} \left(
-        \ydiagram{1,1,1}*[*(red)]{1} \right) =
-      \ydiagram{2,1}*[*(red)]{1+1}
+        \ydiagram{2,2,2}*[*(red)]{1+1} \right) =
+      \ydiagram{1,2,2}*[*(red)]{0,2+1}
     \]\pause
   \item Extend action to a symmetric function \(f_\lambda\) by
     \(R_{i,j}(f_\lambda) = f_{\lambda+\epsilon_i-\epsilon_j}\). \pause
@@ -492,14 +557,14 @@ LACIM at UQAM\\ % Your institution for the title page
   \textcolor{red}{some terms cancel}
 \end{frame}
 \begin{frame}{Raising Operators on Symmetric Functions}
-  Gives definition for Schur function indexed by any
+  Upside: gives definition for Schur function indexed by any
   integer vector \(\alpha \in \Z^\ell\). \pause Straightening: \[
 s_\alpha = \prod_{i<j} (1-R_{ij}) h_\alpha = 
 \begin{cases} \pm\, s_\lambda & \text{for a partition $\lambda$} \\0\end{cases}
 \]
-\pause For \(\langle s_{1^r}^\perp s_\lambda, s_\mu \rangle = \langle
+\pause Simplifies formulas. E.g., for \(\langle s_{1^r}^\perp s_\lambda, s_\mu \rangle = \langle
 s_\lambda, s_{1^r} s_\mu \rangle\), 
-  \[s_{1^r}^\perp s_\lambda = \sum_{S \subset [1,\ell], |S|=r}
+  \[s_{1^r}^\perp s_\lambda =\pause \sum_{S \subset [1,\ell], |S|=r}
     s_{\lambda - \epsilon_S}\]
   \[
     s_{1^2}^\perp s_{333} = s_{322} + s_{232} + s_{223}
@@ -554,6 +619,17 @@ s_\lambda, s_{1^r} s_\mu \rangle\),
             s_\gamma\)\pause
           \item \(\Psi =\) all roots \(\implies H(\Psi;\gamma) = h_\gamma\)
           \end{itemize}
+        \end{frame}
+        \begin{frame}
+          \frametitle{Catalan functions}
+          \begin{block}{Intuition}
+            Catalan functions interpolate between \(h_\lambda\)
+            and \(s_\lambda\).
+          \end{block}\pause
+          \begin{block}{Theorem~\cite{nsym-catalans}}
+            For \(\Psi\) any root ideal and \(\lambda\) a
+            partition, \(H(\Psi;\lambda)\) is Schur positive!
+          \end{block}
         \end{frame}
         \begin{frame}{Catalan functions}
           \begin{block}{\(k\)-Schur root ideal for \(\lambda\)}
@@ -834,6 +910,7 @@ Branching is a special case of Pieri:
       & g_{43}
       + g_{421}
       + g_{331}
+      + g_{3211}
       - g_{42}
       - g_{33}
       -2 g_{321}
@@ -841,12 +918,14 @@ Branching is a special case of Pieri:
       & \ydiagram{2,3}*[*(red)]{2+1,3+1}\quad
       \ydiagram{0,2,3}*[*(red)]{1,0,3+1}\quad
       \ydiagram{0,2,3}*[*(red)]{1,2+1}\quad
+      \ydiagram{1,1,2,3}*[*(red)]{1,1}\quad\quad
       \ydiagram{2,3}*[*(red)]{0,3+1}*[*(lightgray)]{1+1}\quad
       \ydiagram{2,3}*[*(red)]{2+1}*[*(lightgray)]{0,2+1}\quad
       \ydiagram{0,2,3}*[*(red)]{1}*[*(lightgray)]{0,1+1}\,
       \ydiagram{0,2,3}*[*(red)]{1}*[*(lightgray)]{0,0,2+1}\quad
       \ydiagram{2,3}*[*(lightgray)]{1+1,2+1}
-    \end{align*}\pause
+    \end{align*}
+      Add (addable) or mark (removable) in any combination of \(r\) boxes, but only once per row.\pause
     \item \(g_\lambda = \prod_{i < j} (1-R_{ij}) k_\lambda\) for
       \(k_\lambda\) and inhomogeneous analogue of \(h_\lambda\).\pause
     \item Dual to Grothendieck polynomials \(G_\lambda\): Schubert representatives
@@ -957,6 +1036,14 @@ Branching is a special case of Pieri:
       No direct formula for \(g_\lambda^{(k)}\)
     \end{block}
   \end{itemize}
+\end{frame}
+\begin{frame}
+  \frametitle{\(K\)-\(k\)-Schur functions}
+  \begin{block}{Solution}
+    Find a formula for \(g^{(k)}_\lambda\) analogous to raising
+    operator formula for \(s^{(k)}_\lambda\). \pause
+  \end{block}
+  Requires an inhomogeneous refinement of Catalan functions.
 \end{frame}
 \begin{frame}{An Extra Ingredient: Lowering Operators}
    Lowering Operators 
@@ -1108,6 +1195,7 @@ Branching is a special case of Pieri:
 % \end{frame}
 \begin{frame}
   \frametitle{Pieri Rule Illustrated}
+  A ``graphical calculus.''
   \begin{eqnarray*}
     g_1 g_{211}^{(2)} \pause
         & =\footnotesize
@@ -1164,7 +1252,7 @@ Branching is a special case of Pieri:
   {} & {} & {} & {} & 0 & *(lightblue){} \\ 
   {} & {} & {} & {} & {} & 1 
 \end{ytableau}                               
-    \pause\\
+    \\
   \end{eqnarray*}
 \end{frame}
 \begin{frame}
@@ -1361,6 +1449,58 @@ Branching is a special case of Pieri:
     \[\tilde{g}_w = K(\Delta^k(\lambda);\Delta^k(\lambda);\lambda)\]
   \end{block}
 \end{frame}
+\begin{frame}
+  \frametitle{Closed \(K\)-\(k\)-Schur functions}
+  \begin{block}{Definition (Blasiak-Morse-S., 2020)}
+    For any partition \(\lambda\) with \(\lambda_1 \leq k\), we set \[
+      \tilde{g}^{(k)}_\lambda = K(\Delta^k(\lambda);\Delta^k(\lambda);\lambda)
+    \]
+  \end{block}\pause
+  \begin{block}{Conjecture (Blasiak-Morse-S., 2020)}
+    These \(\tilde{g}^{(k)}_\mu\) satisfy the following properties. \pause
+    \begin{itemize}
+    \item The coefficients in \(G_{1^m}^\perp \tilde{g}_\mu^{(k)}
+      = \sum_\nu c_{\mu \nu} \tilde{g}_\nu^{(k)}\) satisfy
+      \((-1)^{|\mu|-|\nu|}a_{\mu \nu} \in \Z_{\geq 0}\).\pause
+    \item The coefficients in \(\tilde{g}_\mu^{(k)} = \sum_\nu a_{\mu
+        \nu} \tilde{g}_\nu^{(k+1)}\) satisfy \((-1)^{|\mu|-|\nu|}
+      a_{\mu \nu} \in \Z_{\geq 0}\).\pause
+    \item The coefficients in \(\tilde{g}_\mu^{(k)} = \sum_\nu b_{\mu
+        \nu} g_\nu^{(k)}\) satisfy \((-1)^{|\mu|-|\nu|} b_{\mu\nu} \in
+      \Z_{\geq 0}\).
+    \end{itemize}
+  \end{block}
+\end{frame}
+\begin{frame}
+  \frametitle{\(k\)-Rectangle Property}
+  \begin{theorem}[S. (thesis), 2021]
+    For \(1 \leq d \leq k\), set \(R_d = ((k+1-d)^d)\) to be the
+    \(k\)-rectangle partition. \pause Then,
+    \[
+      \tilde{g}_{R_d}^{(k)} \tilde{g}_\mu^{(k)} = \tilde{g}_{\mu
+        \union R_d}^{(k)} \,,
+    \] 
+    where \(\mu \union R_d\) is the partition given by sorting \((\mu,R_d)\).\pause
+  \end{theorem}
+  \begin{itemize}
+  \item Corresponding result for \(s_\lambda^{(k)}\) is known, but
+    this gives a Catalan/Katala-theoretic proof.\pause
+  \item \(k\)-Rectangle Property fails for \(g_\lambda^{(k)}\).
+  \end{itemize}
+\end{frame}
+\begin{frame}
+  \frametitle{Positivity of Katalan functions}
+  \begin{block}{Conjecture (Blasiak-Morse-S., 2020)}
+    For \(\Psi\) a root ideal and \(\lambda\) a partition,\pause
+    \begin{itemize}
+    \item \(K(\Psi;\Psi;\lambda) = \sum_\mu a_{\mu}
+      g_\mu\) satisfies \((-1)^{|\lambda|-|\mu|} a_{\mu} \in
+      \Z_{\geq 0}\).\pause
+    \item \(K(\Psi;RC^a(\Psi);\lambda) = \sum_\mu b_{\mu} s_\mu\)
+      satisfies \(b_{\mu} \in \Z_{\geq 0}\).
+    \end{itemize}
+  \end{block}
+\end{frame}
 \begin{frame}{Future Directions}
     For \(G_\lambda^{(k)}\) an affine Grothendieck polynomial (dual to \(g_\lambda^{(k)}\)),\pause
     \begin{enumerate}
@@ -1399,6 +1539,15 @@ Branching is a special case of Pieri:
       number={4}
       pages={921--963}
     }
+    \bib{nsym-catalans}{article}{
+      author={Blasiak, Jonah}
+      author={Morse, Jennifer}
+      author={Pun, Anna}
+      title={Demazure crystals and the Schur positivity of Catalan functions}
+      status={preprint}
+      year={2020}
+      note={arXiv: 2007.04952}
+    }
     \bib{katalans}{article}{
       author={Blasiak, Jonah}
       author={Morse, Jennifer}
@@ -1416,6 +1565,22 @@ Branching is a special case of Pieri:
       year={2010}
       ios={U.C. Berkeley}
     }
+
+
+\bib{FGP}{article}{
+   author={Fomin, Sergey},
+   author={Gelfand, Sergei},
+   author={Postnikov, Alexander},
+   title={Quantum Schubert polynomials},
+   journal={J. Amer. Math. Soc.},
+   volume={10},
+   date={1997},
+   number={3},
+   pages={565--596},
+   issn={0894-0347},
+   review={\MR{1431829}},
+   doi={10.1090/S0894-0347-97-00237-3},
+}
     \bib{IIM}{article}{
       author={Ikeda, Takeshi}
       author={Iwao, Shinsuke}
