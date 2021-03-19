@@ -22,6 +22,7 @@ epstopdf
 epstopdf-pkg
 etexcmds
 etoolbox
+everysel
 float
 fmtcount
 fp
