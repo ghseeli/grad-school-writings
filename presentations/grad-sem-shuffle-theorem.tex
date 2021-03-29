@@ -161,6 +161,8 @@ UVA Graduate Seminar % Your institution for the title page
 \begin{frame}{Multivariate Polynomials}
   \begin{itemize}
   \item \(f \in \Q[x_1,\ldots,x_n]\) multivariate polynomial \pause
+  \item \(\sigma \in S_n\) acts as \(\sigma.f(x_1,x_2,\ldots,x_n) =
+    f(x_{\sigma(1)}, x_{\sigma(2)},\ldots,x_{\sigma(n)})\)
     \[
       \left(
         \begin{matrix}
@@ -168,9 +170,7 @@ UVA Graduate Seminar % Your institution for the title page
           3 & 2 & 1
         \end{matrix}
       \right) (5x_1^2+5x_2^2+8x_3^2) = 8x_1^2+5x_2^2+5x_3^2
-    \]\pause
-  \item \(\sigma \in S_n\) acts as \(\sigma.f(x_1,x_2,\ldots,x_n) =
-    f(x_{\sigma(1)}, x_{\sigma(2)},\ldots,x_{\sigma(n)})\)
+    \]
   \end{itemize}
 \end{frame}
 \begin{frame}{Symmetric Polynomials}
@@ -253,7 +253,7 @@ UVA Graduate Seminar % Your institution for the title page
   \]\pause
   \begin{definition}
     For \(\lambda\) a partition \[
-      s_\lambda = \sum_{T \in \SSYT} x^T \text{ for }x^T = \prod_{i
+      s_\lambda = \sum_{T \in \SSYT(\lambda)} x^T \text{ for }x^T = \prod_{i
         \in T} x_i
     \]
   \end{definition}
@@ -351,7 +351,7 @@ UVA Graduate Seminar % Your institution for the title page
   \begin{itemize}
   \item \(\Q[x_1,\ldots,x_n,y_1,\ldots,y_n]\) satisfying
     \(\sigma(x_i) = x_{\sigma(i)}\), \(\sigma(y_j) = y_{\sigma(j)}\).\pause
-  \item Garsia-Haiman: \(M_\mu = \) span of partial derivatives of
+  \item Garsia-Haiman (1993): \(M_\mu = \) span of partial derivatives of
     \(\Delta_\mu\) \pause \[
       \Delta_{\ydiagram{2,1}} = \det \left|
         \begin{matrix}
@@ -659,8 +659,7 @@ Balanced hook is given by a cell below \(\lambda\) satisfying \[
     Frobenius characteristic \(\nabla e_n\).
   \end{block}\pause
   \begin{block}{Combinatorics: Shuffle Theorem (Carlsson-Mellit, 2018)}
-    \(\nabla e_n = \sum_{\lambda \in \DP_n} t^{\area(\lambda)} \sum_{P
-    \in \PF(\lambda)} q^{\dinv(P)} x^P\).
+    \(\nabla e_n = \sum_{\lambda \in \DP_n} t^{\area(\lambda)} q^{\dinv(\lambda)} \omega\Gcal_{\nu(\lambda)}(x;q)\).
   \end{block}
 \end{frame}
 \begin{frame}
@@ -676,7 +675,7 @@ Balanced hook is given by a cell below \(\lambda\) satisfying \[
   \frametitle{Schiffmann's Elliptic Hall Algebra \(\Ecal\)}
   \begin{itemize}
   \item For every coprime \(m,n \in \Z\), subalgebra \(\sym(X^{m,n})
-    \isom \sym\), with relations between them.\pause
+    \isom \sym\), with relations between them. (Burban-Schiffmann, 2012)\pause
   \item \(\Ecal\) acts on \(\sym\), e.g. \[
       e_k[-MX^{m,1}] \cdot 1 = \nabla^m e_k
     \]\pause
@@ -738,13 +737,13 @@ Balanced hook is given by a cell below \(\lambda\) satisfying \[
   \frametitle{Schiffmann to Shuffle}
   \begin{itemize}
   \item Shuffle algebra \(S\) given by the image of Laurent
-    polynomials \(\phi \in \kk[x_1^{\pm 1},\ldots, x_l^{\pm l}]\) via
+    polynomials \(\phi \in \kk[x_1^{\pm 1},\ldots, x_l^{\pm 1}]\) via
     map \pause\[
       H_{q,t}\from \phi \mapsto \sum_{w \in S_l} w \left( \frac{\phi \prod_{i<j}
           (1-qt x_i/x_j)}{\prod_{i<j}((1-x_j/x_i)(1-q x_i/x_j)(1-t x_i/x_j))} \right)
     \]\pause
   \item There exists isomorphism \(\psi \from S \to \Ecal^+\).\pause
-  \item \[
+  \item (Negut, 2014) gives well-defined \[
     D_{b_1,\ldots,b_l} = \psi \left(H_{q,t}\left(\frac{x_1^{b_1}\cdots
         x_l^{b_l}}{\prod_{i=1}^{l-1} (1-qt x_i/x_{i+1})}  \right)\right)
   \]\pause
@@ -842,7 +841,7 @@ t^{|\aA|} \Lcal^\sigma_{((b_l,\ldots,b_1)+(0,a_{l-1},\ldots,a_1))/(a_{l-1},\ldot
   \]
   for any \(f \in \sym\) and \(B_\mu = \sum_{(i,j) \in \mu} q^{i-1} t^{j-1}\). (Note
   \(\Delta_{e_{n-1}}' e_n = \nabla e_n\)). \pause
-  \begin{block}{Extended Delta Conjecture}
+  \begin{block}{Extended Delta Conjecture (Haglund-Remmel-Wilson, 2018)}
     \begin{align*}
       & \Delta_{h_l} \Delta_{e_{k-1}}' e_n =
       \\ & \langle z^{n-k}\rangle
@@ -971,10 +970,144 @@ t^{-r_i(\lambda)}\right) \,,
   \item Loehr-Warrington conjecture for \(\nabla s_\lambda\).
   \end{enumerate}
 \end{frame}
-\begin{frame}
+\begin{frame}[shrink=10]
   \frametitle{References}
   Thank you!
-  
+  \begin{bibdiv}
+    \begin{biblist}
+\bib{MR3556418}{article}{
+   author={Bergeron, Francois},
+   author={Garsia, Adriano},
+   author={Sergel Leven, Emily},
+   author={Xin, Guoce},
+   title={Compositional $(km,kn)$-shuffle conjectures},
+   journal={Int. Math. Res. Not. IMRN},
+   date={2016},
+   number={14},
+   pages={4229--4270},
+   issn={1073-7928},
+   review={\MR{3556418}},
+   doi={10.1093/imrn/rnv272},
+}
+\bib{paths}{article}{
+  author={Blasiak, Jonah},
+  author={Haiman, Mark},
+  author={Morse, Jennifer},
+  author={Pun, Anna},
+  author={Seelinger, George H},
+  title={A Shuffle Theorem for Paths Under Any Line},
+  year={2021},
+  journal = {arXiv e-prints},
+  eprint={arXiv:2102.07931}
+}
+\bib{paths}{article}{
+  author={Blasiak, Jonah},
+  author={Haiman, Mark},
+  author={Morse, Jennifer},
+  author={Pun, Anna},
+  author={Seelinger, George H.},
+  title={A proof of the Extended Delta Conjecture},
+  year={2021},
+  journal = {arXiv e-prints},
+  eprint={arXiv:2102.08815}
+}
+\bib{MR2922373}{article}{
+   author={Burban, Igor},
+   author={Schiffmann, Olivier},
+   title={On the Hall algebra of an elliptic curve, I},
+   journal={Duke Math. J.},
+   volume={161},
+   date={2012},
+   number={7},
+   pages={1171--1231},
+   issn={0012-7094},
+   review={\MR{2922373}},
+   doi={10.1215/00127094-1593263},
+}
+\bib{MR3787405}{article}{
+   author={Carlsson, Erik},
+   author={Mellit, Anton},
+   title={A proof of the shuffle conjecture},
+   journal={J. Amer. Math. Soc.},
+   volume={31},
+   date={2018},
+   number={3},
+   pages={661--697},
+   issn={0894-0347},
+   review={\MR{3787405}},
+   doi={10.1090/jams/893},
+}
+\bib{MR1214091}{article}{
+   author={Garsia, Adriano M.},
+   author={Haiman, Mark},
+   title={A graded representation model for Macdonald's polynomials},
+   journal={Proc. Nat. Acad. Sci. U.S.A.},
+   volume={90},
+   date={1993},
+   number={8},
+   pages={3607--3610},
+   issn={0027-8424},
+   review={\MR{1214091}},
+   doi={10.1073/pnas.90.8.3607},
+}
+\bib{MR2115257}{article}{
+    AUTHOR = {Haglund, J. and Haiman, M. and Loehr, N. and Remmel, J. B. and
+              Ulyanov, A.},
+     TITLE = {A combinatorial formula for the character of the diagonal
+              coinvariants},
+   JOURNAL = {Duke Math. J.},
+  FJOURNAL = {Duke Mathematical Journal},
+    VOLUME = {126},
+      YEAR = {2005},
+    NUMBER = {2},
+     PAGES = {195--232},
+      ISSN = {0012-7094},
+   MRCLASS = {05E10 (05A30 20C30)},
+  MRNUMBER = {2115257},
+MRREVIEWER = {Edward E. Allen},
+       DOI = {10.1215/S0012-7094-04-12621-1},
+       URL = {https://doi-org.proxy01.its.virginia.edu/10.1215/S0012-7094-04-12621-1},
+}
+\bib{MR3811519}{article}{
+   author={Haglund, J.},
+   author={Remmel, J. B.},
+   author={Wilson, A. T.},
+   title={The delta conjecture},
+   journal={Trans. Amer. Math. Soc.},
+   volume={370},
+   date={2018},
+   number={6},
+   pages={4029--4057},
+   issn={0002-9947},
+   review={\MR{3811519}},
+   doi={10.1090/tran/7096},
+}
+\bib{mellit}{article}{
+       author = {{Mellit}, Anton},
+        title = {Toric braids and $(m,n)$-parking functions},
+      journal = {arXiv e-prints},
+     keywords = {Mathematics - Combinatorics, Mathematics - Quantum Algebra, Mathematics - Representation Theory},
+         year = {2016},
+        month = {apr},
+          eid = {arXiv:1604.07456},
+        pages = {arXiv:1604.07456},
+archivePrefix = {arXiv},
+       eprint = {arXiv:1604.07456},
+ primaryClass = {math.CO},
+}
+\bib{MR3283004}{article}{
+   author={Negut, Andrei},
+   title={The shuffle algebra revisited},
+   journal={Int. Math. Res. Not. IMRN},
+   date={2014},
+   number={22},
+   pages={6242--6275},
+   issn={1073-7928},
+   review={\MR{3283004}},
+   doi={10.1093/imrn/rnt156},
+}
+    \end{biblist}
+  \end{bibdiv}
 \end{frame}
 % \begin{frame}
 %   \begin{itemize}
