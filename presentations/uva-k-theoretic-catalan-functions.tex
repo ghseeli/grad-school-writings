@@ -563,7 +563,8 @@ s_\alpha = \prod_{i<j} (1-R_{ij}) h_\alpha =
 \begin{cases} \pm\, s_\lambda & \text{for a partition $\lambda$} \\0\end{cases}
 \]
 \pause Simplifies formulas. E.g., for \(\langle s_{1^r}^\perp s_\lambda, s_\mu \rangle = \langle
-s_\lambda, s_{1^r} s_\mu \rangle\), 
+s_\lambda, s_{1^r} s_\mu \rangle\) (note \(\langle s_\lambda,s_\mu
+\rangle = \delta_{\lambda\mu}\)), 
   \[s_{1^r}^\perp s_\lambda =\pause \sum_{S \subset [1,\ell], |S|=r}
     s_{\lambda - \epsilon_S}\]
   \[
@@ -1490,6 +1491,10 @@ Branching is a special case of Pieri:
 \end{frame}
 \begin{frame}
   \frametitle{Positivity of Katalan functions}
+  \begin{block}{Recall~\cite{nsym-catalans}}
+    For \(\Psi\) any root ideal and \(\lambda\) a
+    partition, \(H(\Psi;\lambda)\) is Schur positive.
+  \end{block}
   \begin{block}{Conjecture (Blasiak-Morse-S., 2020)}
     For \(\Psi\) a root ideal and \(\lambda\) a partition,\pause
     \begin{itemize}
@@ -1653,6 +1658,18 @@ Branching is a special case of Pieri:
     }
   \end{biblist}
 \end{bibdiv}
+\end{frame}
+\begin{frame}[noframenumbering]
+  \frametitle{Details}
+  \[
+    k_m^{(r)} = \sum_{i=0}^m \binom{r+i-1}{i} h_{m-i} = s_m(X+r)\,,
+  \]
+  a specialization of ``multiSchur functions.'' See, e.g.,
+  Lascoux-Naruse (2014).
+  \[
+    k_\gamma = k_{\gamma_1}^{(0)}
+  k_{\gamma_2}^{(1)} \cdots k_{\gamma_\ell}^{(\ell-1)}
+  \]
 \end{frame}
 \end{document}
 %%% Local Variables:
