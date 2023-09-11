@@ -109,7 +109,6 @@
 \DeclareMathSymbol{\shortminus}{\mathbin}{AMSa}{"39}
 \newcommand{\Gcal}{{\mathcal G}}
 \newcommand{\nubold}{{\boldsymbol \nu }}
-\newcommand{\bbb}{{s}}
 \renewcommand{\Span}{\operatorname{sp}}
 
 \DeclareMathOperator{\conv}{conv}
@@ -137,6 +136,8 @@
 \newcommand{\Ecal}{\mathcal{E}}
 \newcommand{\kk}{\Bbbk}
 \newcommand{\Scal}{\mathcal{S}}
+\newcommand{\tGamma}{{\check{\Gamma}}} %for Laurent reps
+\newcommand{\bbb}{{s}}
 
 \newtheorem{thm}{Theorem}
 \newtheorem{prop}{Proposition}
@@ -220,13 +221,21 @@ ghseeli@umich.edu\\ %Your email address
 \medskip
 Purdue Mathematical Physics Seminar\\ % Your institution for the title page
 \medskip
-Based on arXiv:2307.06517
+Based on arXiv:2112.07063 and arXiv:2307.06517
 }
 \date{September 13, 2023} % Date, can be changed to a custom date
 
 \begin{document}
 \begin{frame}
 \titlepage % Print the title page as the first slide
+\end{frame}
+\begin{frame}
+  \frametitle{Outline}
+  \begin{enumerate}
+  \item {\bf Background on symmetric functions and Macdonald polynomials}
+  \item A new formula for Macdonald polynomials
+  \item LLT polynomials in the elliptic Hall algebra
+  \end{enumerate}
 \end{frame}
 \begin{frame}
   \frametitle{Symmetric Polynomials}
@@ -434,6 +443,14 @@ Based on arXiv:2307.06517
   \item No combinatorial description of \(\tilde{K}_{\lambda \mu}(q,t)\).
   \end{itemize}
   \end{frame}
+\begin{frame}
+  \frametitle{Outline}
+  \begin{enumerate}
+  \item Background on symmetric functions and Macdonald polynomials
+  \item {\bf A new formula for Macdonald polynomials}
+  \item LLT polynomials in the elliptic Hall algebra
+  \end{enumerate}
+\end{frame}
 \begin{frame}{Root ideals}
     $R_+ =  \big\{\alpha_{ij} \mid 1 \le i < j \le n\big\}$ denotes the set of positive roots for $GL _{n}$, where  $\alpha_{ij} = \epsilon_i - \epsilon_j$.
             \ytableausetup{mathmode, boxsize=1em, centertableaux}
@@ -1793,6 +1810,14 @@ for some $c_\nubold \in \pm q^\Z t^{\Z}$.
            \Bigg).
 \end{align*}}
 \end{frame}
+\begin{frame}
+  \frametitle{Outline}
+  \begin{enumerate}
+  \item Background on symmetric functions and Macdonald polynomials
+  \item A new formula for Macdonald polynomials
+  \item {\bf LLT polynomials in the elliptic Hall algebra}
+  \end{enumerate}
+\end{frame}
 \begin{frame}{Elliptic Hall Algebra}
   Burban and Schiffmann studied a subalgebra  $\mathcal{E}$
 of the Hall algebra of coherent sheaves on an elliptic curve over
@@ -1842,40 +1867,234 @@ $\psi \colon \Scal_\Gamma \rightarrow \Ecal ^{+}$.
 %by $\psi (z_1^{a}) = p_{1}[-MX^{1,a}]$ for  $a \in \ZZ$.
 \end{theorem}
 \end{frame}
-\begin{frame}{Catalanimals in the shuffle algebra}
-  For  $\lambda \in \Z^n$,
-\vspace{-3mm}
-%"decode Gamma, and you get back Catalanimals"
+
+
+
+% \begin{frame}{Catalanimals in the shuffle algebra}
+%   For  $\lambda \in \Z^n$,
+% \vspace{-3mm}
+% %"decode Gamma, and you get back Catalanimals"
+% \begin{align*}
+% \sigma_\Gamma^n(\zz^\lambda) &=
+% \sum_{w \in S_n} w\bigg(\frac{\zz ^\lambda \prod_{\alpha \in R_+}
+% \big(1-q t \zz ^\alpha \big)}
+% {\prod_{\alpha \in R_+}\big(\big(1-\zz ^{-\alpha}\big) \big(1-q  \zz ^\alpha\big)
+%  \big(1-t \zz ^\alpha\big)\big)}
+% \bigg)
+%  \\
+% &= H(R_+,R_+,R_+,\lambda)  \in \Scal_\Gamma.
+% \end{align*}
+% Technicality: we have redefined \(\sigmabold(\zz^\gamma) = \sum_{w \in
+% S_n}\left( \frac{\zz^\gamma}{\prod_{\alpha\in R_+}(1-\zz^{-\alpha})}
+% \right) = \chi_\gamma\),
+% the irreducible \(\GL_n\) character. 
+% \end{frame}
+% \begin{frame}{Catalanimals in the Shuffle algebra}
+%  $\sigma_\Gamma^n(f)$ can lie in  $\Scal_\Gamma$ even when  $f$ is not a Laurent polynomial.
+% \begin{theorem}[Negut]
+% The following family of Catalanimals lie in the shuffle algebra:
+% \vspace{-3mm}
+% \begin{align*}
+% & \sigma_\Gamma^n\Big(\frac{\zz^\lambda}{\prod_{i=1}^{n-1} (1-qt z_i/z_{i+1}) }\Big)
+% = H(R_+,R_+,R_+',\lambda) \in \Scal_\Gamma,
+% \end{align*}
+% where  \ \, $R_+' = \{ \alpha_{ij} \in R_+ \mid i+1 < j \}.$
+% \end{theorem}
+% \end{frame}
+% \begin{frame}{The wheel condition}
+%   \begin{itemize}
+%   \item A symmetric Laurent polynomial \(g(\zz)\) satisfies the
+%     \emph{wheel condition} if it vanishes whenever any three of the
+%     variables \(z_i,z_j,z_k\) are in the ratio
+%     \((z_i:z_j:z_k) = (1:q:qt) =
+%     (1:t:qt)\).
+%     \item Let \(\Scal_{\tGamma} \isom \Scal_\Gamma\) for
+%     \(\tGamma(z_i,z_j) = (1-z_i/z_j)(1-q z_j/z_i)(1-t z_j/z_i)(1 - qt
+%     z_i/z_j)\).
+%   \end{itemize}
+% \begin{theorem}[Negut]
+% A symmetric Laurent polynomial $g(z_{1},\ldots,z_{n})$ belongs to
+% $\Scal _{\tGamma }$ if and only if it satisfies the wheel
+% condition and vanishes whenever $z_{i} = z_{j}$ for $i\not =j$.
+% \end{theorem}
+% \end{frame}
+\begin{frame}{Elliptic Hall algebra action}
+  Schiffmann-Vasserot and Feigin-Tsymbauliuk constructed an action of $\Ecal$ on  $\Lambda$,
+where $f(X^{0,1})$ acts by multiplication by $f(X)$.
+\begin{prop}
+  Conjugation by  $\nabla $ provides a symmetry of the
+action of $\Ecal $ on $\Lambda$,
 \begin{align*}
-\sigma_\Gamma^n(\zz^\lambda) &=
-\sum_{w \in S_n} w\bigg(\frac{\zz ^\lambda \prod_{\alpha \in R_+}
-\big(1-q t \zz ^\alpha \big)}
-{\prod_{\alpha \in R_+}\big(\big(1-\zz ^{-\alpha}\big) \big(1-q  \zz ^\alpha\big)
- \big(1-t \zz ^\alpha\big)\big)}
-\bigg)
- \\
-&= H(R_+,R_+,R_+,\lambda)  \in \Scal_\Gamma.
+\\[-8mm]
+\nabla\, f(X^{a,b})\, \nabla^{-1} = f(X^{a+b,b}).
 \end{align*}
-Technicality: we have redefined \(\sigmabold(\zz^\gamma) = \sum_{w \in
-S_n}\left( \frac{\zz^\gamma}{\prod_{\alpha\in R_+}(1-\zz^{-\alpha})}
-\right) = \chi_\gamma\),
-the irreducible \(\GL_n\) character.
-\end{frame}
-\begin{frame}{Catalanimals in the Shuffle algebra}
- $\sigma_\Gamma^n(f)$ can lie in  $\Scal_\Gamma$ even when  $f$ is not a Laurent polynomial.
-\begin{theorem}[Negut]
-The following family of Catalanimals lie in the shuffle algebra:
-\vspace{-3mm}
+\end{prop}
+\begin{corollary}
+  $f(X^{1,1})\cdot 1 = \nabla f(X^{0,1}) \nabla^{-1} \cdot 1 = \nabla f$.
+\end{corollary}
+\begin{theorem}[Blasiak-Haiman-Morse-Pun-S.]
+Let $H$ be a Catalanimal such that  $\psi (H) = f(X^{1,1})$.
+Then
 \begin{align*}
-& \sigma_\Gamma^n\Big(\frac{\zz^\lambda}{\prod_{i=1}^{n-1} (1-qt z_i/z_{i+1}) }\Big)
-= H(R_+,R_+,R_+',\lambda) \in \Scal_\Gamma,
+\nabla f = \omega \pol_X (H).
 \end{align*}
-where  \ \, $R_+' = \{ \alpha_{ij} \in R_+ \mid i+1 < j \}.$
+where \(\pol_X\) sends \(\chi_\lambda \mapsto s_\lambda\) if
+the last part of \(\lambda \geq 0\), otherwise \(\chi_\lambda \mapsto 0\).
 \end{theorem}
 \end{frame}
-\begin{frame}{}
-  
+\begin{frame}
+  \frametitle{Proof of \(\nabla \Gcal_\nubold\) formula}
+  \begin{enumerate}
+  \item LLT Catalanimals are tame.
+  \item LLT Catalanimals lie in \(\psi^{-1}(\Lambda(X^{1,1}))\).
+  \item Describe coproduct \(\Delta\) on \(\Ecal\) explicitly on tame
+    Catalanimals and show \(\Delta H_\nubold\) matches \(\Delta
+    \Gcal_\nubold\).
+  \item Conclude \(\psi(H_\nubold) = c_\nubold^{-1}
+    \Gcal_\nubold(X^{1,1}) \in \Ecal\).
+  \item Apply previous theorem to conclude \(\nabla \Gcal_\nubold =
+    c_\nubold \omega \pol_X(H_\nubold)\)
+  \end{enumerate}
 \end{frame}
+\begin{frame}{A positivity conjecture}
+  \begin{center}
+What can this formula tell us that other formulas for Macdonald polynomials do not?
+\end{center}
+\pause
+%say:raising op for HL so useful, redo theory of Mac's using this
+%but that's not new, so here are some new things we can do with this
+
+
+\vspace{-3mm}
+\vspace{-1mm}
+{\small \begin{align*}
+  \Htild^{(s)}_{\mu} := \omega \sigmabold  \left( (z_1\cdots z_n)^s \,
+\frac{
+ \displaystyle\prod_{\alpha_{ij} \in R_\mu \setminus \widehat{R}_\mu }
+ \raisebox{-1.4mm}{$\big(1- q^{\arm(b_i)+1} t^{-\leg(b_i)} z_i/z_j \big)$}
+\displaystyle\prod_{\alpha \in \widehat{R}_{\mu}}
+ \raisebox{-1.4mm}{$\big(1-q  t \zz^\alpha \big)$} } {\prod_{\alpha \in R_+} \big(1-q  \zz^\alpha\big)
+\prod_{\alpha \in R_\mu} \big(1-t  \zz^\alpha\big)}\right)
+\end{align*}}
+
+
+\vspace{-1.4mm}
+\begin{conjecture}[Blasiak-Haiman-Morse-Pun-S.]
+For any partition  $\mu$ and positive integer $s$, the symmetric function
+ $\Htild^{(s)}_{\mu}$ is Schur positive.
+That is, the coefficients in
+\vspace{-1mm}
+\begin{align*}
+\Htild^{(s)}_{\mu}
+= \sum_{\nu } K^{(s)} _{\nu , \mu}(q,t)\, s_\nu(X)  \\[-10mm]
+\end{align*}
+satisfy $K^{(\bbb)}_{\nu , \mu}(q,t)\in \N[q,t]$.
+%with non-negative integer coefficients.
+\end{conjecture}
+\end{frame}
+\begin{frame}{Thank you!}
+  \begin{bibdiv}
+  \begin{biblist}
+
+  \bib{blasiakLLT21}{article}{
+  title = {{{LLT}} Polynomials in the {{Schiffmann}} Algebra},
+  author = {Blasiak, Jonah},
+  author = {Haiman, Mark},
+  author = {Morse, Jennifer},
+  author = {Pun, Anna},
+  author = {Seelinger, George H.},
+  year = {2021},
+  month = {dec},
+  journal = {arXiv e-prints},
+  primaryclass = {math.CO},
+  pages = {arXiv:2112.07063},
+  adsnote = {Provided by the SAO/NASA Astrophysics Data System},
+  adsurl = {https://ui.adsabs.harvard.edu/abs/2021arXiv211207063B},
+  archiveprefix = {arxiv},
+  eid = {arXiv:2112.07063},
+}
+\bib{BlasiakRaising23}{article}{
+  title = {A Raising Operator Formula for {{Macdonald}} Polynomials},
+  author = {Blasiak, Jonah},
+  author = {Haiman, Mark},
+  author = {Morse, Jennifer},
+  author = {Pun, Anna},
+  author = {Seelinger, George H.},
+  year = {2023},
+  month = {jul},
+  pages = {arXiv:2307.06517},
+  journal = {arXiv e-prints},
+  primaryclass = {math},
+  publisher = {{arXiv}},
+}
+    \bib{haglundCombinatorial05}{article}{
+  title = {A Combinatorial Formula for {{Macdonald}} Polynomials},
+  author = {Haglund, J.}
+  author = {Haiman, M.}
+  author = {Loehr, N.},
+  year = {2005},
+  volume = {18},
+  number = {3},
+  pages = {735--761 (electronic)},
+  issn = {0894-0347},
+}
+\bib{MR1839919}{article}{
+   author={Haiman, Mark},
+   title={Hilbert schemes, polygraphs and the Macdonald positivity
+   conjecture},
+   journal={J. Amer. Math. Soc.},
+   volume={14},
+   date={2001},
+   number={4},
+   pages={941--1006},
+   issn={0894-0347},
+   review={\MR{1839919}},
+   doi={10.1090/S0894-0347-01-00373-3},
+}
+\bib{MR1399754}{article}{
+   author={Lascoux, Alain},
+   author={Leclerc, Bernard},
+   author={Thibon, Jean-Yves},
+   title={Ribbon tableaux, Hall-Littlewood functions and unipotent
+   varieties},
+   journal={S\'{e}m. Lothar. Combin.},
+   volume={34},
+   date={1995},
+   pages={Art. B34g, approx. 23},
+   review={\MR{1399754}},
+}
+    \bib{shimozonoGraded00}{article}{
+  title = {Graded {{Characters}} of {{Modules Supported}} in the {{Closure}} of a {{Nilpotent Conjugacy Class}}},
+  author = {Shimozono, Mark}
+  author = {Weyman, Jerzy},
+  year = {2000},
+  month = {feb},
+  journal = {European Journal of Combinatorics},
+  volume = {21},
+  number = {2},
+  pages = {257--288},
+  issn = {0195-6698},
+  doi = {10.1006/eujc.1999.0344},
+}
+\bib{weyman}{article}{
+  title = {The Equations of Conjugacy Classes of Nilpotent Matrices},
+  author = {Weyman, J.},
+  year = {1989},
+  month = {jun},
+  journal = {Inventiones mathematicae},
+  volume = {98},
+  number = {2},
+  pages = {229--245},
+  issn = {1432-1297},
+  doi = {10.1007/BF01388851},
+  urldate = {2023-07-14},
+  langid = {english},
+  keywords = {Conjugacy Class,Nilpotent Matrice},
+  file = {/Users/ghseeli/Dropbox (University of Michigan)/pdfs/weymanEquationsConjugacyClasses1989.pdf},
+}
+  \end{biblist}
+  \end{bibdiv}
+  \end{frame}
 \end{document}
 %%% Local Variables:
 %%% mode: latex
