@@ -1,0 +1,1883 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Beamer Presentation
+% LaTeX Template
+% Version 1.0 (10/11/12)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND THEMES
+%----------------------------------------------------------------------------------------
+
+\documentclass[dvipsnames,handout]{beamer}
+\mode<presentation> {
+
+% The Beamer class comes with a number of default slide themes
+% which change the colors and layouts of slides. Below this is a list
+% of all the themes, uncomment each in turn to see what they look like.
+
+%\usetheme{default}
+%\usetheme{AnnArbor}
+%\usetheme{Antibes}
+%\usetheme{Bergen}
+%\usetheme{Berkeley}
+%\usetheme{Berlin}
+%\usetheme{Boadilla}
+%\usetheme{CambridgeUS}
+%\usetheme{Copenhagen}
+%\usetheme{Darmstadt}
+%\usetheme{Dresden}
+%\usetheme{Frankfurt}
+%\usetheme{Goettingen}
+%\usetheme{Hannover}
+%\usetheme{Ilmenau}
+%\usetheme{JuanLesPins}
+%\usetheme{Luebeck}
+\usetheme{Madrid}
+%\usetheme{Malmoe}
+%\usetheme{Marburg}
+%\usetheme{Montpellier}
+%\usetheme{PaloAlto}
+%\usetheme{Pittsburgh}
+%\usetheme{Rochester}
+%\usetheme{Singapore}
+%\usetheme{Szeged}
+%\usetheme{Warsaw}
+
+% As well as themes, the Beamer class has a number of color themes
+% for any slide theme. Uncomment each of these in turn to see how it
+% changes the colors of your current slide theme.
+
+%\usecolortheme{albatross}
+%\usecolortheme{beaver}
+%\usecolortheme{beetle}
+%\usecolortheme{crane}
+%\usecolortheme{dolphin}
+%\usecolortheme{dove}
+%\usecolortheme{fly}
+%\usecolortheme{lily}
+%\usecolortheme{orchid}
+%\usecolortheme{rose}
+%\usecolortheme{seagull}
+%\usecolortheme{seahorse}
+%\usecolortheme{whale}
+%\usecolortheme{wolverine}
+
+%\setbeamertemplate{footline} % To remove the footer line in all slides uncomment this line
+%\setbeamertemplate{footline}[page number] % To replace the footer line in all slides with a simple slide count uncomment this line
+
+\setbeamertemplate{navigation symbols}{} % To remove the navigation symbols from the bottom of all slides uncomment this line
+\setbeamertemplate{footline}{}
+}
+
+\usepackage{graphicx} % Allows including images
+%\usepackage{booktabs} % Allows the use of \toprule, \midrule and
+                      % \bottomrule in tables
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usepackage{amsmath}
+\usepackage[author-year]{amsrefs}
+\usepackage{amsthm}
+\usepackage{../ReAdTeX/readtex-core}
+% \usepackage{../ReAdTeX/readtex-dangerous}
+% \usepackage{../ReAdTeX/readtex-abstract-algebra}
+\usepackage{ytableau}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%%  MACRO DEFINITIONS:  Co-authors -- PLEASE use these! 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\definecolor{coralred}{rgb}{1.0, 0.25, 0.25}
+% \definecolor{lightblue}{rgb}{.68,.85,.9} % 
+\definecolor{lightblue}{rgb}{.3,.65,1.0} %
+\DeclareMathOperator{\Gr}{Gr}
+\newcommand{\cupprod}{\smile}
+\newcommand{\sym}{\Lambda}
+\newcommand{\lowers}{\mathcal{L}}
+\newcommand{\mynone}{\ }
+\newcommand{\zz}{{\boldsymbol z}}
+\newcommand{\xx}{{\boldsymbol x}}
+\newcommand{\hbold}{{\boldsymbol h}}
+\newcommand{\sbold}{{\boldsymbol s}}
+\newcommand{\sigmabold}{\boldsymbol \sigma}
+\newcommand{\mubold}{{\boldsymbol \mu }}
+\newcommand{\Htild}{\tilde{H}}
+\DeclareMathSymbol{\shortminus}{\mathbin}{AMSa}{"39}
+\newcommand{\Gcal}{{\mathcal G}}
+\newcommand{\nubold}{{\boldsymbol \nu }}
+\newcommand{\bbb}{{s}}
+\renewcommand{\Span}{\operatorname{sp}}
+
+\DeclareMathOperator{\conv}{conv}
+\DeclareMathOperator{\des}{des}
+\DeclareMathOperator{\fin}{fin}
+\DeclareMathOperator{\aff}{aff}
+\DeclareMathOperator{\ext}{ext}
+\DeclareMathOperator{\dinv}{dinv}
+\DeclareMathOperator{\inv}{inv}
+\DeclareMathOperator{\pol}{pol}
+\DeclareMathOperator{\supp}{supp}
+\DeclareMathOperator{\Ind}{Ind}
+\DeclareMathOperator{\Inv}{Inv}
+\DeclareMathOperator{\GL}{GL}
+\DeclareMathOperator{\SYT}{SYT}
+\DeclareMathOperator{\SSYT}{SSYT}
+\DeclareMathOperator{\Ad}{Ad}
+\DeclareMathOperator{\Stab}{Stab}
+\newcommand{\sgn}{\text{\rm sgn}}
+\DeclareMathOperator{\sort}{sort}
+\newcommand{\south}{{\mathrm{south}}}
+\newcommand{\leg}{{\mathrm{leg}}}
+\newcommand{\arm}{{\mathrm{arm}}}
+\newcommand{\bx}[2]{{\boldsymbol {#1}[#2]}}
+\newcommand{\Ecal}{\mathcal{E}}
+\newcommand{\kk}{\Bbbk}
+\newcommand{\Scal}{\mathcal{S}}
+
+\newtheorem{thm}{Theorem}
+\newtheorem{prop}{Proposition}
+\theoremstyle{definition}
+\newtheorem{rmk}[thm]{Remark}
+\newtheorem*{rmk*}{Remark}
+\newtheorem{conjecture}[theorem]{Conjecture}
+
+\newcounter{boxnum}
+
+\newcommand{\qtrootcolor}{blue!45}
+\newcommand{\colorgr}[1]{\textcolor{gray}{#1}}
+\newcommand{\colorgrgr}[1]{\textcolor{gray!70}{#1}}
+\newcommand{\colorb}[1]{\textcolor{blue}{#1}}
+\newcommand{\colordb}[1]{\textcolor{DarkBlue}{#1}}
+\newcommand{\colorblack}[1]{\textcolor{black}{#1}}
+\newcommand{\colorr}[1]{\textcolor{red}{#1}}
+\newcommand{\colorg}[1]{\textcolor{ForestGreen}{#1}}
+\newcommand{\colorgg}[1]{\textcolor{green}{#1}}
+\newcommand{\colorp}[1]{\textcolor{purple}{#1}}
+
+
+\newcommand{\drawskewdg}[2]{
+  \def\ptn{#1}
+  \def\offset{#2}
+    \setcounter{rownum}{1}
+    \foreach \xstart\xend in \ptn {
+      \draw[thick,fill=white] (\xstart+\offset,\therownum-1+\offset)
+      grid (\xend+\offset,\therownum+\offset) rectangle (\xstart+\offset,\therownum-1+\offset);
+      \addtocounter{rownum}{1}
+    }
+}
+
+\newcounter{rownum}
+
+\newcommand{\drawDgNotThick}[3]{
+      \setcounter{rownum}{0}
+      \def\b{#1};
+      \def\xshift{#2};
+      \def\yshift{#3};
+      \foreach \c in \b {
+        \foreach \xx in \xshift {
+           \foreach \yy in \yshift {
+              \draw[shift={(\xx,\yy)}] (\therownum,0) grid (\therownum+1, \c);
+              \addtocounter{rownum}{1};
+           }
+        }
+      }
+    }
+
+\newcommand{\drawDg}[3]{
+      \setcounter{rownum}{0}
+      \def\b{#1};
+      \def\xshift{#2};
+      \def\yshift{#3};
+      \foreach \c in \b {
+        \foreach \xx in \xshift {
+           \foreach \yy in \yshift {
+              \draw[thick, shift={(\xx,\yy)}] (\therownum,0) grid (\therownum+1, \c);
+              \addtocounter{rownum}{1};
+           }
+        }
+      }
+    }
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\title[Macdonald Catalanimals]{A raising operator formula for
+  Macdonald polynomials via LLT polynomials in the Schiffmann algebra} % The short title appears at the bottom of every slide, the full title is only on the title page
+
+\author[George H. Seelinger]{George H. Seelinger \\ joint work with
+  J. Blasiak, M. Haiman, J. Morse, and A. Pun} % Your name
+\institute[UMich] % Your institution as it will appear on the bottom of every slide, may be shorthand to save space
+{
+ghseeli@umich.edu\\ %Your email address
+\medskip
+Purdue Mathematical Physics Seminar\\ % Your institution for the title page
+\medskip
+Based on arXiv:2307.06517
+}
+\date{September 13, 2023} % Date, can be changed to a custom date
+
+\begin{document}
+\begin{frame}
+\titlepage % Print the title page as the first slide
+\end{frame}
+\begin{frame}
+  \frametitle{Symmetric Polynomials}
+  \begin{itemize}
+  \item Polynomials \(f \in \Q(q,t)[x_1,\ldots,x_n]\) satisfying \(\sigma.f
+    = f\) for all \(\sigma \in S_n\).\pause
+    \begin{block}{Generators}
+    \[
+      e_r =
+      \sum_{i_1 < i_2 < \cdots < i_r} x_{i_1} x_{i_2} \cdots x_{i_r}
+      \text { or }
+      h_r = 
+      \sum_{i_1 \leq i_2 \leq \cdots \leq i_r} x_{i_1} x_{i_2} \cdots x_{i_r}
+    \]\pause 
+  \end{block}
+    \item E.g.\,for \(n=3\),
+    \begin{align*}
+      e_1 = x_1 + x_2 + x_3 = & h_1  \\
+      e_2 = x_1 x_2 + x_1 x_3 + x_2 x_3 \quad & h_2 = x_1^2 + x_1 x_2 + x_1
+                                          x_3 + x_2^2 +  x_2 x_3 +x_3^2  \\
+      e_3 = x_1 x_2 x_3 \quad & h_3 = x_1^3 + x_1^2 x_2 + x_1^2 x_3 + x_1
+                          x_2^2 + \cdots
+    \end{align*} \pause
+    \item Let \(\sym =
+      \Q(q,t)[e_1,e_2,\ldots] = \Q(q,t)[h_1,h_2,\ldots]\). Call these
+      ``symmetric functions.''\pause
+    \item \(\sym\) is a \(\Q(q,t)\)-algebra.
+  \end{itemize}
+\end{frame}
+\begin{frame}{Symmetric functions and Schur functions}
+  \begin{itemize}
+  \item \(h_d = h_d(X) = \sum_{i_1 \leq \cdots \leq i_d} x_{i_1}
+    \cdots x_{i_d}\) with \(h_0 = 1\) and \(h_d = 0\) for \(d < 0\).
+  \item For any \(\gamma = (\gamma_1,\ldots,\gamma_n) \in \Z^n \),
+    \[
+      s_\gamma = s_\gamma(X) = \det(h_{\gamma_i+j-i}(X))_{1 \leq i,j
+        \leq n}
+    \] \pause
+  \end{itemize}
+  Then,
+  \[
+    s_\gamma = 
+\begin{cases}
+\sgn(\gamma+\rho) s_{\sort(\gamma+\rho) -\rho} & \text{if $\gamma +
+                                                 \rho$ has distinct
+                                                 nonnegative parts,}\\
+0                                                          & \text{otherwise,}
+\end{cases}
+  \]
+\begin{itemize}
+\item $\sort(\beta) = $ weakly decreasing sequence obtained by sorting $\beta$,
+\vspace{-1mm}
+\item $\sgn(\beta) =$ sign of the shortest permutation taking $\beta$ to $\sort(\beta)$.
+\end{itemize}
+\end{frame}
+\begin{frame}
+  \frametitle{Schur Polynomials}
+  \begin{itemize}\pause
+  \item \(\{s_\mu\}_\mu\) forms a basis of symmetric polynomials indexed by integer partitions
+    \(\mu = (\mu_1,\ldots,\mu_l) \in \Z^l\) where \(\mu_1 \geq \cdots \geq
+    \mu_l \geq 0\).\pause
+  \item \(s_\lambda = \sum_\mu \frac{\chi_\lambda(\mu)}{z_\mu} p_\mu\) for
+    irreducible \(S_n\)-character \(\chi_\lambda\). \pause
+  \end{itemize}
+  \begin{block}{Hidden Guide: Schur Positivity}
+    ``Naturally occurring'' symmetric functions which are non-negative
+    (coefficients in \(\N[q,t]\))
+    linear combinations in Schur polynomial basis
+     are interesting since they could have representation-theoretic models.
+  \end{block}
+\end{frame}
+\begin{frame}{Harmonic polynomials}
+  \begin{block}{Harmonic polynomials}
+   \(M =\) polynomials killed by all symmetric differential
+   operators.
+  \end{block}\pause
+  Explicitly, for
+   \[
+     \Delta = \det \left|
+       \begin{matrix}
+         x_1^2 & x_1 & 1\\
+         x_2^2 & x_2 & 1\\
+         x_3^2 & x_3 & 1
+       \end{matrix}
+     \right| = x_1^2(x_2-x_3) - x_2^2 (x_1 - x_3) + x_3^2(x_1-x_2)
+   \]\pause
+   \(M\) is the vector space given by\pause
+   \begin{align*}
+       M  = & \Span\left\{
+\left(           \partial_{x_1}^a
+           \partial_{x_2}^b  \partial_{x_3}^c
+\right)         \Delta \st a,b,c \geq 0\right\} \\
+        = & \Span\{\Delta, 2x_1(x_2-x_3)-x_2^2+x_3^2,
+            2x_2(x_3-x_1)-x_3^2+x_1^2, \\
+       & \phantom{\Span\{\}}x_3-x_1, x_2-x_3,1\}
+   \end{align*}
+\end{frame}
+\begin{frame}{Harmonic polynomials}
+\[
+\Span\{\Delta, 2x_1(x_2-x_3)-x_2^2+x_3^2,
+            2x_2(x_3-x_1)-x_3^2+x_1^2, 
+       x_3-x_1, x_2-x_3,1\}
+  \]\pause 
+  \begin{enumerate}
+\item Break \(M\) up into irreducible \(S_n\)-representations. \pause
+  \ytableausetup{boxsize=0.75em,aligntableaux=top}
+  \[
+    \hspace{-2.9em}
+    \scalebox{0.95}{\(
+      \underbrace{\Span\{\Delta\}}_{\ydiagram{1,1,1}} {\oplus} \underbrace{\Span\{2x_1(x_2{-}x_3){-}x_2^2{+}x_3^2,
+        2x_2(x_3{-}x_1){-}x_3^2{+}x_1^2\}}_{\ydiagram{2,1}} {\oplus}
+      \underbrace{\Span\{x_3{-}x_1, x_2{-}x_3\}}_{\ydiagram{2,1}} {\oplus} \underbrace{\Span\{1\}}_{\ydiagram{3}}\)}
+  \]\pause
+  \item How many times does an irreducible \(S_n\)-representation occur? \pause
+    Frobenius: \pause
+    \ytableausetup{boxsize=0.5em}
+    \[
+      e_1^3 = (x_1+x_2+x_3)^3 = s_{\ydiagram{1,1,1}} + s_{\ydiagram{2,1}} +
+      s_{\ydiagram{2,1}} + s_{\ydiagram{3}}
+    \]
+  \end{enumerate}
+  \pause
+  Remark: \(M \isom \C[x_1,x_2,x_3]/(\C[x_1,x_2,x_3]^{S_3}_+)\).
+\end{frame}
+\begin{frame}{Getting more information}
+  \pause
+  Break \(M\) up into smallest \(S_n\) fixed subspaces 
+  \ytableausetup{boxsize=0.75em,aligntableaux=top}
+  \[
+    \hspace{-0.75em}
+    \scalebox{0.95}{\(
+      \underbrace{\Span\{\Delta\}}_{\ydiagram{1,1,1}} {\oplus} \underbrace{\Span\{2x_1(x_2{-}x_3){-}x_2^2{+}x_3^2,
+        2x_2(x_3{-}x_1){-}x_3^2{+}x_1^2\}}_{\substack{\ydiagram{2,1}\\\deg
+        = 2}} {\oplus}
+      \underbrace{\Span\{x_3{-}x_1, x_2{-}x_3\}}_{\substack{\ydiagram{2,1}\\\deg=1}} {\oplus} \underbrace{\Span\{1\}}_{\ydiagram{3}}\)}
+  \]
+  \pause
+  Solution: irreducible \(S_n\)-representation of polynomials of degree \(d\) \(\mapsto q^d
+  s_\lambda\) (graded Frobenius)\[
+    ?? = q^3 s_{\ydiagram{1,1,1}} + q^2 s_{\ydiagram{2,1}} + q
+    s_{\ydiagram{2,1}} + s_{\ydiagram{3}}
+  \]\pause
+  Answer: Hall-Littlewood polynomial \(H_{\ydiagram{1,1,1}}(X;q)\).
+\end{frame}
+\begin{frame}{A Problem}
+  \begin{itemize}
+  \item In 1988, Macdonald introduces a family of symmetric
+    polynomials with coefficients in \(\Q(q,t)\) generalizing
+    Hall-Littlewood polynomials.\pause
+  \item Garsia modifies these polynomials so 
+    \[
+      \tilde{H}_\lambda(X;q,t) = \sum_\mu \tilde{K}(q,t) s_\mu \text{
+        conjecturally satisfies }\tilde{K}(q,t) \in \N[q,t]
+    \]\pause
+  \item \(\tilde{H}_\lambda(X;1,1) = e_1^{|\lambda|}\).\pause
+  \item Does there
+    exist a family of \(S_n\)-regular representations whose bigraded
+    Frobenius characteristics equal \(\tilde{H}_\lambda(X;q,t)\)?
+  \end{itemize}
+\end{frame}
+\begin{frame}{Garsia-Haiman modules}
+  \begin{itemize}
+  \item \(\Q[x_1,\ldots,x_n,y_1,\ldots,y_n]\) satisfying
+    \(\sigma(x_i) = x_{\sigma(i)}\), \(\sigma(y_j) = y_{\sigma(j)}\).\pause
+  \item Garsia-Haiman (1993): \(M_\mu = \) span of partial derivatives of
+    \(\Delta_\mu = \det_{(i,j) \in \mu, k \in [n]} (x_k^{i-1} y_k^{j-1})\) \pause \[
+      \Delta_{\ydiagram{2,1}} = \det \left|
+        \begin{matrix}
+          1 & y_1 & x_1 \\
+          1 & y_2 & x_2 \\
+          1 & y_3 & x_3
+        \end{matrix}
+      \right| = x_3 y_2 - y_3 x_2 - y_1 x_3 + y_1 x_2 + y_3 x_1 - y_2 x_1
+    \]
+    \pause
+  \[
+    \hspace{-3em}
+      M_{2,1} = \underbrace{\Span\{\Delta_{2,1}\}}_{\deg = (1,1)}
+      \oplus \underbrace{\Span\{y_3-y_1, y_1 - y_2\}}_{\deg = (0,1)}
+      \oplus \underbrace{\Span\{x_3-x_1, x_1 - x_2\}}_{\deg = (1,0)}
+      \oplus \underbrace{\Span \{1\}}_{\deg = (0,0)}
+    \]
+    \pause
+    Irreducible \(S_n\)-representation with bidegree \((a,b) \mapsto
+    q^at^b s_\lambda\) \pause \[
+      \tilde{H}_{\ydiagram{2,1}} = qt s_{\ydiagram{1,1,1}} + t
+      s_{\ydiagram{2,1}} + q s_{\ydiagram{2,1}} + s_{\ydiagram{3}}
+    \]
+  \end{itemize}
+\end{frame}
+\begin{frame}
+  \frametitle{Garsia-Haiman modules}
+  \begin{theorem}[Haiman, 2001]
+    The Garsia-Haiman module \(M_\lambda\) has bigraded Frobenius
+    characteristic given by \(\tilde{H}_\lambda(X;q,t)\)
+  \end{theorem}\pause
+  \begin{itemize}
+  \item Proved via connection to the Hilbert Scheme \(Hilb^n(\C^2)\).\pause
+  \end{itemize}
+  \begin{corollary}
+    \(\tilde{H}_\lambda(X;q,t) = \tilde{K}_{\lambda \mu}(q,t) s_\mu\)
+    satisfies \(\tilde{K}_{\lambda \mu}(q,t) \in \N[q,t]\).
+  \end{corollary}\pause
+  \begin{itemize}
+  \item No combinatorial description of \(\tilde{K}_{\lambda \mu}(q,t)\).
+  \end{itemize}
+  \end{frame}
+\begin{frame}{Root ideals}
+    $R_+ =  \big\{\alpha_{ij} \mid 1 \le i < j \le n\big\}$ denotes the set of positive roots for $GL _{n}$, where  $\alpha_{ij} = \epsilon_i - \epsilon_j$.
+            \ytableausetup{mathmode, boxsize=1em, centertableaux}
+            \[
+              \begin{tikzpicture}[inner sep=0in, outer sep=0in]
+                \node (n) {
+                \begin{ytableau}
+                  \mynone &*(red)\text{\tiny (12)}
+                  &*(red)\text{\tiny (13)} &*(red)\text{\tiny (14)}
+                  &*(red)
+                  \text{\tiny (15)}\\
+                  \mynone &\mynone &*(red) \text{\tiny (23)}
+                  &*(red)\text{\tiny (24)}
+                  &*(red) \text{\tiny (25)}\\
+                  \mynone &\mynone &\mynone &*(red) \text{\tiny
+                    (34)}
+                  &*(red)\text{\tiny (35)} \\
+                  \mynone &\mynone &\mynone&\mynone&*(red) \text{\tiny (45)}\\
+                  \mynone &\mynone &\mynone&\mynone&\mynone\\
+                \end{ytableau}};
+              \end{tikzpicture}
+          \]
+          \pause
+          A root ideal \(\Psi \subset R_+\) is an upper order ideal of positive roots.
+            \ytableausetup{mathmode, boxsize=1em, centertableaux}
+            \[
+              \begin{tikzpicture}[inner sep=0in, outer sep=0in]
+                \node (n) {
+                \begin{ytableau}
+                  \mynone &\text{\tiny (12)}
+                  &*(red)\text{\tiny (13)} &*(red)\text{\tiny (14)}
+                  &*(red)
+                  \text{\tiny (15)}\\
+                  \mynone &\mynone &*(red) \text{\tiny (23)}
+                  &*(red)\text{\tiny (24)}
+                  &*(red) \text{\tiny (25)}\\
+                  \mynone &\mynone &\mynone & \text{\tiny
+                    (34)}
+                  &*(red)\text{\tiny (35)} \\
+                  \mynone &\mynone &\mynone&\mynone& \text{\tiny (45)}\\
+                  \mynone &\mynone &\mynone&\mynone&\mynone\\
+                \end{ytableau}};
+              \draw[thick,lightblue] (n.north
+              west)--([xshift=2.1em]n.north
+              west)--++(0,-2.1em)--++(2.1em,0)--++(0,-1.05em)--++(1.05em,0)--++(0,-2.10em);
+              \draw[thick,lightgray] (n.north west)--(n.south east);
+              \end{tikzpicture}
+              \ \ \
+              \scalebox{1.3}{$ 
+              \text{\textcolor{red}{\scriptsize{
+                      $\Psi =$ Roots above Dyck
+                      path}
+                  }
+                }
+            $}
+          \]
+\end{frame}
+\begin{frame}{Weyl symmetrization}
+ Define the \emph{Weyl symmetrization operator} \(\sigmabold \from
+ \Q[z_1^{\pm 1},\ldots, z_n^{\pm 1}] \to \Lambda(X)\) by linearly
+ extending
+ \[
+   \zz^\gamma \mapsto s_\gamma(X)
+ \]
+ where \(\zz^\gamma = z_1^{\gamma_1} \cdots z_n^{\gamma_n}\).
+ \begin{definition}
+   A \emph{Catalan function} is a symmetric function indexed by a root ideal \(\Psi \subset
+   R_+\) and \(\gamma \in \Z^n\) given by
+   \[
+     H(\Phi;\gamma) = \sigmabold \left(
+       \frac{\zz^\gamma}{\prod_{(i,j) \in \Psi} (1-t z_i/z_j)} \right) 
+   \]
+ \end{definition}
+Denominator factors are understood as geometric series \((1-t
+   z_i/z_j)^{-1} = 1 + t z_i/z_j + t^2 (z_i/z_j)^2 + \cdots\)
+\end{frame}
+\begin{frame}{Catalan functions}
+  \begin{definition}
+   A \emph{Catalan function} is a symmetric function indexed by a root ideal \(\Psi \subset
+   R_+\) and \(\gamma \in \Z^n\) given by
+   \[
+     H(\Phi;\gamma) = \sigmabold \left(
+       \frac{\zz^\gamma}{\prod_{(i,j) \in \Psi} (1-t z_i/z_j)} \right) 
+   \]
+ \end{definition}
+\begin{align*} 
+  \Psi = 
+\begin{tikzpicture}[scale=.213]
+\draw[draw = none, fill = \qtrootcolor] (2,-1) rectangle (3,-2);
+\draw[draw = none, fill = \qtrootcolor] (3,-1) rectangle (4,-2);
+\draw[thin, black!31] (1,-1) -- (4,-1);
+\draw[thin, black!31] (2,-2) -- (4,-2);
+\draw[thin, black!31] (3,-3) -- (4,-3);
+\draw[thin, black!31] (2,-2) -- (2,-1);
+\draw[thin, black!31] (3,-3) -- (3,-1);
+\draw[thin, black!31] (4,-1) -- (4,-4);
+\draw[thin] (1,-1) -- (2,-1);
+\draw[thin] (2,-1) -- (2,-2);
+\draw[thin] (2,-2) -- (3,-2);
+\draw[thin] (3,-2) -- (3,-3);
+\draw[thin] (3,-3) -- (4,-3);
+\draw[thin] (4,-3) -- (4,-4);
+\end{tikzpicture} & \phantom{=} \gamma = (1,1,1)\\
+H(\Psi;\gamma) &= \sigma\left( (1+t\frac{z_1}{z_2} + t^2
+  \frac{z_1^2}{z_2^2} + \cdots)(1+t\frac{z_1}{z_3} +
+  t^2\frac{z_1^2}{z_3^2} + \cdots)x_1 x_2 x_3 \right)\\
+  & =  s_{111} + t( s_{201} +  s_{210}) + t^2(
+    s_{3\text{-}10} + s_{300} + s_{31\text{-}1}  ) + \cdots \\
+  & = s_{111} + t s_{210}
+\end{align*}
+\end{frame}
+\begin{frame}{A Catalan function for modified Hall-Littlewoods}
+
+  {\small \text{$B_\mu$ = set of roots above block diagonal matrix with block sizes $\mu_{\ell(\mu)}, \dots, \mu_1$}}
+\vspace{.4mm}
+\vspace{-4.4mm}
+\begin{align*}
+\raisebox{6.7mm}{${B_{3321} = }$}
+\begin{tikzpicture}[scale=.213]
+\draw[draw = none, fill = \qtrootcolor] (2,-1) rectangle (3,-2);
+ \draw[draw = none, fill = \qtrootcolor] (3,-1) rectangle (4,-2);
+ \draw[draw = none, fill = \qtrootcolor] (4,-1) rectangle (5,-2);
+ \draw[draw = none, fill = \qtrootcolor] (4,-2) rectangle (5,-3);
+ \draw[draw = none, fill = \qtrootcolor] (4,-3) rectangle (5,-4);
+ \draw[draw = none, fill = \qtrootcolor] (5,-1) rectangle (6,-2);
+ \draw[draw = none, fill = \qtrootcolor] (5,-2) rectangle (6,-3);
+ \draw[draw = none, fill = \qtrootcolor] (5,-3) rectangle (6,-4);
+ \draw[draw = none, fill = \qtrootcolor] (6,-1) rectangle (7,-2);
+ \draw[draw = none, fill = \qtrootcolor] (6,-2) rectangle (7,-3);
+ \draw[draw = none, fill = \qtrootcolor] (6,-3) rectangle (7,-4);
+ \draw[draw = none, fill = \qtrootcolor] (7,-1) rectangle (8,-2);
+ \draw[draw = none, fill = \qtrootcolor] (7,-2) rectangle (8,-3);
+ \draw[draw = none, fill = \qtrootcolor] (7,-3) rectangle (8,-4);
+ \draw[draw = none, fill = \qtrootcolor] (7,-4) rectangle (8,-5);
+ \draw[draw = none, fill = \qtrootcolor] (7,-5) rectangle (8,-6);
+ \draw[draw = none, fill = \qtrootcolor] (7,-6) rectangle (8,-7);
+ \draw[draw = none, fill = \qtrootcolor] (8,-1) rectangle (9,-2);
+ \draw[draw = none, fill = \qtrootcolor] (8,-2) rectangle (9,-3);
+ \draw[draw = none, fill = \qtrootcolor] (8,-3) rectangle (9,-4);
+ \draw[draw = none, fill = \qtrootcolor] (8,-4) rectangle (9,-5);
+ \draw[draw = none, fill = \qtrootcolor] (8,-5) rectangle (9,-6);
+ \draw[draw = none, fill = \qtrootcolor] (8,-6) rectangle (9,-7);
+ \draw[draw = none, fill = \qtrootcolor] (9,-1) rectangle (10,-2);
+ \draw[draw = none, fill = \qtrootcolor] (9,-2) rectangle (10,-3);
+ \draw[draw = none, fill = \qtrootcolor] (9,-3) rectangle (10,-4);
+ \draw[draw = none, fill = \qtrootcolor] (9,-4) rectangle (10,-5);
+ \draw[draw = none, fill = \qtrootcolor] (9,-5) rectangle (10,-6);
+ \draw[draw = none, fill = \qtrootcolor] (9,-6) rectangle (10,-7);
+ \draw[thin, black!31] (1,-1) -- (10,-1);
+\draw[thin, black!31] (2,-1) -- (2,-1);
+\draw[thin, black!31] (2,-2) -- (10,-2);
+\draw[thin, black!31] (3,-2) -- (3,-1);
+\draw[thin, black!31] (3,-3) -- (10,-3);
+\draw[thin, black!31] (4,-3) -- (4,-1);
+\draw[thin, black!31] (4,-4) -- (10,-4);
+\draw[thin, black!31] (5,-4) -- (5,-1);
+\draw[thin, black!31] (5,-5) -- (10,-5);
+\draw[thin, black!31] (6,-5) -- (6,-1);
+\draw[thin, black!31] (6,-6) -- (10,-6);
+\draw[thin, black!31] (7,-6) -- (7,-1);
+\draw[thin, black!31] (7,-7) -- (10,-7);
+\draw[thin, black!31] (8,-7) -- (8,-1);
+\draw[thin, black!31] (8,-8) -- (10,-8);
+\draw[thin, black!31] (9,-8) -- (9,-1);
+\draw[thin, black!31] (9,-9) -- (10,-9);
+\draw[thin, black!31] (10,-9) -- (10,-1);
+%\draw[draw = none, fill = black!100] (3,-2) rectangle (4,-3);
+% \draw[draw = none, fill = black!100] (5,-4) rectangle (6,-5);
+% \draw[draw = none, fill = black!100] (6,-4) rectangle (7,-5);
+% \draw[draw = none, fill = black!100] (6,-5) rectangle (7,-6);
+% \draw[draw = none, fill = black!100] (8,-7) rectangle (9,-8);
+% \draw[draw = none, fill = black!100] (9,-7) rectangle (10,-8);
+% \draw[draw = none, fill = black!100] (9,-8) rectangle (10,-9);
+ \draw[thin] (1,-1) -- (2,-1);
+\draw[thin] (2,-1) -- (2,-2);
+\draw[thin] (2,-2) -- (3,-2);
+\draw[thin] (3,-2) -- (3,-3);
+\draw[thin] (3,-3) -- (4,-3);
+\draw[thin] (4,-3) -- (4,-4);
+\draw[thin] (4,-4) -- (5,-4);
+\draw[thin] (5,-4) -- (5,-5);
+\draw[thin] (5,-5) -- (6,-5);
+\draw[thin] (6,-5) -- (6,-6);
+\draw[thin] (6,-6) -- (7,-6);
+\draw[thin] (7,-6) -- (7,-7);
+\draw[thin] (7,-7) -- (8,-7);
+\draw[thin] (8,-7) -- (8,-8);
+\draw[thin] (8,-8) -- (9,-8);
+\draw[thin] (9,-8) -- (9,-9);
+\draw[thin] (9,-9) -- (10,-9);
+\draw[thin] (10,-9) -- (10,-10);
+\draw[thick, densely dotted, orange] (1,-1) rectangle (2,-2);
+\draw[thick, densely dotted, orange] (2,-2) rectangle (4,-4);
+\draw[thick, densely dotted, orange] (4,-4) rectangle (7,-7);
+\draw[thick, densely dotted, orange] (7,-7) rectangle (10,-10);
+\end{tikzpicture}
+\end{align*}
+
+\vspace{-2mm}\pause
+\begin{theorem}[Weyman, Shimozono-Weyman]
+  \begin{align*}
+\Htild_\mu(X;0,t) & = \omega\sigmabold 
+\Big( \frac{z_1\cdots z_n}{\prod_{\alpha \in
+B_\mu}(1 - t \zz^\alpha)} \Big),
+\end{align*}
+where \(\zz^\alpha = z_i/z_j\).
+\end{theorem}
+\end{frame}
+\begin{frame}{Catalan functions for modified Hall-Littlewoods}
+\begin{align*}
+\quad \ \ \
+\begin{tikzpicture}[scale = .49]
+\begin{scope}
+\draw[thick] (0,0) grid (1,4);
+\draw[thick] (0,0) grid (2,3);
+\draw[thick] (0,0) grid (3,2);
+\node at (0.5, 3.5) { \footnotesize $b_1$};
+\node at (0.5, 2.5) { \footnotesize $b_2$};
+\node at (1.5, 2.5) { \footnotesize $b_3$};
+\node at (0.5, 1.5) { \footnotesize $b_4$};
+\node at (1.5, 1.5) { \footnotesize $b_5$};
+\node at (2.5, 1.5) { \footnotesize $b_6$};
+\node at (0.5, 0.5) { \footnotesize $b_7$};
+\node at (1.5, 0.5) { \footnotesize $b_8$};
+\node at (2.5, 0.5) { \footnotesize $b_9$};
+\node at (1,-.54) {\small row reading order };
+\node at (1,-1.44) {\small $b_1 \prec b_2 \prec \cdots  \prec b_n$};
+\end{scope}
+\end{tikzpicture}
+\quad  \quad \ \
+\raisebox{14mm}{\parbox{7cm}{
+$R_\mu  :=  \big\{ \alpha_{ij} \in R_+ \mid  \south(b_i) \preceq b_j \big\}$.}}
+\end{align*}
+\vspace{-1cm}
+\begin{align*}
+\raisebox{6.7mm}{$\colorb{R_{3321} = }$}
+\begin{tikzpicture}[scale=.213]
+\draw[draw = none, fill = \qtrootcolor] (2,-1) rectangle (3,-2);
+ \draw[draw = none, fill = \qtrootcolor] (3,-1) rectangle (4,-2);
+ \draw[draw = none, fill = \qtrootcolor] (4,-1) rectangle (5,-2);
+ \draw[draw = none, fill = \qtrootcolor] (4,-2) rectangle (5,-3);
+ \draw[draw = none, fill = \qtrootcolor] (5,-1) rectangle (6,-2);
+ \draw[draw = none, fill = \qtrootcolor] (5,-2) rectangle (6,-3);
+ \draw[draw = none, fill = \qtrootcolor] (5,-3) rectangle (6,-4);
+ \draw[draw = none, fill = \qtrootcolor] (6,-1) rectangle (7,-2);
+ \draw[draw = none, fill = \qtrootcolor] (6,-2) rectangle (7,-3);
+ \draw[draw = none, fill = \qtrootcolor] (6,-3) rectangle (7,-4);
+ \draw[draw = none, fill = \qtrootcolor] (7,-1) rectangle (8,-2);
+ \draw[draw = none, fill = \qtrootcolor] (7,-2) rectangle (8,-3);
+ \draw[draw = none, fill = \qtrootcolor] (7,-3) rectangle (8,-4);
+ \draw[draw = none, fill = \qtrootcolor] (7,-4) rectangle (8,-5);
+ \draw[draw = none, fill = \qtrootcolor] (8,-1) rectangle (9,-2);
+ \draw[draw = none, fill = \qtrootcolor] (8,-2) rectangle (9,-3);
+ \draw[draw = none, fill = \qtrootcolor] (8,-3) rectangle (9,-4);
+ \draw[draw = none, fill = \qtrootcolor] (8,-4) rectangle (9,-5);
+ \draw[draw = none, fill = \qtrootcolor] (8,-5) rectangle (9,-6);
+ \draw[draw = none, fill = \qtrootcolor] (9,-1) rectangle (10,-2);
+ \draw[draw = none, fill = \qtrootcolor] (9,-2) rectangle (10,-3);
+ \draw[draw = none, fill = \qtrootcolor] (9,-3) rectangle (10,-4);
+ \draw[draw = none, fill = \qtrootcolor] (9,-4) rectangle (10,-5);
+ \draw[draw = none, fill = \qtrootcolor] (9,-5) rectangle (10,-6);
+ \draw[draw = none, fill = \qtrootcolor] (9,-6) rectangle (10,-7);
+ \draw[thin, black!31] (1,-1) -- (10,-1);
+\draw[thin, black!31] (2,-1) -- (2,-1);
+\draw[thin, black!31] (2,-2) -- (10,-2);
+\draw[thin, black!31] (3,-2) -- (3,-1);
+\draw[thin, black!31] (3,-3) -- (10,-3);
+\draw[thin, black!31] (4,-3) -- (4,-1);
+\draw[thin, black!31] (4,-4) -- (10,-4);
+\draw[thin, black!31] (5,-4) -- (5,-1);
+\draw[thin, black!31] (5,-5) -- (10,-5);
+\draw[thin, black!31] (6,-5) -- (6,-1);
+\draw[thin, black!31] (6,-6) -- (10,-6);
+\draw[thin, black!31] (7,-6) -- (7,-1);
+\draw[thin, black!31] (7,-7) -- (10,-7);
+\draw[thin, black!31] (8,-7) -- (8,-1);
+\draw[thin, black!31] (8,-8) -- (10,-8);
+\draw[thin, black!31] (9,-8) -- (9,-1);
+\draw[thin, black!31] (9,-9) -- (10,-9);
+\draw[thin, black!31] (10,-9) -- (10,-1);
+%\draw[draw = none, fill = black!100] (3,-2) rectangle (4,-3);
+% \draw[draw = none, fill = black!100] (5,-4) rectangle (6,-5);
+% \draw[draw = none, fill = black!100] (6,-4) rectangle (7,-5);
+% \draw[draw = none, fill = black!100] (6,-5) rectangle (7,-6);
+% \draw[draw = none, fill = black!100] (8,-7) rectangle (9,-8);
+% \draw[draw = none, fill = black!100] (9,-7) rectangle (10,-8);
+% \draw[draw = none, fill = black!100] (9,-8) rectangle (10,-9);
+ \draw[thin] (1,-1) -- (2,-1);
+\draw[thin] (2,-1) -- (2,-2);
+\draw[thin] (2,-2) -- (3,-2);
+\draw[thin] (3,-2) -- (3,-3);
+\draw[thin] (3,-3) -- (4,-3);
+\draw[thin] (4,-3) -- (4,-4);
+\draw[thin] (4,-4) -- (5,-4);
+\draw[thin] (5,-4) -- (5,-5);
+\draw[thin] (5,-5) -- (6,-5);
+\draw[thin] (6,-5) -- (6,-6);
+\draw[thin] (6,-6) -- (7,-6);
+\draw[thin] (7,-6) -- (7,-7);
+\draw[thin] (7,-7) -- (8,-7);
+\draw[thin] (8,-7) -- (8,-8);
+\draw[thin] (8,-8) -- (9,-8);
+\draw[thin] (9,-8) -- (9,-9);
+\draw[thin] (9,-9) -- (10,-9);
+\draw[thin] (10,-9) -- (10,-10);
+\draw[thick, densely dotted, orange] (1,-1) rectangle (2,-2);
+\draw[thick, densely dotted, orange] (2,-2) rectangle (4,-4);
+\draw[thick, densely dotted, orange] (4,-4) rectangle (7,-7);
+\draw[thick, densely dotted, orange] (7,-7) rectangle (10,-10);
+\end{tikzpicture}
+\end{align*}
+\vspace{-0.5cm}
+\pause
+ \begin{align*}
+\Htild_\mu(X;0,t) & = \omega \sigmabold
+\Big( \frac{z_1\cdots z_n}{\prod_{\alpha \in
+B_\mu}(1 - t \zz^\alpha)} 
+                    \Big),\\
+   & =
+ \omega \sigmabold
+\Big( \frac{z_1\cdots z_n}{\prod_{\alpha \in
+\colorb{R_\mu}}(1 - t \zz^\alpha)} 
+                    \Big)
+\end{align*}
+\end{frame}
+\begin{frame}{A Catalanimal formula for \(\Htild_\mu(X;q,t)\)}
+  \begin{align*}
+\quad \ \ \
+\begin{tikzpicture}[scale = .49]
+\begin{scope}
+\draw[thick] (0,0) grid (1,5);
+\draw[thick] (0,0) grid (2,3);
+\node at (0.5, 4.5) { \footnotesize $b_1$};
+\node at (0.5, 3.5) { \footnotesize $b_2$};
+\node at (0.5, 2.5) { \footnotesize $b_3$};
+\node at (1.5, 2.5) { \footnotesize $b_4$};
+\node at (0.5, 1.5) { \footnotesize $b_5$};
+\node at (1.5, 1.5) { \footnotesize $b_6$};
+\node at (0.5, 0.5) { \footnotesize $b_7$};
+\node at (1.5, 0.5) { \footnotesize $b_8$};
+\node at (1,-.54) {\small row reading order };
+\node at (1,-1.44) {\small $b_1 \prec b_2 \prec \cdots  \prec b_n$};
+\end{scope}
+\end{tikzpicture}
+\quad  \quad \ \
+\raisebox{14mm}{\parbox{7cm}{
+ $R_\mu     :=     \big\{ \alpha_{ij} \in R_+ \mid  \south(b_i) \preceq  b_j \big\},$ \\[1.4mm]
+$\widehat{R}_\mu  :=  \big\{ \alpha_{ij} \in R_+ \mid  \south(b_i) \prec b_j \big\}$.}}
+\end{align*}
+
+\vspace{-4.3mm}
+\pause
+\begin{theorem}[Blasiak-Haiman-Morse-Pun-S.]
+The modified Macdonald polynomial $\Htild_\mu = \Htild_{\mu }(X;q,t)$ is given by
+\vspace{-1mm}
+{\small \begin{align*}
+          \Htild_\mu =
+          \omega \sigmabold \Bigg( z_1 \cdots z_n
+\frac{
+\displaystyle\prod_{\alpha_{ij} \in R_\mu \setminus \widehat{R}_\mu }
+ \raisebox{-1.4mm}{$\big(1- q^{\arm(b_i)+1} t^{-\leg(b_i)} z_i/z_j \big)$}
+\displaystyle\prod_{\alpha \in \widehat{R}_{\mu}}
+ \raisebox{-1.4mm}{$\big(1-q  t\zz^\alpha \big)$} } {\prod_{\alpha \in R_+} \big(1-q  \zz^\alpha\big)
+\prod_{\alpha \in R_\mu} \big(1-t  \zz^\alpha\big)} 
+           \Bigg).
+\end{align*}}
+%Define the \cemph{Macdonald series}  $\Hbold_\mu(\zz;q,t) = \Hbold_\mu$ by
+%\vspace{-2.4mm}
+%\begin{multline*}
+%
+%{\small \text{$\Hbold_{\mu, \gamma} = \sigmabold \Bigg(
+%\frac{\zz^\gamma
+%\prod_{\alpha_{ij} \in R_\mu \setminus \widehat{R}_\mu }
+% \big(1- q^{\arm(b_i)+1} t^{-\leg(b_i)} z_i/z_j \big)
+%\prod_{\alpha_{ij} \in \widehat{R}_{\mu}}
+% \big(1-q t z_i/z_j \big)}
+%{\prod_{\alpha_{ij} \in R_+} \big(1-q  z_i/z_j\big)
+%\prod_{\alpha_{ij} \in R_\mu} \big(1-t  z_i/z_j\big)}\Bigg).$}}
+%\end{multline*}
+%The modified Macdonald polynomial  $\Htild_\mu(X;q,t)$ given by
+%\vspace{-2.4mm}
+%\begin{align*}
+%\Htild_\mu(X;q,t) =  \omega\pol_X  \big( z_1\cdots z_n  \Hbold_\mu \big).
+%\end{align*}
+%??l vs n use n
+\end{theorem}
+\end{frame}
+\begin{frame}{Example}
+  \begin{overlayarea}{\textwidth}{\textheight}
+\setbeamercovered{transparent=0}
+
+\vspace{-4.4mm}
+\begin{align*}
+\raisebox{-1.4mm}{
+\begin{tikzpicture}[xscale = 1.5, yscale = 1.26]
+\begin{scope}
+%
+\only<1>{
+\draw[thick] (0,0) grid (1,5);
+\draw[thick] (0,0) grid (2,3);
+\node at (0.5, 4.5) { \large $b_1$};
+\node at (0.5, 3.5) { \large $b_2$};
+\node at (0.5, 2.5) { \large $b_3$};
+\node at (1.5, 2.5) { \large $b_4$};
+\node at (0.5, 1.5) { \large $b_5$};
+\node at (1.5, 1.5) { \large $b_6$};
+\node at (0.5, 0.5) { \large $b_7$};
+\node at (1.5, 0.5) { \large $b_8$};
+\node at (1,-.34) { partition $\mu = 22211$};
+\node at (1.1,-.34) {\small \phantom{numerator factors  $1-q^{\rm arm+1}t^{-{\rm leg}} z_i/z_{j}$}};
+}
+\only<2->{
+\draw[thick] (0,0) grid (1,5);
+\draw[thick] (0,0) grid (2,3);
+\node at (0.5, 4.5) {\footnotesize $1\shortminus  q \frac{z_1}{z_2}$};
+\node at (0.5, 3.5) {\footnotesize $1\shortminus  q t^{\shortminus 1} \frac{z_2}{z_3}$};
+\node at (0.5, 2.5) {\footnotesize $1\shortminus  q^2 t^{\shortminus 2} \frac{z_3}{z_5}$};
+\node at (1.5, 2.5) {\footnotesize $1\shortminus  q  \frac{z_4}{z_6}$};
+\node at (0.5, 1.5) {\footnotesize $1\shortminus q^2 t^{\shortminus 3} \frac{z_5}{z_7}$};
+\node at (1.5, 1.5) {\footnotesize $1\shortminus q t^{\shortminus 1} \frac{z_6}{z_8}$};
+\node at (0.5, 0.5) {\footnotesize $ $};
+\node at (1.5, 0.5) {\footnotesize $ $};
+\node at (1.1,-.34) {\small numerator factors  $1-q^{\rm arm+1}t^{-{\rm leg}} z_i/z_{j}$};
+}
+\end{scope}
+\end{tikzpicture}}
+\hspace{-.6cm}
+\begin{tikzpicture}[scale = .79]
+\draw[draw = none, fill = \qtrootcolor] (3,-1) rectangle (4,-2);
+ \draw[draw = none, fill = \qtrootcolor] (4,-1) rectangle (5,-2);
+ \draw[draw = none, fill = \qtrootcolor] (4,-2) rectangle (5,-3);
+ \draw[draw = none, fill = \qtrootcolor] (5,-1) rectangle (6,-2);
+ \draw[draw = none, fill = \qtrootcolor] (5,-2) rectangle (6,-3);
+ \draw[draw = none, fill = \qtrootcolor] (6,-1) rectangle (7,-2);
+ \draw[draw = none, fill = \qtrootcolor] (6,-2) rectangle (7,-3);
+ \draw[draw = none, fill = \qtrootcolor] (6,-3) rectangle (7,-4);
+ \draw[draw = none, fill = \qtrootcolor] (7,-1) rectangle (8,-2);
+ \draw[draw = none, fill = \qtrootcolor] (7,-2) rectangle (8,-3);
+ \draw[draw = none, fill = \qtrootcolor] (7,-3) rectangle (8,-4);
+ \draw[draw = none, fill = \qtrootcolor] (7,-4) rectangle (8,-5);
+ \draw[draw = none, fill = \qtrootcolor] (8,-1) rectangle (9,-2);
+ \draw[draw = none, fill = \qtrootcolor] (8,-2) rectangle (9,-3);
+ \draw[draw = none, fill = \qtrootcolor] (8,-3) rectangle (9,-4);
+ \draw[draw = none, fill = \qtrootcolor] (8,-4) rectangle (9,-5);
+ \draw[draw = none, fill = \qtrootcolor] (8,-5) rectangle (9,-6);
+ \only<2>{
+ \draw[draw = none, fill = gray!100] (2+0.5, -1-0.5) circle (.2);
+\draw[draw = none, fill = gray!100] (3+0.5, -2-0.5) circle (.2);
+\draw[draw = none, fill = gray!100] (5+0.5, -3-0.5) circle (.2);
+\draw[draw = none, fill = gray!100] (6+0.5, -4-0.5) circle (.2);
+\draw[draw = none, fill = gray!100] (7+0.5, -5-0.5) circle (.2);
+\draw[draw = none, fill = gray!100] (8+0.5, -6-0.5) circle (.2);
+}
+\only<1->{
+ \draw[draw = none, fill = gray!100] (2+0.5, -1-0.5) circle (.2);
+\draw[draw = none, fill = gray!100] (3+0.5, -2-0.5) circle (.2);
+\draw[draw = none, fill = gray!100] (5+0.5, -3-0.5) circle (.2);
+\draw[draw = none, fill = gray!100] (6+0.5, -4-0.5) circle (.2);
+\draw[draw = none, fill = gray!100] (7+0.5, -5-0.5) circle (.2);
+\draw[draw = none, fill = gray!100] (8+0.5, -6-0.5) circle (.2);
+}
+ \only<2->{
+ \draw[draw = none, fill = gray!36] (2+0.5, -1-0.5) circle (.2);
+\draw[draw = none, fill = gray!36] (3+0.5, -2-0.5) circle (.2);
+\draw[draw = none, fill = gray!36] (5+0.5, -3-0.5) circle (.2);
+\draw[draw = none, fill = gray!36] (6+0.5, -4-0.5) circle (.2);
+\draw[draw = none, fill = gray!36] (7+0.5, -5-0.5) circle (.2);
+\draw[draw = none, fill = gray!36] (8+0.5, -6-0.5) circle (.2);
+}
+%\draw[draw = none, fill = red!68] (4,-3) rectangle (5,-4);
+% \draw[draw = none, fill = red!68] (5,-4) rectangle (6,-5);
+% \draw[draw = none, fill = red!68] (6,-5) rectangle (7,-6);
+% \draw[draw = none, fill = red!68] (7,-6) rectangle (8,-7);
+% \draw[draw = none, fill = red!68] (8,-7) rectangle (9,-8);
+ \draw[thin, black!31] (1,-1) -- (9,-1);
+\draw[thin, black!31] (2,-1) -- (2,-1);
+\draw[thin, black!31] (2,-2) -- (9,-2);
+\draw[thin, black!31] (3,-2) -- (3,-1);
+\draw[thin, black!31] (3,-3) -- (9,-3);
+\draw[thin, black!31] (4,-3) -- (4,-1);
+\draw[thin, black!31] (4,-4) -- (9,-4);
+\draw[thin, black!31] (5,-4) -- (5,-1);
+\draw[thin, black!31] (5,-5) -- (9,-5);
+\draw[thin, black!31] (6,-5) -- (6,-1);
+\draw[thin, black!31] (6,-6) -- (9,-6);
+\draw[thin, black!31] (7,-6) -- (7,-1);
+\draw[thin, black!31] (7,-7) -- (9,-7);
+\draw[thin, black!31] (8,-7) -- (8,-1);
+\draw[thin, black!31] (8,-8) -- (9,-8);
+\draw[thin, black!31] (9,-8) -- (9,-1);
+\draw[thin] (1,-1) -- (2,-1);
+\draw[thin] (2,-1) -- (2,-2);
+\draw[thin] (2,-2) -- (3,-2);
+\draw[thin] (3,-2) -- (3,-3);
+\draw[thin] (3,-3) -- (4,-3);
+\draw[thin] (4,-3) -- (4,-4);
+\draw[thin] (4,-4) -- (5,-4);
+\draw[thin] (5,-4) -- (5,-5);
+\draw[thin] (5,-5) -- (6,-5);
+\draw[thin] (6,-5) -- (6,-6);
+\draw[thin] (6,-6) -- (7,-6);
+\draw[thin] (7,-6) -- (7,-7);
+\draw[thin] (7,-7) -- (8,-7);
+\draw[thin] (8,-7) -- (8,-8);
+\draw[thin] (8,-8) -- (9,-8);
+\draw[thin] (9,-8) -- (9,-9);
+\node at (3/2,-3/2) { $1 $};
+\node at (5/2,-5/2) { $1 $};
+\node at (7/2,-7/2) { $1 $};
+\node at (9/2,-9/2) { $1 $};
+\node at (11/2,-11/2) { $1 $};
+\node at (13/2,-13/2) { $1 $};
+\node at (15/2,-15/2) { $1 $};
+\node (vv) at (17/2,-17/2) { $1 $};
+\only<2>{
+%\begin{scope}[yshift = -34*1, scale = .32]
+%\draw[draw = none, fill = red!68] (2,-1) rectangle (3,-2);
+%\node[anchor = west] at (3,-1.5) {\scriptsize  \  $R_q \setminus R_t$};
+%\end{scope}
+\begin{scope}[yshift = -224,xshift = 40, scale = .72]
+\draw[thin, black!0] (2,-1) -- (3,-1);
+\draw[thin, black!0] (2,-1) -- (2,-2);
+\draw[thin, black!0] (2,-2) -- (3,-2);
+\draw[thin, black!0] (3,-2) -- (3,-1);
+\draw[draw = none, fill = gray!36] (2+0.5, -1-0.5) circle (.2/.72);
+\node[anchor = west] at (3,-1.5) {\small \  $R_\mu \setminus \widehat{R}_\mu$ \  ($t$ factors)};
+\end{scope}
+\begin{scope}[yshift = -250,xshift = 40, scale = .72]
+\draw[draw = none, fill = \qtrootcolor] (2,-1) rectangle (3,-2);
+\node[anchor = west] at (3,-1.5) {\small \  $\widehat{R}_{\mu}$ \  ($t$ and  $qt$ factors)};
+\end{scope}
+\node[anchor = east] at (10/2,-11/2-.3) { $\Htild_{22211}$ \ \ \  };
+}
+\only<1>{
+\begin{scope}[yshift = -224,xshift = 40, scale = .72]
+\draw[thin, black!0] (2,-1) -- (3,-1);
+\draw[thin, black!0] (2,-1) -- (2,-2);
+\draw[thin, black!0] (2,-2) -- (3,-2);
+\draw[thin, black!0] (3,-2) -- (3,-1);
+\draw[draw = none, fill = gray!100] (2+0.5, -1-0.5) circle (.2/.72);
+\node[anchor = west] at (3,-1.5) {\small \  $R_\mu \setminus \widehat{R}_\mu$ \  ($t$ factors)};
+\end{scope}
+\begin{scope}[yshift = -250,xshift = 40, scale = .72]
+\draw[draw = none, fill = \qtrootcolor] (2,-1) rectangle (3,-2);
+\node[anchor = west] at (3,-1.5) {\small \  $\widehat{R}_{\mu}$ \  ($t$ and  $qt$ factors)};
+\end{scope}
+}
+\only<2->{
+\node at (2.5,-1.5) {\footnotesize $q $};
+\node at (3.5,-2.5) {\footnotesize $q t^{\shortminus 1} $};
+\node at (5.5,-3.5) {\footnotesize $q^2 t^{\shortminus 2} $};
+\node at (6.5,-4.5) {\footnotesize $q $};
+\node at (7.5,-5.5) {\footnotesize $q^2 t^{\shortminus 3} $};
+\node at (8.5,-6.5) {\footnotesize $q t^{\shortminus 1} $};
+}
+\end{tikzpicture}
+\end{align*}
+\end{overlayarea}
+\end{frame}
+\begin{frame}{\(q=t=1\) specialization}
+  \begin{align*}
+          & \omega \sigmabold \Bigg( z_1 \cdots z_n
+\frac{
+\displaystyle\prod_{\alpha_{ij} \in R_\mu \setminus \widehat{R}_\mu }
+ \raisebox{-1.4mm}{$\big(1- q^{\arm(b_i)+1} t^{-\leg(b_i)} z_i/z_j \big)$}
+\displaystyle\prod_{\alpha \in \widehat{R}_{\mu}}
+ \raisebox{-1.4mm}{$\big(1-q  t\zz^\alpha \big)$} } {\prod_{\alpha \in R_+} \big(1-q  \zz^\alpha\big)
+\prod_{\alpha \in R_\mu} \big(1-t  \zz^\alpha\big)} 
+           \Bigg) \\
+    \overset{q=t=1}{\to} & \omega \sigmabold \left( z_1\cdots z_n
+    \frac{\prod_{\alpha \in R_\mu \setminus \widehat{R}_\mu}
+    (1-\zz^\alpha) \prod_{\alpha \in \widehat{R}_\mu}(1-\zz^\alpha)}{\prod_{\alpha \in R_+}
+    (1-\zz^\alpha) \prod_{\alpha \in R_\mu} (1-\zz^\alpha)}\right) \\
+    = & \omega \sigmabold\left(\frac{z_1 \cdots z_n}{\prod_{\alpha \in R_+}
+      (1-\zz^\alpha)}\right) \\
+    = & \omega h_1^n \\
+    = & e_1^n
+  \end{align*}
+\end{frame}
+\begin{frame}{\(q=0\) specialization}
+  \begin{align*}
+          & \omega \sigmabold \Bigg( z_1 \cdots z_n
+\frac{
+\displaystyle\prod_{\alpha_{ij} \in R_\mu \setminus \widehat{R}_\mu }
+ \raisebox{-1.4mm}{$\big(1- q^{\arm(b_i)+1} t^{-\leg(b_i)} z_i/z_j \big)$}
+\displaystyle\prod_{\alpha \in \widehat{R}_{\mu}}
+ \raisebox{-1.4mm}{$\big(1-q  t\zz^\alpha \big)$} } {\prod_{\alpha \in R_+} \big(1-q  \zz^\alpha\big)
+\prod_{\alpha \in R_\mu} \big(1-t  \zz^\alpha\big)} 
+           \Bigg) \\
+    \overset{q=0}{\to} & \omega \sigmabold \left( \frac{z_1\cdots z_n}{\prod_{\alpha \in
+                         R_\mu} (1-t \zz^\alpha)}  \right) \\
+     = & \Htild_\mu(X;0,t)
+  \end{align*}
+\end{frame}
+\begin{frame}{Proof of formula for \(\Htild_\mu\)}
+  \begin{definition}
+    $\nabla$ is the linear operator on symmetric functions satisfying
+    $\nabla \Htild _{\mu } = t^{n(\mu)}q^{n(\mu ^{*})} \Htild _{\mu
+    }$, where $n(\mu ) = \sum _{i} (i-1)\mu_{i}.$
+  \end{definition}\pause
+\begin{itemize}
+%???add date?
+\item Start with the Haglund-Haiman-Loehr formula for  $\Htild_\mu$ as a sum of LLT polynomials  $\Gcal_\nubold(X;q)$.\pause
+\item Apply  $\omega\nabla$ to both sides.\pause
+\item Use Catalanimal formula for  $\omega\nabla \Gcal_\nubold(X;q)$
+  and collect terms.
+\end{itemize}
+\end{frame}
+\begin{frame}{LLT Polynomials}
+  \vspace{-1.4mm}
+{\small
+Let  $\nubold= (\nu_{(1)}, \dots, \nu_{(k)})$ be a tuple of skew shapes.
+%\vspace{1mm}
+
+\begin{itemize}
+\onslide<2->{\item The \emph{content} of a box in row  $y$,  column  $x$ is  $x-y$.}
+\onslide<3->{\item \emph{Reading order}: label boxes $b_1, \dots, b_n$ by scanning each diagonal from southwest to northeast, in order of increasing content.}
+\onslide<4->{\item A pair  $(a,b) \in \nubold$ is \emph{attacking} if  $a$ precedes  $b$ in reading order and
+\begin{itemize}
+\item  ${\rm content}(b) = {\rm content}(a)$,  or
+\item  ${\rm content}(b) = {\rm content}(a) + 1$ and $a \in \nu_{(i)}, b \in \nu_{(j)}$ with  $i > j$.
+\end{itemize}}
+\end{itemize}}
+
+\vspace{-3mm}
+\begin{equation*}
+\begin{tikzpicture}[scale = .34]
+\begin{scope}
+\node[anchor=east] at (-0.1, 1) {$\nubold = \bigg( $};
+%
+\draw[thin, black!44]  (0,0) grid (1,1);
+%\node at (0.5, 1.5) {\small $b_1$};
+%\node at (1.5, 1.5) {\small $b_2$};
+%\node at (1.5, 0.5) {\small $b_4$};
+%\node at (2.5, 0.5) {\small $b_7$};
+\node at (3.34, 0.02) { , };
+\draw[very thick] (0,1) grid (2,2);
+\draw[very thick] (1,0) grid (3,1);
+\end{scope}
+\begin{scope}[xshift = 117]
+%
+\draw[thin, black!44] (0,0) grid (1,2);
+%\node at (1.5, 1.5) {\small $b_3$};
+%\node at (2.5, 1.5) {\small $b_6$};
+%\node at (1.5, 0.5) {\small $b_5$};
+%\node at (2.5, 0.5) {\small $b_8$};
+\draw[very thick] (1,0) grid (3,2);
+\node at (3.58, 1) { $ \bigg)$};
+\end{scope}
+\end{tikzpicture}
+\quad \quad \quad
+\raisebox{-.94cm}{
+\begin{tikzpicture}[scale = .51]
+\begin{scope}
+\only<5>{
+\draw[draw = none, fill = red!47] (1,1) rectangle (2,2);
+\draw[draw = none, fill = red!47] (4,4) rectangle (5,5);
+}
+\only<6>{
+\draw[draw = none, fill = red!47] (4,4) rectangle (5,5);
+\draw[draw = none, fill = red!47] (1,0) rectangle (2,1);
+}
+\only<7>{
+\draw[draw = none, fill = red!47] (1,0) rectangle (2,1);
+\draw[draw = none, fill = red!47] (4,3) rectangle (5,4);
+}
+\only<8>{
+\draw[draw = none, fill = red!47] (1,0) rectangle (2,1);
+\draw[draw = none, fill = red!47] (5,4) rectangle (6,5);
+}
+\only<9>{
+\draw[draw = none, fill = red!47] (4,3) rectangle (5,4);
+\draw[draw = none, fill = red!47] (2,0) rectangle (3,1);
+}
+\only<10>{
+\draw[draw = none, fill = red!47] (5,4) rectangle (6,5);
+\draw[draw = none, fill = red!47] (2,0) rectangle (3,1);
+}
+\only<11>{
+\draw[draw = none, fill = red!47] (2,0) rectangle (3,1);
+\draw[draw = none, fill = red!47] (5,3) rectangle (6,4);
+}
+%
+\draw[help lines] (0,0) grid (6,5);
+\draw[thick] (0,1) grid (2,2);
+\draw[thick] (1,0) grid (3,1);
+%
+%
+\draw[thick] (4,3) grid (6,5);
+\only<3->{
+\node at (0.5, 1.5) {\small $b_1$};
+\node at (1.5, 1.5) {\small $b_2$};
+\node at (1.5, 0.5) {\small $b_4$};
+\node at (2.5, 0.5) {\small $b_7$};
+%
+\node at (3.0+1.5, 3.0+1.5) {\small $b_3$};
+\node at (3.0+2.5, 3.0+1.5) {\small $b_6$};
+\node at (3.0+1.5, 3.0+0.5) {\small $b_5$};
+\node at (3.0+2.5, 3.0+0.5) {\small $b_8$};}
+%
+\only<2>{
+\foreach \x in {0,...,5}
+    \foreach \y in {0,...,4}
+        {\pgfmathtruncatemacro{\myc}{\x - \y}
+        \node at (\x+0.5,\y+0.5) {\footnotesize \myc };}
+}
+\end{scope}
+\end{tikzpicture}}
+\end{equation*}
+{\small
+\onslide<4->{
+Attacking pairs:  $
+{\color<5>{red}(b_2,b_3)},
+{\color<6>{red}(b_3, b_4)},
+{\color<7>{red}(b_4, b_5)},
+{\color<8>{red}(b_4, b_6)},
+{\color<9>{red}(b_5, b_7)},
+{\color<10>{red}(b_6, b_7)},
+{\color<11>{red}(b_7, b_8)} $}
+}
+\end{frame}
+\begin{frame}{LLT Polynomials}
+  \vspace{-2mm}
+\small
+\begin{itemize}
+\item A \emph{semistandard tableau} on $\nubold  $ is a map
+$T\colon \nubold  \rightarrow \Z _{+}$ which restricts to a
+semistandard tableau on each $\nu_{(i)}$.
+\item An \emph{attacking inversion} in $T$ is
+an attacking pair $(a,b)$ such that~$T(a)>T(b)$.
+\end{itemize}
+
+The \emph{LLT polynomial} indexed by a tuple of skew shapes $\nubold
+$ is
+\begin{equation*}
+\Gcal_{\nubold  }(\xx;q) = \sum _{T\in \SSYT (\nubold
+)}q^{\inv (T)}\xx ^{T},
+\end{equation*}
+\vspace{-1mm}
+where $\inv (T)$ is the number of attacking inversions in $T$ and
+$\xx ^{T} = \prod _{a\in \nubold  } x_{T(a)}$.
+
+\vspace{-2mm}
+\begin{align*}
+&
+\begin{tikzpicture}[scale = .46]
+\node[anchor = east] at (-1.4, 2.5) {$T \ \ = $};
+\begin{scope}
+\node[anchor = west] at (7,3) {\small \phantom{\colorb{non-inversion}}};
+\only<2>{
+\draw[draw = none, fill = blue!47] (1,1) rectangle (2,2);
+\draw[draw = none, fill = blue!47] (4,4) rectangle (5,5);
+\node[anchor = west] at (7,3) {\small \colorb{non-inversion}};
+}
+\only<3>{
+\draw[draw = none, fill = red!47] (4,4) rectangle (5,5);
+\draw[draw = none, fill = red!47] (1,0) rectangle (2,1);
+\node[anchor = west] at (7,3) {\small \colorr{inversion}};
+}
+\only<4>{
+\draw[draw = none, fill = red!47] (1,0) rectangle (2,1);
+\draw[draw = none, fill = red!47] (4,3) rectangle (5,4);
+\node[anchor = west] at (7,3) {\small \colorr{inversion}};
+}
+\only<5>{
+\draw[draw = none, fill = blue!47] (1,0) rectangle (2,1);
+\draw[draw = none, fill = blue!47] (5,4) rectangle (6,5);
+\node[anchor = west] at (7,3) {\small \colorb{non-inversion}};
+}
+\only<6>{
+\draw[draw = none, fill = blue!47] (4,3) rectangle (5,4);
+\draw[draw = none, fill = blue!47] (2,0) rectangle (3,1);
+\node[anchor = west] at (7,3) {\small \colorb{non-inversion}};
+}
+\only<7>{
+\draw[draw = none, fill = red!47] (5,4) rectangle (6,5);
+\draw[draw = none, fill = red!47] (2,0) rectangle (3,1);
+\node[anchor = west] at (7,3) {\small \colorr{inversion}};
+}
+\only<8>{
+\draw[draw = none, fill = red!47] (2,0) rectangle (3,1);
+\draw[draw = none, fill = red!47] (5,3) rectangle (6,4);
+\node[anchor = west] at (7,3) {\small \colorr{inversion}};
+}
+%
+\draw[help lines] (0,0) grid (6,5);
+\draw[thick] (0,1) grid (2,2);
+\draw[thick] (1,0) grid (3,1);
+\node at (0.5, 1.5) {\small $2$};
+\node at (1.5, 1.5) {\small $4$};
+\node at (1.5, 0.5) {\small $3$};
+\node at (2.5, 0.5) {\small $5$};
+\draw[thick] (4,3) grid (6,5);
+\node at (3.0+1.5, 3.0+1.5) {\small $5$};
+\node at (3.0+2.5, 3.0+1.5) {\small $6$};
+\node at (3.0+1.5, 3.0+0.5) {\small $1$};
+\node at (3.0+2.5, 3.0+0.5) {\small $1$};
+\end{scope}
+\end{tikzpicture}\\
+&
+\onslide<8>{\inv(T) = 4,  \quad \xx^T = x_1^2x_2x_3x_4x_5^2x_6}
+\end{align*}
+\end{frame}
+\begin{frame}{Catalanimals}
+The \emph{Catalanimal} indexed by $R_q, R_t, R_{qt} \subseteq R_+$ and $\lambda \in \Z^n$ is
+\vspace{-.4mm}
+\begin{align*}
+H(R_q,R_t,R_{qt},\lambda)
+%\defeq
+ = \sigmabold
+ \bigg(\frac{\zz ^\lambda \prod_{\alpha \in
+R_{qt}} \big(1-q  t \zz ^\alpha \big)} {\prod_{\alpha \in R_q} \big(1-q \zz ^\alpha\big)
+\prod_{\alpha \in R_t} \big(1-t \zz ^\alpha\big)} 
+  \bigg).
+ %
+% \sum_{w \in \SS_n} w\bigg(\frac{\zz ^\lambda \prod_{\alpha \in
+%R_{qt}} \big(1-q\, t\, \zz ^\alpha \big)} {\prod_{\alpha \in R_+}
+%(1-\zz ^{-\alpha}) \prod_{\alpha \in R_q} \big(1-q \, \zz ^\alpha\big)
+%\prod_{\alpha \in R_t} \big(1-t \, \zz ^\alpha\big)}\bigg).
+ \\[-8.4mm]
+\end{align*}
+\pause
+With  $n=3$,
+%For  $n = 3$, $R_q = R_t = R_+ $, $R_{qt} = \{(1,3)\}$, and  $\lambda = 111$,
+\vspace{-3mm}
+\begin{align*}
+& \displaystyle H(R_+,R_+,\{\alpha_{13}\}, (111)) =
+\sigmabold \Big( \frac{\zz^{111} (1 - q t z_{1} /z_3)}
+{\prod_{1\le i < j \le 3}(1 - q z_{i}/ z_{j})(1 - t z_{i}/ z_{j})} \Big)  \\
+&  = s_{111} + (q+t+q^2+qt+t^2)s_{21}+ (qt + q^3+ q^2t + qt^2+t^3)s_{3} \\
+& = \omega \nabla e_3.
+\end{align*}
+%say "a symmetric rational function"
+\vspace{4mm}
+\end{frame}
+\begin{frame}{LLT Catalanimals}
+  For a tuple of skew shapes $\nubold$, the \emph{LLT Catalanimal} $H_{\nubold} = H(R_q,R_t, R_{qt}, \lambda)$
+is determined by
+\vspace{1mm}
+\begin{itemize}
+\item $R_+ \supseteq R_q \supseteq R_t \supseteq R_{qt}$,
+\item $R_+ \setminus R_q = $ pairs of boxes in the same diagonal,
+\item $R_q \setminus R_t \ = $ the attacking pairs,
+\item  $R_t \setminus R_{qt}  = $ pairs going between adjacent diagonals,
+\item $\lambda$: fill each diagonal $D$ of $\nubold$ with
+$1+\chi({\small \text{$D$ contains a row start}}) - \chi({\small \text{$D$ contains a row end}})$. \break
+Listing this filling in reading order gives  $\lambda$.
+%Then  $\lambda$ is the list of entries in the filling in reading order.
+\end{itemize}
+\end{frame}
+% \begin{frame}{LLT Catalanimals}
+%   \vspace{-2mm}
+
+% {\small
+% \begin{itemize}
+% \setlength{\itemsep}{-0.4mm}
+% \item[] \raisebox{-1mm}{
+%  \begin{tikzpicture}[scale = .4]
+% \draw[draw = none, fill = black!100] (2,-1) rectangle (3,-2);
+% \end{tikzpicture}} \
+% $R_+ \setminus R_q = $ pairs of boxes in the same diagonal,
+% \item[] \raisebox{-1mm}{
+%  \begin{tikzpicture}[scale = .4]
+% \draw[draw = none, fill = red!68] (2,-1) rectangle (3,-2);
+% \end{tikzpicture}} \
+% $R_q \setminus R_t \ = $ the attacking pairs,
+% \item[] \raisebox{-1mm}{
+% \begin{tikzpicture}[scale = .4]
+% \draw[thin, black!0] (2,-1) -- (3,-1);
+% \draw[thin, black!0] (2,-1) -- (2,-2);
+% \draw[thin, black!0] (2,-2) -- (3,-2);
+% \draw[thin, black!0] (3,-2) -- (3,-1);
+% \draw[draw = none, fill = gray!100] (2+0.5, -1-0.5) circle (.2);
+% \end{tikzpicture}} \
+%  $R_t \setminus R_{qt}  = $ pairs going between adjacent diagonals,
+% \item[]
+% \raisebox{-1mm}{
+%  \begin{tikzpicture}[scale = .4]
+% \draw[draw = none, fill = \qtrootcolor] (2,-1) rectangle (3,-2);
+% \end{tikzpicture}} \
+%  $R_{qt} = $ all other pairs,
+% \item[] $\lambda$: fill each diagonal $D$ of $\nubold$ with
+% $1+\chi({\small \text{$D$ contains a row start}}) - \chi({\small \text{$D$ contains a row end}})$.
+% \end{itemize}
+% }
+% \vspace{-5mm}
+
+% \begin{align*}
+% \raisebox{5mm}{\begin{tikzpicture}[scale = .52]
+% \begin{scope}
+% \draw[thick] (0,0) grid (4,1);
+% \draw[thick] (0,0) grid (3,3);
+% %
+% \only<1>{
+% \node at (0.5, 2.5) {\small $b_1$};
+% \node at (0.5, 1.5) {\small $b_2$};
+% \node at (1.5, 2.5) {\small $b_3$};
+% \node at (0.5, 0.5) {\small $b_4$};
+% \node at (1.5, 1.5) {\small $b_5$};
+% \node at (2.5, 2.5) {\small $b_6$};
+% \node at (1.5, 0.5) {\small $b_7$};
+% \node at (2.5, 1.5) {\small $b_8$};
+% \node at (2.5, 0.5) {\small $b_9$};
+% \node at (3.5, 0.5) {\small $b_{10}$};
+% \node[anchor=west] at (-0.7,-1.34) {\small $\nubold = ((433))$};
+% }
+% \only<2->{
+% \node at (0.5, 2.5) {\small $2$};
+% \node at (0.5, 1.5) {\small $2$};
+% \node at (1.5, 2.5) {\small $2$};
+% \node at (0.5, 0.5) {\small $1$};
+% \node at (1.5, 1.5) {\small $1$};
+% \node at (2.5, 2.5) {\small $1$};
+% \node at (1.5, 0.5) {\small $0$};
+% \node at (2.5, 1.5) {\small $0$};
+% \node at (2.5, 0.5) {\small $1$};
+% \node at (3.5, 0.5) {\small $0$};
+% \node[anchor=west] at (-0.7,-1.34) {\small $\lambda$, as a filling of $\nubold$};
+% }
+% \node[anchor=west] at (-0.7,-1.34) {\small \phantom{$\lambda$, as a filling of $\nubold$}};
+% \end{scope}
+% \end{tikzpicture}}
+% \qquad
+% \begin{tikzpicture}[scale = .43]
+% \draw[draw = none, fill = \qtrootcolor] (4,-1) rectangle (5,-2);
+%  \draw[draw = none, fill = \qtrootcolor] (5,-1) rectangle (6,-2);
+%  \draw[draw = none, fill = \qtrootcolor] (6,-1) rectangle (7,-2);
+%  \draw[draw = none, fill = \qtrootcolor] (7,-1) rectangle (8,-2);
+%  \draw[draw = none, fill = \qtrootcolor] (7,-2) rectangle (8,-3);
+%  \draw[draw = none, fill = \qtrootcolor] (7,-3) rectangle (8,-4);
+%  \draw[draw = none, fill = \qtrootcolor] (8,-1) rectangle (9,-2);
+%  \draw[draw = none, fill = \qtrootcolor] (8,-2) rectangle (9,-3);
+%  \draw[draw = none, fill = \qtrootcolor] (8,-3) rectangle (9,-4);
+%  \draw[draw = none, fill = \qtrootcolor] (9,-1) rectangle (10,-2);
+%  \draw[draw = none, fill = \qtrootcolor] (9,-2) rectangle (10,-3);
+%  \draw[draw = none, fill = \qtrootcolor] (9,-3) rectangle (10,-4);
+%  \draw[draw = none, fill = \qtrootcolor] (9,-4) rectangle (10,-5);
+%  \draw[draw = none, fill = \qtrootcolor] (9,-5) rectangle (10,-6);
+%  \draw[draw = none, fill = \qtrootcolor] (9,-6) rectangle (10,-7);
+%  \draw[draw = none, fill = \qtrootcolor] (10,-1) rectangle (11,-2);
+%  \draw[draw = none, fill = \qtrootcolor] (10,-2) rectangle (11,-3);
+%  \draw[draw = none, fill = \qtrootcolor] (10,-3) rectangle (11,-4);
+%  \draw[draw = none, fill = \qtrootcolor] (10,-4) rectangle (11,-5);
+%  \draw[draw = none, fill = \qtrootcolor] (10,-5) rectangle (11,-6);
+%  \draw[draw = none, fill = \qtrootcolor] (10,-6) rectangle (11,-7);
+%  \draw[draw = none, fill = \qtrootcolor] (10,-7) rectangle (11,-8);
+%  \draw[draw = none, fill = \qtrootcolor] (10,-8) rectangle (11,-9);
+%  \draw[draw = none, fill = gray!100] (2+0.5, -1-0.5) circle (.2);
+% \draw[draw = none, fill = gray!100] (3+0.5, -1-0.5) circle (.2);
+% \draw[draw = none, fill = gray!100] (4+0.5, -2-0.5) circle (.2);
+% \draw[draw = none, fill = gray!100] (5+0.5, -2-0.5) circle (.2);
+% \draw[draw = none, fill = gray!100] (6+0.5, -2-0.5) circle (.2);
+% \draw[draw = none, fill = gray!100] (4+0.5, -3-0.5) circle (.2);
+% \draw[draw = none, fill = gray!100] (5+0.5, -3-0.5) circle (.2);
+% \draw[draw = none, fill = gray!100] (6+0.5, -3-0.5) circle (.2);
+% \draw[draw = none, fill = gray!100] (7+0.5, -4-0.5) circle (.2);
+% \draw[draw = none, fill = gray!100] (8+0.5, -4-0.5) circle (.2);
+% \draw[draw = none, fill = gray!100] (7+0.5, -5-0.5) circle (.2);
+% \draw[draw = none, fill = gray!100] (8+0.5, -5-0.5) circle (.2);
+% \draw[draw = none, fill = gray!100] (7+0.5, -6-0.5) circle (.2);
+% \draw[draw = none, fill = gray!100] (8+0.5, -6-0.5) circle (.2);
+% \draw[draw = none, fill = gray!100] (9+0.5, -7-0.5) circle (.2);
+% \draw[draw = none, fill = gray!100] (9+0.5, -8-0.5) circle (.2);
+% \draw[draw = none, fill = gray!100] (10+0.5, -9-0.5) circle (.2);
+% \draw[thin, black!31] (1,-1) -- (11,-1);
+% \draw[thin, black!31] (2,-1) -- (2,-1);
+% \draw[thin, black!31] (2,-2) -- (11,-2);
+% \draw[thin, black!31] (3,-2) -- (3,-1);
+% \draw[thin, black!31] (3,-3) -- (11,-3);
+% \draw[thin, black!31] (4,-3) -- (4,-1);
+% \draw[thin, black!31] (4,-4) -- (11,-4);
+% \draw[thin, black!31] (5,-4) -- (5,-1);
+% \draw[thin, black!31] (5,-5) -- (11,-5);
+% \draw[thin, black!31] (6,-5) -- (6,-1);
+% \draw[thin, black!31] (6,-6) -- (11,-6);
+% \draw[thin, black!31] (7,-6) -- (7,-1);
+% \draw[thin, black!31] (7,-7) -- (11,-7);
+% \draw[thin, black!31] (8,-7) -- (8,-1);
+% \draw[thin, black!31] (8,-8) -- (11,-8);
+% \draw[thin, black!31] (9,-8) -- (9,-1);
+% \draw[thin, black!31] (9,-9) -- (11,-9);
+% \draw[thin, black!31] (10,-9) -- (10,-1);
+% \draw[thin, black!31] (10,-10) -- (11,-10);
+% \draw[thin, black!31] (11,-10) -- (11,-1);
+% \draw[draw = none, fill = black!100] (3,-2) rectangle (4,-3);
+%  \draw[draw = none, fill = black!100] (5,-4) rectangle (6,-5);
+%  \draw[draw = none, fill = black!100] (6,-4) rectangle (7,-5);
+%  \draw[draw = none, fill = black!100] (6,-5) rectangle (7,-6);
+%  \draw[draw = none, fill = black!100] (8,-7) rectangle (9,-8);
+%  \draw[thin] (1,-1) -- (2,-1);
+% \draw[thin] (2,-1) -- (2,-2);
+% \draw[thin] (2,-2) -- (3,-2);
+% \draw[thin] (3,-2) -- (3,-3);
+% \draw[thin] (3,-3) -- (4,-3);
+% \draw[thin] (4,-3) -- (4,-4);
+% \draw[thin] (4,-4) -- (5,-4);
+% \draw[thin] (5,-4) -- (5,-5);
+% \draw[thin] (5,-5) -- (6,-5);
+% \draw[thin] (6,-5) -- (6,-6);
+% \draw[thin] (6,-6) -- (7,-6);
+% \draw[thin] (7,-6) -- (7,-7);
+% \draw[thin] (7,-7) -- (8,-7);
+% \draw[thin] (8,-7) -- (8,-8);
+% \draw[thin] (8,-8) -- (9,-8);
+% \draw[thin] (9,-8) -- (9,-9);
+% \draw[thin] (9,-9) -- (10,-9);
+% \draw[thin] (10,-9) -- (10,-10);
+% \draw[thin] (10,-10) -- (11,-10);
+% \draw[thin] (11,-10) -- (11,-11);
+% \node at (3/2,-3/2) {\small $2 $};
+% \node at (5/2,-5/2) {\small $2 $};
+% \node at (7/2,-7/2) {\small $2 $};
+% \node at (9/2,-9/2) {\small $1 $};
+% \node at (11/2,-11/2) {\small $1 $};
+% \node at (13/2,-13/2) {\small $1 $};
+% \node at (15/2,-15/2) {\small $0 $};
+% \node at (17/2,-17/2) {\small $0 $};
+% \node at (19/2,-19/2) {\small $1 $};
+% \node at (21/2,-21/2) {\small $0 $};
+% \end{tikzpicture}
+% \end{align*}
+% \end{frame}
+\begin{frame}{LLT Catalanimals}
+  \vspace{-5mm}
+
+{\small
+\begin{itemize}
+\setlength{\itemsep}{-0.4mm}
+\item[] \raisebox{-1mm}{
+ \begin{tikzpicture}[scale = .4]
+\draw[draw = none, fill = black!100] (2,-1) rectangle (3,-2);
+\end{tikzpicture}} \
+$R_+ \setminus R_q = $ pairs of boxes in the same diagonal,
+\item[] \raisebox{-1mm}{
+ \begin{tikzpicture}[scale = .4]
+\draw[draw = none, fill = red!68] (2,-1) rectangle (3,-2);
+\end{tikzpicture}} \
+$R_q \setminus R_t \ = $ the attacking pairs,
+\item[] \raisebox{-1mm}{
+\begin{tikzpicture}[scale = .4]
+\draw[thin, black!0] (2,-1) -- (3,-1);
+\draw[thin, black!0] (2,-1) -- (2,-2);
+\draw[thin, black!0] (2,-2) -- (3,-2);
+\draw[thin, black!0] (3,-2) -- (3,-1);
+\draw[draw = none, fill = gray!100] (2+0.5, -1-0.5) circle (.2);
+\end{tikzpicture}} \
+ $R_t \setminus R_{qt}  = $ pairs going between adjacent diagonals,
+\item[]
+\raisebox{-1mm}{
+ \begin{tikzpicture}[scale = .4]
+\draw[draw = none, fill = \qtrootcolor] (2,-1) rectangle (3,-2);
+\end{tikzpicture}} \
+ $R_{qt} = $ all other pairs,
+\item[] $\lambda$: fill each diagonal $D$ of $\nubold$ with
+$1+\chi({\small \text{$D$ contains a row start}}) - \chi({\small \text{$D$ contains a row end}})$.
+\end{itemize}
+}
+\vspace{-5mm}
+
+\begin{align*}
+\hspace{-1cm}
+\raisebox{.3cm}{
+\begin{tikzpicture}[scale = .47]
+\begin{scope}
+\draw[help lines] (0,0) grid (6,5);
+\draw[thick] (0,1) grid (2,2);
+\draw[thick] (1,0) grid (3,1);
+%
+\draw[thick] (4,3) grid (6,5);
+\only<1>{
+\node at (0.5, 1.5) {\small $b_1$};
+\node at (1.5, 1.5) {\small $b_2$};
+\node at (1.5, 0.5) {\small $b_4$};
+\node at (2.5, 0.5) {\small $b_7$};
+%
+\node at (3.0+1.5, 3.0+1.5) {\small $b_3$};
+\node at (3.0+2.5, 3.0+1.5) {\small $b_6$};
+\node at (3.0+1.5, 3.0+0.5) {\small $b_5$};
+\node at (3.0+2.5, 3.0+0.5) {\small $b_8$};
+\node at (3,-1.34) {\small $\nubold$};
+}
+\only<2->{
+\node at (0.5, 1.5) {\small $\colorb{2}$};
+\node at (1.5, 1.5) {\small $\colorb{0}$};
+\node at (1.5, 0.5) {\small $\colorb{2}$};
+\node at (2.5, 0.5) {\small $\colorb{0}$};
+%
+\node at (3.0+1.5, 3.0+1.5) {\small $\colorg{2}$};
+\node at (3.0+2.5, 3.0+1.5) {\small $\colorg{1}$};
+\node at (3.0+1.5, 3.0+0.5) {\small $\colorg{1}$};
+\node at (3.0+2.5, 3.0+0.5) {\small $\colorg{0}$};
+\node at (3,-1.34) {\small $\lambda$, as a filling of $\nubold$};
+}
+\node at (3,-1.34) {\small \phantom{$\lambda$, as a filling of $\nubold$}};
+\end{scope}
+\end{tikzpicture}
+}
+\ \ \qquad
+\begin{tikzpicture}[scale = .47]
+\draw[draw = none, fill = \qtrootcolor] (3,-1) rectangle (4,-2);
+ \draw[draw = none, fill = \qtrootcolor] (4,-1) rectangle (5,-2);
+ \draw[draw = none, fill = \qtrootcolor] (5,-1) rectangle (6,-2);
+ \draw[draw = none, fill = \qtrootcolor] (5,-2) rectangle (6,-3);
+ \draw[draw = none, fill = \qtrootcolor] (6,-1) rectangle (7,-2);
+ \draw[draw = none, fill = \qtrootcolor] (6,-2) rectangle (7,-3);
+ \draw[draw = none, fill = \qtrootcolor] (7,-1) rectangle (8,-2);
+ \draw[draw = none, fill = \qtrootcolor] (7,-2) rectangle (8,-3);
+ \draw[draw = none, fill = \qtrootcolor] (7,-3) rectangle (8,-4);
+ \draw[draw = none, fill = \qtrootcolor] (8,-1) rectangle (9,-2);
+ \draw[draw = none, fill = \qtrootcolor] (8,-2) rectangle (9,-3);
+ \draw[draw = none, fill = \qtrootcolor] (8,-3) rectangle (9,-4);
+ \draw[draw = none, fill = \qtrootcolor] (8,-4) rectangle (9,-5);
+ \draw[draw = none, fill = gray!100] (2+0.5, -1-0.5) circle (.2);
+\draw[draw = none, fill = gray!100] (4+0.5, -2-0.5) circle (.2);
+\draw[draw = none, fill = gray!100] (5+0.5, -3-0.5) circle (.2);
+\draw[draw = none, fill = gray!100] (6+0.5, -3-0.5) circle (.2);
+\draw[draw = none, fill = gray!100] (7+0.5, -4-0.5) circle (.2);
+\draw[draw = none, fill = gray!100] (8+0.5, -5-0.5) circle (.2);
+\draw[draw = none, fill = gray!100] (8+0.5, -6-0.5) circle (.2);
+\draw[draw = none, fill = red!68] (3,-2) rectangle (4,-3);
+ \draw[draw = none, fill = red!68] (4,-3) rectangle (5,-4);
+ \draw[draw = none, fill = red!68] (5,-4) rectangle (6,-5);
+ \draw[draw = none, fill = red!68] (6,-4) rectangle (7,-5);
+ \draw[draw = none, fill = red!68] (7,-5) rectangle (8,-6);
+ \draw[draw = none, fill = red!68] (7,-6) rectangle (8,-7);
+ \draw[draw = none, fill = red!68] (8,-7) rectangle (9,-8);
+ \draw[thin, black!31] (1,-1) -- (9,-1);
+\draw[thin, black!31] (2,-1) -- (2,-1);
+\draw[thin, black!31] (2,-2) -- (9,-2);
+\draw[thin, black!31] (3,-2) -- (3,-1);
+\draw[thin, black!31] (3,-3) -- (9,-3);
+\draw[thin, black!31] (4,-3) -- (4,-1);
+\draw[thin, black!31] (4,-4) -- (9,-4);
+\draw[thin, black!31] (5,-4) -- (5,-1);
+\draw[thin, black!31] (5,-5) -- (9,-5);
+\draw[thin, black!31] (6,-5) -- (6,-1);
+\draw[thin, black!31] (6,-6) -- (9,-6);
+\draw[thin, black!31] (7,-6) -- (7,-1);
+\draw[thin, black!31] (7,-7) -- (9,-7);
+\draw[thin, black!31] (8,-7) -- (8,-1);
+\draw[thin, black!31] (8,-8) -- (9,-8);
+\draw[thin, black!31] (9,-8) -- (9,-1);
+\draw[draw = none, fill = black!100] (6,-5) rectangle (7,-6);
+ \draw[thin] (1,-1) -- (2,-1);
+\draw[thin] (2,-1) -- (2,-2);
+\draw[thin] (2,-2) -- (3,-2);
+\draw[thin] (3,-2) -- (3,-3);
+\draw[thin] (3,-3) -- (4,-3);
+\draw[thin] (4,-3) -- (4,-4);
+\draw[thin] (4,-4) -- (5,-4);
+\draw[thin] (5,-4) -- (5,-5);
+\draw[thin] (5,-5) -- (6,-5);
+\draw[thin] (6,-5) -- (6,-6);
+\draw[thin] (6,-6) -- (7,-6);
+\draw[thin] (7,-6) -- (7,-7);
+\draw[thin] (7,-7) -- (8,-7);
+\draw[thin] (8,-7) -- (8,-8);
+\draw[thin] (8,-8) -- (9,-8);
+\draw[thin] (9,-8) -- (9,-9);
+\node at (3/2,-3/2) {\small $\colorb{2} $};
+\node at (5/2,-5/2) {\small $\colorb{0} $};
+\node at (7/2,-7/2) {\small $\colorg{2} $};
+\node at (9/2,-9/2) {\small $\colorb{2} $};
+\node at (11/2,-11/2) {\small $\colorg{1} $};
+\node at (13/2,-13/2) {\small $\colorg{1} $};
+\node at (15/2,-15/2) {\small $\colorb{0} $};
+\node at (17/2,-17/2) {\small $\colorg{0} $};
+\end{tikzpicture}
+\end{align*}
+\end{frame}
+\begin{frame}{LLT Catalanimals}
+\begin{theorem}[Blasiak-Haiman-Morse-Pun-S.]
+Let  $\nubold$ be a tuple of skew shapes 
+and let $H_{\nubold} = H(R_q,R_t,R_{qt}, \lambda)$ be the associated LLT Catalanimal. Then
+ %we have the following raising operator style formula for  $\nabla$ applied to the associated LLT polynomial:
+ \vspace{-2mm}
+\begin{align*}
+\nabla \Gcal_{\nubold}(X;q)
+& = c_\nubold\,\omega \pol_X (H_{\nubold})
+\\
+& = c_\nubold  \, \omega \pol_X \sigmabold
+ \bigg(\frac{\zz ^\lambda \prod_{\alpha \in
+R_{qt}} \big(1-q t\, \zz ^\alpha \big)} {\prod_{\alpha \in R_q} \big(1-q \, \zz ^\alpha\big)
+\prod_{\alpha \in R_t} \big(1-t \, \zz ^\alpha\big)}\bigg)
+\end{align*}
+for some $c_\nubold \in \pm q^\Z t^{\Z}$.
+%$A = A(\nubold)$ is the number of attacking pairs in  $\nubold$,%and $p = p(\nubold)$, $\gamma = \gamma(\nubold)$ are the magic number and diagonal lengths of $\nubold$.
+\end{theorem}
+\end{frame}
+\begin{frame}{Haglund-Haiman-Loehr formula}
+  \begin{theorem}[Haglund-Haiman-Loehr, 2005]
+    \[
+      \Htild_\mu(X;q,t) = \sum_D \left( \prod_{u \in D} q^{-\arm(u)}
+        t^{\leg(u)+1}\right) \Gcal_{\nubold(\mu,D)}(X;q)\,,
+    \]
+    where
+    \begin{itemize}
+    \item the sum runs over all subsets
+      \(D \subset \{(i,j) \in \mu \mid j > 1\}\), and
+    \item \(\nubold(\mu,D) = (\nu^{(1)}, \ldots, \nu^{(k)})\) where
+      \(k=\mu_1\) is the number of columns of \(\mu\), and
+      \(\nu^{(i)}\) is a ribbon of size \(\mu_i^*\), i.e., box contents
+      \(\{-1,-2,\ldots,-\mu_i^*\}\), and descent set
+      \(Des(\nu^{(i)}) = \{-j \mid (i,j) \in D\}\).
+    \end{itemize}
+  \end{theorem}
+\end{frame}
+\begin{frame}{Haglund-Haiman-Loehr formula example}
+  \begin{equation*}
+        \begin{tikzpicture}[scale=0.65]
+      \drawDg{3,2}{0}{0} \setcounter{boxnum}{1};
+      \foreach \x\y in
+      {1/3,1/2,2/2,1/1,2/1} { \node at (\x-0.5,\y-0.5) {\footnotesize
+          $b_{\theboxnum}$}; \addtocounter{boxnum}{1}; };
+      \node at (1,-.58) {$\mu$};
+    \end{tikzpicture}
+  \end{equation*}
+\begin{equation*}
+  % \vspace{1mm}
+  %       \begin{tikzpicture}[scale=0.6]
+  %     \drawDg{3,2}{0}{0} \foreach \x\y in {1/3,2/2} { \node at
+  %       (\x-0.5,\y-0.5) {$0$}; } \node at (0.5,1.5) {$1$};
+  %     \node at (1,-0.62) {\footnotesize \phantom{l}arms\phantom{g}};
+  %   \end{tikzpicture}
+    % \quad
+    % \begin{tikzpicture}[scale=0.6]
+    %   \drawDg{3,2}{0}{0} \foreach \x\y in {1/3,2/2} { \node at
+    %     (\x-0.5,\y-0.5) {$0$}; } \node at (0.5,1.5) {$1$};
+    %   \node at (1,-0.62) {\footnotesize legs};
+    % \end{tikzpicture}
+    \begin{tabular}{rccl}
+    \begin{tikzpicture}[scale=0.3]
+      \draw [dashed,gray] (-0.5,1.5)--(3.5,5.5); \draw [dashed,gray]
+      (-0.5,0.5)--(3.5,4.5); \draw [dashed,gray]
+      (-0.5,-0.5)--(3.5,3.5); \drawskewdg{0/1,0/1,0/1}{0}
+      \drawskewdg{0/1,0/1}{2}
+      \setcounter{boxnum}{1};
+      \foreach \x\y in {1/3,1/2,3/4,1/1,3/3} {
+        \node at (\x-0.5,\y-0.5) {\tiny \theboxnum};
+        \addtocounter{boxnum}{1};
+      }
+      \node at (1.5,-1.5) {\footnotesize\(D = \{b_1,b_2,b_3\}\)};
+      \node at (3.5,0.5) {\(q^{\shortminus 1}t^4\)};
+    \end{tikzpicture}&
+    \begin{tikzpicture}[scale=0.3]
+      \draw [dashed,gray] (-0.5,1.5)--(2.5,4.5); \draw [dashed,gray]
+      (-0.5,0.5)--(3.5,4.5); \draw [dashed,gray]
+      (-0.5,-0.5)--(3.5,3.5); \drawskewdg{0/1,-1/1}{0}
+      \drawskewdg{0/1,0/1}{2}
+      \setcounter{boxnum}{1};
+      \foreach \x\y in {0/2,1/2,3/4,1/1,3/3} {
+        \node at (\x-0.5,\y-0.5) {\tiny \theboxnum};
+        \addtocounter{boxnum}{1};
+      }
+      \node at (1.5,-1.5) {\footnotesize \(D = \{b_2,b_3\}\)};
+      \node at (3.5,0.5) {\(q^{\shortminus 1}t^3\)};
+    \end{tikzpicture}&
+    \begin{tikzpicture}[scale=0.3]
+      \draw [dashed,gray] (-0.5,1.5)--(3.5,5.5); \draw [dashed,gray]
+      (-0.5,0.5)--(3.5,4.5); \draw [dashed,gray]
+      (-0.5,-0.5)--(4.5,4.5); \drawskewdg{0/1,0/1,0/1}{0}
+      \drawskewdg{-1/1}{3}
+      \setcounter{boxnum}{1};
+      \foreach \x\y in {1/3,1/2,3/4,1/1,4/4} {
+        \node at (\x-0.5,\y-0.5) {\tiny \theboxnum};
+        \addtocounter{boxnum}{1};
+      }
+      \node at (1.5,-1.5) {\footnotesize \(D = \{b_1,b_2\}\)};
+      \node at (3.5,0.5) {\(q^{\shortminus 1}t^3\)};
+    \end{tikzpicture}&
+    \begin{tikzpicture}[scale=0.3]
+      \draw [dashed,gray] (-1.5,0.5)--(3.5,5.5); \draw [dashed,gray]
+      (-1.5,-0.5)--(3.5,4.5); \draw [dashed,gray]
+      (-0.5,-0.5)--(3.5,3.5); \drawskewdg{-1/1,-1/0}{0}
+      \drawskewdg{0/1,0/1}{2}
+      \setcounter{boxnum}{1};
+      \foreach \x\y in {0/2,0/1,3/4,1/1,3/3} {
+        \node at (\x-0.5,\y-0.5) {\tiny \theboxnum};
+        \addtocounter{boxnum}{1};
+      }
+      \node at (1.5,-1.5) {\footnotesize \(D = \{b_1,b_3\}\)};
+      \node at (3.5,0.5) {\(t^2\)};
+    \end{tikzpicture}\\
+    \begin{tikzpicture}[scale=0.3]
+      \draw [dashed,gray] (-0.5,1.5)--(2.5,4.5); \draw [dashed,gray]
+      (-0.5,0.5)--(3.5,4.5); \draw [dashed,gray]
+      (-0.5,-0.5)--(4.5,4.5); \drawskewdg{0/1,-1/1}{0}
+      \drawskewdg{-1/1}{3}
+      \setcounter{boxnum}{1};
+      \foreach \x\y in {0/2,1/2,3/4,1/1,4/4} {
+        \node at (\x-0.5,\y-0.5) {\tiny \theboxnum};
+        \addtocounter{boxnum}{1};
+      }
+      \node at (1.5,-1.5) {\footnotesize \(D = \{b_2\}\)};
+      \node at (3.5,0.5) {\(q^{\shortminus 1}t^2\)};
+    \end{tikzpicture}&
+    \begin{tikzpicture}[scale=0.3]
+      \draw [dashed,gray] (-1.5,0.5)--(2.5,4.5); \draw [dashed,gray]
+      (-1.5,-0.5)--(3.5,4.5); \draw [dashed,gray]
+      (-0.5,-0.5)--(3.5,3.5); \drawskewdg{-2/1}{0}
+      \drawskewdg{0/1,0/1}{2}
+      \setcounter{boxnum}{1};
+      \foreach \x\y in {-1/1,0/1,3/4,1/1,3/3} {
+        \node at (\x-0.5,\y-0.5) {\tiny \theboxnum};
+        \addtocounter{boxnum}{1};
+      }
+      \node at (1.5,-1.5) {\footnotesize \(D = \{b_3\}\)};
+      \node at (3.5,0.5) {\(t\)};
+    \end{tikzpicture}&
+    \begin{tikzpicture}[scale=0.3]
+      \draw [dashed,gray] (-1.5,0.5)--(2.5,4.5); \draw [dashed,gray]
+      (-1.5,-0.5)--(2.5,3.5); \draw [dashed,gray] (-0.5,-0.5)--(3.5,3.5);
+      \drawskewdg{-1/1,-1/0}{0} \drawskewdg{-1/1}{2}
+      \setcounter{boxnum}{1};
+      \foreach \x\y in {0/2,0/1,2/3,1/1,3/3} {
+        \node at (\x-0.5,\y-0.5) {\tiny \theboxnum};
+        \addtocounter{boxnum}{1};
+      }
+      \node at (1.5,-1.5) {\footnotesize \(D = \{b_1\}\)};
+      \node at (3.5,0.5) {\(t\)};
+    \end{tikzpicture}&
+    \begin{tikzpicture}[scale=0.3]
+      \draw [dashed,gray] (-1.5,0.5)--(1.5,3.5); \draw [dashed,gray]
+      (-1.5,-0.5)--(2.5,3.5); \draw [dashed,gray] (-0.5,-0.5)--(3.5,3.5);
+      \drawskewdg{-2/1}{0} \drawskewdg{-1/1}{2}
+      \setcounter{boxnum}{1};
+      \foreach \x\y in {-1/1,0/1,2/3,1/1,3/3} {
+        \node at (\x-0.5,\y-0.5) {\tiny \theboxnum};
+        \addtocounter{boxnum}{1};
+      }
+      \node at (1.5,-1.5) {\footnotesize \(D = \varnothing\)};
+      \node at (3.5,0.5) {\(1\)};
+    \end{tikzpicture}
+    \end{tabular}
+\end{equation*}
+\end{frame}
+\begin{frame}{Putting it all together}
+  \begin{itemize}
+  \item Take HHL formula \(\Htild_\mu = \sum_D a_{\mu, D}
+    \Gcal_{\nubold(\mu, D)}\) and apply \(\omega \nabla\).\pause
+  \item By construction, all the LLT Catalanimals 
+    \(H_{\nubold(\mu,D)}\) appearing on the LHS will have the same
+    root ideal data (\(R_q, R_t, R_{qt}\)). \pause
+  \item Collect terms to get \(\prod_{\alpha_{ij} \in R_\mu \setminus
+      \widehat{R}_\mu)}(1-q^{\arm(b_i)+1} t^{-\leg(b_i)} z_i/z_j)\)
+      factor. 
+  \end{itemize}
+{\small \begin{align*}
+          \Htild_\mu =
+          \omega \sigmabold \Bigg( z_1 \cdots z_n
+\frac{
+\displaystyle\colorb{\prod_{\alpha_{ij} \in R_\mu \setminus \widehat{R}_\mu }
+ \raisebox{-1.4mm}{$\big(1- q^{\arm(b_i)+1} t^{-\leg(b_i)} z_i/z_j \big)$}}
+\displaystyle\prod_{\alpha \in \widehat{R}_{\mu}}
+ \raisebox{-1.4mm}{$\big(1-q  t\zz^\alpha \big)$} } {\prod_{\alpha \in R_+} \big(1-q  \zz^\alpha\big)
+\prod_{\alpha \in R_\mu} \big(1-t  \zz^\alpha\big)} 
+           \Bigg).
+\end{align*}}
+\end{frame}
+\begin{frame}{Elliptic Hall Algebra}
+  Burban and Schiffmann studied a subalgebra  $\mathcal{E}$
+of the Hall algebra of coherent sheaves on an elliptic curve over
+$\mathbb{F}_p$. \\
+
+\ \\
+
+The \emph{elliptic Hall algebra} $\Ecal$ is generated by subalgebras $\Lambda(X^{a,b})$
+isomorphic to the ring of symmetric functions  $\Lambda$ over $\kk = \Q(q,t)$,
+one for each coprime pair $(a,b) \in \Z^2$, along with an additional
+central subalgebra.
+\end{frame}
+\begin{frame}{Shuffle algebra}
+  Define a linear map
+\vspace{-2.3mm}
+\begin{align*}
+\sigma_\Gamma \colon \bigoplus_n \kk(z_1,\ldots,z_n) \to \bigoplus_n \kk(z_1,\ldots,z_n)^{\SS_n} \\[-10mm]
+\end{align*}
+whose graded components  $\sigma_\Gamma^n$ are given by
+\vspace{-1.4mm}
+\begin{align*}
+ \sigma_\Gamma^{n} \colon \kk (z_{1},\ldots,z_{n}) \to \kk (z_{1},\ldots,z_{n})^{S_n} \\[-11mm]
+\end{align*}
+\begin{align*}
+ \sigma_\Gamma^{n}(f) = \sum _{w\in \SS_{n}}
+w\bigl(f(z_{1},\ldots,z_{n})\prod _{1 \le i<j \le n}\Gamma
+  (z_{i},z_{j})\bigr), \\
+  \text{where }\Gamma(z_i,z_j) = \frac{1-qt z_i/z_j}{(1-z_j/z_i)(1-q z_i/z_j)(1-tz_i/z_j)}
+\end{align*}
+The \emph{shuffle algebra}  $\Scal_\Gamma$ is the  image of
+$\bigoplus _{n} \kk[z_{1}^{\pm 1},\ldots,z_n^{\pm 1}]$ under the map $\sigma_\Gamma$,
+equipped with a variant of the concatenation product.
+\end{frame}
+\begin{frame}{Shuffle to elliptic Hall isomorphism}
+  \begin{itemize}
+\item The \emph{right half-plane subalgebra} $\Ecal^{+}\subset \Ecal$
+is generated by $\Lambda (X^{a,b})$ for $a>0$.
+\item  $\Scal_\Gamma = \sigma_\Gamma\left( \bigoplus_n \kk[z_{1}^{\pm 1},\ldots,z_n^{\pm 1}] \right)$  ($\Gamma$-symmetrized Laurent polynomials).
+\end{itemize}
+
+\vspace{3mm}
+
+\begin{theorem}[Schiffmann-Vasserot]
+There is an algebra isomorphism
+$\psi \colon \Scal_\Gamma \rightarrow \Ecal ^{+}$.
+% given on the generators  $z_1 \in \kk[z_1^{\pm 1}] \subset \Scal_\Gamma$
+%by $\psi (z_1^{a}) = p_{1}[-MX^{1,a}]$ for  $a \in \ZZ$.
+\end{theorem}
+\end{frame}
+\begin{frame}{Catalanimals in the shuffle algebra}
+  For  $\lambda \in \Z^n$,
+\vspace{-3mm}
+%"decode Gamma, and you get back Catalanimals"
+\begin{align*}
+\sigma_\Gamma^n(\zz^\lambda) &=
+\sum_{w \in S_n} w\bigg(\frac{\zz ^\lambda \prod_{\alpha \in R_+}
+\big(1-q t \zz ^\alpha \big)}
+{\prod_{\alpha \in R_+}\big(\big(1-\zz ^{-\alpha}\big) \big(1-q  \zz ^\alpha\big)
+ \big(1-t \zz ^\alpha\big)\big)}
+\bigg)
+ \\
+&= H(R_+,R_+,R_+,\lambda)  \in \Scal_\Gamma.
+\end{align*}
+Technicality: we have redefined \(\sigmabold(\zz^\gamma) = \sum_{w \in
+S_n}\left( \frac{\zz^\gamma}{\prod_{\alpha\in R_+}(1-\zz^{-\alpha})}
+\right) = \chi_\gamma\),
+the irreducible \(\GL_n\) character.
+\end{frame}
+\begin{frame}{Catalanimals in the Shuffle algebra}
+ $\sigma_\Gamma^n(f)$ can lie in  $\Scal_\Gamma$ even when  $f$ is not a Laurent polynomial.
+\begin{theorem}[Negut]
+The following family of Catalanimals lie in the shuffle algebra:
+\vspace{-3mm}
+\begin{align*}
+& \sigma_\Gamma^n\Big(\frac{\zz^\lambda}{\prod_{i=1}^{n-1} (1-qt z_i/z_{i+1}) }\Big)
+= H(R_+,R_+,R_+',\lambda) \in \Scal_\Gamma,
+\end{align*}
+where  \ \, $R_+' = \{ \alpha_{ij} \in R_+ \mid i+1 < j \}.$
+\end{theorem}
+\end{frame}
+\begin{frame}{}
+  
+\end{frame}
+\end{document}
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
