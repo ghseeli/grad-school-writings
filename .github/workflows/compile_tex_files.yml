@@ -58,6 +58,7 @@ jobs:
         write_section_links "presentations" "presentations.md" "Presentations" ""
         cd ..
     - name: Upload compiled PDF files
+      uses: actions/upload-artifact@v2
       with:
         name: compiled-pdfs
         path: |
