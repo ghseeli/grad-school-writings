@@ -3,10 +3,10 @@ name: Compile and Upload LaTeX Files
 on:
   push:
     branches:
-      - main
+      - master
   pull_request:
     branches:
-      - main
+      - master
 
 jobs:
   build:
