@@ -108,12 +108,12 @@ X\).'' Similarly, one can think of \(\rho_V^U\) as a restriction map.
     instead letting \(F(U)\) be all locally constant functions from
     \(U\).
   \item Given \(Y\) as another topological space, recall that, given a
-    map \(\pi \from Y \to X\), a section \(\sigma \from X \to Y\) is a
+    fixed map \(\pi \from Y \to X\), a section \(\sigma \from X \to Y\) is a
     continuous map such that \(\sigma \circ \pi = id_X\). Then, we can
-    define the \de{presheaf of sections} by defining, for
+    define the \de{presheaf of sections} (with respect to \(\pi\)) by defining, for
     \(U \subset X\), \[
       F(U) = \{\phi \from U \to Y \text{ continuous} \st \pi \circ
-      \phi = id_U\}
+      \phi = id_U\}\,.
     \]
   \item Given any presheaf \(F\) on \(X\), we can restrict it to an
     open subset \(W \subset X\) by taking only the \(F(U)\) where \(U
@@ -622,7 +622,7 @@ this setting.
 \begin{prop}\todo{Double check these are true.}
   \begin{enumerate}
   \item Given an \(s \in \F_x\), there exists some open neighborhood
-    \(U\) of \(x\) and some \(t \in U\) such that \(\rho^U_x(t) = s\).
+    \(U\) of \(x\) and some \(t \in \F(U)\) such that \(\rho^U_x(t) = s\).
   \item Given a homomorphism of presheaves \(\phi \from \F \to \G\),
     we have \[
       \rho^U_x(\G) \circ \phi_U = \phi_x \circ \rho^U_x(\F)
@@ -1158,3 +1158,7 @@ Our first goal is to show that \(\Gamma\) is a sheaf.
   \end{biblist}
 \end{bibdiv}
 \end{document}
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
