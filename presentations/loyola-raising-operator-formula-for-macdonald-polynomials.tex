@@ -245,10 +245,48 @@ Based on arXiv:2112.07063 and arXiv:2307.06517
   \item LLT polynomials in the elliptic Hall algebra
   \end{enumerate}
 \end{frame}
+\begin{frame}{Symmetric Group}
+  \begin{itemize}
+  \item Permutations \(\sigma \from \{1,2,\ldots,n\} \to \{1,2,\ldots,n\}\):\pause \[
+\left(
+  \begin{matrix}
+    1 & 2 & 3 & 4\\
+    2 & 3 & 1 & 4 
+  \end{matrix}
+\right) = 
+      \begin{tikzpicture}[scale = 0.5,thick, baseline={(0,-1ex/2)}] 
+        \tikzstyle{vertex} = [shape = circle, minimum size = 7pt, inner sep = 1pt] 
+        \node[vertex] (G--4) at (4.5, -1) [shape = circle, draw] {}; 
+        \node[vertex] (G-4) at (4.5, 1) [shape = circle, draw] {}; 
+        \node[vertex] (G--3) at (3.0, -1) [shape = circle, draw] {}; 
+        \node[vertex] (G-2) at (1.5, 1) [shape = circle, draw] {}; 
+        \node[vertex] (G--2) at (1.5, -1) [shape = circle, draw] {}; 
+        \node[vertex] (G-1) at (0.0, 1) [shape = circle, draw] {}; 
+        \node[vertex] (G--1) at (0.0, -1) [shape = circle, draw] {}; 
+        \node[vertex] (G-3) at (3.0, 1) [shape = circle, draw] {}; 
+        \draw[] (G-4) .. controls +(0, -1) and +(0, 1) .. (G--4); 
+        \draw[] (G-2) .. controls +(0.75, -1) and +(-0.75, 1) .. (G--3); 
+        \draw[] (G-1) .. controls +(0.75, -1) and +(-0.75, 1) .. (G--2); 
+        \draw[] (G-3) .. controls +(-1, -1) and +(1, 1) .. (G--1); 
+      \end{tikzpicture}
+    \] \pause
+    \item For \(f \in \Q[x_1,\ldots,x_n]\) multivariate polynomial,
+    \(\sigma \in S_n\) acts as \(\sigma.f(x_1,x_2,\ldots,x_n) =
+    f(x_{\sigma(1)}, x_{\sigma(2)},\ldots,x_{\sigma(n)})\)
+  \end{itemize}
+    \[
+      \left(
+        \begin{matrix}
+          1 & 2 & 3\\
+          3 & 2 & 1
+        \end{matrix}
+      \right) (5x_1^2+5x_2^2+8x_3^2) = 8x_1^2+5x_2^2+5x_3^2
+    \]
+\end{frame}
 \begin{frame}
   \frametitle{Symmetric Polynomials}
   \begin{itemize}
-  \item Polynomials \(f \in \Q(q,t)[x_1,\ldots,x_n]\) satisfying \(\sigma.f
+  \item Polynomials \(f \in \Q[x_1,\ldots,x_n]\) satisfying \(\sigma.f
     = f\) for all \(\sigma \in S_n\).\pause
     \begin{block}{Generators}
     \[
@@ -268,9 +306,9 @@ Based on arXiv:2112.07063 and arXiv:2307.06517
                           x_2^2 + \cdots
     \end{align*} \pause
     \item Let \(\sym =
-      \Q(q,t)[e_1,e_2,\ldots] = \Q(q,t)[h_1,h_2,\ldots]\). Call these
+      \Q[e_1,e_2,\ldots] = \Q[h_1,h_2,\ldots]\). Call these
       ``symmetric functions.''\pause
-    \item \(\sym\) is a \(\Q(q,t)\)-algebra.
+    \item \(\sym\) is a \(\Q\)-algebra.
   \end{itemize}
 \end{frame}
 \begin{frame}
@@ -325,7 +363,7 @@ Based on arXiv:2112.07063 and arXiv:2307.06517
     s_{(2,1)}(x_1,x_2,x_3) = x_1^2x_2+x_1^2x_3+x_2^2x_3+x_1x_2^2+x_1x_3^2+x_2x_3^2+2x_1x_2x_3
   \]\pause
   \begin{definition}
-    For \(\lambda\) a partition \[
+    For \(\lambda\) a partition, set \[
       s_\lambda = \sum_{T \in \SSYT(\lambda)} \xx^T \text{ for }\xx^T = \prod_{i
         \in T} x_i
     \]
@@ -333,7 +371,7 @@ Based on arXiv:2112.07063 and arXiv:2307.06517
   \pause
   \begin{itemize}
   \item \(s_\lambda\) is a symmetric function.\pause
-  \item \(\{s_\lambda\}_\lambda\) forms a basis for \(\sym_\Q\).
+  \item \(\{s_\lambda\}_\lambda\) forms a basis for \(\sym\).
   \end{itemize}
 \end{frame}
 \begin{frame}{Symmetric functions and Schur functions}
@@ -362,7 +400,7 @@ Based on arXiv:2112.07063 and arXiv:2307.06517
 \item $\sort(\beta) = $ weakly decreasing sequence obtained by sorting $\beta$,
 \vspace{-1mm}
 \item $\sgn(\beta) =$ sign of the shortest permutation taking $\beta$ to $\sort(\beta)$.
-\end{itemize} \pause
+\end{itemize}
 Example: \(s_{201} = 0, s_{2\text{-}11} = -s_{200}\).
 \end{frame}
 \begin{frame}
