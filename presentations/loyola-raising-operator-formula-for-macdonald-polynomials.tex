@@ -293,9 +293,10 @@ Based on arXiv:2112.07063 and arXiv:2307.06517
     1+1+1+1+1 \to&\ \ydiagram{1,1,1,1,1}\\
     3+1+1 \to &\ \ydiagram{1,1,3}
   \end{align*}\pause
-  \(\implies\) any basis of symmetric functions is indexed by partitions.
+  \(\implies\) any basis of degree \(d\) symmetric functions 
+  can be indexed by partitions of \(d\).
 \end{frame}
-\begin{frame}{Young Tableaux}
+\begin{frame}{Semistandard Young Tableaux}
   \begin{definition}
     Filling of partition diagram of \(\lambda\) with numbers such that\pause
     \begin{enumerate}
@@ -344,7 +345,10 @@ Based on arXiv:2112.07063 and arXiv:2307.06517
         \leq n}
     \] \pause
   \end{itemize}
-  Then, for \(\rho = (n-1,n-2, \ldots, 1,0)\),
+  Then, \(s_\gamma = \pm s_\lambda\) or 0 for some partition
+  \(\lambda\). \pause\\
+  
+  Precisely, for \(\rho = (n-1,n-2, \ldots, 1,0)\),
   \[
     s_\gamma = 
 \begin{cases}
@@ -365,9 +369,11 @@ Example: \(s_{201} = 0, s_{2\text{-}11} = -s_{200}\).
   \frametitle{Representation theory and Schur functions}
   Frobenius charactersitc, \(\operatorname{Frob}\from Rep(S_n) \to \Lambda\). \pause
     \begin{itemize}
-    \item Irreducible \(S_n\)-representation
-      \(V_\lambda \mapsto s_\lambda\) \pause
-    \item \(0 \to U \to V \to W \to 0 \implies \operatorname{Frob}(W) = \operatorname{Frob}(U)+\operatorname{Frob}(V)\)\pause
+    \item Irreducible representations of \(S_n\) are labeled by
+      partitions of \(n\). \pause
+    \item Irreducible \(S_n\)-representation \(V_\lambda\) has 
+      \(\operatorname{Frob}(V_\lambda) = s_\lambda\) \pause
+    \item \(U \isom V \oplus W \implies \operatorname{Frob}(U) = \operatorname{Frob}(V)+\operatorname{Frob}(W)\)\pause
     \item \(\Ind_{S_m \times S_n}^{S_{m+n}} (V \times W) \mapsto
       \operatorname{Frob}(V) \cdot \operatorname{Frob}(W)\) \pause
     \item Upshot: \(S_n\)-representations go to symmetric functions in
@@ -380,7 +386,7 @@ Example: \(s_{201} = 0, s_{2\text{-}11} = -s_{200}\).
      are interesting since they could have representation-theoretic models.
   \end{block}
 \end{frame}
-\begin{frame}{Harmonic polynomials}
+\begin{frame}{An Example: Harmonic polynomials}
   \begin{block}{Harmonic polynomials}
    \(M =\) polynomials killed by all symmetric differential
    operators.
@@ -413,7 +419,8 @@ Example: \(s_{201} = 0, s_{2\text{-}11} = -s_{200}\).
        x_3-x_1, x_2-x_3,1\}
   \]\pause 
   \begin{enumerate}
-\item Break \(M\) up into irreducible \(S_n\)-representations. \pause
+\item Break \(M\) up into irreducible \(S_n\)-representations
+  (smallest \(S_n\) fixed subspaces). \pause
   \ytableausetup{boxsize=0.75em,aligntableaux=top}
   \[
     \hspace{-2.9em}
@@ -435,7 +442,7 @@ Example: \(s_{201} = 0, s_{2\text{-}11} = -s_{200}\).
 \end{frame}
 \begin{frame}{Getting more information}
   \pause
-  Break \(M\) up into smallest \(S_n\) fixed subspaces 
+  Break \(M\) up into irreducible representations.
   \ytableausetup{boxsize=0.75em,aligntableaux=top}
   \[
     \hspace{-0.75em}
@@ -459,11 +466,11 @@ Example: \(s_{201} = 0, s_{2\text{-}11} = -s_{200}\).
     polynomials with coefficients in \(\Q(q,t)\) generalizing
     Hall-Littlewood polynomials (and many other famous bases).\pause
   \item Defined by orthogonality and triangularity under a certain
-    inner-product. \pause
+    inner-product. (Indirect) \pause
   \item Garsia modifies these polynomials so 
     \[
-      \tilde{H}_\lambda(X;q,t) = \sum_\mu \tilde{K}(q,t) s_\mu \text{
-        conjecturally satisfies }\tilde{K}(q,t) \in \N[q,t]
+      \tilde{H}_\lambda(X;q,t) = \sum_\mu \tilde{K}_{\lambda\mu}(q,t) s_\mu \text{
+        conjecturally satisfies }\tilde{K}_{\lambda \mu}(q,t) \in \N[q,t]
     \]\pause
   \item \(\tilde{H}_\lambda(X;1,1) = e_1^{|\lambda|}\).\pause
   \item Does there
@@ -505,13 +512,13 @@ Example: \(s_{201} = 0, s_{2\text{-}11} = -s_{200}\).
   \frametitle{Garsia-Haiman modules}
   \begin{theorem}[Haiman, 2001]
     The Garsia-Haiman module \(M_\lambda\) has bigraded Frobenius
-    characteristic given by \(\tilde{H}_\lambda(X;q,t)\)
+    characteristic given by \(\tilde{H}_\lambda(X;q,t)\).
   \end{theorem}\pause
   \begin{itemize}
   \item Proved via connection to the Hilbert Scheme \(Hilb^n(\C^2)\).\pause
   \end{itemize}
   \begin{corollary}
-    \(\tilde{H}_\lambda(X;q,t) = \tilde{K}_{\lambda \mu}(q,t) s_\mu\)
+    \(\tilde{H}_\lambda(X;q,t) = \sum_\mu \tilde{K}_{\lambda \mu}(q,t) s_\mu\)
     satisfies \(\tilde{K}_{\lambda \mu}(q,t) \in \N[q,t]\).
   \end{corollary}\pause
   \begin{itemize}
@@ -1335,7 +1342,7 @@ $\xx ^{T} = \prod _{a\in \nubold  } x_{T(a)}$.
 \begin{frame}{Catalanimals}
   \begin{definition}
     The \emph{Catalanimal} indexed by $R_q, R_t, R_{qt} \subseteq R_+$
-    and $\lambda \in \Z^n$ is \vspace{-.4mm}
+    and $\lambda \in \Z^n$ is \pause\vspace{-.4mm}
     \begin{align*}
       H(R_q,R_t,R_{qt},\lambda)
       % \defeq
@@ -1371,10 +1378,10 @@ With  $n=3$,
 is determined by
 \vspace{1mm}
 \begin{itemize}
-\item $R_+ \supseteq R_q \supseteq R_t \supseteq R_{qt}$,
+\item $R_+ \supseteq R_q \supseteq R_t \supseteq R_{qt}$,\pause
 \item $R_+ \setminus R_q = $ pairs of boxes in the same diagonal,
 \item $R_q \setminus R_t \ = $ the attacking pairs,
-\item  $R_t \setminus R_{qt}  = $ pairs going between adjacent diagonals,
+\item  $R_t \setminus R_{qt}  = $ pairs going between adjacent diagonals,\pause
 \item $\lambda$: fill each diagonal $D$ of $\nubold$ with
 $1+\chi({\small \text{$D$ contains a row start}}) - \chi({\small \text{$D$ contains a row end}})$. \break
 Listing this filling in reading order gives  $\lambda$.
@@ -1984,7 +1991,8 @@ Then
   \frametitle{Shuffle to elliptic Hall summary}
   \[
   \begin{tikzcd}[column sep=tiny]
-    & \Ecal \ar[r, phantom, "\curvearrowright"] & \Lambda\\
+    & \Ecal \ar[r, phantom, "\curvearrowright"] & \Lambda & f(X^{1,1})
+    \cdot 1 = \nabla f \\
     \bigoplus_{\substack{a > 0 \\ b \in \Z \\ (a,b)=1}} \Lambda(X^{a,b}) \ar[r,
     phantom, "\substack{\isom \\ \text{\tiny v.sp.}}"] &
     \Ecal^+  \ar[u, hookrightarrow]& \\
