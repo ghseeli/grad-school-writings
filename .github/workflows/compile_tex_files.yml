@@ -30,13 +30,13 @@ jobs:
     - name: Move PDFs to correct location
       run: |
         for DIR in $(ls -d */ | grep ''); do
-        mkdir "docs/$DIR"
-        for PATH_REL_SRC in $(ls "$DIR"*.pdf | grep ''); do
-          PATH_REL_DEST="docs/$PATH_REL_SRC"
-          echo "Moving $PATH_REL_SRC to docs/$DIR folder"
-          mv "$PATH_REL_SRC" "$PATH_REL_DEST"
+          mkdir "docs/$DIR"
+          for PATH_REL_SRC in $(ls "$DIR"*.pdf | grep ''); do
+            PATH_REL_DEST="docs/$PATH_REL_SRC"
+            echo "Moving $PATH_REL_SRC to docs/$DIR folder"
+            mv "$PATH_REL_SRC" "$PATH_REL_DEST"
+          done
         done
-      done
     - name: Edit webpages to include links for those pdfs
       run: |
         cd docs
