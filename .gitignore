@@ -32,6 +32,10 @@
 *.mtc1
 *.out
 *.synctex.gz
+*.nav
+*.snm
+*.vrb
+*.key
  
 # Mac IDE files
 *.swp
