@@ -23,7 +23,6 @@ jobs:
         sudo apt-get install liblz4-tool
         wget http://mirrors.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz -O - | tar -x --gzip
         mv $(ls | grep install) install-tl
-        tlmgr init-usertree
         ./install-tl/install-tl -profile texlive.profile
         export PATH=$(pwd)/texlive/bin/x86_64-linux:$PATH
         tlmgr update --self
