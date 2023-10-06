@@ -54,11 +54,8 @@ jobs:
         write_section_links "Monographs" "monographs.md" "Monographs" ""
         write_section_links "presentations" "presentations.md" "Presentations" ""
         cd ..
-    - name: Upload compiled PDF files
-      uses: actions/upload-artifact@v2
+    - name: Deploy PDFs
+      uses: peaceiris/actions-gh-pages@v3
       with:
-        name: compiled-pdfs
-        path: |
-          |
-          $(find . -type f -name '*.pdf')
-
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./docs
