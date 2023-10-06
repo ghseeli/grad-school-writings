@@ -16,24 +16,12 @@ jobs:
     - name: Check out the code
       uses: actions/checkout@v2
 
-    - name: Install LaTeX packages
+    - name: Build TeXLive Docker 
       run: |
-        sudo apt-get update
-        sudo apt-get install liblz4-dev
-        sudo apt-get install liblz4-tool
-        wget http://mirrors.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz -O - | tar -x --gzip
-        mv $(ls | grep install) install-tl
-        ./install-tl/install-tl -profile texlive.profile
-        export PATH=$(pwd)/texlive/bin/x86_64-linux:$PATH
-        sudo apt-get install texlive texlive-extra-utils texlive-latex-base texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended texlive-luatex texlive-xetex texlive-pstricks
-        sudo apt-get install latexmk
-        tlmgr update --self
-        tlmgr update --all
-        tlmgr install $(cat .tlmgr-dep)
+        docker build -t my-latex-image .
     - name: Compile LaTeX files
       run: |
-        chmod a+x scripts/build-pdfs.sh
-        scripts/build-pdfs.sh
+        docker run --rm -v $PWD:/data my-latex-image
     - name: Move PDFs to correct location
       run: |
         for DIR in $(ls -d */ | grep ''); do
