@@ -15,7 +15,7 @@
 %	PACKAGES AND THEMES
 %----------------------------------------------------------------------------------------
 
-\documentclass[dvipsnames,handout]{beamer}
+\documentclass[dvipsnames]{beamer}
 \mode<presentation> {
 
 % The Beamer class comes with a number of default slide themes
@@ -547,9 +547,10 @@ Compare to
   \end{center}\pause
   \begin{block}{Operator \(\nabla\)}
     \[
-      \nabla \tilde{H}_\lambda(X;q,t) = q^{n(\lambda)} t^{n(\lambda')} \tilde{H}_\lambda(X;q,t)\,,
+      \nabla \tilde{H}_\lambda(X;q,t) = q^{n(\lambda)} t^{n(\lambda^*)} \tilde{H}_\lambda(X;q,t)\,,
     \]
-    where $n(\mu ) = \sum _{i} (i-1)\mu_{i}.$
+    where $n(\lambda) = \sum _{i} (i-1)\lambda_{i}$ and \(\lambda^*\)
+    is the transpose partition to \(\lambda\).
   \end{block}\pause
   \begin{theorem}[Haiman, 2002]
     The bigraded Frobenius characteristic of \(DH_n\) is given by \(\nabla e_n\).
@@ -576,7 +577,8 @@ Compare to
 \begin{frame}{LLT Polynomials}
   \vspace{-1.4mm}
 {\small
-Let  $\nubold= (\nu_{(1)}, \dots, \nu_{(k)})$ be a tuple of skew shapes.
+Let  $\nubold= (\nu_{(1)}, \dots, \nu_{(k)})$ be a tuple of skew
+shapes. (Skew shape = \(\lambda \setminus \mu\))
 %\vspace{1mm}
 
 \begin{itemize}
@@ -789,14 +791,14 @@ $\xx ^{T} = \prod _{a\in \nubold  } x_{T(a)}$.
     \]
   \end{theorem}
   \begin{itemize}
-  \item Conjectured by (Haiman-Haglund-Loehr-Remmel-Ulyanov, 2002).\pause
-  \item Combinatorial RHS: Combinatorics of Dyck paths. \pause
+  \item Conjectured by (Haiman-Haglund-Loehr-Remmel-Ulyanov, 2002).
+  \item Combinatorial RHS: Combinatorics of Dyck paths. 
   \item Summation over all \(k\)-by-\(k\) Dyck paths.\pause
   \item \(\area(\lambda)\) and \(\dinv(\lambda)\) statistics of Dyck paths.\pause
   \item \(\Gcal_{\nu(\lambda)}(X;q)\) a symmetric LLT polynomial
-    indexed by a tuple of offset rows. \pause
+    indexed by a tuple of offset (skew) rows. \pause
   \item \(\omega\) an automorphism of symmetric functions:
-    \(\omega(s_\lambda) = s_{\lambda^*}\)
+    \(\omega(s_\lambda) = s_{\lambda^*}\) for \(\lambda^* =\) transpose of \(\lambda\).
   \end{itemize}
 \end{frame}
 \begin{frame}
@@ -917,7 +919,7 @@ Balanced hook is given by a cell below \(\lambda\) satisfying \[
   \begin{eqnarray*}
     \lambda
     & q^{\dinv(\lambda)}t^{\area(\lambda)}
-    & q^{\dinv(\lambda)}t^{\area(\lambda)}\Gcal_{\nu(\lambda)}(X;q^{-1})\\
+    & q^{\dinv(\lambda)}t^{\area(\lambda)}\omega \Gcal_{\nu(\lambda)}(X;q^{-1})\\
       \onslide<2->{\begin{tikzpicture}[xscale = 0.3,yscale = 0.3]
       \draw[step=1cm,gray!20,very thin] (0,0) grid (3,3);
       \draw[step=1cm,gray!20,very thin] (0,3)--(3,0); \draw[thick]
@@ -1367,9 +1369,9 @@ With  $n=3$,
       \end{tikzpicture}
     \end{column}
     \begin{column}{0.8\textwidth}
-      \(\area(\lambda)\) as before\\
+      \onslide<5->{\(\area(\lambda)\) as before\\
       \(\dinv_p(\lambda) = \# p\)-balanced hooks \(\frac{\ell}{a+1} < p <
-      \frac{\ell+1}{a}\)\\
+      \frac{\ell+1}{a}\)}\\
     \end{column}
   \end{columns}
 \end{frame}
@@ -2274,7 +2276,7 @@ satisfy $K^{(\bbb)}_{\nu , \mu}(q,t)\in \N[q,t]$.
     \end{tabular}
 \end{frame}
 \begin{frame}[shrink=10]
-  \frametitle{Grazie Mille!}
+  \frametitle{Grazie mille!}
   \begin{bibdiv}
   \begin{biblist}
 \bib{blasiakShuffleTheoremPaths2023}{article}{
