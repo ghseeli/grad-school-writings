@@ -16,6 +16,7 @@
 [math-club-symmetric-functions.pdf](presentations/math-club-symmetric-functions.pdf)  
 [michigan-combinatorics-seminar-shuffle-theorems.pdf](presentations/michigan-combinatorics-seminar-shuffle-theorems.pdf)  
 [oist-rep-theory-seminar-presentation.pdf](presentations/oist-rep-theory-seminar-presentation.pdf)  
+[pisa-diagonal-harmonics-macdonald-polynomials-and-shuffle-theorems.pdf](presentations/pisa-diagonal-harmonics-macdonald-polynomials-and-shuffle-theorems.pdf)  
 [postdoc-orientation-research-presentation.pdf](presentations/postdoc-orientation-research-presentation.pdf)  
 [purdue-raising-operator-formula-for-macdonald-polynomials.pdf](presentations/purdue-raising-operator-formula-for-macdonald-polynomials.pdf)  
 [ramification-of-primes.pdf](presentations/ramification-of-primes.pdf)  
