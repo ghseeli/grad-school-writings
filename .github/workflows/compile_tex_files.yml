@@ -1,0 +1,62 @@
+name: Compile and Upload LaTeX Files
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Check out the code
+      uses: actions/checkout@v2
+      with:
+        submodules: 'recursive' # This ensures that submodules are recursively initialized and updated
+
+    - name: Build TeXLive Docker 
+      run: |
+        docker build -t my-latex-image .
+    - name: Compile LaTeX files
+      run: |
+        docker run --rm -v $PWD:/data my-latex-image
+    - name: Move PDFs to correct location
+      run: |
+        for DIR in $(ls -d */ | grep ''); do
+          mkdir "docs/$DIR"
+          for PATH_REL_SRC in $(ls "$DIR"*.pdf | grep ''); do
+            PATH_REL_DEST="docs/$PATH_REL_SRC"
+            echo "Moving $PATH_REL_SRC to docs/$DIR folder"
+            mv "$PATH_REL_SRC" "$PATH_REL_DEST"
+          done
+        done
+    - name: Edit webpages to include links for those pdfs
+      run: |
+        cd docs
+        write_section_links() {
+          DIR_NAME="$1"
+          OUTPUT_FILENAME="$2"
+          OUTPUT_SECTION_TITLE="$3"
+          OUTPUT_LINK_PREFIX="$4"
+          printf "## $OUTPUT_SECTION_TITLE\n" >> "$OUTPUT_FILENAME"
+          for FNAME in $(ls "$DIR_NAME" | grep ''); do
+            NAME="$OUTPUT_LINK_PREFIX""$FNAME"
+            FPATH="$DIR_NAME/$FNAME"
+            printf "[$NAME]($FPATH)  \n" >> "$OUTPUT_FILENAME" # Two spaces before \n tells Markdown to generate <br />
+          done
+          printf "\n" >> "$OUTPUT_FILENAME"
+        }
+        write_section_links "class-notes" "class-notes.md" "Class Notes" ""
+        write_section_links "Monographs" "monographs.md" "Monographs" ""
+        write_section_links "presentations" "presentations.md" "Presentations" ""
+        cd ..
+    - name: Deploy PDFs
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./docs
+        enable_jekyll: true
