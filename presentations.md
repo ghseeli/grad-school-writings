@@ -23,4 +23,5 @@
 [thesis-defense.pdf](presentations/thesis-defense.pdf)  
 [two-elementary-examples-of-extreme-characters-of-u-infty.pdf](presentations/two-elementary-examples-of-extreme-characters-of-u-infty.pdf)  
 [uva-k-theoretic-catalan-functions.pdf](presentations/uva-k-theoretic-catalan-functions.pdf)  
+[yorku-raising-operator-formulas-for-macdonald-polynomials.pdf](presentations/yorku-raising-operator-formulas-for-macdonald-polynomials.pdf)  
 
