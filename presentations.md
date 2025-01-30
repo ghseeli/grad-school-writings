@@ -15,6 +15,7 @@
 [maagc-2019-poster.pdf](presentations/maagc-2019-poster.pdf)  
 [math-club-symmetric-functions.pdf](presentations/math-club-symmetric-functions.pdf)  
 [michigan-combinatorics-seminar-shuffle-theorems.pdf](presentations/michigan-combinatorics-seminar-shuffle-theorems.pdf)  
+[msu-raising-operator-formulas-for-macdonald-polynomials.pdf](presentations/msu-raising-operator-formulas-for-macdonald-polynomials.pdf)  
 [oist-rep-theory-seminar-presentation.pdf](presentations/oist-rep-theory-seminar-presentation.pdf)  
 [pisa-diagonal-harmonics-macdonald-polynomials-and-shuffle-theorems.pdf](presentations/pisa-diagonal-harmonics-macdonald-polynomials-and-shuffle-theorems.pdf)  
 [postdoc-orientation-research-presentation.pdf](presentations/postdoc-orientation-research-presentation.pdf)  
