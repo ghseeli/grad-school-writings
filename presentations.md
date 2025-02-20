@@ -23,6 +23,7 @@
 [ramification-of-primes.pdf](presentations/ramification-of-primes.pdf)  
 [thesis-defense.pdf](presentations/thesis-defense.pdf)  
 [two-elementary-examples-of-extreme-characters-of-u-infty.pdf](presentations/two-elementary-examples-of-extreme-characters-of-u-infty.pdf)  
+[uillinois-raising-operator-formula-for-macdonald-polynomials.pdf](presentations/uillinois-raising-operator-formula-for-macdonald-polynomials.pdf)  
 [uva-k-theoretic-catalan-functions.pdf](presentations/uva-k-theoretic-catalan-functions.pdf)  
 [yorku-raising-operator-formulas-for-macdonald-polynomials.pdf](presentations/yorku-raising-operator-formulas-for-macdonald-polynomials.pdf)  
 
