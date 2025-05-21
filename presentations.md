@@ -21,6 +21,7 @@
 [postdoc-orientation-research-presentation.pdf](presentations/postdoc-orientation-research-presentation.pdf)  
 [purdue-raising-operator-formula-for-macdonald-polynomials.pdf](presentations/purdue-raising-operator-formula-for-macdonald-polynomials.pdf)  
 [ramification-of-primes.pdf](presentations/ramification-of-primes.pdf)  
+[smri-shuffle-theorems-and-macdonald-polynomials.pdf](presentations/smri-shuffle-theorems-and-macdonald-polynomials.pdf)  
 [thesis-defense.pdf](presentations/thesis-defense.pdf)  
 [two-elementary-examples-of-extreme-characters-of-u-infty.pdf](presentations/two-elementary-examples-of-extreme-characters-of-u-infty.pdf)  
 [uillinois-raising-operator-formula-for-macdonald-polynomials.pdf](presentations/uillinois-raising-operator-formula-for-macdonald-polynomials.pdf)  
