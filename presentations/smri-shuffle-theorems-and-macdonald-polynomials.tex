@@ -335,7 +335,7 @@ SMRI: Modern Perspectives in Representation Theory\\ % Your institution for the 
 % \end{frame}
 \begin{frame}{Symmetric polynomials and functions}
   \begin{itemize}
-  \item Symmetric polynomials \(\kk[z_1,\ldots,z_n]^{S_n}\)
+  \item Symmetric polynomials \(\Q[z_1,\ldots,z_n]^{S_n}\)
   \item Generators
     \[
        e_r(z_1,\ldots,z_n) = \sum_{1 \leq i_1 < i_2 <\cdots < i_r
@@ -347,8 +347,8 @@ SMRI: Modern Perspectives in Representation Theory\\ % Your institution for the 
       e_3(z_1,z_2,z_3) &= z_1 z_2 z_3 
     \end{align*}
     \pause
-  \item \(\Lambda = \kk[e_1,e_2,\ldots]\)\pause
-  \item Degree \(d\) elements of \(\Lambda\) \(=\) \(\kk\)-vector
+  \item \(\Lambda = \Q[e_1,e_2,\ldots]\)\pause
+  \item Degree \(d\) elements of \(\Lambda\) \(=\) \(\Q\)-vector
     space of dimension\ldots?\pause
   \item Integer partitions of \(d\).
   \end{itemize}
@@ -442,7 +442,7 @@ SMRI: Modern Perspectives in Representation Theory\\ % Your institution for the 
       \begin{center}
         \ytableausetup{boxsize=0.5em, aligntableaux=center}
         \(V_{\ydiagram{3}} = \)trivial,
-        \(V_{\ydiagram{1,2}} \isom \C^3 / \Span\{(1,1,1)\},
+        \(V_{\ydiagram{1,2}} \isom \Span\{e_1-e_2, e_2-e_3\},
         V_{\ydiagram{1,1,1}} = \)sign
       \end{center}\pause
   Frobenius charactersitc, \(\operatorname{Frob}\from Rep(S_n) \to
@@ -476,7 +476,7 @@ SMRI: Modern Perspectives in Representation Theory\\ % Your institution for the 
    \(S_3 \curvearrowright \Span\{\Delta\}\) via \(\sigma.\Delta =
    \sgn(\sigma) \Delta\).\pause
 
-   Consider \(S_3 \curvearrowright M = \) on all partial derivatives of \(\Delta\).
+   Consider \(S_3 \curvearrowright M = \) all partial derivatives of \(\Delta\).
    \[
    \begin{tikzcd}
      \Span \{\Delta \} \ar[d, "\partial_{x_i}"]\\
@@ -1486,7 +1486,7 @@ $\zz ^{T} = \prod _{a\in \nubold  } z_{T(a)}$.
  \begin{itemize}
  \item For \(\lambda\) a partition,
    \(\chi_\lambda(\zz) = s_\lambda(\zz)\).\pause
- \item \(\pol_X \chi_\lambda(\zz) = s_\lambda\) if \(\lambda_l \geq 0\),
+ \item Define \(\pol_X \chi_\lambda(\zz) = s_\lambda\) if \(\lambda_l \geq 0\),
    otherwise \(0\).
  \end{itemize}
 \end{frame}
@@ -2489,7 +2489,7 @@ What can this formula tell us that other formulas for Macdonald polynomials do n
 
 
 \vspace{-1.4mm}
-\begin{conjecture}[Blasiak-Haiman-Morse-Pun-S.]
+\begin{conjecture}[Blasiak-Haiman-Morse-Pun-S., 2025]
 For any partition  $\mu$ and positive integer $s$, the symmetric function
  $\Htild^{(s)}_{\mu}$ is Schur positive.
 That is, the coefficients in
@@ -2740,7 +2740,7 @@ MRREVIEWER = {Edward E. Allen},
   \frametitle{Schiffmann to Shuffle}
   \begin{itemize}
   \item Shuffle algebra \(S\) given by the image of Laurent
-    polynomials \(\phi \in \kk[x_1^{\pm 1},\ldots, x_l^{\pm 1}]\) via
+    polynomials \(\phi \in \Q(q,t)[x_1^{\pm 1},\ldots, x_l^{\pm 1}]\) via
     map \[
       H_{q,t}\from \phi \mapsto \sum_{w \in S_l} w \left( \frac{\phi \prod_{i<j}
           (1-qt x_i/x_j)}{\prod_{i<j}((1-x_j/x_i)(1-q x_i/x_j)(1-t x_i/x_j))} \right)
