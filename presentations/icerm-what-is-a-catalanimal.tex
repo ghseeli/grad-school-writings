@@ -1,0 +1,813 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Beamer Presentation
+% LaTeX Template
+% Version 1.0 (10/11/12)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND THEMES
+%----------------------------------------------------------------------------------------
+
+\documentclass[dvipsnames]{beamer}
+\mode<presentation> {
+
+% The Beamer class comes with a number of default slide themes
+% which change the colors and layouts of slides. Below this is a list
+% of all the themes, uncomment each in turn to see what they look like.
+
+%\usetheme{default}
+%\usetheme{AnnArbor}
+%\usetheme{Antibes}
+%\usetheme{Bergen}
+%\usetheme{Berkeley}
+%\usetheme{Berlin}
+%\usetheme{Boadilla}
+%\usetheme{CambridgeUS}
+%\usetheme{Copenhagen}
+%\usetheme{Darmstadt}
+%\usetheme{Dresden}
+%\usetheme{Frankfurt}
+%\usetheme{Goettingen}
+%\usetheme{Hannover}
+%\usetheme{Ilmenau}
+%\usetheme{JuanLesPins}
+%\usetheme{Luebeck}
+\usetheme{Madrid}
+%\usetheme{Malmoe}
+%\usetheme{Marburg}
+%\usetheme{Montpellier}
+%\usetheme{PaloAlto}
+%\usetheme{Pittsburgh}
+%\usetheme{Rochester}
+%\usetheme{Singapore}
+%\usetheme{Szeged}
+%\usetheme{Warsaw}
+
+% As well as themes, the Beamer class has a number of color themes
+% for any slide theme. Uncomment each of these in turn to see how it
+% changes the colors of your current slide theme.
+
+%\usecolortheme{albatross}
+%\usecolortheme{beaver}
+%\usecolortheme{beetle}
+%\usecolortheme{crane}
+%\usecolortheme{dolphin}
+%\usecolortheme{dove}
+%\usecolortheme{fly}
+%\usecolortheme{lily}
+%\usecolortheme{orchid}
+%\usecolortheme{rose}
+%\usecolortheme{seagull}
+%\usecolortheme{seahorse}
+%\usecolortheme{whale}
+%\usecolortheme{wolverine}
+
+%\setbeamertemplate{footline} % To remove the footer line in all slides uncomment this line
+%\setbeamertemplate{footline}[page number] % To replace the footer line in all slides with a simple slide count uncomment this line
+
+\setbeamertemplate{navigation symbols}{} % To remove the navigation symbols from the bottom of all slides uncomment this line
+\setbeamertemplate{footline}{}
+}
+
+\usepackage{graphicx} % Allows including images
+%\usepackage{booktabs} % Allows the use of \toprule, \midrule and
+                      % \bottomrule in tables
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{tikz-cd}
+\usepackage{bm}
+\usepackage{amsmath}
+\usepackage[author-year]{amsrefs}
+\usepackage{amsthm}
+\usepackage{../ReAdTeX/readtex-core}
+% \usepackage{../ReAdTeX/readtex-dangerous}
+% \usepackage{../ReAdTeX/readtex-abstract-algebra}
+\usepackage{ytableau}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%%  MACRO DEFINITIONS:  Co-authors -- PLEASE use these! 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\definecolor{coralred}{rgb}{1.0, 0.25, 0.25}
+% \definecolor{lightblue}{rgb}{.68,.85,.9} % 
+\definecolor{lightblue}{rgb}{.3,.65,1.0} %
+\definecolor{asparagus}{rgb}{0.53, 0.66, 0.42}
+
+\DeclareMathOperator{\Gr}{Gr}
+\newcommand{\cupprod}{\smile}
+\newcommand{\sym}{\Lambda}
+\newcommand{\lowers}{\mathcal{L}}
+\newcommand{\mynone}{\ }
+\newcommand{\zz}{{\boldsymbol z}}
+\newcommand{\xx}{{\boldsymbol x}}
+\newcommand{\hbold}{{\boldsymbol h}}
+\newcommand{\sbold}{{\boldsymbol s}}
+\newcommand{\sigmabold}{\boldsymbol \sigma}
+\newcommand{\mubold}{{\boldsymbol \mu }}
+\newcommand{\Htild}{\tilde{H}}
+\DeclareMathSymbol{\shortminus}{\mathbin}{AMSa}{"39}
+\newcommand{\Gcal}{{\mathcal G}}
+\newcommand{\nubold}{{\boldsymbol \nu }}
+\renewcommand{\Span}{\operatorname{span}}
+
+\DeclareMathOperator{\conv}{conv}
+\DeclareMathOperator{\des}{des}
+\DeclareMathOperator{\fin}{fin}
+\DeclareMathOperator{\aff}{aff}
+\DeclareMathOperator{\ext}{ext}
+\DeclareMathOperator{\dinv}{dinv}
+\DeclareMathOperator{\inv}{inv}
+\DeclareMathOperator{\pol}{pol}
+\DeclareMathOperator{\supp}{supp}
+\DeclareMathOperator{\Ind}{Ind}
+\DeclareMathOperator{\Inv}{Inv}
+\DeclareMathOperator{\GL}{GL}
+\DeclareMathOperator{\SYT}{SYT}
+\DeclareMathOperator{\SSYT}{SSYT}
+\DeclareMathOperator{\Ad}{Ad}
+\DeclareMathOperator{\Stab}{Stab}
+\newcommand{\sgn}{\text{\rm sgn}}
+\DeclareMathOperator{\sort}{sort}
+\newcommand{\south}{{\mathrm{south}}}
+\newcommand{\leg}{{\mathrm{leg}}}
+\newcommand{\arm}{{\mathrm{arm}}}
+\newcommand{\bx}[2]{{\boldsymbol {#1}[#2]}}
+\newcommand{\Ecal}{\mathcal{E}}
+\newcommand{\kk}{\Bbbk}
+\newcommand{\Scal}{\mathcal{S}}
+\newcommand{\tGamma}{{\check{\Gamma}}} %for Laurent reps
+\newcommand{\bbb}{{s}}
+\DeclareMathOperator{\area}{area}
+\newcommand{\Acal}{{\mathcal A}}
+\DeclareMathOperator{\Aut}{Aut}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\aA}{{\mathbf a}}
+\newcommand{\bb}{{\mathbf b}}
+\renewcommand{\sl}{\mathfrak{sl}}
+
+\newtheorem{thm}{Theorem}
+\newtheorem{prop}{Proposition}
+\theoremstyle{definition}
+\newtheorem{rmk}[thm]{Remark}
+\newtheorem*{rmk*}{Remark}
+\newtheorem{conjecture}[theorem]{Conjecture}
+
+\newcounter{boxnum}
+
+\newcommand{\qtrootcolor}{blue!45}
+\newcommand{\colorgr}[1]{\textcolor{gray}{#1}}
+\newcommand{\colorgrgr}[1]{\textcolor{gray!70}{#1}}
+\newcommand{\colorb}[1]{\textcolor{blue}{#1}}
+\newcommand{\colordb}[1]{\textcolor{DarkBlue}{#1}}
+\newcommand{\colorblack}[1]{\textcolor{black}{#1}}
+\newcommand{\colorr}[1]{\textcolor{red}{#1}}
+\newcommand{\colorg}[1]{\textcolor{ForestGreen}{#1}}
+\newcommand{\colorgg}[1]{\textcolor{green}{#1}}
+\newcommand{\colorp}[1]{\textcolor{purple}{#1}}
+
+
+\newcommand{\drawskewdg}[2]{
+  \def\ptn{#1}
+  \def\offset{#2}
+    \setcounter{rownum}{1}
+    \foreach \xstart\xend in \ptn {
+      \draw[thick,fill=white] (\xstart+\offset,\therownum-1+\offset)
+      grid (\xend+\offset,\therownum+\offset) rectangle (\xstart+\offset,\therownum-1+\offset);
+      \addtocounter{rownum}{1}
+    }
+}
+
+\newcounter{rownum}
+
+\newcommand{\drawDgNotThick}[3]{
+      \setcounter{rownum}{0}
+      \def\b{#1};
+      \def\xshift{#2};
+      \def\yshift{#3};
+      \foreach \c in \b {
+        \foreach \xx in \xshift {
+           \foreach \yy in \yshift {
+              \draw[shift={(\xx,\yy)}] (\therownum,0) grid (\therownum+1, \c);
+              \addtocounter{rownum}{1};
+           }
+        }
+      }
+    }
+
+\newcommand{\drawDg}[3]{
+      \setcounter{rownum}{0}
+      \def\b{#1};
+      \def\xshift{#2};
+      \def\yshift{#3};
+      \foreach \c in \b {
+        \foreach \xx in \xshift {
+           \foreach \yy in \yshift {
+              \draw[thick, shift={(\xx,\yy)}] (\therownum,0) grid (\therownum+1, \c);
+              \addtocounter{rownum}{1};
+           }
+        }
+      }
+    }
+
+\newcounter{c}
+\newcounter{cp}
+\tikzset{
+    invisible/.style={opacity=0},
+    visible on/.style={alt={#1{}{invisible}}},
+    alt/.code args={<#1>#2#3}{%
+      \alt<#1>{\pgfkeysalso{#2}}{\pgfkeysalso{#3}}%
+  }
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\title[]{What is a Catalanimal?} % The short title appears at the bottom of every slide, the full title is only on the title page
+
+\author[George H. Seelinger]{George H. Seelinger} % Your name
+\institute[UMich] % Your institution as it will appear on the bottom of every slide, may be shorthand to save space
+{
+ghseeli@umich.edu\\ %Your email address
+\medskip
+ICERM: What is...? Seminar \\ % Your institution for the title page
+\medskip
+}
+\date{24 September 2025} % Date, can be changed to a custom date
+
+\begin{document}
+\begin{frame}
+\titlepage % Print the title page as the first slide
+\end{frame}
+\begin{frame}{Resources}
+  \begin{itemize}
+  \item My IPAC 2024 Lectures:
+    \url{https://www2.math.upenn.edu/~jhaglund/IPAC/2024.html}
+  \item Anna Pun’s 2021 Lectures: \url{https://www2.math.upenn.edu/~jhaglund/IPAC/2021.html}
+  \end{itemize}
+\end{frame}
+\begin{frame}{Hall-Littlewood Examples}
+  \begin{eqnarray*}
+    & H_{(4,2)} & = \pol\left( \sigmabold\left( \frac{x_1^4 x_2^2}{1-t
+                x_1/x_2} \right) \right)\\
+    &&= \pol\left( \sigmabold \left( x_1^4 x_2^2 + t x_1^5 x_2 + t^2
+      x_1^6 x_2^0 + t^3 x_1^7 x_2^{-1} + \cdots \right) \right) \\
+    &&= \pol\left( \chi_{42} + t \chi_{51} + t^2 \chi_{60} + t^3
+      \chi_{7,{\text{-}1}} + \cdots\right) \\
+    &&= s_{42} + t s_{51} + t^2 s_{6} \,. \\
+    && \\
+    & H_{(4,2,1)} & = \pol\left( \sigmabold\left( \frac{x_1^4 x_2^2
+                    x_3^1}{(1-t x_1/x_2)(1-t x_1/x_3)(1-t x_2/x_3)}
+                    \right) \right) \\
+    && \cdots \\
+    && = s_{421} + ts_{43}+ts_{511}+(t^2+t)s_{52}+(t^3+t^2)s_{61}+t^4 s_7
+  \end{eqnarray*}
+\end{frame}
+\begin{frame}{Root Ideals}
+              \ytableausetup{mathmode, boxsize=1em, centertableaux}
+            \[
+              \begin{tikzpicture}[inner sep=0in, outer sep=0in]
+                \node (n) {
+                \begin{ytableau}
+                  \mynone &*(\qtrootcolor)\text{\tiny (12)}
+                  &*(\qtrootcolor)\text{\tiny (13)} &*(\qtrootcolor)\text{\tiny (14)}
+                  &*(\qtrootcolor)
+                  \text{\tiny (15)}\\
+                  \mynone &\mynone &*(\qtrootcolor) \text{\tiny (23)}
+                  &*(\qtrootcolor)\text{\tiny (24)}
+                  &*(\qtrootcolor) \text{\tiny (25)}\\
+                  \mynone &\mynone &\mynone &*(\qtrootcolor) \text{\tiny
+                    (34)}
+                  &*(\qtrootcolor)\text{\tiny (35)} \\
+                  \mynone &\mynone &\mynone&\mynone&*(\qtrootcolor) \text{\tiny (45)}\\
+                  \mynone &\mynone &\mynone&\mynone&\mynone\\
+                \end{ytableau}};
+              \end{tikzpicture}
+              \hspace{3em}
+              \begin{tikzpicture}[inner sep=0in, outer sep=0in]
+                \node (n) {
+                \begin{ytableau}
+                  \mynone &\text{\tiny (12)}
+                  &*(\qtrootcolor)\text{\tiny (13)} &*(\qtrootcolor)\text{\tiny (14)}
+                  &*(\qtrootcolor)
+                  \text{\tiny (15)}\\
+                  \mynone &\mynone &*(\qtrootcolor) \text{\tiny (23)}
+                  &*(\qtrootcolor)\text{\tiny (24)}
+                  &*(\qtrootcolor) \text{\tiny (25)}\\
+                  \mynone &\mynone &\mynone & \text{\tiny
+                    (34)}
+                  &*(\qtrootcolor)\text{\tiny (35)} \\
+                  \mynone &\mynone &\mynone&\mynone& \text{\tiny (45)}\\
+                  \mynone &\mynone &\mynone&\mynone&\mynone\\
+                \end{ytableau}};
+              \draw[very thick,orange] (n.north
+              west)--([xshift=2.1em]n.north
+              west)--++(0,-2.1em)--++(2.1em,0)--++(0,-1.05em)--++(1.05em,0)--++(0,-2.10em);
+              \draw[thick,lightgray] (n.north west)--(n.south east);
+              \end{tikzpicture}
+          \]
+\end{frame}
+\begin{frame}{Catalan Function Examples}
+  \begin{itemize}
+  \item Parabolic Hall-Littlewood polynomials \(H_{\eta,\lambda} = H(R^+_\eta,\lambda)\)
+    \\
+    \[
+      \textcolor{orange}{\eta=(1,2,3,3)} \hspace{4em} R^+_\eta = 
+      \begin{tikzpicture}[scale=.3]
+        \draw[draw = none, fill = \qtrootcolor] (2,-1) rectangle
+        (3,-2); \draw[draw = none, fill = \qtrootcolor] (3,-1)
+        rectangle (4,-2); \draw[draw = none, fill = \qtrootcolor]
+        (4,-1) rectangle (5,-2); \draw[draw = none, fill =
+        \qtrootcolor] (4,-2) rectangle (5,-3); \draw[draw = none, fill
+        = \qtrootcolor] (4,-3) rectangle (5,-4); \draw[draw = none,
+        fill = \qtrootcolor] (5,-1) rectangle (6,-2); \draw[draw =
+        none, fill = \qtrootcolor] (5,-2) rectangle (6,-3); \draw[draw
+        = none, fill = \qtrootcolor] (5,-3) rectangle (6,-4);
+        \draw[draw = none, fill = \qtrootcolor] (6,-1) rectangle
+        (7,-2); \draw[draw = none, fill = \qtrootcolor] (6,-2)
+        rectangle (7,-3); \draw[draw = none, fill = \qtrootcolor]
+        (6,-3) rectangle (7,-4); \draw[draw = none, fill =
+        \qtrootcolor] (7,-1) rectangle (8,-2); \draw[draw = none, fill
+        = \qtrootcolor] (7,-2) rectangle (8,-3); \draw[draw = none,
+        fill = \qtrootcolor] (7,-3) rectangle (8,-4); \draw[draw =
+        none, fill = \qtrootcolor] (7,-4) rectangle (8,-5); \draw[draw
+        = none, fill = \qtrootcolor] (7,-5) rectangle (8,-6);
+        \draw[draw = none, fill = \qtrootcolor] (7,-6) rectangle
+        (8,-7); \draw[draw = none, fill = \qtrootcolor] (8,-1)
+        rectangle (9,-2); \draw[draw = none, fill = \qtrootcolor]
+        (8,-2) rectangle (9,-3); \draw[draw = none, fill =
+        \qtrootcolor] (8,-3) rectangle (9,-4); \draw[draw = none, fill
+        = \qtrootcolor] (8,-4) rectangle (9,-5); \draw[draw = none,
+        fill = \qtrootcolor] (8,-5) rectangle (9,-6); \draw[draw =
+        none, fill = \qtrootcolor] (8,-6) rectangle (9,-7); \draw[draw
+        = none, fill = \qtrootcolor] (9,-1) rectangle (10,-2);
+        \draw[draw = none, fill = \qtrootcolor] (9,-2) rectangle
+        (10,-3); \draw[draw = none, fill = \qtrootcolor] (9,-3)
+        rectangle (10,-4); \draw[draw = none, fill = \qtrootcolor]
+        (9,-4) rectangle (10,-5); \draw[draw = none, fill =
+        \qtrootcolor] (9,-5) rectangle (10,-6); \draw[draw = none,
+        fill = \qtrootcolor] (9,-6) rectangle (10,-7); \draw[thin,
+        black!31] (1,-1) -- (10,-1); \draw[thin, black!31] (2,-1) --
+        (2,-1); \draw[thin, black!31] (2,-2) -- (10,-2); \draw[thin,
+        black!31] (3,-2) -- (3,-1); \draw[thin, black!31] (3,-3) --
+        (10,-3); \draw[thin, black!31] (4,-3) -- (4,-1); \draw[thin,
+        black!31] (4,-4) -- (10,-4); \draw[thin, black!31] (5,-4) --
+        (5,-1); \draw[thin, black!31] (5,-5) -- (10,-5); \draw[thin,
+        black!31] (6,-5) -- (6,-1); \draw[thin, black!31] (6,-6) --
+        (10,-6); \draw[thin, black!31] (7,-6) -- (7,-1); \draw[thin,
+        black!31] (7,-7) -- (10,-7); \draw[thin, black!31] (8,-7) --
+        (8,-1); \draw[thin, black!31] (8,-8) -- (10,-8); \draw[thin,
+        black!31] (9,-8) -- (9,-1); \draw[thin, black!31] (9,-9) --
+        (10,-9); \draw[thin, black!31] (10,-9) -- (10,-1);
+        % \draw[draw = none, fill = black!100] (3,-2) rectangle
+        % (4,-3); \draw[draw = none, fill = black!100] (5,-4)
+        % rectangle (6,-5); \draw[draw = none, fill = black!100]
+        % (6,-4) rectangle (7,-5); \draw[draw = none, fill =
+        % black!100] (6,-5) rectangle (7,-6); \draw[draw = none, fill
+        % = black!100] (8,-7) rectangle (9,-8); \draw[draw = none,
+        % fill = black!100] (9,-7) rectangle (10,-8); \draw[draw =
+        % none, fill = black!100] (9,-8) rectangle (10,-9);
+        \draw[thin] (1,-1) -- (2,-1); \draw[thin] (2,-1) -- (2,-2);
+        \draw[thin] (2,-2) -- (3,-2); \draw[thin] (3,-2) -- (3,-3);
+        \draw[thin] (3,-3) -- (4,-3); \draw[thin] (4,-3) -- (4,-4);
+        \draw[thin] (4,-4) -- (5,-4); \draw[thin] (5,-4) -- (5,-5);
+        \draw[thin] (5,-5) -- (6,-5); \draw[thin] (6,-5) -- (6,-6);
+        \draw[thin] (6,-6) -- (7,-6); \draw[thin] (7,-6) -- (7,-7);
+        \draw[thin] (7,-7) -- (8,-7); \draw[thin] (8,-7) -- (8,-8);
+        \draw[thin] (8,-8) -- (9,-8); \draw[thin] (9,-8) -- (9,-9);
+        \draw[thin] (9,-9) -- (10,-9); \draw[thin] (10,-9) --
+        (10,-10); \draw[thick, densely dotted, orange] (1,-1)
+        rectangle (2,-2); \draw[thick, densely dotted, orange] (2,-2)
+        rectangle (4,-4); \draw[thick, densely dotted, orange] (4,-4)
+        rectangle (7,-7); \draw[thick, densely dotted, orange] (7,-7)
+        rectangle (10,-10);
+      \end{tikzpicture}
+    \]
+  \item \(k\)-Schur functions \(s^{(k)}_\lambda = H(\Delta^k(\lambda),\lambda)\)
+    \[
+      \Delta^4(432211111) =
+      \begin{tikzpicture}[scale=.3]
+\foreach \r/\c in {1/2,1/3,1/4,1/5,1/6,1/7,1/8,1/9,2/4,2/5,2/6,2/7,2/8,2/9,3/6,3/7,3/8,3/9,4/7,4/8,4/9,5/9} {
+  \draw[draw = none, fill=\qtrootcolor] (\c,-\r) rectangle (\c+1,-\r-1);
+}
+         \draw[thin, black!31] (1,-1) -- (10,-1);
+\draw[thin, black!31] (2,-1) -- (2,-1);
+\draw[thin, black!31] (2,-2) -- (10,-2);
+\draw[thin, black!31] (3,-2) -- (3,-1);
+\draw[thin, black!31] (3,-3) -- (10,-3);
+\draw[thin, black!31] (4,-3) -- (4,-1);
+\draw[thin, black!31] (4,-4) -- (10,-4);
+\draw[thin, black!31] (5,-4) -- (5,-1);
+\draw[thin, black!31] (5,-5) -- (10,-5);
+\draw[thin, black!31] (6,-5) -- (6,-1);
+\draw[thin, black!31] (6,-6) -- (10,-6);
+\draw[thin, black!31] (7,-6) -- (7,-1);
+\draw[thin, black!31] (7,-7) -- (10,-7);
+\draw[thin, black!31] (8,-7) -- (8,-1);
+\draw[thin, black!31] (8,-8) -- (10,-8);
+\draw[thin, black!31] (9,-8) -- (9,-1);
+\draw[thin, black!31] (9,-9) -- (10,-9);
+\draw[thin, black!31] (10,-9) -- (10,-1);
+%\draw[draw = none, fill = black!100] (3,-2) rectangle (4,-3);
+% \draw[draw = none, fill = black!100] (5,-4) rectangle (6,-5);
+% \draw[draw = none, fill = black!100] (6,-4) rectangle (7,-5);
+% \draw[draw = none, fill = black!100] (6,-5) rectangle (7,-6);
+% \draw[draw = none, fill = black!100] (8,-7) rectangle (9,-8);
+% \draw[draw = none, fill = black!100] (9,-7) rectangle (10,-8);
+% \draw[draw = none, fill = black!100] (9,-8) rectangle (10,-9);
+ \draw[thin] (1,-1) -- (2,-1);
+\draw[thin] (2,-1) -- (2,-2);
+\draw[thin] (2,-2) -- (3,-2);
+\draw[thin] (3,-2) -- (3,-3);
+\draw[thin] (3,-3) -- (4,-3);
+\draw[thin] (4,-3) -- (4,-4);
+\draw[thin] (4,-4) -- (5,-4);
+\draw[thin] (5,-4) -- (5,-5);
+\draw[thin] (5,-5) -- (6,-5);
+\draw[thin] (6,-5) -- (6,-6);
+\draw[thin] (6,-6) -- (7,-6);
+\draw[thin] (7,-6) -- (7,-7);
+\draw[thin] (7,-7) -- (8,-7);
+\draw[thin] (8,-7) -- (8,-8);
+\draw[thin] (8,-8) -- (9,-8);
+\draw[thin] (9,-8) -- (9,-9);
+\draw[thin] (9,-9) -- (10,-9);
+\draw[thin] (10,-9) -- (10,-10);
+\node at (1.5,-1.5) {\scriptsize $4$};
+\node at (2.5,-2.5) {\scriptsize $3$};
+\node at (3.5,-3.5) {\scriptsize $2$};
+\node at (4.5,-4.5) {\scriptsize $2$};
+\node at (5.5,-5.5) {\scriptsize $1$};
+\node at (6.5,-6.5) {\scriptsize $1$};
+\node at (7.5,-7.5) {\scriptsize $1$};
+\node at (8.5,-8.5) {\scriptsize $1$};
+\node at (9.5,-9.5) {\scriptsize $1$};
+      \end{tikzpicture}
+    \]
+  \end{itemize}
+\end{frame}
+\begin{frame}{Catalanimal Example}
+
+  {\small
+    Special case: \(R_+ = R_q = R_t \supset R_{qt}\)
+\begin{itemize}
+\setlength{\itemsep}{-0.4mm}
+\item[] \raisebox{-1mm}{
+\begin{tikzpicture}[scale = .4]
+\draw[thin, black!0] (2,-1) -- (3,-1);
+\draw[thin, black!0] (2,-1) -- (2,-2);
+\draw[thin, black!0] (2,-2) -- (3,-2);
+\draw[thin, black!0] (3,-2) -- (3,-1);
+\draw[draw = none, fill = gray!100] (2+0.5, -1-0.5) circle (.2);
+\end{tikzpicture}} \
+ $R_t \setminus R_{qt} $% pairs going between adjacent diagonals,
+\item[]
+\raisebox{-1mm}{
+ \begin{tikzpicture}[scale = .4]
+\draw[draw = none, fill = \qtrootcolor] (2,-1) rectangle (3,-2);
+\end{tikzpicture}} \
+ $R_{qt} $ %all other pairs,
+\end{itemize}
+}
+\vspace{3ex}
+    \hspace{6ex}\begin{tikzpicture}[scale=.47]
+      \draw[draw = none, fill = \qtrootcolor] (3,-1) rectangle (4,-2);
+      \draw[draw = none, fill = gray!100] (2+0.5, -1-0.5) circle (.2);
+      \draw[draw = none, fill = gray!100] (3+0.5, -2-0.5) circle (.2);
+      \draw[thin, black!31] (1,-1) -- (4,-1);
+      \draw[thin, black!31] (2,-2) -- (4,-2);
+      \draw[thin, black!31] (3,-3) -- (4,-3);
+      \draw[thin, black!31] (4,-1) -- (4,-4);
+      \draw[thin, black!31] (3,-1) -- (3,-3);
+      \draw[thin, black!31] (2,-1) -- (2,-2);
+      \draw[thin] (1,-1) -- (2,-1);
+      \draw[thin] (2,-1) -- (2,-2);
+      \draw[thin] (2,-2) -- (3,-2);
+      \draw[thin] (3,-2) -- (3,-3);
+      \draw[thin] (3,-3) -- (4,-3);
+      \draw[thin] (4,-3) -- (4,-4);
+    \end{tikzpicture}
+  \begin{eqnarray*}
+    &&H(R_+,R_+,\{\alpha_{13}\},111) \\
+    &&= \pol \sigmabold\left( \frac{x_1x_2x_3 (1-qt x_1/x_3)}{\prod_{1
+       \leq i < j \leq 3}(1-q x_i/x_j)(1-tx_i/x_j)} \right)\\
+    &&= \cdots\\
+    &&= s_{111} + (q^2+qt+t^2+q+t)s_{21}
+       + (q^3+q^2t+qt^2+t^3+qt)s_3\\
+    &&= \omega \nabla e_3
+  \end{eqnarray*}
+\end{frame}
+\begin{frame}{Elliptic Hall Algebra \(\Ecal\)}
+  \(\Lambda^{(m,n)} = \Lambda(X^{m,n}) \isom \Lambda\)
+  \begin{center}
+    \begin{tikzpicture}[scale=0.5]
+      \draw[help lines, color=gray!30, dashed] (-4.9,-4.9) grid
+      (4.9,4.9); \draw[->,thick] (0,0)--(0,5)
+      node[above]{$\scriptstyle \Lambda^{(0,1)}$}; \draw[->,thick]
+      (0,0)--(5/3,5) node[above
+      ]{$\scriptstyle \phantom{++}\Lambda^{(1,3)}$}; \draw[->,thick]
+      (0,0)--(10/3,5) node[above
+      right]{$\scriptstyle \Lambda^{(2,3)}$}; \draw[->,thick]
+      (0,0)--(5,5) node[right]{$\scriptstyle \Lambda^{(1,1)}$};
+      \draw[->,thick] (0,0)--(5,10/3)
+      node[right]{$\scriptstyle \Lambda^{(3,2)}$};
+      % \draw[->,thick] (0,0)--(5,2.5)
+      % node[right]{$\scriptstyle \Lambda^{(2,1)}$};
+      \draw[->,thick] (0,0)--(5,5/3)
+      node[right]{$\scriptstyle \Lambda^{(3,1)}$}; \draw[->,thick]
+      (0,0)--(5,0) node[right]{$\scriptstyle \Lambda^{(1,0)}$};
+      \draw[->,thick] (0,0)--(-5,0)
+      node[above]{\(\scriptstyle \Lambda^{(-1,0)}\)}; \draw[->,thick]
+      (0,0)--(0,-5) node[right]{\(\scriptstyle \Lambda^{(0,-1)}\)};
+    \end{tikzpicture}
+  \end{center}
+\end{frame}
+\begin{frame}{Negut Catalanimal}
+
+   {\small
+    Special case: \(R_+ = R_q = R_t \supset R_{qt}\)
+\begin{itemize}
+\setlength{\itemsep}{-0.4mm}
+\item[] \raisebox{-1mm}{
+\begin{tikzpicture}[scale = .4]
+\draw[thin, black!0] (2,-1) -- (3,-1);
+\draw[thin, black!0] (2,-1) -- (2,-2);
+\draw[thin, black!0] (2,-2) -- (3,-2);
+\draw[thin, black!0] (3,-2) -- (3,-1);
+\draw[draw = none, fill = gray!100] (2+0.5, -1-0.5) circle (.2);
+\end{tikzpicture}} \
+ $R_t \setminus R_{qt} $% pairs going between adjacent diagonals,
+\item[]
+\raisebox{-1mm}{
+ \begin{tikzpicture}[scale = .4]
+\draw[draw = none, fill = \qtrootcolor] (2,-1) rectangle (3,-2);
+\end{tikzpicture}} \
+ $R_{qt} $ %all other pairs,
+\end{itemize}
+}
+\vspace{3ex}
+    \hspace{6ex}\begin{tikzpicture}[scale=.47]
+      \foreach \i in {1,...,4} {
+        \foreach \j in {\i,...,4} {
+          \draw[draw = none, fill = \qtrootcolor] (\j+2,-\i) rectangle (\j+3,-\i-1);
+        }
+      }
+      \foreach \i in {1,...,5} {
+        \draw[draw = none, fill = gray!100] (\i+1.5, -\i-0.5) circle (.2);
+      }
+      \foreach \x in {1,...,7} {
+        \draw[thin, black!31] (\x,-\x) -- (7,-\x);
+      }
+      \foreach \y in {1,...,7} {
+        \draw[thin, black!31] (\y,-1) -- (\y,-\y);
+      }
+      \foreach \n in {1,...,6} {
+        \draw[thin] (\n,-\n) -- (\n+1,-\n);
+        \draw[thin] (\n+1,-\n) -- (\n+1,-\n-1);
+      }
+      \foreach \i in {1,...,6} {
+        \node at (\i+0.5,-\i-0.5) {\small $\gamma_\i$};
+      }
+      % \draw[thin] (1,-1) -- (2,-1);
+      % \draw[thin] (2,-1) -- (2,-2);
+      % \draw[thin] (2,-2) -- (3,-2);
+      % \draw[thin] (3,-2) -- (3,-3);
+      % \draw[thin] (3,-3) -- (4,-3);
+      % \draw[thin] (4,-3) -- (4,-4);
+    \end{tikzpicture}
+    \[
+      H(R_+,R_+,[R_+,R_+],\gamma) = \pol \sigmabold\left( \frac{x^\gamma \prod_{i+1 < j}(1-qtx_i/x_j)}{\prod_{i<j}(1-qx_i/x_j)(q-tx_i/x_j)} \right)
+    \]
+\end{frame}
+\begin{frame}{Some \((1,1)\)-Cuddly Catalanimals}
+
+  {\small
+    Special case: \(R_+ \supset R_q \supset R_t \supset R_{qt}\)
+\begin{itemize}
+\setlength{\itemsep}{-0.4mm}
+\item[] \raisebox{-1mm}{
+ \begin{tikzpicture}[scale = .4]
+\draw[draw = none, fill = black!100] (2,-1) rectangle (3,-2);
+\end{tikzpicture}} \
+$R_+ \setminus R_q $ %pairs of boxes in the same diagonal in the same shape,
+\item[] \raisebox{-1mm}{
+ \begin{tikzpicture}[scale = .4]
+\draw[draw = none, fill = red!68] (2,-1) rectangle (3,-2);
+\end{tikzpicture}} \
+$R_q \setminus R_t $ %the attacking pairs,
+\item[] \raisebox{-1mm}{
+\begin{tikzpicture}[scale = .4]
+\draw[thin, black!0] (2,-1) -- (3,-1);
+\draw[thin, black!0] (2,-1) -- (2,-2);
+\draw[thin, black!0] (2,-2) -- (3,-2);
+\draw[thin, black!0] (3,-2) -- (3,-1);
+\draw[draw = none, fill = gray!100] (2+0.5, -1-0.5) circle (.2);
+\end{tikzpicture}} \
+ $R_t \setminus R_{qt} $% pairs going between adjacent diagonals,
+\item[]
+\raisebox{-1mm}{
+ \begin{tikzpicture}[scale = .4]
+\draw[draw = none, fill = \qtrootcolor] (2,-1) rectangle (3,-2);
+\end{tikzpicture}} \
+ $R_{qt} $ %all other pairs,
+\end{itemize}
+}
+\vspace{-5mm}
+
+\begin{align*}
+\hspace{-1cm}
+\begin{tikzpicture}[scale=.47]
+       \begin{scope}
+         \draw[draw = none, fill = \qtrootcolor] (4,-1) rectangle (5,-2);
+         \draw[draw = none, fill = \qtrootcolor] (5,-1) rectangle (6,-2);
+         \draw[draw = none, fill = \qtrootcolor] (6,-1) rectangle (7,-2);
+         \draw[draw = none, fill = \qtrootcolor] (7,-1) rectangle (8,-2);
+         \draw[draw = none, fill = \qtrootcolor] (7,-2) rectangle (8,-3);
+         \draw[draw = none, fill = \qtrootcolor] (7,-3) rectangle (8,-4);
+         \draw[draw = none, fill = \qtrootcolor] (8,-1) rectangle (9,-2);
+         \draw[draw = none, fill = \qtrootcolor] (8,-2) rectangle (9,-3);
+         \draw[draw = none, fill = \qtrootcolor] (8,-3) rectangle (9,-4);
+         \draw[draw = none, fill = \qtrootcolor] (9,-1) rectangle (10,-2);
+         \draw[draw = none, fill = \qtrootcolor] (9,-2) rectangle (10,-3);
+         \draw[draw = none, fill = \qtrootcolor] (9,-3) rectangle (10,-4);
+         \draw[draw = none, fill = \qtrootcolor] (9,-4) rectangle (10,-5);
+         \draw[draw = none, fill = \qtrootcolor] (9,-5) rectangle (10,-6);
+         \draw[draw = none, fill = \qtrootcolor] (9,-6) rectangle (10,-7);
+         \draw[draw = none, fill = \qtrootcolor] (10,-1) rectangle
+         (11,-2); \draw[draw = none, fill = \qtrootcolor] (10,-2)
+         rectangle (11,-3); \draw[draw = none, fill = \qtrootcolor]
+         (10,-3) rectangle (11,-4); \draw[draw = none, fill =
+         \qtrootcolor] (10,-4) rectangle (11,-5); \draw[draw = none, fill
+         = \qtrootcolor] (10,-5) rectangle (11,-6); \draw[draw = none,
+         fill = \qtrootcolor] (10,-6) rectangle (11,-7); \draw[draw =
+         none, fill = \qtrootcolor] (10,-7) rectangle (11,-8); \draw[draw
+         = none, fill = \qtrootcolor] (10,-8) rectangle (11,-9);
+         \draw[draw = none, fill = gray!100] (2+0.5, -1-0.5) circle
+         (.2); \draw[draw = none, fill = gray!100] (3+0.5, -1-0.5)
+         circle (.2); \draw[draw = none, fill = gray!100] (4+0.5,
+         -2-0.5) circle (.2); \draw[draw = none, fill = gray!100]
+         (5+0.5, -2-0.5) circle (.2); \draw[draw = none, fill =
+         gray!100] (6+0.5, -2-0.5) circle (.2); \draw[draw = none,
+         fill = gray!100] (4+0.5, -3-0.5) circle (.2); \draw[draw =
+         none, fill = gray!100] (5+0.5, -3-0.5) circle (.2);
+         \draw[draw = none, fill = gray!100] (6+0.5, -3-0.5) circle
+         (.2); \draw[draw = none, fill = gray!100] (7+0.5, -4-0.5)
+         circle (.2); \draw[draw = none, fill = gray!100] (8+0.5,
+         -4-0.5) circle (.2); \draw[draw = none, fill = gray!100]
+         (7+0.5, -5-0.5) circle (.2); \draw[draw = none, fill =
+         gray!100] (8+0.5, -5-0.5) circle (.2); \draw[draw = none,
+         fill = gray!100] (7+0.5, -6-0.5) circle (.2); \draw[draw =
+         none, fill = gray!100] (8+0.5, -6-0.5) circle (.2);
+         \draw[draw = none, fill = gray!100] (9+0.5, -7-0.5) circle
+         (.2); \draw[draw = none, fill = gray!100] (9+0.5, -8-0.5)
+         circle (.2); \draw[draw = none, fill = gray!100] (10+0.5,
+         -9-0.5) circle (.2); \draw[thin, black!31] (1,-1) -- (11,-1);
+         \draw[thin, black!31] (2,-1) -- (2,-1); \draw[thin, black!31]
+         (2,-2) -- (11,-2); \draw[thin, black!31] (3,-2) -- (3,-1);
+         \draw[thin, black!31] (3,-3) -- (11,-3); \draw[thin,
+         black!31] (4,-3) -- (4,-1); \draw[thin, black!31] (4,-4) --
+         (11,-4); \draw[thin, black!31] (5,-4) -- (5,-1); \draw[thin,
+         black!31] (5,-5) -- (11,-5); \draw[thin, black!31] (6,-5) --
+         (6,-1); \draw[thin, black!31] (6,-6) -- (11,-6); \draw[thin,
+         black!31] (7,-6) -- (7,-1); \draw[thin, black!31] (7,-7) --
+         (11,-7); \draw[thin, black!31] (8,-7) -- (8,-1); \draw[thin,
+         black!31] (8,-8) -- (11,-8); \draw[thin, black!31] (9,-8) --
+         (9,-1); \draw[thin, black!31] (9,-9) -- (11,-9); \draw[thin,
+         black!31] (10,-9) -- (10,-1); \draw[thin, black!31] (10,-10)
+         -- (11,-10); \draw[thin, black!31] (11,-10) -- (11,-1);
+         \draw[draw = none, fill = black!100] (3,-2) rectangle (4,-3);
+         \draw[draw = none, fill = black!100] (5,-4) rectangle (6,-5);
+         \draw[draw = none, fill = black!100] (6,-4) rectangle (7,-5);
+         \draw[draw = none, fill = black!100] (6,-5) rectangle (7,-6);
+         \draw[draw = none, fill = black!100] (8,-7) rectangle (9,-8);
+         \draw[thin] (1,-1) -- (2,-1); \draw[thin] (2,-1) -- (2,-2);
+         \draw[thin] (2,-2) -- (3,-2); \draw[thin] (3,-2) -- (3,-3);
+         \draw[thin] (3,-3) -- (4,-3); \draw[thin] (4,-3) -- (4,-4);
+         \draw[thin] (4,-4) -- (5,-4); \draw[thin] (5,-4) -- (5,-5);
+         \draw[thin] (5,-5) -- (6,-5); \draw[thin] (6,-5) -- (6,-6);
+         \draw[thin] (6,-6) -- (7,-6); \draw[thin] (7,-6) -- (7,-7);
+         \draw[thin] (7,-7) -- (8,-7); \draw[thin] (8,-7) -- (8,-8);
+         \draw[thin] (8,-8) -- (9,-8); \draw[thin] (9,-8) -- (9,-9);
+         \draw[thin] (9,-9) -- (10,-9); \draw[thin] (10,-9) --
+         (10,-10); \draw[thin] (10,-10) -- (11,-10); \draw[thin]
+         (11,-10) -- (11,-11); \node at (3/2,-3/2) {\small $2 $}; \node
+         at (5/2,-5/2) {\small $2 $}; \node at (7/2,-7/2) {\small $2 $};
+         \node at (9/2,-9/2) {\small $1 $}; \node at (11/2,-11/2)
+         {\small $1 $}; \node at (13/2,-13/2) {\small $1 $}; \node at
+         (15/2,-15/2) {\small $0 $}; \node at (17/2,-17/2) {\small
+           $0 $}; \node (vv) at (19/2,-19/2) {\small $1 $}; \node at
+         (21/2,-21/2) {\small $0 $};
+       \end{scope}
+  \end{tikzpicture}
+\ \ \qquad
+\begin{tikzpicture}[scale = .47]
+\draw[draw = none, fill = \qtrootcolor] (3,-1) rectangle (4,-2);
+ \draw[draw = none, fill = \qtrootcolor] (4,-1) rectangle (5,-2);
+ \draw[draw = none, fill = \qtrootcolor] (5,-1) rectangle (6,-2);
+ \draw[draw = none, fill = \qtrootcolor] (5,-2) rectangle (6,-3);
+ \draw[draw = none, fill = \qtrootcolor] (6,-1) rectangle (7,-2);
+ \draw[draw = none, fill = \qtrootcolor] (6,-2) rectangle (7,-3);
+ \draw[draw = none, fill = \qtrootcolor] (7,-1) rectangle (8,-2);
+ \draw[draw = none, fill = \qtrootcolor] (7,-2) rectangle (8,-3);
+ \draw[draw = none, fill = \qtrootcolor] (7,-3) rectangle (8,-4);
+ \draw[draw = none, fill = \qtrootcolor] (8,-1) rectangle (9,-2);
+ \draw[draw = none, fill = \qtrootcolor] (8,-2) rectangle (9,-3);
+ \draw[draw = none, fill = \qtrootcolor] (8,-3) rectangle (9,-4);
+ \draw[draw = none, fill = \qtrootcolor] (8,-4) rectangle (9,-5);
+ \draw[draw = none, fill = gray!100] (2+0.5, -1-0.5) circle (.2);
+\draw[draw = none, fill = gray!100] (4+0.5, -2-0.5) circle (.2);
+\draw[draw = none, fill = gray!100] (5+0.5, -3-0.5) circle (.2);
+\draw[draw = none, fill = gray!100] (6+0.5, -3-0.5) circle (.2);
+\draw[draw = none, fill = gray!100] (7+0.5, -4-0.5) circle (.2);
+\draw[draw = none, fill = gray!100] (8+0.5, -5-0.5) circle (.2);
+\draw[draw = none, fill = gray!100] (8+0.5, -6-0.5) circle (.2);
+\draw[draw = none, fill = red!68] (3,-2) rectangle (4,-3);
+ \draw[draw = none, fill = red!68] (4,-3) rectangle (5,-4);
+ \draw[draw = none, fill = red!68] (5,-4) rectangle (6,-5);
+ \draw[draw = none, fill = red!68] (6,-4) rectangle (7,-5);
+ \draw[draw = none, fill = red!68] (7,-5) rectangle (8,-6);
+ \draw[draw = none, fill = red!68] (7,-6) rectangle (8,-7);
+ \draw[draw = none, fill = red!68] (8,-7) rectangle (9,-8);
+ \draw[thin, black!31] (1,-1) -- (9,-1);
+\draw[thin, black!31] (2,-1) -- (2,-1);
+\draw[thin, black!31] (2,-2) -- (9,-2);
+\draw[thin, black!31] (3,-2) -- (3,-1);
+\draw[thin, black!31] (3,-3) -- (9,-3);
+\draw[thin, black!31] (4,-3) -- (4,-1);
+\draw[thin, black!31] (4,-4) -- (9,-4);
+\draw[thin, black!31] (5,-4) -- (5,-1);
+\draw[thin, black!31] (5,-5) -- (9,-5);
+\draw[thin, black!31] (6,-5) -- (6,-1);
+\draw[thin, black!31] (6,-6) -- (9,-6);
+\draw[thin, black!31] (7,-6) -- (7,-1);
+\draw[thin, black!31] (7,-7) -- (9,-7);
+\draw[thin, black!31] (8,-7) -- (8,-1);
+\draw[thin, black!31] (8,-8) -- (9,-8);
+\draw[thin, black!31] (9,-8) -- (9,-1);
+\draw[draw = none, fill = black!100] (6,-5) rectangle (7,-6);
+ \draw[thin] (1,-1) -- (2,-1);
+\draw[thin] (2,-1) -- (2,-2);
+\draw[thin] (2,-2) -- (3,-2);
+\draw[thin] (3,-2) -- (3,-3);
+\draw[thin] (3,-3) -- (4,-3);
+\draw[thin] (4,-3) -- (4,-4);
+\draw[thin] (4,-4) -- (5,-4);
+\draw[thin] (5,-4) -- (5,-5);
+\draw[thin] (5,-5) -- (6,-5);
+\draw[thin] (6,-5) -- (6,-6);
+\draw[thin] (6,-6) -- (7,-6);
+\draw[thin] (7,-6) -- (7,-7);
+\draw[thin] (7,-7) -- (8,-7);
+\draw[thin] (8,-7) -- (8,-8);
+\draw[thin] (8,-8) -- (9,-8);
+\draw[thin] (9,-8) -- (9,-9);
+\node at (3/2,-3/2) {\small ${2} $};
+\node at (5/2,-5/2) {\small ${0} $};
+\node at (7/2,-7/2) {\small ${2} $};
+\node at (9/2,-9/2) {\small ${2} $};
+\node at (11/2,-11/2) {\small ${1} $};
+\node at (13/2,-13/2) {\small ${1} $};
+\node at (15/2,-15/2) {\small ${0} $};
+\node at (17/2,-17/2) {\small ${0} $};
+\end{tikzpicture}
+\end{align*}
+\end{frame}
+\begin{frame}[fragile]{Catalanimals and shuffle theorems}
+    \begin{center}
+    \begin{tikzcd}[column sep=tiny]
+      \Ecal^+ \ar[r,"\sim"] \ar[d] & \mathcal{S} \ar[d]\\
+      \Ecal^+ \curvearrowright 1 \in \Lambda
+      \ar[r,equals]\ar[d,equals]&\parbox[l]{20ex}{Tame Catalanimal
+        (explicit description)} \ar[d,dashed,"\text{Cauchy formula}"]\\
+      \text{Algebraic quantity}
+      \ar[r,equals] & 
+      \text{Combinatorial quantity}
+    \end{tikzcd}
+  \end{center}
+\end{frame}
+\begin{frame}[fragile]{Mystery}
+  \begin{center}
+    \begin{tikzpicture}[xscale = .7,yscale = .7]
+      \draw[step=1cm,gray!20,very thin] (0,0) grid (11,6);
+      \draw[thick] (0,5.45) to[out=-70,in=175] (11.4,0); \draw[very
+      thick]
+      (0,5)--(0,3)--(1,3)--(1,2)--(2,2)--(2,1)--(4,1)--(4,0)--(11,0);
+      \draw[fill = black] (0,5.45) circle (0.15) node[left]
+      {\((0,s)\)}; \draw[fill = black] (11.4,0) circle (0.15)
+      node[below] {\((r,0)\)};
+    \end{tikzpicture}
+  \end{center}
+\end{frame}
+\end{document}
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
