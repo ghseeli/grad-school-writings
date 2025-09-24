@@ -6,6 +6,7 @@
 [general-audience-research-presentation-jsf.pdf](presentations/general-audience-research-presentation-jsf.pdf)  
 [grad-sem-k-theoretic-catalan-functions.pdf](presentations/grad-sem-k-theoretic-catalan-functions.pdf)  
 [grad-sem-shuffle-theorem.pdf](presentations/grad-sem-shuffle-theorem.pdf)  
+[icerm-what-is-a-catalanimal.pdf](presentations/icerm-what-is-a-catalanimal.pdf)  
 [illinois-state-diagonal-harmonics-and-shuffle-theorems.pdf](presentations/illinois-state-diagonal-harmonics-and-shuffle-theorems.pdf)  
 [jmra-k-theoretic-catalan-functions.pdf](presentations/jmra-k-theoretic-catalan-functions.pdf)  
 [k-schur-functions-as-schubert-representatives-for-affine-grassmannian.pdf](presentations/k-schur-functions-as-schubert-representatives-for-affine-grassmannian.pdf)  
