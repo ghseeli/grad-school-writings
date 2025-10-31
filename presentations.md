@@ -1,4 +1,5 @@
 ## Presentations
+[basic-examples-and-feature-engineering.pdf](presentations/basic-examples-and-feature-engineering.pdf)  
 [cage-k-theoretic-catalan-functions.pdf](presentations/cage-k-theoretic-catalan-functions.pdf)  
 [cms-schubert-calculus-k-theoretic-catalan-functions.pdf](presentations/cms-schubert-calculus-k-theoretic-catalan-functions.pdf)  
 [fpsac23-macdonald-catalanimals.pdf](presentations/fpsac23-macdonald-catalanimals.pdf)  
