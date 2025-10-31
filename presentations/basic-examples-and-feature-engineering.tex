@@ -1,0 +1,248 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Beamer Presentation
+% LaTeX Template
+% Version 1.0 (10/11/12)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND THEMES
+%----------------------------------------------------------------------------------------
+
+\documentclass[dvipsnames]{beamer}
+\mode<presentation> {
+
+% The Beamer class comes with a number of default slide themes
+% which change the colors and layouts of slides. Below this is a list
+% of all the themes, uncomment each in turn to see what they look like.
+
+%\usetheme{default}
+%\usetheme{AnnArbor}
+%\usetheme{Antibes}
+%\usetheme{Bergen}
+%\usetheme{Berkeley}
+%\usetheme{Berlin}
+%\usetheme{Boadilla}
+%\usetheme{CambridgeUS}
+%\usetheme{Copenhagen}
+%\usetheme{Darmstadt}
+%\usetheme{Dresden}
+%\usetheme{Frankfurt}
+%\usetheme{Goettingen}
+%\usetheme{Hannover}
+%\usetheme{Ilmenau}
+%\usetheme{JuanLesPins}
+%\usetheme{Luebeck}
+\usetheme{Madrid}
+%\usetheme{Malmoe}
+%\usetheme{Marburg}
+%\usetheme{Montpellier}
+%\usetheme{PaloAlto}
+%\usetheme{Pittsburgh}
+%\usetheme{Rochester}
+%\usetheme{Singapore}
+%\usetheme{Szeged}
+%\usetheme{Warsaw}
+
+% As well as themes, the Beamer class has a number of color themes
+% for any slide theme. Uncomment each of these in turn to see how it
+% changes the colors of your current slide theme.
+
+%\usecolortheme{albatross}
+%\usecolortheme{beaver}
+%\usecolortheme{beetle}
+%\usecolortheme{crane}
+%\usecolortheme{dolphin}
+%\usecolortheme{dove}
+%\usecolortheme{fly}
+%\usecolortheme{lily}
+%\usecolortheme{orchid}
+%\usecolortheme{rose}
+%\usecolortheme{seagull}
+%\usecolortheme{seahorse}
+%\usecolortheme{whale}
+%\usecolortheme{wolverine}
+
+%\setbeamertemplate{footline} % To remove the footer line in all slides uncomment this line
+%\setbeamertemplate{footline}[page number] % To replace the footer line in all slides with a simple slide count uncomment this line
+
+\setbeamertemplate{navigation symbols}{} % To remove the navigation symbols from the bottom of all slides uncomment this line
+\setbeamertemplate{footline}{}
+}
+
+\usepackage{graphicx} % Allows including images
+%\usepackage{booktabs} % Allows the use of \toprule, \midrule and
+                      % \bottomrule in tables
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{tikz-cd}
+
+\usepackage{../ReAdTeX/readtex-core}
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\title[]{Basic Examples and Feature Engineering} % The short title appears at the bottom of every slide, the full title is only on the title page
+
+\author[George H. Seelinger]{George H. Seelinger} % Your name
+\institute[UMich] % Your institution as it will appear on the bottom of every slide, may be shorthand to save space
+{
+ghseeli@umich.edu\\ %Your email address
+\medskip
+ICERM: Machine Learning Seminar \\ % Your institution for the title page
+\medskip
+}
+\date{28 October 2025} % Date, can be changed to a custom date
+
+\begin{document}
+\begin{frame}
+\titlepage % Print the title page as the first slide
+\end{frame}
+\begin{frame}{Goals}
+  \begin{itemize}
+  \item Learn basics of decision tree learning.
+  \item Explore some challenges to using machine learning to mathematical problems.
+  \item Encounter many difficulties, negative results, and arguably
+    trivial results.
+  \end{itemize}
+\end{frame}
+\begin{frame}{``Good Old Fashioned Machine Learning''}
+  Supervised learning:
+  \begin{itemize}
+  \item Real world data with inputs (or ``features'') \(\textbf{X}\)
+    and outputs (or ``labels'') \(\textbf{y}\).
+  \item In practice, split \(\textbf{X} = \textbf{X}_{\text{train}}
+    \dunion \textbf{X}_{\text{test}}\) and matching \(\textbf{y} =
+    \textbf{y}_{\text{train}} \dunion \textbf{y}_{\text{test}}\).
+  \item Learn function \(f\) that ``fits'' \(f(x) = y\) from the pair \(\textbf{X}_{\text{train}},\textbf{y}_{\text{train}}\).
+  \item Ideally, for new input \(x\) with unknown output \(y\), \(f(x)
+    = y\) (or at least \(|f(x)-y|\) is small).
+  \item Test ideal situation using withheld pair \(\textbf{X}_{\text{test}},\textbf{y}_{\text{test}}\).
+  \end{itemize}
+\end{frame}
+\begin{frame}{Real World Toy Example}
+  Problem: given a Titanic passenger with some information about
+  them (``features''), predict whether or not they survived.
+  \begin{itemize}
+  \item This data has noise! Impossible to perfectly predict survivability off
+    knowledge of individual passenger available prior to April 15, 1912.
+  \item However, there can still be detectable trends.
+  \end{itemize}
+  We will use data from Kaggle.
+  \includegraphics[scale=0.3]{images/Titanic data head}
+\end{frame}
+\begin{frame}{Decision Trees}
+  \includegraphics[scale=0.65]{images/Titanic basic decision tree}
+  Accuracy on withheld test data: \(79\%\)
+\end{frame}
+\begin{frame}{Decision Trees}
+  \includegraphics[scale=0.50]{images/Titanic decision tree feature importance}
+\end{frame}
+\begin{frame}{Decision Trees}
+  Some pros:
+  \begin{itemize}
+  \item Relatively easy to understand and interpret.
+  \item Input data requires little preprocessing.
+  \end{itemize}
+  Some cons:
+  \begin{itemize}
+  \item Highly susceptible to overfitting.
+  \item Cannot detect relationships between features.
+  \item Non-robust: small changes in training data can cause large
+    changes in tree.
+  \end{itemize}
+\end{frame}
+\begin{frame}{Solution 1: Random Forests}
+  \begin{itemize}
+  \item Instead of training a tree, train a forest!
+  \item For any given classification problem, have every tree vote and take
+    the majority vote.
+  \item Harder to visualize, but can still measure importance of features.
+  \end{itemize}
+  \includegraphics[scale=0.15]{images/Titanic rf sample}\(\cdots\)
+\end{frame}
+\begin{frame}{Solution 2: Feature engineering}
+  \begin{itemize}
+  \item If you think there is some relationship between features, you
+    can manually try to add one. (``Derived feature'')
+  \item  Titanic data lists ``\# siblings or spouses'' as one feature
+    and ``\# parents or children'' as another. Perhaps total family size
+    is more relevant.
+  \item Titanic data lists every passenger's name, including their ``Title''
+    (e.g., Mr, Master, Miss, Mrs, etc.). This might be useful to
+    extract for the model. \pause
+  \item Decision tree accuracy with additional features \(79\% \to 80\%\)
+  \item Random forest accuracy with additional features \(80\% \to 82\%\)
+  \end{itemize}
+\end{frame}
+\begin{frame}{Solution 3: Gradient boosting}
+  \begin{itemize}
+  \item XGBoost (and other gradient boosted tree libraries) use more
+    advanced techniques to train a decision tree forest in a more
+    sophisticated way to get even better models that are not as likely
+    to overfit.
+  \item Like random forests, some explainability is lost.
+  \end{itemize}
+\end{frame}
+\begin{frame}{Mathematical Data}
+  \begin{itemize}
+  \item Unlike real world data, mathematical data (often) has no noise.
+  \item However, decision trees are designed to find signal in noise.
+  \item In general, decision tree learning algorithms are designed for
+    interpolating from data, not extrapolating from data.
+  \end{itemize}
+\end{frame}
+\begin{frame}{Mathematical Example 1: is this number even or odd?}
+  \begin{itemize}
+  \item E.g., let \(X = \) first \(N\) non-negative integers and \(y_i = \)0 if
+    \(i\) is even, 1 if \(i\) is odd.
+  \item Training using \(X\) as given leads to terrible performance
+    on decision tree.
+  \item Feature engineering: rewrite \(X\) as binary sequences
+    \(\implies\) decision tree model (easily) scores 100\%.
+  \end{itemize}
+\end{frame}
+\begin{frame}{Is this number even or odd? (Binary input)}
+  \begin{itemize}
+  \item Decision tree (binary input)
+        \includegraphics[scale=0.15]{images/DT on binary number}
+  \item Neural network (binary input)
+        \includegraphics[scale=0.2]{images/NN even odd weights}
+  \item \href{https://stats.stackexchange.com/questions/161189/train-a-neural-network-to-distinguish-between-even-and-odd-numbers}{https://stats.stackexchange.com/questions/161189/train-a-neural-network-to-distinguish-between-even-and-odd-numbers}
+  \end{itemize}
+\end{frame}
+\begin{frame}{Mathematical Example 2: Horn problem}
+  \begin{itemize}
+  \item Schur polynomials \(s_\lambda(x_1,\ldots,x_n)\) form a basis
+    of symmetric polynomials as \(\lambda\) varies over partitions:
+    \(\lambda = (\lambda_1 \geq \cdots \geq \lambda_n \geq 0) \in \Z_{\geq 0}^n\).
+  \item Littlewood-Richardson coefficients \(c_{\lambda,\mu}^\nu\):  \[s_\lambda s_\mu =
+    \sum_\nu c_{\lambda,\mu}^\nu s_\nu\] for \(c_{\lambda \mu}^\nu \in
+    \Z_{\geq 0}\).
+  \item Horn problem: determine when \(c_{\lambda, \mu}^\nu \neq 0\) (support).
+  \item Remark: this is a mathematically solved and well understood problem.
+  \item Can we see how ML models could learn the solution?
+  \end{itemize}
+\end{frame}
+\begin{frame}{Horn problem}
+  \begin{block}{Solution (Klyachko, 1998, Knutson-Tao, 1999)}
+    \(c_{\lambda \mu}^{\nu} \neq 0 \iff \sum_{i \in I} \lambda_i +
+    \sum_{j \in J} \mu_j \leq \sum_{k \in K} \nu_k\) for
+    \(I,J,K \subset \{1,\ldots,n\}\) satisfying \(|I|=|J|=|K|\) and \(|\lambda|+|\mu|=|\nu|\).
+  \end{block}
+\end{frame}
+\begin{frame}{Additional resource for Algebraic Combinatorics Data}
+  Algebraic Combinatorics Dataset Repository: \href{https://github.com/pnnl/ML4AlgComb}{https://github.com/pnnl/ML4AlgComb}
+\end{frame}
+\end{document}
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
