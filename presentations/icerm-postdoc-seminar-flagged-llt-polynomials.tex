@@ -554,7 +554,7 @@ $\zz ^{T} = \prod _{a\in \nubold  } z_{T(a)}$.
   \item For \(G = \) incomparability graph for natural unit interval
     order (encoded by Dyck path \(P\)),
     \[
-      \chi_G(X;t) = {(1-t)}^{-|V|} \Gcal_{\nu(P)}[(1-t)X;t] \,.
+      \chi_G(x;t) = {(1-t)}^{-|V|} \Gcal_{\nu(P)}[(1-t)x;t] \,.
     \]
   \end{itemize}
 \end{frame}
@@ -587,7 +587,7 @@ $\zz ^{T} = \prod _{a\in \nubold  } z_{T(a)}$.
     \end{itemize}
   \end{center}
 \end{frame}
-\begin{frame}{Flagged Schur functions}
+\begin{frame}{Flagged Schur functions (Lascoux-Sch\"{u}tzenberger, Wachs)}
   \begin{itemize}
   \item For partition \(\lambda\) and flag \(\bb\), the \emph{flagged
       Schur function} is given by
@@ -595,7 +595,31 @@ $\zz ^{T} = \prod _{a\in \nubold  } z_{T(a)}$.
       s_{\lambda,\bb}(x) = \sum_{T \in \FT(\lambda,\bb)} x^T
     \]\pause
   \item Jacobi-Trudi: \(s_{\lambda,\bb}(x) = \det(h_{\lambda_i-i+j}(x_1,\ldots,x_{b_i}))\)\pause
-  \item E.g., \(s_{21,13}(x_1,x_2,x_3) = x_1^2x_2 + x_1^2 x_3 = h_2(x_1)h_1(x_1,x_2,x_3)-h_3(x_1)\)\pause
+  \item E.g., \(s_{21,13}(x_1,x_2,x_3) = x_1^2x_2 + x_1^2 x_3 =
+    h_2(x_1)h_1(x_1,x_2,x_3)-h_3(x_1)\) 
+    \begin{center}
+     \begin{tikzpicture}[scale=0.5,baseline=0]
+      \foreach \beta / \alpha / \y in {2/0/0,1/0/1} \draw (\alpha,\y)
+      grid (\beta, \y+1); \node at (2.5,0.5) {\(\scriptstyle \leq 1\)}; \node at (1.5,1.5)
+      {\(\scriptstyle \leq 3\)}; \node at (0.5,0.5) {1}; \node at (1.5,0.5) {1}; \node at
+      (0.5,1.5) {2};
+    \end{tikzpicture}
+    \begin{tikzpicture}[scale=0.5,baseline=0]
+      \foreach \beta / \alpha / \y in {2/0/0,1/0/1} \draw (\alpha,\y)
+      grid (\beta, \y+1); \node at (2.5,0.5) {\(\scriptstyle \leq 1\)}; \node at (1.5,1.5)
+      {\(\scriptstyle \leq 3\)}; \node at (0.5,0.5) {1}; \node at (1.5,0.5) {1}; \node at
+      (0.5,1.5) {3};
+    \end{tikzpicture}
+    \raisebox{.12in}{
+    \(
+\left(    \begin{matrix}
+      h_2(x_1) & h_3(x_1) \\
+      h_0(x_1,x_2,x_3) & h_1(x_1,x_2,x_3)
+    \end{matrix}
+\right)
+    \)}
+    \end{center}
+    \pause
   \item \(\mathfrak{S}_w(x) = s_{\lambda,\bb}(x)\) for
     \emph{vexillary} \(w \in S_n\) (2143-avoiding).\pause
   \item \(s_{\lambda,\bb}(x)\) are examples of \emph{Demazure characters}.
@@ -627,10 +651,11 @@ $\hat{\pi}_i := \pi_i-1$ in place of  $\pi_i$:
 \end{frame}
 \begin{frame}{Examples}
   \begin{align*}
-\Dcal_{520} & = x_1^5x_2^2  \\[.8mm]
+\Dcal_{520} & = x_1^5x_2^2  \\[.8mm] 
 \Dcal_{250} & = \pi_{1}\Dcal_{520}=\pi_1(x_1^5x_2^2) = x_1^5x_2^2 + x_1^4 x_2^3 + x_1^3 x_2^4 + x_1^2x_2^5 \\[.8mm]
 \Dcal_{205} & = \pi_2 \Dcal_{250} = \pi_2 \big(x_1^5x_2^2 + x_1^4 x_2^3 + x_1^3 x_2^4 + x_1^2x_2^5\big)
 \end{align*}
+\pause
 \begin{align*}
   \Dcal_{520} & = \Acal_{520}\\
   \Dcal_{250} & = \Acal_{520} + \Acal_{250}\\
@@ -649,12 +674,12 @@ $\hat{\pi}_i := \pi_i-1$ in place of  $\pi_i$:
     $\pi_w := \pi_{i_1}\pi_{i_2}\cdots \pi_{i_m}.$\pause
   \item For \emph{Weyl symmetrization operator} \(\pi_{w_0}\), we have \[
         \pi_{w_0}(s_{\lambda,\bb}(x)) = s_\lambda(x), \hspace{0.1in}
-        \pi_{w_0}(\Dcal_\alpha) = \Dcal_{\sort(\alpha)},
+        \pi_{w_0}(\Dcal_\alpha) = \Dcal_{\sort(\alpha)} = s_{\alpha_+},
       \]
       \[
         \pi_{w_0}(\Acal_\alpha) =
         \begin{cases}
-          \Acal_\alpha & \alpha \text{ a partition},\\
+          s_\alpha & \alpha \text{ a partition},\\
           0 & \text{else.}
         \end{cases}
     \]
@@ -665,7 +690,7 @@ $\hat{\pi}_i := \pi_i-1$ in place of  $\pi_i$:
   \item Let  $e_1,\dots, e_l$ be the row ends of  $\nubold$, ordered in reverse reading order.
   \item Fix flag \(\bb = (b_1 \leq \cdots \leq b_l)\).
   \item \(\FT(\nubold,\bb) = \) set of semistandard tableaux \(T\)
-    on \(\nubold\) satisfying \(T(e_i) \leq b_i\).
+    on \(\nubold\) satisfying \(T(e_i) \leq b_i\). 
   \item The \emph{flagged LLT polynomial} indexed by \(\nubold\) and
     \(\bb\) is
     \[
@@ -679,7 +704,7 @@ $\hat{\pi}_i := \pi_i-1$ in place of  $\pi_i$:
         \draw[help lines] (0,0) grid (6,5); \draw[thick] (0,1) grid
         (2,2); \draw[thick] (1,0) grid (3,1);
 %
-        \draw[thick] (4,3) grid (6,5); \only<1-2>{ \node at (0.5, 1.5)
+        \draw[thick] (4,3) grid (6,5); \only<1>{ \node at (0.5, 1.5)
           {\small $ $}; \node at (1.5, 1.5) {\small $e_4$}; \node at
           (1.5, 0.5) {\small $ $}; \node at (2.5, 0.5) {\small $e_2$};
 %
@@ -687,7 +712,7 @@ $\hat{\pi}_i := \pi_i-1$ in place of  $\pi_i$:
           3.0+1.5) {\small $e_3$}; \node at (3.0+1.5, 3.0+0.5) {\small
             $ $}; \node at (3.0+2.5, 3.0+0.5) {\small $e_1$};}
 
-        \only<3->{ \node at (0.5, 1.5) {\small $2$}; \node at (1.5,
+        \only<2->{ \node at (0.5, 1.5) {\small $2$}; \node at (1.5,
           1.5) {\small $4$}; \node at (1.5, 0.5) {\small $1$}; \node
           at (2.5, 0.5) {\small $2$}; \node at (3.0+1.5, 3.0+1.5)
           {\small $2$}; \node at (3.0+2.5, 3.0+1.5) {\small $3$};
@@ -810,7 +835,7 @@ where $|T|$ is the result of removing all bars from $T$.
 \begin{tikzpicture}[scale = .34]
 \draw[very thick] (0,0) grid (2,1);
 \end{tikzpicture}
-\, \big)
+\, \big), \bb = (1,2)
 \end{equation*}
 \[
 \begin{array}{cc@{\ \ \ }c@{\ \ \ }c@{\ \ \ }c@{\ \ \ }c}
@@ -921,7 +946,7 @@ T&
     flagged Dyck paths.\pause
   \item Tewari-Wilson-Zhang define chromatic nonsymmetric polynomials
     associated to \(d \times d\) Dyck paths starting with \(r\) north steps, \(\chi_{\bb,\pi}\). We show \[
-      \chi_{(1,\ldots,r),\pi} = (1-t)^{r-d} \Gcal^\pm_{\nu(\pi),(1,\ldots,r)}(x;t)\,.
+      \chi_{(1,\ldots,r),\pi}(x;t) = (1-t)^{r-d} \Gcal^\pm_{\nu(\pi),(1,\ldots,r)}(x;t)\,.
     \]
   \end{enumerate}
 \end{frame}
