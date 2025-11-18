@@ -1,0 +1,932 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Beamer Presentation
+% LaTeX Template
+% Version 1.0 (10/11/12)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND THEMES
+%----------------------------------------------------------------------------------------
+
+\documentclass[dvipsnames]{beamer}
+\mode<presentation> {
+
+% The Beamer class comes with a number of default slide themes
+% which change the colors and layouts of slides. Below this is a list
+% of all the themes, uncomment each in turn to see what they look like.
+
+%\usetheme{default}
+%\usetheme{AnnArbor}
+%\usetheme{Antibes}
+%\usetheme{Bergen}
+%\usetheme{Berkeley}
+%\usetheme{Berlin}
+%\usetheme{Boadilla}
+%\usetheme{CambridgeUS}
+%\usetheme{Copenhagen}
+%\usetheme{Darmstadt}
+%\usetheme{Dresden}
+%\usetheme{Frankfurt}
+%\usetheme{Goettingen}
+%\usetheme{Hannover}
+%\usetheme{Ilmenau}
+%\usetheme{JuanLesPins}
+%\usetheme{Luebeck}
+\usetheme{Madrid}
+%\usetheme{Malmoe}
+%\usetheme{Marburg}
+%\usetheme{Montpellier}
+%\usetheme{PaloAlto}
+%\usetheme{Pittsburgh}
+%\usetheme{Rochester}
+%\usetheme{Singapore}
+%\usetheme{Szeged}
+%\usetheme{Warsaw}
+
+% As well as themes, the Beamer class has a number of color themes
+% for any slide theme. Uncomment each of these in turn to see how it
+% changes the colors of your current slide theme.
+
+%\usecolortheme{albatross}
+%\usecolortheme{beaver}
+%\usecolortheme{beetle}
+%\usecolortheme{crane}
+%\usecolortheme{dolphin}
+%\usecolortheme{dove}
+%\usecolortheme{fly}
+%\usecolortheme{lily}
+%\usecolortheme{orchid}
+%\usecolortheme{rose}
+%\usecolortheme{seagull}
+%\usecolortheme{seahorse}
+%\usecolortheme{whale}
+%\usecolortheme{wolverine}
+
+%\setbeamertemplate{footline} % To remove the footer line in all slides uncomment this line
+%\setbeamertemplate{footline}[page number] % To replace the footer line in all slides with a simple slide count uncomment this line
+
+\setbeamertemplate{navigation symbols}{} % To remove the navigation symbols from the bottom of all slides uncomment this line
+\setbeamertemplate{footline}{}
+}
+
+\usepackage{graphicx} % Allows including images
+%\usepackage{booktabs} % Allows the use of \toprule, \midrule and
+                      % \bottomrule in tables
+\usepackage{tikz}
+\usetikzlibrary{decorations.pathmorphing}
+\usetikzlibrary{shapes,arrows,backgrounds,fit,positioning}
+\usepackage{pgfplots}
+\usepackage{tikz-cd}
+\usepackage{bm}
+\usepackage{amsmath}
+\usepackage[author-year]{amsrefs}
+\usepackage{amsthm}
+\usepackage{../ReAdTeX/readtex-core}
+% \usepackage{../ReAdTeX/readtex-dangerous}
+% \usepackage{../ReAdTeX/readtex-abstract-algebra}
+\usepackage{ytableau}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%%  MACRO DEFINITIONS:  Co-authors -- PLEASE use these! 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\definecolor{coralred}{rgb}{1.0, 0.25, 0.25}
+% \definecolor{lightblue}{rgb}{.68,.85,.9} % 
+\definecolor{lightblue}{rgb}{.3,.65,1.0} %
+\definecolor{asparagus}{rgb}{0.53, 0.66, 0.42}
+
+\DeclareMathOperator{\Gr}{Gr}
+\newcommand{\cupprod}{\smile}
+\newcommand{\sym}{\Lambda}
+\newcommand{\lowers}{\mathcal{L}}
+\newcommand{\mynone}{\ }
+\newcommand{\zz}{{\boldsymbol z}}
+\newcommand{\xx}{{\boldsymbol x}}
+\newcommand{\hbold}{{\boldsymbol h}}
+\newcommand{\sbold}{{\boldsymbol s}}
+\newcommand{\sigmabold}{\boldsymbol \sigma}
+\newcommand{\mubold}{{\boldsymbol \mu }}
+\newcommand{\Htild}{\tilde{H}}
+\DeclareMathSymbol{\shortminus}{\mathbin}{AMSa}{"39}
+\newcommand{\Gcal}{{\mathcal G}}
+\newcommand{\nubold}{{\boldsymbol \nu }}
+\renewcommand{\Span}{\operatorname{span}}
+
+\DeclareMathOperator{\conv}{conv}
+\DeclareMathOperator{\des}{des}
+\DeclareMathOperator{\fin}{fin}
+\DeclareMathOperator{\aff}{aff}
+\DeclareMathOperator{\ext}{ext}
+\DeclareMathOperator{\dinv}{dinv}
+\DeclareMathOperator{\inv}{inv}
+\DeclareMathOperator{\pol}{pol}
+\DeclareMathOperator{\supp}{supp}
+\DeclareMathOperator{\Ind}{Ind}
+\DeclareMathOperator{\Inv}{Inv}
+\DeclareMathOperator{\GL}{GL}
+\DeclareMathOperator{\SYT}{SYT}
+\DeclareMathOperator{\SSYT}{SSYT}
+\DeclareMathOperator{\FT}{FT}
+\DeclareMathOperator{\Ad}{Ad}
+\DeclareMathOperator{\Stab}{Stab}
+\newcommand{\sgn}{\text{\rm sgn}}
+\DeclareMathOperator{\sort}{sort}
+\newcommand{\south}{{\mathrm{south}}}
+\newcommand{\leg}{{\mathrm{leg}}}
+\newcommand{\arm}{{\mathrm{arm}}}
+\newcommand{\bx}[2]{{\boldsymbol {#1}[#2]}}
+\newcommand{\Ecal}{\mathcal{E}}
+\newcommand{\kk}{\Bbbk}
+\newcommand{\Scal}{\mathcal{S}}
+\newcommand{\tGamma}{{\check{\Gamma}}} %for Laurent reps
+\newcommand{\bbb}{{s}}
+\DeclareMathOperator{\area}{area}
+\newcommand{\Acal}{{\mathcal A}}
+\newcommand{\Dcal}{{\mathcal D}}
+\DeclareMathOperator{\Aut}{Aut}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\aA}{{\mathbf a}}
+\newcommand{\bb}{{\mathbf b}}
+\renewcommand{\sl}{\mathfrak{sl}}
+
+\newtheorem{thm}{Theorem}
+\newtheorem{prop}{Proposition}
+\theoremstyle{definition}
+\newtheorem{rmk}[thm]{Remark}
+\newtheorem*{rmk*}{Remark}
+\newtheorem{conjecture}[theorem]{Conjecture}
+
+\newcounter{boxnum}
+
+\newcommand{\qtrootcolor}{blue!45}
+\newcommand{\colorgr}[1]{\textcolor{gray}{#1}}
+\newcommand{\colorgrgr}[1]{\textcolor{gray!70}{#1}}
+\newcommand{\colorb}[1]{\textcolor{blue}{#1}}
+\newcommand{\colordb}[1]{\textcolor{DarkBlue}{#1}}
+\newcommand{\colorblack}[1]{\textcolor{black}{#1}}
+\newcommand{\colorr}[1]{\textcolor{red}{#1}}
+\newcommand{\colorg}[1]{\textcolor{ForestGreen}{#1}}
+\newcommand{\colorgg}[1]{\textcolor{green}{#1}}
+\newcommand{\colorp}[1]{\textcolor{purple}{#1}}
+
+
+\newcommand{\drawskewdg}[2]{
+  \def\ptn{#1}
+  \def\offset{#2}
+    \setcounter{rownum}{1}
+    \foreach \xstart\xend in \ptn {
+      \draw[thick,fill=white] (\xstart+\offset,\therownum-1+\offset)
+      grid (\xend+\offset,\therownum+\offset) rectangle (\xstart+\offset,\therownum-1+\offset);
+      \addtocounter{rownum}{1}
+    }
+}
+
+\newcounter{rownum}
+
+\newcommand{\drawDgNotThick}[3]{
+      \setcounter{rownum}{0}
+      \def\b{#1};
+      \def\xshift{#2};
+      \def\yshift{#3};
+      \foreach \c in \b {
+        \foreach \xx in \xshift {
+           \foreach \yy in \yshift {
+              \draw[shift={(\xx,\yy)}] (\therownum,0) grid (\therownum+1, \c);
+              \addtocounter{rownum}{1};
+           }
+        }
+      }
+    }
+
+\newcommand{\drawDg}[3]{
+      \setcounter{rownum}{0}
+      \def\b{#1};
+      \def\xshift{#2};
+      \def\yshift{#3};
+      \foreach \c in \b {
+        \foreach \xx in \xshift {
+           \foreach \yy in \yshift {
+              \draw[thick, shift={(\xx,\yy)}] (\therownum,0) grid (\therownum+1, \c);
+              \addtocounter{rownum}{1};
+           }
+        }
+      }
+    }
+
+\newcounter{c}
+\newcounter{cp}
+\tikzset{
+    invisible/.style={opacity=0},
+    visible on/.style={alt={#1{}{invisible}}},
+    alt/.code args={<#1>#2#3}{%
+      \alt<#1>{\pgfkeysalso{#2}}{\pgfkeysalso{#3}}%
+  }
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\title[]{Flagged LLT Polynomials} % The short title appears at the bottom of every slide, the full title is only on the title page
+
+\author[George H. Seelinger]{George H. Seelinger} % Your name
+\institute[UMich] % Your institution as it will appear on the bottom of every slide, may be shorthand to save space
+{
+ghseeli@umich.edu\\ %Your email address
+\medskip
+ICERM ECR Seminar \\ % Your institution for the title page
+\medskip
+joint work with Jonah Blasiak, Mark Haiman, Jennifer Morse, and Anna Pun
+}
+\date{18 November 2025} % Date, can be changed to a custom date
+
+\begin{document}
+\begin{frame}
+\titlepage % Print the title page as the first slide
+\end{frame}
+\begin{frame}{Young Tableaux}
+  \begin{definition}
+    Filling of partition diagram of \(\lambda\) with numbers such that
+    \begin{enumerate}
+    \item strictly increasing up columns
+    \item weakly increasing along rows
+    \end{enumerate}
+    Collection is called \(\SSYT(\lambda)\). 
+  \end{definition}
+  \begin{center}
+    \begin{tikzpicture}
+      \ytableausetup{boxsize=1em}
+        \node at (0,0) { \(\ydiagram{1,1,3,4}\)};
+        \node at (-.4,-.6) {\(\scriptstyle \leq\)};
+        \node at (0,-.6) {\(\scriptstyle \leq\)};
+        \node at (.4,-.6) {\(\scriptstyle \leq\)};
+        \node at (.2,-.4) {\(\scriptstyle \vee\)};
+        \node at (-.2,-.4) {\(\scriptstyle \vee\)};
+        \node at (-.6,-.4) {\(\scriptstyle \vee\)};
+        \node at (-.4,-.2) {\(\scriptstyle \leq\)};
+        \node at (0,-.2) {\(\scriptstyle \leq\)};
+        \node at (-.6,0) {\(\scriptstyle \vee\)};
+        \node at (-.6,0.4) {\(\scriptstyle \vee\)};
+      \end{tikzpicture}
+  \end{center}
+  For \(\lambda = (2,1)\), 
+  \ytableausetup{aligntableaux=bottom,boxsize=1em}
+\[
+  \ytableaushort{2,11},\  \ytableaushort{3,11},\ \ytableaushort{3,22},\
+    \ytableaushort{2,12},\ \ytableaushort{3,13},\ \ytableaushort{3,23},\
+    \ytableaushort{2,13},\ \ytableaushort{3,12}
+\]
+\end{frame}
+\begin{frame}{Schur polynomials}
+  Associate a polynomial to \(\SSYT(\lambda)\).
+ \[
+   \quad \quad \quad \quad \quad \quad \quad \quad
+  \ytableaushort{2,11},\  \ytableaushort{3,11},\ \ytableaushort{3,22},\
+    \ytableaushort{2,12},\ \ytableaushort{3,13},\ \ytableaushort{3,23},\
+    \ytableaushort{2,13},\ \ytableaushort{3,12}
+  \]
+  \vspace{-0.75em}
+ \[
+   \quad \quad \quad \quad \quad \quad \quad \to
+  \ytableaushort{{z_{2}},{z_{1}}{z_{1}}},\  \ytableaushort{{z_{3}},{z_{1}}{z_{1}}},\ \ytableaushort{{z_{3}},{z_{2}}{z_{2}}},\
+    \ytableaushort{{z_{2}},{z_{1}}{z_{2}}},\ \ytableaushort{{ z_{ 3 } },{ z_{ 1 } }{ z_{ 3 } }},\ \ytableaushort{{ z_{ 3 } },{ z_{ 2 } }{ z_{ 3 } }},\
+    \ytableaushort{{ z_{ 2 } },{ z_{ 1 } }{ z_{ 3 } }},\ \ytableaushort{{ z_{ 3 } },{ z_{ 1 } }{ z_{ 2 } }}
+  \]
+  \vspace{-0.75em}
+  \[
+    s_{(2,1)}(z_1,z_2,z_3) = z_1^2z_2+z_1^2z_3+z_2^2z_3+z_1z_2^2+z_1z_3^2+z_2z_3^2+2z_1z_2z_3
+  \]
+  \begin{definition}
+    For \(\lambda\) a partition \[
+      s_\lambda = \sum_{T \in \SSYT(\lambda)} \zz^T \text{ for }\zz^T = \prod_{i
+        \in T} z_i
+    \]
+  \end{definition}
+  
+  \begin{itemize}
+  \item \(s_\lambda\) is a symmetric function.
+  \item \(\{s_\lambda\}_\lambda\) forms a basis for \(\sym\).
+  \end{itemize}
+\end{frame}
+\begin{frame}{Products of Schur polynomials}
+  \begin{itemize}
+  \item Littlewood-Richardson rule: \(s_\lambda s_\mu = \sum_\nu c_{\lambda \mu}^\nu s_\nu\) for
+    \(c_{\lambda\mu}^\nu \in \N\). 
+  \item Skew Schur function: \(s_{\nu/\lambda} = \sum_{T \in
+      \SSYT(\nu/\lambda)} x^T = \sum_\mu c_{\lambda \mu}^\nu s_\mu\) .
+  \item Straightforward observation: \(s_{\nu/\lambda} s_{\kappa/\mu} = \sum_{\substack{T \in \SSYT(\nu/\lambda) \\ S
+        \in \SSYT(\kappa/\mu)}} x^T x^S\).
+  \item \(q\)-deformation?
+  \end{itemize}
+\end{frame}
+\begin{frame}{Key Object: LLT Polynomials}
+  \vspace{-1.4mm}
+{\small
+Let  $\nubold= (\nu_{(1)}, \dots, \nu_{(k)})$ be a tuple of skew
+shapes. (Skew shape = \(\lambda \setminus \mu\))
+%\vspace{1mm}
+
+\begin{itemize}
+\onslide<2->{\item The \emph{content} of a box in row  $y$,  column  $x$ is  $x-y$.}
+\onslide<3->{\item \emph{Reading order}: label boxes $b_1, \dots, b_n$ by scanning each diagonal from southwest to northeast, in order of increasing content.}
+\onslide<4->{\item A pair  $(a,b) \in \nubold$ is \emph{attacking} if  $a$ precedes  $b$ in reading order and
+\begin{itemize}
+\item  ${\rm content}(b) = {\rm content}(a)$,  or
+\item  ${\rm content}(b) = {\rm content}(a) + 1$ and $a \in \nu_{(i)}, b \in \nu_{(j)}$ with  $i > j$.
+\end{itemize}}
+\end{itemize}}
+
+\vspace{-3mm}
+\begin{equation*}
+\begin{tikzpicture}[scale = .34]
+\begin{scope}
+\node[anchor=east] at (-0.1, 1) {$\nubold = \bigg( $};
+%
+\draw[thin, black!44]  (0,0) grid (1,1);
+%\node at (0.5, 1.5) {\small $b_1$};
+%\node at (1.5, 1.5) {\small $b_2$};
+%\node at (1.5, 0.5) {\small $b_4$};
+%\node at (2.5, 0.5) {\small $b_7$};
+\node at (3.34, 0.02) { , };
+\draw[very thick] (0,1) grid (2,2);
+\draw[very thick] (1,0) grid (3,1);
+\end{scope}
+\begin{scope}[xshift = 117]
+%
+\draw[thin, black!44] (0,0) grid (1,2);
+%\node at (1.5, 1.5) {\small $b_3$};
+%\node at (2.5, 1.5) {\small $b_6$};
+%\node at (1.5, 0.5) {\small $b_5$};
+%\node at (2.5, 0.5) {\small $b_8$};
+\draw[very thick] (1,0) grid (3,2);
+\node at (3.58, 1) { $ \bigg)$};
+\end{scope}
+\end{tikzpicture}
+\quad \quad \quad
+\raisebox{-.94cm}{
+\begin{tikzpicture}[scale = .51]
+\begin{scope}
+\only<5>{
+\draw[draw = none, fill = red!47] (1,1) rectangle (2,2);
+\draw[draw = none, fill = red!47] (4,4) rectangle (5,5);
+}
+\only<6>{
+\draw[draw = none, fill = red!47] (4,4) rectangle (5,5);
+\draw[draw = none, fill = red!47] (1,0) rectangle (2,1);
+}
+\only<7>{
+\draw[draw = none, fill = red!47] (1,0) rectangle (2,1);
+\draw[draw = none, fill = red!47] (4,3) rectangle (5,4);
+}
+\only<8>{
+\draw[draw = none, fill = red!47] (1,0) rectangle (2,1);
+\draw[draw = none, fill = red!47] (5,4) rectangle (6,5);
+}
+\only<9>{
+\draw[draw = none, fill = red!47] (4,3) rectangle (5,4);
+\draw[draw = none, fill = red!47] (2,0) rectangle (3,1);
+}
+\only<10>{
+\draw[draw = none, fill = red!47] (5,4) rectangle (6,5);
+\draw[draw = none, fill = red!47] (2,0) rectangle (3,1);
+}
+\only<11>{
+\draw[draw = none, fill = red!47] (2,0) rectangle (3,1);
+\draw[draw = none, fill = red!47] (5,3) rectangle (6,4);
+}
+%
+\draw[help lines] (0,0) grid (6,5);
+\draw[thick] (0,1) grid (2,2);
+\draw[thick] (1,0) grid (3,1);
+%
+%
+\draw[thick] (4,3) grid (6,5);
+\only<3->{
+\node at (0.5, 1.5) {\small $b_1$};
+\node at (1.5, 1.5) {\small $b_2$};
+\node at (1.5, 0.5) {\small $b_4$};
+\node at (2.5, 0.5) {\small $b_7$};
+%
+\node at (3.0+1.5, 3.0+1.5) {\small $b_3$};
+\node at (3.0+2.5, 3.0+1.5) {\small $b_6$};
+\node at (3.0+1.5, 3.0+0.5) {\small $b_5$};
+\node at (3.0+2.5, 3.0+0.5) {\small $b_8$};}
+%
+\only<2>{
+\foreach \x in {0,...,5}
+    \foreach \y in {0,...,4}
+        {\pgfmathtruncatemacro{\myc}{\x - \y}
+        \node at (\x+0.5,\y+0.5) {\footnotesize \myc };}
+}
+\end{scope}
+\end{tikzpicture}}
+\end{equation*}
+{\small
+\onslide<4->{
+Attacking pairs:  $
+{\color<5>{red}(b_2,b_3)},
+{\color<6>{red}(b_3, b_4)},
+{\color<7>{red}(b_4, b_5)},
+{\color<8>{red}(b_4, b_6)},
+{\color<9>{red}(b_5, b_7)},
+{\color<10>{red}(b_6, b_7)},
+{\color<11>{red}(b_7, b_8)} $}
+}
+\end{frame}
+\begin{frame}{LLT Polynomials}
+  \vspace{-2mm}
+\small
+\begin{itemize}
+\item A \emph{semistandard tableau} on $\nubold  $ is a map
+$T\colon \nubold  \rightarrow \Z _{+}$ which restricts to a
+semistandard tableau on each $\nu_{(i)}$.
+\onslide<2->{
+\item An \emph{attacking inversion} in $T$ is
+an attacking pair $(a,b)$ such that~$T(a)>T(b)$.}
+\end{itemize}
+
+The \emph{LLT polynomial} indexed by a tuple of skew shapes $\nubold
+$ is
+\begin{equation*}
+\Gcal_{\nubold  }(\zz;q) = \sum _{T\in \SSYT (\nubold
+)}\onslide<2->{q^{\inv (T)}}\zz ^{T},
+\end{equation*}
+\vspace{-1mm}
+\onslide<2->{where $\inv (T)$ is the number of attacking inversions in $T$ and}
+$\zz ^{T} = \prod _{a\in \nubold  } z_{T(a)}$.
+
+\vspace{-2mm}
+\begin{align*}
+&
+\begin{tikzpicture}[scale = .46]
+\node[anchor = east] at (-1.4, 2.5) {$T \ \ = $};
+\begin{scope}
+\node[anchor = west] at (7,3) {\small \phantom{\colorb{non-inversion}}};
+\only<3>{
+\draw[draw = none, fill = blue!47] (1,1) rectangle (2,2);
+\draw[draw = none, fill = blue!47] (4,4) rectangle (5,5);
+\node[anchor = west] at (7,3) {\small \colorb{non-inversion}};
+}
+\only<4>{
+\draw[draw = none, fill = red!47] (4,4) rectangle (5,5);
+\draw[draw = none, fill = red!47] (1,0) rectangle (2,1);
+\node[anchor = west] at (7,3) {\small \colorr{inversion}};
+}
+\only<5>{
+\draw[draw = none, fill = red!47] (1,0) rectangle (2,1);
+\draw[draw = none, fill = red!47] (4,3) rectangle (5,4);
+\node[anchor = west] at (7,3) {\small \colorr{inversion}};
+}
+\only<6>{
+\draw[draw = none, fill = blue!47] (1,0) rectangle (2,1);
+\draw[draw = none, fill = blue!47] (5,4) rectangle (6,5);
+\node[anchor = west] at (7,3) {\small \colorb{non-inversion}};
+}
+\only<7>{
+\draw[draw = none, fill = blue!47] (4,3) rectangle (5,4);
+\draw[draw = none, fill = blue!47] (2,0) rectangle (3,1);
+\node[anchor = west] at (7,3) {\small \colorb{non-inversion}};
+}
+\only<8>{
+\draw[draw = none, fill = red!47] (5,4) rectangle (6,5);
+\draw[draw = none, fill = red!47] (2,0) rectangle (3,1);
+\node[anchor = west] at (7,3) {\small \colorr{inversion}};
+}
+\only<9>{
+\draw[draw = none, fill = red!47] (2,0) rectangle (3,1);
+\draw[draw = none, fill = red!47] (5,3) rectangle (6,4);
+\node[anchor = west] at (7,3) {\small \colorr{inversion}};
+}
+%
+\draw[help lines] (0,0) grid (6,5);
+\draw[thick] (0,1) grid (2,2);
+\draw[thick] (1,0) grid (3,1);
+\node at (0.5, 1.5) {\small $2$};
+\node at (1.5, 1.5) {\small $4$};
+\node at (1.5, 0.5) {\small $3$};
+\node at (2.5, 0.5) {\small $5$};
+\draw[thick] (4,3) grid (6,5);
+\node at (3.0+1.5, 3.0+1.5) {\small $5$};
+\node at (3.0+2.5, 3.0+1.5) {\small $6$};
+\node at (3.0+1.5, 3.0+0.5) {\small $1$};
+\node at (3.0+2.5, 3.0+0.5) {\small $1$};
+\end{scope}
+\end{tikzpicture}\\
+&
+\onslide<10>{\inv(T) = 4,}  \quad \zz^T = z_1^2z_2z_3z_4z_5^2z_6
+\end{align*}
+\end{frame}
+\begin{frame}{LLT Polynomials \(\Gcal_\nubold(X;q)\)}
+  \begin{itemize}
+  \item \(\Gcal_\nubold(X;q)\) is a symmetric function\pause
+  \item \(\Gcal_\nubold(X;1) = s_{\nu^{(1)}} \cdots s_{\nu^{(r)}}\)\pause
+  \item \(\Gcal_\nubold\) were originally defined by Lascoux, Leclerc, and
+    Thibon to explore connections to Fock space representations of \(U_q(\hat{\sl_r})\)\pause
+  \item When \(\nu^{(i)}\) are partitions, the Schur-expansion
+    coefficients are essentially parabolic Kazdhan-Luzstig polynomials.\pause
+  \item \(\Gcal_\nubold\) is Schur-positive for any tuple of skew shapes \(\nubold\)
+    [Grojnowski-Haiman, 2007].
+  \end{itemize}
+\end{frame}
+\begin{frame}{Some notable occurrences of LLT Polynomials}
+  \begin{itemize}
+  \item Haglund-Haiman-Loehr formula for Macdonald polynomials:
+    \[
+      \ytableausetup{boxsize=0.75em}
+      \Htild_\mu(X;q,t) =
+      t^{n(\mu)} \sum_R \big( \prod_{\ytableaushort{u,{}}} q^{a+1}
+        t^l\big) \Gcal_R(X;t^{-1})\,.
+    \]\pause
+  \item Shuffle theorem (and generalizations):
+    \[
+      \nabla e_n =
+      \sum_{\lambda \in DP_n} t^{\area(\lambda)} q^{\dinv(\lambda)}
+      \Gcal_{\nu(\lambda)}(X;q^{-1})\,.
+    \]\pause
+  \item For \(G = \) incomparability graph for natural unit interval
+    order (encoded by Dyck path \(P\)),
+    \[
+      \chi_G(X;t) = {(1-t)}^{-|V|} \Gcal_{\nu(P)}[(1-t)X;t] \,.
+    \]
+  \end{itemize}
+\end{frame}
+\begin{frame}{Flagged Tableaux}
+  \begin{itemize}
+  \item Fix partition shape \(\lambda = (\lambda_1,\ldots,\lambda_l)\)
+    and \emph{flag} \(\bb = (b_1 \leq \cdots \leq b_l) \in \N^l\).\pause
+   \item A \emph{flagged semistandard Young tableau} of shape \(\lambda\)
+    with flag \(\bb\) is a \(T \in \SSYT(\lambda)\) such that the
+    entries of row \(i\) are bounded above by \(b_i\).
+   \item Denote the set of such tableaux via \(\FT(\lambda,\bb)\).
+   \item E.g., \(\lambda = (2,1), \bb = (1,3)\), \(\FT(\lambda,\bb) = \)
+  \end{itemize}
+  \begin{center}
+    \begin{tikzpicture}[scale=0.5,baseline=0]
+      \foreach \beta / \alpha / \y in {2/0/0,1/0/1} \draw (\alpha,\y)
+      grid (\beta, \y+1); \node at (2.5,0.5) {\(\scriptstyle \leq 1\)}; \node at (1.5,1.5)
+      {\(\scriptstyle \leq 3\)}; \node at (0.5,0.5) {1}; \node at (1.5,0.5) {1}; \node at
+      (0.5,1.5) {2};
+    \end{tikzpicture}
+    \begin{tikzpicture}[scale=0.5,baseline=0]
+      \foreach \beta / \alpha / \y in {2/0/0,1/0/1} \draw (\alpha,\y)
+      grid (\beta, \y+1); \node at (2.5,0.5) {\(\scriptstyle \leq 1\)}; \node at (1.5,1.5)
+      {\(\scriptstyle \leq 3\)}; \node at (0.5,0.5) {1}; \node at (1.5,0.5) {1}; \node at
+      (0.5,1.5) {3};
+    \end{tikzpicture}
+    \begin{itemize}\pause
+    \item Note, there is no issue with letting length of \(\bb\) be
+      less than \(l\).
+    \end{itemize}
+  \end{center}
+\end{frame}
+\begin{frame}{Flagged Schur functions}
+  \begin{itemize}
+  \item For partition \(\lambda\) and flag \(\bb\), the \emph{flagged
+      Schur function} is given by
+    \[
+      s_{\lambda,\bb}(x) = \sum_{T \in \FT(\lambda,\bb)} x^T
+    \]\pause
+  \item Jacobi-Trudi: \(s_{\lambda,\bb}(x) = \det(h_{\lambda_i-i+j}(x_1,\ldots,x_{b_i}))\)\pause
+  \item E.g., \(s_{21,13}(x_1,x_2,x_3) = x_1^2x_2 + x_1^2 x_3 = h_2(x_1)h_1(x_1,x_2,x_3)-h_3(x_1)\)\pause
+  \item \(\mathfrak{S}_w(x) = s_{\lambda,\bb}(x)\) for
+    \emph{vexillary} \(w \in S_n\) (2143-avoiding).\pause
+  \item \(s_{\lambda,\bb}(x)\) are examples of \emph{Demazure characters}.
+  \end{itemize}
+\end{frame}
+\begin{frame}{Demazure characters and atoms}
+  The \emph{Demazure operator} $\pi_i$
+  acts on $f \in \Q(q,t)[x_1^{\pm 1}, \dots, x_N^{\pm 1}]$ by
+  \vspace{-1mm}
+  \begin{align*}
+  \pi_i(f) &= \frac{x_if-x_{i+1}s_i(f)}{x_i-x_{i+1}}.
+  \end{align*}\pause
+
+  The \emph{Demazure characters} or \emph{key polynomials} are
+  constructed from
+  \begin{itemize}
+  \item  $\Dcal_{\lambda} = x^\lambda := x_1^{\lambda_1}\cdots x_N^{\lambda_N}$ for partition  $\lambda$.
+  \item $\Dcal_{s_i(\alpha)} = \pi_i \Dcal_{\alpha}$ for  $\alpha_i > \alpha_{i+1}$, for any  $\alpha \in \N^N$.
+
+  \end{itemize}\pause
+\emph{Demazure atoms} are defined the same as keys but with
+$\hat{\pi}_i := \pi_i-1$ in place of  $\pi_i$:
+\begin{itemize}
+\item \(\Acal_\lambda = x^\lambda\) for partition \(\lambda\).
+\item \(\Acal_{s_i(\alpha)} = \hat{\pi}_i \Acal_\alpha\) for \(\alpha_i >
+  \alpha_{i+1}\), for any \(\alpha \in \N^N\).
+\end{itemize}
+\vspace{5mm}
+\end{frame}
+\begin{frame}{Examples}
+  \begin{align*}
+\Dcal_{520} & = x_1^5x_2^2  \\[.8mm]
+\Dcal_{250} & = \pi_{1}\Dcal_{520}=\pi_1(x_1^5x_2^2) = x_1^5x_2^2 + x_1^4 x_2^3 + x_1^3 x_2^4 + x_1^2x_2^5 \\[.8mm]
+\Dcal_{205} & = \pi_2 \Dcal_{250} = \pi_2 \big(x_1^5x_2^2 + x_1^4 x_2^3 + x_1^3 x_2^4 + x_1^2x_2^5\big)
+\end{align*}
+\begin{align*}
+  \Dcal_{520} & = \Acal_{520}\\
+  \Dcal_{250} & = \Acal_{520} + \Acal_{250}\\
+  \Dcal_{205} & = \Acal_{520} + \Acal_{250} + \Acal_{502} +
+                \Acal_{205}\\
+  \vdots
+\end{align*}
+
+\end{frame}
+\begin{frame}{Recovering Symmetric Functions}
+  \begin{itemize}
+  \item If \(\bb = (n,\ldots,n)\) for \(n = |\lambda|\), then
+    \(s_{\lambda,\bb}(x) = s_\lambda(x_1,\ldots,x_n)\).\pause
+  \item If \(\bb = \emptyset\), \(s_{\lambda,\bb}(x) = s_\lambda(x)\).\pause
+  \item For $w=s_{i_1}s_{i_2}\cdots s_{i_m} \in S_{N}$ reduced,
+    $\pi_w := \pi_{i_1}\pi_{i_2}\cdots \pi_{i_m}.$\pause
+  \item For \emph{Weyl symmetrization operator} \(\pi_{w_0}\), we have \[
+        \pi_{w_0}(s_{\lambda,\bb}(x)) = s_\lambda(x), \hspace{0.1in}
+        \pi_{w_0}(\Dcal_\alpha) = \Dcal_{\sort(\alpha)},
+      \]
+      \[
+        \pi_{w_0}(\Acal_\alpha) =
+        \begin{cases}
+          \Acal_\alpha & \alpha \text{ a partition},\\
+          0 & \text{else.}
+        \end{cases}
+    \]
+  \end{itemize}
+\end{frame}
+\begin{frame}{Flagged LLT Polynomials (Blasiak-Haiman-Morse-Pun-S.)}
+  \begin{itemize}
+  \item Let  $e_1,\dots, e_l$ be the row ends of  $\nubold$, ordered in reverse reading order.
+  \item Fix flag \(\bb = (b_1 \leq \cdots \leq b_l)\).
+  \item \(\FT(\nubold,\bb) = \) set of semistandard tableaux \(T\)
+    on \(\nubold\) satisfying \(T(e_i) \leq b_i\).
+  \item The \emph{flagged LLT polynomial} indexed by \(\nubold\) and
+    \(\bb\) is
+    \[
+      \Gcal_{\nubold, \bb}(x;t) = \sum_{T \in \FT(\nubold,\bb)}
+      t^{\inv (T)} x^T \,.
+    \]
+  \end{itemize}
+  \begin{center}
+    \begin{tikzpicture}[scale = .51]
+      \begin{scope}
+        \draw[help lines] (0,0) grid (6,5); \draw[thick] (0,1) grid
+        (2,2); \draw[thick] (1,0) grid (3,1);
+%
+        \draw[thick] (4,3) grid (6,5); \only<1-2>{ \node at (0.5, 1.5)
+          {\small $ $}; \node at (1.5, 1.5) {\small $e_4$}; \node at
+          (1.5, 0.5) {\small $ $}; \node at (2.5, 0.5) {\small $e_2$};
+%
+          \node at (3.0+1.5, 3.0+1.5) {\small $ $}; \node at (3.0+2.5,
+          3.0+1.5) {\small $e_3$}; \node at (3.0+1.5, 3.0+0.5) {\small
+            $ $}; \node at (3.0+2.5, 3.0+0.5) {\small $e_1$};}
+
+        \only<3->{ \node at (0.5, 1.5) {\small $2$}; \node at (1.5,
+          1.5) {\small $4$}; \node at (1.5, 0.5) {\small $1$}; \node
+          at (2.5, 0.5) {\small $2$}; \node at (3.0+1.5, 3.0+1.5)
+          {\small $2$}; \node at (3.0+2.5, 3.0+1.5) {\small $3$};
+          \node at (3.0+1.5, 3.0+0.5) {\small $1$}; \node at (3.0+2.5,
+          3.0+0.5) {\small $1$};
+
+          \node at (6.8, 3.0+1.5) {\small $\le 3$}; \node at (6.8,
+          3.0+0.5) {\small $\le 1$}; \node at (6.8, 1.5) {\small
+            $\le 4$}; \node at (6.8, 0.5) {\small $\le 2$}; }
+      \end{scope}
+    \end{tikzpicture}
+  \end{center}
+\end{frame}
+\begin{frame}[fragile]{Flagged LLT Polynomials}
+\begin{equation*}
+\nubold =  \big(
+\begin{tikzpicture}[scale = .34]
+\draw[very thick] (0,0) grid (2,1);
+\end{tikzpicture}
+,
+\begin{tikzpicture}[scale = .34]
+\draw[very thick] (0,0) grid (2,1);
+\end{tikzpicture}
+\, \big), \bb = (1,2)
+\end{equation*}
+\vspace{0.2in}
+\[
+\begin{array}{cc@{\quad\quad\quad}c@{\quad\quad\quad}c}
+\raisebox{5mm}{T}&
+\begin{tikzpicture}[scale = .5]
+\begin{scope}
+\draw[help lines] (0,0) grid (4,3);
+\draw[thick] (0,0) grid (2,1);
+\draw[thick] (2,2) grid (4,3);
+\node at (0.5, 0.5) {\small $1$};
+\node at (1.5, 0.5) {\small $1$};
+\node at (2.5, 2.5) {\small $1$};
+\node at (3.5, 2.5) {\small $1$};
+\node at (2.5, 0.5) {\tiny $\leq 2$};
+\node at (4.5, 2.5) {\tiny $\leq 1$};
+\end{scope}
+\end{tikzpicture}
+&
+\begin{tikzpicture}[scale = .5]
+\begin{scope}
+\tikzstyle{rededge} = [draw, ->,red]
+\draw[help lines] (0,0) grid (4,3);
+\draw[thick] (0,0) grid (2,1);
+\draw[thick] (2,2) grid (4,3);
+\node at (0.5, 0.5) {\small $1$};
+\node at (1.5, 0.5) {\small $2$};
+\node at (2.5, 2.5) {\small $1$};
+\node at (3.5, 2.5) {\small $1$};
+\node at (2.5, 0.5) {\tiny $\leq 2$};
+\node at (4.5, 2.5) {\tiny $\leq 1$};
+\draw[rededge] (2+.1,1+0.1) to (3-.1,2-.1);
+\end{scope}
+\end{tikzpicture}
+&
+\begin{tikzpicture}[scale = .5]
+\tikzstyle{rededge} = [draw, ->,red]
+\begin{scope}
+\draw[help lines] (0,0) grid (4,3);
+\draw[thick] (0,0) grid (2,1);
+\draw[thick] (2,2) grid (4,3);
+\node at (0.5, 0.5) {\small $2$};
+\node at (1.5, 0.5) {\small $2$};
+\node at (2.5, 2.5) {\small $1$};
+\node at (3.5, 2.5) {\small $1$};
+\node at (2.5, 0.5) {\tiny $\leq 2$};
+\node at (4.5, 2.5) {\tiny $\leq 1$};
+\draw[rededge] (2+.1,1+0.1) to (3-.1,2-.1);
+\draw[rededge] (1+.1,1+0.1) to (2-.1,2-.1);
+\end{scope}
+\end{tikzpicture}
+\end{array}
+\]
+\[
+\Gcal_{r, \nubold}(x;t) = x_1^4+ t\, x_1^3x_2 + t^2 x_1^2x_2^2
+\]
+\end{frame}
+
+\begin{frame}{Flagged LLT Polynomials}
+  \begin{itemize}
+  \item \(\Gcal_{\nubold,\bb}(x;t)\) will Weyl symmetrize to
+    \(\Gcal_\nubold(X;t)\).\pause
+  \item For \(\nubold = (\lambda)\) a single shape, \(\Gcal_{\nubold,\bb}(x;t) = s_{\lambda,\bb}(x)\).\pause
+  \item \(\Gcal_{\nubold,\bb}(x;t)\) have an algebraic formula via
+    ``nonsymmetric Hall-Littlewood polynomials.'' \pause
+  \item \(\Gcal_{\nubold,\bb}(x;t)\) are conjecturally positive in terms
+    of \emph{Demazure atoms}.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Signed flagged LLT polynomials}
+ \begin{itemize}
+\item Signed alphabet $\Acal = 1 < \bar{1} < 2 < \bar{2} \, \cdots $\pause
+\item $\FT^{\pm}(\nubold,\bb) = $ fillings of  $\nubold$ from $\Acal$ satisfying
+\begin{itemize}
+\item unbarred letters weakly increase in rows, strictly increase in columns.
+\item barred letters strictly increase in rows, weakly increase in columns.
+\item $T(e_{i}) \le b_i$ for  $i = 1,\dots, l$.\pause
+\end{itemize}
+\end{itemize}
+The \emph{signed flagged LLT polynomial} indexed by \(\nubold\) and
+flag \(\bb\) is 
+ \begin{align*}
+\Gcal^\pm_{\nubold,\bb}(\xx;t) & = \sum_{T \in \FT^{\pm}(\nubold,\bb)} t^{\inv(T)} (-t)^{-\#\text{bar}(T)} \xx^{|T|},
+\end{align*}
+\vspace{-3.6mm}
+where $|T|$ is the result of removing all bars from $T$.
+\end{frame}
+\begin{frame}[fragile]{Signed flagged LLT polynomials}
+\begin{equation*}
+\nubold =  \big(
+\begin{tikzpicture}[scale = .34]
+\draw[very thick] (0,0) grid (2,1);
+\end{tikzpicture}
+,
+\begin{tikzpicture}[scale = .34]
+\draw[very thick] (0,0) grid (2,1);
+\end{tikzpicture}
+\, \big)
+\end{equation*}
+\[
+\begin{array}{cc@{\ \ \ }c@{\ \ \ }c@{\ \ \ }c@{\ \ \ }c}
+T&
+\begin{tikzpicture}[scale = .38]
+\begin{scope}
+\draw[help lines] (0,0) grid (4,3);
+\draw[thick] (0,0) grid (2,1);
+\draw[thick] (2,2) grid (4,3);
+\node at (0.5, 0.5) {\scriptsize $1$};
+\node at (1.5, 0.5) {\scriptsize $1$};
+\node at (2.5, 2.5) {\scriptsize $1$};
+\node at (3.5, 2.5) {\scriptsize $1$};
+\end{scope}
+\end{tikzpicture}
+&
+\begin{tikzpicture}[scale = .38]
+\begin{scope}
+\tikzstyle{rededge} = [draw, ->,red]
+\draw[help lines] (0,0) grid (4,3);
+\draw[thick] (0,0) grid (2,1);
+\draw[thick] (2,2) grid (4,3);
+\node at (0.5, 0.5) {\scriptsize $1$};
+\node at (1.5, 0.5) {\scriptsize $2$};
+\node at (2.5, 2.5) {\scriptsize $1$};
+\node at (3.5, 2.5) {\scriptsize $1$};
+\draw[rededge] (2+.1,1+0.1) to (3-.1,2-.1);
+\end{scope}
+\end{tikzpicture}
+&
+\begin{tikzpicture}[scale = .38]
+\tikzstyle{rededge} = [draw, ->,red]
+\begin{scope}
+\draw[help lines] (0,0) grid (4,3);
+\draw[thick] (0,0) grid (2,1);
+\draw[thick] (2,2) grid (4,3);
+\node at (0.5, 0.5) {\scriptsize $2$};
+\node at (1.5, 0.5) {\scriptsize $2$};
+\node at (2.5, 2.5) {\scriptsize $1$};
+\node at (3.5, 2.5) {\scriptsize $1$};
+\draw[rededge] (2+.1,1+0.1) to (3-.1,2-.1);
+\draw[rededge] (1+.1,1+0.1) to (2-.1,2-.1);
+\end{scope}
+\end{tikzpicture}
+ &
+\begin{tikzpicture}[scale = .38]
+\tikzstyle{rededge} = [draw, ->,red]
+\begin{scope}
+\draw[help lines] (0,0) grid (4,3);
+\draw[thick] (0,0) grid (2,1);
+\draw[thick] (2,2) grid (4,3);
+\node at (0.5, 0.47) {\scriptsize $1$};
+\node at (1.5, 0.47) {\scriptsize $\bar{1}$};
+\node at (2.5, 2.5) {\scriptsize $1$};
+\node at (3.5, 2.5) {\scriptsize $1$};
+\draw[rededge] (2+.1,1+0.1) to (3-.1,2-.1);
+\end{scope}
+\end{tikzpicture}
+ &
+\begin{tikzpicture}[scale = .38]
+\tikzstyle{rededge} = [draw, ->,red]
+\begin{scope}
+\draw[help lines] (0,0) grid (4,3);
+\draw[thick] (0,0) grid (2,1);
+\draw[thick] (2,2) grid (4,3);
+\node at (0.5, 0.47) {\scriptsize $\bar{1}$};
+\node at (1.5, 0.47) {\scriptsize $2$};
+\node at (2.5, 2.5) {\scriptsize $1$};
+\node at (3.5, 2.5) {\scriptsize $1$};
+\draw[rededge] (2+.1,1+0.1) to (3-.1,2-.1);
+\draw[rededge] (1+.1,1+0.1) to (2-.1,2-.1);
+\end{scope}
+\end{tikzpicture}
+\end{array}
+\]
+\begin{align*}
+\Gcal^{\pm}_{\nubold,\bb}(\xx;t)
+\, \ & = \ \, x_1^4  \hspace{2.9mm}+ \hspace{2.9mm}tx_1^3x_2 \hspace{2.9mm}+\hspace{2.9mm}t^2 x_1^2x_2^2\hspace{2.9mm}-\hspace{2.9mm}x_1^4 \hspace{2.9mm}- \hspace{2.9mm}t x_1^3x_2 \\
+\ \, & = \ \,  t^2 x_1^2 x_2^2
+\end{align*}
+\end{frame}
+\begin{frame}{Flagged plethysm}
+  Define \emph{flagged plethysm} \(\Pi_{t,x} \from \kk[x_1,\ldots,x_l]
+  \to \kk[x_1,\ldots,x_l]\) to be the (over-determined) linear map \[
+    \Pi_{t,x} \Gcal_{\nubold,\bb}^{\pm}(x;t^{-1}) =
+    \Gcal_{\nubold,\bb}(x;t^{-1}) \,.
+  \]
+  \begin{thm}[Blasiak-Haiman-Morse-Pun-S., 2025+]
+    \(\Pi_{t,x}\) is well-defined.
+  \end{thm}
+  Note, \(\Pi_{t,x}\) is a ``nonsymmetric analogue'' of the plethystic map
+  \(f[X] \mapsto f[X/(1-t)]\) for symmetric function \(f\).
+\end{frame}
+\begin{frame}{Applications}
+  \begin{enumerate}
+  \item Can define \emph{modified \(r\)-nonsymmetric Macdonald
+      polynomials} (or \emph{modern Macdonald polynomials})
+    via a \emph{flagged} Haglund-Haiman-Loehr formula:
+    \[
+      H_{\eta|\lambda}(x;q,t) = t^{n} \sum_{R} \big( \prod_{\ytableaushort{u,{}}} q^{a+1}
+        t^l\big) \Gcal_{R,(b_1,\ldots,b_r)}(x;t^{-1})\,.
+    \]
+    These symmetrize to Macdonald \(H\)-polynomials and are
+    conjecturally Demazure atom positive.\pause
+  \item Using \(H_{\eta|\lambda}\) to define a nonsymmetric analogue
+    of \(\nabla\), we show a ``nonsymmetric shuffle theorem''
+    expressed in terms of flagged LLT polynomials associated to
+    flagged Dyck paths.\pause
+  \item Tewari-Wilson-Zhang define chromatic nonsymmetric polynomials
+    associated to \(d \times d\) Dyck paths starting with \(r\) north steps, \(\chi_{\bb,\pi}\). We show \[
+      \chi_{(1,\ldots,r),\pi} = (1-t)^{r-d} \Gcal^\pm_{\nu(\pi),(1,\ldots,r)}(x;t)\,.
+    \]
+  \end{enumerate}
+\end{frame}
+\end{document}
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
