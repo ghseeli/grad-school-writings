@@ -243,18 +243,20 @@
 %	TITLE PAGE
 %----------------------------------------------------------------------------------------
 
-\title[]{Flagged LLT polynomials and nonsymmetric Macdonald polynomials} % The short title appears at the bottom of every slide, the full title is only on the title page
+\title[]{Flagged LLT polynomials and their applications} % The short title appears at the bottom of every slide, the full title is only on the title page
 
 \author[George H. Seelinger]{George H. Seelinger} % Your name
 \institute[UMich] % Your institution as it will appear on the bottom of every slide, may be shorthand to save space
 {
 ghseeli@umich.edu\\ %Your email address
 \medskip
-UC Davis Algebra \& Discrete Mathematics Seminar \\ % Your institution for the title page
+joint work with Jonah Blasiak, Mark Haiman, Jennifer Morse, and Anna Pun\\
 \medskip
-joint work with Jonah Blasiak, Mark Haiman, Jennifer Morse, and Anna Pun
+Center for Mathematics at the University of Notre Dame \\ % Your institution for the title page
+\medskip
+Algebraic combinatorics and applications 
 }
-\date{20 April 2026} % Date, can be changed to a custom date
+\date{6 July 2026} % Date, can be changed to a custom date
 
 \begin{document}
 \begin{frame}
@@ -286,7 +288,7 @@ joint work with Jonah Blasiak, Mark Haiman, Jennifer Morse, and Anna Pun
     \(\lambda = (\lambda_1 \geq
     \lambda_2 \geq \cdots \geq \lambda_\ell > 0)\) such that
     \(\lambda_1+\lambda_2 + \cdots + \lambda_\ell = n \).
-  \end{definition}\pause
+  \end{definition}
   \ytableausetup{boxsize=0.5em, aligntableaux=center}
   \begin{align*}
     5 \to &\ \ydiagram{5} & 
@@ -357,7 +359,7 @@ joint work with Jonah Blasiak, Mark Haiman, Jennifer Morse, and Anna Pun
     \]
   \end{definition}
   
-  \begin{itemize}
+  \begin{itemize}\pause
   \item \(s_\lambda\) is a symmetric function.\pause
   \item \(\{s_\lambda\}_\lambda\) forms a basis for \(\sym\).
   \end{itemize}
@@ -396,8 +398,28 @@ joint work with Jonah Blasiak, Mark Haiman, Jennifer Morse, and Anna Pun
     \(c_{\lambda\mu}^\nu \in \N\). \pause 
   \item Skew Schur function: \(s_{\nu/\lambda} = \sum_{T \in
       \SSYT(\nu/\lambda)} x^T = \sum_\mu c_{\lambda \mu}^\nu s_\mu\).\pause
-  \item Straightforward observation: \(s_{\nu/\lambda} s_{\kappa/\mu} = \sum_{\substack{T \in \SSYT(\nu/\lambda) \\ S
-        \in \SSYT(\kappa/\mu)}} x^T x^S\).\pause
+  \ytableausetup{boxsize=1em, aligntableaux=center}
+    \begin{align*}
+      \ytableausetup{boxsize=0.5em}
+      s_{\ydiagram{2,1+2}} = & x_1^3 x_2 + 2 x_1^2 x_2^2 + \cdots  & = s_{\ydiagram{1,3}}+s_{\ydiagram{2,2}}\\
+     & \ytableausetup{boxsize=1em}\ytableaushort{12,\none11} \
+       \ytableaushort{12,\none12} \ \ytableaushort{22,\none11} \ \cdots&
+    \end{align*}\pause
+  \item Straightforwardly, \[s_{\nu/\lambda} \cdot s_{\kappa/\mu} = \left(
+        \sum_{T \in \SSYT(\nu/\lambda)} x^T \right)\left( \sum_{S \in
+          \SSYT(\kappa/\mu)} x^S \right) = \sum_{\substack{T \in \SSYT(\nu/\lambda) \\ S
+        \in \SSYT(\kappa/\mu)}} x^T x^S .\]\pause
+  \vspace{-12pt}
+  \begin{align*}
+    \ytableausetup{boxsize=0.5em}
+    s_{\ydiagram{2,1+2}} \cdot s_{\ydiagram{2,2}}
+    & = x_1^5 x_2^3 + \cdots
+    \\
+   \ytableausetup{boxsize=1em} 
+    &
+    \left( \ytableaushort{12,\none11}, \ytableaushort{22,11}\right) \cdots
+  \end{align*}\pause
+  \vspace{-12pt}
   \item \(q\)-deformation?
   \end{itemize}
 \end{frame}
@@ -595,7 +617,7 @@ $\xx ^{T} = \prod _{a\in \nubold  } x_{T(a)}$.
 \end{scope}
 \end{tikzpicture}\\
 &
-\onslide<10>{\inv(T) = 4,}  \quad \xx^T = x_1^2x_2x_3x_4x_5^2x_6
+  \onslide<10>{\inv(T) = 4,}  \quad \xx^T = x_1^2x_2x_3x_4x_5^2x_6
 \end{align*}
 \end{frame}
 \begin{frame}{LLT Polynomials \(\Gcal_\nubold(X;q)\)}
@@ -628,7 +650,7 @@ $\xx ^{T} = \prod _{a\in \nubold  } x_{T(a)}$.
     \]\pause
   \item For \(G = \) incomparability graph for natural unit interval
     order (encoded by Dyck path \(P\)), the \(t\)-chromatic symmetric
-    polynomial is a ``signed'' LLT polynomial (later), i.e.,
+    polynomial is essentially a ``signed'' unicellular LLT polynomial (later), i.e.,
     \[
       \chi_G(x;t) = {(1-t)}^{-|V|} \Gcal_{\nu(P)}[(1-t)x;t] \,.
     \]
@@ -688,7 +710,7 @@ $\xx ^{T} = \prod _{a\in \nubold  } x_{T(a)}$.
     \end{tikzpicture}
     \raisebox{.12in}{
     \(
-\left(    \begin{matrix}
+\det \left(    \begin{matrix}
       h_2(x_1) & h_3(x_1) \\
       h_0(x_1,x_2,x_3) & h_1(x_1,x_2,x_3)
     \end{matrix}
@@ -698,12 +720,13 @@ $\xx ^{T} = \prod _{a\in \nubold  } x_{T(a)}$.
     \pause
   \item Schubert \(\mathfrak{S}_w(x) = s_{\lambda,\bb}(x)\) for
     \emph{vexillary} \(w \in S_n\) (2143-avoiding).\pause
-  \item \(s_{\lambda,\bb}(x)\) are examples of \emph{Demazure characters}.
+  \item \(s_{\lambda,\bb}(x)\) are examples of \emph{Demazure
+      characters} (Reiner-Shimozono, 1995).
   \end{itemize}
 \end{frame}
-\begin{frame}{Demazure characters and atoms}
+\begin{frame}{Demazure characters}
   The \emph{Demazure operator} $\pi_i$
-  acts on $f \in \Q(q,t)[x_1^{\pm 1}, \dots, x_N^{\pm 1}]$ by
+  acts on $f \in \kk[x_1^{\pm 1}, \dots, x_N^{\pm 1}]$ by
   \vspace{-1mm}
   \begin{align*}
   \pi_i(f) &= \frac{x_if-x_{i+1}s_i(f)}{x_i-x_{i+1}}.
@@ -715,23 +738,24 @@ $\xx ^{T} = \prod _{a\in \nubold  } x_{T(a)}$.
   \item  $\Dcal_{\lambda} = x^\lambda := x_1^{\lambda_1}\cdots x_N^{\lambda_N}$ for partition  $\lambda$.
   \item $\Dcal_{s_i(\alpha)} = \pi_i \Dcal_{\alpha}$ for  $\alpha_i > \alpha_{i+1}$, for any  $\alpha \in \N^N$.
 
-  \end{itemize}\pause
+\pause
+    \begin{align*}
+\Dcal_{520} & = x_1^5x_2^2  \\[.8mm] 
+\Dcal_{250} & = \pi_{1}\Dcal_{520}=\pi_1(x_1^5x_2^2) = x_1^5x_2^2 + x_1^4 x_2^3 + x_1^3 x_2^4 + x_1^2x_2^5 \\[.8mm]
+\Dcal_{205} & = \pi_2 \Dcal_{250} = \pi_2 \big(x_1^5x_2^2 + x_1^4 x_2^3 + x_1^3 x_2^4 + x_1^2x_2^5\big)
+\end{align*}\pause
+  \item Demazure characters are characters of irreducible \(B\)-modules.
+  \end{itemize}
+\end{frame}
+\begin{frame}{Demazure atoms}
 \emph{Demazure atoms} are defined the same as keys but with
 $\hat{\pi}_i := \pi_i-1$ in place of  $\pi_i$:
 \begin{itemize}
 \item \(\Acal_\lambda = x^\lambda\) for partition \(\lambda\).
 \item \(\Acal_{s_i(\alpha)} = \hat{\pi}_i \Acal_\alpha\) for \(\alpha_i >
-  \alpha_{i+1}\), for any \(\alpha \in \N^N\).
-\end{itemize}
-\vspace{5mm}
-\end{frame}
-\begin{frame}{Examples}
-  \begin{align*}
-\Dcal_{520} & = x_1^5x_2^2  \\[.8mm] 
-\Dcal_{250} & = \pi_{1}\Dcal_{520}=\pi_1(x_1^5x_2^2) = x_1^5x_2^2 + x_1^4 x_2^3 + x_1^3 x_2^4 + x_1^2x_2^5 \\[.8mm]
-\Dcal_{205} & = \pi_2 \Dcal_{250} = \pi_2 \big(x_1^5x_2^2 + x_1^4 x_2^3 + x_1^3 x_2^4 + x_1^2x_2^5\big)
-\end{align*}
-\pause
+  \alpha_{i+1}\), for any \(\alpha \in \N^N\).\pause
+\item Demazure atoms are related to Demazure characters by Bruhat
+  order inclusion-exclusion:
 \begin{align*}
   \Dcal_{520} & = \Acal_{520}\\
   \Dcal_{250} & = \Acal_{520} + \Acal_{250}\\
@@ -739,7 +763,8 @@ $\hat{\pi}_i := \pi_i-1$ in place of  $\pi_i$:
                 \Acal_{205}\\
   \vdots
 \end{align*}
-
+\end{itemize}
+\vspace{5mm}
 \end{frame}
 \begin{frame}{Recovering Symmetric Functions}
   \begin{itemize}
@@ -747,9 +772,10 @@ $\hat{\pi}_i := \pi_i-1$ in place of  $\pi_i$:
     \(s_{\lambda,\bb}(x) = s_\lambda(x_1,\ldots,x_n)\).\pause
   \item For $w=s_{i_1}s_{i_2}\cdots s_{i_m} \in S_{N}$ reduced,
     $\pi_w := \pi_{i_1}\pi_{i_2}\cdots \pi_{i_m}.$\pause
-  \item For \emph{Weyl symmetrization operator} \(\pi_{w_0}\), we have \[
-        \pi_{w_0}(s_{\lambda,\bb}(x)) = s_\lambda(x), \hspace{0.1in}
-        \pi_{w_0}(\Dcal_\alpha) = \Dcal_{\sort(\alpha)} = s_{\alpha_+},
+  \item For \emph{Weyl symmetrization operator} \(\pi_{w_0}\), we
+    have \pause \[
+        \pi_{w_0}(s_{\lambda,\bb}(x)) = s_\lambda(x)\pause, \hspace{0.1in}
+        \pi_{w_0}(\Dcal_\alpha) = \Dcal_{\sort(\alpha)} = s_{\alpha_+},\pause
       \]
       \[
         \pi_{w_0}(\Acal_\alpha) =
@@ -759,6 +785,33 @@ $\hat{\pi}_i := \pi_i-1$ in place of  $\pi_i$:
         \end{cases}
     \]
   \end{itemize}
+\end{frame}
+\begin{frame}{Summary of families}
+   \begin{center}
+    \begin{tikzpicture}
+      \node (zero) at (0,0) {0};
+      \node (schur) at (5,0) {Schur};
+      \node (atom) at (0,3)
+      {\(\Acal_\alpha\)};
+      \node (key) at (5,3) {\(\Dcal_\alpha\)};
+      \node (fschur) at
+      (10,3) {\(s_{\lambda,\bb}\)};
+      \node at (10,1.5) {Weyl sym. \(\pi_{w_0}\)};
+
+      \draw [->] (atom) -- (zero);
+      \draw [->] (atom) -- (schur);
+      \draw [->] (key) -- (schur);
+      \draw [->] (fschur) -- (schur);
+      \draw [dashed] (atom) --  node[midway, above] {\small\(\Dcal = \text{
+          positive sum of }\Acal\)} (key);
+      \draw [dashed] (key) --  node[midway, above] {\small\(s_{\lambda,\bb} = \text{
+          special case of }\Dcal\)} (fschur);
+    \end{tikzpicture}\pause
+    \begin{block}{Question}
+      Is there some ``nice'' family of polynomials that Weyl
+      symmetrizes to LLT polynomials?
+    \end{block}
+  \end{center}
 \end{frame}
 \begin{frame}{Flagged LLT Polynomials (Blasiak-Haiman-Morse-Pun-S.)}
   \begin{itemize}
@@ -875,10 +928,10 @@ $\hat{\pi}_i := \pi_i-1$ in place of  $\pi_i$:
   \item \(\Gcal_{\nubold,\bb}(x;t)\) Weyl symmetrizes to symmetric
     \(\Gcal_\nubold(\xx;t)\).\pause
   \item For \(\nubold = (\lambda)\) a single shape, \(\Gcal_{\nubold,\bb}(x;t) = s_{\lambda,\bb}(x)\).\pause
-  \item \(\Gcal_{\nubold,\bb}(x;t)\) have an algebraic formula via
+  \item \(\Gcal_{\nubold,\bb}(x;t)\) also have an algebraic formula via
     ``nonsymmetric Hall-Littlewood polynomials.'' \pause
   \item \(\Gcal_{\nubold,\bb}(x;t)\) are conjecturally positive in terms
-    of \emph{Demazure atoms}.
+    of Demazure atoms.
   \end{itemize}
 \end{frame}
 
@@ -991,6 +1044,10 @@ T&
 \, \ & = \ \, x_1^4  \hspace{2.9mm}+ \hspace{2.9mm}tx_1^3x_2 \hspace{2.9mm}+\hspace{2.9mm}t^2 x_1^2x_2^2\hspace{2.9mm}-\hspace{2.9mm}x_1^4 \hspace{2.9mm}- \hspace{2.9mm}t x_1^3x_2 \\
 \ \, & = \ \,  t^2 x_1^2 x_2^2
 \end{align*}
+\begin{block}{Remark}
+  Signed flagged LLTs are typically not positive in terms of Demazure
+  atoms, nor are they generally even monomial positive.
+\end{block}
 \end{frame}
 \begin{frame}{Flagged plethysm}
   Define \emph{flagged plethysm} \(\Pi_{t,x} \from \kk[x_1,\ldots,x_l]
@@ -1000,7 +1057,7 @@ T&
   \]\pause
   \begin{thm}[Blasiak-Haiman-Morse-Pun-S., 2025+]
     \(\Pi_{t,x}\) is well-defined.
-  \end{thm}
+  \end{thm}\pause
   \(\Pi_{t,x}\) is a ``nonsymmetric analogue'' of the plethystic map
   \(f[X] \mapsto f[X/(1-t)]\) for symmetric function \(f\).
 \end{frame}
@@ -1020,8 +1077,8 @@ T&
     flagged Dyck paths.\pause
   \item Tewari-Wilson-Zhang define chromatic nonsymmetric polynomials
     associated to \(d \times d\) Dyck paths starting with \(r\) north
-    steps, \(\chi_{\bb,\pi}\). This is (essentially) a signed
-    flagged LLT polynomial.
+    steps, \(\chi_{\bb,\pi}\). These are (essentially) examples of signed
+    flagged LLT polynomials.
     % \[
     %   \chi_{(1,\ldots,r),\pi}(x;t) = (1-t)^{r-d} \Gcal^\pm_{\nu(\pi),(1,\ldots,r)}(x;t)\,.
     % \]
@@ -1062,10 +1119,8 @@ H_{31} = ts_4 + (1+qt+q^2t)s_{31} + (q+tq^2)s_{22}+(q+q^2+q^3t)s_{211}+q^3s_{111
     \begin{tabular}{rccl}
     % Diagram 1
     \begin{tikzpicture}[scale=0.3]
-      \draw [dashed,gray] (-0.5,1.5)--(3.5,5.5);
-      \draw [dashed,gray]
-      (-0.5,0.5)--(3.5,4.5);
-      \draw [dashed,gray]
+      \draw [dashed,gray] (-0.5,1.5)--(3.5,5.5); \draw [dashed,gray]
+      (-0.5,0.5)--(3.5,4.5); \draw [dashed,gray]
       (-0.5,-0.5)--(3.5,3.5); 
       \drawskewdg{0/1,0/1}{0} % Swapped offset to 0
       \drawskewdg{0/1,0/1,0/1}{2} % Swapped offset to 2
@@ -1162,57 +1217,57 @@ eigenfunctions of the commuting operators $Y_1,\dots, Y_N$.
   \big( \prod_{\ytableaushort{u,{}}} q^{a+1} t^l\big)
         \Gcal^\pm_{R,(1,2,\ldots,m)}(x;t^{-1})\).\pause
 
-  For \(\alpha = (2,0,1)\), we get 8 signed flagged LLT terms:
-  \begin{equation*}
+  For \(\alpha = (2,0,1)\), we get 8 \emph{signed} flagged LLT terms:\pause
+\begin{equation*}
 \setlength{\arraycolsep}{0cm}
 \begin{array}{rcrcrcrcrcrcrcrc}
 t  &
 \begin{tikzpicture}[scale=.35,baseline=.85cm]
   \draw[yshift=4.25cm] (-2,0) grid (0,1); \node at (.5,4.75) {1};
-  \draw[yshift=2.5cm] (0,0) grid (0,1); \node at (.5,3) {2};
-  \draw[yshift=.5cm] (-1,0) grid (0,1); \node at (.5,1) {3};
+  \draw[yshift=2.5cm] (-1.5,0) grid (-1.5,1); \node at (-.5,3) {2};
+  \draw[yshift=.5cm] (-3,0) grid (-2,1); \node at (-1.5,1) {3};
 \end{tikzpicture}
 & \quad   q\, t  &
 \begin{tikzpicture}[scale=.35,baseline=.85cm]
   \draw[yshift=4.25cm] (-2,0) grid (0,1); \node at (.5,4.75) {1};
-  \draw[yshift=2.5cm] (0,0) grid (0,1); \node at (.5,3) {2};
-  \draw[yshift=.75cm] (0,0) grid (1,1); \node at (.5,.25) {3};
+  \draw[yshift=2.5cm] (-1,0) grid (-1,1); \node at (-.5,3) {2};
+  \draw[yshift=.75cm] (-3,0) grid (-2,1); \node at (-2.5,.25) {3};
 \end{tikzpicture}
 & \quad  q\, t^{2} &
 \begin{tikzpicture}[scale=.35,baseline=.85cm]
   \draw[yshift=4.25cm] (-1,0) grid (0,2); \node at (.5,4.75) {1};
-  \draw[yshift=2.5cm] (0,0) grid (0,1); \node at (.5,3) {2};
-  \draw[yshift=.5cm] (-1,0) grid (0,1); \node at (.5,1) {3};
+  \draw[yshift=2.5cm] (-1,0) grid (-1,1); \node at (-.5,3) {2};
+  \draw[yshift=.5cm] (-3,0) grid (-2,1); \node at (-1.5,1) {3};
 \end{tikzpicture}
 & \quad   q^{2} t^{2}  &
 \begin{tikzpicture}[scale=.35,baseline=.85cm]
   \draw[yshift=4.25cm] (-1,0) grid (0,2); \node at (.5,4.75) {1};
-  \draw[yshift=2.5cm] (0,0) grid (0,1); \node at (.5,3) {2};
-  \draw[yshift=.75cm] (0,0) grid (1,1); \node at (.5,.25) {3};
+  \draw[yshift=2.5cm] (-1,0) grid (-1,1); \node at (-.5,3) {2};
+  \draw[yshift=.75cm] (-3,0) grid (-2,1); \node at (-2.5,.25) {3};
 \end{tikzpicture} \\
 \quad  q^{2} t^{3} &
 \begin{tikzpicture}[scale=.35,baseline=.85cm]
   \draw[yshift=4.25cm] (-1,1) grid (1,2); \node at (.5,4.75) {1};
-  \draw[yshift=2.5cm] (0,0) grid (0,1); \node at (.5,3) {2};
-  \draw[yshift=.5cm] (-1,0) grid (0,1); \node at (.5,1) {3};
+  \draw[yshift=2.5cm] (-1,0) grid (-1,1); \node at (-.5,3) {2};
+  \draw[yshift=.5cm] (-3,0) grid (-2,1); \node at (-1.5,1) {3};
 \end{tikzpicture}
 & \quad  q^{3} t^{3}  &
 \begin{tikzpicture}[scale=.35,baseline=.85cm]
   \draw[yshift=4.25cm] (-1,1) grid (1,2); \node at (.5,4.75) {1};
-  \draw[yshift=2.5cm] (0,0) grid (0,1); \node at (.5,3) {2};
-  \draw[yshift=.75cm] (0,0) grid (1,1); \node at (.5,.25) {3};
+  \draw[yshift=2.5cm] (-1,0) grid (-1,1); \node at (-.5,3) {2};
+  \draw[yshift=.75cm] (-2,0) grid (-3,1); \node at (-2.5,.25) {3};
 \end{tikzpicture}
 & \quad   q^{3} t^{4} &
 \begin{tikzpicture}[scale=.35,baseline=.85cm]
   \draw[yshift=4.25cm] (0,1) grid (1,3); \node at (.5,4.75) {1};
-  \draw[yshift=2.5cm] (0,0) grid (0,1); \node at (.5,3) {2};
-  \draw[yshift=.5cm] (-1,0) grid (0,1); \node at (.5,1) {3};
+  \draw[yshift=2.5cm] (-1,0) grid (-1,1); \node at (-.5,3) {2};
+  \draw[yshift=.5cm] (-3,0) grid (-2,1); \node at (-1.5,1) {3};
 \end{tikzpicture}
 & \quad  q^{4} t^{4}  &
 \begin{tikzpicture}[scale=.35,baseline=.85cm]
   \draw[yshift=4.25cm] (0,1) grid (1,3); \node at (.5,4.75) {1};
-  \draw[yshift=2.5cm] (0,0) grid (0,1); \node at (.5,3) {2};
-  \draw[yshift=.75cm] (0,0) grid (1,1); \node at (.5,.25) {3};
+  \draw[yshift=2.5cm] (-1,0) grid (-1,1); \node at (-.5,3) {2};
+  \draw[yshift=.75cm] (-3,0) grid (-2,1); \node at (-2.5,.25) {3};
 \end{tikzpicture}
 \end{array}
 \end{equation*}
@@ -1221,25 +1276,6 @@ t  &
   ``diagonal.''
 \item Variation: bound boxes below shape bound shape strictly from below.
 \end{itemize}
-\end{frame}
-\begin{frame}{Arms and legs}
-  \begin{equation*}\label{e:arms-and-legs}
-\begin{tikzpicture}[scale=.33,baseline=5*.33cm]
-\foreach  \mu / \y in {2/9, 1/7.5, 4/6, 4/4.5, 0/3, 1/1.5, 4/0}
-  \draw[xshift=-.5cm, yshift=\y cm] (-\mu,0) grid (0,1);
-\node at (-2,5) {$u$};
-\node at (-3,5) {$*$};
-\node at (-4,5) {$*$};
-\filldraw[color=black, fill=gray!50] (-3,9.5) circle (.25) (-5,6.5)
-circle (.25) (-2,2) circle (.25);
-\draw (-2,8) circle (.25) (-5,5) circle (.25) (-1,3.5) circle (.25)
-(-5,.5) circle (.25);
-\end{tikzpicture}
-\vspace{1cm}
-\end{equation*}
-\[
-  a(u) = 2, l(u) = 3
-\]
 \end{frame}
 \begin{frame}{The Missing Corner}
   \begin{center}
@@ -1257,7 +1293,7 @@ circle (.25) (-2,2) circle (.25);
   \draw[->] (A) -- node[midway, below] {\footnotesize } (B);
   \draw[->] (C) -- node[midway, below] {\footnotesize Plethysm} (D);
   \draw[->] (A) -- node[midway, left]  {\footnotesize Hecke sym.} (C);
-  \draw[->] (B) -- node[midway, right] {\footnotesize }  (D);
+  \draw[->] (B) -- node[midway, right] {\footnotesize Weyl sym.}  (D);
 \end{tikzpicture}
 \end{center}
 \begin{block}{Question}
@@ -1280,36 +1316,34 @@ An important feature for ``nice''? Positivity!
   \end{itemize}
 \end{frame}
 \begin{frame}{Filling in the missing corner}
-  \begin{itemize}
-  \item \(\Pcal(r) = \Q(q,t)[x_1,\ldots,x_r] \otimes
-    \Lambda_{\Q(q,t)}(x_{r+1},\ldots)\).
-  \item Use a ``stable'' version of \(\Ecal_\alpha\), which we denote \(\nsJ_{\eta|\lambda}\).
-  \end{itemize}
-  \begin{center}
-  \begin{tikzpicture}[xscale=5.34, yscale=2.3]%[xscale=2cm, yscale=.95cm]%, >=Latex]
+\begin{equation*}
+\begin{tikzpicture}[xscale=6.34, yscale=2.8]%[xscale=2cm, yscale=.95cm]%, >=Latex]
   % Nodes
-  \node (A) at (0,1) {$\nsJ_{\eta|\lambda}(\xx;q,t)$};
-  \node (B) at (1,1) {$\nsH_{\eta|\lambda}(\xx;q,t)$};
-  \node (C) at (0,0) {$J_{(\eta;\lambda)_+}(\xx;q, t)$};
-  \node (D) at (1,0) {$H_{(\eta;\lambda)_+}(\xx;q,t)$};
-  \draw[->] (A) -- node[midway, above] {\footnotesize $\Pi_r$} (B);
-  \draw[->] (C) -- node[midway, below] {\footnotesize Plethysm} (D);
+  \node (A2) at (0,1.78) {\Large $\substack{\Ecal_{\alpha}(x_1,\dots, x_N;q,t) \, =  \\[.8mm] \sum \text{signed flagged LLTs} }$ };
+
+\node (A) at (0,1) {\Large $\substack{\nsJ_{\eta|\lambda}(\xx;q,t) \, =  \\[.8mm] \sum \text{signed flagged LLTs} }$ };
+%\node[below (A)] {J};
+%(flag  $1,\dots, r, \infty,\dots , \infty$)}
+  \node (B) at (1.1,1) {    \only<1>{\Large $\boldsymbol{?}$}%
+    \only<2->{\Large $\substack{\nsH_{\eta|\lambda}(\xx;q,t) \, =  \\[.8mm] \sum \text{flagged LLTs} }$}%
+  };
+  \node (C) at (0,0) {\Large $\substack{J_{(\eta;\lambda)_+}(\xx;q, t) \, =  \\[.8mm] \sum \text{signed LLTs}}$};
+  \node (D) at (1.1,0) {\Large $\substack{H_{(\eta;\lambda)_+}(\xx;q,t) \, =  \\[.8mm] \sum \text{LLTs}}$ };
+%
+  % Horizontal arrows (maps-to)
+  \draw[->, decorate, decoration={snake, segment length=4pt, amplitude=1pt}] (A2) -- node[midway, right] {\footnotesize stabilize} (A);
+  \draw[->] (A) -- node[midway, above] {\only<2->{\footnotesize Stable
+    flagged plethysm}} (B);
+  \draw[->] (C) -- node[midway, above] {\footnotesize Plethysm} (D);
+
+  % Vertical arrows (down)
   \draw[->] (A) -- node[midway, left]  {\footnotesize Hecke sym.} (C);
   \draw[->] (B) -- node[midway, right] {\footnotesize Weyl sym.}  (D);
 \end{tikzpicture}
-\begin{itemize}
-\item \(\nsJ_{\eta|\lambda}(x;q,t)\) and
-  \(\nsH_{\eta|\lambda}(\xx;q,t)\) for \((\eta|\lambda) \in \N^r 
-  \times \Par\) form bases of \(\Pcal(r)\).
-\item \((\eta;\lambda)_+ =\) partition rearrangement of concatenating
-  \((\eta; \lambda)\).
-\item \(\Pi_r\) is ``\(r\)-nonsymmetric plethysm''
- \[\Pi_r (f(x_1,\ldots,x_r) \otimes g(\xx)) = (\Pi_{t,x} f(x_1,\ldots,x_r)) \otimes g\left[ \xx/(1-t) \right]\,.\]
-\end{itemize}
-\end{center}
+\end{equation*}
 \end{frame}
-\begin{frame}{Modern Macdonald polynomials}
-  \begin{definition}
+\begin{frame}{Modern Macdonald polynomials }
+  \begin{definition}[Blasiak-Haiman-Morse-Pun-S., 2025+]
     The \emph{modern Macdonald polynomial} indexed by \(\eta \in
     \N^r\) and partition \(\lambda\) is
     \[
@@ -1318,7 +1352,7 @@ An important feature for ``nice''? Positivity!
       \Gcal_{R,(1,2,\ldots,r)}(x;t^{-1})
     \]
   \end{definition}
-    For \(r=2\), \(\eta=(2,1)\), \(\lambda = \emptyset\), the LLT
+    For \(r=2\), \(\eta=(2,1)\), \(\lambda = \emptyset\), the flagged LLT
     terms are
 \begin{equation*}\label{e:H-HHL-ribbon-tuples}
 \setlength{\arraycolsep}{0cm}
@@ -1350,123 +1384,9 @@ qt\,x_1^2x_2  +  qt\,x_1x_2^2  +  qt\,x_1^2x_3 +  q\,x_1x_2x_3
     combinatorial formula.\pause
   \item \(\nsH_{\eta | \lambda}(x;q,t)\) Weyl symmetrizes to symmetric
     \(H_{\beta_+}(x;q,t)\).\pause
-  \item \(\nsH_{\eta | \lambda}(x;q,t)\) form a basis of \(\mathcal{P}(r)\).\pause
   \item We conjecture \(\nsH_{\eta | \lambda}(x;q,t)\) is atom positive
     (would follow from flagged LLTs being atom positive).
   \end{itemize}
-\end{frame}
-\begin{frame}{Modern Macdonald summary}
-\begin{equation*}
-\begin{tikzpicture}[xscale=6.34, yscale=2.8]%[xscale=2cm, yscale=.95cm]%, >=Latex]
-  % Nodes
-  \node (A2) at (0,1.78) {\Large $\substack{\Ecal_{\alpha}(x_1,\dots, x_N;q,t) \, =  \\[.8mm] \sum \text{signed flagged LLTs} }$ };
-
-\node (A) at (0,1) {\Large $\substack{\nsJ_{\eta|\lambda}(\xx;q,t) \, =  \\[.8mm] \sum \text{signed flagged LLTs} }$ };
-%\node[below (A)] {J};
-%(flag  $1,\dots, r, \infty,\dots , \infty$)}
-  \node (B) at (1,1) {\Large $\substack{\nsH_{\eta|\lambda}(\xx;q,t) \, =  \\[.8mm] \sum \text{flagged LLTs} }$};
-  \node (C) at (0,0) {\Large $\substack{J_{(\eta;\lambda)_+}(\xx;q, t) \, =  \\[.8mm] \sum \text{signed LLTs}}$};
-  \node (D) at (1,0) {\Large $\substack{H_{(\eta;\lambda)_+}(\xx;q,t) \, =  \\[.8mm] \sum \text{LLTs}}$ };
-%
-  % Horizontal arrows (maps-to)
-  \draw[->, decorate, decoration={snake, segment length=4pt, amplitude=1pt}] (A2) -- node[midway, right] {\footnotesize stabilize} (A);
-  \draw[->] (A) -- node[midway, above] {\footnotesize \(\Pi_r\)} (B);
-  \draw[->] (C) -- node[midway, above] {\footnotesize Plethysm} (D);
-
-  % Vertical arrows (down)
-  \draw[->] (A) -- node[midway, left]  {\footnotesize Hecke sym.} (C);
-  \draw[->] (B) -- node[midway, right] {\footnotesize Weyl sym.}  (D);
-\end{tikzpicture}
-\end{equation*}
-\end{frame}
-%% This is where my presentation ended after 50 minutes.
-%% Also had to skip discussion of arm/leg
-\begin{frame}{Extra slides}
-  What follows are extra slides that were not presented.
-\end{frame}
-\begin{frame}{Stabilization}
-  \begin{definition}
-    A sequence \(g_1,g_2,\ldots\) with \(g_N \in
-    \Q(q,t)[x_1,\ldots,x_N]\) \emph{converges \(t\)-adically} to
-    \(f(x) \in \Pcal(r)\) if, for all \(e \geq 0\),
-    \[
-      g_N(x_1,\ldots,x_N) - f(x_1,\ldots,x_N,0,0,\ldots)
-    \]
-    has coefficients whose order of vanishing in \(t\) is at least
-    \(e\), for sufficiently large \(N\).
-  \end{definition}
-  \begin{itemize}
-  \item \(1, 1+t, 1+t+t^2,\ldots \to \frac{1}{1-t}\).
-  \item \(x_1, tx_1+x_2, t^2x_1+x_2+x_3, t^3 x_1+x_2+x_3+x_4, \ldots
-    \to x_2+x_3+x_4+\cdots\).
-  \end{itemize}
-\end{frame}
-\begin{frame}{Stable nonsymmetric Macdonald polynomials}
-  \begin{definition}
-    For $(\eta|\lambda) \in \N^r \times \Par$, the \emph{integral form
-      stable $r$-nonsymmetric Macdonald polynomial}
-    $\nsJ_{\eta|\lambda}(\xx;q,t) \in \Pcal(r)$ is given by
-    \vspace{-1.4mm}
-    \begin{align*}
-      \nsJ_{\eta| \lambda}(\xx;q,t)
-      = \lim_{n \to \infty} \Ecal_{(\eta; 0^{n}; \lambda)}(x_1,\dots,x_{r+n}, 0^{\ell(\lambda)};q,t).
-    \end{align*}
-  \end{definition}
-  These \(\nsJ_{\eta|\lambda}\)'s are integral forms of stable
-  versions of \(E_\alpha\) introduced by Bechtloff Weising.
-\end{frame}
-\begin{frame}{Stable nonsymmetric Macdonald polynomials}
-  Fix some \(r \in \Z_{>0}\). Add \(n\) empty ribbons after the first
-  \(r\). Set variables \(x_{r+n} = x_{r+n+1} = \cdots = 0\).
-\begin{equation*}
-\begin{array}{c}
-\begin{tikzpicture}[scale=.5]
-\tikzset{decoration={snake,segment length=5mm, amplitude=1mm}}
-\node[circle, fill=black, inner sep=.5mm, outer sep=1mm,
-      label=right:{$r+n+1$}] (a) at (2,2) {};
-\node[circle, fill=black, inner sep=.5mm, outer sep=1mm,
-      label=right:{$r+n+k$}] (b) at (0,0) {};
-\draw[decorate] (0,4) -- (a);
-\draw[decorate] (-2,2) -- (b);
-\draw[loosely dotted, very thick, shorten <=3mm, shorten >=3mm] (b) -- (a);
-\draw[-Latex, dashed] (-.5,4.5) -- (-2.5,2.5);
-\node  at (-2,4) {$\lambda $};
-\node[circle, fill=black, inner sep=.5mm, outer sep=1mm,
-      label=right:{$r+1$}] (c) at (5,5) {};
-\node[circle, fill=black, inner sep=.5mm, outer sep=1mm,
-      label=right:{$r+n$}] (d) at (3,3) {};
-\draw[loosely dotted, very thick, shorten <=3mm, shorten >=3mm] (d) -- (c);
-\node[circle, fill=black, inner sep=.5mm, outer sep=1mm,
-      label=right:{$1$}] (e) at (8,8) {};
-\node[circle, fill=black, inner sep=.5mm, outer sep=1mm,
-      label=right:{$r$}] (f) at (6,6) {};
-\draw[decorate] (6,10) -- (e);
-\draw[decorate] (4,8) -- (f);
-\draw[loosely dotted, very thick, shorten <=3mm, shorten >=3mm] (f) -- (e);
-\draw[-Latex, dashed]  (5.5,10.5) -- (3.5,8.5);
-\node  at (4,10) {$\eta $};
-\end{tikzpicture}
-\end{array}
-\end{equation*}
-On (signed) flagged ribbon LLTs, this causes bounds \(\geq r+n+1\) to
-be no restriction and ribbons with bounds below ribbon \(\to 0\).
-\end{frame}
-\begin{frame}{The plethystic relationship}
-  \begin{theorem}[Blasiak-Haiman-Morse-Pun-S., 2025+]
-    \[
-      \nsJ_{\eta|\lambda}(x;q,t) = t^{n((\eta;\lambda)_+)} \sum_R
-      \big( \prod_{\ytableaushort{u,{}}} q^{a+1} t^l\big) \Gcal_{R,(1,2,\ldots,r)}(x;t^{-1})
-    \]
-  \end{theorem}\pause
-  \begin{theorem}[Blasiak-Haiman-Morse-Pun-S., 2025+]
-  \[\nsH_{\eta|\lambda}(x;q,t) = \Pi_r \nsJ_{\eta|\lambda}(x;q,t)\,.\]
-\end{theorem}\pause
-Follows from
-\begin{itemize}
-\item HHL style formula for both sides.
-\item Stabilized ribbon LLT's satisfy \(\Gcal_{R,(1,2,\ldots,r)}(x;t^{-1}) = \Pi_r
-  \Gcal^\pm_{R,(1,2,\ldots,r)}(x;t^{-1})\).
-\end{itemize}
 \end{frame}
 \begin{frame}{Raising the flag}
   \begin{itemize}
@@ -1481,9 +1401,56 @@ Follows from
   \end{itemize}
   Thank you!
 \end{frame}
+\begin{frame}{Filling in the missing corner}
+  \begin{itemize}
+  \item \(\Pcal(r) = \Q(q,t)[x_1,\ldots,x_r] \otimes
+    \Lambda_{\Q(q,t)}(x_{r+1},\ldots)\).
+  \item Use a ``stable'' version of \(\Ecal_\alpha\), which we denote \(\nsJ_{\eta|\lambda}\).
+  \end{itemize}
+  \begin{center}
+  \begin{tikzpicture}[xscale=5.34, yscale=2.3]%[xscale=2cm, yscale=.95cm]%, >=Latex]
+  % Nodes
+  \node (A) at (0,1) {$\nsJ_{\eta|\lambda}(\xx;q,t)$};
+  \node (B) at (1,1) {$\nsH_{\eta|\lambda}(\xx;q,t)$};
+  \node (C) at (0,0) {$J_{(\eta;\lambda)_+}(\xx;q, t)$};
+  \node (D) at (1,0) {$H_{(\eta;\lambda)_+}(\xx;q,t)$};
+  \draw[->] (A) -- node[midway, above] {\footnotesize $\Pi_r$} (B);
+  \draw[->] (C) -- node[midway, below] {\footnotesize Plethysm} (D);
+  \draw[->] (A) -- node[midway, left]  {\footnotesize Hecke sym.} (C);
+  \draw[->] (B) -- node[midway, right] {\footnotesize Weyl sym.}  (D);
+\end{tikzpicture}
+\begin{itemize}
+\item \(\nsJ_{\eta|\lambda}(x;q,t)\) and
+  \(\nsH_{\eta|\lambda}(\xx;q,t)\) for \((\eta|\lambda) \in \N^r 
+  \times \Par\) form bases of \(\Pcal(r)\).
+\item \((\eta;\lambda)_+ =\) partition rearrangement of concatenating
+  \((\eta; \lambda)\).
+\item \(\Pi_r\) is ``\(r\)-nonsymmetric plethysm''
+ \[\Pi_r (f(x_1,\ldots,x_r) \otimes g(\xx)) = (\Pi_{t,x} f(x_1,\ldots,x_r)) \otimes g\left[ \xx/(1-t) \right]\,.\]
+\end{itemize}
+\end{center}
+\end{frame}
+\begin{frame}{Arms and legs}
+  \begin{equation*}\label{e:arms-and-legs}
+\begin{tikzpicture}[scale=.33,baseline=5*.33cm]
+\foreach  \mu / \y in {2/9, 1/7.5, 4/6, 4/4.5, 0/3, 1/1.5, 4/0}
+  \draw[xshift=-.5cm, yshift=\y cm] (-\mu,0) grid (0,1);
+\node at (-2,5) {$u$};
+\node at (-3,5) {$*$};
+\node at (-4,5) {$*$};
+\filldraw[color=black, fill=gray!50] (-3,9.5) circle (.25) (-5,6.5)
+circle (.25) (-2,2) circle (.25);
+\draw (-2,8) circle (.25) (-5,5) circle (.25) (-1,3.5) circle (.25)
+(-5,.5) circle (.25);
+\end{tikzpicture}
+\vspace{1cm}
+\end{equation*}
+\[
+  a(u) = 2, l(u) = 3
+\]
+\end{frame}
 \end{document}
-
 %%% Local Variables:
-%%% mode: latex
+%%% mode: LaTeX
 %%% TeX-master: t
 %%% End:
